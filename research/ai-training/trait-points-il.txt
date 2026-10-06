@@ -1,0 +1,222 @@
+TYPE Employee BASE System.Object
+INTERFACE IFormatColorObject
+INTERFACE SINetworking.INetworkID
+FIELD Public, Static System.Int32 RetirementAge
+FIELD Public, Static System.Int32 Youngest
+FIELD Public, Static, Literal, HasDefault System.Int32 RoleCount
+CONSTANT RoleCount = 5
+FIELD Public, Static System.Byte[] RoleToBit
+FIELD Public, Static System.Int32 MaxLeadSpec
+FIELD Public, Static System.Int32 MaxServiceSpec
+FIELD Public, Static System.String[] LeadSpecs
+FIELD Public, Static System.String[] ServiceSpecs
+FIELD Public, Static Employee/RoleBit[] RoleToMask
+FIELD Public, Static, Literal, HasDefault Employee/Trait DeprecatedTraits
+CONSTANT DeprecatedTraits = 67108864
+FIELD Public, Static, Literal, HasDefault Employee/Trait GoodTraits
+CONSTANT GoodTraits = 3087007871
+FIELD Public, Static, Literal, HasDefault Employee/Trait NeutralTraits
+CONSTANT NeutralTraits = 1082146688
+FIELD Public, Static, Literal, HasDefault Employee/Trait BadTraits
+CONSTANT BadTraits = 4353671168
+FIELD Public, Static, Literal, HasDefault Employee/Trait FounderTraits
+CONSTANT FounderTraits = 8522590037
+FIELD Private, Static System.Int32[] RoleOrder
+FIELD Private, Static System.Single[] RoleSalaryFactor
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> ServiceSalaryFactor
+FIELD Private, Static System.Collections.Generic.KeyValuePair`2<System.String,System.Single>[] ServiceSalaryFactorArr
+FIELD Private, NotSerialized System.String _maxServiceSpec
+FIELD Public, Static System.Single[] LowSkillCap
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] SpecializationLevels
+FIELD Private System.Single[] SpecializationExp
+FIELD Private System.Int32[] SpecUsed
+FIELD Public, Static System.Single AverageWage
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.Boolean Female
+FIELD Public, InitOnly System.Single Creativity
+FIELD Public, InitOnly System.Single InspirationTime
+FIELD Public System.Single CreativityKnown
+FIELD Public System.Single Inspiration
+FIELD Public System.Single LastDemandScore
+FIELD Public SDateTime LastInpirationUse
+FIELD Public SDateTime LastBid
+FIELD Public System.String NickName
+FIELD Public System.Boolean ActiveComplaint
+FIELD Public System.Boolean Filter
+FIELD Public System.Boolean PreviousEmployment
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> CustomBenefits
+FIELD Public ActorBodyItem/BodyItemObject[] StyleGen
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareType,System.Single> LeadSpecialization
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> LeadSpecializationFix
+FIELD Public, NotSerialized System.String LeadSpecPick
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> LeadProjects
+FIELD Public System.Collections.Generic.List`1<System.UInt32> LeadProjectsFix
+FIELD Public System.UInt32 DemandsMet
+FIELD Public System.UInt32 DemandsRequested
+FIELD Public, InitOnly System.Single InitialLeadExperience
+FIELD Public LeadDesignDemands/Demand DemandResults
+FIELD Public Company Employer
+FIELD Public NetworkedID`1<System.UInt32> EmployerID
+FIELD Public System.Single[] LastCreatity
+FIELD Public System.Int32 AgeMonth
+FIELD Public System.Single SkillCeiling
+FIELD Public System.Single LowestSatisfaction
+FIELD Public, NotSerialized System.UInt32 _leadUpdateCount
+FIELD Private Employee/RoleBit _currentRole
+FIELD Private Employee/RoleBit _secondaryRole
+FIELD Public, Static System.String[] ShortFormRole
+FIELD Public, Static System.Int32[] RoleOrderIndex
+FIELD Public Employee/EmployeeRole HiredFor
+FIELD Public, Static System.Single HungerDrain
+FIELD Public, Static System.Single BladderDrain
+FIELD Public, Static System.Single EnergyDrain
+FIELD Public, Static System.Single StressDrain
+FIELD Public, Static System.Single SocialDrain
+FIELD Public System.Single Hunger
+FIELD Public System.Single Energy
+FIELD Public System.Single Bladder
+FIELD Public System.Single Social
+FIELD Public System.Single Stress
+FIELD Public System.Single Posture
+FIELD Public System.Single CoffeeQual
+FIELD Public System.Boolean SatisfactionHitZero
+FIELD Public System.Boolean InteractedWithBestFriend
+FIELD Private, Static System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single> _friendships
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> Friendships
+FIELD Public Employee/Trait Traits
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee> _localFriendCache
+FIELD Private, Static System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>> _friendCache2
+FIELD Public DictionaryList`2<System.String,Employee/ThoughtEffect> Thoughts
+FIELD Public System.Boolean HadProperFood
+FIELD Public System.Single JobSatisfaction
+FIELD Private System.Single[] Skill
+FIELD Public System.String[] PersonalityTraits
+FIELD Public System.Single Salary
+FIELD Public System.Single AskedFor
+FIELD Public System.Single Demanded
+FIELD Public System.Single UpfrontDemand
+FIELD Public SDateTime Hired
+FIELD Public SDateTime LastWage
+FIELD Public System.Nullable`1<SDateTime> PlayerQuarantine
+FIELD Public System.Boolean Founder
+FIELD Public System.Boolean MadeCEO
+FIELD Public System.Boolean Dismissed
+FIELD Public System.Boolean Retired
+FIELD Public SDateTime BirthDate
+FIELD Public, NotSerialized Actor MyActor
+FIELD Private, Static, InitOnly System.Int32[] _pointDist
+FIELD Private, Static System.Int32 PersonalityNum
+FIELD Public System.Single SkillFact
+FIELD Public, Static System.Single SkillBase
+FIELD Public, Static System.Single SkillFactor
+FIELD Public, Static System.Single SeniorityWeight
+FIELD Public, Static System.Int32[][] AgeBrackets
+FIELD Private, Static FloatInterpolator _coffeeDrain
+FIELD Private System.UInt32 <NetworkID>k__BackingField
+PROPERTY Company Employee::MyEmployer()
+PROPERTY System.String Employee::FullName()
+PROPERTY System.String Employee::ExtraName()
+PROPERTY Employee/RoleBit Employee::CurrentRoleBit()
+PROPERTY Employee/RoleBit Employee::SecondaryRole()
+PROPERTY System.String Employee::RoleString()
+PROPERTY System.Collections.Generic.HashSet`1<Employee> Employee::LocalFriendCache()
+PROPERTY System.UInt32 Employee::NetworkID()
+PROPERTY UnityEngine.GameObject Employee::GO()
+METHOD Public, HideBySig System.Single Employee::GetSpecExperience(Employee/EmployeeRole,Actor)
+LOCAL 0 Employee/<>c__DisplayClass192_0
+IL_0000: newobj System.Void Employee/<>c__DisplayClass192_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld Employee/EmployeeRole Employee/<>c__DisplayClass192_0::role
+IL_000d: ldarg.0
+IL_000e: ldfld System.Single[] Employee::SpecializationExp
+IL_0013: ldloc.0
+IL_0014: ldfld Employee/EmployeeRole Employee/<>c__DisplayClass192_0::role
+IL_0019: ldelem.r4
+IL_001a: ldarg.2
+IL_001b: ldnull
+IL_001c: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0021: brtrue.s IL_003c
+IL_0023: ldarg.2
+IL_0024: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Actor::Courses
+IL_0029: ldloc.0
+IL_002a: ldftn System.Boolean Employee/<>c__DisplayClass192_0::<GetSpecExperience>b__0(System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>)
+IL_0030: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0035: call System.Int32 Utilities::Count<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_003a: br.s IL_003d
+IL_003c: ldc.i4.0
+IL_003d: conv.r4
+IL_003e: sub
+IL_003f: ret
+METHOD Public, HideBySig System.Int32 Employee::GetSpecPointsLeft(Employee/EmployeeRole,Actor)
+LOCAL 0 Employee/<>c__DisplayClass200_0
+LOCAL 1 System.Int32
+IL_0000: newobj System.Void Employee/<>c__DisplayClass200_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld Employee/EmployeeRole Employee/<>c__DisplayClass200_0::r
+IL_000d: ldarg.2
+IL_000e: ldnull
+IL_000f: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0014: brtrue.s IL_002f
+IL_0016: ldarg.2
+IL_0017: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Actor::Courses
+IL_001c: ldloc.0
+IL_001d: ldftn System.Boolean Employee/<>c__DisplayClass200_0::<GetSpecPointsLeft>b__0(System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>)
+IL_0023: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0028: call System.Int32 Utilities::Count<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_002d: br.s IL_0030
+IL_002f: ldc.i4.0
+IL_0030: stloc.1
+IL_0031: ldc.i4.0
+IL_0032: ldloc.0
+IL_0033: ldfld Employee/EmployeeRole Employee/<>c__DisplayClass200_0::r
+IL_0038: ldarg.0
+IL_0039: ldc.i4.4
+IL_003a: conv.i8
+IL_003b: call System.Boolean Employee::HasTrait(Employee/Trait)
+IL_0040: brfalse.s IL_0052
+IL_0042: ldloc.0
+IL_0043: ldfld Employee/EmployeeRole Employee/<>c__DisplayClass200_0::r
+IL_0048: ldarg.0
+IL_0049: ldfld Employee/EmployeeRole Employee::HiredFor
+IL_004e: ceq
+IL_0050: br.s IL_0053
+IL_0052: ldc.i4.0
+IL_0053: ldc.i4.0
+IL_0054: call System.Int32 GameSettings::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Boolean)
+IL_0059: ldarg.0
+IL_005a: ldfld System.Int32[] Employee::SpecUsed
+IL_005f: ldloc.0
+IL_0060: ldfld Employee/EmployeeRole Employee/<>c__DisplayClass200_0::r
+IL_0065: ldelem.i4
+IL_0066: sub
+IL_0067: ldloc.1
+IL_0068: sub
+IL_0069: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_006e: ret
+METHOD Public, HideBySig System.Int32 Employee::GetSpecPointsAvailable(Employee/EmployeeRole,Actor)
+LOCAL 0 Employee/<>c__DisplayClass201_0
+IL_0000: newobj System.Void Employee/<>c__DisplayClass201_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld Employee/EmployeeRole Employee/<>c__DisplayClass201_0::r
+IL_000d: ldc.i4.0
+IL_000e: ldarg.0
+IL_000f: ldloc.0
+IL_0010: ldfld Employee/EmployeeRole Employee/<>c__DisplayClass201_0::r
+IL_0015: ldnull
+IL_0016: call System.Single Employee::GetSpecExperience(Employee/EmployeeRole,Actor)
+IL_001b: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0020: ldarg.2
+IL_0021: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Actor::Courses
+IL_0026: ldloc.0
+IL_0027: ldftn System.Boolean Employee/<>c__DisplayClass201_0::<GetSpecPointsAvailable>b__0(System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>)
+IL_002d: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0032: call System.Int32 Utilities::Count<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0037: sub
+IL_0038: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_003d: ret

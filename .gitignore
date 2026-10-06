@@ -1,0 +1,20 @@
+# Generated builds, packages, and install backups
+/build/
+
+# Local game saves and workstation recovery state
+/save-backups/
+*.sav
+*.sav.bak
+
+# Compiled binaries and game caches
+*.dll
+*.exe
+*.pdb
+*.dcache
+*.bin
+
+# Local editor and OS files
+.vs/
+.idea/
+Thumbs.db
+.DS_Store

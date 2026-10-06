@@ -1,0 +1,4651 @@
+System.Void Furniture::RefreshUsage(System.Boolean)
+IL_0000: ldarg.0
+IL_0001: ldfld System.Double Furniture::_currentWattage
+IL_0006: ldc.r8 0
+IL_000f: ble.un.s IL_002a
+IL_0011: ldsfld GameSettings GameSettings::Instance
+IL_0016: dup
+IL_0017: ldfld System.Double GameSettings::ElectricityDelta
+IL_001c: ldarg.0
+IL_001d: ldfld System.Double Furniture::_currentWattage
+IL_0022: sub
+IL_0023: stfld System.Double GameSettings::ElectricityDelta
+IL_0028: br.s IL_0053
+IL_002a: ldarg.0
+IL_002b: ldfld System.Double Furniture::_currentWattage
+IL_0030: ldc.r8 0
+IL_0039: bge.un.s IL_0053
+IL_003b: ldsfld GameSettings GameSettings::Instance
+IL_0040: dup
+IL_0041: ldfld System.Double GameSettings::ElectricityGenerationDelta
+IL_0046: ldarg.0
+IL_0047: ldfld System.Double Furniture::_currentWattage
+IL_004c: neg
+IL_004d: sub
+IL_004e: stfld System.Double GameSettings::ElectricityGenerationDelta
+IL_0053: ldarg.0
+IL_0054: ldfld System.Double Furniture::_currentWater
+IL_0059: ldc.r8 0
+IL_0062: ble.un.s IL_007b
+IL_0064: ldsfld GameSettings GameSettings::Instance
+IL_0069: dup
+IL_006a: ldfld System.Double GameSettings::WaterDelta
+IL_006f: ldarg.0
+IL_0070: ldfld System.Double Furniture::_currentWater
+IL_0075: sub
+IL_0076: stfld System.Double GameSettings::WaterDelta
+IL_007b: ldarg.0
+IL_007c: ldfld System.Double Furniture::_currentGas
+IL_0081: ldc.r8 0
+IL_008a: ble.un.s IL_00a3
+IL_008c: ldsfld GameSettings GameSettings::Instance
+IL_0091: dup
+IL_0092: ldfld System.Double GameSettings::GasDelta
+IL_0097: ldarg.0
+IL_0098: ldfld System.Double Furniture::_currentGas
+IL_009d: sub
+IL_009e: stfld System.Double GameSettings::GasDelta
+IL_00a3: ldarg.1
+IL_00a4: brfalse.s IL_00d4
+IL_00a6: ldarg.0
+IL_00a7: ldc.r8 0
+IL_00b0: stfld System.Double Furniture::_currentWater
+IL_00b5: ldarg.0
+IL_00b6: ldc.r8 0
+IL_00bf: stfld System.Double Furniture::_currentWattage
+IL_00c4: ldarg.0
+IL_00c5: ldc.r8 0
+IL_00ce: stfld System.Double Furniture::_currentGas
+IL_00d3: ret
+IL_00d4: ldarg.0
+IL_00d5: ldfld System.Boolean Furniture::ManualUsageCalculation
+IL_00da: brtrue.s IL_00ec
+IL_00dc: ldarg.0
+IL_00dd: call System.Boolean Furniture::get_IsOn()
+IL_00e2: brfalse.s IL_00ec
+IL_00e4: ldarg.0
+IL_00e5: call System.Boolean Furniture::IsPlayerOwned()
+IL_00ea: br.s IL_00ed
+IL_00ec: ldc.i4.0
+IL_00ed: stloc.0
+IL_00ee: ldarg.0
+IL_00ef: ldloc.0
+IL_00f0: brtrue.s IL_00f9
+IL_00f2: ldc.r4 0
+IL_00f7: br.s IL_0106
+IL_00f9: ldarg.0
+IL_00fa: ldfld System.Single Furniture::Water
+IL_00ff: ldarg.0
+IL_0100: call System.Single Furniture::get_UseModifier()
+IL_0105: mul
+IL_0106: conv.r8
+IL_0107: stfld System.Double Furniture::_currentWater
+IL_010c: ldarg.0
+IL_010d: ldloc.0
+IL_010e: brtrue.s IL_0117
+IL_0110: ldc.r4 0
+IL_0115: br.s IL_0124
+IL_0117: ldarg.0
+IL_0118: ldfld System.Single Furniture::Wattage
+IL_011d: ldarg.0
+IL_011e: call System.Single Furniture::get_UseModifier()
+IL_0123: mul
+IL_0124: conv.r8
+IL_0125: stfld System.Double Furniture::_currentWattage
+IL_012a: ldarg.0
+IL_012b: ldloc.0
+IL_012c: brtrue.s IL_0135
+IL_012e: ldc.r4 0
+IL_0133: br.s IL_0142
+IL_0135: ldarg.0
+IL_0136: ldfld System.Single Furniture::Gas
+IL_013b: ldarg.0
+IL_013c: call System.Single Furniture::get_UseModifier()
+IL_0141: mul
+IL_0142: conv.r8
+IL_0143: stfld System.Double Furniture::_currentGas
+IL_0148: ldarg.0
+IL_0149: ldfld System.Double Furniture::_currentWattage
+IL_014e: ldc.r8 0
+IL_0157: ble.un.s IL_0172
+IL_0159: ldsfld GameSettings GameSettings::Instance
+IL_015e: dup
+IL_015f: ldfld System.Double GameSettings::ElectricityDelta
+IL_0164: ldarg.0
+IL_0165: ldfld System.Double Furniture::_currentWattage
+IL_016a: add
+IL_016b: stfld System.Double GameSettings::ElectricityDelta
+IL_0170: br.s IL_019b
+IL_0172: ldarg.0
+IL_0173: ldfld System.Double Furniture::_currentWattage
+IL_0178: ldc.r8 0
+IL_0181: bge.un.s IL_019b
+IL_0183: ldsfld GameSettings GameSettings::Instance
+IL_0188: dup
+IL_0189: ldfld System.Double GameSettings::ElectricityGenerationDelta
+IL_018e: ldarg.0
+IL_018f: ldfld System.Double Furniture::_currentWattage
+IL_0194: neg
+IL_0195: add
+IL_0196: stfld System.Double GameSettings::ElectricityGenerationDelta
+IL_019b: ldarg.0
+IL_019c: ldfld System.Double Furniture::_currentWater
+IL_01a1: ldc.r8 0
+IL_01aa: ble.un.s IL_01c3
+IL_01ac: ldsfld GameSettings GameSettings::Instance
+IL_01b1: dup
+IL_01b2: ldfld System.Double GameSettings::WaterDelta
+IL_01b7: ldarg.0
+IL_01b8: ldfld System.Double Furniture::_currentWater
+IL_01bd: add
+IL_01be: stfld System.Double GameSettings::WaterDelta
+IL_01c3: ldarg.0
+IL_01c4: ldfld System.Double Furniture::_currentGas
+IL_01c9: ldc.r8 0
+IL_01d2: ble.un.s IL_01eb
+IL_01d4: ldsfld GameSettings GameSettings::Instance
+IL_01d9: dup
+IL_01da: ldfld System.Double GameSettings::GasDelta
+IL_01df: ldarg.0
+IL_01e0: ldfld System.Double Furniture::_currentGas
+IL_01e5: add
+IL_01e6: stfld System.Double GameSettings::GasDelta
+IL_01eb: ret
+System.Void GameSettings::UpdateUtilities(System.Single,System.Boolean)
+IL_0000: ldarg.1
+IL_0001: ldc.r4 60
+IL_0006: div
+IL_0007: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_000c: conv.r4
+IL_000d: div
+IL_000e: stloc.0
+IL_000f: ldc.r4 0.03
+IL_0014: ldloc.0
+IL_0015: mul
+IL_0016: stloc.1
+IL_0017: ldc.r4 0
+IL_001c: stloc.2
+IL_001d: ldc.i4.0
+IL_001e: stloc.s V_7
+IL_0020: br IL_00ac
+IL_0025: ldarg.0
+IL_0026: ldfld System.Collections.Generic.List`1<ProductPrinter> GameSettings::ProductPrinters
+IL_002b: ldloc.s V_7
+IL_002d: callvirt !0 System.Collections.Generic.List`1<ProductPrinter>::get_Item(System.Int32)
+IL_0032: stloc.s V_8
+IL_0034: ldloc.s V_8
+IL_0036: ldfld System.Single ProductPrinter::OwedWatt
+IL_003b: ldc.r4 0
+IL_0040: ble.un.s IL_00a6
+IL_0042: ldarg.2
+IL_0043: brtrue.s IL_0062
+IL_0045: ldloc.s V_8
+IL_0047: ldfld Furniture ProductPrinter::Furn
+IL_004c: ldfld System.Single Furniture::Wattage
+IL_0051: ldloc.s V_8
+IL_0053: ldfld Furniture ProductPrinter::Furn
+IL_0058: callvirt System.Single Furniture::get_UseModifier()
+IL_005d: mul
+IL_005e: ldloc.1
+IL_005f: mul
+IL_0060: br.s IL_0069
+IL_0062: ldloc.s V_8
+IL_0064: ldfld System.Single ProductPrinter::OwedWatt
+IL_0069: stloc.s V_9
+IL_006b: ldloc.s V_8
+IL_006d: dup
+IL_006e: ldfld System.Single ProductPrinter::OwedWatt
+IL_0073: ldloc.s V_9
+IL_0075: sub
+IL_0076: stfld System.Single ProductPrinter::OwedWatt
+IL_007b: ldloc.s V_8
+IL_007d: ldfld System.Single ProductPrinter::OwedWatt
+IL_0082: ldc.r4 0
+IL_0087: bge.un.s IL_00a1
+IL_0089: ldloc.s V_9
+IL_008b: ldloc.s V_8
+IL_008d: ldfld System.Single ProductPrinter::OwedWatt
+IL_0092: add
+IL_0093: stloc.s V_9
+IL_0095: ldloc.s V_8
+IL_0097: ldc.r4 0
+IL_009c: stfld System.Single ProductPrinter::OwedWatt
+IL_00a1: ldloc.2
+IL_00a2: ldloc.s V_9
+IL_00a4: add
+IL_00a5: stloc.2
+IL_00a6: ldloc.s V_7
+IL_00a8: ldc.i4.1
+IL_00a9: add
+IL_00aa: stloc.s V_7
+IL_00ac: ldloc.s V_7
+IL_00ae: ldarg.0
+IL_00af: ldfld System.Collections.Generic.List`1<ProductPrinter> GameSettings::ProductPrinters
+IL_00b4: callvirt System.Int32 System.Collections.Generic.List`1<ProductPrinter>::get_Count()
+IL_00b9: blt IL_0025
+IL_00be: ldarg.0
+IL_00bf: ldfld System.Double GameSettings::ElectricityGenerationDelta
+IL_00c4: ldloc.1
+IL_00c5: conv.r8
+IL_00c6: mul
+IL_00c7: conv.r4
+IL_00c8: stloc.3
+IL_00c9: ldarg.0
+IL_00ca: ldfld System.Double GameSettings::ElectricityDelta
+IL_00cf: ldloc.1
+IL_00d0: conv.r8
+IL_00d1: mul
+IL_00d2: ldloc.2
+IL_00d3: conv.r8
+IL_00d4: add
+IL_00d5: ldarg.0
+IL_00d6: ldfld System.Double GameSettings::ElectricityBurst
+IL_00db: add
+IL_00dc: conv.r4
+IL_00dd: stloc.s V_4
+IL_00df: ldarg.0
+IL_00e0: ldc.r8 0
+IL_00e9: stfld System.Double GameSettings::ElectricityBurst
+IL_00ee: ldarg.0
+IL_00ef: ldarg.0
+IL_00f0: ldfld System.Single GameSettings::LastWattSaved
+IL_00f5: ldloc.3
+IL_00f6: ldloc.s V_4
+IL_00f8: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_00fd: add
+IL_00fe: stfld System.Single GameSettings::LastWattSaved
+IL_0103: ldarg.0
+IL_0104: ldarg.0
+IL_0105: ldfld System.Single GameSettings::LastWattUse
+IL_010a: ldloc.s V_4
+IL_010c: add
+IL_010d: stfld System.Single GameSettings::LastWattUse
+IL_0112: ldarg.0
+IL_0113: ldfld System.Single[] GameSettings::HourWattUse
+IL_0118: ldc.i4.s 23
+IL_011a: ldelema System.Single
+IL_011f: dup
+IL_0120: ldind.r4
+IL_0121: ldloc.s V_4
+IL_0123: add
+IL_0124: stind.r4
+IL_0125: ldarg.0
+IL_0126: ldfld System.Single[] GameSettings::HourWattGen
+IL_012b: ldc.i4.s 23
+IL_012d: ldelema System.Single
+IL_0132: dup
+IL_0133: ldind.r4
+IL_0134: ldloc.3
+IL_0135: add
+IL_0136: stind.r4
+IL_0137: ldarg.0
+IL_0138: ldfld System.Single[] GameSettings::MonthWattUse
+IL_013d: ldc.i4.s 11
+IL_013f: ldelema System.Single
+IL_0144: dup
+IL_0145: ldind.r4
+IL_0146: ldloc.s V_4
+IL_0148: add
+IL_0149: stind.r4
+IL_014a: ldarg.0
+IL_014b: ldfld System.Single[] GameSettings::MonthWattGen
+IL_0150: ldc.i4.s 11
+IL_0152: ldelema System.Single
+IL_0157: dup
+IL_0158: ldind.r4
+IL_0159: ldloc.3
+IL_015a: add
+IL_015b: stind.r4
+IL_015c: ldloc.s V_4
+IL_015e: ldloc.3
+IL_015f: sub
+IL_0160: stloc.s V_4
+IL_0162: ldloc.s V_4
+IL_0164: ldc.r4 0
+IL_0169: ble.un IL_0218
+IL_016e: ldarg.0
+IL_016f: ldfld System.Collections.Generic.List`1<Battery> GameSettings::Batteries
+IL_0174: callvirt System.Int32 System.Collections.Generic.List`1<Battery>::get_Count()
+IL_0179: ldc.i4.0
+IL_017a: ble IL_0218
+IL_017f: ldarg.0
+IL_0180: ldc.i4.1
+IL_0181: call Battery GameSettings::GetBattery(System.Boolean)
+IL_0186: stloc.s V_10
+IL_0188: ldloc.s V_10
+IL_018a: ldnull
+IL_018b: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0190: brfalse IL_0298
+IL_0195: ldloc.s V_10
+IL_0197: ldloc.s V_4
+IL_0199: callvirt System.Single Battery::TakeCharge(System.Single)
+IL_019e: stloc.s V_11
+IL_01a0: ldarg.0
+IL_01a1: ldarg.0
+IL_01a2: ldfld System.Single GameSettings::LastWattSaved
+IL_01a7: ldloc.s V_11
+IL_01a9: add
+IL_01aa: stfld System.Single GameSettings::LastWattSaved
+IL_01af: ldloc.s V_4
+IL_01b1: ldloc.s V_11
+IL_01b3: sub
+IL_01b4: stloc.s V_4
+IL_01b6: br.s IL_01ec
+IL_01b8: ldarg.0
+IL_01b9: ldc.i4.1
+IL_01ba: call Battery GameSettings::GetBattery(System.Boolean)
+IL_01bf: stloc.s V_10
+IL_01c1: ldloc.s V_10
+IL_01c3: ldnull
+IL_01c4: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_01c9: brfalse.s IL_01ec
+IL_01cb: ldloc.s V_10
+IL_01cd: ldloc.s V_4
+IL_01cf: callvirt System.Single Battery::TakeCharge(System.Single)
+IL_01d4: stloc.s V_12
+IL_01d6: ldarg.0
+IL_01d7: ldarg.0
+IL_01d8: ldfld System.Single GameSettings::LastWattSaved
+IL_01dd: ldloc.s V_12
+IL_01df: add
+IL_01e0: stfld System.Single GameSettings::LastWattSaved
+IL_01e5: ldloc.s V_4
+IL_01e7: ldloc.s V_12
+IL_01e9: sub
+IL_01ea: stloc.s V_4
+IL_01ec: ldloc.s V_4
+IL_01ee: ldc.r4 0
+IL_01f3: ble.un IL_0298
+IL_01f8: ldloc.s V_10
+IL_01fa: ldnull
+IL_01fb: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0200: brfalse IL_0298
+IL_0205: ldloc.s V_10
+IL_0207: ldfld System.Single Battery::CurrentCharge
+IL_020c: ldc.r4 0
+IL_0211: beq.s IL_01b8
+IL_0213: br IL_0298
+IL_0218: ldloc.s V_4
+IL_021a: ldc.r4 0
+IL_021f: bge.un.s IL_0298
+IL_0221: ldarg.0
+IL_0222: ldfld System.Collections.Generic.List`1<Battery> GameSettings::Batteries
+IL_0227: callvirt System.Int32 System.Collections.Generic.List`1<Battery>::get_Count()
+IL_022c: ldc.i4.0
+IL_022d: ble.s IL_0298
+IL_022f: ldarg.0
+IL_0230: ldc.i4.0
+IL_0231: call Battery GameSettings::GetBattery(System.Boolean)
+IL_0236: stloc.s V_13
+IL_0238: ldloc.s V_13
+IL_023a: ldnull
+IL_023b: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0240: brfalse.s IL_0298
+IL_0242: ldloc.s V_4
+IL_0244: ldloc.s V_13
+IL_0246: ldloc.s V_4
+IL_0248: neg
+IL_0249: callvirt System.Single Battery::AddCharge(System.Single)
+IL_024e: add
+IL_024f: stloc.s V_4
+IL_0251: br.s IL_0275
+IL_0253: ldarg.0
+IL_0254: ldc.i4.0
+IL_0255: call Battery GameSettings::GetBattery(System.Boolean)
+IL_025a: stloc.s V_13
+IL_025c: ldloc.s V_13
+IL_025e: ldnull
+IL_025f: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0264: brfalse.s IL_0275
+IL_0266: ldloc.s V_4
+IL_0268: ldloc.s V_13
+IL_026a: ldloc.s V_4
+IL_026c: neg
+IL_026d: callvirt System.Single Battery::AddCharge(System.Single)
+IL_0272: add
+IL_0273: stloc.s V_4
+IL_0275: ldloc.s V_4
+IL_0277: ldc.r4 0
+IL_027c: bge.un.s IL_0298
+IL_027e: ldloc.s V_13
+IL_0280: ldnull
+IL_0281: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0286: brfalse.s IL_0298
+IL_0288: ldloc.s V_13
+IL_028a: ldfld System.Single Battery::CurrentCharge
+IL_028f: ldloc.s V_13
+IL_0291: ldfld System.Single Battery::MaxCapacity
+IL_0296: beq.s IL_0253
+IL_0298: ldloc.s V_4
+IL_029a: ldc.r4 0
+IL_029f: ble.un.s IL_02b2
+IL_02a1: ldarg.0
+IL_02a2: ldarg.0
+IL_02a3: ldfld System.Single GameSettings::ElectricityBill
+IL_02a8: ldloc.s V_4
+IL_02aa: add
+IL_02ab: stfld System.Single GameSettings::ElectricityBill
+IL_02b0: br.s IL_02c1
+IL_02b2: ldarg.0
+IL_02b3: ldarg.0
+IL_02b4: ldfld System.Single GameSettings::ElectricityIncome
+IL_02b9: ldloc.s V_4
+IL_02bb: sub
+IL_02bc: stfld System.Single GameSettings::ElectricityIncome
+IL_02c1: ldarg.0
+IL_02c2: ldfld System.Double GameSettings::WaterDelta
+IL_02c7: ldloc.0
+IL_02c8: conv.r8
+IL_02c9: mul
+IL_02ca: ldc.r8 30
+IL_02d3: mul
+IL_02d4: conv.r4
+IL_02d5: stloc.s V_5
+IL_02d7: ldarg.0
+IL_02d8: ldfld System.Single[] GameSettings::HourWaterUse
+IL_02dd: ldc.i4.s 23
+IL_02df: ldelema System.Single
+IL_02e4: dup
+IL_02e5: ldind.r4
+IL_02e6: ldloc.s V_5
+IL_02e8: add
+IL_02e9: stind.r4
+IL_02ea: ldarg.0
+IL_02eb: ldfld System.Single[] GameSettings::MonthWaterUse
+IL_02f0: ldc.i4.s 11
+IL_02f2: ldelema System.Single
+IL_02f7: dup
+IL_02f8: ldind.r4
+IL_02f9: ldloc.s V_5
+IL_02fb: add
+IL_02fc: stind.r4
+IL_02fd: ldarg.0
+IL_02fe: ldarg.0
+IL_02ff: ldfld System.Single GameSettings::Waterbill
+IL_0304: ldloc.s V_5
+IL_0306: add
+IL_0307: stfld System.Single GameSettings::Waterbill
+IL_030c: ldarg.0
+IL_030d: ldfld System.Double GameSettings::GasDelta
+IL_0312: ldloc.0
+IL_0313: conv.r8
+IL_0314: mul
+IL_0315: ldc.r8 30
+IL_031e: mul
+IL_031f: conv.r4
+IL_0320: stloc.s V_6
+IL_0322: ldarg.0
+IL_0323: ldfld System.Single[] GameSettings::HourGasUse
+IL_0328: ldc.i4.s 23
+IL_032a: ldelema System.Single
+IL_032f: dup
+IL_0330: ldind.r4
+IL_0331: ldloc.s V_6
+IL_0333: add
+IL_0334: stind.r4
+IL_0335: ldarg.0
+IL_0336: ldfld System.Single[] GameSettings::MonthGasUse
+IL_033b: ldc.i4.s 11
+IL_033d: ldelema System.Single
+IL_0342: dup
+IL_0343: ldind.r4
+IL_0344: ldloc.s V_6
+IL_0346: add
+IL_0347: stind.r4
+IL_0348: ldarg.0
+IL_0349: ldarg.0
+IL_034a: ldfld System.Single GameSettings::Gasbill
+IL_034f: ldloc.s V_6
+IL_0351: add
+IL_0352: stfld System.Single GameSettings::Gasbill
+IL_0357: ret
+System.Boolean TimeOfDay::UpdateHour(System.Boolean)
+IL_0000: newobj System.Void TimeOfDay/<>c__DisplayClass157_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.0
+IL_0008: stfld TimeOfDay TimeOfDay/<>c__DisplayClass157_0::<>4__this
+IL_000d: ldsfld GameSettings GameSettings::Instance
+IL_0012: ldfld System.Int32 GameSettings::MissedSink
+IL_0017: ldc.i4.0
+IL_0018: ble.s IL_002c
+IL_001a: ldsfld GameSettings GameSettings::Instance
+IL_001f: dup
+IL_0020: ldfld System.Int32 GameSettings::MissedSink
+IL_0025: ldc.i4.1
+IL_0026: sub
+IL_0027: stfld System.Int32 GameSettings::MissedSink
+IL_002c: ldarg.0
+IL_002d: call System.Void TimeOfDay::UpdateSunEffectiveness()
+IL_0032: ldarg.0
+IL_0033: ldarg.0
+IL_0034: ldfld System.Single TimeOfDay::SunEffectivenessSum
+IL_0039: ldarg.0
+IL_003a: ldfld System.Single TimeOfDay::SunEffectiveness
+IL_003f: add
+IL_0040: stfld System.Single TimeOfDay::SunEffectivenessSum
+IL_0045: ldsfld HUD HUD::Instance
+IL_004a: ldfld ComplaintWindow HUD::complaintWindow
+IL_004f: callvirt System.Void ComplaintWindow::RefreshComplaints()
+IL_0054: ldsfld System.Boolean BusScript::Present
+IL_0059: brtrue.s IL_0073
+IL_005b: ldsfld RoadManager RoadManager::Instance
+IL_0060: ldc.i4.0
+IL_0061: ldc.i4.1
+IL_0062: ldc.i4.0
+IL_0063: callvirt CarScript RoadManager::CreateCar(System.Int32,System.Boolean,System.Boolean)
+IL_0068: callvirt System.Void CarScript::Init()
+IL_006d: ldc.i4.1
+IL_006e: stsfld System.Boolean BusScript::Present
+IL_0073: ldc.i4.0
+IL_0074: stloc.s V_12
+IL_0076: br IL_01b0
+IL_007b: ldsfld GameSettings GameSettings::Instance
+IL_0080: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> GameSettings::DDoS
+IL_0085: ldloc.s V_12
+IL_0087: callvirt !0 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>>::get_Item(System.Int32)
+IL_008c: stloc.s V_13
+IL_008e: ldloca.s V_13
+IL_0090: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_0095: ldfld Company SoftwareProduct::DevCompany
+IL_009a: callvirt System.Boolean Company::get_IsLocalPlayer()
+IL_009f: brtrue.s IL_00c3
+IL_00a1: ldloca.s V_13
+IL_00a3: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_00a8: ldfld Company SoftwareProduct::DevCompany
+IL_00ad: ldc.i4.1
+IL_00ae: callvirt System.Boolean Company::IsPlayerOwned(System.Boolean)
+IL_00b3: brtrue.s IL_00c3
+IL_00b5: ldloca.s V_13
+IL_00b7: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_00bc: ldfld System.Boolean SoftwareProduct::ExternalHostingActive
+IL_00c1: brfalse.s IL_00df
+IL_00c3: ldsfld GameSettings GameSettings::Instance
+IL_00c8: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> GameSettings::DDoS
+IL_00cd: ldloc.s V_12
+IL_00cf: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>>::RemoveAt(System.Int32)
+IL_00d4: ldloc.s V_12
+IL_00d6: ldc.i4.1
+IL_00d7: sub
+IL_00d8: stloc.s V_12
+IL_00da: br IL_01aa
+IL_00df: ldloca.s V_13
+IL_00e1: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_00e6: ldloca.s V_13
+IL_00e8: call !1 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Value()
+IL_00ed: ldc.i4.0
+IL_00ee: blt.s IL_00f7
+IL_00f0: ldc.r4 0
+IL_00f5: br.s IL_00fc
+IL_00f7: ldc.r4 1
+IL_00fc: callvirt System.Void SoftwareProduct::HandleLoad(System.Single)
+IL_0101: ldloca.s V_13
+IL_0103: call !1 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Value()
+IL_0108: ldc.i4.s 12
+IL_010a: bne.un.s IL_0161
+IL_010c: ldsfld Newspaper Newspaper::Instance
+IL_0111: call SDateTime SDateTime::Now()
+IL_0116: ldstr "DDoSNewsTitle"
+IL_011b: ldc.i4.1
+IL_011c: newarr System.Object
+IL_0121: dup
+IL_0122: ldc.i4.0
+IL_0123: ldloca.s V_13
+IL_0125: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_012a: ldfld Company SoftwareProduct::DevCompany
+IL_012f: stelem.ref
+IL_0130: call System.String Localization::Loc(System.String,System.Object[])
+IL_0135: ldstr "DDoSNewsDesc"
+IL_013a: ldc.i4.1
+IL_013b: newarr System.Object
+IL_0140: dup
+IL_0141: ldc.i4.0
+IL_0142: ldloca.s V_13
+IL_0144: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_0149: stelem.ref
+IL_014a: call System.String Localization::Loc(System.String,System.Object[])
+IL_014f: ldc.i4.2
+IL_0150: ldnull
+IL_0151: ldc.r4 ∞
+IL_0156: newobj System.Void Newspaper/Story::.ctor(System.String,System.String,Newspaper/Section,System.String,System.Single)
+IL_015b: ldc.i4.1
+IL_015c: callvirt System.Void Newspaper::AddNewStory(SDateTime,Newspaper/Story,System.Boolean)
+IL_0161: ldloca.s V_13
+IL_0163: call !1 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Value()
+IL_0168: ldc.i4.1
+IL_0169: sub
+IL_016a: stloc.s V_14
+IL_016c: ldloc.s V_14
+IL_016e: ldc.i4.s -13
+IL_0170: bne.un.s IL_018b
+IL_0172: ldsfld GameSettings GameSettings::Instance
+IL_0177: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> GameSettings::DDoS
+IL_017c: ldloc.s V_12
+IL_017e: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>>::RemoveAt(System.Int32)
+IL_0183: ldloc.s V_12
+IL_0185: ldc.i4.1
+IL_0186: sub
+IL_0187: stloc.s V_12
+IL_0189: br.s IL_01aa
+IL_018b: ldsfld GameSettings GameSettings::Instance
+IL_0190: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> GameSettings::DDoS
+IL_0195: ldloc.s V_12
+IL_0197: ldloca.s V_13
+IL_0199: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::get_Key()
+IL_019e: ldloc.s V_14
+IL_01a0: newobj System.Void System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>::.ctor(!0,!1)
+IL_01a5: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>>::set_Item(System.Int32,!0)
+IL_01aa: ldloc.s V_12
+IL_01ac: ldc.i4.1
+IL_01ad: add
+IL_01ae: stloc.s V_12
+IL_01b0: ldloc.s V_12
+IL_01b2: ldsfld GameSettings GameSettings::Instance
+IL_01b7: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> GameSettings::DDoS
+IL_01bc: callvirt System.Int32 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>>::get_Count()
+IL_01c1: blt IL_007b
+IL_01c6: ldarg.0
+IL_01c7: ldc.i4.0
+IL_01c8: call SDateTime TimeOfDay::GetDate(System.Boolean)
+IL_01cd: stloc.1
+IL_01ce: ldloc.1
+IL_01cf: ldsfld GameSettings GameSettings::Instance
+IL_01d4: ldfld SDateTime GameSettings::NextOnlookerCheck
+IL_01d9: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_01de: brfalse.s IL_01e5
+IL_01e0: call System.Void TimeOfDay::UpdateOnlookerStatus()
+IL_01e5: ldsfld GameSettings GameSettings::Instance
+IL_01ea: ldc.i4.0
+IL_01eb: ldc.i4.1
+IL_01ec: callvirt System.Collections.Generic.IEnumerable`1<ServerGroup> GameSettings::GetAllServerGroups(System.Boolean,System.Boolean)
+IL_01f1: call !!0[] System.Linq.Enumerable::ToArray<ServerGroup>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_01f6: stloc.2
+IL_01f7: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<ServerGroup>>::.ctor()
+IL_01fc: stloc.3
+IL_01fd: ldc.i4.0
+IL_01fe: stloc.s V_15
+IL_0200: br IL_02dd
+IL_0205: ldloc.2
+IL_0206: ldloc.s V_15
+IL_0208: ldelem.ref
+IL_0209: stloc.s V_16
+IL_020b: ldloc.s V_16
+IL_020d: ldfld System.Single ServerGroup::PowerSum
+IL_0212: ldc.r4 0
+IL_0217: bne.un IL_02d7
+IL_021c: ldloc.s V_16
+IL_021e: ldfld System.String ServerGroup::Fallback
+IL_0223: brfalse IL_02d7
+IL_0228: ldarg.0
+IL_0229: ldfld System.Collections.Generic.HashSet`1<ServerGroup> TimeOfDay::_fallbackVisit
+IL_022e: callvirt System.Void System.Collections.Generic.HashSet`1<ServerGroup>::Clear()
+IL_0233: ldsfld GameSettings GameSettings::Instance
+IL_0238: ldloc.s V_16
+IL_023a: ldfld System.String ServerGroup::Fallback
+IL_023f: callvirt ServerGroup GameSettings::GetServerGroup(System.String)
+IL_0244: stloc.s V_17
+IL_0246: br.s IL_026d
+IL_0248: ldsfld GameSettings GameSettings::Instance
+IL_024d: ldloc.s V_17
+IL_024f: ldfld System.String ServerGroup::Fallback
+IL_0254: callvirt ServerGroup GameSettings::GetServerGroup(System.String)
+IL_0259: stloc.s V_17
+IL_025b: ldarg.0
+IL_025c: ldfld System.Collections.Generic.HashSet`1<ServerGroup> TimeOfDay::_fallbackVisit
+IL_0261: ldloc.s V_17
+IL_0263: callvirt System.Boolean System.Collections.Generic.HashSet`1<ServerGroup>::Add(!0)
+IL_0268: brtrue.s IL_026d
+IL_026a: ldnull
+IL_026b: stloc.s V_17
+IL_026d: ldloc.s V_17
+IL_026f: brfalse.s IL_029d
+IL_0271: ldloc.s V_17
+IL_0273: ldfld System.Single ServerGroup::PowerSum
+IL_0278: ldc.r4 0
+IL_027d: bne.un.s IL_029d
+IL_027f: ldloc.s V_17
+IL_0281: ldfld System.String ServerGroup::Fallback
+IL_0286: brfalse.s IL_029d
+IL_0288: ldloc.s V_16
+IL_028a: ldfld System.String ServerGroup::Name
+IL_028f: ldloc.s V_17
+IL_0291: ldfld System.String ServerGroup::Fallback
+IL_0296: callvirt System.Boolean System.String::Equals(System.String)
+IL_029b: brfalse.s IL_0248
+IL_029d: ldloc.s V_17
+IL_029f: brfalse.s IL_02d7
+IL_02a1: ldloc.3
+IL_02a2: ldloc.s V_17
+IL_02a4: ldfld System.String ServerGroup::Name
+IL_02a9: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<ServerGroup>>::ContainsKey(!0)
+IL_02ae: brtrue.s IL_02c2
+IL_02b0: ldloc.3
+IL_02b1: ldloc.s V_17
+IL_02b3: ldfld System.String ServerGroup::Name
+IL_02b8: newobj System.Void System.Collections.Generic.HashSet`1<ServerGroup>::.ctor()
+IL_02bd: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<ServerGroup>>::set_Item(!0,!1)
+IL_02c2: ldloc.3
+IL_02c3: ldloc.s V_17
+IL_02c5: ldfld System.String ServerGroup::Name
+IL_02ca: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<ServerGroup>>::get_Item(!0)
+IL_02cf: ldloc.s V_16
+IL_02d1: callvirt System.Boolean System.Collections.Generic.HashSet`1<ServerGroup>::Add(!0)
+IL_02d6: pop
+IL_02d7: ldloc.s V_15
+IL_02d9: ldc.i4.1
+IL_02da: add
+IL_02db: stloc.s V_15
+IL_02dd: ldloc.s V_15
+IL_02df: ldloc.2
+IL_02e0: ldlen
+IL_02e1: conv.i4
+IL_02e2: blt IL_0205
+IL_02e7: ldloc.0
+IL_02e8: ldc.r4 1
+IL_02ed: ldloc.1
+IL_02ee: call System.Single Utilities::BandwidthFactor(System.Single,SDateTime)
+IL_02f3: stfld System.Single TimeOfDay/<>c__DisplayClass157_0::bandwidth
+IL_02f8: ldc.i4.0
+IL_02f9: stloc.s V_4
+IL_02fb: ldc.r4 0
+IL_0300: stloc.s V_5
+IL_0302: call System.Single Furniture::GetElectricityPrice()
+IL_0307: stloc.s V_6
+IL_0309: ldsfld GameSettings GameSettings::Instance
+IL_030e: ldfld System.Single GameSettings::LastWattUse
+IL_0313: ldc.r4 0
+IL_0318: bgt.s IL_0321
+IL_031a: ldc.r4 0
+IL_031f: br.s IL_0336
+IL_0321: ldsfld GameSettings GameSettings::Instance
+IL_0326: ldfld System.Single GameSettings::LastWattSaved
+IL_032b: ldsfld GameSettings GameSettings::Instance
+IL_0330: ldfld System.Single GameSettings::LastWattUse
+IL_0335: div
+IL_0336: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_033b: stloc.s V_7
+IL_033d: ldsfld GameSettings GameSettings::Instance
+IL_0342: ldc.r4 0
+IL_0347: stfld System.Single GameSettings::LastWattSaved
+IL_034c: ldsfld GameSettings GameSettings::Instance
+IL_0351: ldc.r4 0
+IL_0356: stfld System.Single GameSettings::LastWattUse
+IL_035b: ldarg.0
+IL_035c: ldfld System.Collections.Generic.Dictionary`2<System.Byte,System.Single> TimeOfDay::_cloudUsage
+IL_0361: callvirt System.Void System.Collections.Generic.Dictionary`2<System.Byte,System.Single>::Clear()
+IL_0366: ldc.i4.0
+IL_0367: stloc.s V_18
+IL_0369: br IL_089c
+IL_036e: ldloc.2
+IL_036f: ldloc.s V_18
+IL_0371: ldelem.ref
+IL_0372: stloc.s V_19
+IL_0374: ldloc.s V_19
+IL_0376: ldfld System.Single ServerGroup::PowerSum
+IL_037b: ldc.r4 0
+IL_0380: bne.un.s IL_039c
+IL_0382: ldloc.s V_19
+IL_0384: ldfld System.String ServerGroup::Fallback
+IL_0389: brfalse.s IL_039c
+IL_038b: ldloc.s V_19
+IL_038d: ldc.r4 1
+IL_0392: stfld System.Single ServerGroup::Available
+IL_0397: br IL_0896
+IL_039c: ldloc.s V_19
+IL_039e: callvirt System.Byte ServerGroup::get_CloudProvider()
+IL_03a3: stloc.s V_20
+IL_03a5: ldloc.s V_19
+IL_03a7: ldfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_03ac: ldsfld System.Func`2<IServerItem,IServerItem> TimeOfDay/<>c::<>9__157_4
+IL_03b1: dup
+IL_03b2: brtrue.s IL_03cb
+IL_03b4: pop
+IL_03b5: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_03ba: ldftn IServerItem TimeOfDay/<>c::<UpdateHour>b__157_4(IServerItem)
+IL_03c0: newobj System.Void System.Func`2<IServerItem,IServerItem>::.ctor(System.Object,System.IntPtr)
+IL_03c5: dup
+IL_03c6: stsfld System.Func`2<IServerItem,IServerItem> TimeOfDay/<>c::<>9__157_4
+IL_03cb: ldloc.0
+IL_03cc: ldfld System.Func`2<IServerItem,System.Single> TimeOfDay/<>c__DisplayClass157_0::<>9__5
+IL_03d1: dup
+IL_03d2: brtrue.s IL_03ec
+IL_03d4: pop
+IL_03d5: ldloc.0
+IL_03d6: ldloc.0
+IL_03d7: ldftn System.Single TimeOfDay/<>c__DisplayClass157_0::<UpdateHour>b__5(IServerItem)
+IL_03dd: newobj System.Void System.Func`2<IServerItem,System.Single>::.ctor(System.Object,System.IntPtr)
+IL_03e2: dup
+IL_03e3: stloc.s V_29
+IL_03e5: stfld System.Func`2<IServerItem,System.Single> TimeOfDay/<>c__DisplayClass157_0::<>9__5
+IL_03ea: ldloc.s V_29
+IL_03ec: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<IServerItem,IServerItem,System.Single>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_03f1: stloc.s V_21
+IL_03f3: ldloc.s V_19
+IL_03f5: ldfld System.Boolean ServerGroup::IsCloud
+IL_03fa: stloc.s V_22
+IL_03fc: ldloc.3
+IL_03fd: ldloc.s V_19
+IL_03ff: ldfld System.String ServerGroup::Name
+IL_0404: ldloca.s V_23
+IL_0406: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<ServerGroup>>::TryGetValue(!0,!1&)
+IL_040b: brfalse IL_0492
+IL_0410: ldloc.s V_23
+IL_0412: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<ServerGroup>::GetEnumerator()
+IL_0417: stloc.s V_30
+IL_0419: br.s IL_0479
+IL_041b: ldloca.s V_30
+IL_041d: call !0 System.Collections.Generic.HashSet`1/Enumerator<ServerGroup>::get_Current()
+IL_0422: stloc.s V_31
+IL_0424: ldloc.s V_22
+IL_0426: ldloc.s V_31
+IL_0428: ldfld System.Boolean ServerGroup::IsCloud
+IL_042d: or
+IL_042e: stloc.s V_22
+IL_0430: ldloc.s V_31
+IL_0432: ldfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_0437: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<IServerItem>::GetEnumerator()
+IL_043c: stloc.s V_32
+IL_043e: br.s IL_0460
+IL_0440: ldloca.s V_32
+IL_0442: call !0 System.Collections.Generic.HashSet`1/Enumerator<IServerItem>::get_Current()
+IL_0447: stloc.s V_33
+IL_0449: ldloc.s V_21
+IL_044b: ldloc.s V_33
+IL_044d: ldloc.s V_33
+IL_044f: callvirt System.Single IServerItem::GetLoadRequirement()
+IL_0454: ldloc.0
+IL_0455: ldfld System.Single TimeOfDay/<>c__DisplayClass157_0::bandwidth
+IL_045a: mul
+IL_045b: callvirt System.Void System.Collections.Generic.Dictionary`2<IServerItem,System.Single>::set_Item(!0,!1)
+IL_0460: ldloca.s V_32
+IL_0462: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<IServerItem>::MoveNext()
+IL_0467: brtrue.s IL_0440
+IL_0469: leave.s IL_0479
+IL_046b: ldloca.s V_32
+IL_046d: constrained. System.Collections.Generic.HashSet`1/Enumerator<IServerItem>
+IL_0473: callvirt System.Void System.IDisposable::Dispose()
+IL_0478: endfinally
+IL_0479: ldloca.s V_30
+IL_047b: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<ServerGroup>::MoveNext()
+IL_0480: brtrue.s IL_041b
+IL_0482: leave.s IL_0492
+IL_0484: ldloca.s V_30
+IL_0486: constrained. System.Collections.Generic.HashSet`1/Enumerator<ServerGroup>
+IL_048c: callvirt System.Void System.IDisposable::Dispose()
+IL_0491: endfinally
+IL_0492: ldc.r4 0
+IL_0497: stloc.s V_24
+IL_0499: ldc.r4 0
+IL_049e: stloc.s V_25
+IL_04a0: ldloc.s V_21
+IL_04a2: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<IServerItem,System.Single>::GetEnumerator()
+IL_04a7: stloc.s V_34
+IL_04a9: br.s IL_04f5
+IL_04ab: ldloca.s V_34
+IL_04ad: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::get_Current()
+IL_04b2: stloc.s V_35
+IL_04b4: ldloc.s V_24
+IL_04b6: ldloca.s V_35
+IL_04b8: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_04bd: add
+IL_04be: stloc.s V_24
+IL_04c0: ldloc.s V_20
+IL_04c2: ldc.i4.0
+IL_04c3: ble.s IL_04db
+IL_04c5: ldarg.0
+IL_04c6: ldfld System.Collections.Generic.Dictionary`2<System.Byte,System.Single> TimeOfDay::_cloudUsage
+IL_04cb: ldloc.s V_20
+IL_04cd: ldloca.s V_35
+IL_04cf: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_04d4: call System.Void Utilities::AddUp<System.Byte>(System.Collections.Generic.Dictionary`2<T,System.Single>,T,System.Single)
+IL_04d9: br.s IL_04f5
+IL_04db: ldloca.s V_35
+IL_04dd: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_04e2: callvirt System.Boolean IServerItem::get_UsesISP()
+IL_04e7: brfalse.s IL_04f5
+IL_04e9: ldloc.s V_25
+IL_04eb: ldloca.s V_35
+IL_04ed: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_04f2: add
+IL_04f3: stloc.s V_25
+IL_04f5: ldloca.s V_34
+IL_04f7: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::MoveNext()
+IL_04fc: brtrue.s IL_04ab
+IL_04fe: leave.s IL_050e
+IL_0500: ldloca.s V_34
+IL_0502: constrained. System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>
+IL_0508: callvirt System.Void System.IDisposable::Dispose()
+IL_050d: endfinally
+IL_050e: ldc.r4 0
+IL_0513: stloc.s V_26
+IL_0515: ldloc.s V_19
+IL_0517: ldfld System.Single ServerGroup::PowerSum
+IL_051c: ldc.r4 0
+IL_0521: beq.s IL_052f
+IL_0523: ldloc.s V_24
+IL_0525: ldloc.s V_19
+IL_0527: ldfld System.Single ServerGroup::PowerSum
+IL_052c: div
+IL_052d: br.s IL_0534
+IL_052f: ldc.r4 0
+IL_0534: stloc.s V_27
+IL_0536: ldloc.s V_19
+IL_0538: ldloc.s V_27
+IL_053a: ldc.r4 1
+IL_053f: bgt.s IL_054b
+IL_0541: ldc.r4 1
+IL_0546: ldloc.s V_27
+IL_0548: sub
+IL_0549: br.s IL_0550
+IL_054b: ldc.r4 0
+IL_0550: stfld System.Single ServerGroup::Available
+IL_0555: ldloc.s V_19
+IL_0557: ldloc.s V_19
+IL_0559: ldfld System.Single ServerGroup::PowerSum
+IL_055e: ldloc.s V_24
+IL_0560: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_0565: stfld System.Single ServerGroup::LastUsed
+IL_056a: ldc.r4 1
+IL_056f: ldloc.s V_27
+IL_0571: ldc.r4 0.25
+IL_0576: add
+IL_0577: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_057c: stloc.s V_28
+IL_057e: ldloc.s V_28
+IL_0580: call System.Boolean System.Single::IsNaN(System.Single)
+IL_0585: brtrue IL_0646
+IL_058a: ldloc.s V_28
+IL_058c: call System.Boolean System.Single::IsInfinity(System.Single)
+IL_0591: brtrue IL_0646
+IL_0596: ldloc.s V_20
+IL_0598: ldc.i4.0
+IL_0599: ble.s IL_05c8
+IL_059b: ldloc.s V_26
+IL_059d: ldloc.s V_24
+IL_059f: ldloc.s V_19
+IL_05a1: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_05a6: call !!0 System.Linq.Enumerable::First<IServerHost>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_05ab: castclass NetworkServer
+IL_05b0: callvirt System.Single NetworkServer::get_Cost()
+IL_05b5: mul
+IL_05b6: ldc.r4 24
+IL_05bb: div
+IL_05bc: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_05c1: conv.r4
+IL_05c2: div
+IL_05c3: add
+IL_05c4: stloc.s V_26
+IL_05c6: br.s IL_0646
+IL_05c8: ldloc.s V_19
+IL_05ca: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_05cf: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<Server>(System.Collections.IEnumerable)
+IL_05d4: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Server>::GetEnumerator()
+IL_05d9: stloc.s V_36
+IL_05db: br.s IL_062f
+IL_05dd: ldloc.s V_36
+IL_05df: callvirt !0 System.Collections.Generic.IEnumerator`1<Server>::get_Current()
+IL_05e4: stloc.s V_37
+IL_05e6: ldloc.s V_37
+IL_05e8: callvirt Furniture Server::get_furn()
+IL_05ed: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_05f2: brtrue.s IL_062f
+IL_05f4: ldloc.s V_37
+IL_05f6: callvirt Furniture Server::get_furn()
+IL_05fb: ldfld Upgradable Furniture::upg
+IL_0600: ldloc.s V_28
+IL_0602: stfld System.Single Upgradable::AtrophyModifier
+IL_0607: ldloc.s V_37
+IL_0609: callvirt Furniture Server::get_furn()
+IL_060e: ldloc.s V_27
+IL_0610: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0615: ldloc.s V_26
+IL_0617: ldloc.s V_37
+IL_0619: callvirt Furniture Server::get_furn()
+IL_061e: callvirt System.Single Furniture::get_CurrentWattage()
+IL_0623: ldc.r4 0.03
+IL_0628: mul
+IL_0629: ldloc.s V_6
+IL_062b: mul
+IL_062c: add
+IL_062d: stloc.s V_26
+IL_062f: ldloc.s V_36
+IL_0631: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0636: brtrue.s IL_05dd
+IL_0638: leave.s IL_0646
+IL_063a: ldloc.s V_36
+IL_063c: brfalse.s IL_0645
+IL_063e: ldloc.s V_36
+IL_0640: callvirt System.Void System.IDisposable::Dispose()
+IL_0645: endfinally
+IL_0646: ldloc.s V_20
+IL_0648: brtrue.s IL_0657
+IL_064a: ldloc.s V_26
+IL_064c: ldc.r4 1
+IL_0651: ldloc.s V_7
+IL_0653: sub
+IL_0654: mul
+IL_0655: stloc.s V_26
+IL_0657: ldloc.s V_21
+IL_0659: callvirt System.Int32 System.Collections.Generic.Dictionary`2<IServerItem,System.Single>::get_Count()
+IL_065e: ldc.i4.0
+IL_065f: ble IL_0813
+IL_0664: ldloc.s V_24
+IL_0666: ldloc.s V_19
+IL_0668: ldfld System.Single ServerGroup::PowerSum
+IL_066d: bge.un IL_0728
+IL_0672: ldloc.s V_5
+IL_0674: ldloc.s V_24
+IL_0676: add
+IL_0677: stloc.s V_5
+IL_0679: ldsfld GameSettings GameSettings::Instance
+IL_067e: dup
+IL_067f: ldfld System.Single GameSettings::ServerCost
+IL_0684: ldloc.s V_25
+IL_0686: call System.Single Server::GetISPCost()
+IL_068b: mul
+IL_068c: ldc.r4 24
+IL_0691: div
+IL_0692: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0697: conv.r4
+IL_0698: div
+IL_0699: add
+IL_069a: stfld System.Single GameSettings::ServerCost
+IL_069f: ldloc.s V_21
+IL_06a1: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<IServerItem,System.Single>::GetEnumerator()
+IL_06a6: stloc.s V_34
+IL_06a8: br.s IL_070c
+IL_06aa: ldloca.s V_34
+IL_06ac: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::get_Current()
+IL_06b1: stloc.s V_38
+IL_06b3: ldloca.s V_38
+IL_06b5: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_06ba: ldc.r4 1
+IL_06bf: callvirt System.Void IServerItem::HandleLoad(System.Single)
+IL_06c4: ldloca.s V_38
+IL_06c6: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_06cb: ldc.r4 0
+IL_06d0: ble.un.s IL_070c
+IL_06d2: ldarg.0
+IL_06d3: ldloca.s V_38
+IL_06d5: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_06da: ldloc.s V_20
+IL_06dc: brtrue.s IL_06ec
+IL_06de: ldloca.s V_38
+IL_06e0: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_06e5: callvirt System.Boolean IServerItem::get_UsesISP()
+IL_06ea: brtrue.s IL_06f3
+IL_06ec: ldc.r4 0
+IL_06f1: br.s IL_06fa
+IL_06f3: ldloca.s V_38
+IL_06f5: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_06fa: ldloc.s V_26
+IL_06fc: ldloca.s V_38
+IL_06fe: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_0703: ldloc.s V_24
+IL_0705: div
+IL_0706: mul
+IL_0707: call System.Void TimeOfDay::AddServerLoss(IServerItem,System.Single,System.Single)
+IL_070c: ldloca.s V_34
+IL_070e: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::MoveNext()
+IL_0713: brtrue.s IL_06aa
+IL_0715: leave IL_0813
+IL_071a: ldloca.s V_34
+IL_071c: constrained. System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>
+IL_0722: callvirt System.Void System.IDisposable::Dispose()
+IL_0727: endfinally
+IL_0728: ldloc.s V_5
+IL_072a: ldloc.s V_19
+IL_072c: ldfld System.Single ServerGroup::PowerSum
+IL_0731: add
+IL_0732: stloc.s V_5
+IL_0734: ldsfld GameSettings GameSettings::Instance
+IL_0739: dup
+IL_073a: ldfld System.Single GameSettings::ServerCost
+IL_073f: ldloc.s V_25
+IL_0741: ldloc.s V_19
+IL_0743: ldfld System.Single ServerGroup::PowerSum
+IL_0748: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_074d: call System.Single Server::GetISPCost()
+IL_0752: mul
+IL_0753: ldc.r4 24
+IL_0758: div
+IL_0759: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_075e: conv.r4
+IL_075f: div
+IL_0760: add
+IL_0761: stfld System.Single GameSettings::ServerCost
+IL_0766: ldloc.s V_4
+IL_0768: ldc.i4.1
+IL_0769: add
+IL_076a: stloc.s V_4
+IL_076c: ldloc.s V_24
+IL_076e: ldc.r4 0
+IL_0773: beq.s IL_0786
+IL_0775: ldloc.s V_19
+IL_0777: ldfld System.Single ServerGroup::PowerSum
+IL_077c: ldloc.s V_24
+IL_077e: div
+IL_077f: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_0784: br.s IL_078b
+IL_0786: ldc.r4 1
+IL_078b: stloc.s V_39
+IL_078d: ldloc.s V_21
+IL_078f: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<IServerItem,System.Single>::GetEnumerator()
+IL_0794: stloc.s V_34
+IL_0796: br.s IL_07fa
+IL_0798: ldloca.s V_34
+IL_079a: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::get_Current()
+IL_079f: stloc.s V_40
+IL_07a1: ldloca.s V_40
+IL_07a3: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_07a8: ldloc.s V_39
+IL_07aa: callvirt System.Void IServerItem::HandleLoad(System.Single)
+IL_07af: ldloca.s V_40
+IL_07b1: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_07b6: ldc.r4 0
+IL_07bb: ble.un.s IL_07fa
+IL_07bd: ldarg.0
+IL_07be: ldloca.s V_40
+IL_07c0: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_07c5: ldloc.s V_20
+IL_07c7: brtrue.s IL_07d7
+IL_07c9: ldloca.s V_40
+IL_07cb: call !0 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Key()
+IL_07d0: callvirt System.Boolean IServerItem::get_UsesISP()
+IL_07d5: brtrue.s IL_07de
+IL_07d7: ldc.r4 0
+IL_07dc: br.s IL_07e8
+IL_07de: ldloca.s V_40
+IL_07e0: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_07e5: ldloc.s V_39
+IL_07e7: mul
+IL_07e8: ldloc.s V_26
+IL_07ea: ldloca.s V_40
+IL_07ec: call !1 System.Collections.Generic.KeyValuePair`2<IServerItem,System.Single>::get_Value()
+IL_07f1: ldloc.s V_24
+IL_07f3: div
+IL_07f4: mul
+IL_07f5: call System.Void TimeOfDay::AddServerLoss(IServerItem,System.Single,System.Single)
+IL_07fa: ldloca.s V_34
+IL_07fc: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>::MoveNext()
+IL_0801: brtrue.s IL_0798
+IL_0803: leave.s IL_0813
+IL_0805: ldloca.s V_34
+IL_0807: constrained. System.Collections.Generic.Dictionary`2/Enumerator<IServerItem,System.Single>
+IL_080d: callvirt System.Void System.IDisposable::Dispose()
+IL_0812: endfinally
+IL_0813: ldloc.s V_22
+IL_0815: brfalse.s IL_0896
+IL_0817: ldloc.s V_19
+IL_0819: ldfld System.Single ServerGroup::PowerSum
+IL_081e: ldloc.s V_19
+IL_0820: ldfld System.Single ServerGroup::Available
+IL_0825: mul
+IL_0826: stloc.s V_41
+IL_0828: ldc.i4.0
+IL_0829: stloc.s V_42
+IL_082b: br.s IL_0883
+IL_082d: ldsfld SINetworking.NetworkManager SINetworking.NetworkManager::Instance
+IL_0832: ldfld System.Collections.Generic.List`1<SINetworking.NetworkPlayer> SINetworking.NetworkManager::Players
+IL_0837: ldloc.s V_42
+IL_0839: callvirt !0 System.Collections.Generic.List`1<SINetworking.NetworkPlayer>::get_Item(System.Int32)
+IL_083e: stloc.s V_43
+IL_0840: ldloc.s V_43
+IL_0842: ldfld System.Boolean SINetworking.NetworkPlayer::Self
+IL_0847: brtrue.s IL_087d
+IL_0849: ldloc.s V_41
+IL_084b: ldloc.s V_19
+IL_084d: ldloc.s V_43
+IL_084f: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_0854: callvirt System.Single ServerGroup::GetLoadFor(System.Byte)
+IL_0859: ldloc.0
+IL_085a: ldfld System.Single TimeOfDay/<>c__DisplayClass157_0::bandwidth
+IL_085f: mul
+IL_0860: add
+IL_0861: stloc.s V_44
+IL_0863: call System.Byte SINetworking.NetworkManager::get_LocalPlayerID()
+IL_0868: ldc.r4 -1
+IL_086d: ldloc.s V_44
+IL_086f: ldc.i4.3
+IL_0870: ldloc.s V_43
+IL_0872: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_0877: call System.Boolean SINetworking.NetworkMessaging::SendUpdateCloudService(System.Byte,System.Single,System.Single,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_087c: pop
+IL_087d: ldloc.s V_42
+IL_087f: ldc.i4.1
+IL_0880: add
+IL_0881: stloc.s V_42
+IL_0883: ldloc.s V_42
+IL_0885: ldsfld SINetworking.NetworkManager SINetworking.NetworkManager::Instance
+IL_088a: ldfld System.Collections.Generic.List`1<SINetworking.NetworkPlayer> SINetworking.NetworkManager::Players
+IL_088f: callvirt System.Int32 System.Collections.Generic.List`1<SINetworking.NetworkPlayer>::get_Count()
+IL_0894: blt.s IL_082d
+IL_0896: ldloc.s V_18
+IL_0898: ldc.i4.1
+IL_0899: add
+IL_089a: stloc.s V_18
+IL_089c: ldloc.s V_18
+IL_089e: ldloc.2
+IL_089f: ldlen
+IL_08a0: conv.i4
+IL_08a1: blt IL_036e
+IL_08a6: ldsfld GameSettings GameSettings::Instance
+IL_08ab: callvirt System.Boolean GameSettings::get_IsNetworkMode()
+IL_08b0: brfalse IL_0a6f
+IL_08b5: ldc.i4.0
+IL_08b6: stloc.s V_45
+IL_08b8: br IL_099f
+IL_08bd: ldsfld SINetworking.NetworkManager SINetworking.NetworkManager::Instance
+IL_08c2: ldfld System.Collections.Generic.List`1<SINetworking.NetworkPlayer> SINetworking.NetworkManager::Players
+IL_08c7: ldloc.s V_45
+IL_08c9: callvirt !0 System.Collections.Generic.List`1<SINetworking.NetworkPlayer>::get_Item(System.Int32)
+IL_08ce: stloc.s V_46
+IL_08d0: ldloc.s V_46
+IL_08d2: ldfld System.Boolean SINetworking.NetworkPlayer::Self
+IL_08d7: brtrue IL_0999
+IL_08dc: call MarketSimulation MarketSimulation::get_Active()
+IL_08e1: ldloc.s V_46
+IL_08e3: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_08e8: callvirt Company MarketSimulation::GetPlayerCompany(System.Byte)
+IL_08ed: stloc.s V_47
+IL_08ef: ldloc.s V_47
+IL_08f1: brtrue.s IL_08f6
+IL_08f3: ldnull
+IL_08f4: br.s IL_08fd
+IL_08f6: ldloc.s V_47
+IL_08f8: ldfld NetworkServer Company::CloudService
+IL_08fd: brfalse IL_0999
+IL_0902: ldarg.0
+IL_0903: ldfld System.Collections.Generic.Dictionary`2<System.Byte,System.Single> TimeOfDay::_cloudUsage
+IL_0908: ldloc.s V_46
+IL_090a: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_090f: ldc.r4 0
+IL_0914: call TValue Utilities::GetOrDefault<System.Byte,System.Single>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0919: stloc.s V_48
+IL_091b: ldarg.0
+IL_091c: ldfld System.Collections.Generic.Dictionary`2<System.Byte,System.Single> TimeOfDay::_cloudUsage
+IL_0921: ldloc.s V_46
+IL_0923: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_0928: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.Byte,System.Single>::Remove(!0)
+IL_092d: pop
+IL_092e: call System.Byte SINetworking.NetworkManager::get_LocalPlayerID()
+IL_0933: ldloc.s V_46
+IL_0935: ldfld System.Byte SINetworking.NetworkPlayer::ID
+IL_093a: ldloc.s V_48
+IL_093c: ldc.i4.1
+IL_093d: ldc.i4.4
+IL_093e: ldc.i4.0
+IL_093f: call System.Boolean SINetworking.NetworkMessaging::SendUpdateCloudUsage(System.Byte,System.Byte,System.Single,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_0944: pop
+IL_0945: ldloc.s V_48
+IL_0947: ldc.r4 0
+IL_094c: ble.un.s IL_0999
+IL_094e: ldloc.s V_48
+IL_0950: ldloc.s V_47
+IL_0952: ldfld NetworkServer Company::CloudService
+IL_0957: callvirt System.Single NetworkServer::get_Cost()
+IL_095c: mul
+IL_095d: ldc.r4 24
+IL_0962: div
+IL_0963: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0968: conv.r4
+IL_0969: div
+IL_096a: stloc.s V_49
+IL_096c: ldsfld GameSettings GameSettings::Instance
+IL_0971: ldfld Company GameSettings::MyCompany
+IL_0976: ldloc.s V_49
+IL_0978: neg
+IL_0979: conv.r8
+IL_097a: ldc.i4.3
+IL_097b: ldc.i4.1
+IL_097c: ldstr "CloudService"
+IL_0981: ldc.i4.0
+IL_0982: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0987: ldloc.s V_47
+IL_0989: ldloc.s V_49
+IL_098b: conv.r8
+IL_098c: ldc.i4.1
+IL_098d: ldc.i4.1
+IL_098e: ldstr "CloudService"
+IL_0993: ldc.i4.1
+IL_0994: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0999: ldloc.s V_45
+IL_099b: ldc.i4.1
+IL_099c: add
+IL_099d: stloc.s V_45
+IL_099f: ldloc.s V_45
+IL_09a1: ldsfld SINetworking.NetworkManager SINetworking.NetworkManager::Instance
+IL_09a6: ldfld System.Collections.Generic.List`1<SINetworking.NetworkPlayer> SINetworking.NetworkManager::Players
+IL_09ab: callvirt System.Int32 System.Collections.Generic.List`1<SINetworking.NetworkPlayer>::get_Count()
+IL_09b0: blt IL_08bd
+IL_09b5: ldarg.0
+IL_09b6: ldfld System.Collections.Generic.Dictionary`2<System.Byte,System.Single> TimeOfDay::_cloudUsage
+IL_09bb: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.Byte,System.Single>::GetEnumerator()
+IL_09c0: stloc.s V_50
+IL_09c2: br IL_0a53
+IL_09c7: ldloca.s V_50
+IL_09c9: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.Byte,System.Single>::get_Current()
+IL_09ce: stloc.s V_51
+IL_09d0: call System.Byte SINetworking.NetworkManager::get_LocalPlayerID()
+IL_09d5: ldloca.s V_51
+IL_09d7: call !0 System.Collections.Generic.KeyValuePair`2<System.Byte,System.Single>::get_Key()
+IL_09dc: ldloca.s V_51
+IL_09de: call !1 System.Collections.Generic.KeyValuePair`2<System.Byte,System.Single>::get_Value()
+IL_09e3: ldc.i4.1
+IL_09e4: ldc.i4.4
+IL_09e5: ldc.i4.0
+IL_09e6: call System.Boolean SINetworking.NetworkMessaging::SendUpdateCloudUsage(System.Byte,System.Byte,System.Single,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_09eb: pop
+IL_09ec: call MarketSimulation MarketSimulation::get_Active()
+IL_09f1: ldloca.s V_51
+IL_09f3: call !0 System.Collections.Generic.KeyValuePair`2<System.Byte,System.Single>::get_Key()
+IL_09f8: callvirt Company MarketSimulation::GetPlayerCompany(System.Byte)
+IL_09fd: stloc.s V_52
+IL_09ff: ldloc.s V_52
+IL_0a01: brfalse.s IL_0a53
+IL_0a03: ldloca.s V_51
+IL_0a05: call !1 System.Collections.Generic.KeyValuePair`2<System.Byte,System.Single>::get_Value()
+IL_0a0a: ldloc.s V_52
+IL_0a0c: ldfld NetworkServer Company::CloudService
+IL_0a11: callvirt System.Single NetworkServer::get_Cost()
+IL_0a16: mul
+IL_0a17: ldc.r4 24
+IL_0a1c: div
+IL_0a1d: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0a22: conv.r4
+IL_0a23: div
+IL_0a24: stloc.s V_53
+IL_0a26: ldsfld GameSettings GameSettings::Instance
+IL_0a2b: ldfld Company GameSettings::MyCompany
+IL_0a30: ldloc.s V_53
+IL_0a32: neg
+IL_0a33: conv.r8
+IL_0a34: ldc.i4.3
+IL_0a35: ldc.i4.1
+IL_0a36: ldstr "CloudService"
+IL_0a3b: ldc.i4.0
+IL_0a3c: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0a41: ldloc.s V_52
+IL_0a43: ldloc.s V_53
+IL_0a45: conv.r8
+IL_0a46: ldc.i4.1
+IL_0a47: ldc.i4.1
+IL_0a48: ldstr "CloudService"
+IL_0a4d: ldc.i4.1
+IL_0a4e: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0a53: ldloca.s V_50
+IL_0a55: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.Byte,System.Single>::MoveNext()
+IL_0a5a: brtrue IL_09c7
+IL_0a5f: leave.s IL_0a6f
+IL_0a61: ldloca.s V_50
+IL_0a63: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.Byte,System.Single>
+IL_0a69: callvirt System.Void System.IDisposable::Dispose()
+IL_0a6e: endfinally
+IL_0a6f: ldloc.2
+IL_0a70: ldlen
+IL_0a71: brfalse.s IL_0aa8
+IL_0a73: ldsfld GameSettings GameSettings::Instance
+IL_0a78: ldstr "ServerBandwidth"
+IL_0a7d: ldloc.s V_5
+IL_0a7f: ldc.r4 24
+IL_0a84: div
+IL_0a85: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0a8a: conv.r4
+IL_0a8b: div
+IL_0a8c: callvirt System.Void GameSettings::RegisterStat(System.String,System.Single)
+IL_0a91: ldloc.s V_4
+IL_0a93: ldc.i4.0
+IL_0a94: ble.s IL_0aa8
+IL_0a96: ldsfld GameSettings GameSettings::Instance
+IL_0a9b: ldstr "ServerFailure"
+IL_0aa0: ldloc.s V_4
+IL_0aa2: conv.r4
+IL_0aa3: callvirt System.Void GameSettings::RegisterStat(System.String,System.Single)
+IL_0aa8: ldarg.0
+IL_0aa9: ldfld ButtonCounter TimeOfDay::BadServerCounter
+IL_0aae: ldloc.s V_4
+IL_0ab0: callvirt System.Void ButtonCounter::SetNumber(System.Int32)
+IL_0ab5: ldsfld GameSettings GameSettings::Instance
+IL_0aba: ldfld System.Collections.Generic.List`1<IServerItem> GameSettings::UnsupportedServerItems
+IL_0abf: callvirt !0[] System.Collections.Generic.List`1<IServerItem>::ToArray()
+IL_0ac4: stloc.s V_8
+IL_0ac6: ldc.i4.0
+IL_0ac7: stloc.s V_54
+IL_0ac9: br.s IL_0ae0
+IL_0acb: ldloc.s V_8
+IL_0acd: ldloc.s V_54
+IL_0acf: ldelem.ref
+IL_0ad0: ldc.r4 0
+IL_0ad5: callvirt System.Void IServerItem::HandleLoad(System.Single)
+IL_0ada: ldloc.s V_54
+IL_0adc: ldc.i4.1
+IL_0add: add
+IL_0ade: stloc.s V_54
+IL_0ae0: ldloc.s V_54
+IL_0ae2: ldloc.s V_8
+IL_0ae4: ldlen
+IL_0ae5: conv.i4
+IL_0ae6: blt.s IL_0acb
+IL_0ae8: ldsfld GameSettings GameSettings::Instance
+IL_0aed: ldfld ActorManager GameSettings::sActorManager
+IL_0af2: ldfld System.Collections.Generic.Dictionary`2<System.String,Team> ActorManager::Teams
+IL_0af7: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,Team>::get_Values()
+IL_0afc: callvirt System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2/ValueCollection<System.String,Team>::GetEnumerator()
+IL_0b01: stloc.s V_55
+IL_0b03: br.s IL_0b1c
+IL_0b05: ldloca.s V_55
+IL_0b07: call !1 System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>::get_Current()
+IL_0b0c: stloc.s V_56
+IL_0b0e: ldloc.s V_56
+IL_0b10: ldfld HRManagement Team::HR
+IL_0b15: ldloc.s V_56
+IL_0b17: callvirt System.Void HRManagement::Update(Team)
+IL_0b1c: ldloca.s V_55
+IL_0b1e: call System.Boolean System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>::MoveNext()
+IL_0b23: brtrue.s IL_0b05
+IL_0b25: leave.s IL_0b35
+IL_0b27: ldloca.s V_55
+IL_0b29: constrained. System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>
+IL_0b2f: callvirt System.Void System.IDisposable::Dispose()
+IL_0b34: endfinally
+IL_0b35: ldsfld GameSettings GameSettings::Instance
+IL_0b3a: ldfld RoomManager GameSettings::sRoomManager
+IL_0b3f: ldfld System.Collections.Generic.List`1<TemperatureGroup> RoomManager::TempGroups
+IL_0b44: ldsfld System.Action`1<TemperatureGroup> TimeOfDay/<>c::<>9__157_0
+IL_0b49: dup
+IL_0b4a: brtrue.s IL_0b63
+IL_0b4c: pop
+IL_0b4d: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0b52: ldftn System.Void TimeOfDay/<>c::<UpdateHour>b__157_0(TemperatureGroup)
+IL_0b58: newobj System.Void System.Action`1<TemperatureGroup>::.ctor(System.Object,System.IntPtr)
+IL_0b5d: dup
+IL_0b5e: stsfld System.Action`1<TemperatureGroup> TimeOfDay/<>c::<>9__157_0
+IL_0b63: call System.Void Utilities::ForEachEnum<TemperatureGroup>(System.Collections.Generic.IList`1<T>,System.Action`1<T>)
+IL_0b68: ldarg.0
+IL_0b69: ldflda UnityEngine.Vector2 TimeOfDay::Windiness
+IL_0b6e: call System.Single UnityEngine.Vector2::get_magnitude()
+IL_0b73: ldc.r4 0.01
+IL_0b78: ldc.r4 0.02
+IL_0b7d: ldc.r4 0
+IL_0b82: ldc.r4 1
+IL_0b87: ldc.i4.1
+IL_0b88: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0b8d: stloc.s V_9
+IL_0b8f: ldc.i4.0
+IL_0b90: stloc.s V_57
+IL_0b92: br IL_0d97
+IL_0b97: ldsfld GameSettings GameSettings::Instance
+IL_0b9c: ldfld RoomManager GameSettings::sRoomManager
+IL_0ba1: ldfld HashList`1<Furniture> RoomManager::AllFurniture
+IL_0ba6: ldloc.s V_57
+IL_0ba8: callvirt !0 HashList`1<Furniture>::get_Item(System.Int32)
+IL_0bad: stloc.s V_58
+IL_0baf: ldloc.s V_58
+IL_0bb1: ldflda System.Nullable`1<SDateTime> Furniture::TurnOffTimer
+IL_0bb6: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_0bbb: brfalse.s IL_0be6
+IL_0bbd: ldloc.1
+IL_0bbe: ldloc.s V_58
+IL_0bc0: ldflda System.Nullable`1<SDateTime> Furniture::TurnOffTimer
+IL_0bc5: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_0bca: call System.Boolean SDateTime::op_GreaterThanOrEqual(SDateTime,SDateTime)
+IL_0bcf: brfalse.s IL_0be6
+IL_0bd1: ldloc.s V_58
+IL_0bd3: ldflda System.Nullable`1<SDateTime> Furniture::TurnOffTimer
+IL_0bd8: initobj System.Nullable`1<SDateTime>
+IL_0bde: ldloc.s V_58
+IL_0be0: ldc.i4.0
+IL_0be1: callvirt System.Void Furniture::set_IsOn(System.Boolean)
+IL_0be6: ldloc.s V_58
+IL_0be8: ldfld Furniture/TemperatureType Furniture::TempControlType
+IL_0bed: brfalse IL_0d41
+IL_0bf2: ldloc.s V_58
+IL_0bf4: callvirt System.Boolean Furniture::get_IsOn()
+IL_0bf9: brfalse IL_0d41
+IL_0bfe: ldloc.s V_58
+IL_0c00: ldfld Furniture/TemperatureType Furniture::TempControlType
+IL_0c05: ldc.i4.2
+IL_0c06: ceq
+IL_0c08: stloc.s V_59
+IL_0c0a: ldloc.s V_58
+IL_0c0c: ldfld System.Boolean Furniture::TemperatureController
+IL_0c11: brfalse IL_0cc4
+IL_0c16: ldloc.s V_58
+IL_0c18: ldfld TemperatureGroup Furniture::TempGroup
+IL_0c1d: brfalse IL_0ca2
+IL_0c22: ldc.i4 8388608
+IL_0c27: call System.Void Achievements.AchievementController::SetInteraction(Achievements.AchievementController/Mechanics)
+IL_0c2c: ldloc.s V_59
+IL_0c2e: brtrue.s IL_0c3e
+IL_0c30: ldloc.s V_58
+IL_0c32: ldfld TemperatureGroup Furniture::TempGroup
+IL_0c37: ldfld System.Single TemperatureGroup::HeatUse
+IL_0c3c: br.s IL_0c4a
+IL_0c3e: ldloc.s V_58
+IL_0c40: ldfld TemperatureGroup Furniture::TempGroup
+IL_0c45: ldfld System.Single TemperatureGroup::CoolUse
+IL_0c4a: stloc.s V_60
+IL_0c4c: ldloc.s V_58
+IL_0c4e: ldfld Upgradable Furniture::upg
+IL_0c53: ldloc.s V_60
+IL_0c55: ldloc.s V_58
+IL_0c57: callvirt System.Single Furniture::GetTempCapacity()
+IL_0c5c: ldc.r4 1
+IL_0c61: ldc.r4 1.5
+IL_0c66: ldc.r4 1
+IL_0c6b: ldc.r4 2
+IL_0c70: ldc.i4.1
+IL_0c71: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0c76: mul
+IL_0c77: stfld System.Single Upgradable::AtrophyModifier
+IL_0c7c: ldloc.s V_58
+IL_0c7e: ldloc.s V_60
+IL_0c80: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0c85: ldloc.s V_58
+IL_0c87: ldfld Upgradable Furniture::upg
+IL_0c8c: ldc.r4 0.041666668
+IL_0c91: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0c96: conv.r4
+IL_0c97: div
+IL_0c98: callvirt System.Void Upgradable::DegradeMonths(System.Single)
+IL_0c9d: br IL_0d91
+IL_0ca2: ldloc.s V_58
+IL_0ca4: ldfld Upgradable Furniture::upg
+IL_0ca9: ldc.r4 0
+IL_0cae: stfld System.Single Upgradable::AtrophyModifier
+IL_0cb3: ldloc.s V_58
+IL_0cb5: ldc.r4 0
+IL_0cba: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0cbf: br IL_0d91
+IL_0cc4: ldloc.s V_58
+IL_0cc6: ldfld System.Boolean Furniture::TemperatureOutput
+IL_0ccb: brtrue IL_0d91
+IL_0cd0: ldloc.s V_58
+IL_0cd2: ldfld System.Boolean Furniture::TemperatureModifyUsage
+IL_0cd7: brfalse.s IL_0d10
+IL_0cd9: ldloc.s V_59
+IL_0cdb: brtrue.s IL_0ceb
+IL_0cdd: ldloc.s V_58
+IL_0cdf: callvirt Room Furniture::get_Parent()
+IL_0ce4: ldfld System.Single Room::TempHeatDirectUsage
+IL_0ce9: br.s IL_0cf7
+IL_0ceb: ldloc.s V_58
+IL_0ced: callvirt Room Furniture::get_Parent()
+IL_0cf2: ldfld System.Single Room::TempCoolDirectUsage
+IL_0cf7: stloc.s V_61
+IL_0cf9: ldloc.s V_58
+IL_0cfb: ldfld Upgradable Furniture::upg
+IL_0d00: ldloc.s V_61
+IL_0d02: stfld System.Single Upgradable::AtrophyModifier
+IL_0d07: ldloc.s V_58
+IL_0d09: ldloc.s V_61
+IL_0d0b: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0d10: ldloc.s V_58
+IL_0d12: ldfld System.Boolean Furniture::HasUpg
+IL_0d17: brfalse.s IL_0d91
+IL_0d19: ldloc.s V_58
+IL_0d1b: ldfld Upgradable Furniture::upg
+IL_0d20: ldfld System.Boolean Upgradable::ManualDegrade
+IL_0d25: brfalse.s IL_0d91
+IL_0d27: ldloc.s V_58
+IL_0d29: ldfld Upgradable Furniture::upg
+IL_0d2e: ldc.r4 0.041666668
+IL_0d33: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0d38: conv.r4
+IL_0d39: div
+IL_0d3a: callvirt System.Void Upgradable::DegradeMonths(System.Single)
+IL_0d3f: br.s IL_0d91
+IL_0d41: ldloc.s V_58
+IL_0d43: ldfld System.String WallSnap::Type
+IL_0d48: ldstr "Solarpanel"
+IL_0d4d: callvirt System.Boolean System.String::Equals(System.String)
+IL_0d52: brfalse.s IL_0d6c
+IL_0d54: ldloc.s V_58
+IL_0d56: callvirt System.Boolean Furniture::get_IsOn()
+IL_0d5b: brfalse.s IL_0d6c
+IL_0d5d: ldloc.s V_58
+IL_0d5f: ldarg.0
+IL_0d60: ldfld System.Single TimeOfDay::SunEffectiveness
+IL_0d65: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0d6a: br.s IL_0d91
+IL_0d6c: ldloc.s V_58
+IL_0d6e: ldfld System.String WallSnap::Type
+IL_0d73: ldstr "WindTurbine"
+IL_0d78: callvirt System.Boolean System.String::Equals(System.String)
+IL_0d7d: brfalse.s IL_0d91
+IL_0d7f: ldloc.s V_58
+IL_0d81: callvirt System.Boolean Furniture::get_IsOn()
+IL_0d86: brfalse.s IL_0d91
+IL_0d88: ldloc.s V_58
+IL_0d8a: ldloc.s V_9
+IL_0d8c: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0d91: ldloc.s V_57
+IL_0d93: ldc.i4.1
+IL_0d94: add
+IL_0d95: stloc.s V_57
+IL_0d97: ldloc.s V_57
+IL_0d99: ldsfld GameSettings GameSettings::Instance
+IL_0d9e: ldfld RoomManager GameSettings::sRoomManager
+IL_0da3: ldfld HashList`1<Furniture> RoomManager::AllFurniture
+IL_0da8: callvirt System.Int32 HashList`1<Furniture>::get_Count()
+IL_0dad: blt IL_0b97
+IL_0db2: ldc.i4.0
+IL_0db3: stloc.s V_62
+IL_0db5: br.s IL_0e04
+IL_0db7: ldsfld GameSettings GameSettings::Instance
+IL_0dbc: ldfld RoomManager GameSettings::sRoomManager
+IL_0dc1: ldfld System.Collections.Generic.List`1<Room> RoomManager::Rooms
+IL_0dc6: ldloc.s V_62
+IL_0dc8: callvirt !0 System.Collections.Generic.List`1<Room>::get_Item(System.Int32)
+IL_0dcd: stloc.s V_63
+IL_0dcf: ldloc.s V_63
+IL_0dd1: callvirt System.Void Room::ResetTempUsage()
+IL_0dd6: ldloc.s V_63
+IL_0dd8: ldc.i4.1
+IL_0dd9: callvirt System.Void Room::UpdateTemperature(System.Boolean)
+IL_0dde: ldarg.0
+IL_0ddf: ldfld System.Int32 TimeOfDay::Hour
+IL_0de4: brtrue.s IL_0dfe
+IL_0de6: ldarg.0
+IL_0de7: ldfld System.Int32 TimeOfDay::Day
+IL_0dec: brtrue.s IL_0dfe
+IL_0dee: ldarg.0
+IL_0def: ldfld System.Int32 TimeOfDay::Month
+IL_0df4: ldc.i4.6
+IL_0df5: bne.un.s IL_0dfe
+IL_0df7: ldloc.s V_63
+IL_0df9: callvirt System.Void Room::UpdateAwardValues()
+IL_0dfe: ldloc.s V_62
+IL_0e00: ldc.i4.1
+IL_0e01: add
+IL_0e02: stloc.s V_62
+IL_0e04: ldloc.s V_62
+IL_0e06: ldsfld GameSettings GameSettings::Instance
+IL_0e0b: ldfld RoomManager GameSettings::sRoomManager
+IL_0e10: ldfld System.Collections.Generic.List`1<Room> RoomManager::Rooms
+IL_0e15: callvirt System.Int32 System.Collections.Generic.List`1<Room>::get_Count()
+IL_0e1a: blt.s IL_0db7
+IL_0e1c: ldsfld GameSettings GameSettings::Instance
+IL_0e21: ldfld Company GameSettings::MyCompany
+IL_0e26: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0e2b: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<WorkItem>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0e30: stloc.s V_10
+IL_0e32: ldc.i4.0
+IL_0e33: stloc.s V_64
+IL_0e35: br.s IL_0e99
+IL_0e37: ldloc.s V_10
+IL_0e39: ldloc.s V_64
+IL_0e3b: callvirt !0 System.Collections.Generic.List`1<WorkItem>::get_Item(System.Int32)
+IL_0e40: stloc.s V_65
+IL_0e42: ldloc.s V_65
+IL_0e44: callvirt System.Void WorkItem::UpdateDealSender()
+IL_0e49: ldloc.s V_65
+IL_0e4b: isinst SupportWork
+IL_0e50: dup
+IL_0e51: stloc.s V_66
+IL_0e53: brfalse.s IL_0e5f
+IL_0e55: ldloc.s V_66
+IL_0e57: ldloc.1
+IL_0e58: callvirt System.Void SupportWork::Simulate(SDateTime)
+IL_0e5d: br.s IL_0e93
+IL_0e5f: ldloc.s V_65
+IL_0e61: isinst LegalWork
+IL_0e66: dup
+IL_0e67: stloc.s V_67
+IL_0e69: brfalse.s IL_0e93
+IL_0e6b: ldloc.s V_67
+IL_0e6d: callvirt System.Boolean LegalWork::IsLawsuit()
+IL_0e72: brfalse.s IL_0e93
+IL_0e74: ldloc.1
+IL_0e75: ldloc.s V_67
+IL_0e77: ldfld SDateTime LegalWork::Deadline
+IL_0e7c: call System.Boolean SDateTime::op_GreaterThanOrEqual(SDateTime,SDateTime)
+IL_0e81: brfalse.s IL_0e8c
+IL_0e83: ldloc.s V_67
+IL_0e85: callvirt System.Void LegalWork::Defeat()
+IL_0e8a: br.s IL_0e93
+IL_0e8c: ldloc.s V_67
+IL_0e8e: callvirt System.Void LegalWork::UpdateSettleStatus()
+IL_0e93: ldloc.s V_64
+IL_0e95: ldc.i4.1
+IL_0e96: add
+IL_0e97: stloc.s V_64
+IL_0e99: ldloc.s V_64
+IL_0e9b: ldloc.s V_10
+IL_0e9d: callvirt System.Int32 System.Collections.Generic.List`1<WorkItem>::get_Count()
+IL_0ea2: blt.s IL_0e37
+IL_0ea4: ldarg.0
+IL_0ea5: ldarg.0
+IL_0ea6: call System.Boolean TimeOfDay::CanSkip()
+IL_0eab: stfld System.Boolean TimeOfDay::canSkip
+IL_0eb0: ldarg.0
+IL_0eb1: ldfld System.Int32 TimeOfDay::Month
+IL_0eb6: ldc.i4.5
+IL_0eb7: bne.un.s IL_0f1a
+IL_0eb9: ldarg.0
+IL_0eba: ldfld System.Int32 TimeOfDay::Day
+IL_0ebf: brtrue.s IL_0f1a
+IL_0ec1: ldarg.0
+IL_0ec2: ldfld System.Int32 TimeOfDay::Hour
+IL_0ec7: brtrue.s IL_0f1a
+IL_0ec9: call System.Boolean SINetworking.NetworkManager::get_NotConnectedOrHost()
+IL_0ece: brfalse.s IL_0f1a
+IL_0ed0: ldsfld GameSettings GameSettings::Instance
+IL_0ed5: call System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] AwardTrophy::GetWinners()
+IL_0eda: stfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] GameSettings::AwardWinners
+IL_0edf: ldsfld GameSettings GameSettings::Instance
+IL_0ee4: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] GameSettings::AwardWinners
+IL_0ee9: ldsfld System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>>> TimeOfDay/<>c::<>9__157_1
+IL_0eee: dup
+IL_0eef: brtrue.s IL_0f08
+IL_0ef1: pop
+IL_0ef2: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0ef7: ldftn System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>> TimeOfDay/<>c::<UpdateHour>b__157_1(System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>)
+IL_0efd: newobj System.Void System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>>>::.ctor(System.Object,System.IntPtr)
+IL_0f02: dup
+IL_0f03: stsfld System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>>> TimeOfDay/<>c::<>9__157_1
+IL_0f08: call T2[] Utilities::SelectInPlace<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>>>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,T2>)
+IL_0f0d: ldc.i4.1
+IL_0f0e: ldc.i4.0
+IL_0f0f: call System.Boolean SINetworking.NetworkMessaging::SendAwardWinners(System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.String>>[],SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_0f14: pop
+IL_0f15: call System.Void NetworkMeta::CheckDirty()
+IL_0f1a: ldarg.0
+IL_0f1b: ldfld System.Int32 TimeOfDay::Month
+IL_0f20: ldc.i4.5
+IL_0f21: bne.un IL_10db
+IL_0f26: ldarg.0
+IL_0f27: ldfld System.Int32 TimeOfDay::Day
+IL_0f2c: brtrue IL_10db
+IL_0f31: ldarg.0
+IL_0f32: ldfld System.Int32 TimeOfDay::Hour
+IL_0f37: ldc.i4.s 18
+IL_0f39: bne.un IL_10db
+IL_0f3e: ldsfld GameSettings GameSettings::Instance
+IL_0f43: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] GameSettings::AwardWinners
+IL_0f48: brfalse IL_10db
+IL_0f4d: ldsfld GameSettings GameSettings::Instance
+IL_0f52: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] GameSettings::AwardWinners
+IL_0f57: stloc.s V_68
+IL_0f59: ldsfld GameSettings GameSettings::Instance
+IL_0f5e: ldnull
+IL_0f5f: stfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] GameSettings::AwardWinners
+IL_0f64: newobj System.Void System.Text.StringBuilder::.ctor()
+IL_0f69: stloc.s V_69
+IL_0f6b: ldc.i4.0
+IL_0f6c: stloc.s V_70
+IL_0f6e: br IL_1055
+IL_0f73: ldloc.s V_68
+IL_0f75: ldloc.s V_70
+IL_0f77: ldelem.ref
+IL_0f78: stloc.s V_71
+IL_0f7a: ldloc.s V_71
+IL_0f7c: callvirt System.Int32 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>::get_Count()
+IL_0f81: ldc.i4.2
+IL_0f82: ble IL_104f
+IL_0f87: ldloc.s V_69
+IL_0f89: ldloc.s V_70
+IL_0f8b: stloc.s V_72
+IL_0f8d: ldloca.s V_72
+IL_0f8f: constrained. AwardTrophy/AwardType
+IL_0f95: callvirt System.String System.Object::ToString()
+IL_0f9a: call System.String Localization::Loc(System.String)
+IL_0f9f: ldstr ":"
+IL_0fa4: call System.String System.String::Concat(System.String,System.String)
+IL_0fa9: call System.String Utilities::FontBold(System.String)
+IL_0fae: callvirt System.Text.StringBuilder System.Text.StringBuilder::AppendLine(System.String)
+IL_0fb3: pop
+IL_0fb4: ldc.i4.0
+IL_0fb5: stloc.s V_73
+IL_0fb7: br IL_103f
+IL_0fbc: ldloc.s V_71
+IL_0fbe: ldloc.s V_73
+IL_0fc0: callvirt !0 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>::get_Item(System.Int32)
+IL_0fc5: stloc.s V_74
+IL_0fc7: ldloc.s V_69
+IL_0fc9: ldloc.s V_73
+IL_0fcb: ldc.i4.1
+IL_0fcc: add
+IL_0fcd: box System.Int32
+IL_0fd2: ldstr ". "
+IL_0fd7: call System.String System.String::Concat(System.Object,System.Object)
+IL_0fdc: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_0fe1: pop
+IL_0fe2: ldloca.s V_74
+IL_0fe4: call !0 System.Collections.Generic.KeyValuePair`2<Company,System.String>::get_Key()
+IL_0fe9: brtrue.s IL_0ff7
+IL_0feb: ldstr "NotApplicableAbbr"
+IL_0ff0: call System.String Localization::Loc(System.String)
+IL_0ff5: br.s IL_1003
+IL_0ff7: ldloca.s V_74
+IL_0ff9: call !0 System.Collections.Generic.KeyValuePair`2<Company,System.String>::get_Key()
+IL_0ffe: ldfld System.String Company::Name
+IL_1003: stloc.s V_75
+IL_1005: ldloc.s V_69
+IL_1007: ldloca.s V_74
+IL_1009: call !1 System.Collections.Generic.KeyValuePair`2<Company,System.String>::get_Value()
+IL_100e: brtrue.s IL_1014
+IL_1010: ldloc.s V_75
+IL_1012: br.s IL_1033
+IL_1014: ldstr "AwardCompanyFor"
+IL_1019: ldc.i4.2
+IL_101a: newarr System.Object
+IL_101f: dup
+IL_1020: ldc.i4.0
+IL_1021: ldloc.s V_75
+IL_1023: stelem.ref
+IL_1024: dup
+IL_1025: ldc.i4.1
+IL_1026: ldloca.s V_74
+IL_1028: call !1 System.Collections.Generic.KeyValuePair`2<Company,System.String>::get_Value()
+IL_102d: stelem.ref
+IL_102e: call System.String Localization::Loc(System.String,System.Object[])
+IL_1033: callvirt System.Text.StringBuilder System.Text.StringBuilder::AppendLine(System.String)
+IL_1038: pop
+IL_1039: ldloc.s V_73
+IL_103b: ldc.i4.1
+IL_103c: add
+IL_103d: stloc.s V_73
+IL_103f: ldloc.s V_73
+IL_1041: ldc.i4.3
+IL_1042: blt IL_0fbc
+IL_1047: ldloc.s V_69
+IL_1049: callvirt System.Text.StringBuilder System.Text.StringBuilder::AppendLine()
+IL_104e: pop
+IL_104f: ldloc.s V_70
+IL_1051: ldc.i4.1
+IL_1052: add
+IL_1053: stloc.s V_70
+IL_1055: ldloc.s V_70
+IL_1057: ldloc.s V_68
+IL_1059: ldlen
+IL_105a: conv.i4
+IL_105b: blt IL_0f73
+IL_1060: ldsfld Newspaper Newspaper::Instance
+IL_1065: ldloc.1
+IL_1066: ldstr "AwardArticleTitle"
+IL_106b: call System.String Localization::Loc(System.String)
+IL_1070: ldloc.s V_69
+IL_1072: callvirt System.String System.Object::ToString()
+IL_1077: callvirt System.String System.String::Trim()
+IL_107c: ldc.i4.2
+IL_107d: ldnull
+IL_107e: ldc.r4 0
+IL_1083: newobj System.Void Newspaper/Story::.ctor(System.String,System.String,Newspaper/Section,System.String,System.Single)
+IL_1088: ldc.i4.0
+IL_1089: callvirt System.Void Newspaper::AddNewStory(SDateTime,Newspaper/Story,System.Boolean)
+IL_108e: ldloc.s V_68
+IL_1090: ldsfld System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Boolean> TimeOfDay/<>c::<>9__157_7
+IL_1095: dup
+IL_1096: brtrue.s IL_10af
+IL_1098: pop
+IL_1099: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_109e: ldftn System.Boolean TimeOfDay/<>c::<UpdateHour>b__157_7(System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>)
+IL_10a4: newobj System.Void System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_10a9: dup
+IL_10aa: stsfld System.Func`2<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>,System.Boolean> TimeOfDay/<>c::<>9__157_7
+IL_10af: call System.Boolean Utilities::Any<System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_10b4: brfalse.s IL_10c1
+IL_10b6: ldsfld Newspaper Newspaper::Instance
+IL_10bb: ldc.i4.1
+IL_10bc: callvirt System.Void Newspaper::AddReminder(System.Boolean)
+IL_10c1: ldsfld HUD HUD::Instance
+IL_10c6: ldfld AwardWindow HUD::awardWindow
+IL_10cb: ldloc.s V_68
+IL_10cd: callvirt System.Boolean AwardWindow::Show(System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[])
+IL_10d2: brfalse.s IL_10db
+IL_10d4: ldarg.0
+IL_10d5: ldc.i4.0
+IL_10d6: stfld System.Boolean TimeOfDay::canSkip
+IL_10db: ldsfld GameSettings GameSettings::Instance
+IL_10e0: ldfld ActorManager GameSettings::sActorManager
+IL_10e5: ldfld EventList`1<Actor> ActorManager::Staff
+IL_10ea: ldsfld System.Func`2<Actor,System.Boolean> TimeOfDay/<>c::<>9__157_2
+IL_10ef: dup
+IL_10f0: brtrue.s IL_1109
+IL_10f2: pop
+IL_10f3: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_10f8: ldftn System.Boolean TimeOfDay/<>c::<UpdateHour>b__157_2(Actor)
+IL_10fe: newobj System.Void System.Func`2<Actor,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_1103: dup
+IL_1104: stsfld System.Func`2<Actor,System.Boolean> TimeOfDay/<>c::<>9__157_2
+IL_1109: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<Actor>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_110e: ldsfld System.Func`2<Actor,System.Single> TimeOfDay/<>c::<>9__157_3
+IL_1113: dup
+IL_1114: brtrue.s IL_112d
+IL_1116: pop
+IL_1117: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_111c: ldftn System.Single TimeOfDay/<>c::<UpdateHour>b__157_3(Actor)
+IL_1122: newobj System.Void System.Func`2<Actor,System.Single>::.ctor(System.Object,System.IntPtr)
+IL_1127: dup
+IL_1128: stsfld System.Func`2<Actor,System.Single> TimeOfDay/<>c::<>9__157_3
+IL_112d: call System.Collections.Generic.IEnumerable`1<!!1> System.Linq.Enumerable::Select<Actor,System.Single>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_1132: call System.Single System.Linq.Enumerable::Sum(System.Collections.Generic.IEnumerable`1<System.Single>)
+IL_1137: stloc.s V_11
+IL_1139: ldloc.s V_11
+IL_113b: ldc.r4 0
+IL_1140: ble.un.s IL_115e
+IL_1142: ldsfld GameSettings GameSettings::Instance
+IL_1147: ldfld Company GameSettings::MyCompany
+IL_114c: ldloc.s V_11
+IL_114e: neg
+IL_114f: conv.r8
+IL_1150: ldc.i4.s 9
+IL_1152: ldc.i4.1
+IL_1153: ldstr "On call"
+IL_1158: ldc.i4.0
+IL_1159: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_115e: ldsfld GameSettings GameSettings::Instance
+IL_1163: callvirt System.Void GameSettings::UpdateLawsuitQueue()
+IL_1168: ldsfld GameSettings GameSettings::Instance
+IL_116d: ldfld DictionaryList`2<System.UInt32,NetworkPrintDeal> GameSettings::NetworkPrintOrders
+IL_1172: callvirt System.Int32 DictionaryList`2<System.UInt32,NetworkPrintDeal>::get_Count()
+IL_1177: ldc.i4.0
+IL_1178: ble IL_13a1
+IL_117d: ldc.i4.0
+IL_117e: stloc.s V_76
+IL_1180: br IL_1386
+IL_1185: ldsfld GameSettings GameSettings::Instance
+IL_118a: ldfld DictionaryList`2<System.UInt32,NetworkPrintDeal> GameSettings::NetworkPrintOrders
+IL_118f: ldfld System.Collections.Generic.List`1<!1> DictionaryList`2<System.UInt32,NetworkPrintDeal>::List
+IL_1194: ldloc.s V_76
+IL_1196: callvirt !0 System.Collections.Generic.List`1<NetworkPrintDeal>::get_Item(System.Int32)
+IL_119b: stloc.s V_77
+IL_119d: ldloc.s V_77
+IL_119f: ldfld System.Byte NetworkPrintDeal::Client
+IL_11a4: call System.Byte SINetworking.NetworkManager::get_LocalPlayerID()
+IL_11a9: bne.un IL_1380
+IL_11ae: ldloc.s V_77
+IL_11b0: ldfld System.UInt32 NetworkPrintDeal::PerDay
+IL_11b5: ldc.i4.0
+IL_11b6: ble.un.s IL_11d9
+IL_11b8: ldloc.s V_77
+IL_11ba: ldfld System.UInt32 NetworkPrintDeal::DealID
+IL_11bf: ldloc.s V_77
+IL_11c1: ldfld IStockable NetworkPrintDeal::Target
+IL_11c6: callvirt System.UInt32 IStockable::get_PhysicalCopies()
+IL_11cb: ldc.i4.3
+IL_11cc: ldloc.s V_77
+IL_11ce: ldfld System.Byte NetworkPrintDeal::Printer
+IL_11d3: call System.Boolean SINetworking.NetworkMessaging::SendNetworkPrintDealChange(System.UInt32,System.UInt32,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_11d8: pop
+IL_11d9: ldloc.s V_77
+IL_11db: ldflda System.Nullable`1<SDateTime> NetworkPrintDeal::Deadline
+IL_11e0: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_11e5: brfalse IL_12db
+IL_11ea: call SDateTime SDateTime::Now()
+IL_11ef: ldloc.s V_77
+IL_11f1: ldflda System.Nullable`1<SDateTime> NetworkPrintDeal::Deadline
+IL_11f6: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_11fb: call System.Boolean SDateTime::op_GreaterThanOrEqual(SDateTime,SDateTime)
+IL_1200: brfalse IL_12db
+IL_1205: call MarketSimulation MarketSimulation::get_Active()
+IL_120a: ldloc.s V_77
+IL_120c: ldfld System.Byte NetworkPrintDeal::Printer
+IL_1211: callvirt Company MarketSimulation::GetPlayerCompany(System.Byte)
+IL_1216: stloc.s V_78
+IL_1218: ldloc.s V_78
+IL_121a: brfalse IL_129f
+IL_121f: ldloc.s V_77
+IL_1221: callvirt System.UInt32 NetworkPrintDeal::get_PhysicalCopies()
+IL_1226: ldloc.s V_77
+IL_1228: ldfld System.UInt32 NetworkPrintDeal::MaxCopies
+IL_122d: bge.un.s IL_1268
+IL_122f: ldsfld GameSettings GameSettings::Instance
+IL_1234: ldfld Company GameSettings::MyCompany
+IL_1239: ldloc.s V_77
+IL_123b: ldfld System.Single NetworkPrintDeal::Penalty
+IL_1240: conv.r8
+IL_1241: ldc.i4.1
+IL_1242: ldc.i4.1
+IL_1243: ldstr "Printjobcopies"
+IL_1248: ldc.i4.0
+IL_1249: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_124e: ldloc.s V_78
+IL_1250: ldloc.s V_77
+IL_1252: ldfld System.Single NetworkPrintDeal::Penalty
+IL_1257: neg
+IL_1258: conv.r8
+IL_1259: ldc.i4.1
+IL_125a: ldc.i4.1
+IL_125b: ldstr "Printjobcopies"
+IL_1260: ldc.i4.0
+IL_1261: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_1266: br.s IL_129f
+IL_1268: ldsfld GameSettings GameSettings::Instance
+IL_126d: ldfld Company GameSettings::MyCompany
+IL_1272: ldloc.s V_77
+IL_1274: ldfld System.Single NetworkPrintDeal::OnCompletion
+IL_1279: neg
+IL_127a: conv.r8
+IL_127b: ldc.i4.1
+IL_127c: ldc.i4.1
+IL_127d: ldstr "Printjobcopies"
+IL_1282: ldc.i4.0
+IL_1283: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_1288: ldloc.s V_78
+IL_128a: ldloc.s V_77
+IL_128c: ldfld System.Single NetworkPrintDeal::OnCompletion
+IL_1291: conv.r8
+IL_1292: ldc.i4.1
+IL_1293: ldc.i4.1
+IL_1294: ldstr "Printjobcopies"
+IL_1299: ldc.i4.1
+IL_129a: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_129f: ldstr "FinishedPrintingJob"
+IL_12a4: ldc.i4.1
+IL_12a5: newarr System.Object
+IL_12aa: dup
+IL_12ab: ldc.i4.0
+IL_12ac: ldloc.s V_77
+IL_12ae: stelem.ref
+IL_12af: call System.String Localization::LocColor(System.String,System.Object[])
+IL_12b4: ldstr "Box"
+IL_12b9: call SDateTime SDateTime::Now()
+IL_12be: ldc.i4.2
+IL_12bf: newobj System.Void NotificationMessage::.ctor(System.String,System.String,SDateTime,NotificationManager/NotificationType)
+IL_12c4: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_12c9: ldloc.s V_77
+IL_12cb: callvirt System.Void NetworkPrintDeal::Cancel()
+IL_12d0: ldloc.s V_76
+IL_12d2: ldc.i4.1
+IL_12d3: sub
+IL_12d4: stloc.s V_76
+IL_12d6: br IL_1380
+IL_12db: ldloc.s V_77
+IL_12dd: ldfld System.UInt32 NetworkPrintDeal::MaxCopies
+IL_12e2: ldc.i4.0
+IL_12e3: ble.un IL_1380
+IL_12e8: ldloc.s V_77
+IL_12ea: callvirt System.UInt32 NetworkPrintDeal::get_PhysicalCopies()
+IL_12ef: ldloc.s V_77
+IL_12f1: ldfld System.UInt32 NetworkPrintDeal::MaxCopies
+IL_12f6: blt.un IL_1380
+IL_12fb: call MarketSimulation MarketSimulation::get_Active()
+IL_1300: ldloc.s V_77
+IL_1302: ldfld System.Byte NetworkPrintDeal::Printer
+IL_1307: callvirt Company MarketSimulation::GetPlayerCompany(System.Byte)
+IL_130c: stloc.s V_79
+IL_130e: ldloc.s V_79
+IL_1310: brfalse.s IL_1349
+IL_1312: ldsfld GameSettings GameSettings::Instance
+IL_1317: ldfld Company GameSettings::MyCompany
+IL_131c: ldloc.s V_77
+IL_131e: ldfld System.Single NetworkPrintDeal::OnCompletion
+IL_1323: neg
+IL_1324: conv.r8
+IL_1325: ldc.i4.1
+IL_1326: ldc.i4.1
+IL_1327: ldstr "Printjobcopies"
+IL_132c: ldc.i4.0
+IL_132d: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_1332: ldloc.s V_79
+IL_1334: ldloc.s V_77
+IL_1336: ldfld System.Single NetworkPrintDeal::OnCompletion
+IL_133b: conv.r8
+IL_133c: ldc.i4.1
+IL_133d: ldc.i4.1
+IL_133e: ldstr "Printjobcopies"
+IL_1343: ldc.i4.1
+IL_1344: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_1349: ldstr "FinishedPrintingJob"
+IL_134e: ldc.i4.1
+IL_134f: newarr System.Object
+IL_1354: dup
+IL_1355: ldc.i4.0
+IL_1356: ldloc.s V_77
+IL_1358: stelem.ref
+IL_1359: call System.String Localization::LocColor(System.String,System.Object[])
+IL_135e: ldstr "Box"
+IL_1363: call SDateTime SDateTime::Now()
+IL_1368: ldc.i4.2
+IL_1369: newobj System.Void NotificationMessage::.ctor(System.String,System.String,SDateTime,NotificationManager/NotificationType)
+IL_136e: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_1373: ldloc.s V_77
+IL_1375: callvirt System.Void NetworkPrintDeal::Cancel()
+IL_137a: ldloc.s V_76
+IL_137c: ldc.i4.1
+IL_137d: sub
+IL_137e: stloc.s V_76
+IL_1380: ldloc.s V_76
+IL_1382: ldc.i4.1
+IL_1383: add
+IL_1384: stloc.s V_76
+IL_1386: ldloc.s V_76
+IL_1388: ldsfld GameSettings GameSettings::Instance
+IL_138d: ldfld DictionaryList`2<System.UInt32,NetworkPrintDeal> GameSettings::NetworkPrintOrders
+IL_1392: ldfld System.Collections.Generic.List`1<!1> DictionaryList`2<System.UInt32,NetworkPrintDeal>::List
+IL_1397: callvirt System.Int32 System.Collections.Generic.List`1<NetworkPrintDeal>::get_Count()
+IL_139c: blt IL_1185
+IL_13a1: ldarg.1
+IL_13a2: brfalse IL_16d3
+IL_13a7: ldsfld GameSettings GameSettings::Instance
+IL_13ac: ldfld Company GameSettings::MyCompany
+IL_13b1: ldfld System.Nullable`1<SDateTime> Company::TakeOver
+IL_13b6: stloc.s V_80
+IL_13b8: ldloca.s V_80
+IL_13ba: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_13bf: brfalse IL_14d8
+IL_13c4: call SDateTime SDateTime::Now()
+IL_13c9: ldloca.s V_80
+IL_13cb: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_13d0: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_13d5: brfalse IL_14d8
+IL_13da: ldsfld GameSettings GameSettings::Instance
+IL_13df: ldfld Company GameSettings::MyCompany
+IL_13e4: callvirt System.Double Company::GetShareWithFounders()
+IL_13e9: ldc.r8 0.75
+IL_13f2: bge.un IL_14a9
+IL_13f7: ldarg.0
+IL_13f8: ldc.i4.0
+IL_13f9: call System.Void TimeOfDay::EndGameNetwork(System.Boolean)
+IL_13fe: ldsfld GameSettings GameSettings::Instance
+IL_1403: ldfld Company GameSettings::MyCompany
+IL_1408: ldfld System.Collections.Generic.List`1<NewStock> Company::NewStock
+IL_140d: ldsfld System.Func`2<NewStock,System.Boolean> TimeOfDay/<>c::<>9__157_9
+IL_1412: dup
+IL_1413: brtrue.s IL_142c
+IL_1415: pop
+IL_1416: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_141b: ldftn System.Boolean TimeOfDay/<>c::<UpdateHour>b__157_9(NewStock)
+IL_1421: newobj System.Void System.Func`2<NewStock,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_1426: dup
+IL_1427: stsfld System.Func`2<NewStock,System.Boolean> TimeOfDay/<>c::<>9__157_9
+IL_142c: ldnull
+IL_142d: call T Utilities::FirstOrDefault<NewStock>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>,T)
+IL_1432: stloc.s V_81
+IL_1434: ldc.r8 0
+IL_143d: stloc.s V_82
+IL_143f: ldloc.s V_81
+IL_1441: brfalse.s IL_146b
+IL_1443: ldsfld GameSettings GameSettings::Instance
+IL_1448: ldfld Company GameSettings::MyCompany
+IL_144d: ldloc.s V_81
+IL_144f: ldfld Company NewStock::Buyer
+IL_1454: callvirt System.Double Company::GetBuyOutPrice(Company)
+IL_1459: ldsfld GameSettings GameSettings::Instance
+IL_145e: ldfld Company GameSettings::MyCompany
+IL_1463: callvirt System.Double Company::GetShare()
+IL_1468: mul
+IL_1469: stloc.s V_82
+IL_146b: ldloc.s V_81
+IL_146d: brfalse.s IL_1478
+IL_146f: ldloc.s V_81
+IL_1471: callvirt System.String NewStock::get_BuyerName()
+IL_1476: br.s IL_147d
+IL_1478: ldstr ""
+IL_147d: stloc.s V_83
+IL_147f: ldarg.0
+IL_1480: ldstr "PlayerTakeOverLosePrompt"
+IL_1485: ldc.i4.1
+IL_1486: newarr System.Object
+IL_148b: dup
+IL_148c: ldc.i4.0
+IL_148d: ldloc.s V_83
+IL_148f: stelem.ref
+IL_1490: call System.String Localization::Loc(System.String,System.Object[])
+IL_1495: ldc.i4.0
+IL_1496: ldloc.s V_82
+IL_1498: call System.Void TimeOfDay::ShowGameOverMessage(System.String,System.Boolean,System.Double)
+IL_149d: ldsfld System.EventHandler TimeOfDay::OnHourPassed
+IL_14a2: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_14a7: ldc.i4.1
+IL_14a8: ret
+IL_14a9: ldsfld WindowManager WindowManager::Instance
+IL_14ae: ldstr "TakeOverAverted"
+IL_14b3: call System.String Localization::Loc(System.String)
+IL_14b8: ldc.i4.1
+IL_14b9: ldc.i4.0
+IL_14ba: ldnull
+IL_14bb: callvirt DialogWindow WindowManager::ShowMessageBox(System.String,System.Boolean,DialogWindow/DialogType,GUIWindow)
+IL_14c0: pop
+IL_14c1: ldsfld GameSettings GameSettings::Instance
+IL_14c6: ldfld Company GameSettings::MyCompany
+IL_14cb: ldfld System.UInt32 Company::ID
+IL_14d0: ldc.i4.0
+IL_14d1: ldc.i4.0
+IL_14d2: ldc.i4.0
+IL_14d3: call System.Void SINetworking.NetworkMessaging::SendBeginTakeover(System.UInt32,System.UInt32,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_14d8: ldarg.0
+IL_14d9: ldflda System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_14de: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_14e3: brtrue IL_1593
+IL_14e8: ldsfld GameSettings GameSettings::Instance
+IL_14ed: ldfld Company GameSettings::MyCompany
+IL_14f2: callvirt System.Double Company::get_Money()
+IL_14f7: ldc.r8 0
+IL_1500: bge.un IL_1593
+IL_1505: call SDateTime SDateTime::Now()
+IL_150a: stloc.s V_84
+IL_150c: ldarg.0
+IL_150d: ldc.i4.0
+IL_150e: ldloc.s V_84
+IL_1510: ldfld System.Int32 SDateTime::Hour
+IL_1515: ldc.i4.1
+IL_1516: sub
+IL_1517: ldloc.s V_84
+IL_1519: ldfld System.Int32 SDateTime::Day
+IL_151e: ldloc.s V_84
+IL_1520: ldfld System.Int32 SDateTime::Month
+IL_1525: ldc.i4.1
+IL_1526: add
+IL_1527: ldloc.s V_84
+IL_1529: ldfld System.Int32 SDateTime::Year
+IL_152e: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_1533: newobj System.Void System.Nullable`1<SDateTime>::.ctor(!0)
+IL_1538: stfld System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_153d: ldsfld WindowManager WindowManager::Instance
+IL_1542: ldstr "NewDebtLoss"
+IL_1547: ldc.i4.1
+IL_1548: newarr System.Object
+IL_154d: dup
+IL_154e: ldc.i4.0
+IL_154f: ldarg.0
+IL_1550: ldflda System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_1555: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_155a: ldc.i4.0
+IL_155b: ldc.i4.1
+IL_155c: ldc.i4.0
+IL_155d: ldc.i4.0
+IL_155e: ldc.i4.0
+IL_155f: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_1564: call SDateTime SDateTime::op_Addition(SDateTime,SDateTime)
+IL_1569: stloc.s V_85
+IL_156b: ldloca.s V_85
+IL_156d: constrained. SDateTime
+IL_1573: callvirt System.String System.Object::ToString()
+IL_1578: stelem.ref
+IL_1579: call System.String Localization::Loc(System.String,System.Object[])
+IL_157e: ldc.i4.1
+IL_157f: ldc.i4.1
+IL_1580: ldnull
+IL_1581: callvirt DialogWindow WindowManager::ShowMessageBox(System.String,System.Boolean,DialogWindow/DialogType,GUIWindow)
+IL_1586: pop
+IL_1587: ldsfld System.EventHandler TimeOfDay::OnHourPassed
+IL_158c: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_1591: ldc.i4.1
+IL_1592: ret
+IL_1593: ldarg.0
+IL_1594: ldflda System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_1599: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_159e: brfalse IL_16d3
+IL_15a3: call SDateTime SDateTime::Now()
+IL_15a8: stloc.s V_85
+IL_15aa: ldarg.0
+IL_15ab: ldfld System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_15b0: stloc.s V_86
+IL_15b2: ldloca.s V_86
+IL_15b4: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_15b9: brtrue.s IL_15be
+IL_15bb: ldc.i4.0
+IL_15bc: br.s IL_15cc
+IL_15be: ldloc.s V_85
+IL_15c0: ldloca.s V_86
+IL_15c2: call !0 System.Nullable`1<SDateTime>::GetValueOrDefault()
+IL_15c7: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_15cc: brfalse IL_16d3
+IL_15d1: ldsfld GameSettings GameSettings::Instance
+IL_15d6: ldfld Company GameSettings::MyCompany
+IL_15db: callvirt System.Double Company::get_Money()
+IL_15e0: ldc.r8 0
+IL_15e9: bge.un IL_16b2
+IL_15ee: newobj System.Void TimeOfDay/<>c__DisplayClass157_1::.ctor()
+IL_15f3: stloc.s V_87
+IL_15f5: ldloc.s V_87
+IL_15f7: ldloc.0
+IL_15f8: stfld TimeOfDay/<>c__DisplayClass157_0 TimeOfDay/<>c__DisplayClass157_1::CS$<>8__locals1
+IL_15fd: call System.Double BankruptcyHandler::GetMax()
+IL_1602: ldloc.s V_87
+IL_1604: ldsfld GameSettings GameSettings::Instance
+IL_1609: ldfld Company GameSettings::MyCompany
+IL_160e: callvirt System.Double Company::get_Money()
+IL_1613: neg
+IL_1614: ldc.r8 1000
+IL_161d: add
+IL_161e: stfld System.Double TimeOfDay/<>c__DisplayClass157_1::needs
+IL_1623: ldloc.s V_87
+IL_1625: ldfld System.Double TimeOfDay/<>c__DisplayClass157_1::needs
+IL_162a: ble.un.s IL_1666
+IL_162c: ldsfld WindowManager WindowManager::Instance
+IL_1631: ldstr "BankruptAutoPrompt"
+IL_1636: call System.String Localization::Loc(System.String)
+IL_163b: ldc.i4.1
+IL_163c: ldc.i4.3
+IL_163d: ldloc.s V_87
+IL_163f: ldftn System.Void TimeOfDay/<>c__DisplayClass157_1::<UpdateHour>b__10()
+IL_1645: newobj System.Void System.Action::.ctor(System.Object,System.IntPtr)
+IL_164a: ldnull
+IL_164b: ldloc.s V_87
+IL_164d: ldfld TimeOfDay/<>c__DisplayClass157_0 TimeOfDay/<>c__DisplayClass157_1::CS$<>8__locals1
+IL_1652: ldftn System.Void TimeOfDay/<>c__DisplayClass157_0::<UpdateHour>b__11()
+IL_1658: newobj System.Void System.Action::.ctor(System.Object,System.IntPtr)
+IL_165d: ldc.i4.1
+IL_165e: callvirt DialogWindow WindowManager::ShowMessageBox(System.String,System.Boolean,DialogWindow/DialogType,System.Action,System.String,System.Action,System.Boolean)
+IL_1663: pop
+IL_1664: br.s IL_16a6
+IL_1666: ldarg.0
+IL_1667: ldc.i4.1
+IL_1668: call System.Void TimeOfDay::EndGameNetwork(System.Boolean)
+IL_166d: ldarg.0
+IL_166e: ldstr "BankruptLoseMsg"
+IL_1673: ldc.i4.1
+IL_1674: newarr System.Object
+IL_1679: dup
+IL_167a: ldc.i4.0
+IL_167b: ldsfld GameSettings GameSettings::Instance
+IL_1680: ldfld Company GameSettings::MyCompany
+IL_1685: callvirt System.Double Company::get_Money()
+IL_168a: ldc.i4.1
+IL_168b: ldc.i4.0
+IL_168c: call System.String Utilities::Currency(System.Double,System.Boolean,System.Boolean)
+IL_1691: stelem.ref
+IL_1692: call System.String Localization::Loc(System.String,System.Object[])
+IL_1697: ldc.i4.1
+IL_1698: ldc.r8 0
+IL_16a1: call System.Void TimeOfDay::ShowGameOverMessage(System.String,System.Boolean,System.Double)
+IL_16a6: ldsfld System.EventHandler TimeOfDay::OnHourPassed
+IL_16ab: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_16b0: ldc.i4.1
+IL_16b1: ret
+IL_16b2: ldstr "NewDebtLossPass"
+IL_16b7: call System.String Localization::Loc(System.String)
+IL_16bc: ldstr "Money"
+IL_16c1: ldc.i4.2
+IL_16c2: call System.Void NotificationManager::AddNotification(System.String,System.String,NotificationManager/NotificationType)
+IL_16c7: ldarg.0
+IL_16c8: ldflda System.Nullable`1<SDateTime> TimeOfDay::Banktupcy
+IL_16cd: initobj System.Nullable`1<SDateTime>
+IL_16d3: ldsfld System.EventHandler TimeOfDay::OnHourPassed
+IL_16d8: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_16dd: ldc.i4.0
+IL_16de: ret
+System.Void TimeOfDay::UpdateDay()
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: ldfld ConferenceController GameSettings::ConferenceController
+IL_000a: callvirt System.Void ConferenceController::UpdateTime()
+IL_000f: ldsfld GameSettings GameSettings::Instance
+IL_0014: callvirt System.Void GameSettings::FetchGrass()
+IL_0019: br.s IL_0022
+IL_001b: ldc.i4.s 10
+IL_001d: call System.Void System.Threading.Thread::Sleep(System.Int32)
+IL_0022: ldsfld GameSettings GameSettings::Instance
+IL_0027: ldfld ConferenceController GameSettings::ConferenceController
+IL_002c: callvirt System.Boolean ConferenceController::get_IsRunning()
+IL_0031: brtrue.s IL_001b
+IL_0033: ldarg.0
+IL_0034: ldfld System.Int32 TimeOfDay::Month
+IL_0039: ldc.i4.5
+IL_003a: bne.un.s IL_009d
+IL_003c: ldarg.0
+IL_003d: ldfld System.Int32 TimeOfDay::Day
+IL_0042: brtrue.s IL_009d
+IL_0044: ldsfld GameSettings GameSettings::Instance
+IL_0049: ldfld ConferenceController GameSettings::ConferenceController
+IL_004e: ldsfld GameSettings GameSettings::Instance
+IL_0053: ldfld Company GameSettings::MyCompany
+IL_0058: callvirt ConferenceController/Booth ConferenceController::GetBoothOf(Company)
+IL_005d: stloc.s V_5
+IL_005f: ldloc.s V_5
+IL_0061: brfalse.s IL_008e
+IL_0063: ldloc.s V_5
+IL_0065: ldfld System.Collections.Generic.List`1<Employee> ConferenceController/Booth::Attendants
+IL_006a: ldsfld System.Action`1<Employee> TimeOfDay/<>c::<>9__166_5
+IL_006f: dup
+IL_0070: brtrue.s IL_0089
+IL_0072: pop
+IL_0073: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0078: ldftn System.Void TimeOfDay/<>c::<UpdateDay>b__166_5(Employee)
+IL_007e: newobj System.Void System.Action`1<Employee>::.ctor(System.Object,System.IntPtr)
+IL_0083: dup
+IL_0084: stsfld System.Action`1<Employee> TimeOfDay/<>c::<>9__166_5
+IL_0089: callvirt System.Void System.Collections.Generic.List`1<Employee>::ForEach(System.Action`1<!0>)
+IL_008e: ldsfld GameSettings GameSettings::Instance
+IL_0093: ldfld ConferenceController GameSettings::ConferenceController
+IL_0098: callvirt System.Void ConferenceController::StartThread()
+IL_009d: ldsfld GameSettings GameSettings::Instance
+IL_00a2: ldfld ConferenceController GameSettings::ConferenceController
+IL_00a7: callvirt System.Void ConferenceController::UpdateDay()
+IL_00ac: call System.Boolean SINetworking.NetworkManager::get_NotConnectedOrHost()
+IL_00b1: brfalse.s IL_00bd
+IL_00b3: ldsfld NotificationManager NotificationManager::Instance
+IL_00b8: callvirt System.Void NotificationManager::RollDay()
+IL_00bd: ldsfld GameSettings GameSettings::Instance
+IL_00c2: callvirt System.Void GameSettings::ResetComputerPower()
+IL_00c7: ldc.i4.0
+IL_00c8: call System.Void Example::FixComponentCounts(System.Boolean)
+IL_00cd: ldarg.0
+IL_00ce: call System.Void TimeOfDay::UpdateSunColorGradient()
+IL_00d3: call System.Boolean SINetworking.NetworkManager::get_NotConnectedOrHost()
+IL_00d8: brfalse.s IL_00e0
+IL_00da: ldarg.0
+IL_00db: call System.Void TimeOfDay::RandomizeCloudShadows()
+IL_00e0: ldarg.0
+IL_00e1: ldc.i4.0
+IL_00e2: call SDateTime TimeOfDay::GetDate(System.Boolean)
+IL_00e7: stloc.0
+IL_00e8: ldsfld GameSettings GameSettings::Instance
+IL_00ed: ldfld DifficultyValues/DifficultySetting GameSettings::Difficulty
+IL_00f2: ldfld System.Single DifficultyValues/DifficultySetting::Fires
+IL_00f7: ldc.r4 0
+IL_00fc: ble.un.s IL_0167
+IL_00fe: ldstr "Security"
+IL_0103: call System.Boolean GameSettings::HasCompletedMission(System.String)
+IL_0108: brfalse.s IL_0167
+IL_010a: ldsfld GameSettings GameSettings::Instance
+IL_010f: ldfld System.Boolean GameSettings::RentMode
+IL_0114: brtrue.s IL_0167
+IL_0116: ldsfld GameSettings GameSettings::Instance
+IL_011b: ldfld ActorManager GameSettings::sActorManager
+IL_0120: ldfld EventList`1<Actor> ActorManager::Actors
+IL_0125: callvirt System.Int32 EventList`1<Actor>::get_Count()
+IL_012a: ldc.i4.s 10
+IL_012c: blt.s IL_0167
+IL_012e: ldloc.0
+IL_012f: ldfld System.Int32 SDateTime::Month
+IL_0134: ldc.i4.s 11
+IL_0136: bne.un.s IL_0167
+IL_0138: ldloc.0
+IL_0139: ldfld System.Int32 SDateTime::Day
+IL_013e: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0143: ldc.i4.1
+IL_0144: sub
+IL_0145: bne.un.s IL_0167
+IL_0147: ldsfld GameSettings GameSettings::Instance
+IL_014c: ldc.i4.1
+IL_014d: callvirt System.Void GameSettings::SpawnFireInspectors(System.Boolean)
+IL_0152: ldstr "FireInspectionWarning"
+IL_0157: call System.String Localization::Loc(System.String)
+IL_015c: ldstr "Fire"
+IL_0161: ldc.i4.3
+IL_0162: call System.Void NotificationManager::AddNotification(System.String,System.String,NotificationManager/NotificationType)
+IL_0167: ldloc.0
+IL_0168: ldfld System.Int32 SDateTime::Day
+IL_016d: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0172: ldc.i4.1
+IL_0173: sub
+IL_0174: bne.un IL_0223
+IL_0179: ldsfld GameSettings GameSettings::Instance
+IL_017e: ldfld Company GameSettings::MyCompany
+IL_0183: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0188: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SoftwareWorkItem>(System.Collections.IEnumerable)
+IL_018d: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<SoftwareWorkItem>::GetEnumerator()
+IL_0192: stloc.s V_6
+IL_0194: br.s IL_020c
+IL_0196: ldloc.s V_6
+IL_0198: callvirt !0 System.Collections.Generic.IEnumerator`1<SoftwareWorkItem>::get_Current()
+IL_019d: stloc.s V_7
+IL_019f: ldloc.s V_7
+IL_01a1: ldfld System.Boolean WorkItem::AutoDev
+IL_01a6: brtrue.s IL_020c
+IL_01a8: ldloc.s V_7
+IL_01aa: callvirt System.Boolean WorkItem::IsWorkOwner()
+IL_01af: brfalse.s IL_020c
+IL_01b1: ldloc.s V_7
+IL_01b3: callvirt System.Boolean SoftwareWorkItem::get_WorkAddOn()
+IL_01b8: brtrue.s IL_020c
+IL_01ba: ldloc.s V_7
+IL_01bc: ldflda System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_01c1: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_01c6: brfalse.s IL_020c
+IL_01c8: ldloc.s V_7
+IL_01ca: ldflda System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_01cf: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_01d4: stloc.s V_8
+IL_01d6: ldloca.s V_8
+IL_01d8: ldloc.0
+IL_01d9: call System.Boolean SDateTime::EqualsVerySimple(SDateTime)
+IL_01de: brfalse.s IL_020c
+IL_01e0: ldloc.s V_7
+IL_01e2: ldstr "ReleaseDateReminder"
+IL_01e7: ldc.i4.1
+IL_01e8: newarr System.Object
+IL_01ed: dup
+IL_01ee: ldc.i4.0
+IL_01ef: ldloc.s V_7
+IL_01f1: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_01f6: stelem.ref
+IL_01f7: call System.String Localization::Loc(System.String,System.Object[])
+IL_01fc: ldstr "Software"
+IL_0201: ldc.i4.3
+IL_0202: newobj System.Void WorkItemNotification::.ctor(WorkItem,System.String,System.String,NotificationManager/NotificationType)
+IL_0207: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_020c: ldloc.s V_6
+IL_020e: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0213: brtrue.s IL_0196
+IL_0215: leave.s IL_0223
+IL_0217: ldloc.s V_6
+IL_0219: brfalse.s IL_0222
+IL_021b: ldloc.s V_6
+IL_021d: callvirt System.Void System.IDisposable::Dispose()
+IL_0222: endfinally
+IL_0223: call System.Boolean SINetworking.NetworkManager::get_IsHost()
+IL_0228: brfalse.s IL_0261
+IL_022a: call MarketSimulation MarketSimulation::get_Active()
+IL_022f: callvirt System.Collections.Generic.IEnumerable`1<Company> MarketSimulation::GetPlayerCompanies()
+IL_0234: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Company>::GetEnumerator()
+IL_0239: stloc.s V_9
+IL_023b: br.s IL_024a
+IL_023d: ldloc.s V_9
+IL_023f: callvirt !0 System.Collections.Generic.IEnumerator`1<Company>::get_Current()
+IL_0244: ldloc.0
+IL_0245: callvirt System.Void Company::SimulateFanLoss(SDateTime)
+IL_024a: ldloc.s V_9
+IL_024c: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0251: brtrue.s IL_023d
+IL_0253: leave.s IL_0278
+IL_0255: ldloc.s V_9
+IL_0257: brfalse.s IL_0260
+IL_0259: ldloc.s V_9
+IL_025b: callvirt System.Void System.IDisposable::Dispose()
+IL_0260: endfinally
+IL_0261: call System.Boolean SINetworking.NetworkManager::get_IsConnected()
+IL_0266: brtrue.s IL_0278
+IL_0268: ldsfld GameSettings GameSettings::Instance
+IL_026d: ldfld Company GameSettings::MyCompany
+IL_0272: ldloc.0
+IL_0273: callvirt System.Void Company::SimulateFanLoss(SDateTime)
+IL_0278: ldsfld GameSettings GameSettings::Instance
+IL_027d: callvirt System.Void GameSettings::ResetUndo()
+IL_0282: call System.Boolean SINetworking.NetworkManager::get_NotConnectedOrHost()
+IL_0287: brfalse.s IL_028f
+IL_0289: ldarg.0
+IL_028a: call System.Void TimeOfDay::UpdateMarketingPlans()
+IL_028f: ldsfld GameSettings GameSettings::Instance
+IL_0294: ldc.r8 0
+IL_029d: stfld System.Double GameSettings::WaterDelta
+IL_02a2: ldsfld GameSettings GameSettings::Instance
+IL_02a7: ldc.r8 0
+IL_02b0: stfld System.Double GameSettings::ElectricityDelta
+IL_02b5: ldsfld GameSettings GameSettings::Instance
+IL_02ba: ldfld System.Double GameSettings::ElectricityGenerationDelta
+IL_02bf: ldc.r8 0
+IL_02c8: ble.un.s IL_02d4
+IL_02ca: ldc.i4 32768
+IL_02cf: call System.Void Achievements.AchievementController::SetInteraction(Achievements.AchievementController/Mechanics)
+IL_02d4: ldsfld GameSettings GameSettings::Instance
+IL_02d9: ldc.r8 0
+IL_02e2: stfld System.Double GameSettings::ElectricityGenerationDelta
+IL_02e7: ldsfld GameSettings GameSettings::Instance
+IL_02ec: ldc.r8 0
+IL_02f5: stfld System.Double GameSettings::GasDelta
+IL_02fa: ldc.r4 0
+IL_02ff: stloc.1
+IL_0300: ldc.i4.0
+IL_0301: stloc.s V_10
+IL_0303: br.s IL_0359
+IL_0305: ldsfld GameSettings GameSettings::Instance
+IL_030a: ldfld RoomManager GameSettings::sRoomManager
+IL_030f: ldfld HashList`1<Furniture> RoomManager::AllFurniture
+IL_0314: ldloc.s V_10
+IL_0316: callvirt !0 HashList`1<Furniture>::get_Item(System.Int32)
+IL_031b: stloc.s V_11
+IL_031d: ldloc.s V_11
+IL_031f: ldnull
+IL_0320: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0325: brfalse.s IL_0353
+IL_0327: ldloc.s V_11
+IL_0329: callvirt System.Void Furniture::TurnMonth()
+IL_032e: ldloc.s V_11
+IL_0330: ldfld System.Int32 Furniture::Capacity
+IL_0335: ldc.i4.0
+IL_0336: ble.s IL_0353
+IL_0338: ldloc.s V_11
+IL_033a: ldfld System.Boolean Furniture::RefillCapacity
+IL_033f: brfalse.s IL_0353
+IL_0341: ldloc.1
+IL_0342: ldloc.s V_11
+IL_0344: ldc.i4.1
+IL_0345: ldloc.s V_11
+IL_0347: callvirt System.Boolean WallSnap::IsActuallyPlayerControlled()
+IL_034c: callvirt System.Single Furniture::Restock(System.Boolean,System.Boolean)
+IL_0351: add
+IL_0352: stloc.1
+IL_0353: ldloc.s V_10
+IL_0355: ldc.i4.1
+IL_0356: add
+IL_0357: stloc.s V_10
+IL_0359: ldloc.s V_10
+IL_035b: ldsfld GameSettings GameSettings::Instance
+IL_0360: ldfld RoomManager GameSettings::sRoomManager
+IL_0365: ldfld HashList`1<Furniture> RoomManager::AllFurniture
+IL_036a: callvirt System.Int32 HashList`1<Furniture>::get_Count()
+IL_036f: blt.s IL_0305
+IL_0371: ldloc.1
+IL_0372: ldc.r4 0
+IL_0377: ble.un.s IL_0391
+IL_0379: ldsfld GameSettings GameSettings::Instance
+IL_037e: ldfld Company GameSettings::MyCompany
+IL_0383: ldloc.1
+IL_0384: neg
+IL_0385: conv.r8
+IL_0386: ldc.i4.3
+IL_0387: ldstr "FoodWaste"
+IL_038c: callvirt System.Void Company::AddToBill(System.Double,Company/TransactionCategory,System.String)
+IL_0391: ldarg.0
+IL_0392: ldc.r4 0
+IL_0397: stfld System.Single TimeOfDay::SunEffectivenessSum
+IL_039c: ldsfld GameSettings GameSettings::Instance
+IL_03a1: ldfld System.Collections.Generic.HashSet`1<SoftwareAlpha> GameSettings::PressBuildQueue
+IL_03a6: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<SoftwareAlpha>::GetEnumerator()
+IL_03ab: stloc.s V_12
+IL_03ad: br IL_0655
+IL_03b2: ldloca.s V_12
+IL_03b4: call !0 System.Collections.Generic.HashSet`1/Enumerator<SoftwareAlpha>::get_Current()
+IL_03b9: stloc.s V_13
+IL_03bb: ldloc.s V_13
+IL_03bd: ldfld System.Boolean WorkItem::Done
+IL_03c2: brtrue IL_0655
+IL_03c7: ldloc.s V_13
+IL_03c9: callvirt System.Double SoftwareAlpha::GetQuality()
+IL_03ce: ldloc.s V_13
+IL_03d0: ldfld SDateTime SoftwareWorkItem::DevStart
+IL_03d5: call SDateTime SDateTime::Now()
+IL_03da: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_03df: stloc.s V_14
+IL_03e1: ldloc.s V_13
+IL_03e3: ldflda System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_03e8: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_03ed: brtrue.s IL_03fb
+IL_03ef: ldloc.s V_13
+IL_03f1: ldfld System.Single SoftwareWorkItem::DevTime
+IL_03f6: ldloc.s V_14
+IL_03f8: sub
+IL_03f9: br.s IL_040d
+IL_03fb: ldloc.s V_13
+IL_03fd: ldflda System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0402: call !0 System.Nullable`1<SDateTime>::get_Value()
+IL_0407: call System.Single SoftwareWorkItem::Lateness(SDateTime)
+IL_040c: neg
+IL_040d: stloc.s V_15
+IL_040f: ldloc.s V_15
+IL_0411: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_0416: stloc.s V_16
+IL_0418: ldc.r4 0
+IL_041d: ldloc.s V_15
+IL_041f: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_0424: call DifficultyValues/DifficultySetting DifficultyValues::get_Difficulty()
+IL_0429: ldfld System.Single DifficultyValues/DifficultySetting::MarketingEndQualityEstimate
+IL_042e: mul
+IL_042f: stloc.s V_15
+IL_0431: ldc.r4 1
+IL_0436: ldloc.s V_13
+IL_0438: ldfld System.Single SoftwareWorkItem::DevTime
+IL_043d: div
+IL_043e: ldc.r4 1
+IL_0443: ldc.r4 2
+IL_0448: ldloc.s V_13
+IL_044a: ldfld System.Single SoftwareWorkItem::CodeArtRatio
+IL_044f: call System.Single UnityEngine.Mathf::Lerp(System.Single,System.Single,System.Single)
+IL_0454: div
+IL_0455: stloc.s V_17
+IL_0457: ldloc.s V_15
+IL_0459: ldloc.s V_17
+IL_045b: mul
+IL_045c: conv.r8
+IL_045d: add
+IL_045e: call System.Double Utilities::Clamp01(System.Double)
+IL_0463: stloc.s V_18
+IL_0465: ldloc.s V_18
+IL_0467: ldc.r8 0.5
+IL_0470: sub
+IL_0471: ldc.r8 2
+IL_047a: call System.Double System.Math::Pow(System.Double,System.Double)
+IL_047f: stloc.s V_19
+IL_0481: ldloc.s V_18
+IL_0483: ldc.r8 0.5
+IL_048c: bgt.s IL_0493
+IL_048e: ldloc.s V_19
+IL_0490: neg
+IL_0491: br.s IL_049f
+IL_0493: ldloc.s V_19
+IL_0495: ldc.r8 0.25
+IL_049e: div
+IL_049f: stloc.s V_19
+IL_04a1: ldloc.s V_13
+IL_04a3: callvirt System.Single SoftwareWorkItem::GetRep()
+IL_04a8: stloc.s V_20
+IL_04aa: ldloc.s V_19
+IL_04ac: ldloc.s V_20
+IL_04ae: ldc.r4 0.9
+IL_04b3: call System.Single Utilities::WeightOne(System.Single,System.Single)
+IL_04b8: conv.r8
+IL_04b9: mul
+IL_04ba: stloc.s V_19
+IL_04bc: ldloc.s V_19
+IL_04be: ldloc.s V_13
+IL_04c0: ldfld System.Single SoftwareWorkItem::PressBuildEffect
+IL_04c5: conv.r8
+IL_04c6: mul
+IL_04c7: stloc.s V_19
+IL_04c9: ldloc.s V_13
+IL_04cb: callvirt System.Double SoftwareWorkItem::GetPerceivedMarketValue()
+IL_04d0: stloc.s V_21
+IL_04d2: ldloc.s V_19
+IL_04d4: ldloc.s V_21
+IL_04d6: mul
+IL_04d7: stloc.s V_19
+IL_04d9: ldloc.s V_13
+IL_04db: callvirt System.Single SoftwareWorkItem::get_Followers()
+IL_04e0: ldloc.s V_13
+IL_04e2: ldfld System.UInt32 SoftwareWorkItem::MaxFollowers
+IL_04e7: conv.r.un
+IL_04e8: conv.r4
+IL_04e9: div
+IL_04ea: stloc.s V_22
+IL_04ec: ldloc.s V_19
+IL_04ee: ldc.r4 10
+IL_04f3: ldloc.s V_22
+IL_04f5: mul
+IL_04f6: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_04fb: ldc.r4 0.85
+IL_0500: call System.Single Utilities::WeightOne(System.Single,System.Single)
+IL_0505: conv.r8
+IL_0506: mul
+IL_0507: stloc.s V_19
+IL_0509: ldloc.s V_13
+IL_050b: ldfld SoftwareProduct SoftwareWorkItem::SequelTo
+IL_0510: ldloc.s V_13
+IL_0512: ldfld SoftwareCategory SoftwareWorkItem::SWCategory
+IL_0517: ldloc.s V_13
+IL_0519: callvirt FeatureBase[] SoftwareWorkItem::GetFeatures()
+IL_051e: ldloc.s V_13
+IL_0520: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareWorkItem::TechLevels
+IL_0525: callvirt System.Double SoftwareCategory::PerceivedValue(System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>)
+IL_052a: ldloc.s V_13
+IL_052c: ldfld System.Double SoftwareWorkItem::CreativityScore
+IL_0531: ldloc.s V_13
+IL_0533: ldfld System.Double[] SoftwareWorkItem::Submarkets
+IL_0538: ldloc.s V_13
+IL_053a: ldfld System.Boolean SoftwareWorkItem::SubscriptionBased
+IL_053f: ldloc.0
+IL_0540: call System.Double SoftwareProduct::CalculateSequelBonus(SoftwareProduct,System.Double,System.Double,System.Double[],System.Boolean,SDateTime)
+IL_0545: stloc.s V_23
+IL_0547: ldloc.s V_19
+IL_0549: ldloc.s V_23
+IL_054b: ldc.r8 0.10000000149011612
+IL_0554: call System.Double Utilities::WeightOne(System.Double,System.Double)
+IL_0559: mul
+IL_055a: stloc.s V_19
+IL_055c: ldloc.s V_13
+IL_055e: callvirt System.Boolean SoftwareWorkItem::get_AddOn()
+IL_0563: brtrue.s IL_0577
+IL_0565: ldloc.s V_19
+IL_0567: ldloc.s V_13
+IL_0569: ldfld System.Double SoftwareWorkItem::CreativityScore
+IL_056e: ldc.i4.1
+IL_056f: call System.Double SoftwareProduct::GetCreativityFactor(System.Double,System.Boolean)
+IL_0574: mul
+IL_0575: stloc.s V_19
+IL_0577: ldloc.s V_13
+IL_0579: ldfld System.Single SoftwareWorkItem::PressBuildEffect
+IL_057e: stloc.s V_24
+IL_0580: ldloc.s V_13
+IL_0582: ldc.r4 0
+IL_0587: stfld System.Single SoftwareWorkItem::PressBuildEffect
+IL_058c: ldloc.s V_13
+IL_058e: ldflda System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0593: call System.Boolean System.Nullable`1<SDateTime>::get_HasValue()
+IL_0598: brtrue.s IL_05a8
+IL_059a: ldloc.s V_19
+IL_059c: ldc.r8 0.25
+IL_05a5: mul
+IL_05a6: stloc.s V_19
+IL_05a8: ldloc.s V_13
+IL_05aa: ldfld System.UInt32 SoftwareWorkItem::MaxFollowers
+IL_05af: conv.r.un
+IL_05b0: conv.r4
+IL_05b1: call System.Single MarketingPlan::GetFollowerWish(System.Single)
+IL_05b6: stloc.s V_25
+IL_05b8: ldloc.s V_13
+IL_05ba: dup
+IL_05bb: callvirt System.Single SoftwareWorkItem::get_Followers()
+IL_05c0: ldloc.s V_19
+IL_05c2: ldloc.s V_25
+IL_05c4: conv.r8
+IL_05c5: mul
+IL_05c6: ldc.r8 0.5
+IL_05cf: mul
+IL_05d0: conv.r4
+IL_05d1: add
+IL_05d2: callvirt System.Void SoftwareWorkItem::set_Followers(System.Single)
+IL_05d7: ldloc.s V_13
+IL_05d9: dup
+IL_05da: ldfld System.Single SoftwareWorkItem::FollowerChange
+IL_05df: ldloc.s V_19
+IL_05e1: ldloc.s V_25
+IL_05e3: conv.r8
+IL_05e4: mul
+IL_05e5: ldc.r8 0.10000000149011612
+IL_05ee: mul
+IL_05ef: conv.r4
+IL_05f0: add
+IL_05f1: stfld System.Single SoftwareWorkItem::FollowerChange
+IL_05f6: ldloc.s V_13
+IL_05f8: ldfld System.Boolean WorkItem::AutoDev
+IL_05fd: brtrue.s IL_064e
+IL_05ff: ldloc.s V_13
+IL_0601: ldstr "Marketing"
+IL_0606: call System.Boolean PublisherDeal::HasDeal(SoftwareWorkItem,System.String)
+IL_060b: brtrue.s IL_064e
+IL_060d: ldloc.s V_13
+IL_060f: callvirt Company WorkItem::GetLocalCompanyOwner()
+IL_0614: ldfld System.String Company::Name
+IL_0619: stloc.s V_26
+IL_061b: ldloc.s V_13
+IL_061d: ldloca.s V_26
+IL_061f: ldloca.s V_20
+IL_0621: callvirt System.Void SoftwareWorkItem::FixReviewRep(System.String&,System.Single&)
+IL_0626: ldloc.s V_26
+IL_0628: ldloc.s V_13
+IL_062a: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_062f: ldloc.s V_18
+IL_0631: conv.r4
+IL_0632: ldloc.s V_21
+IL_0634: conv.r4
+IL_0635: ldloc.s V_24
+IL_0637: ldloc.s V_22
+IL_0639: ldloc.s V_20
+IL_063b: ldloc.s V_16
+IL_063d: ldloc.s V_13
+IL_063f: ldfld System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0644: newobj System.Void ArticleGenerator/PressBuildReviewData::.ctor(System.String,System.String,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Nullable`1<SDateTime>)
+IL_0649: call System.Void Newspaper::GeneratePressbuildReview(ArticleGenerator/PressBuildReviewData)
+IL_064e: ldloc.s V_13
+IL_0650: callvirt System.Void SoftwareWorkItem::MarketingDone()
+IL_0655: ldloca.s V_12
+IL_0657: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<SoftwareAlpha>::MoveNext()
+IL_065c: brtrue IL_03b2
+IL_0661: leave.s IL_0671
+IL_0663: ldloca.s V_12
+IL_0665: constrained. System.Collections.Generic.HashSet`1/Enumerator<SoftwareAlpha>
+IL_066b: callvirt System.Void System.IDisposable::Dispose()
+IL_0670: endfinally
+IL_0671: ldsfld GameSettings GameSettings::Instance
+IL_0676: ldfld System.Collections.Generic.HashSet`1<SoftwareAlpha> GameSettings::PressBuildQueue
+IL_067b: callvirt System.Void System.Collections.Generic.HashSet`1<SoftwareAlpha>::Clear()
+IL_0680: ldsfld HUD HUD::Instance
+IL_0685: ldfld DealWindow HUD::dealWindow
+IL_068a: ldfld System.Collections.Generic.Dictionary`2<System.UInt32,Deal> DealWindow::AllDeals
+IL_068f: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.UInt32,Deal>::get_Values()
+IL_0694: callvirt System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2/ValueCollection<System.UInt32,Deal>::GetEnumerator()
+IL_0699: stloc.s V_27
+IL_069b: br IL_076a
+IL_06a0: ldloca.s V_27
+IL_06a2: call !1 System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.UInt32,Deal>::get_Current()
+IL_06a7: stloc.s V_28
+IL_06a9: ldloc.s V_28
+IL_06ab: brfalse IL_076a
+IL_06b0: ldloc.s V_28
+IL_06b2: ldfld System.Boolean Deal::Active
+IL_06b7: brfalse IL_076a
+IL_06bc: ldloc.s V_28
+IL_06be: callvirt System.Single Deal::Payout()
+IL_06c3: stloc.s V_29
+IL_06c5: ldloc.s V_29
+IL_06c7: ldc.r4 0
+IL_06cc: ble.un.s IL_071d
+IL_06ce: ldloc.s V_28
+IL_06d0: callvirt Company Deal::get_Company()
+IL_06d5: brfalse.s IL_071d
+IL_06d7: ldloc.s V_28
+IL_06d9: callvirt Company Deal::get_Client()
+IL_06de: brfalse.s IL_071d
+IL_06e0: ldloc.s V_28
+IL_06e2: callvirt System.String Deal::Title()
+IL_06e7: stloc.s V_30
+IL_06e9: ldloc.s V_28
+IL_06eb: callvirt Company Deal::get_Company()
+IL_06f0: ldloc.s V_29
+IL_06f2: conv.r8
+IL_06f3: ldc.i4.s 15
+IL_06f5: ldc.i4.1
+IL_06f6: ldloc.s V_30
+IL_06f8: ldc.i4.0
+IL_06f9: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_06fe: ldloc.s V_28
+IL_0700: callvirt Company Deal::get_Client()
+IL_0705: ldloc.s V_29
+IL_0707: neg
+IL_0708: conv.r8
+IL_0709: ldc.i4.s 15
+IL_070b: ldc.i4.1
+IL_070c: ldloc.s V_30
+IL_070e: ldc.i4.0
+IL_070f: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0714: ldloc.s V_28
+IL_0716: ldloc.s V_29
+IL_0718: callvirt System.Void Deal::MadePayment(System.Single)
+IL_071d: ldloc.s V_28
+IL_071f: callvirt Company Deal::get_Company()
+IL_0724: brfalse.s IL_076a
+IL_0726: ldloc.s V_28
+IL_0728: ldc.i4.0
+IL_0729: callvirt System.Single Deal::ReputationEffect(System.Boolean)
+IL_072e: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0733: conv.r4
+IL_0734: div
+IL_0735: stloc.s V_31
+IL_0737: ldloc.s V_28
+IL_0739: callvirt Company Deal::get_Company()
+IL_073e: ldloc.s V_31
+IL_0740: ldloc.s V_28
+IL_0742: callvirt System.String Deal::ReputationCategory()
+IL_0747: ldc.r4 1
+IL_074c: callvirt System.Void Company::ChangeBusinessRep(System.Single,System.String,System.Single)
+IL_0751: ldloc.s V_28
+IL_0753: ldloc.s V_31
+IL_0755: stfld System.Single Deal::PerfDiff
+IL_075a: ldloc.s V_28
+IL_075c: dup
+IL_075d: ldfld System.Single Deal::Performance
+IL_0762: ldloc.s V_31
+IL_0764: add
+IL_0765: stfld System.Single Deal::Performance
+IL_076a: ldloca.s V_27
+IL_076c: call System.Boolean System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.UInt32,Deal>::MoveNext()
+IL_0771: brtrue IL_06a0
+IL_0776: leave.s IL_0786
+IL_0778: ldloca.s V_27
+IL_077a: constrained. System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.UInt32,Deal>
+IL_0780: callvirt System.Void System.IDisposable::Dispose()
+IL_0785: endfinally
+IL_0786: ldsfld GameSettings GameSettings::Instance
+IL_078b: ldfld System.Single GameSettings::ContentsInsured
+IL_0790: ldc.r4 0
+IL_0795: ble.un.s IL_07f8
+IL_0797: ldsfld GameSettings GameSettings::Instance
+IL_079c: ldfld Company GameSettings::MyCompany
+IL_07a1: ldsfld GameSettings GameSettings::Instance
+IL_07a6: ldfld System.Single GameSettings::ContentsInsured
+IL_07ab: conv.r8
+IL_07ac: ldc.i4.s 21
+IL_07ae: ldc.i4.1
+IL_07af: ldstr "ContentInsurance"
+IL_07b4: ldc.i4.0
+IL_07b5: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_07ba: ldstr "ContentInsurancePayout"
+IL_07bf: ldc.i4.1
+IL_07c0: newarr System.Object
+IL_07c5: dup
+IL_07c6: ldc.i4.0
+IL_07c7: ldsfld GameSettings GameSettings::Instance
+IL_07cc: ldfld System.Single GameSettings::ContentsInsured
+IL_07d1: ldc.i4.1
+IL_07d2: ldc.i4.0
+IL_07d3: call System.String Utilities::Currency(System.Single,System.Boolean,System.Boolean)
+IL_07d8: stelem.ref
+IL_07d9: call System.String Localization::Loc(System.String,System.Object[])
+IL_07de: ldstr "Umbrella"
+IL_07e3: ldc.i4.2
+IL_07e4: call System.Void NotificationManager::AddNotification(System.String,System.String,NotificationManager/NotificationType)
+IL_07e9: ldsfld GameSettings GameSettings::Instance
+IL_07ee: ldc.r4 0
+IL_07f3: stfld System.Single GameSettings::ContentsInsured
+IL_07f8: ldsfld GameSettings GameSettings::Instance
+IL_07fd: ldfld InsuranceAccount GameSettings::Insurance
+IL_0802: stloc.2
+IL_0803: ldloc.2
+IL_0804: ldloc.2
+IL_0805: ldfld System.Int32 InsuranceAccount::ContentInsurance
+IL_080a: stfld System.Int32 InsuranceAccount::ActualContentInsurance
+IL_080f: ldsfld GameSettings GameSettings::Instance
+IL_0814: ldfld System.Boolean GameSettings::PassedFireInspection
+IL_0819: brfalse.s IL_0842
+IL_081b: ldsfld GameSettings GameSettings::Instance
+IL_0820: ldfld Company GameSettings::MyCompany
+IL_0825: ldloc.2
+IL_0826: ldc.i4.1
+IL_0827: callvirt System.Single InsuranceAccount::GetContentBill(System.Boolean)
+IL_082c: neg
+IL_082d: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0832: conv.r4
+IL_0833: div
+IL_0834: conv.r8
+IL_0835: ldc.i4.3
+IL_0836: ldc.i4.1
+IL_0837: ldstr "ContentInsurance"
+IL_083c: ldc.i4.0
+IL_083d: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0842: ldsfld GameSettings GameSettings::Instance
+IL_0847: ldfld DictionaryList`2<IStockable,PrintJob> GameSettings::PrintOrders
+IL_084c: stloc.s V_32
+IL_084e: ldc.i4.0
+IL_084f: stloc.s V_33
+IL_0851: ldloc.s V_32
+IL_0853: ldloca.s V_33
+IL_0855: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_085a: ldc.i4.0
+IL_085b: stloc.s V_34
+IL_085d: br IL_08e9
+IL_0862: ldsfld GameSettings GameSettings::Instance
+IL_0867: ldfld DictionaryList`2<IStockable,PrintJob> GameSettings::PrintOrders
+IL_086c: ldloc.s V_34
+IL_086e: callvirt !1 DictionaryList`2<IStockable,PrintJob>::get_Item(System.Int32)
+IL_0873: stloc.s V_35
+IL_0875: ldloc.s V_35
+IL_0877: ldfld System.Boolean PrintJob::Hardware
+IL_087c: brfalse.s IL_08e3
+IL_087e: ldloc.s V_35
+IL_0880: ldfld IStockable PrintJob::Target
+IL_0885: isinst ContractWork
+IL_088a: dup
+IL_088b: stloc.s V_36
+IL_088d: brfalse.s IL_08e3
+IL_088f: ldloc.0
+IL_0890: ldloc.s V_36
+IL_0892: ldfld SDateTime ContractWork::Deadline
+IL_0897: call System.Boolean SDateTime::op_GreaterThanOrEqual(SDateTime,SDateTime)
+IL_089c: brtrue.s IL_08ae
+IL_089e: ldloc.s V_36
+IL_08a0: callvirt System.UInt32 ContractWork::get_PhysicalCopies()
+IL_08a5: ldloc.s V_36
+IL_08a7: ldfld System.UInt32 ContractWork::Goal
+IL_08ac: blt.un.s IL_08e3
+IL_08ae: ldsfld HUD HUD::Instance
+IL_08b3: ldfld ContractWindow HUD::contractWindow
+IL_08b8: ldfld GUIListView ContractWindow::ContractResults
+IL_08bd: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_08c2: ldloc.s V_36
+IL_08c4: ldc.i4.0
+IL_08c5: newobj System.Void ContractResult::.ctor(ContractWork,System.Boolean)
+IL_08ca: callvirt System.Int32 EventList`1<System.Object>::Add(System.Object)
+IL_08cf: pop
+IL_08d0: ldsfld GameSettings GameSettings::Instance
+IL_08d5: ldloc.s V_35
+IL_08d7: ldc.i4.0
+IL_08d8: callvirt System.Void GameSettings::CancelPrintOrder(PrintJob,System.Boolean)
+IL_08dd: ldloc.s V_34
+IL_08df: ldc.i4.1
+IL_08e0: sub
+IL_08e1: stloc.s V_34
+IL_08e3: ldloc.s V_34
+IL_08e5: ldc.i4.1
+IL_08e6: add
+IL_08e7: stloc.s V_34
+IL_08e9: ldloc.s V_34
+IL_08eb: ldsfld GameSettings GameSettings::Instance
+IL_08f0: ldfld DictionaryList`2<IStockable,PrintJob> GameSettings::PrintOrders
+IL_08f5: callvirt System.Int32 DictionaryList`2<IStockable,PrintJob>::get_Count()
+IL_08fa: blt IL_0862
+IL_08ff: leave.s IL_090d
+IL_0901: ldloc.s V_33
+IL_0903: brfalse.s IL_090c
+IL_0905: ldloc.s V_32
+IL_0907: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_090c: endfinally
+IL_090d: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_0912: brtrue IL_09db
+IL_0917: ldsfld GameSettings GameSettings::Instance
+IL_091c: ldfld System.Collections.Generic.Dictionary`2<System.UInt32,BillboardAd> GameSettings::Billboards
+IL_0921: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.UInt32,BillboardAd>::get_Values()
+IL_0926: ldsfld System.Action`1<BillboardAd> TimeOfDay/<>c::<>9__166_0
+IL_092b: dup
+IL_092c: brtrue.s IL_0945
+IL_092e: pop
+IL_092f: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0934: ldftn System.Void TimeOfDay/<>c::<UpdateDay>b__166_0(BillboardAd)
+IL_093a: newobj System.Void System.Action`1<BillboardAd>::.ctor(System.Object,System.IntPtr)
+IL_093f: dup
+IL_0940: stsfld System.Action`1<BillboardAd> TimeOfDay/<>c::<>9__166_0
+IL_0945: call System.Void Utilities::ForEachEnum<BillboardAd>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_094a: ldsfld GameSettings GameSettings::Instance
+IL_094f: ldfld MarketSimulation GameSettings::simulation
+IL_0954: ldloc.0
+IL_0955: ldc.i4.0
+IL_0956: callvirt System.Void MarketSimulation::SimulateMonth(SDateTime,System.Boolean)
+IL_095b: ldsfld GameSettings GameSettings::Instance
+IL_0960: ldfld MarketSimulation GameSettings::simulation
+IL_0965: ldc.i4.0
+IL_0966: callvirt System.Collections.Generic.IEnumerable`1<SoftwareProduct> MarketSimulation::GetAllProducts(System.Boolean)
+IL_096b: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<SoftwareProduct>::GetEnumerator()
+IL_0970: stloc.s V_37
+IL_0972: br.s IL_098f
+IL_0974: ldloc.s V_37
+IL_0976: callvirt !0 System.Collections.Generic.IEnumerator`1<SoftwareProduct>::get_Current()
+IL_097b: stloc.s V_38
+IL_097d: ldloc.s V_38
+IL_097f: ldc.i4.1
+IL_0980: ldloc.s V_38
+IL_0982: ldloc.0
+IL_0983: ldc.i4.0
+IL_0984: call ScriptSystem/ProductScope ScriptSystem/ProductScope::GetTempScope(SoftwareProduct,SDateTime,System.Boolean)
+IL_0989: ldc.i4.0
+IL_098a: callvirt System.Void SoftwareProduct::RunScripts(ScriptSystem/EntryPoint,ScriptSystem/DefaultScope,System.Boolean)
+IL_098f: ldloc.s V_37
+IL_0991: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0996: brtrue.s IL_0974
+IL_0998: leave.s IL_09a6
+IL_099a: ldloc.s V_37
+IL_099c: brfalse.s IL_09a5
+IL_099e: ldloc.s V_37
+IL_09a0: callvirt System.Void System.IDisposable::Dispose()
+IL_09a5: endfinally
+IL_09a6: ldsfld GameSettings GameSettings::Instance
+IL_09ab: ldfld MarketSimulation GameSettings::simulation
+IL_09b0: callvirt System.Collections.Generic.IEnumerable`1<Company> MarketSimulation::GetPlayerCompanies()
+IL_09b5: ldsfld System.Action`1<Company> TimeOfDay/<>c::<>9__166_1
+IL_09ba: dup
+IL_09bb: brtrue.s IL_09d4
+IL_09bd: pop
+IL_09be: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_09c3: ldftn System.Void TimeOfDay/<>c::<UpdateDay>b__166_1(Company)
+IL_09c9: newobj System.Void System.Action`1<Company>::.ctor(System.Object,System.IntPtr)
+IL_09ce: dup
+IL_09cf: stsfld System.Action`1<Company> TimeOfDay/<>c::<>9__166_1
+IL_09d4: call System.Void Utilities::ForEachEnum<Company>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_09d9: br.s IL_09e6
+IL_09db: call MarketSimulation MarketSimulation::get_Active()
+IL_09e0: ldloc.0
+IL_09e1: callvirt System.Void MarketSimulation::ClearForClient(SDateTime)
+IL_09e6: ldc.i4.0
+IL_09e7: stloc.s V_39
+IL_09e9: br.s IL_0a14
+IL_09eb: ldsfld GameSettings GameSettings::Instance
+IL_09f0: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> GameSettings::FollowerSimulation
+IL_09f5: ldloc.s V_39
+IL_09f7: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_09fc: stloc.s V_40
+IL_09fe: ldloc.s V_40
+IL_0a00: ldfld System.Boolean WorkItem::Done
+IL_0a05: brtrue.s IL_0a0e
+IL_0a07: ldloc.s V_40
+IL_0a09: callvirt System.Void SoftwareWorkItem::ReEvaluateMaxFollowers()
+IL_0a0e: ldloc.s V_39
+IL_0a10: ldc.i4.1
+IL_0a11: add
+IL_0a12: stloc.s V_39
+IL_0a14: ldloc.s V_39
+IL_0a16: ldsfld GameSettings GameSettings::Instance
+IL_0a1b: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> GameSettings::FollowerSimulation
+IL_0a20: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_0a25: blt.s IL_09eb
+IL_0a27: ldsfld GameSettings GameSettings::Instance
+IL_0a2c: ldfld Company GameSettings::MyCompany
+IL_0a31: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0a36: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<WorkItem>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0a3b: stloc.3
+IL_0a3c: ldc.i4.0
+IL_0a3d: stloc.s V_41
+IL_0a3f: br.s IL_0a7e
+IL_0a41: ldloc.3
+IL_0a42: ldloc.s V_41
+IL_0a44: callvirt !0 System.Collections.Generic.List`1<WorkItem>::get_Item(System.Int32)
+IL_0a49: callvirt System.Void WorkItem::HandleUnitPayout()
+IL_0a4e: ldloc.3
+IL_0a4f: ldloc.s V_41
+IL_0a51: callvirt !0 System.Collections.Generic.List`1<WorkItem>::get_Item(System.Int32)
+IL_0a56: ldc.i4.1
+IL_0a57: callvirt System.Boolean WorkItem::HandleNetworkEnding(System.Boolean)
+IL_0a5c: brtrue.s IL_0a78
+IL_0a5e: ldloc.3
+IL_0a5f: ldloc.s V_41
+IL_0a61: callvirt !0 System.Collections.Generic.List`1<WorkItem>::get_Item(System.Int32)
+IL_0a66: isinst AutoDevWorkItem
+IL_0a6b: dup
+IL_0a6c: stloc.s V_42
+IL_0a6e: brfalse.s IL_0a78
+IL_0a70: ldloc.s V_42
+IL_0a72: ldc.i4.1
+IL_0a73: callvirt System.Void AutoDevWorkItem::UpdateSupportMarket(System.Boolean)
+IL_0a78: ldloc.s V_41
+IL_0a7a: ldc.i4.1
+IL_0a7b: add
+IL_0a7c: stloc.s V_41
+IL_0a7e: ldloc.s V_41
+IL_0a80: ldloc.3
+IL_0a81: callvirt System.Int32 System.Collections.Generic.List`1<WorkItem>::get_Count()
+IL_0a86: blt.s IL_0a41
+IL_0a88: ldsfld HUD HUD::Instance
+IL_0a8d: callvirt System.Void HUD::ApplyProductWindowFilters()
+IL_0a92: ldsfld HUD HUD::Instance
+IL_0a97: ldfld DigitalDistributionWindow HUD::digitalDistributionWindow
+IL_0a9c: ldfld GUILineChart DigitalDistributionWindow::Chart
+IL_0aa1: callvirt System.Void GUILineChart::UpdateCachedLines()
+IL_0aa6: ldsfld HUD HUD::Instance
+IL_0aab: ldfld DigitalDistributionWindow HUD::digitalDistributionWindow
+IL_0ab0: callvirt System.Void DigitalDistributionWindow::UpdateDistributionDeals()
+IL_0ab5: ldsfld HUD HUD::Instance
+IL_0aba: ldfld DistributionWindow HUD::distributionWindow
+IL_0abf: callvirt System.Void DistributionWindow::RefreshOrders()
+IL_0ac4: ldarg.0
+IL_0ac5: ldfld System.Int32 TimeOfDay::Day
+IL_0aca: brfalse.s IL_0ae4
+IL_0acc: ldsfld HUD HUD::Instance
+IL_0ad1: ldfld CompanyWorksheet HUD::financeWindow
+IL_0ad6: ldc.i4.0
+IL_0ad7: callvirt System.Void CompanyWorksheet::UpdateSheet(System.Boolean)
+IL_0adc: ldloc.0
+IL_0add: ldc.i4.1
+IL_0ade: ldc.i4.0
+IL_0adf: call System.Void Newspaper::StoryRollover(SDateTime,System.Boolean,System.Boolean)
+IL_0ae4: ldsfld HUD HUD::Instance
+IL_0ae9: callvirt System.Void HUD::UpdateCashflow()
+IL_0aee: ldsfld GameSettings GameSettings::Instance
+IL_0af3: ldfld System.Collections.Generic.List`1<Actor> GameSettings::Vacations
+IL_0af8: callvirt System.Int32 System.Collections.Generic.List`1<Actor>::get_Count()
+IL_0afd: ldc.i4.0
+IL_0afe: ble.s IL_0b6b
+IL_0b00: ldstr "VacationNotify"
+IL_0b05: ldc.i4.1
+IL_0b06: newarr System.Object
+IL_0b0b: dup
+IL_0b0c: ldc.i4.0
+IL_0b0d: ldsfld GameSettings GameSettings::Instance
+IL_0b12: ldfld System.Collections.Generic.List`1<Actor> GameSettings::Vacations
+IL_0b17: stelem.ref
+IL_0b18: call System.String Localization::LocColor(System.String,System.Object[])
+IL_0b1d: ldstr "MoreEmployees"
+IL_0b22: ldloc.0
+IL_0b23: ldc.i4.3
+IL_0b24: ldsfld GameSettings GameSettings::Instance
+IL_0b29: ldfld System.Collections.Generic.List`1<Actor> GameSettings::Vacations
+IL_0b2e: ldsfld System.Func`2<Actor,Employee> TimeOfDay/<>c::<>9__166_2
+IL_0b33: dup
+IL_0b34: brtrue.s IL_0b4d
+IL_0b36: pop
+IL_0b37: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0b3c: ldftn Employee TimeOfDay/<>c::<UpdateDay>b__166_2(Actor)
+IL_0b42: newobj System.Void System.Func`2<Actor,Employee>::.ctor(System.Object,System.IntPtr)
+IL_0b47: dup
+IL_0b48: stsfld System.Func`2<Actor,Employee> TimeOfDay/<>c::<>9__166_2
+IL_0b4d: call System.Collections.Generic.IEnumerable`1<T2> Utilities::Select<Actor,Employee>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,T2>)
+IL_0b52: newobj System.Void EmployeeNotification::.ctor(System.String,System.String,SDateTime,NotificationManager/NotificationType,System.Collections.Generic.IEnumerable`1<Employee>)
+IL_0b57: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0b5c: ldsfld GameSettings GameSettings::Instance
+IL_0b61: ldfld System.Collections.Generic.List`1<Actor> GameSettings::Vacations
+IL_0b66: callvirt System.Void System.Collections.Generic.List`1<Actor>::Clear()
+IL_0b6b: ldsfld HUD HUD::Instance
+IL_0b70: ldfld ComingReleaseWindow HUD::comingReleaseWindow
+IL_0b75: callvirt System.Void ComingReleaseWindow::CheckRefresh()
+IL_0b7a: ldarg.0
+IL_0b7b: ldfld System.Collections.Generic.List`1<Actor> TimeOfDay::Sick
+IL_0b80: callvirt System.Int32 System.Collections.Generic.List`1<Actor>::get_Count()
+IL_0b85: ldc.i4.0
+IL_0b86: ble.s IL_0bdc
+IL_0b88: ldstr "SickNotify"
+IL_0b8d: ldc.i4.1
+IL_0b8e: newarr System.Object
+IL_0b93: dup
+IL_0b94: ldc.i4.0
+IL_0b95: ldarg.0
+IL_0b96: ldfld System.Collections.Generic.List`1<Actor> TimeOfDay::Sick
+IL_0b9b: stelem.ref
+IL_0b9c: call System.String Localization::LocColor(System.String,System.Object[])
+IL_0ba1: ldstr "Germ"
+IL_0ba6: ldloc.0
+IL_0ba7: ldc.i4.3
+IL_0ba8: ldarg.0
+IL_0ba9: ldfld System.Collections.Generic.List`1<Actor> TimeOfDay::Sick
+IL_0bae: ldsfld System.Func`2<Actor,Employee> TimeOfDay/<>c::<>9__166_3
+IL_0bb3: dup
+IL_0bb4: brtrue.s IL_0bcd
+IL_0bb6: pop
+IL_0bb7: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0bbc: ldftn Employee TimeOfDay/<>c::<UpdateDay>b__166_3(Actor)
+IL_0bc2: newobj System.Void System.Func`2<Actor,Employee>::.ctor(System.Object,System.IntPtr)
+IL_0bc7: dup
+IL_0bc8: stsfld System.Func`2<Actor,Employee> TimeOfDay/<>c::<>9__166_3
+IL_0bcd: call System.Collections.Generic.IEnumerable`1<T2> Utilities::Select<Actor,Employee>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,T2>)
+IL_0bd2: newobj System.Void EmployeeNotification::.ctor(System.String,System.String,SDateTime,NotificationManager/NotificationType,System.Collections.Generic.IEnumerable`1<Employee>)
+IL_0bd7: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0bdc: ldarg.0
+IL_0bdd: ldfld System.Collections.Generic.List`1<Actor> TimeOfDay::Sick
+IL_0be2: callvirt System.Void System.Collections.Generic.List`1<Actor>::Clear()
+IL_0be7: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_0bec: brtrue.s IL_0bfd
+IL_0bee: ldsfld GameSettings GameSettings::Instance
+IL_0bf3: ldfld MarketSimulation GameSettings::simulation
+IL_0bf8: callvirt System.Void MarketSimulation::TurnLoss()
+IL_0bfd: ldsfld System.EventHandler TimeOfDay::OnDayPassed
+IL_0c02: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_0c07: call System.Collections.Generic.IEnumerable`1<T> WindowManager::FindWindowTypeEnum<ProductDetailWindow>()
+IL_0c0c: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<ProductDetailWindow>::GetEnumerator()
+IL_0c11: stloc.s V_43
+IL_0c13: br.s IL_0c21
+IL_0c15: ldloc.s V_43
+IL_0c17: callvirt !0 System.Collections.Generic.IEnumerator`1<ProductDetailWindow>::get_Current()
+IL_0c1c: callvirt System.Void ProductDetailWindow::UpdateMe()
+IL_0c21: ldloc.s V_43
+IL_0c23: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0c28: brtrue.s IL_0c15
+IL_0c2a: leave.s IL_0c38
+IL_0c2c: ldloc.s V_43
+IL_0c2e: brfalse.s IL_0c37
+IL_0c30: ldloc.s V_43
+IL_0c32: callvirt System.Void System.IDisposable::Dispose()
+IL_0c37: endfinally
+IL_0c38: call System.Collections.Generic.IEnumerable`1<T> WindowManager::FindWindowTypeEnum<CompanyDetailWindow>()
+IL_0c3d: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<CompanyDetailWindow>::GetEnumerator()
+IL_0c42: stloc.s V_44
+IL_0c44: br.s IL_0c52
+IL_0c46: ldloc.s V_44
+IL_0c48: callvirt !0 System.Collections.Generic.IEnumerator`1<CompanyDetailWindow>::get_Current()
+IL_0c4d: callvirt System.Void CompanyDetailWindow::UpdateStocks()
+IL_0c52: ldloc.s V_44
+IL_0c54: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0c59: brtrue.s IL_0c46
+IL_0c5b: leave.s IL_0c69
+IL_0c5d: ldloc.s V_44
+IL_0c5f: brfalse.s IL_0c68
+IL_0c61: ldloc.s V_44
+IL_0c63: callvirt System.Void System.IDisposable::Dispose()
+IL_0c68: endfinally
+IL_0c69: ldsfld HUD HUD::Instance
+IL_0c6e: ldfld ProductWindow HUD::PlayerProductWindow
+IL_0c73: ldfld GUIWindow ProductWindow::Window
+IL_0c78: callvirt System.Boolean GUIWindow::get_Shown()
+IL_0c7d: brfalse.s IL_0c8e
+IL_0c7f: ldsfld HUD HUD::Instance
+IL_0c84: ldfld ProductWindow HUD::PlayerProductWindow
+IL_0c89: callvirt System.Void ProductWindow::RefreshPlayerItems()
+IL_0c8e: ldsfld HUD HUD::Instance
+IL_0c93: ldfld DigitalDistributionWindow HUD::digitalDistributionWindow
+IL_0c98: ldfld GUIWindow DigitalDistributionWindow::Window
+IL_0c9d: callvirt System.Boolean GUIWindow::get_Shown()
+IL_0ca2: brfalse.s IL_0cb3
+IL_0ca4: ldsfld HUD HUD::Instance
+IL_0ca9: ldfld DigitalDistributionWindow HUD::digitalDistributionWindow
+IL_0cae: callvirt System.Void DigitalDistributionWindow::UpdateInfo()
+IL_0cb3: ldsfld GameSettings GameSettings::Instance
+IL_0cb8: ldfld Company GameSettings::MyCompany
+IL_0cbd: callvirt System.Collections.Generic.List`1<DistributionPlatform> Company::GetPlatforms()
+IL_0cc2: callvirt System.Int32 System.Collections.Generic.List`1<DistributionPlatform>::get_Count()
+IL_0cc7: brtrue.s IL_0cdd
+IL_0cc9: ldnull
+IL_0cca: ldc.i4.0
+IL_0ccb: ldc.i4.0
+IL_0ccc: call System.Boolean NotificationManager::CheckAggregate<DigitalDistributionWarning>(System.Object,System.UInt32,System.Boolean)
+IL_0cd1: brtrue.s IL_0cdd
+IL_0cd3: newobj System.Void DigitalDistributionWarning::.ctor()
+IL_0cd8: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0cdd: call System.Void SINetworking.NetworkMessaging::SendAllIDsNow()
+IL_0ce2: ldsfld GameSettings GameSettings::Instance
+IL_0ce7: ldfld UnlockChecker GameSettings::UnlockCheck
+IL_0cec: ldc.i4.0
+IL_0ced: callvirt System.Collections.Generic.List`1<UnlockChecker/UnlockItem> UnlockChecker::UpdateMe(System.Boolean)
+IL_0cf2: stloc.s V_4
+IL_0cf4: ldloc.s V_4
+IL_0cf6: callvirt System.Int32 System.Collections.Generic.List`1<UnlockChecker/UnlockItem>::get_Count()
+IL_0cfb: ldc.i4.0
+IL_0cfc: ble IL_0da1
+IL_0d01: ldc.i4.0
+IL_0d02: stloc.s V_45
+IL_0d04: ldloc.s V_4
+IL_0d06: ldsfld System.Func`2<UnlockChecker/UnlockItem,System.Boolean> TimeOfDay/<>c::<>9__166_6
+IL_0d0b: dup
+IL_0d0c: brtrue.s IL_0d25
+IL_0d0e: pop
+IL_0d0f: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0d14: ldftn System.Boolean TimeOfDay/<>c::<UpdateDay>b__166_6(UnlockChecker/UnlockItem)
+IL_0d1a: newobj System.Void System.Func`2<UnlockChecker/UnlockItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0d1f: dup
+IL_0d20: stsfld System.Func`2<UnlockChecker/UnlockItem,System.Boolean> TimeOfDay/<>c::<>9__166_6
+IL_0d25: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<UnlockChecker/UnlockItem>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0d2a: ldsfld System.Func`2<UnlockChecker/UnlockItem,Furniture> TimeOfDay/<>c::<>9__166_7
+IL_0d2f: dup
+IL_0d30: brtrue.s IL_0d49
+IL_0d32: pop
+IL_0d33: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0d38: ldftn Furniture TimeOfDay/<>c::<UpdateDay>b__166_7(UnlockChecker/UnlockItem)
+IL_0d3e: newobj System.Void System.Func`2<UnlockChecker/UnlockItem,Furniture>::.ctor(System.Object,System.IntPtr)
+IL_0d43: dup
+IL_0d44: stsfld System.Func`2<UnlockChecker/UnlockItem,Furniture> TimeOfDay/<>c::<>9__166_7
+IL_0d49: call System.Collections.Generic.IEnumerable`1<!!1> System.Linq.Enumerable::Select<UnlockChecker/UnlockItem,Furniture>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_0d4e: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Furniture>::GetEnumerator()
+IL_0d53: stloc.s V_46
+IL_0d55: br.s IL_0d70
+IL_0d57: ldloc.s V_46
+IL_0d59: callvirt !0 System.Collections.Generic.IEnumerator`1<Furniture>::get_Current()
+IL_0d5e: stloc.s V_47
+IL_0d60: ldsfld HUD HUD::Instance
+IL_0d65: ldloc.s V_47
+IL_0d67: ldc.i4.1
+IL_0d68: callvirt System.Void HUD::SetFurnitureNew(Furniture,System.Boolean)
+IL_0d6d: ldc.i4.1
+IL_0d6e: stloc.s V_45
+IL_0d70: ldloc.s V_46
+IL_0d72: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0d77: brtrue.s IL_0d57
+IL_0d79: leave.s IL_0d87
+IL_0d7b: ldloc.s V_46
+IL_0d7d: brfalse.s IL_0d86
+IL_0d7f: ldloc.s V_46
+IL_0d81: callvirt System.Void System.IDisposable::Dispose()
+IL_0d86: endfinally
+IL_0d87: ldloc.s V_45
+IL_0d89: brfalse.s IL_0d95
+IL_0d8b: ldsfld HUD HUD::Instance
+IL_0d90: callvirt System.Void HUD::RefreshBuildButtons()
+IL_0d95: ldloc.s V_4
+IL_0d97: newobj System.Void NewUnlockNotification::.ctor(System.Collections.Generic.List`1<UnlockChecker/UnlockItem>)
+IL_0d9c: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0da1: ldarg.0
+IL_0da2: call System.Void TimeOfDay::CheckFounder()
+IL_0da7: call System.Void NetworkMeta::CheckDirty()
+IL_0dac: call MarketSimulation MarketSimulation::get_Active()
+IL_0db1: callvirt System.Collections.Generic.IEnumerable`1<Company> MarketSimulation::GetAllCompanies()
+IL_0db6: ldsfld System.Action`1<Company> TimeOfDay/<>c::<>9__166_4
+IL_0dbb: dup
+IL_0dbc: brtrue.s IL_0dd5
+IL_0dbe: pop
+IL_0dbf: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0dc4: ldftn System.Void TimeOfDay/<>c::<UpdateDay>b__166_4(Company)
+IL_0dca: newobj System.Void System.Action`1<Company>::.ctor(System.Object,System.IntPtr)
+IL_0dcf: dup
+IL_0dd0: stsfld System.Action`1<Company> TimeOfDay/<>c::<>9__166_4
+IL_0dd5: call System.Void Utilities::ForEachEnum<Company>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_0dda: ret
+System.Boolean TimeOfDay::UpdateMonth()
+IL_0000: ldc.i4.1
+IL_0001: stloc.0
+IL_0002: ldarg.0
+IL_0003: ldfld System.Int32 TimeOfDay::Month
+IL_0008: stloc.s V_5
+IL_000a: ldloc.s V_5
+IL_000c: ldc.i4.3
+IL_000d: bgt.s IL_001a
+IL_000f: ldloc.s V_5
+IL_0011: brfalse.s IL_0027
+IL_0013: ldloc.s V_5
+IL_0015: ldc.i4.3
+IL_0016: beq.s IL_0033
+IL_0018: br.s IL_0055
+IL_001a: ldloc.s V_5
+IL_001c: ldc.i4.6
+IL_001d: beq.s IL_003f
+IL_001f: ldloc.s V_5
+IL_0021: ldc.i4.s 9
+IL_0023: beq.s IL_004b
+IL_0025: br.s IL_0055
+IL_0027: ldstr "Spring"
+IL_002c: call System.Void UISoundFX::ChangeMusicState(System.String)
+IL_0031: br.s IL_0055
+IL_0033: ldstr "Summer"
+IL_0038: call System.Void UISoundFX::ChangeMusicState(System.String)
+IL_003d: br.s IL_0055
+IL_003f: ldstr "Autumn"
+IL_0044: call System.Void UISoundFX::ChangeMusicState(System.String)
+IL_0049: br.s IL_0055
+IL_004b: ldstr "Winter"
+IL_0050: call System.Void UISoundFX::ChangeMusicState(System.String)
+IL_0055: ldsfld GameSettings GameSettings::Instance
+IL_005a: ldfld Company GameSettings::MyCompany
+IL_005f: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0064: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SoftwareWorkItem>(System.Collections.IEnumerable)
+IL_0069: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareWorkItem>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_006e: stloc.1
+IL_006f: ldarg.0
+IL_0070: ldc.i4.0
+IL_0071: call SDateTime TimeOfDay::GetDate(System.Boolean)
+IL_0076: stloc.2
+IL_0077: ldc.i4.0
+IL_0078: stloc.s V_6
+IL_007a: br.s IL_009c
+IL_007c: ldloc.1
+IL_007d: ldloc.s V_6
+IL_007f: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_0084: stloc.s V_7
+IL_0086: ldloc.s V_7
+IL_0088: ldfld ContractWork WorkItem::contract
+IL_008d: brfalse.s IL_0096
+IL_008f: ldloc.s V_7
+IL_0091: callvirt System.Void SoftwareWorkItem::UpdateContract()
+IL_0096: ldloc.s V_6
+IL_0098: ldc.i4.1
+IL_0099: add
+IL_009a: stloc.s V_6
+IL_009c: ldloc.s V_6
+IL_009e: ldloc.1
+IL_009f: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_00a4: blt.s IL_007c
+IL_00a6: ldsfld GameSettings GameSettings::Instance
+IL_00ab: ldfld System.Collections.Generic.Dictionary`2<System.UInt32,BillboardAd> GameSettings::Billboards
+IL_00b0: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.UInt32,BillboardAd>::get_Values()
+IL_00b5: ldsfld System.Action`1<BillboardAd> TimeOfDay/<>c::<>9__169_0
+IL_00ba: dup
+IL_00bb: brtrue.s IL_00d4
+IL_00bd: pop
+IL_00be: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_00c3: ldftn System.Void TimeOfDay/<>c::<UpdateMonth>b__169_0(BillboardAd)
+IL_00c9: newobj System.Void System.Action`1<BillboardAd>::.ctor(System.Object,System.IntPtr)
+IL_00ce: dup
+IL_00cf: stsfld System.Action`1<BillboardAd> TimeOfDay/<>c::<>9__169_0
+IL_00d4: call System.Void Utilities::ForEachEnum<BillboardAd>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_00d9: ldsfld GameSettings GameSettings::Instance
+IL_00de: ldfld ApplicantAttractionData GameSettings::ApplicantScore
+IL_00e3: callvirt System.Void ApplicantAttractionData::TurnMonth()
+IL_00e8: ldsfld HUD HUD::Instance
+IL_00ed: ldfld DealWindow HUD::dealWindow
+IL_00f2: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_00f7: callvirt System.Void DealWindow::CancelDueWork(System.Boolean)
+IL_00fc: ldsfld HUD HUD::Instance
+IL_0101: ldfld DealWindow HUD::dealWindow
+IL_0106: callvirt System.Void DealWindow::GenerateBid()
+IL_010b: ldsfld GameSettings GameSettings::Instance
+IL_0110: ldfld BoxController GameSettings::BoxController
+IL_0115: dup
+IL_0116: dup
+IL_0117: ldfld System.Int32 BoxController::BoxesShipped
+IL_011c: stfld System.Int32 BoxController::BoxesShippedLast
+IL_0121: ldc.i4.0
+IL_0122: stfld System.Int32 BoxController::BoxesShipped
+IL_0127: ldsfld GameSettings GameSettings::Instance
+IL_012c: ldfld DifficultyValues/DifficultySetting GameSettings::Difficulty
+IL_0131: ldfld System.Single DifficultyValues/DifficultySetting::Burglaries
+IL_0136: ldc.r4 0
+IL_013b: ble.un IL_01ea
+IL_0140: ldstr "Security"
+IL_0145: call System.Boolean GameSettings::HasCompletedMission(System.String)
+IL_014a: brfalse IL_01ea
+IL_014f: ldsfld GameSettings GameSettings::Instance
+IL_0154: dup
+IL_0155: ldfld System.Int32 GameSettings::LastBurglarSpawn
+IL_015a: ldc.i4.1
+IL_015b: add
+IL_015c: stfld System.Int32 GameSettings::LastBurglarSpawn
+IL_0161: ldsfld GameSettings GameSettings::Instance
+IL_0166: callvirt System.Single GameSettings::GetBurglarWorth()
+IL_016b: stloc.s V_8
+IL_016d: ldloc.s V_8
+IL_016f: ldc.r4 1000
+IL_0174: ble.un.s IL_01ea
+IL_0176: ldloc.s V_8
+IL_0178: ldc.r4 0
+IL_017d: ldc.r4 100000
+IL_0182: ldc.r4 60
+IL_0187: ldc.r4 12
+IL_018c: ldc.i4.1
+IL_018d: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0192: stloc.s V_9
+IL_0194: ldsfld GameSettings GameSettings::Instance
+IL_0199: ldfld System.Int32 GameSettings::LastBurglarSpawn
+IL_019e: conv.r4
+IL_019f: ldloc.s V_9
+IL_01a1: blt.un.s IL_01ea
+IL_01a3: call System.Single UnityEngine.Random::get_value()
+IL_01a8: ldc.r4 0.25
+IL_01ad: bge.un.s IL_01ea
+IL_01af: ldloc.s V_8
+IL_01b1: ldc.r4 15000
+IL_01b6: ldc.r4 100000
+IL_01bb: ldc.r4 1
+IL_01c0: ldc.r4 4
+IL_01c5: ldc.i4.1
+IL_01c6: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_01cb: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_01d0: stloc.s V_10
+IL_01d2: ldsfld GameSettings GameSettings::Instance
+IL_01d7: ldloc.s V_10
+IL_01d9: ldc.i4.1
+IL_01da: callvirt System.Void GameSettings::SpawnBurglar(System.Int32,System.Boolean)
+IL_01df: ldsfld GameSettings GameSettings::Instance
+IL_01e4: ldc.i4.0
+IL_01e5: stfld System.Int32 GameSettings::LastBurglarSpawn
+IL_01ea: ldsfld GameSettings GameSettings::Instance
+IL_01ef: ldfld ActorManager GameSettings::sActorManager
+IL_01f4: ldfld EventList`1<Actor> ActorManager::Actors
+IL_01f9: callvirt System.Collections.Generic.IEnumerator`1<T> EventList`1<Actor>::GetEnumerator()
+IL_01fe: stloc.s V_11
+IL_0200: br IL_02ec
+IL_0205: ldloc.s V_11
+IL_0207: callvirt !0 System.Collections.Generic.IEnumerator`1<Actor>::get_Current()
+IL_020c: stloc.s V_12
+IL_020e: ldloc.s V_12
+IL_0210: ldfld System.Boolean Actor::IgnoreOffSalary
+IL_0215: brtrue.s IL_0284
+IL_0217: ldloc.s V_12
+IL_0219: callvirt System.Boolean Actor::get_TakingCourses()
+IL_021e: brfalse.s IL_023e
+IL_0220: ldsfld GameSettings GameSettings::Instance
+IL_0225: ldfld Company GameSettings::MyCompany
+IL_022a: ldloc.s V_12
+IL_022c: callvirt System.Single Actor::GetMonthlySalary()
+IL_0231: neg
+IL_0232: conv.r8
+IL_0233: ldc.i4.0
+IL_0234: ldc.i4.1
+IL_0235: ldnull
+IL_0236: ldc.i4.0
+IL_0237: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_023c: br.s IL_0284
+IL_023e: ldloc.s V_12
+IL_0240: ldfld Actor/HomeState Actor::SpecialState
+IL_0245: ldc.i4.2
+IL_0246: bne.un.s IL_0284
+IL_0248: ldloc.s V_12
+IL_024a: ldstr "Paid vacation"
+IL_024f: ldc.i4.0
+IL_0250: callvirt System.Single Actor::GetBenefitValue(System.String,System.Boolean)
+IL_0255: stloc.s V_13
+IL_0257: ldloc.s V_13
+IL_0259: ldc.r4 0
+IL_025e: ble.un.s IL_0284
+IL_0260: ldsfld GameSettings GameSettings::Instance
+IL_0265: ldfld Company GameSettings::MyCompany
+IL_026a: ldloc.s V_13
+IL_026c: neg
+IL_026d: ldloc.s V_12
+IL_026f: callvirt System.Single Actor::GetMonthlySalary()
+IL_0274: mul
+IL_0275: conv.r8
+IL_0276: ldc.i4.s 19
+IL_0278: ldc.i4.1
+IL_0279: ldstr "Paid vacation"
+IL_027e: ldc.i4.0
+IL_027f: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0284: ldarg.0
+IL_0285: ldfld System.Int32 TimeOfDay::Month
+IL_028a: brtrue.s IL_02e4
+IL_028c: ldloc.s V_12
+IL_028e: callvirt Employee Actor::get_employee()
+IL_0293: ldfld System.Boolean Employee::Dismissed
+IL_0298: brtrue.s IL_02e4
+IL_029a: ldloc.s V_12
+IL_029c: ldfld System.Single Actor::ChristmasBonus
+IL_02a1: ldloc.s V_12
+IL_02a3: callvirt System.Single Actor::GetMonthlySalary()
+IL_02a8: mul
+IL_02a9: stloc.s V_14
+IL_02ab: ldloc.s V_14
+IL_02ad: ldc.r4 0
+IL_02b2: ble.un.s IL_02d0
+IL_02b4: ldsfld GameSettings GameSettings::Instance
+IL_02b9: ldfld Company GameSettings::MyCompany
+IL_02be: ldloc.s V_14
+IL_02c0: neg
+IL_02c1: conv.r8
+IL_02c2: ldc.i4.s 19
+IL_02c4: ldc.i4.1
+IL_02c5: ldstr "Christmas bonus"
+IL_02ca: ldc.i4.0
+IL_02cb: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_02d0: ldloc.s V_12
+IL_02d2: ldloc.s V_12
+IL_02d4: ldstr "Christmas bonus"
+IL_02d9: ldc.i4.0
+IL_02da: callvirt System.Single Actor::GetBenefitValue(System.String,System.Boolean)
+IL_02df: stfld System.Single Actor::ChristmasBonus
+IL_02e4: ldloc.s V_12
+IL_02e6: ldc.i4.0
+IL_02e7: stfld System.Boolean Actor::IgnoreOffSalary
+IL_02ec: ldloc.s V_11
+IL_02ee: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_02f3: brtrue IL_0205
+IL_02f8: leave.s IL_0306
+IL_02fa: ldloc.s V_11
+IL_02fc: brfalse.s IL_0305
+IL_02fe: ldloc.s V_11
+IL_0300: callvirt System.Void System.IDisposable::Dispose()
+IL_0305: endfinally
+IL_0306: ldsfld GameSettings GameSettings::Instance
+IL_030b: ldfld System.Single GameSettings::IdlePay
+IL_0310: ldc.r4 0
+IL_0315: ble.un.s IL_0338
+IL_0317: ldsfld GameSettings GameSettings::Instance
+IL_031c: ldfld Company GameSettings::MyCompany
+IL_0321: ldsfld GameSettings GameSettings::Instance
+IL_0326: ldfld System.Single GameSettings::IdlePay
+IL_032b: neg
+IL_032c: conv.r8
+IL_032d: ldc.i4.0
+IL_032e: ldstr "Idle"
+IL_0333: callvirt System.Void Company::AddToBill(System.Double,Company/TransactionCategory,System.String)
+IL_0338: ldsfld GameSettings GameSettings::Instance
+IL_033d: ldc.r4 0
+IL_0342: stfld System.Single GameSettings::IdlePay
+IL_0347: ldsfld GameSettings GameSettings::Instance
+IL_034c: ldfld ActorManager GameSettings::sActorManager
+IL_0351: ldfld System.Collections.Generic.Dictionary`2<System.String,Team> ActorManager::Teams
+IL_0356: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,Team>::get_Values()
+IL_035b: callvirt System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2/ValueCollection<System.String,Team>::GetEnumerator()
+IL_0360: stloc.s V_15
+IL_0362: br.s IL_0396
+IL_0364: ldloca.s V_15
+IL_0366: call !1 System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>::get_Current()
+IL_036b: stloc.s V_16
+IL_036d: ldloc.s V_16
+IL_036f: ldfld HRManagement Team::HR
+IL_0374: ldloc.s V_16
+IL_0376: ldfld HRManagement Team::HR
+IL_037b: ldfld System.Single HRManagement::Spent
+IL_0380: stfld System.Single HRManagement::SpentLast
+IL_0385: ldloc.s V_16
+IL_0387: ldfld HRManagement Team::HR
+IL_038c: ldc.r4 0
+IL_0391: stfld System.Single HRManagement::Spent
+IL_0396: ldloca.s V_15
+IL_0398: call System.Boolean System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>::MoveNext()
+IL_039d: brtrue.s IL_0364
+IL_039f: leave.s IL_03af
+IL_03a1: ldloca.s V_15
+IL_03a3: constrained. System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,Team>
+IL_03a9: callvirt System.Void System.IDisposable::Dispose()
+IL_03ae: endfinally
+IL_03af: ldc.i4.0
+IL_03b0: stloc.s V_17
+IL_03b2: br.s IL_041f
+IL_03b4: ldsfld GameSettings GameSettings::Instance
+IL_03b9: ldfld System.Collections.Generic.List`1<PlotArea> GameSettings::PlayerPlots
+IL_03be: ldloc.s V_17
+IL_03c0: callvirt !0 System.Collections.Generic.List`1<PlotArea>::get_Item(System.Int32)
+IL_03c5: stloc.s V_18
+IL_03c7: ldloc.s V_18
+IL_03c9: ldfld System.Int32 PlotArea::MonthsLeft
+IL_03ce: ldc.i4.0
+IL_03cf: ble.s IL_0419
+IL_03d1: ldloc.s V_18
+IL_03d3: dup
+IL_03d4: ldfld System.Int32 PlotArea::MonthsLeft
+IL_03d9: ldc.i4.1
+IL_03da: sub
+IL_03db: stfld System.Int32 PlotArea::MonthsLeft
+IL_03e0: ldsfld GameSettings GameSettings::Instance
+IL_03e5: ldfld Company GameSettings::MyCompany
+IL_03ea: ldloc.s V_18
+IL_03ec: ldfld System.Single PlotArea::Monthly
+IL_03f1: neg
+IL_03f2: conv.r8
+IL_03f3: ldc.i4.3
+IL_03f4: ldc.i4.0
+IL_03f5: ldstr "Plot"
+IL_03fa: ldc.i4.0
+IL_03fb: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0400: ldsfld GameSettings GameSettings::Instance
+IL_0405: ldfld Company GameSettings::MyCompany
+IL_040a: ldc.i4.5
+IL_040b: ldloc.s V_18
+IL_040d: ldfld System.Single PlotArea::MonthlyInterest
+IL_0412: neg
+IL_0413: conv.r8
+IL_0414: callvirt System.Void Company::AddTax(TaxReport/TaxType,System.Double)
+IL_0419: ldloc.s V_17
+IL_041b: ldc.i4.1
+IL_041c: add
+IL_041d: stloc.s V_17
+IL_041f: ldloc.s V_17
+IL_0421: ldsfld GameSettings GameSettings::Instance
+IL_0426: ldfld System.Collections.Generic.List`1<PlotArea> GameSettings::PlayerPlots
+IL_042b: callvirt System.Int32 System.Collections.Generic.List`1<PlotArea>::get_Count()
+IL_0430: blt.s IL_03b4
+IL_0432: ldsfld HUD HUD::Instance
+IL_0437: ldfld ContractWindow HUD::contractWindow
+IL_043c: ldloc.2
+IL_043d: callvirt System.Void ContractWindow::UpdateContracts(SDateTime)
+IL_0442: ldsfld GameSettings GameSettings::Instance
+IL_0447: ldfld System.Single GameSettings::SalaryDue
+IL_044c: ldc.r4 0
+IL_0451: ble.un.s IL_0481
+IL_0453: ldsfld GameSettings GameSettings::Instance
+IL_0458: ldfld Company GameSettings::MyCompany
+IL_045d: ldsfld GameSettings GameSettings::Instance
+IL_0462: ldfld System.Single GameSettings::SalaryDue
+IL_0467: neg
+IL_0468: conv.r8
+IL_0469: ldc.i4.0
+IL_046a: ldc.i4.1
+IL_046b: ldnull
+IL_046c: ldc.i4.0
+IL_046d: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0472: ldsfld GameSettings GameSettings::Instance
+IL_0477: ldc.r4 0
+IL_047c: stfld System.Single GameSettings::SalaryDue
+IL_0481: ldsfld GameSettings GameSettings::Instance
+IL_0486: ldfld System.Single GameSettings::NightSalaryDue
+IL_048b: ldc.r4 0
+IL_0490: ble.un.s IL_04c4
+IL_0492: ldsfld GameSettings GameSettings::Instance
+IL_0497: ldfld Company GameSettings::MyCompany
+IL_049c: ldsfld GameSettings GameSettings::Instance
+IL_04a1: ldfld System.Single GameSettings::NightSalaryDue
+IL_04a6: neg
+IL_04a7: conv.r8
+IL_04a8: ldc.i4.0
+IL_04a9: ldc.i4.1
+IL_04aa: ldstr "NightShiftCompensation"
+IL_04af: ldc.i4.0
+IL_04b0: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_04b5: ldsfld GameSettings GameSettings::Instance
+IL_04ba: ldc.r4 0
+IL_04bf: stfld System.Single GameSettings::NightSalaryDue
+IL_04c4: ldsfld GameSettings GameSettings::Instance
+IL_04c9: ldfld System.Single GameSettings::StaffSalaryDue
+IL_04ce: ldc.r4 0
+IL_04d3: ble.un.s IL_0508
+IL_04d5: ldsfld GameSettings GameSettings::Instance
+IL_04da: ldfld Company GameSettings::MyCompany
+IL_04df: ldsfld GameSettings GameSettings::Instance
+IL_04e4: ldfld System.Single GameSettings::StaffSalaryDue
+IL_04e9: neg
+IL_04ea: conv.r8
+IL_04eb: ldc.i4.s 9
+IL_04ed: ldc.i4.1
+IL_04ee: ldstr "Salary"
+IL_04f3: ldc.i4.0
+IL_04f4: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_04f9: ldsfld GameSettings GameSettings::Instance
+IL_04fe: ldc.r4 0
+IL_0503: stfld System.Single GameSettings::StaffSalaryDue
+IL_0508: ldsfld GameSettings GameSettings::Instance
+IL_050d: ldfld ActorManager GameSettings::sActorManager
+IL_0512: ldfld EventList`1<Actor> ActorManager::Actors
+IL_0517: callvirt System.Collections.Generic.IEnumerator`1<T> EventList`1<Actor>::GetEnumerator()
+IL_051c: stloc.s V_11
+IL_051e: br.s IL_056d
+IL_0520: ldloc.s V_11
+IL_0522: callvirt !0 System.Collections.Generic.IEnumerator`1<Actor>::get_Current()
+IL_0527: stloc.s V_19
+IL_0529: ldloc.s V_19
+IL_052b: callvirt System.Boolean Actor::WorksForFree()
+IL_0530: brtrue.s IL_056d
+IL_0532: ldloc.s V_19
+IL_0534: ldstr "Pension"
+IL_0539: ldc.i4.0
+IL_053a: callvirt System.Single Actor::GetBenefitValue(System.String,System.Boolean)
+IL_053f: stloc.s V_20
+IL_0541: ldloc.s V_19
+IL_0543: dup
+IL_0544: ldfld System.Single Actor::RetirementFund
+IL_0549: ldloc.s V_20
+IL_054b: add
+IL_054c: stfld System.Single Actor::RetirementFund
+IL_0551: ldsfld GameSettings GameSettings::Instance
+IL_0556: ldfld Company GameSettings::MyCompany
+IL_055b: ldloc.s V_20
+IL_055d: neg
+IL_055e: conv.r8
+IL_055f: ldc.i4.s 19
+IL_0561: ldc.i4.1
+IL_0562: ldstr "Pension"
+IL_0567: ldc.i4.0
+IL_0568: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_056d: ldloc.s V_11
+IL_056f: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0574: brtrue.s IL_0520
+IL_0576: leave.s IL_0584
+IL_0578: ldloc.s V_11
+IL_057a: brfalse.s IL_0583
+IL_057c: ldloc.s V_11
+IL_057e: callvirt System.Void System.IDisposable::Dispose()
+IL_0583: endfinally
+IL_0584: ldsfld GameSettings GameSettings::Instance
+IL_0589: ldfld System.Single GameSettings::ElectricityBill
+IL_058e: ldc.r4 0
+IL_0593: ble.un.s IL_05cd
+IL_0595: ldsfld GameSettings GameSettings::Instance
+IL_059a: ldfld Company GameSettings::MyCompany
+IL_059f: ldsfld GameSettings GameSettings::Instance
+IL_05a4: ldfld System.Single GameSettings::ElectricityBill
+IL_05a9: neg
+IL_05aa: call System.Single Furniture::GetElectricityPrice()
+IL_05af: mul
+IL_05b0: conv.r8
+IL_05b1: ldc.i4.3
+IL_05b2: ldc.i4.1
+IL_05b3: ldstr "Electricity"
+IL_05b8: ldc.i4.0
+IL_05b9: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_05be: ldsfld GameSettings GameSettings::Instance
+IL_05c3: ldc.r4 0
+IL_05c8: stfld System.Single GameSettings::ElectricityBill
+IL_05cd: ldsfld GameSettings GameSettings::Instance
+IL_05d2: ldfld System.Single GameSettings::ElectricityIncome
+IL_05d7: ldc.r4 0
+IL_05dc: ble.un.s IL_061b
+IL_05de: ldsfld GameSettings GameSettings::Instance
+IL_05e3: ldfld Company GameSettings::MyCompany
+IL_05e8: ldsfld GameSettings GameSettings::Instance
+IL_05ed: ldfld System.Single GameSettings::ElectricityIncome
+IL_05f2: call System.Single Furniture::GetElectricityPrice()
+IL_05f7: mul
+IL_05f8: ldc.r4 0.25
+IL_05fd: mul
+IL_05fe: conv.r8
+IL_05ff: ldc.i4.3
+IL_0600: ldc.i4.1
+IL_0601: ldstr "ElectricityToGrid"
+IL_0606: ldc.i4.0
+IL_0607: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_060c: ldsfld GameSettings GameSettings::Instance
+IL_0611: ldc.r4 0
+IL_0616: stfld System.Single GameSettings::ElectricityIncome
+IL_061b: ldsfld GameSettings GameSettings::Instance
+IL_0620: ldfld System.Single GameSettings::Waterbill
+IL_0625: ldc.r4 0
+IL_062a: ble.un.s IL_0664
+IL_062c: ldsfld GameSettings GameSettings::Instance
+IL_0631: ldfld Company GameSettings::MyCompany
+IL_0636: ldsfld GameSettings GameSettings::Instance
+IL_063b: ldfld System.Single GameSettings::Waterbill
+IL_0640: neg
+IL_0641: call System.Single Furniture::GetWaterPrice()
+IL_0646: mul
+IL_0647: conv.r8
+IL_0648: ldc.i4.3
+IL_0649: ldc.i4.1
+IL_064a: ldstr "Water"
+IL_064f: ldc.i4.0
+IL_0650: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0655: ldsfld GameSettings GameSettings::Instance
+IL_065a: ldc.r4 0
+IL_065f: stfld System.Single GameSettings::Waterbill
+IL_0664: ldsfld GameSettings GameSettings::Instance
+IL_0669: ldfld System.Single GameSettings::Gasbill
+IL_066e: ldc.r4 0
+IL_0673: ble.un.s IL_06ad
+IL_0675: ldsfld GameSettings GameSettings::Instance
+IL_067a: ldfld Company GameSettings::MyCompany
+IL_067f: ldsfld GameSettings GameSettings::Instance
+IL_0684: ldfld System.Single GameSettings::Gasbill
+IL_0689: neg
+IL_068a: call System.Single Furniture::GetGasPrice()
+IL_068f: mul
+IL_0690: conv.r8
+IL_0691: ldc.i4.3
+IL_0692: ldc.i4.1
+IL_0693: ldstr "Gas"
+IL_0698: ldc.i4.0
+IL_0699: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_069e: ldsfld GameSettings GameSettings::Instance
+IL_06a3: ldc.r4 0
+IL_06a8: stfld System.Single GameSettings::Gasbill
+IL_06ad: ldsfld GameSettings GameSettings::Instance
+IL_06b2: ldfld System.Single GameSettings::ServerCost
+IL_06b7: ldc.r4 0
+IL_06bc: ble.un.s IL_06f0
+IL_06be: ldsfld GameSettings GameSettings::Instance
+IL_06c3: ldfld Company GameSettings::MyCompany
+IL_06c8: ldsfld GameSettings GameSettings::Instance
+IL_06cd: ldfld System.Single GameSettings::ServerCost
+IL_06d2: neg
+IL_06d3: conv.r8
+IL_06d4: ldc.i4.3
+IL_06d5: ldc.i4.1
+IL_06d6: ldstr "Internet"
+IL_06db: ldc.i4.0
+IL_06dc: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_06e1: ldsfld GameSettings GameSettings::Instance
+IL_06e6: ldc.r4 0
+IL_06eb: stfld System.Single GameSettings::ServerCost
+IL_06f0: ldsfld GameSettings GameSettings::Instance
+IL_06f5: ldfld System.Boolean GameSettings::RentMode
+IL_06fa: brfalse.s IL_0770
+IL_06fc: ldsfld GameSettings GameSettings::Instance
+IL_0701: ldfld RoomManager GameSettings::sRoomManager
+IL_0706: ldfld System.Collections.Generic.List`1<Room> RoomManager::Rooms
+IL_070b: ldsfld System.Func`2<Room,System.Boolean> TimeOfDay/<>c::<>9__169_3
+IL_0710: dup
+IL_0711: brtrue.s IL_072a
+IL_0713: pop
+IL_0714: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0719: ldftn System.Boolean TimeOfDay/<>c::<UpdateMonth>b__169_3(Room)
+IL_071f: newobj System.Void System.Func`2<Room,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0724: dup
+IL_0725: stsfld System.Func`2<Room,System.Boolean> TimeOfDay/<>c::<>9__169_3
+IL_072a: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<Room>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_072f: ldsfld System.Func`2<Room,System.Single> TimeOfDay/<>c::<>9__169_4
+IL_0734: dup
+IL_0735: brtrue.s IL_074e
+IL_0737: pop
+IL_0738: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_073d: ldftn System.Single TimeOfDay/<>c::<UpdateMonth>b__169_4(Room)
+IL_0743: newobj System.Void System.Func`2<Room,System.Single>::.ctor(System.Object,System.IntPtr)
+IL_0748: dup
+IL_0749: stsfld System.Func`2<Room,System.Single> TimeOfDay/<>c::<>9__169_4
+IL_074e: call System.Single Utilities::SumSafe<Room>(System.Collections.Generic.IEnumerable`1<T>,System.Func`2<T,System.Single>)
+IL_0753: stloc.s V_21
+IL_0755: ldsfld GameSettings GameSettings::Instance
+IL_075a: ldfld Company GameSettings::MyCompany
+IL_075f: ldloc.s V_21
+IL_0761: neg
+IL_0762: conv.r8
+IL_0763: ldc.i4.3
+IL_0764: ldc.i4.1
+IL_0765: ldstr "Rent"
+IL_076a: ldc.i4.0
+IL_076b: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_0770: ldsfld GameSettings GameSettings::Instance
+IL_0775: callvirt System.Double GameSettings::PaybackLoan()
+IL_077a: pop
+IL_077b: ldsfld HUD HUD::Instance
+IL_0780: ldfld LoanWindow HUD::loanWindow
+IL_0785: callvirt System.Void LoanWindow::UpdateLoans()
+IL_078a: ldsfld GameSettings GameSettings::Instance
+IL_078f: ldfld InsuranceAccount GameSettings::Insurance
+IL_0794: dup
+IL_0795: ldfld System.Double InsuranceAccount::Money
+IL_079a: ldsfld System.Double InsuranceAccount::MonthlyInterest
+IL_079f: mul
+IL_07a0: stloc.3
+IL_07a1: ldsfld GameSettings GameSettings::Instance
+IL_07a6: ldfld InsuranceAccount GameSettings::Insurance
+IL_07ab: ldloc.3
+IL_07ac: callvirt System.Void InsuranceAccount::UpdateAccrued(System.Double)
+IL_07b1: ldsfld GameSettings GameSettings::Instance
+IL_07b6: ldfld Company GameSettings::MyCompany
+IL_07bb: ldloc.3
+IL_07bc: ldc.i4.s 13
+IL_07be: callvirt System.Void Company::AddToCashflow(System.Double,Company/TransactionCategory)
+IL_07c3: ldsfld GameSettings GameSettings::Instance
+IL_07c8: ldfld Company GameSettings::MyCompany
+IL_07cd: ldc.i4.4
+IL_07ce: ldloc.3
+IL_07cf: callvirt System.Void Company::AddTax(TaxReport/TaxType,System.Double)
+IL_07d4: dup
+IL_07d5: dup
+IL_07d6: ldfld System.Double InsuranceAccount::Money
+IL_07db: ldloc.3
+IL_07dc: add
+IL_07dd: stfld System.Double InsuranceAccount::Money
+IL_07e2: callvirt System.Void InsuranceAccount::UpdateDeposits()
+IL_07e7: ldsfld GameSettings GameSettings::Instance
+IL_07ec: ldfld MarketSimulation GameSettings::simulation
+IL_07f1: ldloc.2
+IL_07f2: ldnull
+IL_07f3: callvirt System.Void MarketSimulation::EndDay(SDateTime,Company)
+IL_07f8: ldsfld GameSettings GameSettings::Instance
+IL_07fd: ldfld Company GameSettings::MyCompany
+IL_0802: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0807: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SoftwareWorkItem>(System.Collections.IEnumerable)
+IL_080c: ldsfld System.Action`1<SoftwareWorkItem> TimeOfDay/<>c::<>9__169_1
+IL_0811: dup
+IL_0812: brtrue.s IL_082b
+IL_0814: pop
+IL_0815: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_081a: ldftn System.Void TimeOfDay/<>c::<UpdateMonth>b__169_1(SoftwareWorkItem)
+IL_0820: newobj System.Void System.Action`1<SoftwareWorkItem>::.ctor(System.Object,System.IntPtr)
+IL_0825: dup
+IL_0826: stsfld System.Action`1<SoftwareWorkItem> TimeOfDay/<>c::<>9__169_1
+IL_082b: call System.Void Utilities::ForEachEnum<SoftwareWorkItem>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_0830: ldsfld GameSettings GameSettings::Instance
+IL_0835: ldfld Company GameSettings::MyCompany
+IL_083a: ldfld SHashSet`1<System.UInt32> Company::Subsidiaries
+IL_083f: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<System.UInt32>::GetEnumerator()
+IL_0844: stloc.s V_22
+IL_0846: br.s IL_0874
+IL_0848: ldloca.s V_22
+IL_084a: call !0 System.Collections.Generic.HashSet`1/Enumerator<System.UInt32>::get_Current()
+IL_084f: stloc.s V_23
+IL_0851: ldsfld GameSettings GameSettings::Instance
+IL_0856: ldfld MarketSimulation GameSettings::simulation
+IL_085b: ldloc.s V_23
+IL_085d: callvirt Company MarketSimulation::GetCompany(System.UInt32)
+IL_0862: isinst SimulatedCompany
+IL_0867: stloc.s V_24
+IL_0869: ldloc.s V_24
+IL_086b: brfalse.s IL_0874
+IL_086d: ldloc.s V_24
+IL_086f: callvirt System.Void SimulatedCompany::CheckSubsidiaryBankruptcy()
+IL_0874: ldloca.s V_22
+IL_0876: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<System.UInt32>::MoveNext()
+IL_087b: brtrue.s IL_0848
+IL_087d: leave.s IL_088d
+IL_087f: ldloca.s V_22
+IL_0881: constrained. System.Collections.Generic.HashSet`1/Enumerator<System.UInt32>
+IL_0887: callvirt System.Void System.IDisposable::Dispose()
+IL_088c: endfinally
+IL_088d: ldsfld HUD HUD::Instance
+IL_0892: callvirt System.Void HUD::UpdateCashflow()
+IL_0897: ldarg.0
+IL_0898: call System.Void TimeOfDay::BiggestGrowth()
+IL_089d: ldloc.2
+IL_089e: ldc.i4.1
+IL_089f: ldc.i4.0
+IL_08a0: call System.Void Newspaper::StoryRollover(SDateTime,System.Boolean,System.Boolean)
+IL_08a5: ldnull
+IL_08a6: stloc.s V_4
+IL_08a8: ldsfld GameSettings GameSettings::Instance
+IL_08ad: ldfld Company GameSettings::MyCompany
+IL_08b2: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<System.Single>> Company::Cashflow
+IL_08b7: ldstr "Balance"
+IL_08bc: ldloca.s V_4
+IL_08be: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<System.Single>>::TryGetValue(!0,!1&)
+IL_08c3: brfalse IL_0999
+IL_08c8: ldloc.s V_4
+IL_08ca: callvirt System.Int32 System.Collections.Generic.List`1<System.Single>::get_Count()
+IL_08cf: ldc.i4.1
+IL_08d0: ble IL_0999
+IL_08d5: ldc.r4 0
+IL_08da: stloc.s V_25
+IL_08dc: ldc.i4.0
+IL_08dd: stloc.s V_26
+IL_08df: ldc.r4 0
+IL_08e4: stloc.s V_27
+IL_08e6: ldc.r4 1
+IL_08eb: stloc.s V_28
+IL_08ed: ldc.i4.1
+IL_08ee: stloc.s V_29
+IL_08f0: br.s IL_0942
+IL_08f2: ldloc.s V_25
+IL_08f4: ldloc.s V_4
+IL_08f6: ldloc.s V_4
+IL_08f8: callvirt System.Int32 System.Collections.Generic.List`1<System.Single>::get_Count()
+IL_08fd: ldloc.s V_29
+IL_08ff: sub
+IL_0900: callvirt !0 System.Collections.Generic.List`1<System.Single>::get_Item(System.Int32)
+IL_0905: ldloc.s V_4
+IL_0907: ldloc.s V_4
+IL_0909: callvirt System.Int32 System.Collections.Generic.List`1<System.Single>::get_Count()
+IL_090e: ldloc.s V_29
+IL_0910: sub
+IL_0911: ldc.i4.1
+IL_0912: sub
+IL_0913: callvirt !0 System.Collections.Generic.List`1<System.Single>::get_Item(System.Int32)
+IL_0918: sub
+IL_0919: ldloc.s V_28
+IL_091b: mul
+IL_091c: add
+IL_091d: stloc.s V_25
+IL_091f: ldloc.s V_27
+IL_0921: ldloc.s V_28
+IL_0923: add
+IL_0924: stloc.s V_27
+IL_0926: ldloc.s V_26
+IL_0928: ldc.i4.1
+IL_0929: add
+IL_092a: stloc.s V_26
+IL_092c: ldloc.s V_28
+IL_092e: ldc.r4 3
+IL_0933: div
+IL_0934: ldc.r4 2
+IL_0939: mul
+IL_093a: stloc.s V_28
+IL_093c: ldloc.s V_29
+IL_093e: ldc.i4.1
+IL_093f: add
+IL_0940: stloc.s V_29
+IL_0942: ldloc.s V_29
+IL_0944: ldc.i4.7
+IL_0945: ldloc.s V_4
+IL_0947: callvirt System.Int32 System.Collections.Generic.List`1<System.Single>::get_Count()
+IL_094c: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0951: blt.s IL_08f2
+IL_0953: ldsfld HUD HUD::Instance
+IL_0958: ldfld UnityEngine.GameObject HUD::BankruptcyWarning
+IL_095d: ldsfld GameSettings GameSettings::Instance
+IL_0962: ldfld Company GameSettings::MyCompany
+IL_0967: callvirt System.Double Company::get_Money()
+IL_096c: ldsfld GameSettings GameSettings::Instance
+IL_0971: ldfld InsuranceAccount GameSettings::Insurance
+IL_0976: ldfld System.Double InsuranceAccount::Money
+IL_097b: add
+IL_097c: ldloc.s V_25
+IL_097e: ldloc.s V_27
+IL_0980: div
+IL_0981: ldloc.s V_26
+IL_0983: conv.r4
+IL_0984: mul
+IL_0985: conv.r8
+IL_0986: add
+IL_0987: ldc.r8 0
+IL_0990: clt
+IL_0992: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0997: br.s IL_09a9
+IL_0999: ldsfld HUD HUD::Instance
+IL_099e: ldfld UnityEngine.GameObject HUD::BankruptcyWarning
+IL_09a3: ldc.i4.0
+IL_09a4: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_09a9: ldarg.0
+IL_09aa: ldfld System.Int32 TimeOfDay::Month
+IL_09af: brfalse.s IL_09bd
+IL_09b1: ldarg.0
+IL_09b2: ldfld System.Int32 TimeOfDay::Month
+IL_09b7: ldc.i4.3
+IL_09b8: bne.un IL_0a47
+IL_09bd: ldarg.0
+IL_09be: ldfld System.Int32 TimeOfDay::Month
+IL_09c3: brtrue.s IL_0a38
+IL_09c5: ldsfld GameSettings GameSettings::Instance
+IL_09ca: ldfld Company GameSettings::MyCompany
+IL_09cf: ldfld TaxReport Company::LastTaxReport
+IL_09d4: brfalse.s IL_0a38
+IL_09d6: ldsfld GameSettings GameSettings::Instance
+IL_09db: ldfld Company GameSettings::MyCompany
+IL_09e0: ldfld TaxReport Company::LastTaxReport
+IL_09e5: stloc.s V_30
+IL_09e7: ldloc.s V_30
+IL_09e9: ldloca.s V_5
+IL_09eb: ldloca.s V_31
+IL_09ed: callvirt System.Void TaxReport::GetWorkersNeeded(System.Int32&,System.Single&)
+IL_09f2: ldloc.s V_30
+IL_09f4: callvirt System.Double TaxReport::GetCost()
+IL_09f9: stloc.s V_32
+IL_09fb: ldloc.s V_30
+IL_09fd: ldfld System.Boolean TaxReport::IllegalActions
+IL_0a02: brtrue.s IL_0a18
+IL_0a04: ldloc.s V_32
+IL_0a06: ldc.r8 0
+IL_0a0f: ble.un.s IL_0a38
+IL_0a11: ldloc.s V_31
+IL_0a13: conv.r8
+IL_0a14: ldloc.s V_32
+IL_0a16: bgt.un.s IL_0a38
+IL_0a18: ldloc.s V_30
+IL_0a1a: ldc.i4.1
+IL_0a1b: callvirt System.Double TaxReport::FinalValue(System.Boolean)
+IL_0a20: ldloc.s V_32
+IL_0a22: ldsfld GameSettings GameSettings::Instance
+IL_0a27: ldloc.s V_30
+IL_0a29: callvirt System.Boolean GameSettings::WouldBeAudited(TaxReport)
+IL_0a2e: newobj System.Void TaxNotification::.ctor(System.Double,System.Double,System.Boolean)
+IL_0a33: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0a38: ldsfld HUD HUD::Instance
+IL_0a3d: ldfld CompanyWorksheet HUD::financeWindow
+IL_0a42: callvirt System.Void CompanyWorksheet::CheckTaxes()
+IL_0a47: ldarg.0
+IL_0a48: ldfld System.Int32 TimeOfDay::Month
+IL_0a4d: ldc.i4.s 11
+IL_0a4f: bne.un IL_0bc9
+IL_0a54: ldsfld HUD HUD::Instance
+IL_0a59: ldfld WageWindow HUD::wageWindow
+IL_0a5e: ldfld GUIListView WageWindow::List
+IL_0a63: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0a68: callvirt System.Void EventList`1<System.Object>::Clear()
+IL_0a6d: ldsfld GameSettings GameSettings::Instance
+IL_0a72: ldfld ActorManager GameSettings::sActorManager
+IL_0a77: ldfld EventList`1<Actor> ActorManager::Actors
+IL_0a7c: callvirt System.Collections.Generic.IEnumerator`1<T> EventList`1<Actor>::GetEnumerator()
+IL_0a81: stloc.s V_11
+IL_0a83: br IL_0b79
+IL_0a88: ldloc.s V_11
+IL_0a8a: callvirt !0 System.Collections.Generic.IEnumerator`1<Actor>::get_Current()
+IL_0a8f: stloc.s V_33
+IL_0a91: ldloc.s V_33
+IL_0a93: callvirt System.Void Actor::ApplyNewBenefits()
+IL_0a98: ldloc.s V_33
+IL_0a9a: callvirt Employee Actor::get_employee()
+IL_0a9f: ldfld System.UInt32 Employee::DemandsRequested
+IL_0aa4: brtrue.s IL_0af4
+IL_0aa6: ldloc.s V_33
+IL_0aa8: callvirt Employee Actor::get_employee()
+IL_0aad: ldfld System.Boolean Employee::Dismissed
+IL_0ab2: brtrue IL_0b79
+IL_0ab7: ldloc.s V_33
+IL_0ab9: callvirt System.Boolean Actor::WorksForFree()
+IL_0abe: brtrue IL_0b79
+IL_0ac3: ldloc.s V_33
+IL_0ac5: ldfld System.Boolean Actor::NegotiateSalary
+IL_0aca: brtrue.s IL_0ae8
+IL_0acc: ldloc.s V_33
+IL_0ace: callvirt Employee Actor::get_employee()
+IL_0ad3: ldfld SDateTime Employee::LastWage
+IL_0ad8: ldloc.2
+IL_0ad9: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0ade: ldc.r4 8
+IL_0ae3: blt IL_0b79
+IL_0ae8: ldloc.s V_33
+IL_0aea: callvirt System.Boolean Actor::WageNegotiationNecessary()
+IL_0aef: brfalse IL_0b79
+IL_0af4: ldloc.s V_33
+IL_0af6: callvirt Employee Actor::get_employee()
+IL_0afb: ldfld System.UInt32 Employee::DemandsRequested
+IL_0b00: brtrue.s IL_0b5d
+IL_0b02: ldloc.s V_33
+IL_0b04: callvirt System.String Actor::get_Team()
+IL_0b09: brfalse.s IL_0b5d
+IL_0b0b: ldloc.s V_33
+IL_0b0d: callvirt Team Actor::GetTeam()
+IL_0b12: callvirt Actor Team::get_Leader()
+IL_0b17: ldloc.s V_33
+IL_0b19: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0b1e: brfalse.s IL_0b5d
+IL_0b20: ldloc.s V_33
+IL_0b22: callvirt Team Actor::GetTeam()
+IL_0b27: ldc.i4.1
+IL_0b28: callvirt System.Boolean Team::CheckHRLevel(System.Int32)
+IL_0b2d: brfalse.s IL_0b5d
+IL_0b2f: ldloc.s V_33
+IL_0b31: callvirt Team Actor::GetTeam()
+IL_0b36: ldfld HRManagement Team::HR
+IL_0b3b: ldfld System.Boolean HRManagement::HandleWages
+IL_0b40: brfalse.s IL_0b5d
+IL_0b42: ldloc.s V_33
+IL_0b44: callvirt Team Actor::GetTeam()
+IL_0b49: stloc.s V_34
+IL_0b4b: ldloc.s V_34
+IL_0b4d: ldfld HRManagement Team::HR
+IL_0b52: ldloc.s V_33
+IL_0b54: ldloc.s V_34
+IL_0b56: callvirt System.Void HRManagement::HandleWage(Actor,Team)
+IL_0b5b: br.s IL_0b79
+IL_0b5d: ldsfld HUD HUD::Instance
+IL_0b62: ldfld WageWindow HUD::wageWindow
+IL_0b67: ldfld GUIListView WageWindow::List
+IL_0b6c: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0b71: ldloc.s V_33
+IL_0b73: callvirt System.Int32 EventList`1<System.Object>::Add(System.Object)
+IL_0b78: pop
+IL_0b79: ldloc.s V_11
+IL_0b7b: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0b80: brtrue IL_0a88
+IL_0b85: leave.s IL_0b93
+IL_0b87: ldloc.s V_11
+IL_0b89: brfalse.s IL_0b92
+IL_0b8b: ldloc.s V_11
+IL_0b8d: callvirt System.Void System.IDisposable::Dispose()
+IL_0b92: endfinally
+IL_0b93: ldsfld HUD HUD::Instance
+IL_0b98: ldfld WageWindow HUD::wageWindow
+IL_0b9d: ldfld GUIListView WageWindow::List
+IL_0ba2: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0ba7: callvirt System.Int32 EventList`1<System.Object>::get_Count()
+IL_0bac: ldc.i4.0
+IL_0bad: ble IL_0d19
+IL_0bb2: ldsfld HUD HUD::Instance
+IL_0bb7: ldfld WageWindow HUD::wageWindow
+IL_0bbc: ldc.i4.1
+IL_0bbd: callvirt System.Void WageWindow::Show(System.Boolean)
+IL_0bc2: ldc.i4.0
+IL_0bc3: stloc.0
+IL_0bc4: br IL_0d19
+IL_0bc9: ldsfld GameSettings GameSettings::Instance
+IL_0bce: ldfld ActorManager GameSettings::sActorManager
+IL_0bd3: ldfld EventList`1<Actor> ActorManager::Actors
+IL_0bd8: ldsfld System.Func`2<Actor,System.Boolean> TimeOfDay/<>c::<>9__169_5
+IL_0bdd: dup
+IL_0bde: brtrue.s IL_0bf7
+IL_0be0: pop
+IL_0be1: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0be6: ldftn System.Boolean TimeOfDay/<>c::<UpdateMonth>b__169_5(Actor)
+IL_0bec: newobj System.Void System.Func`2<Actor,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0bf1: dup
+IL_0bf2: stsfld System.Func`2<Actor,System.Boolean> TimeOfDay/<>c::<>9__169_5
+IL_0bf7: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<Actor>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0bfc: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Actor>::GetEnumerator()
+IL_0c01: stloc.s V_11
+IL_0c03: br IL_0cd1
+IL_0c08: ldloc.s V_11
+IL_0c0a: callvirt !0 System.Collections.Generic.IEnumerator`1<Actor>::get_Current()
+IL_0c0f: stloc.s V_35
+IL_0c11: ldloc.s V_35
+IL_0c13: callvirt Employee Actor::get_employee()
+IL_0c18: ldfld System.UInt32 Employee::DemandsRequested
+IL_0c1d: brtrue.s IL_0c4c
+IL_0c1f: ldloc.s V_35
+IL_0c21: callvirt Employee Actor::get_employee()
+IL_0c26: ldfld System.Boolean Employee::Dismissed
+IL_0c2b: brtrue.s IL_0c3f
+IL_0c2d: ldloc.s V_35
+IL_0c2f: callvirt System.Boolean Actor::WorksForFree()
+IL_0c34: brtrue.s IL_0c3f
+IL_0c36: ldloc.s V_35
+IL_0c38: callvirt System.Boolean Actor::WageNegotiationNecessary()
+IL_0c3d: brtrue.s IL_0c4c
+IL_0c3f: ldloc.s V_35
+IL_0c41: ldc.i4.0
+IL_0c42: stfld System.Boolean Actor::NegotiateSalary
+IL_0c47: br IL_0cd1
+IL_0c4c: ldloc.s V_35
+IL_0c4e: callvirt Employee Actor::get_employee()
+IL_0c53: ldfld System.UInt32 Employee::DemandsRequested
+IL_0c58: brtrue.s IL_0cb5
+IL_0c5a: ldloc.s V_35
+IL_0c5c: callvirt System.String Actor::get_Team()
+IL_0c61: brfalse.s IL_0cb5
+IL_0c63: ldloc.s V_35
+IL_0c65: callvirt Team Actor::GetTeam()
+IL_0c6a: callvirt Actor Team::get_Leader()
+IL_0c6f: ldloc.s V_35
+IL_0c71: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_0c76: brfalse.s IL_0cb5
+IL_0c78: ldloc.s V_35
+IL_0c7a: callvirt Team Actor::GetTeam()
+IL_0c7f: ldc.i4.1
+IL_0c80: callvirt System.Boolean Team::CheckHRLevel(System.Int32)
+IL_0c85: brfalse.s IL_0cb5
+IL_0c87: ldloc.s V_35
+IL_0c89: callvirt Team Actor::GetTeam()
+IL_0c8e: ldfld HRManagement Team::HR
+IL_0c93: ldfld System.Boolean HRManagement::HandleWages
+IL_0c98: brfalse.s IL_0cb5
+IL_0c9a: ldloc.s V_35
+IL_0c9c: callvirt Team Actor::GetTeam()
+IL_0ca1: stloc.s V_36
+IL_0ca3: ldloc.s V_36
+IL_0ca5: ldfld HRManagement Team::HR
+IL_0caa: ldloc.s V_35
+IL_0cac: ldloc.s V_36
+IL_0cae: callvirt System.Void HRManagement::HandleWage(Actor,Team)
+IL_0cb3: br.s IL_0cd1
+IL_0cb5: ldsfld HUD HUD::Instance
+IL_0cba: ldfld WageWindow HUD::wageWindow
+IL_0cbf: ldfld GUIListView WageWindow::List
+IL_0cc4: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0cc9: ldloc.s V_35
+IL_0ccb: callvirt System.Int32 EventList`1<System.Object>::Add(System.Object)
+IL_0cd0: pop
+IL_0cd1: ldloc.s V_11
+IL_0cd3: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0cd8: brtrue IL_0c08
+IL_0cdd: leave.s IL_0ceb
+IL_0cdf: ldloc.s V_11
+IL_0ce1: brfalse.s IL_0cea
+IL_0ce3: ldloc.s V_11
+IL_0ce5: callvirt System.Void System.IDisposable::Dispose()
+IL_0cea: endfinally
+IL_0ceb: ldsfld HUD HUD::Instance
+IL_0cf0: ldfld WageWindow HUD::wageWindow
+IL_0cf5: ldfld GUIListView WageWindow::List
+IL_0cfa: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0cff: callvirt System.Int32 EventList`1<System.Object>::get_Count()
+IL_0d04: ldc.i4.0
+IL_0d05: ble.s IL_0d19
+IL_0d07: ldsfld HUD HUD::Instance
+IL_0d0c: ldfld WageWindow HUD::wageWindow
+IL_0d11: ldc.i4.1
+IL_0d12: callvirt System.Void WageWindow::Show(System.Boolean)
+IL_0d17: ldc.i4.0
+IL_0d18: stloc.0
+IL_0d19: call System.Boolean SINetworking.NetworkManager::get_NotConnectedOrHost()
+IL_0d1e: brfalse IL_0e2f
+IL_0d23: ldc.i4.0
+IL_0d24: stloc.s V_37
+IL_0d26: ldc.i4.0
+IL_0d27: stloc.s V_38
+IL_0d29: br.s IL_0da8
+IL_0d2b: newobj System.Void TimeOfDay/<>c__DisplayClass169_0::.ctor()
+IL_0d30: stloc.s V_39
+IL_0d32: ldloc.s V_39
+IL_0d34: ldsfld GameSettings GameSettings::Instance
+IL_0d39: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::StockMarkets
+IL_0d3e: ldloc.s V_38
+IL_0d40: callvirt !0 System.Collections.Generic.List`1<StockMarket>::get_Item(System.Int32)
+IL_0d45: stfld StockMarket TimeOfDay/<>c__DisplayClass169_0::s
+IL_0d4a: ldloc.s V_39
+IL_0d4c: ldfld StockMarket TimeOfDay/<>c__DisplayClass169_0::s
+IL_0d51: ldc.i4.0
+IL_0d52: ldc.i4.0
+IL_0d53: callvirt System.Void StockMarket::Simulate(System.Boolean,System.Boolean)
+IL_0d58: ldloc.s V_39
+IL_0d5a: ldfld StockMarket TimeOfDay/<>c__DisplayClass169_0::s
+IL_0d5f: ldfld System.Single StockMarket::Value
+IL_0d64: ldc.r4 0
+IL_0d69: bge.un.s IL_0da2
+IL_0d6b: ldsfld GameSettings GameSettings::Instance
+IL_0d70: ldfld System.Collections.Generic.List`1<Investment> GameSettings::Investments
+IL_0d75: ldloc.s V_39
+IL_0d77: ldftn System.Boolean TimeOfDay/<>c__DisplayClass169_0::<UpdateMonth>b__6(Investment)
+IL_0d7d: newobj System.Void System.Predicate`1<Investment>::.ctor(System.Object,System.IntPtr)
+IL_0d82: callvirt System.Int32 System.Collections.Generic.List`1<Investment>::RemoveAll(System.Predicate`1<!0>)
+IL_0d87: pop
+IL_0d88: ldsfld GameSettings GameSettings::Instance
+IL_0d8d: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::StockMarkets
+IL_0d92: ldloc.s V_38
+IL_0d94: callvirt System.Void System.Collections.Generic.List`1<StockMarket>::RemoveAt(System.Int32)
+IL_0d99: ldloc.s V_38
+IL_0d9b: ldc.i4.1
+IL_0d9c: sub
+IL_0d9d: stloc.s V_38
+IL_0d9f: ldc.i4.1
+IL_0da0: stloc.s V_37
+IL_0da2: ldloc.s V_38
+IL_0da4: ldc.i4.1
+IL_0da5: add
+IL_0da6: stloc.s V_38
+IL_0da8: ldloc.s V_38
+IL_0daa: ldsfld GameSettings GameSettings::Instance
+IL_0daf: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::StockMarkets
+IL_0db4: callvirt System.Int32 System.Collections.Generic.List`1<StockMarket>::get_Count()
+IL_0db9: blt IL_0d2b
+IL_0dbe: ldsfld GameSettings GameSettings::Instance
+IL_0dc3: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::StockMarkets
+IL_0dc8: callvirt System.Int32 System.Collections.Generic.List`1<StockMarket>::get_Count()
+IL_0dcd: stloc.s V_40
+IL_0dcf: br.s IL_0de1
+IL_0dd1: ldsfld GameSettings GameSettings::Instance
+IL_0dd6: callvirt System.Void GameSettings::GenerateStockMarket()
+IL_0ddb: ldloc.s V_40
+IL_0ddd: ldc.i4.1
+IL_0dde: add
+IL_0ddf: stloc.s V_40
+IL_0de1: ldloc.s V_40
+IL_0de3: ldc.i4.5
+IL_0de4: blt.s IL_0dd1
+IL_0de6: ldc.i4.0
+IL_0de7: stloc.s V_41
+IL_0de9: br.s IL_0e09
+IL_0deb: ldsfld GameSettings GameSettings::Instance
+IL_0df0: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::MetalMarkets
+IL_0df5: ldloc.s V_41
+IL_0df7: callvirt !0 System.Collections.Generic.List`1<StockMarket>::get_Item(System.Int32)
+IL_0dfc: ldc.i4.1
+IL_0dfd: ldc.i4.0
+IL_0dfe: callvirt System.Void StockMarket::Simulate(System.Boolean,System.Boolean)
+IL_0e03: ldloc.s V_41
+IL_0e05: ldc.i4.1
+IL_0e06: add
+IL_0e07: stloc.s V_41
+IL_0e09: ldloc.s V_41
+IL_0e0b: ldsfld GameSettings GameSettings::Instance
+IL_0e10: ldfld System.Collections.Generic.List`1<StockMarket> GameSettings::MetalMarkets
+IL_0e15: callvirt System.Int32 System.Collections.Generic.List`1<StockMarket>::get_Count()
+IL_0e1a: blt.s IL_0deb
+IL_0e1c: ldloc.s V_37
+IL_0e1e: brfalse.s IL_0e2f
+IL_0e20: ldsfld HUD HUD::Instance
+IL_0e25: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0e2a: callvirt System.Void InsuranceWindow::UpdateInvestments()
+IL_0e2f: ldsfld HUD HUD::Instance
+IL_0e34: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0e39: ldfld GUIWindow InsuranceWindow::Window
+IL_0e3e: callvirt System.Boolean GUIWindow::get_Shown()
+IL_0e43: brfalse.s IL_0e6a
+IL_0e45: ldsfld HUD HUD::Instance
+IL_0e4a: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0e4f: ldfld UnityEngine.UI.Toggle InsuranceWindow::Stocks
+IL_0e54: callvirt System.Boolean UnityEngine.UI.Toggle::get_isOn()
+IL_0e59: brfalse.s IL_0e6a
+IL_0e5b: ldsfld HUD HUD::Instance
+IL_0e60: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0e65: callvirt System.Void InsuranceWindow::UpdateStocks()
+IL_0e6a: ldsfld GameSettings GameSettings::Instance
+IL_0e6f: callvirt System.Void GameSettings::FlipBills()
+IL_0e74: ldsfld HUD HUD::Instance
+IL_0e79: ldfld EmployeeWindow HUD::employeeWindow
+IL_0e7e: callvirt System.Void EmployeeWindow::UpdateEdNumber()
+IL_0e83: ldsfld HUD HUD::Instance
+IL_0e88: ldfld CompanyWorksheet HUD::financeWindow
+IL_0e8d: ldc.i4.0
+IL_0e8e: callvirt System.Void CompanyWorksheet::UpdateSheet(System.Boolean)
+IL_0e93: ldsfld HUD HUD::Instance
+IL_0e98: callvirt System.Void HUD::UpdateFurnitureButtons()
+IL_0e9d: ldsfld HUD HUD::Instance
+IL_0ea2: ldfld EventWindow HUD::eventWindow
+IL_0ea7: callvirt System.Void EventWindow::UpdateEvents()
+IL_0eac: ldsfld HUD HUD::Instance
+IL_0eb1: ldfld ResearchWindow HUD::researchWindow
+IL_0eb6: callvirt System.Void ResearchWindow::UpdateLists()
+IL_0ebb: ldsfld HUD HUD::Instance
+IL_0ec0: ldfld LookHireWindow HUD::hireWindow
+IL_0ec5: ldfld HireWindow LookHireWindow::HireWin
+IL_0eca: ldfld System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>> HireWindow::HirePool
+IL_0ecf: ldsfld System.Action`1<System.Collections.Generic.KeyValuePair`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>>> TimeOfDay/<>c::<>9__169_2
+IL_0ed4: dup
+IL_0ed5: brtrue.s IL_0eee
+IL_0ed7: pop
+IL_0ed8: ldsfld TimeOfDay/<>c TimeOfDay/<>c::<>9
+IL_0edd: ldftn System.Void TimeOfDay/<>c::<UpdateMonth>b__169_2(System.Collections.Generic.KeyValuePair`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>>)
+IL_0ee3: newobj System.Void System.Action`1<System.Collections.Generic.KeyValuePair`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>>>::.ctor(System.Object,System.IntPtr)
+IL_0ee8: dup
+IL_0ee9: stsfld System.Action`1<System.Collections.Generic.KeyValuePair`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>>> TimeOfDay/<>c::<>9__169_2
+IL_0eee: call System.Void Utilities::ForEachEnum<System.Collections.Generic.KeyValuePair`2<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,Employee/WageBracket>,System.Collections.Generic.List`1<Employee>>>(System.Collections.Generic.IEnumerable`1<T>,System.Action`1<T>)
+IL_0ef3: ldsfld HUD HUD::Instance
+IL_0ef8: ldfld LookHireWindow HUD::hireWindow
+IL_0efd: ldfld HireWindow LookHireWindow::HireWin
+IL_0f02: ldc.i4.0
+IL_0f03: ldc.i4.s 25
+IL_0f05: call System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)
+IL_0f0a: stfld System.Int32 HireWindow::BonusPool
+IL_0f0f: ldsfld HUD HUD::Instance
+IL_0f14: ldfld DealWindow HUD::dealWindow
+IL_0f19: callvirt System.Void DealWindow::CleanUpAllDeals()
+IL_0f1e: ldsfld HUD HUD::Instance
+IL_0f23: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0f28: ldfld GUIListView InsuranceWindow::Terminations
+IL_0f2d: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0f32: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<EmployeeTermination>(System.Collections.IEnumerable)
+IL_0f37: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<EmployeeTermination>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0f3c: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<EmployeeTermination>::GetEnumerator()
+IL_0f41: stloc.s V_42
+IL_0f43: br.s IL_0f9c
+IL_0f45: ldloca.s V_42
+IL_0f47: call !0 System.Collections.Generic.List`1/Enumerator<EmployeeTermination>::get_Current()
+IL_0f4c: stloc.s V_43
+IL_0f4e: ldloc.s V_43
+IL_0f50: ldfld SDateTime EmployeeTermination::Date
+IL_0f55: ldloc.2
+IL_0f56: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0f5b: stloc.s V_44
+IL_0f5d: ldloc.s V_44
+IL_0f5f: ldc.r4 36
+IL_0f64: blt.un.s IL_0f83
+IL_0f66: ldsfld HUD HUD::Instance
+IL_0f6b: ldfld InsuranceWindow HUD::insuranceWindow
+IL_0f70: ldfld GUIListView InsuranceWindow::Terminations
+IL_0f75: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0f7a: ldloc.s V_43
+IL_0f7c: callvirt System.Void EventList`1<System.Object>::Remove(System.Object)
+IL_0f81: br.s IL_0f9c
+IL_0f83: ldloc.s V_44
+IL_0f85: ldc.r4 12
+IL_0f8a: blt.un.s IL_0f9c
+IL_0f8c: ldloc.s V_43
+IL_0f8e: ldnull
+IL_0f8f: stfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] EmployeeTermination::Specs
+IL_0f94: ldloc.s V_43
+IL_0f96: ldnull
+IL_0f97: stfld System.Single[] EmployeeTermination::Skills
+IL_0f9c: ldloca.s V_42
+IL_0f9e: call System.Boolean System.Collections.Generic.List`1/Enumerator<EmployeeTermination>::MoveNext()
+IL_0fa3: brtrue.s IL_0f45
+IL_0fa5: leave.s IL_0fb5
+IL_0fa7: ldloca.s V_42
+IL_0fa9: constrained. System.Collections.Generic.List`1/Enumerator<EmployeeTermination>
+IL_0faf: callvirt System.Void System.IDisposable::Dispose()
+IL_0fb4: endfinally
+IL_0fb5: ldsfld HUD HUD::Instance
+IL_0fba: ldfld LookHireWindow HUD::hireWindow
+IL_0fbf: ldfld GUIWindow LookHireWindow::Window
+IL_0fc4: callvirt System.Boolean GUIWindow::get_Shown()
+IL_0fc9: brfalse.s IL_0fda
+IL_0fcb: ldsfld HUD HUD::Instance
+IL_0fd0: ldfld LookHireWindow HUD::hireWindow
+IL_0fd5: callvirt System.Void LookHireWindow::UpdateCost()
+IL_0fda: ldc.i4.1
+IL_0fdb: stsfld System.Boolean CalendarWindow::ScheduleRefresh
+IL_0fe0: ldsfld GameSettings GameSettings::Instance
+IL_0fe5: ldfld InsuranceAccount GameSettings::Insurance
+IL_0fea: callvirt System.Void InsuranceAccount::UpdateInsuranceRate()
+IL_0fef: ldsfld System.EventHandler TimeOfDay::OnMonthPassed
+IL_0ff4: call System.Void TimeOfDay::FireEvent(System.EventHandler)
+IL_0ff9: ldarg.0
+IL_0ffa: ldfld System.Int32 TimeOfDay::Month
+IL_0fff: brtrue.s IL_1011
+IL_1001: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_1006: brfalse.s IL_1011
+IL_1008: ldnull
+IL_1009: ldnull
+IL_100a: ldc.i4.4
+IL_100b: ldc.i4.0
+IL_100c: call System.Void SINetworking.NetworkMessaging::SendSyncMoney(System.UInt32[],System.Double[],SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_1011: ldloc.0
+IL_1012: ret

@@ -1,0 +1,326 @@
+TYPE DynamicCSharp.DynamicCSharp BASE UnityEngine.ScriptableObject
+FIELD Private, Static, Literal, HasDefault System.String editorSettingsDirectory
+CONSTANT editorSettingsDirectory = /Resources
+FIELD Private, Static, Literal, HasDefault System.String settingsLocation
+CONSTANT settingsLocation = DynamicCSharp_Settings
+FIELD Private, Static, Literal, HasDefault System.Reflection.BindingFlags defaultFlags
+CONSTANT defaultFlags = 28
+FIELD Private, Static DynamicCSharp.DynamicCSharp instance
+FIELD Public System.Boolean caseSensitiveNames
+FIELD Public System.Boolean discoverNonPublicTypes
+FIELD Public System.Boolean discoverNonPublicMembers
+FIELD Public System.Boolean securityCheckCode
+FIELD Public, InitOnly System.Boolean debugMode
+FIELD Public System.String compilerWorkingDirectory
+FIELD Public System.String[] assemblyReferences
+FIELD Public, Static, InitOnly System.String[] unityAssemblyReferences
+FIELD Public DynamicCSharp.RestrictionMode namespaceRestrictionMode
+FIELD Public DynamicCSharp.RestrictionMode assemblyRestrictionMode
+FIELD Public DynamicCSharp.RestrictionMode typeReferenceRestrictionMode
+FIELD Public DynamicCSharp.Security.NamespaceRestriction[] namespaceRestrictions
+FIELD Public DynamicCSharp.Security.ReferenceRestriction[] referenceRestrictions
+FIELD Public DynamicCSharp.Security.TypeReferenceRestriction[] typeRestrictions
+PROPERTY DynamicCSharp.DynamicCSharp DynamicCSharp.DynamicCSharp::Settings()
+PROPERTY System.Boolean DynamicCSharp.DynamicCSharp::IsPlatformSupported()
+PROPERTY System.Collections.Generic.IEnumerable`1<DynamicCSharp.Security.Restriction> DynamicCSharp.DynamicCSharp::Restrictions()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DynamicCSharp.DynamicCSharp::.ctor()
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+IL_0000: ldarg.0
+IL_0001: ldc.i4.1
+IL_0002: stfld System.Boolean DynamicCSharp.DynamicCSharp::discoverNonPublicTypes
+IL_0007: ldarg.0
+IL_0008: ldc.i4.1
+IL_0009: stfld System.Boolean DynamicCSharp.DynamicCSharp::discoverNonPublicMembers
+IL_000e: ldarg.0
+IL_000f: ldc.i4.1
+IL_0010: stfld System.Boolean DynamicCSharp.DynamicCSharp::securityCheckCode
+IL_0015: ldarg.0
+IL_0016: ldstr ""
+IL_001b: stfld System.String DynamicCSharp.DynamicCSharp::compilerWorkingDirectory
+IL_0020: ldarg.0
+IL_0021: ldc.i4.1
+IL_0022: newarr System.String
+IL_0027: dup
+IL_0028: ldc.i4.0
+IL_0029: ldstr "Assembly-CSharp.dll"
+IL_002e: stelem.ref
+IL_002f: stfld System.String[] DynamicCSharp.DynamicCSharp::assemblyReferences
+IL_0034: ldarg.0
+IL_0035: ldc.i4.1
+IL_0036: stfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::namespaceRestrictionMode
+IL_003b: ldarg.0
+IL_003c: ldc.i4.1
+IL_003d: stfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::assemblyRestrictionMode
+IL_0042: ldarg.0
+IL_0043: ldc.i4.1
+IL_0044: stfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::typeReferenceRestrictionMode
+IL_0049: ldarg.0
+IL_004a: ldc.i4.2
+IL_004b: newarr DynamicCSharp.Security.NamespaceRestriction
+IL_0050: dup
+IL_0051: ldc.i4.0
+IL_0052: ldstr "System.IO"
+IL_0057: newobj System.Void DynamicCSharp.Security.NamespaceRestriction::.ctor(System.String)
+IL_005c: stelem.ref
+IL_005d: dup
+IL_005e: ldc.i4.1
+IL_005f: ldstr "System.Reflection"
+IL_0064: newobj System.Void DynamicCSharp.Security.NamespaceRestriction::.ctor(System.String)
+IL_0069: stelem.ref
+IL_006a: stfld DynamicCSharp.Security.NamespaceRestriction[] DynamicCSharp.DynamicCSharp::namespaceRestrictions
+IL_006f: ldarg.0
+IL_0070: ldc.i4.2
+IL_0071: newarr DynamicCSharp.Security.ReferenceRestriction
+IL_0076: dup
+IL_0077: ldc.i4.0
+IL_0078: ldstr "UnityEditor.dll"
+IL_007d: newobj System.Void DynamicCSharp.Security.ReferenceRestriction::.ctor(System.String)
+IL_0082: stelem.ref
+IL_0083: dup
+IL_0084: ldc.i4.1
+IL_0085: ldstr "Mono.Cecil.dll"
+IL_008a: newobj System.Void DynamicCSharp.Security.ReferenceRestriction::.ctor(System.String)
+IL_008f: stelem.ref
+IL_0090: stfld DynamicCSharp.Security.ReferenceRestriction[] DynamicCSharp.DynamicCSharp::referenceRestrictions
+IL_0095: ldarg.0
+IL_0096: ldc.i4.1
+IL_0097: newarr DynamicCSharp.Security.TypeReferenceRestriction
+IL_009c: dup
+IL_009d: ldc.i4.0
+IL_009e: ldstr "UnityEngine.WWW"
+IL_00a3: newobj System.Void DynamicCSharp.Security.TypeReferenceRestriction::.ctor(System.String)
+IL_00a8: stelem.ref
+IL_00a9: stfld DynamicCSharp.Security.TypeReferenceRestriction[] DynamicCSharp.DynamicCSharp::typeRestrictions
+IL_00ae: ldarg.0
+IL_00af: call System.Void UnityEngine.ScriptableObject::.ctor()
+IL_00b4: ldarg.0
+IL_00b5: ldfld System.String[] DynamicCSharp.DynamicCSharp::assemblyReferences
+IL_00ba: ldlen
+IL_00bb: conv.i4
+IL_00bc: stloc.0
+IL_00bd: ldarg.0
+IL_00be: ldflda System.String[] DynamicCSharp.DynamicCSharp::assemblyReferences
+IL_00c3: ldloc.0
+IL_00c4: ldsfld System.String[] DynamicCSharp.DynamicCSharp::unityAssemblyReferences
+IL_00c9: ldlen
+IL_00ca: conv.i4
+IL_00cb: add
+IL_00cc: call System.Void System.Array::Resize<System.String>(!!0[]&,System.Int32)
+IL_00d1: ldloc.0
+IL_00d2: stloc.1
+IL_00d3: br.s IL_00ea
+IL_00d5: ldarg.0
+IL_00d6: ldfld System.String[] DynamicCSharp.DynamicCSharp::assemblyReferences
+IL_00db: ldloc.1
+IL_00dc: ldsfld System.String[] DynamicCSharp.DynamicCSharp::unityAssemblyReferences
+IL_00e1: ldloc.1
+IL_00e2: ldloc.0
+IL_00e3: sub
+IL_00e4: ldelem.ref
+IL_00e5: stelem.ref
+IL_00e6: ldloc.1
+IL_00e7: ldc.i4.1
+IL_00e8: add
+IL_00e9: stloc.1
+IL_00ea: ldloc.1
+IL_00eb: ldarg.0
+IL_00ec: ldfld System.String[] DynamicCSharp.DynamicCSharp::assemblyReferences
+IL_00f1: ldlen
+IL_00f2: conv.i4
+IL_00f3: blt.s IL_00d5
+IL_00f5: ret
+TYPE DynamicCSharp.Security.NamespaceRestriction BASE DynamicCSharp.Security.Restriction
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> AlwaysAllowed
+FIELD Private System.String namespaceName
+FIELD Private, NotSerialized System.String _referencedType
+PROPERTY System.String DynamicCSharp.Security.NamespaceRestriction::RestrictedNamespace()
+PROPERTY System.String DynamicCSharp.Security.NamespaceRestriction::Message()
+PROPERTY DynamicCSharp.RestrictionMode DynamicCSharp.Security.NamespaceRestriction::Mode()
+METHOD Public, Virtual, HideBySig, SpecialName DynamicCSharp.RestrictionMode DynamicCSharp.Security.NamespaceRestriction::get_Mode()
+IL_0000: call DynamicCSharp.DynamicCSharp DynamicCSharp.DynamicCSharp::get_Settings()
+IL_0005: ldfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::namespaceRestrictionMode
+IL_000a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DynamicCSharp.Security.NamespaceRestriction::.ctor(System.String)
+IL_0000: ldarg.0
+IL_0001: ldsfld System.String System.String::Empty
+IL_0006: stfld System.String DynamicCSharp.Security.NamespaceRestriction::namespaceName
+IL_000b: ldarg.0
+IL_000c: ldstr "N/A"
+IL_0011: stfld System.String DynamicCSharp.Security.NamespaceRestriction::_referencedType
+IL_0016: ldarg.0
+IL_0017: call System.Void DynamicCSharp.Security.Restriction::.ctor()
+IL_001c: ldarg.0
+IL_001d: ldarg.1
+IL_001e: stfld System.String DynamicCSharp.Security.NamespaceRestriction::namespaceName
+IL_0023: ret
+METHOD Public, Virtual, HideBySig System.Boolean DynamicCSharp.Security.NamespaceRestriction::Verify(Mono.Cecil.ModuleDefinition)
+LOCAL 0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.TypeReference>
+LOCAL 1 Mono.Cecil.TypeReference
+LOCAL 2 System.String
+LOCAL 3 System.Boolean
+IL_0000: ldarg.0
+IL_0001: ldfld System.String DynamicCSharp.Security.NamespaceRestriction::namespaceName
+IL_0006: call System.Boolean System.String::IsNullOrEmpty(System.String)
+IL_000b: brfalse.s IL_000f
+IL_000d: ldc.i4.1
+IL_000e: ret
+IL_000f: ldarg.1
+IL_0010: callvirt System.Collections.Generic.IEnumerable`1<Mono.Cecil.TypeReference> Mono.Cecil.ModuleDefinition::GetTypeReferences()
+IL_0015: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Mono.Cecil.TypeReference>::GetEnumerator()
+IL_001a: stloc.0
+IL_001b: br.s IL_005b
+IL_001d: ldloc.0
+IL_001e: callvirt !0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.TypeReference>::get_Current()
+IL_0023: stloc.1
+IL_0024: ldloc.1
+IL_0025: callvirt System.String Mono.Cecil.TypeReference::get_Namespace()
+IL_002a: stloc.2
+IL_002b: ldsfld System.Collections.Generic.HashSet`1<System.String> DynamicCSharp.Security.NamespaceRestriction::AlwaysAllowed
+IL_0030: ldloc.1
+IL_0031: callvirt System.String Mono.Cecil.MemberReference::get_Name()
+IL_0036: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.String>::Contains(!0)
+IL_003b: brtrue.s IL_005b
+IL_003d: ldarg.0
+IL_003e: ldfld System.String DynamicCSharp.Security.NamespaceRestriction::namespaceName
+IL_0043: ldloc.2
+IL_0044: call System.Int32 System.String::Compare(System.String,System.String)
+IL_0049: brtrue.s IL_005b
+IL_004b: ldarg.0
+IL_004c: ldloc.1
+IL_004d: callvirt System.String Mono.Cecil.MemberReference::get_FullName()
+IL_0052: stfld System.String DynamicCSharp.Security.NamespaceRestriction::_referencedType
+IL_0057: ldc.i4.0
+IL_0058: stloc.3
+IL_0059: leave.s IL_0071
+IL_005b: ldloc.0
+IL_005c: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0061: brtrue.s IL_001d
+IL_0063: leave.s IL_006f
+IL_0065: ldloc.0
+IL_0066: brfalse.s IL_006e
+IL_0068: ldloc.0
+IL_0069: callvirt System.Void System.IDisposable::Dispose()
+IL_006e: endfinally
+IL_006f: ldc.i4.1
+IL_0070: ret
+IL_0071: ldloc.3
+IL_0072: ret
+TYPE DynamicCSharp.Security.TypeReferenceRestriction BASE DynamicCSharp.Security.Restriction
+FIELD Private System.String namespaceName
+FIELD Private DynamicCSharp.RestrictionMode _mode
+PROPERTY System.String DynamicCSharp.Security.TypeReferenceRestriction::RestrictedNamespace()
+PROPERTY System.String DynamicCSharp.Security.TypeReferenceRestriction::Message()
+PROPERTY DynamicCSharp.RestrictionMode DynamicCSharp.Security.TypeReferenceRestriction::Mode()
+METHOD Public, Virtual, HideBySig, SpecialName DynamicCSharp.RestrictionMode DynamicCSharp.Security.TypeReferenceRestriction::get_Mode()
+IL_0000: call DynamicCSharp.DynamicCSharp DynamicCSharp.DynamicCSharp::get_Settings()
+IL_0005: ldfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::typeReferenceRestrictionMode
+IL_000a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DynamicCSharp.Security.TypeReferenceRestriction::.ctor(System.String)
+IL_0000: ldarg.0
+IL_0001: ldsfld System.String System.String::Empty
+IL_0006: stfld System.String DynamicCSharp.Security.TypeReferenceRestriction::namespaceName
+IL_000b: ldarg.0
+IL_000c: call System.Void DynamicCSharp.Security.Restriction::.ctor()
+IL_0011: ldarg.0
+IL_0012: ldarg.1
+IL_0013: stfld System.String DynamicCSharp.Security.TypeReferenceRestriction::namespaceName
+IL_0018: ret
+METHOD Public, Virtual, HideBySig System.Boolean DynamicCSharp.Security.TypeReferenceRestriction::Verify(Mono.Cecil.ModuleDefinition)
+LOCAL 0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.TypeReference>
+LOCAL 1 System.Boolean
+IL_0000: ldarg.0
+IL_0001: ldfld System.String DynamicCSharp.Security.TypeReferenceRestriction::namespaceName
+IL_0006: call System.Boolean System.String::IsNullOrEmpty(System.String)
+IL_000b: brfalse.s IL_000f
+IL_000d: ldc.i4.1
+IL_000e: ret
+IL_000f: ldarg.1
+IL_0010: callvirt System.Collections.Generic.IEnumerable`1<Mono.Cecil.TypeReference> Mono.Cecil.ModuleDefinition::GetTypeReferences()
+IL_0015: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Mono.Cecil.TypeReference>::GetEnumerator()
+IL_001a: stloc.0
+IL_001b: br.s IL_0039
+IL_001d: ldloc.0
+IL_001e: callvirt !0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.TypeReference>::get_Current()
+IL_0023: callvirt System.String Mono.Cecil.MemberReference::get_FullName()
+IL_0028: ldarg.0
+IL_0029: ldfld System.String DynamicCSharp.Security.TypeReferenceRestriction::namespaceName
+IL_002e: callvirt System.Boolean System.String::StartsWith(System.String)
+IL_0033: brfalse.s IL_0039
+IL_0035: ldc.i4.0
+IL_0036: stloc.1
+IL_0037: leave.s IL_004f
+IL_0039: ldloc.0
+IL_003a: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_003f: brtrue.s IL_001d
+IL_0041: leave.s IL_004d
+IL_0043: ldloc.0
+IL_0044: brfalse.s IL_004c
+IL_0046: ldloc.0
+IL_0047: callvirt System.Void System.IDisposable::Dispose()
+IL_004c: endfinally
+IL_004d: ldc.i4.1
+IL_004e: ret
+IL_004f: ldloc.1
+IL_0050: ret
+TYPE DynamicCSharp.Security.ReferenceRestriction BASE DynamicCSharp.Security.Restriction
+FIELD Private System.String referenceName
+PROPERTY System.String DynamicCSharp.Security.ReferenceRestriction::RestrictedName()
+PROPERTY System.String DynamicCSharp.Security.ReferenceRestriction::Message()
+PROPERTY DynamicCSharp.RestrictionMode DynamicCSharp.Security.ReferenceRestriction::Mode()
+METHOD Public, Virtual, HideBySig, SpecialName DynamicCSharp.RestrictionMode DynamicCSharp.Security.ReferenceRestriction::get_Mode()
+IL_0000: call DynamicCSharp.DynamicCSharp DynamicCSharp.DynamicCSharp::get_Settings()
+IL_0005: ldfld DynamicCSharp.RestrictionMode DynamicCSharp.DynamicCSharp::assemblyRestrictionMode
+IL_000a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DynamicCSharp.Security.ReferenceRestriction::.ctor(System.String)
+IL_0000: ldarg.0
+IL_0001: ldsfld System.String System.String::Empty
+IL_0006: stfld System.String DynamicCSharp.Security.ReferenceRestriction::referenceName
+IL_000b: ldarg.0
+IL_000c: call System.Void DynamicCSharp.Security.Restriction::.ctor()
+IL_0011: ldarg.0
+IL_0012: ldarg.1
+IL_0013: stfld System.String DynamicCSharp.Security.ReferenceRestriction::referenceName
+IL_0018: ret
+METHOD Public, Virtual, HideBySig System.Boolean DynamicCSharp.Security.ReferenceRestriction::Verify(Mono.Cecil.ModuleDefinition)
+LOCAL 0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.AssemblyNameReference>
+LOCAL 1 Mono.Cecil.AssemblyNameReference
+LOCAL 2 System.Boolean
+IL_0000: ldarg.0
+IL_0001: ldfld System.String DynamicCSharp.Security.ReferenceRestriction::referenceName
+IL_0006: call System.Boolean System.String::IsNullOrEmpty(System.String)
+IL_000b: brfalse.s IL_000f
+IL_000d: ldc.i4.1
+IL_000e: ret
+IL_000f: ldarg.1
+IL_0010: callvirt Mono.Collections.Generic.Collection`1<Mono.Cecil.AssemblyNameReference> Mono.Cecil.ModuleDefinition::get_AssemblyReferences()
+IL_0015: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Mono.Cecil.AssemblyNameReference>::GetEnumerator()
+IL_001a: stloc.0
+IL_001b: br.s IL_0045
+IL_001d: ldloc.0
+IL_001e: callvirt !0 System.Collections.Generic.IEnumerator`1<Mono.Cecil.AssemblyNameReference>::get_Current()
+IL_0023: stloc.1
+IL_0024: ldarg.0
+IL_0025: ldfld System.String DynamicCSharp.Security.ReferenceRestriction::referenceName
+IL_002a: ldloc.1
+IL_002b: callvirt System.String Mono.Cecil.AssemblyNameReference::get_Name()
+IL_0030: ldstr ".dll"
+IL_0035: call System.String System.String::Concat(System.String,System.String)
+IL_003a: call System.Int32 System.String::Compare(System.String,System.String)
+IL_003f: brtrue.s IL_0045
+IL_0041: ldc.i4.0
+IL_0042: stloc.2
+IL_0043: leave.s IL_005b
+IL_0045: ldloc.0
+IL_0046: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_004b: brtrue.s IL_001d
+IL_004d: leave.s IL_0059
+IL_004f: ldloc.0
+IL_0050: brfalse.s IL_0058
+IL_0052: ldloc.0
+IL_0053: callvirt System.Void System.IDisposable::Dispose()
+IL_0058: endfinally
+IL_0059: ldc.i4.1
+IL_005a: ret
+IL_005b: ldloc.2
+IL_005c: ret

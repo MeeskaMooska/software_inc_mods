@@ -1,0 +1,96 @@
+TYPE ServerWindow BASE UnityEngine.MonoBehaviour
+FIELD Public GUIWindow Window
+FIELD Public GUIListView ServerList
+FIELD Public GUIListView ItemList
+FIELD Public UnityEngine.UI.Image UnsupportButton
+FIELD Public UnityEngine.UI.Text UnsupportText
+FIELD Public UnityEngine.UI.Text ProcessLabel
+FIELD Public UnityEngine.UI.InputField InputName
+FIELD Public UnityEngine.GameObject MultiplayerPanel
+FIELD Public GUICombobox CloudCombo
+FIELD Public UnityEngine.UI.Slider MarkupSlider
+FIELD Public UnityEngine.UI.Text MarkupText
+FIELD Public System.Single CloudFactor
+FIELD Public, NotSerialized System.Boolean ShouldUpdateServerList
+FIELD Public, NotSerialized System.Boolean ShowUnsupported
+FIELD Public, NotSerialized System.Boolean ShowAll
+METHOD Public, HideBySig System.Void ServerWindow::UpdateServerList()
+IL_0000: ldarg.0
+IL_0001: ldc.i4.1
+IL_0002: stfld System.Boolean ServerWindow::ShouldUpdateServerList
+IL_0007: ret
+METHOD Public, HideBySig System.Void ServerWindow::UpdateItems()
+LOCAL 0 ServerGroup
+IL_0000: ldarg.0
+IL_0001: ldfld GUIListView ServerWindow::ItemList
+IL_0006: ldstr "SrvItemServer"
+IL_000b: callvirt GUIColumn GUIListView::get_Item(System.String)
+IL_0010: ldc.i4.0
+IL_0011: ldc.i4.0
+IL_0012: callvirt System.Void GUIColumn::ToggleActive(System.Boolean,System.Boolean)
+IL_0017: ldarg.0
+IL_0018: ldfld System.Boolean ServerWindow::ShowUnsupported
+IL_001d: brfalse.s IL_0026
+IL_001f: ldarg.0
+IL_0020: call System.Void ServerWindow::Unsupported()
+IL_0025: ret
+IL_0026: ldarg.0
+IL_0027: ldfld System.Boolean ServerWindow::ShowAll
+IL_002c: brfalse.s IL_0035
+IL_002e: ldarg.0
+IL_002f: call System.Void ServerWindow::ShowAllProcs()
+IL_0034: ret
+IL_0035: ldarg.0
+IL_0036: ldfld GUIListView ServerWindow::ServerList
+IL_003b: ldfld EventList`1<System.Int32> GUIListView::Selected
+IL_0040: callvirt System.Int32 EventList`1<System.Int32>::get_Count()
+IL_0045: ldc.i4.0
+IL_0046: ble.s IL_00b0
+IL_0048: ldarg.0
+IL_0049: ldfld GUIListView ServerWindow::ItemList
+IL_004e: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0053: callvirt System.Void EventList`1<System.Object>::Clear()
+IL_0058: ldarg.0
+IL_0059: ldfld GUIListView ServerWindow::ServerList
+IL_005e: callvirt T[] GUIListView::GetSelected<ServerGroup>()
+IL_0063: ldc.i4.0
+IL_0064: ldelem.ref
+IL_0065: stloc.0
+IL_0066: ldarg.0
+IL_0067: ldfld GUIListView ServerWindow::ItemList
+IL_006c: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0071: ldloc.0
+IL_0072: ldfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_0077: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Cast<System.Object>(System.Collections.IEnumerable)
+IL_007c: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_0081: ldarg.0
+IL_0082: ldfld UnityEngine.UI.Text ServerWindow::ProcessLabel
+IL_0087: ldstr "ProcessOnServer"
+IL_008c: ldc.i4.1
+IL_008d: newarr System.Object
+IL_0092: dup
+IL_0093: ldc.i4.0
+IL_0094: ldloc.0
+IL_0095: ldfld System.String ServerGroup::Name
+IL_009a: stelem.ref
+IL_009b: call System.String Localization::Loc(System.String,System.Object[])
+IL_00a0: ldstr ":"
+IL_00a5: call System.String System.String::Concat(System.String,System.String)
+IL_00aa: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00af: ret
+IL_00b0: ldarg.0
+IL_00b1: ldfld UnityEngine.UI.Text ServerWindow::ProcessLabel
+IL_00b6: ldstr "Processes"
+IL_00bb: call System.String Localization::Loc(System.String)
+IL_00c0: ldstr ":"
+IL_00c5: call System.String System.String::Concat(System.String,System.String)
+IL_00ca: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00cf: ldarg.0
+IL_00d0: ldfld GUIListView ServerWindow::ItemList
+IL_00d5: ldfld EventList`1<System.Int32> GUIListView::Selected
+IL_00da: callvirt System.Void EventList`1<System.Int32>::Clear()
+IL_00df: ldarg.0
+IL_00e0: ldfld GUIListView ServerWindow::ItemList
+IL_00e5: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_00ea: callvirt System.Void EventList`1<System.Object>::Clear()
+IL_00ef: ret

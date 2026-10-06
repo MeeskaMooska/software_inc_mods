@@ -1,0 +1,138 @@
+TYPE SDateTime BASE System.ValueType
+INTERFACE System.IComparable`1<SDateTime>
+INTERFACE IByteData
+FIELD Public, Static System.String[] Months
+FIELD Public, Static, Literal, HasDefault System.Int32 BaseYear
+CONSTANT BaseYear = 1900
+FIELD Public, Static System.Boolean AMPM
+FIELD Public, InitOnly System.Int32 Minute
+FIELD Public, InitOnly System.Int32 Hour
+FIELD Public, InitOnly System.Int32 Month
+FIELD Public, InitOnly System.Int32 Year
+FIELD Public, InitOnly System.Int32 Day
+PROPERTY System.Int32 SDateTime::RealYear()
+PROPERTY System.Single SDateTime::HourFraction()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Int32,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.0
+IL_0002: ldc.i4.0
+IL_0003: ldarg.1
+IL_0004: ldarg.2
+IL_0005: call System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+IL_000a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.0
+IL_0002: ldc.i4.0
+IL_0003: ldarg.1
+IL_0004: ldarg.2
+IL_0005: ldarg.3
+IL_0006: call System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_000b: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.0
+IL_0002: stfld System.Int32 SDateTime::Minute
+IL_0007: ldarg.0
+IL_0008: ldc.i4.0
+IL_0009: stfld System.Int32 SDateTime::Hour
+IL_000e: ldarg.0
+IL_000f: ldc.i4.0
+IL_0010: stfld System.Int32 SDateTime::Day
+IL_0015: ldarg.0
+IL_0016: ldc.i4.0
+IL_0017: stfld System.Int32 SDateTime::Month
+IL_001c: ldarg.0
+IL_001d: ldarg.1
+IL_001e: ldc.i4 1900
+IL_0023: sub
+IL_0024: stfld System.Int32 SDateTime::Year
+IL_0029: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: ldarg.2
+IL_0003: ldc.i4.0
+IL_0004: ldarg.3
+IL_0005: ldarg.s year
+IL_0007: call System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_000c: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0000: ldarga.s minute
+IL_0002: ldarga.s hour
+IL_0004: ldc.i4.s 60
+IL_0006: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_000b: ldarga.s hour
+IL_000d: ldarga.s day
+IL_000f: ldc.i4.s 24
+IL_0011: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_0016: ldarga.s day
+IL_0018: ldarga.s month
+IL_001a: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_001f: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_0024: ldarga.s month
+IL_0026: ldarga.s year
+IL_0028: ldc.i4.s 12
+IL_002a: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_002f: ldarg.0
+IL_0030: ldarg.1
+IL_0031: stfld System.Int32 SDateTime::Minute
+IL_0036: ldarg.0
+IL_0037: ldarg.2
+IL_0038: stfld System.Int32 SDateTime::Hour
+IL_003d: ldarg.0
+IL_003e: ldarg.3
+IL_003f: stfld System.Int32 SDateTime::Day
+IL_0044: ldarg.0
+IL_0045: ldarg.s month
+IL_0047: stfld System.Int32 SDateTime::Month
+IL_004c: ldarg.0
+IL_004d: ldarg.s year
+IL_004f: stfld System.Int32 SDateTime::Year
+IL_0054: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SDateTime::.ctor(System.Single,System.Int32,System.Int32,System.Int32)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+IL_0000: ldarg.1
+IL_0001: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0006: stloc.0
+IL_0007: ldarg.1
+IL_0008: ldloc.0
+IL_0009: conv.r4
+IL_000a: sub
+IL_000b: ldc.r4 60
+IL_0010: mul
+IL_0011: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0016: stloc.1
+IL_0017: ldloca.s V_1
+IL_0019: ldloca.s V_0
+IL_001b: ldc.i4.s 60
+IL_001d: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_0022: ldloca.s V_0
+IL_0024: ldarga.s day
+IL_0026: ldc.i4.s 24
+IL_0028: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_002d: ldarga.s day
+IL_002f: ldarga.s month
+IL_0031: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0036: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_003b: ldarga.s month
+IL_003d: ldarga.s year
+IL_003f: ldc.i4.s 12
+IL_0041: call System.Void SDateTime::FixCounter(System.Int32&,System.Int32&,System.Int32)
+IL_0046: ldarg.0
+IL_0047: ldloc.1
+IL_0048: stfld System.Int32 SDateTime::Minute
+IL_004d: ldarg.0
+IL_004e: ldloc.0
+IL_004f: stfld System.Int32 SDateTime::Hour
+IL_0054: ldarg.0
+IL_0055: ldarg.2
+IL_0056: stfld System.Int32 SDateTime::Day
+IL_005b: ldarg.0
+IL_005c: ldarg.3
+IL_005d: stfld System.Int32 SDateTime::Month
+IL_0062: ldarg.0
+IL_0063: ldarg.s year
+IL_0065: stfld System.Int32 SDateTime::Year
+IL_006a: ret

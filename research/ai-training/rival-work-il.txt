@@ -1,0 +1,422 @@
+TYPE SimulatedCompany BASE Company
+FIELD Public System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> Categories
+FIELD Private System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> _addonDev
+FIELD Public System.Single AverageQuality
+FIELD Public System.Single BusinessSavy
+FIELD Public System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> Releases
+FIELD Public System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> ProjectQueue
+FIELD Public SimulatedCompany/AddonPrototype CurrentAddonProject
+FIELD Public SimulatedCompany/TechResearch SpecResearch
+FIELD Public Employee LeadDesigner
+FIELD Public, InitOnly System.Boolean DoesAddons
+FIELD Private, InitOnly System.String _type
+FIELD Public System.Single StockBudgetUsed
+FIELD Public System.Boolean CampaignProtected
+FIELD Private System.Single _focus
+FIELD Private System.Single _workItemFocus
+FIELD Public System.Single WorkItemCost
+FIELD Private System.Boolean _firstLaunch
+FIELD Private System.Boolean _autonomous
+FIELD Public System.Int32 DistributionDealCooldown
+FIELD Public System.Int32 DistributionDevelopmentCooldown
+FIELD Private SDateTime _lastForcedDilution
+FIELD Public System.Boolean WillPublishPlayer
+FIELD Public System.Single PlayerRelationship
+FIELD Private SDateTime _lastUpdate
+FIELD Private SDateTime _lastLeadLook
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Int32> _researchCache
+FIELD Private, Static System.Collections.Generic.List`1<Company> _playerCompanyCache
+FIELD Private System.Boolean _hadItTough
+FIELD Private, Static System.Collections.Generic.HashSet`1<IMarketable> _marketingCache
+PROPERTY System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> SimulatedCompany::AddonDev()
+PROPERTY System.Single SimulatedCompany::FocusLeft()
+PROPERTY CompanyType SimulatedCompany::Type()
+PROPERTY System.Boolean SimulatedCompany::Autonomous()
+METHOD Public, HideBySig System.Boolean SimulatedCompany::DoWork(System.Single)
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single SimulatedCompany::_focus
+IL_0006: ldarg.1
+IL_0007: blt.un.s IL_0027
+IL_0009: ldarg.0
+IL_000a: ldarg.0
+IL_000b: ldfld System.Single SimulatedCompany::_workItemFocus
+IL_0010: ldarg.1
+IL_0011: add
+IL_0012: stfld System.Single SimulatedCompany::_workItemFocus
+IL_0017: ldarg.0
+IL_0018: ldarg.0
+IL_0019: ldfld System.Single SimulatedCompany::_focus
+IL_001e: ldarg.1
+IL_001f: sub
+IL_0020: stfld System.Single SimulatedCompany::_focus
+IL_0025: ldc.i4.1
+IL_0026: ret
+IL_0027: ldc.i4.0
+IL_0028: ret
+METHOD Private, HideBySig System.Boolean SimulatedCompany::UpdateReleases(SDateTime,System.Collections.Generic.List`1<SoftwareProduct>)
+LOCAL 0 SimulatedCompany/<>c__DisplayClass52_0
+LOCAL 1 System.Int32
+LOCAL 2 SimulatedCompany/ProductPrototype
+LOCAL 3 System.Int32
+LOCAL 4 System.Double
+LOCAL 5 System.Double
+LOCAL 6 SDateTime
+LOCAL 7 SimulatedCompany/<>c__DisplayClass52_1
+LOCAL 8 System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype>
+LOCAL 9 System.Boolean
+LOCAL 10 AddOnProduct
+IL_0000: newobj System.Void SimulatedCompany/<>c__DisplayClass52_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_000d: ldloc.0
+IL_000e: ldarg.0
+IL_000f: stfld SimulatedCompany SimulatedCompany/<>c__DisplayClass52_0::<>4__this
+IL_0014: ldc.i4.0
+IL_0015: stloc.1
+IL_0016: br IL_02e5
+IL_001b: ldarg.0
+IL_001c: ldfld System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> SimulatedCompany::Releases
+IL_0021: ldloc.1
+IL_0022: callvirt !0 System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype>::get_Item(System.Int32)
+IL_0027: stloc.2
+IL_0028: ldloc.0
+IL_0029: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_002e: ldloc.2
+IL_002f: ldfld SDateTime SimulatedCompany/ProductPrototype::ReleaseDate
+IL_0034: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_0039: stloc.s V_6
+IL_003b: ldloca.s V_6
+IL_003d: call System.Int32 SDateTime::ToInt()
+IL_0042: stloc.3
+IL_0043: ldarg.0
+IL_0044: ldloc.2
+IL_0045: call System.Double SimulatedCompany::GetProductMonthlyCost(SimulatedCompany/ProductPrototype)
+IL_004a: stloc.s V_4
+IL_004c: ldc.r8 1
+IL_0055: stloc.s V_5
+IL_0057: ldloc.s V_4
+IL_0059: ldc.r8 0
+IL_0062: ble.un.s IL_009e
+IL_0064: ldarg.0
+IL_0065: call System.Double Company::get_Money()
+IL_006a: ldc.r8 0.25
+IL_0073: mul
+IL_0074: ldloc.s V_4
+IL_0076: call System.Double System.Math::Min(System.Double,System.Double)
+IL_007b: ldloc.s V_4
+IL_007d: div
+IL_007e: stloc.s V_5
+IL_0080: ldarg.0
+IL_0081: ldloc.s V_4
+IL_0083: neg
+IL_0084: ldc.i4.0
+IL_0085: ldc.i4.1
+IL_0086: ldnull
+IL_0087: ldc.i4.0
+IL_0088: call System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_008d: ldloc.2
+IL_008e: dup
+IL_008f: ldfld System.Double SimulatedCompany/ProductPrototype::Loss
+IL_0094: ldloc.s V_4
+IL_0096: conv.r4
+IL_0097: conv.r8
+IL_0098: add
+IL_0099: stfld System.Double SimulatedCompany/ProductPrototype::Loss
+IL_009e: ldloc.2
+IL_009f: ldc.r8 0
+IL_00a8: ldloc.2
+IL_00a9: ldfld System.Single SimulatedCompany/ProductPrototype::DevTimeLeft
+IL_00ae: conv.r8
+IL_00af: ldloc.s V_5
+IL_00b1: sub
+IL_00b2: call System.Double System.Math::Max(System.Double,System.Double)
+IL_00b7: conv.r4
+IL_00b8: stfld System.Single SimulatedCompany/ProductPrototype::DevTimeLeft
+IL_00bd: ldloc.2
+IL_00be: callvirt System.Boolean SimulatedCompany/ProductPrototype::IsInDeal()
+IL_00c3: brtrue IL_025c
+IL_00c8: ldloc.3
+IL_00c9: ldc.i4.0
+IL_00ca: blt IL_025c
+IL_00cf: ldarg.0
+IL_00d0: ldfld Employee SimulatedCompany::LeadDesigner
+IL_00d5: brfalse IL_021b
+IL_00da: newobj System.Void SimulatedCompany/<>c__DisplayClass52_1::.ctor()
+IL_00df: stloc.s V_7
+IL_00e1: ldloc.s V_7
+IL_00e3: ldloc.0
+IL_00e4: stfld SimulatedCompany/<>c__DisplayClass52_0 SimulatedCompany/<>c__DisplayClass52_1::CS$<>8__locals1
+IL_00e9: ldsfld HUD HUD::Instance
+IL_00ee: ldfld DealWindow HUD::dealWindow
+IL_00f3: ldloc.2
+IL_00f4: ldarg.0
+IL_00f5: callvirt System.Void DealWindow::CancelWorkDeal(SimulatedCompany/ProductPrototype,Company)
+IL_00fa: ldloc.s V_7
+IL_00fc: ldloc.2
+IL_00fd: ldloc.s V_7
+IL_00ff: ldfld SimulatedCompany/<>c__DisplayClass52_0 SimulatedCompany/<>c__DisplayClass52_1::CS$<>8__locals1
+IL_0104: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0109: ldarg.0
+IL_010a: ldfld Employee SimulatedCompany::LeadDesigner
+IL_010f: callvirt SoftwareProduct SimulatedCompany/ProductPrototype::ToProduct(SDateTime,Employee)
+IL_0114: stfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_0119: ldarg.0
+IL_011a: ldloc.s V_7
+IL_011c: ldfld SimulatedCompany/<>c__DisplayClass52_0 SimulatedCompany/<>c__DisplayClass52_1::CS$<>8__locals1
+IL_0121: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0126: stfld SDateTime SimulatedCompany::_lastUpdate
+IL_012b: ldarg.2
+IL_012c: ldloc.s V_7
+IL_012e: ldfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_0133: callvirt System.Void System.Collections.Generic.List`1<SoftwareProduct>::Add(!0)
+IL_0138: ldarg.0
+IL_0139: ldfld System.Collections.Generic.List`1<SoftwareProduct> Company::Products
+IL_013e: ldloc.s V_7
+IL_0140: ldfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_0145: callvirt System.Void System.Collections.Generic.List`1<SoftwareProduct>::Add(!0)
+IL_014a: ldsfld GameSettings GameSettings::Instance
+IL_014f: ldloc.2
+IL_0150: ldc.i4.1
+IL_0151: callvirt System.Void GameSettings::CancelPrintOrder(IStockable,System.Boolean)
+IL_0156: ldloc.2
+IL_0157: ldc.i4.0
+IL_0158: callvirt System.Void SimulatedCompany/ProductPrototype::RemoveProject(System.Boolean)
+IL_015d: ldloc.s V_7
+IL_015f: ldfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_0164: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareProduct::TechLevels
+IL_0169: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>,System.Boolean> SimulatedCompany/<>c::<>9__52_0
+IL_016e: dup
+IL_016f: brtrue.s IL_0188
+IL_0171: pop
+IL_0172: ldsfld SimulatedCompany/<>c SimulatedCompany/<>c::<>9
+IL_0177: ldftn System.Boolean SimulatedCompany/<>c::<UpdateReleases>b__52_0(System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>)
+IL_017d: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0182: dup
+IL_0183: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>,System.Boolean> SimulatedCompany/<>c::<>9__52_0
+IL_0188: call System.Boolean System.Linq.Enumerable::Any<System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_018d: brfalse IL_0212
+IL_0192: ldloc.s V_7
+IL_0194: ldfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_0199: ldc.i4.0
+IL_019a: ldc.i4.0
+IL_019b: ldloc.s V_7
+IL_019d: ldfld SoftwareProduct SimulatedCompany/<>c__DisplayClass52_1::product
+IL_01a2: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareProduct::TechLevels
+IL_01a7: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,TechLevel>::get_Values()
+IL_01ac: ldsfld System.Func`2<TechLevel,System.Boolean> SimulatedCompany/<>c::<>9__52_1
+IL_01b1: dup
+IL_01b2: brtrue.s IL_01cb
+IL_01b4: pop
+IL_01b5: ldsfld SimulatedCompany/<>c SimulatedCompany/<>c::<>9
+IL_01ba: ldftn System.Boolean SimulatedCompany/<>c::<UpdateReleases>b__52_1(TechLevel)
+IL_01c0: newobj System.Void System.Func`2<TechLevel,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_01c5: dup
+IL_01c6: stsfld System.Func`2<TechLevel,System.Boolean> SimulatedCompany/<>c::<>9__52_1
+IL_01cb: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<TechLevel>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_01d0: ldsfld System.Func`2<TechLevel,System.String> SimulatedCompany/<>c::<>9__52_2
+IL_01d5: dup
+IL_01d6: brtrue.s IL_01ef
+IL_01d8: pop
+IL_01d9: ldsfld SimulatedCompany/<>c SimulatedCompany/<>c::<>9
+IL_01de: ldftn System.String SimulatedCompany/<>c::<UpdateReleases>b__52_2(TechLevel)
+IL_01e4: newobj System.Void System.Func`2<TechLevel,System.String>::.ctor(System.Object,System.IntPtr)
+IL_01e9: dup
+IL_01ea: stsfld System.Func`2<TechLevel,System.String> SimulatedCompany/<>c::<>9__52_2
+IL_01ef: ldloc.s V_7
+IL_01f1: ldftn TechLevel SimulatedCompany/<>c__DisplayClass52_1::<UpdateReleases>b__3(TechLevel)
+IL_01f7: newobj System.Void System.Func`2<TechLevel,TechLevel>::.ctor(System.Object,System.IntPtr)
+IL_01fc: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<TechLevel,System.String,TechLevel>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_0201: ldloc.s V_7
+IL_0203: ldfld SimulatedCompany/<>c__DisplayClass52_0 SimulatedCompany/<>c__DisplayClass52_1::CS$<>8__locals1
+IL_0208: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_020d: callvirt System.Void SoftwareProduct::Update(System.Int32,System.Int32,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SDateTime)
+IL_0212: ldloc.1
+IL_0213: ldc.i4.1
+IL_0214: sub
+IL_0215: stloc.1
+IL_0216: br IL_029b
+IL_021b: ldarg.0
+IL_021c: ldc.i4.0
+IL_021d: call System.Boolean Company::IsPlayerOwned(System.Boolean)
+IL_0222: brfalse.s IL_029b
+IL_0224: ldarg.0
+IL_0225: ldc.i4.1
+IL_0226: call System.Boolean Company::IsPlayerOwned(System.Boolean)
+IL_022b: brtrue.s IL_0245
+IL_022d: ldarg.0
+IL_022e: newobj System.Void SubsidaryLeadNotification::.ctor(SimulatedCompany)
+IL_0233: ldarg.0
+IL_0234: call Company Company::get_OwnerCompany()
+IL_0239: ldfld System.Byte Company::NetworkPlayerID
+IL_023e: call System.Void NotificationManager::SendNotification(NotificationMessage,System.Byte)
+IL_0243: br.s IL_029b
+IL_0245: ldarg.0
+IL_0246: ldc.i4.0
+IL_0247: ldc.i4.0
+IL_0248: call System.Boolean NotificationManager::CheckAggregate<SubsidaryLeadNotification>(System.Object,System.UInt32,System.Boolean)
+IL_024d: brtrue.s IL_029b
+IL_024f: ldarg.0
+IL_0250: newobj System.Void SubsidaryLeadNotification::.ctor(SimulatedCompany)
+IL_0255: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_025a: br.s IL_029b
+IL_025c: ldloc.2
+IL_025d: ldfld System.Boolean SimulatedCompany/ProductPrototype::PrintDeal
+IL_0262: brtrue.s IL_029b
+IL_0264: ldarg.0
+IL_0265: ldc.i4.1
+IL_0266: call System.Boolean Company::IsPlayerOwned(System.Boolean)
+IL_026b: brtrue.s IL_029b
+IL_026d: ldloc.3
+IL_026e: ldc.i4 -1440
+IL_0273: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0278: mul
+IL_0279: call MarketSimulation MarketSimulation::get_Active()
+IL_027e: ldfld System.Random MarketSimulation::Random
+IL_0283: ldc.i4.4
+IL_0284: ldc.i4.s 12
+IL_0286: callvirt System.Int32 System.Random::Next(System.Int32,System.Int32)
+IL_028b: mul
+IL_028c: blt.s IL_029b
+IL_028e: ldarg.0
+IL_028f: ldloc.2
+IL_0290: ldloc.0
+IL_0291: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0296: call System.Void SimulatedCompany::OfferPrintDeal(SimulatedCompany/ProductPrototype,SDateTime)
+IL_029b: leave.s IL_02d7
+IL_029d: call System.Void UnityEngine.Debug::LogException(System.Exception)
+IL_02a2: ldarg.0
+IL_02a3: ldfld System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> SimulatedCompany::Releases
+IL_02a8: stloc.s V_8
+IL_02aa: ldc.i4.0
+IL_02ab: stloc.s V_9
+IL_02ad: ldloc.s V_8
+IL_02af: ldloca.s V_9
+IL_02b1: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_02b6: ldarg.0
+IL_02b7: ldfld System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> SimulatedCompany::Releases
+IL_02bc: ldloc.2
+IL_02bd: callvirt System.Boolean System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype>::Remove(!0)
+IL_02c2: pop
+IL_02c3: leave.s IL_02d1
+IL_02c5: ldloc.s V_9
+IL_02c7: brfalse.s IL_02d0
+IL_02c9: ldloc.s V_8
+IL_02cb: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_02d0: endfinally
+IL_02d1: ldloc.1
+IL_02d2: ldc.i4.1
+IL_02d3: sub
+IL_02d4: stloc.1
+IL_02d5: leave.s IL_02d7
+IL_02d7: ldarg.0
+IL_02d8: ldfld System.Boolean Company::Bankrupt
+IL_02dd: brfalse.s IL_02e1
+IL_02df: ldc.i4.0
+IL_02e0: ret
+IL_02e1: ldloc.1
+IL_02e2: ldc.i4.1
+IL_02e3: add
+IL_02e4: stloc.1
+IL_02e5: ldloc.1
+IL_02e6: ldarg.0
+IL_02e7: ldfld System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype> SimulatedCompany::Releases
+IL_02ec: callvirt System.Int32 System.Collections.Generic.List`1<SimulatedCompany/ProductPrototype>::get_Count()
+IL_02f1: blt IL_001b
+IL_02f6: ldarg.0
+IL_02f7: ldfld SimulatedCompany/AddonPrototype SimulatedCompany::CurrentAddonProject
+IL_02fc: brfalse IL_03c8
+IL_0301: ldloc.0
+IL_0302: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0307: ldarg.0
+IL_0308: ldfld SimulatedCompany/AddonPrototype SimulatedCompany::CurrentAddonProject
+IL_030d: ldfld SDateTime SimulatedCompany/AddonPrototype::ReleaseDate
+IL_0312: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_0317: stloc.s V_6
+IL_0319: ldloca.s V_6
+IL_031b: call System.Int32 SDateTime::ToInt()
+IL_0320: ldc.i4.0
+IL_0321: blt IL_03c8
+IL_0326: ldarg.0
+IL_0327: ldfld SimulatedCompany/AddonPrototype SimulatedCompany::CurrentAddonProject
+IL_032c: ldloc.0
+IL_032d: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0332: callvirt AddOnProduct SimulatedCompany/AddonPrototype::ToProduct(SDateTime)
+IL_0337: stloc.s V_10
+IL_0339: ldarg.0
+IL_033a: ldfld SimulatedCompany/AddonPrototype SimulatedCompany::CurrentAddonProject
+IL_033f: ldfld SoftwareProduct SimulatedCompany/AddonPrototype::Parent
+IL_0344: ldfld Company SoftwareProduct::DevCompany
+IL_0349: ldarg.0
+IL_034a: bne.un.s IL_0396
+IL_034c: ldloc.s V_10
+IL_034e: ldfld SoftwareProduct AddOnProduct::Parent
+IL_0353: ldloc.s V_10
+IL_0355: ldfld SoftwareProduct AddOnProduct::Parent
+IL_035a: callvirt System.Int32 SoftwareProduct::get_Bugss()
+IL_035f: conv.r4
+IL_0360: ldc.r4 0.25
+IL_0365: mul
+IL_0366: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_036b: ldc.i4.0
+IL_036c: ldarg.0
+IL_036d: ldloc.s V_10
+IL_036f: ldfld SoftwareProduct AddOnProduct::Parent
+IL_0374: ldloc.0
+IL_0375: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_037a: call System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany::GetLatestTech(SoftwareProduct,SDateTime)
+IL_037f: ldloc.0
+IL_0380: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0385: callvirt System.Void SoftwareProduct::Update(System.Int32,System.Int32,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SDateTime)
+IL_038a: ldarg.0
+IL_038b: ldloc.0
+IL_038c: ldfld SDateTime SimulatedCompany/<>c__DisplayClass52_0::time
+IL_0391: stfld SDateTime SimulatedCompany::_lastUpdate
+IL_0396: ldarg.0
+IL_0397: ldfld System.Collections.Generic.List`1<AddOnProduct> Company::AddOns
+IL_039c: ldloc.s V_10
+IL_039e: callvirt System.Void System.Collections.Generic.List`1<AddOnProduct>::Add(!0)
+IL_03a3: call MarketSimulation MarketSimulation::get_Active()
+IL_03a8: ldloc.s V_10
+IL_03aa: callvirt System.Void MarketSimulation::AddAddOn(AddOnProduct)
+IL_03af: ldsfld GameSettings GameSettings::Instance
+IL_03b4: ldloc.s V_10
+IL_03b6: ldc.i4.1
+IL_03b7: callvirt System.Void GameSettings::CancelPrintOrder(IStockable,System.Boolean)
+IL_03bc: ldarg.0
+IL_03bd: ldfld SimulatedCompany/AddonPrototype SimulatedCompany::CurrentAddonProject
+IL_03c2: ldc.i4.0
+IL_03c3: callvirt System.Void SimulatedCompany/AddonPrototype::RemoveProject(System.Boolean)
+IL_03c8: ldarg.0
+IL_03c9: ldfld System.Single SimulatedCompany::_workItemFocus
+IL_03ce: ldc.r4 0
+IL_03d3: ble.un.s IL_0410
+IL_03d5: ldarg.0
+IL_03d6: ldarg.0
+IL_03d7: ldfld System.Single SimulatedCompany::WorkItemCost
+IL_03dc: neg
+IL_03dd: conv.r8
+IL_03de: ldc.i4.0
+IL_03df: ldc.i4.1
+IL_03e0: ldnull
+IL_03e1: ldc.i4.0
+IL_03e2: call System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_03e7: ldarg.0
+IL_03e8: ldc.r4 0
+IL_03ed: stfld System.Single SimulatedCompany::WorkItemCost
+IL_03f2: ldarg.0
+IL_03f3: ldarg.0
+IL_03f4: ldfld System.Single SimulatedCompany::_focus
+IL_03f9: ldarg.0
+IL_03fa: ldfld System.Single SimulatedCompany::_workItemFocus
+IL_03ff: add
+IL_0400: stfld System.Single SimulatedCompany::_focus
+IL_0405: ldarg.0
+IL_0406: ldc.r4 0
+IL_040b: stfld System.Single SimulatedCompany::_workItemFocus
+IL_0410: ldarg.0
+IL_0411: ldfld System.Boolean Company::Bankrupt
+IL_0416: ldc.i4.0
+IL_0417: ceq
+IL_0419: ret

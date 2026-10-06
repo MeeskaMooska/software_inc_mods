@@ -1,0 +1,544 @@
+TYPE ModController BASE UnityEngine.MonoBehaviour
+FIELD Public, Static, Literal, HasDefault System.String DLLModBuildVersion
+CONSTANT DLLModBuildVersion = 24
+FIELD Public FileReaderWindow ReaderWindowPrefab
+FIELD Private, Static System.Boolean _initialized
+FIELD Public, Static ModController Instance
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ModController/DLLMod> Mods
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _needsVerification
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _eulaPrevent
+FIELD Private, Static System.UInt32 _dllCounter
+FIELD Private, NotSerialized DynamicCSharp.ScriptDomain _modDomain
+FIELD Public, Static System.String ModEula
+FIELD Private, Static System.Threading.Thread _mainThread
+FIELD Private System.Boolean _pendingVerification
+FIELD Private, Static System.Collections.Generic.HashSet`1<ModController/DLLMod> _unload
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _deactivating
+PROPERTY System.String ModController::ModFolder()
+PROPERTY System.Threading.Thread ModController::MainThread()
+METHOD Private, HideBySig IWorkshopItem ModController::FinalizeAssembly(System.String,System.Reflection.Assembly,System.String,System.Boolean,System.Single)
+LOCAL 0 ModMeta
+LOCAL 1 System.Collections.Generic.List`1<System.Type>
+LOCAL 2 System.Type[]
+LOCAL 3 System.Int32
+LOCAL 4 System.Type
+LOCAL 5 System.Reflection.ConstructorInfo
+LOCAL 6 UnityEngine.GameObject
+LOCAL 7 System.Collections.Generic.List`1<ModBehaviour>
+LOCAL 8 ModController/DLLMod
+LOCAL 9 System.Int32
+LOCAL 10 System.Type
+LOCAL 11 ModBehaviour
+LOCAL 12 System.Int32
+LOCAL 13 IWorkshopItem
+LOCAL 14 System.Reflection.ReflectionTypeLoadException
+LOCAL 15 System.Exception
+IL_0000: ldnull
+IL_0001: stloc.0
+IL_0002: newobj System.Void System.Collections.Generic.List`1<System.Type>::.ctor()
+IL_0007: stloc.1
+IL_0008: ldarg.2
+IL_0009: callvirt System.Type[] System.Reflection.Assembly::GetTypes()
+IL_000e: stloc.2
+IL_000f: ldc.i4.0
+IL_0010: stloc.3
+IL_0011: br.s IL_0076
+IL_0013: ldloc.2
+IL_0014: ldloc.3
+IL_0015: ldelem.ref
+IL_0016: stloc.s V_4
+IL_0018: ldloc.0
+IL_0019: brtrue.s IL_0057
+IL_001b: ldloc.s V_4
+IL_001d: ldtoken ModMeta
+IL_0022: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_0027: callvirt System.Boolean System.Type::IsSubclassOf(System.Type)
+IL_002c: brfalse.s IL_0057
+IL_002e: ldloc.s V_4
+IL_0030: ldc.i4.0
+IL_0031: newarr System.Type
+IL_0036: callvirt System.Reflection.ConstructorInfo System.Type::GetConstructor(System.Type[])
+IL_003b: stloc.s V_5
+IL_003d: ldloc.s V_5
+IL_003f: ldnull
+IL_0040: call System.Boolean System.Reflection.ConstructorInfo::op_Inequality(System.Reflection.ConstructorInfo,System.Reflection.ConstructorInfo)
+IL_0045: brfalse.s IL_0072
+IL_0047: ldloc.s V_5
+IL_0049: ldnull
+IL_004a: callvirt System.Object System.Reflection.ConstructorInfo::Invoke(System.Object[])
+IL_004f: castclass ModMeta
+IL_0054: stloc.0
+IL_0055: br.s IL_0072
+IL_0057: ldloc.s V_4
+IL_0059: ldtoken ModBehaviour
+IL_005e: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_0063: callvirt System.Boolean System.Type::IsSubclassOf(System.Type)
+IL_0068: brfalse.s IL_0072
+IL_006a: ldloc.1
+IL_006b: ldloc.s V_4
+IL_006d: callvirt System.Void System.Collections.Generic.List`1<System.Type>::Add(!0)
+IL_0072: ldloc.3
+IL_0073: ldc.i4.1
+IL_0074: add
+IL_0075: stloc.3
+IL_0076: ldloc.3
+IL_0077: ldloc.2
+IL_0078: ldlen
+IL_0079: conv.i4
+IL_007a: blt.s IL_0013
+IL_007c: ldloc.0
+IL_007d: brfalse IL_017e
+IL_0082: ldloc.1
+IL_0083: callvirt System.Int32 System.Collections.Generic.List`1<System.Type>::get_Count()
+IL_0088: ldc.i4.0
+IL_0089: ble IL_0168
+IL_008e: ldarg.1
+IL_008f: newobj System.Void UnityEngine.GameObject::.ctor(System.String)
+IL_0094: stloc.s V_6
+IL_0096: ldloc.s V_6
+IL_0098: ldc.i4.0
+IL_0099: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_009e: ldloc.s V_6
+IL_00a0: call System.Void UnityEngine.Object::DontDestroyOnLoad(UnityEngine.Object)
+IL_00a5: newobj System.Void System.Collections.Generic.List`1<ModBehaviour>::.ctor()
+IL_00aa: stloc.s V_7
+IL_00ac: ldc.i4.0
+IL_00ad: stloc.s V_9
+IL_00af: br.s IL_00ef
+IL_00b1: ldloc.1
+IL_00b2: ldloc.s V_9
+IL_00b4: callvirt !0 System.Collections.Generic.List`1<System.Type>::get_Item(System.Int32)
+IL_00b9: stloc.s V_10
+IL_00bb: ldloc.s V_6
+IL_00bd: ldloc.s V_10
+IL_00bf: callvirt UnityEngine.Component UnityEngine.GameObject::AddComponent(System.Type)
+IL_00c4: isinst ModBehaviour
+IL_00c9: stloc.s V_11
+IL_00cb: ldloc.s V_11
+IL_00cd: ldc.i4.0
+IL_00ce: callvirt System.Void UnityEngine.Behaviour::set_enabled(System.Boolean)
+IL_00d3: ldloc.s V_7
+IL_00d5: ldloc.s V_11
+IL_00d7: callvirt System.Void System.Collections.Generic.List`1<ModBehaviour>::Add(!0)
+IL_00dc: ldloc.0
+IL_00dd: ldfld System.Collections.Generic.List`1<ModBehaviour> ModMeta::ModBehaviours
+IL_00e2: ldloc.s V_11
+IL_00e4: callvirt System.Void System.Collections.Generic.List`1<ModBehaviour>::Add(!0)
+IL_00e9: ldloc.s V_9
+IL_00eb: ldc.i4.1
+IL_00ec: add
+IL_00ed: stloc.s V_9
+IL_00ef: ldloc.s V_9
+IL_00f1: ldloc.1
+IL_00f2: callvirt System.Int32 System.Collections.Generic.List`1<System.Type>::get_Count()
+IL_00f7: blt.s IL_00b1
+IL_00f9: ldloc.0
+IL_00fa: ldarg.1
+IL_00fb: ldarg.3
+IL_00fc: ldarg.s dll
+IL_00fe: ldloc.s V_7
+IL_0100: callvirt !0[] System.Collections.Generic.List`1<ModBehaviour>::ToArray()
+IL_0105: ldarg.s loadTime
+IL_0107: newobj System.Void ModController/DLLMod::.ctor(ModMeta,System.String,System.String,System.Boolean,ModBehaviour[],System.Single)
+IL_010c: stloc.s V_8
+IL_010e: ldc.i4.0
+IL_010f: stloc.s V_12
+IL_0111: br.s IL_0129
+IL_0113: ldloc.s V_7
+IL_0115: ldloc.s V_12
+IL_0117: callvirt !0 System.Collections.Generic.List`1<ModBehaviour>::get_Item(System.Int32)
+IL_011c: ldloc.s V_8
+IL_011e: stfld ModController/DLLMod ModBehaviour::ParentMod
+IL_0123: ldloc.s V_12
+IL_0125: ldc.i4.1
+IL_0126: add
+IL_0127: stloc.s V_12
+IL_0129: ldloc.s V_12
+IL_012b: ldloc.s V_7
+IL_012d: callvirt System.Int32 System.Collections.Generic.List`1<ModBehaviour>::get_Count()
+IL_0132: blt.s IL_0113
+IL_0134: ldloc.s V_6
+IL_0136: ldc.i4.1
+IL_0137: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_013c: ldloc.0
+IL_013d: ldloc.s V_8
+IL_013f: callvirt System.Void ModMeta::Initialize(ModController/DLLMod)
+IL_0144: ldloc.s V_8
+IL_0146: callvirt System.Boolean ModController/DLLMod::get_Active()
+IL_014b: brfalse.s IL_0155
+IL_014d: ldloc.s V_8
+IL_014f: ldc.i4.1
+IL_0150: callvirt System.Void ModController/DLLMod::Activate(System.Boolean)
+IL_0155: ldarg.0
+IL_0156: ldfld System.Collections.Generic.List`1<ModController/DLLMod> ModController::Mods
+IL_015b: ldloc.s V_8
+IL_015d: callvirt System.Void System.Collections.Generic.List`1<ModController/DLLMod>::Add(!0)
+IL_0162: ldloc.s V_8
+IL_0164: stloc.s V_13
+IL_0166: leave.s IL_01b4
+IL_0168: ldstr "Error loading dll mod "
+IL_016d: ldarg.1
+IL_016e: ldstr ": didn't have any behaviours and was not loaded"
+IL_0173: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_0178: newobj System.Void System.Exception::.ctor(System.String)
+IL_017d: throw
+IL_017e: ldstr "Error loading dll mod "
+IL_0183: ldarg.1
+IL_0184: ldstr ": didn't have any meta and was not loaded"
+IL_0189: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_018e: newobj System.Void System.Exception::.ctor(System.String)
+IL_0193: throw
+IL_0194: stloc.s V_14
+IL_0196: ldarg.0
+IL_0197: ldloc.s V_14
+IL_0199: ldarg.1
+IL_019a: ldarg.3
+IL_019b: call IWorkshopItem ModController::HandleException(System.Exception,System.String,System.String)
+IL_01a0: stloc.s V_13
+IL_01a2: leave.s IL_01b4
+IL_01a4: stloc.s V_15
+IL_01a6: ldarg.0
+IL_01a7: ldloc.s V_15
+IL_01a9: ldarg.1
+IL_01aa: ldarg.3
+IL_01ab: call IWorkshopItem ModController::HandleException(System.Exception,System.String,System.String)
+IL_01b0: stloc.s V_13
+IL_01b2: leave.s IL_01b4
+IL_01b4: ldloc.s V_13
+IL_01b6: ret
+METHOD Private, HideBySig System.Void ModController::ActuallyLoadMod(System.String,System.Boolean,System.Boolean)
+LOCAL 0 ModController/<>c__DisplayClass21_0
+LOCAL 1 ModController/DLLMod
+LOCAL 2 System.Boolean
+LOCAL 3 System.String
+LOCAL 4 System.Boolean
+LOCAL 5 ModController/DLLMod
+LOCAL 6 System.String[]
+LOCAL 7 System.String
+LOCAL 8 System.String[]
+LOCAL 9 System.Int32
+IL_0000: newobj System.Void ModController/<>c__DisplayClass21_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld System.String ModController/<>c__DisplayClass21_0::name
+IL_000d: ldloc.0
+IL_000e: ldfld System.String ModController/<>c__DisplayClass21_0::name
+IL_0013: callvirt System.String System.String::Trim()
+IL_0018: call System.Boolean System.String::IsNullOrEmpty(System.String)
+IL_001d: brfalse.s IL_002a
+IL_001f: ldstr "Please enter a mod name"
+IL_0024: call System.Void DevConsole.Console::LogError(System.String)
+IL_0029: ret
+IL_002a: ldarg.0
+IL_002b: ldfld System.Collections.Generic.List`1<ModController/DLLMod> ModController::Mods
+IL_0030: ldloc.0
+IL_0031: ldftn System.Boolean ModController/<>c__DisplayClass21_0::<ActuallyLoadMod>b__0(ModController/DLLMod)
+IL_0037: newobj System.Void System.Func`2<ModController/DLLMod,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_003c: ldnull
+IL_003d: call T Utilities::FirstOrDefault<ModController/DLLMod>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>,T)
+IL_0042: stloc.1
+IL_0043: ldloc.1
+IL_0044: brfalse.s IL_0058
+IL_0046: ldarg.0
+IL_0047: ldloc.1
+IL_0048: ldarg.2
+IL_0049: call System.Void ModController::UnloadMod(ModController/DLLMod,System.Boolean)
+IL_004e: ldarg.0
+IL_004f: ldloc.1
+IL_0050: ldarg.2
+IL_0051: ldarg.3
+IL_0052: call System.Void ModController::ActuallyLoadMod(ModController/DLLMod,System.Boolean,System.Boolean)
+IL_0057: ret
+IL_0058: ldsfld OptionsWindow OptionsWindow::Instance
+IL_005d: ldfld System.Boolean OptionsWindow::Initialized
+IL_0062: stloc.2
+IL_0063: ldarg.0
+IL_0064: ldloc.0
+IL_0065: ldfld System.String ModController/<>c__DisplayClass21_0::name
+IL_006a: ldc.i4.1
+IL_006b: ldarg.2
+IL_006c: call System.Void ModController::UnloadMod(System.String,System.Boolean,System.Boolean)
+IL_0071: call System.String ModController::get_ModFolder()
+IL_0076: ldloc.0
+IL_0077: ldfld System.String ModController/<>c__DisplayClass21_0::name
+IL_007c: call System.String System.IO.Path::Combine(System.String,System.String)
+IL_0081: stloc.3
+IL_0082: ldc.i4.0
+IL_0083: stloc.s V_4
+IL_0085: ldnull
+IL_0086: stloc.s V_5
+IL_0088: ldloc.3
+IL_0089: call System.Boolean System.IO.Directory::Exists(System.String)
+IL_008e: brfalse IL_012b
+IL_0093: ldarg.3
+IL_0094: brfalse.s IL_00ed
+IL_0096: ldloc.3
+IL_0097: ldloc.3
+IL_0098: call System.String System.IO.Path::GetFileName(System.String)
+IL_009d: ldstr "H.bin"
+IL_00a2: call System.String System.String::Concat(System.String,System.String)
+IL_00a7: call System.String System.IO.Path::Combine(System.String,System.String)
+IL_00ac: stloc.s V_7
+IL_00ae: ldloc.s V_7
+IL_00b0: call System.Boolean System.IO.File::Exists(System.String)
+IL_00b5: brfalse.s IL_00be
+IL_00b7: ldloc.s V_7
+IL_00b9: call System.Void System.IO.File::Delete(System.String)
+IL_00be: ldloc.3
+IL_00bf: ldstr "*.dcache"
+IL_00c4: call System.String[] System.IO.Directory::GetFiles(System.String,System.String)
+IL_00c9: stloc.s V_8
+IL_00cb: ldc.i4.0
+IL_00cc: stloc.s V_9
+IL_00ce: br.s IL_00e0
+IL_00d0: ldloc.s V_8
+IL_00d2: ldloc.s V_9
+IL_00d4: ldelem.ref
+IL_00d5: call System.Void System.IO.File::Delete(System.String)
+IL_00da: ldloc.s V_9
+IL_00dc: ldc.i4.1
+IL_00dd: add
+IL_00de: stloc.s V_9
+IL_00e0: ldloc.s V_9
+IL_00e2: ldloc.s V_8
+IL_00e4: ldlen
+IL_00e5: conv.i4
+IL_00e6: blt.s IL_00d0
+IL_00e8: leave.s IL_00ed
+IL_00ea: pop
+IL_00eb: leave.s IL_00ed
+IL_00ed: ldloc.3
+IL_00ee: ldstr "*.dll"
+IL_00f3: call System.String[] System.IO.Directory::GetFiles(System.String,System.String)
+IL_00f8: stloc.s V_6
+IL_00fa: ldloc.s V_6
+IL_00fc: ldlen
+IL_00fd: brfalse.s IL_0116
+IL_00ff: ldarg.0
+IL_0100: ldloc.s V_6
+IL_0102: ldc.i4.0
+IL_0103: ldelem.ref
+IL_0104: ldc.i4.1
+IL_0105: ldc.i4.1
+IL_0106: ldarg.3
+IL_0107: ldnull
+IL_0108: call IWorkshopItem ModController::LoadMod(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)
+IL_010d: isinst ModController/DLLMod
+IL_0112: stloc.s V_5
+IL_0114: br.s IL_0128
+IL_0116: ldarg.0
+IL_0117: ldloc.3
+IL_0118: ldc.i4.0
+IL_0119: ldc.i4.1
+IL_011a: ldarg.3
+IL_011b: ldnull
+IL_011c: call IWorkshopItem ModController::LoadMod(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)
+IL_0121: isinst ModController/DLLMod
+IL_0126: stloc.s V_5
+IL_0128: ldc.i4.1
+IL_0129: stloc.s V_4
+IL_012b: ldloc.s V_5
+IL_012d: brfalse.s IL_0148
+IL_012f: ldstr "Successfully loaded mod"
+IL_0134: call System.Void DevConsole.Console::Log(System.String)
+IL_0139: ldloc.2
+IL_013a: brfalse.s IL_0148
+IL_013c: ldsfld OptionsWindow OptionsWindow::Instance
+IL_0141: ldloc.s V_5
+IL_0143: callvirt System.Void OptionsWindow::AddModOption(ModController/DLLMod)
+IL_0148: ldloc.s V_4
+IL_014a: brtrue.s IL_0156
+IL_014c: ldstr "Mod not found"
+IL_0151: call System.Void DevConsole.Console::LogError(System.String)
+IL_0156: ret
+METHOD Private, HideBySig System.Void ModController::ActuallyLoadMod(ModController/DLLMod,System.Boolean,System.Boolean)
+LOCAL 0 ModController/DLLMod
+LOCAL 1 System.Boolean
+LOCAL 2 System.String
+LOCAL 3 System.String[]
+LOCAL 4 System.Int32
+LOCAL 5 System.String[]
+IL_0000: ldnull
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: ldarg.3
+IL_0005: brfalse.s IL_0067
+IL_0007: ldarg.1
+IL_0008: ldfld System.String ModController/DLLMod::ModPath
+IL_000d: ldarg.1
+IL_000e: ldfld System.String ModController/DLLMod::FileName
+IL_0013: call System.String System.IO.Path::GetFileName(System.String)
+IL_0018: ldstr "H.bin"
+IL_001d: call System.String System.String::Concat(System.String,System.String)
+IL_0022: call System.String System.IO.Path::Combine(System.String,System.String)
+IL_0027: stloc.2
+IL_0028: ldloc.2
+IL_0029: call System.Boolean System.IO.File::Exists(System.String)
+IL_002e: brfalse.s IL_0036
+IL_0030: ldloc.2
+IL_0031: call System.Void System.IO.File::Delete(System.String)
+IL_0036: ldarg.1
+IL_0037: ldfld System.String ModController/DLLMod::ModPath
+IL_003c: ldstr "*.dcache"
+IL_0041: call System.String[] System.IO.Directory::GetFiles(System.String,System.String)
+IL_0046: stloc.3
+IL_0047: ldc.i4.0
+IL_0048: stloc.s V_4
+IL_004a: br.s IL_005b
+IL_004c: ldloc.3
+IL_004d: ldloc.s V_4
+IL_004f: ldelem.ref
+IL_0050: call System.Void System.IO.File::Delete(System.String)
+IL_0055: ldloc.s V_4
+IL_0057: ldc.i4.1
+IL_0058: add
+IL_0059: stloc.s V_4
+IL_005b: ldloc.s V_4
+IL_005d: ldloc.3
+IL_005e: ldlen
+IL_005f: conv.i4
+IL_0060: blt.s IL_004c
+IL_0062: leave.s IL_0067
+IL_0064: pop
+IL_0065: leave.s IL_0067
+IL_0067: ldarg.1
+IL_0068: ldfld System.Boolean ModController/DLLMod::DLL
+IL_006d: brfalse.s IL_009c
+IL_006f: ldarg.1
+IL_0070: ldfld System.String ModController/DLLMod::ModPath
+IL_0075: ldstr "*.dll"
+IL_007a: call System.String[] System.IO.Directory::GetFiles(System.String,System.String)
+IL_007f: stloc.s V_5
+IL_0081: ldloc.s V_5
+IL_0083: ldlen
+IL_0084: brfalse.s IL_00c9
+IL_0086: ldarg.0
+IL_0087: ldloc.s V_5
+IL_0089: ldc.i4.0
+IL_008a: ldelem.ref
+IL_008b: ldc.i4.1
+IL_008c: ldc.i4.1
+IL_008d: ldarg.3
+IL_008e: ldnull
+IL_008f: call IWorkshopItem ModController::LoadMod(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)
+IL_0094: isinst ModController/DLLMod
+IL_0099: stloc.0
+IL_009a: br.s IL_00c9
+IL_009c: ldarg.1
+IL_009d: ldfld System.Boolean ModController/DLLMod::DLL
+IL_00a2: brtrue.s IL_00c9
+IL_00a4: ldarg.1
+IL_00a5: ldfld System.String ModController/DLLMod::ModPath
+IL_00aa: call System.Boolean System.IO.Directory::Exists(System.String)
+IL_00af: brfalse.s IL_00c9
+IL_00b1: ldarg.0
+IL_00b2: ldarg.1
+IL_00b3: ldfld System.String ModController/DLLMod::ModPath
+IL_00b8: ldc.i4.0
+IL_00b9: ldc.i4.1
+IL_00ba: ldarg.3
+IL_00bb: ldnull
+IL_00bc: call IWorkshopItem ModController::LoadMod(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)
+IL_00c1: isinst ModController/DLLMod
+IL_00c6: stloc.0
+IL_00c7: ldc.i4.1
+IL_00c8: stloc.1
+IL_00c9: ldloc.0
+IL_00ca: brfalse.s IL_00f0
+IL_00cc: ldarg.2
+IL_00cd: brfalse.s IL_00d9
+IL_00cf: ldstr "Successfully loaded mod"
+IL_00d4: call System.Void DevConsole.Console::Log(System.String)
+IL_00d9: ldsfld OptionsWindow OptionsWindow::Instance
+IL_00de: ldfld System.Boolean OptionsWindow::Initialized
+IL_00e3: brfalse.s IL_00f0
+IL_00e5: ldsfld OptionsWindow OptionsWindow::Instance
+IL_00ea: ldloc.0
+IL_00eb: callvirt System.Void OptionsWindow::AddModOption(ModController/DLLMod)
+IL_00f0: ldloc.1
+IL_00f1: ldc.i4.0
+IL_00f2: ceq
+IL_00f4: ldarg.2
+IL_00f5: and
+IL_00f6: brfalse.s IL_0102
+IL_00f8: ldstr "Mod not found"
+IL_00fd: call System.Void DevConsole.Console::LogError(System.String)
+IL_0102: ret
+METHOD Private, HideBySig System.Void ModController::Awake()
+IL_0000: ldsfld ModController ModController::Instance
+IL_0005: ldnull
+IL_0006: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_000b: brfalse.s IL_0019
+IL_000d: ldarg.0
+IL_000e: call UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0013: call System.Void UnityEngine.Object::Destroy(UnityEngine.Object)
+IL_0018: ret
+IL_0019: ldarg.0
+IL_001a: stsfld ModController ModController::Instance
+IL_001f: ldarg.0
+IL_0020: ldstr "ModDomain"
+IL_0025: ldc.i4.1
+IL_0026: call DynamicCSharp.ScriptDomain DynamicCSharp.ScriptDomain::CreateDomain(System.String,System.Boolean)
+IL_002b: stfld DynamicCSharp.ScriptDomain ModController::_modDomain
+IL_0030: ldarg.0
+IL_0031: call UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0036: call System.Void UnityEngine.Object::DontDestroyOnLoad(UnityEngine.Object)
+IL_003b: call System.Threading.Thread System.Threading.Thread::get_CurrentThread()
+IL_0040: stsfld System.Threading.Thread ModController::_mainThread
+IL_0045: ldsfld System.Action ModController/<>c::<>9__36_0
+IL_004a: dup
+IL_004b: brtrue.s IL_0064
+IL_004d: pop
+IL_004e: ldsfld ModController/<>c ModController/<>c::<>9
+IL_0053: ldftn System.Void ModController/<>c::<Awake>b__36_0()
+IL_0059: newobj System.Void System.Action::.ctor(System.Object,System.IntPtr)
+IL_005e: dup
+IL_005f: stsfld System.Action ModController/<>c::<>9__36_0
+IL_0064: call System.Void UnityEngine.Application::add_quitting(System.Action)
+IL_0069: ret
+METHOD Private, HideBySig System.Void ModController::Update()
+LOCAL 0 System.Collections.Generic.HashSet`1/Enumerator<ModController/DLLMod>
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.List`1<ModController/DLLVerify> ModController::_needsVerification
+IL_0006: callvirt System.Int32 System.Collections.Generic.List`1<ModController/DLLVerify>::get_Count()
+IL_000b: ldc.i4.0
+IL_000c: bgt.s IL_001c
+IL_000e: ldarg.0
+IL_000f: ldfld System.Collections.Generic.List`1<ModController/DLLVerify> ModController::_eulaPrevent
+IL_0014: callvirt System.Int32 System.Collections.Generic.List`1<ModController/DLLVerify>::get_Count()
+IL_0019: ldc.i4.0
+IL_001a: ble.s IL_003f
+IL_001c: ldarg.0
+IL_001d: ldfld System.Boolean ModController::_pendingVerification
+IL_0022: brtrue.s IL_003f
+IL_0024: ldsfld WindowManager WindowManager::Instance
+IL_0029: ldnull
+IL_002a: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_002f: brfalse.s IL_003f
+IL_0031: ldarg.0
+IL_0032: ldc.i4.1
+IL_0033: stfld System.Boolean ModController::_pendingVerification
+IL_0038: ldarg.0
+IL_0039: ldc.i4.0
+IL_003a: call System.Void ModController::QueryNextVerification(System.Boolean)
+IL_003f: call System.Void ModErrorWindow::UpdateMe()
+IL_0044: ldsfld System.Collections.Generic.HashSet`1<ModController/DLLMod> ModController::_unload
+IL_0049: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<ModController/DLLMod>::GetEnumerator()
+IL_004e: stloc.0
+IL_004f: br.s IL_005d
+IL_0051: ldloca.s V_0
+IL_0053: call !0 System.Collections.Generic.HashSet`1/Enumerator<ModController/DLLMod>::get_Current()
+IL_0058: call System.Void ModController::UnloadAndDeactivateMod(ModController/DLLMod)
+IL_005d: ldloca.s V_0
+IL_005f: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<ModController/DLLMod>::MoveNext()
+IL_0064: brtrue.s IL_0051
+IL_0066: leave.s IL_0076
+IL_0068: ldloca.s V_0
+IL_006a: constrained. System.Collections.Generic.HashSet`1/Enumerator<ModController/DLLMod>
+IL_0070: callvirt System.Void System.IDisposable::Dispose()
+IL_0075: endfinally
+IL_0076: ldsfld System.Collections.Generic.HashSet`1<ModController/DLLMod> ModController::_unload
+IL_007b: callvirt System.Void System.Collections.Generic.HashSet`1<ModController/DLLMod>::Clear()
+IL_0080: ret

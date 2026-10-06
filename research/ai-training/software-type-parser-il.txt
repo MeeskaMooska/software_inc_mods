@@ -1,0 +1,623 @@
+TYPE SoftwareType BASE System.Object
+INTERFACE IFormatColorObject
+FIELD Public, Static System.Single SequelBoost
+FIELD Public, Static System.Single RoyaltySum
+FIELD Private, Static System.Int32 AwarenessLabelCount
+FIELD Private, Static System.Int32 PerceptionLabelCount
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.String Description
+FIELD Public, InitOnly System.Single RandomFactor
+FIELD Public, InitOnly System.Single OptimalDevTime
+FIELD Public, InitOnly System.String[] SubMarkets
+FIELD Private, InitOnly System.String[] _OSLimits
+FIELD Public, InitOnly System.Boolean OneClient
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,FeatureBase> Features
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> Categories
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> AddOns
+FIELD Public, InitOnly System.Nullable`1<System.Int32> Unlock
+FIELD Public, InitOnly System.Boolean Modded
+FIELD Public System.String ModName
+FIELD Public System.Boolean CanOverride
+FIELD Public System.UInt32 ID
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,FeatureBase> _featCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareAddOn> _addonCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareCategory> _catCache
+FIELD Private System.Collections.Generic.List`1<System.String> _specCache
+FIELD Public, Static System.Single DesignRatio
+FIELD Public, Static FloatInterpolator QualityLevel
+FIELD Public, Static FloatInterpolator CreativityLevel
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Int32> _osSpecCounter
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<System.String>> _toolRatioCache
+PROPERTY System.Boolean SoftwareType::OSSpecific()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareType::.ctor(System.String,System.String,System.String[],System.Single,System.Single,System.Boolean,System.Boolean,System.String[],System.Collections.Generic.Dictionary`2<System.String,FeatureBase>,System.Nullable`1<System.Int32>,System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>,System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn>,System.String)
+IL_0000: ldarg.0
+IL_0001: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn>::.ctor()
+IL_0006: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> SoftwareType::AddOns
+IL_000b: ldarg.0
+IL_000c: ldc.i4.1
+IL_000d: stfld System.Boolean SoftwareType::CanOverride
+IL_0012: ldarg.0
+IL_0013: ldc.i4.1
+IL_0014: stfld System.UInt32 SoftwareType::ID
+IL_0019: ldarg.0
+IL_001a: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_001f: stfld System.Collections.Generic.List`1<System.String> SoftwareType::_specCache
+IL_0024: ldarg.0
+IL_0025: call System.Void System.Object::.ctor()
+IL_002a: ldarg.0
+IL_002b: ldarg.1
+IL_002c: stfld System.String SoftwareType::Name
+IL_0031: ldarg.0
+IL_0032: ldarg.2
+IL_0033: stfld System.String SoftwareType::Description
+IL_0038: ldarg.0
+IL_0039: ldarg.3
+IL_003a: stfld System.String[] SoftwareType::_OSLimits
+IL_003f: ldarg.0
+IL_0040: ldarg.s random
+IL_0042: stfld System.Single SoftwareType::RandomFactor
+IL_0047: ldarg.0
+IL_0048: ldarg.s optimalDevtime
+IL_004a: stfld System.Single SoftwareType::OptimalDevTime
+IL_004f: ldarg.0
+IL_0050: ldarg.s submarkets
+IL_0052: stfld System.String[] SoftwareType::SubMarkets
+IL_0057: ldarg.0
+IL_0058: ldarg.s oneClient
+IL_005a: stfld System.Boolean SoftwareType::OneClient
+IL_005f: ldarg.0
+IL_0060: ldarg.s inHouse
+IL_0062: stfld System.Boolean SoftwareType::InHouse
+IL_0067: ldarg.0
+IL_0068: ldarg.s feat
+IL_006a: stfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_006f: ldarg.0
+IL_0070: ldarg.s unlock
+IL_0072: stfld System.Nullable`1<System.Int32> SoftwareType::Unlock
+IL_0077: ldarg.0
+IL_0078: ldarg.s categories
+IL_007a: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_007f: ldarg.0
+IL_0080: ldarg.s addOns
+IL_0082: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> SoftwareType::AddOns
+IL_0087: ldarg.s mod
+IL_0089: brfalse.s IL_009a
+IL_008b: ldarg.0
+IL_008c: ldc.i4.1
+IL_008d: stfld System.Boolean SoftwareType::Modded
+IL_0092: ldarg.0
+IL_0093: ldarg.s mod
+IL_0095: stfld System.String SoftwareType::ModName
+IL_009a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareType::.ctor()
+IL_0000: ldarg.0
+IL_0001: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn>::.ctor()
+IL_0006: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> SoftwareType::AddOns
+IL_000b: ldarg.0
+IL_000c: ldc.i4.1
+IL_000d: stfld System.Boolean SoftwareType::CanOverride
+IL_0012: ldarg.0
+IL_0013: ldc.i4.1
+IL_0014: stfld System.UInt32 SoftwareType::ID
+IL_0019: ldarg.0
+IL_001a: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_001f: stfld System.Collections.Generic.List`1<System.String> SoftwareType::_specCache
+IL_0024: ldarg.0
+IL_0025: call System.Void System.Object::.ctor()
+IL_002a: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareType::.ctor(Tyd.TydCollection,System.String,System.String)
+LOCAL 0 SoftwareType/<>c__DisplayClass43_0
+LOCAL 1 SoftwareType/<>c__DisplayClass43_1
+LOCAL 2 Tyd.TydCollection
+LOCAL 3 Tyd.TydTable
+LOCAL 4 Tyd.TydNode
+LOCAL 5 Tyd.TydCollection
+LOCAL 6 System.Single
+LOCAL 7 System.Boolean
+LOCAL 8 System.Single
+LOCAL 9 System.Single
+LOCAL 10 Tyd.TydNode
+LOCAL 11 System.Double[]
+LOCAL 12 System.Single
+LOCAL 13 System.Boolean
+LOCAL 14 SoftwareType/<>c__DisplayClass43_2
+LOCAL 15 System.Nullable`1<System.Single>
+LOCAL 16 System.Nullable`1<System.Boolean>
+LOCAL 17 System.Collections.Generic.IEnumerator`1<Tyd.TydCollection>
+LOCAL 18 SpecFeature
+LOCAL 19 Tyd.TydCollection
+LOCAL 20 System.Collections.Generic.IEnumerator`1<Tyd.TydCollection>
+LOCAL 21 SubFeature
+LOCAL 22 System.Nullable`1<System.Int32>
+LOCAL 23 System.Int32
+IL_0000: ldarg.0
+IL_0001: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn>::.ctor()
+IL_0006: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> SoftwareType::AddOns
+IL_000b: ldarg.0
+IL_000c: ldc.i4.1
+IL_000d: stfld System.Boolean SoftwareType::CanOverride
+IL_0012: ldarg.0
+IL_0013: ldc.i4.1
+IL_0014: stfld System.UInt32 SoftwareType::ID
+IL_0019: ldarg.0
+IL_001a: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_001f: stfld System.Collections.Generic.List`1<System.String> SoftwareType::_specCache
+IL_0024: newobj System.Void SoftwareType/<>c__DisplayClass43_0::.ctor()
+IL_0029: stloc.0
+IL_002a: ldloc.0
+IL_002b: ldarg.3
+IL_002c: stfld System.String SoftwareType/<>c__DisplayClass43_0::pathRoot
+IL_0031: ldarg.0
+IL_0032: call System.Void System.Object::.ctor()
+IL_0037: ldloc.0
+IL_0038: ldarg.0
+IL_0039: stfld SoftwareType SoftwareType/<>c__DisplayClass43_0::<>4__this
+IL_003e: newobj System.Void SoftwareType/<>c__DisplayClass43_1::.ctor()
+IL_0043: stloc.1
+IL_0044: ldloc.1
+IL_0045: ldloc.0
+IL_0046: stfld SoftwareType/<>c__DisplayClass43_0 SoftwareType/<>c__DisplayClass43_1::CS$<>8__locals1
+IL_004b: ldarg.0
+IL_004c: ldarg.1
+IL_004d: ldstr "Name"
+IL_0052: ldc.i4.1
+IL_0053: callvirt System.String Tyd.TydCollection::GetChildValue(System.String,System.Boolean)
+IL_0058: stfld System.String SoftwareType::Name
+IL_005d: ldarg.0
+IL_005e: ldarg.1
+IL_005f: ldstr "Description"
+IL_0064: ldc.i4.0
+IL_0065: callvirt System.String Tyd.TydCollection::GetChildValue(System.String,System.Boolean)
+IL_006a: stfld System.String SoftwareType::Description
+IL_006f: ldarg.0
+IL_0070: ldarg.1
+IL_0071: ldstr "Random"
+IL_0076: ldc.i4.1
+IL_0077: ldc.r4 0
+IL_007c: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0081: stfld System.Single SoftwareType::RandomFactor
+IL_0086: ldarg.0
+IL_0087: ldarg.1
+IL_0088: ldstr "OptimalDevTime"
+IL_008d: ldc.i4.1
+IL_008e: ldc.r4 0
+IL_0093: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0098: stfld System.Single SoftwareType::OptimalDevTime
+IL_009d: ldarg.0
+IL_009e: ldarg.1
+IL_009f: ldstr "SubmarketNames"
+IL_00a4: ldc.i4.1
+IL_00a5: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydCollection>(System.String,System.Boolean)
+IL_00aa: ldc.i4.1
+IL_00ab: callvirt System.Collections.Generic.IEnumerable`1<System.String> Tyd.TydCollection::GetChildValues(System.Boolean)
+IL_00b0: call !!0[] System.Linq.Enumerable::ToArray<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00b5: stfld System.String[] SoftwareType::SubMarkets
+IL_00ba: ldarg.0
+IL_00bb: ldfld System.String[] SoftwareType::SubMarkets
+IL_00c0: ldlen
+IL_00c1: conv.i4
+IL_00c2: ldc.i4.3
+IL_00c3: beq.s IL_00d0
+IL_00c5: ldstr "Incorrect number of submarket names supplied. Needs 3"
+IL_00ca: newobj System.Void System.Exception::.ctor(System.String)
+IL_00cf: throw
+IL_00d0: ldloc.1
+IL_00d1: ldarg.1
+IL_00d2: ldstr "NameGenerator"
+IL_00d7: ldc.i4.0
+IL_00d8: callvirt System.String Tyd.TydCollection::GetChildValue(System.String,System.Boolean)
+IL_00dd: stfld System.String SoftwareType/<>c__DisplayClass43_1::defaultGen
+IL_00e2: ldarg.1
+IL_00e3: ldstr "Categories"
+IL_00e8: ldc.i4.0
+IL_00e9: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydCollection>(System.String,System.Boolean)
+IL_00ee: stloc.2
+IL_00ef: ldloc.1
+IL_00f0: ldnull
+IL_00f1: stfld Manufacturing SoftwareType/<>c__DisplayClass43_1::man
+IL_00f6: ldarg.1
+IL_00f7: ldstr "Manufacturing"
+IL_00fc: ldc.i4.0
+IL_00fd: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydTable>(System.String,System.Boolean)
+IL_0102: stloc.3
+IL_0103: ldloc.3
+IL_0104: brfalse.s IL_011d
+IL_0106: ldloc.1
+IL_0107: ldloc.3
+IL_0108: ldloc.1
+IL_0109: ldfld SoftwareType/<>c__DisplayClass43_0 SoftwareType/<>c__DisplayClass43_1::CS$<>8__locals1
+IL_010e: ldfld System.String SoftwareType/<>c__DisplayClass43_0::pathRoot
+IL_0113: newobj System.Void Manufacturing::.ctor(Tyd.TydTable,System.String)
+IL_0118: stfld Manufacturing SoftwareType/<>c__DisplayClass43_1::man
+IL_011d: ldloc.2
+IL_011e: brtrue IL_01f7
+IL_0123: ldarg.1
+IL_0124: ldstr "Popularity"
+IL_0129: ldc.i4.1
+IL_012a: ldc.r4 0
+IL_012f: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0134: stloc.s V_6
+IL_0136: ldarg.1
+IL_0137: ldstr "ForcePopularity"
+IL_013c: ldc.i4.0
+IL_013d: ldc.i4.0
+IL_013e: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_0143: stloc.s V_7
+IL_0145: ldarg.1
+IL_0146: ldstr "Retention"
+IL_014b: ldc.i4.1
+IL_014c: ldc.r4 0
+IL_0151: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0156: stloc.s V_8
+IL_0158: ldarg.1
+IL_0159: ldstr "Iterative"
+IL_015e: ldc.i4.1
+IL_015f: ldc.r4 0
+IL_0164: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0169: stloc.s V_9
+IL_016b: ldarg.1
+IL_016c: ldstr "Submarkets"
+IL_0171: ldc.i4.0
+IL_0172: callvirt Tyd.TydNode Tyd.TydCollection::GetChild(System.String,System.Boolean)
+IL_0177: stloc.s V_10
+IL_0179: ldloc.s V_10
+IL_017b: brtrue.s IL_0190
+IL_017d: ldc.i4.3
+IL_017e: newarr System.Double
+IL_0183: dup
+IL_0184: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=24 <PrivateImplementationDetails>::A8EDEA541FEA977E91B2906EF0D4E42FDE88A2EA
+IL_0189: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_018e: br.s IL_0198
+IL_0190: ldloc.s V_10
+IL_0192: ldc.i4.0
+IL_0193: call System.Double[] SoftwareType::GetSoftwareEq(Tyd.TydNode,System.Boolean)
+IL_0198: stloc.s V_11
+IL_019a: ldarg.1
+IL_019b: ldstr "IdealPrice"
+IL_01a0: ldc.i4.1
+IL_01a1: ldc.r4 0
+IL_01a6: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_01ab: stloc.s V_12
+IL_01ad: ldarg.1
+IL_01ae: ldstr "Hardware"
+IL_01b3: ldc.i4.0
+IL_01b4: ldc.i4.0
+IL_01b5: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_01ba: stloc.s V_13
+IL_01bc: ldarg.0
+IL_01bd: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::.ctor()
+IL_01c2: dup
+IL_01c3: ldstr "Default"
+IL_01c8: ldarg.0
+IL_01c9: ldloc.s V_6
+IL_01cb: ldloc.s V_7
+IL_01cd: ldloc.s V_8
+IL_01cf: ldloc.s V_9
+IL_01d1: ldloc.s V_12
+IL_01d3: ldloc.s V_11
+IL_01d5: ldloc.1
+IL_01d6: ldfld System.String SoftwareType/<>c__DisplayClass43_1::defaultGen
+IL_01db: ldloc.s V_13
+IL_01dd: ldloc.1
+IL_01de: ldfld Manufacturing SoftwareType/<>c__DisplayClass43_1::man
+IL_01e3: call SoftwareCategory SoftwareCategory::GetDefault(SoftwareType,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.Double[],System.String,System.Boolean,Manufacturing)
+IL_01e8: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::Add(!0,!1)
+IL_01ed: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_01f2: br IL_02a6
+IL_01f7: newobj System.Void SoftwareType/<>c__DisplayClass43_2::.ctor()
+IL_01fc: stloc.s V_14
+IL_01fe: ldloc.s V_14
+IL_0200: ldloc.1
+IL_0201: stfld SoftwareType/<>c__DisplayClass43_1 SoftwareType/<>c__DisplayClass43_2::CS$<>8__locals2
+IL_0206: ldloc.s V_14
+IL_0208: ldarg.1
+IL_0209: ldstr "IdealPrice"
+IL_020e: ldc.i4.0
+IL_020f: ldloca.s V_15
+IL_0211: initobj System.Nullable`1<System.Single>
+IL_0217: ldloc.s V_15
+IL_0219: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Single>>(System.String,System.Boolean,!!0)
+IL_021e: stfld System.Nullable`1<System.Single> SoftwareType/<>c__DisplayClass43_2::idealPrice
+IL_0223: ldloc.s V_14
+IL_0225: ldarg.1
+IL_0226: ldstr "Hardware"
+IL_022b: ldc.i4.0
+IL_022c: ldloca.s V_16
+IL_022e: initobj System.Nullable`1<System.Boolean>
+IL_0234: ldloc.s V_16
+IL_0236: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Boolean>>(System.String,System.Boolean,!!0)
+IL_023b: stfld System.Nullable`1<System.Boolean> SoftwareType/<>c__DisplayClass43_2::hardware
+IL_0240: ldarg.0
+IL_0241: ldloc.2
+IL_0242: callvirt System.Collections.Generic.List`1<Tyd.TydNode> Tyd.TydCollection::get_Nodes()
+IL_0247: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<Tyd.TydCollection>(System.Collections.IEnumerable)
+IL_024c: ldloc.s V_14
+IL_024e: ldftn SoftwareCategory SoftwareType/<>c__DisplayClass43_2::<.ctor>b__4(Tyd.TydCollection)
+IL_0254: newobj System.Void System.Func`2<Tyd.TydCollection,SoftwareCategory>::.ctor(System.Object,System.IntPtr)
+IL_0259: call System.Collections.Generic.IEnumerable`1<!!1> System.Linq.Enumerable::Select<Tyd.TydCollection,SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_025e: ldsfld System.Func`2<SoftwareCategory,System.String> SoftwareType/<>c::<>9__43_5
+IL_0263: dup
+IL_0264: brtrue.s IL_027d
+IL_0266: pop
+IL_0267: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_026c: ldftn System.String SoftwareType/<>c::<.ctor>b__43_5(SoftwareCategory)
+IL_0272: newobj System.Void System.Func`2<SoftwareCategory,System.String>::.ctor(System.Object,System.IntPtr)
+IL_0277: dup
+IL_0278: stsfld System.Func`2<SoftwareCategory,System.String> SoftwareType/<>c::<>9__43_5
+IL_027d: ldsfld System.Func`2<SoftwareCategory,SoftwareCategory> SoftwareType/<>c::<>9__43_6
+IL_0282: dup
+IL_0283: brtrue.s IL_029c
+IL_0285: pop
+IL_0286: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_028b: ldftn SoftwareCategory SoftwareType/<>c::<.ctor>b__43_6(SoftwareCategory)
+IL_0291: newobj System.Void System.Func`2<SoftwareCategory,SoftwareCategory>::.ctor(System.Object,System.IntPtr)
+IL_0296: dup
+IL_0297: stsfld System.Func`2<SoftwareCategory,SoftwareCategory> SoftwareType/<>c::<>9__43_6
+IL_029c: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<SoftwareCategory,System.String,SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_02a1: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_02a6: ldarg.1
+IL_02a7: ldstr "OSSupport"
+IL_02ac: ldc.i4.0
+IL_02ad: callvirt Tyd.TydNode Tyd.TydCollection::GetChild(System.String,System.Boolean)
+IL_02b2: stloc.s V_4
+IL_02b4: ldloc.s V_4
+IL_02b6: brfalse.s IL_0311
+IL_02b8: ldarg.0
+IL_02b9: ldloc.s V_4
+IL_02bb: callvirt System.Collections.Generic.IEnumerable`1<System.String> Tyd.TydNode::GetNodeValues()
+IL_02c0: call !!0[] System.Linq.Enumerable::ToArray<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_02c5: stfld System.String[] SoftwareType::_OSLimits
+IL_02ca: ldarg.0
+IL_02cb: ldfld System.String[] SoftwareType::_OSLimits
+IL_02d0: ldlen
+IL_02d1: conv.i4
+IL_02d2: ldc.i4.1
+IL_02d3: bne.un.s IL_02e8
+IL_02d5: ldarg.0
+IL_02d6: ldfld System.String[] SoftwareType::_OSLimits
+IL_02db: ldc.i4.0
+IL_02dc: ldelem.ref
+IL_02dd: brtrue.s IL_02e8
+IL_02df: ldarg.0
+IL_02e0: ldnull
+IL_02e1: stfld System.String[] SoftwareType::_OSLimits
+IL_02e6: br.s IL_0318
+IL_02e8: ldarg.0
+IL_02e9: ldfld System.String[] SoftwareType::_OSLimits
+IL_02ee: ldlen
+IL_02ef: conv.i4
+IL_02f0: ldc.i4.1
+IL_02f1: bne.un.s IL_0318
+IL_02f3: ldarg.0
+IL_02f4: ldfld System.String[] SoftwareType::_OSLimits
+IL_02f9: ldc.i4.0
+IL_02fa: ldelem.ref
+IL_02fb: ldc.i4.0
+IL_02fc: call System.Boolean Utilities::ConvertToBoolDef(System.String,System.Boolean)
+IL_0301: brfalse.s IL_0318
+IL_0303: ldarg.0
+IL_0304: ldc.i4.0
+IL_0305: newarr System.String
+IL_030a: stfld System.String[] SoftwareType::_OSLimits
+IL_030f: br.s IL_0318
+IL_0311: ldarg.0
+IL_0312: ldnull
+IL_0313: stfld System.String[] SoftwareType::_OSLimits
+IL_0318: ldarg.0
+IL_0319: ldarg.1
+IL_031a: ldstr "OneClient"
+IL_031f: ldc.i4.0
+IL_0320: ldc.i4.0
+IL_0321: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_0326: stfld System.Boolean SoftwareType::OneClient
+IL_032b: ldarg.0
+IL_032c: ldarg.1
+IL_032d: ldstr "InHouse"
+IL_0332: ldc.i4.0
+IL_0333: ldc.i4.0
+IL_0334: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_0339: stfld System.Boolean SoftwareType::InHouse
+IL_033e: ldarg.0
+IL_033f: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::.ctor()
+IL_0344: stfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_0349: ldarg.1
+IL_034a: ldstr "Features"
+IL_034f: ldc.i4.1
+IL_0350: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydCollection>(System.String,System.Boolean)
+IL_0355: callvirt System.Collections.Generic.List`1<Tyd.TydNode> Tyd.TydCollection::get_Nodes()
+IL_035a: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<Tyd.TydCollection>(System.Collections.IEnumerable)
+IL_035f: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Tyd.TydCollection>::GetEnumerator()
+IL_0364: stloc.s V_17
+IL_0366: br IL_045f
+IL_036b: ldloc.s V_17
+IL_036d: callvirt !0 System.Collections.Generic.IEnumerator`1<Tyd.TydCollection>::get_Current()
+IL_0372: dup
+IL_0373: ldarg.0
+IL_0374: ldfld System.String SoftwareType::Name
+IL_0379: newobj System.Void SpecFeature::.ctor(Tyd.TydCollection,System.String)
+IL_037e: stloc.s V_18
+IL_0380: ldarg.0
+IL_0381: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_0386: ldloc.s V_18
+IL_0388: ldfld System.String FeatureBase::Name
+IL_038d: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::ContainsKey(!0)
+IL_0392: brfalse.s IL_03ab
+IL_0394: ldstr "Can't re-use feature name: "
+IL_0399: ldloc.s V_18
+IL_039b: ldfld System.String FeatureBase::Name
+IL_03a0: call System.String System.String::Concat(System.String,System.String)
+IL_03a5: newobj System.Void System.Exception::.ctor(System.String)
+IL_03aa: throw
+IL_03ab: ldarg.0
+IL_03ac: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_03b1: ldloc.s V_18
+IL_03b3: ldfld System.String FeatureBase::Name
+IL_03b8: ldloc.s V_18
+IL_03ba: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::set_Item(!0,!1)
+IL_03bf: ldstr "Features"
+IL_03c4: ldc.i4.0
+IL_03c5: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydCollection>(System.String,System.Boolean)
+IL_03ca: stloc.s V_19
+IL_03cc: ldloc.s V_19
+IL_03ce: brfalse IL_045f
+IL_03d3: ldloc.s V_19
+IL_03d5: callvirt System.Collections.Generic.List`1<Tyd.TydNode> Tyd.TydCollection::get_Nodes()
+IL_03da: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<Tyd.TydCollection>(System.Collections.IEnumerable)
+IL_03df: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<Tyd.TydCollection>::GetEnumerator()
+IL_03e4: stloc.s V_20
+IL_03e6: br.s IL_0448
+IL_03e8: ldloc.s V_20
+IL_03ea: callvirt !0 System.Collections.Generic.IEnumerator`1<Tyd.TydCollection>::get_Current()
+IL_03ef: ldloc.s V_18
+IL_03f1: ldarg.0
+IL_03f2: ldfld System.String SoftwareType::Name
+IL_03f7: ldloc.1
+IL_03f8: ldfld SoftwareType/<>c__DisplayClass43_0 SoftwareType/<>c__DisplayClass43_1::CS$<>8__locals1
+IL_03fd: ldfld System.String SoftwareType/<>c__DisplayClass43_0::pathRoot
+IL_0402: newobj System.Void SubFeature::.ctor(Tyd.TydCollection,FeatureBase,System.String,System.String)
+IL_0407: stloc.s V_21
+IL_0409: ldarg.0
+IL_040a: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_040f: ldloc.s V_21
+IL_0411: ldfld System.String FeatureBase::Name
+IL_0416: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::ContainsKey(!0)
+IL_041b: brfalse.s IL_0434
+IL_041d: ldstr "Can't re-use feature name: "
+IL_0422: ldloc.s V_21
+IL_0424: ldfld System.String FeatureBase::Name
+IL_0429: call System.String System.String::Concat(System.String,System.String)
+IL_042e: newobj System.Void System.Exception::.ctor(System.String)
+IL_0433: throw
+IL_0434: ldarg.0
+IL_0435: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_043a: ldloc.s V_21
+IL_043c: ldfld System.String FeatureBase::Name
+IL_0441: ldloc.s V_21
+IL_0443: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::set_Item(!0,!1)
+IL_0448: ldloc.s V_20
+IL_044a: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_044f: brtrue.s IL_03e8
+IL_0451: leave.s IL_045f
+IL_0453: ldloc.s V_20
+IL_0455: brfalse.s IL_045e
+IL_0457: ldloc.s V_20
+IL_0459: callvirt System.Void System.IDisposable::Dispose()
+IL_045e: endfinally
+IL_045f: ldloc.s V_17
+IL_0461: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0466: brtrue IL_036b
+IL_046b: leave.s IL_0479
+IL_046d: ldloc.s V_17
+IL_046f: brfalse.s IL_0478
+IL_0471: ldloc.s V_17
+IL_0473: callvirt System.Void System.IDisposable::Dispose()
+IL_0478: endfinally
+IL_0479: ldarg.0
+IL_047a: ldarg.1
+IL_047b: ldstr "Unlock"
+IL_0480: ldc.i4.0
+IL_0481: ldloca.s V_22
+IL_0483: initobj System.Nullable`1<System.Int32>
+IL_0489: ldloc.s V_22
+IL_048b: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Int32>>(System.String,System.Boolean,!!0)
+IL_0490: stfld System.Nullable`1<System.Int32> SoftwareType::Unlock
+IL_0495: ldarg.0
+IL_0496: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_049b: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_04a0: ldsfld System.Func`2<SoftwareCategory,System.Boolean> SoftwareType/<>c::<>9__43_0
+IL_04a5: dup
+IL_04a6: brtrue.s IL_04bf
+IL_04a8: pop
+IL_04a9: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_04ae: ldftn System.Boolean SoftwareType/<>c::<.ctor>b__43_0(SoftwareCategory)
+IL_04b4: newobj System.Void System.Func`2<SoftwareCategory,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_04b9: dup
+IL_04ba: stsfld System.Func`2<SoftwareCategory,System.Boolean> SoftwareType/<>c::<>9__43_0
+IL_04bf: call System.Boolean System.Linq.Enumerable::All<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_04c4: brfalse IL_054c
+IL_04c9: ldarg.0
+IL_04ca: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_04cf: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_04d4: ldsfld System.Func`2<SoftwareCategory,System.Boolean> SoftwareType/<>c::<>9__43_7
+IL_04d9: dup
+IL_04da: brtrue.s IL_04f3
+IL_04dc: pop
+IL_04dd: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_04e2: ldftn System.Boolean SoftwareType/<>c::<.ctor>b__43_7(SoftwareCategory)
+IL_04e8: newobj System.Void System.Func`2<SoftwareCategory,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_04ed: dup
+IL_04ee: stsfld System.Func`2<SoftwareCategory,System.Boolean> SoftwareType/<>c::<>9__43_7
+IL_04f3: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_04f8: ldsfld System.Func`2<SoftwareCategory,System.Int32> SoftwareType/<>c::<>9__43_8
+IL_04fd: dup
+IL_04fe: brtrue.s IL_0517
+IL_0500: pop
+IL_0501: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_0506: ldftn System.Int32 SoftwareType/<>c::<.ctor>b__43_8(SoftwareCategory)
+IL_050c: newobj System.Void System.Func`2<SoftwareCategory,System.Int32>::.ctor(System.Object,System.IntPtr)
+IL_0511: dup
+IL_0512: stsfld System.Func`2<SoftwareCategory,System.Int32> SoftwareType/<>c::<>9__43_8
+IL_0517: call System.Int32 System.Linq.Enumerable::Min<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Int32>)
+IL_051c: stloc.s V_23
+IL_051e: ldarg.0
+IL_051f: ldflda System.Nullable`1<System.Int32> SoftwareType::Unlock
+IL_0524: call System.Boolean System.Nullable`1<System.Int32>::get_HasValue()
+IL_0529: brfalse.s IL_053f
+IL_052b: ldarg.0
+IL_052c: ldflda System.Nullable`1<System.Int32> SoftwareType::Unlock
+IL_0531: call !0 System.Nullable`1<System.Int32>::get_Value()
+IL_0536: ldloc.s V_23
+IL_0538: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_053d: stloc.s V_23
+IL_053f: ldarg.0
+IL_0540: ldloc.s V_23
+IL_0542: newobj System.Void System.Nullable`1<System.Int32>::.ctor(!0)
+IL_0547: stfld System.Nullable`1<System.Int32> SoftwareType::Unlock
+IL_054c: ldarg.1
+IL_054d: ldstr "AddOns"
+IL_0552: ldc.i4.0
+IL_0553: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydCollection>(System.String,System.Boolean)
+IL_0558: stloc.s V_5
+IL_055a: ldarg.0
+IL_055b: ldloc.s V_5
+IL_055d: brtrue.s IL_0566
+IL_055f: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn>::.ctor()
+IL_0564: br.s IL_05cb
+IL_0566: ldloc.s V_5
+IL_0568: callvirt System.Collections.Generic.List`1<Tyd.TydNode> Tyd.TydCollection::get_Nodes()
+IL_056d: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<Tyd.TydCollection>(System.Collections.IEnumerable)
+IL_0572: ldloc.1
+IL_0573: ldfld SoftwareType/<>c__DisplayClass43_0 SoftwareType/<>c__DisplayClass43_1::CS$<>8__locals1
+IL_0578: ldftn SoftwareAddOn SoftwareType/<>c__DisplayClass43_0::<.ctor>b__1(Tyd.TydCollection)
+IL_057e: newobj System.Void System.Func`2<Tyd.TydCollection,SoftwareAddOn>::.ctor(System.Object,System.IntPtr)
+IL_0583: call System.Collections.Generic.IEnumerable`1<!!1> System.Linq.Enumerable::Select<Tyd.TydCollection,SoftwareAddOn>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_0588: ldsfld System.Func`2<SoftwareAddOn,System.String> SoftwareType/<>c::<>9__43_2
+IL_058d: dup
+IL_058e: brtrue.s IL_05a7
+IL_0590: pop
+IL_0591: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_0596: ldftn System.String SoftwareType/<>c::<.ctor>b__43_2(SoftwareAddOn)
+IL_059c: newobj System.Void System.Func`2<SoftwareAddOn,System.String>::.ctor(System.Object,System.IntPtr)
+IL_05a1: dup
+IL_05a2: stsfld System.Func`2<SoftwareAddOn,System.String> SoftwareType/<>c::<>9__43_2
+IL_05a7: ldsfld System.Func`2<SoftwareAddOn,SoftwareAddOn> SoftwareType/<>c::<>9__43_3
+IL_05ac: dup
+IL_05ad: brtrue.s IL_05c6
+IL_05af: pop
+IL_05b0: ldsfld SoftwareType/<>c SoftwareType/<>c::<>9
+IL_05b5: ldftn SoftwareAddOn SoftwareType/<>c::<.ctor>b__43_3(SoftwareAddOn)
+IL_05bb: newobj System.Void System.Func`2<SoftwareAddOn,SoftwareAddOn>::.ctor(System.Object,System.IntPtr)
+IL_05c0: dup
+IL_05c1: stsfld System.Func`2<SoftwareAddOn,SoftwareAddOn> SoftwareType/<>c::<>9__43_3
+IL_05c6: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<SoftwareAddOn,System.String,SoftwareAddOn>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_05cb: stfld System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> SoftwareType::AddOns
+IL_05d0: ldarg.2
+IL_05d1: brfalse.s IL_05e1
+IL_05d3: ldarg.0
+IL_05d4: ldc.i4.1
+IL_05d5: stfld System.Boolean SoftwareType::Modded
+IL_05da: ldarg.0
+IL_05db: ldarg.2
+IL_05dc: stfld System.String SoftwareType::ModName
+IL_05e1: ret

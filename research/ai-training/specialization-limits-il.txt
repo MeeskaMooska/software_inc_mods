@@ -1,0 +1,510 @@
+TYPE GameSettings BASE UnityEngine.MonoBehaviour
+INTERFACE IBenefitReceiver
+FIELD Public, Static, Literal, HasDefault System.Single ElectricityIncomeFactor
+CONSTANT ElectricityIncomeFactor = 0.25
+FIELD Public, Static, Literal, HasDefault System.Single MaxHeat
+CONSTANT MaxHeat = 1E+07
+FIELD Public, Static, Literal, HasDefault System.Int32 HeatReductionTime
+CONSTANT HeatReductionTime = 12
+FIELD Public, Static System.Boolean HasQuitSaved
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> FixServerWiringNow
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> CalculateServerPowerNow
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> MiscStatOrder
+FIELD Public System.Boolean WireMode
+FIELD Public, Static GameSettings Instance
+FIELD Public, Static GameSettings LastInstance
+FIELD Public, Static System.Int32 MaxFloor
+FIELD Public System.Int32 FireCounter
+FIELD Public System.Int32 Looted
+FIELD Public System.Int32 StolenBack
+FIELD Public System.Boolean Arrested
+FIELD Public System.Boolean LODDirty
+FIELD Public Confiscator ConfiscatorPrefab
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Confiscator> Confiscators
+FIELD Public UnityEngine.Transform AudioListener
+FIELD Public UnityEngine.Material TreeTrunkMat
+FIELD Public UnityEngine.Material tTreeTrunkMat
+FIELD Public UnityEngine.Material LeaveMat
+FIELD Public UnityEngine.Material CactusTrunkMat
+FIELD Public StaticTree[] CachedTrees
+FIELD Public TreeBatch TreeBatchPrefab
+FIELD Public BoxController BoxController
+FIELD Public ConferenceController ConferenceController
+FIELD Public UnlockChecker UnlockCheck
+FIELD Public ScissorLift ScissorPrefab
+FIELD Public System.Collections.Generic.List`1<TreeBatch> TreeBatches
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<System.UInt32,System.UInt32>,HardwareDesignFurn/HardwareFurnInstance> _hardwareFurnInstances
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,BillboardAd> Billboards
+FIELD Public System.UInt32 BillboardID
+FIELD Public BillboardAd BillboardPrefab
+FIELD Public System.Collections.Generic.List`1<UnityEngine.GameObject> MergedTreeTrunks
+FIELD Public System.Collections.Generic.List`1<UnityEngine.GameObject> MergedLeaves
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Room> Burgled
+FIELD Public UnityEngine.ParticleSystem ChimneySmokePrefab
+FIELD Public, NotSerialized System.Collections.Generic.List`1<TreeInstance> Trees
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.Mesh,System.Collections.Generic.List`1<UnityEngine.Matrix4x4>> TreeInstance
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ReceptionDesk> ReceptionDesks
+FIELD Public, NotSerialized System.Collections.Generic.List`1<TreeInstance> TempTrees
+FIELD Public System.Collections.Generic.List`1<RoomStyle> RoomStyles
+FIELD Public RoomStyle DefaultOutdoorRoomStyle
+FIELD Public RoomStyle DefaultIndoorRoomStyle
+FIELD Public RoomStyle DefaultRoofStyle
+FIELD Public RoomStyle DefaultPathStyle
+FIELD Public RoomStyle DefaultBalconyStyle
+FIELD Public, NotSerialized QuadTree`1<TreeInstance> TreeTree
+FIELD Public RoomManager sRoomManager
+FIELD Public System.Single ElectricityBill
+FIELD Public System.Single ElectricityIncome
+FIELD Public System.Single Waterbill
+FIELD Public System.Single Gasbill
+FIELD Public System.Single LastWattUse
+FIELD Public System.Single LastWattSaved
+FIELD Public System.Double ElectricityDelta
+FIELD Public System.Double ElectricityGenerationDelta
+FIELD Public System.Double WaterDelta
+FIELD Public System.Double GasDelta
+FIELD Public System.Double ElectricityBurst
+FIELD Public System.Single ContentsInsured
+FIELD Public System.Single IdlePay
+FIELD Public ActorManager sActorManager
+FIELD Public System.Int32 ActiveFloor
+FIELD Private, NotSerialized System.UInt32 _nextLocalNetworkID
+FIELD Public, NotSerialized Company MyCompany
+FIELD Private System.Int32 WindowIDCounter
+FIELD Private System.UInt32 WorkItemIDCounter
+FIELD Private SDateTime LastTaxCase
+FIELD Public, NotSerialized SDateTime NextOnlookerCheck
+FIELD Public, NotSerialized System.Single NextHeatActionAdd
+FIELD Public System.Boolean HideCeilingFurniture
+FIELD Public, NotSerialized System.Int32[] PlatinumProgress
+FIELD Public System.Boolean AssignOverlay
+FIELD Public, NotSerialized System.Boolean MuteIssues
+FIELD Public, NotSerialized System.Boolean MuteGuide
+FIELD Public, NotSerialized System.Boolean InsuranceIncidentPossible
+FIELD Public, NotSerialized MarketSimulation simulation
+FIELD Public, NotSerialized ApplicantAttractionData ApplicantScore
+FIELD Public UnityEngine.Color[] PlotColors
+FIELD Public UnityEngine.GameObject RoomObject
+FIELD Public UnityEngine.GameObject ActorObj
+FIELD Public System.Int32 ExpansionSize
+FIELD Public, NotSerialized DifficultyValues/DifficultySetting Difficulty
+FIELD Public, NotSerialized System.Boolean HasFounder
+FIELD Public, NotSerialized System.Int32 MissedSink
+FIELD Public System.Single ExpansionCost
+FIELD Public, NotSerialized SaveGame AssociatedSave
+FIELD Public, NotSerialized SaveGame AssociatedAutoSave
+FIELD Private UnityEngine.GameObject TreeRoot
+FIELD Private, Static System.Int32 _forcePause
+FIELD Public, Static System.Boolean FreezeGame
+FIELD Public System.Int32 LastBurglarSpawn
+FIELD Public, NotSerialized System.Boolean EmployerAwardDis
+FIELD Public, Static GameSettings/WallState WallsDown
+FIELD Public System.Collections.Generic.HashSet`1<System.String> DisabledTutorials
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Loan> Loans
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Single> CompanyBenefits
+FIELD Public PersonalityGraph Personalities
+FIELD Public, NotSerialized InsuranceAccount Insurance
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Color> ColorDefaults
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<Company,SoftwareCategory>,SDateTime> LastFanWarning
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.String> StyleDefaults
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<System.String>> TeamDefaults
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,ServerGroup> ServerGroups
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.Int32,System.Collections.Generic.List`1<Furniture>> _LODFloors
+FIELD Public, NotSerialized System.Collections.Generic.List`1<IServerItem> UnsupportedServerItems
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Actor> Founders
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<System.Single>> MiscStats
+FIELD Public System.Collections.Generic.HashSet`1<System.String> CompletedTasks
+FIELD Public System.Collections.Generic.HashSet`1<System.String> ClaimedRewards
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Int32> TaskProgress
+FIELD Public System.Collections.Generic.List`1<StockMarket> StockMarkets
+FIELD Public, NotSerialized System.Collections.Generic.List`1<StockMarket> MetalMarkets
+FIELD Public System.Double OffshoreAccount
+FIELD Public System.Single Heat
+FIELD Public System.Single HeatCountdown
+FIELD Public System.Single HeatFullCountdown
+FIELD Public System.Collections.Generic.List`1<Investment> Investments
+FIELD Public System.Collections.Generic.HashSet`1<System.String> ColumnsDisabled
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.String[]> ColumnOrder
+FIELD Public, NotSerialized System.Boolean ColumnDataLoaded
+FIELD Public, NotSerialized System.Collections.Generic.List`1<TrashCan> FullTrashCans
+FIELD Public, NotSerialized System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareProduct,System.Int32>> DDoS
+FIELD Public, NotSerialized Furniture Portal1
+FIELD Public, NotSerialized Furniture Portal2
+FIELD Private System.Int32 _taskOffset
+FIELD Private System.Int32 _taskSubOffset
+FIELD Private, Static System.Single _gameSpeed
+FIELD Private, Static System.Single lastGameSpeed
+FIELD Public System.String[] Specializations
+FIELD Public System.String[] CodeSpecializations
+FIELD Public System.String[] ArtSpecializations
+FIELD Public System.Int32 LocalDefaultPriority
+FIELD Public, Static System.Boolean IsQuitting
+FIELD Public System.Single FireInspectorCluster
+FIELD Public UnityEngine.Camera LoadingCamera
+FIELD Public UnityEngine.UI.Text LoadingText
+FIELD Public UnityEngine.UI.RawImage LoadingImage
+FIELD Public GUIProgressBar LoadingBar
+FIELD Private System.Boolean CachedSpecs
+FIELD Public, NotSerialized System.Collections.Generic.List`1<AwardTrophy/AwardData> Awards
+FIELD Private SDateTime LastSpec
+FIELD Private System.String[][] CachedSpecDict
+FIELD Public UnityEngine.Color CompanyCarColor
+FIELD Public, Static System.Int32 DaysPerMonth
+FIELD Public UnityEngine.GameObject PreSimLoadPanel
+FIELD Public UnityEngine.UI.Text PreSimLoadText
+FIELD Public UnityEngine.UI.Text PreSimSWText
+FIELD Public GUIProgressBar PreSimBar
+FIELD Public System.Collections.Generic.List`1<Actor> Vacations
+FIELD Public UnityEngine.GameObject BusStopSign
+FIELD Public System.Single SalaryDue
+FIELD Public System.Single NightSalaryDue
+FIELD Public System.Single StaffSalaryDue
+FIELD Public System.String RNDString
+FIELD Public System.String RNDStringOverride
+FIELD Public System.Boolean RNDStringOverrideRandom
+FIELD Public System.Boolean RuralBigPlotOverride
+FIELD Public System.Boolean CheckOSLicenses
+FIELD Public System.Boolean DangerFreebie
+FIELD Public EnvironmentPreset Environment
+FIELD Public GameData/EnvironmentType EnvType
+FIELD Public GameData/ClimateType CliType
+FIELD Public UnityEngine.Mesh PipeMesh
+FIELD Public UnityEngine.Material PipeMat
+FIELD Public System.Boolean SkipSimulation
+FIELD Public System.Boolean SkipTrees
+FIELD Public System.Boolean EditMode
+FIELD Public System.Boolean CampaignMode
+FIELD Public System.Boolean RentMode
+FIELD Public System.Collections.Generic.HashSet`1<System.String> CurrentMissions
+FIELD Public System.Collections.Generic.HashSet`1<System.String> CompletedMissions
+FIELD Public UnityEngine.AnimationCurve TreeFalloff
+FIELD Public FrameDistributor ActorUpdateHandler
+FIELD Public FrameDistributor WorkUpdateHandler
+FIELD Public FrameDistributor FurnitureUpdateHandler
+FIELD Public FrameDistributor ComputerNoiseUpdateHandler
+FIELD Public FrameDistributor LampUpdateHandler
+FIELD Public SHashSet`1<System.String> Errors
+FIELD Public, NotSerialized System.Boolean FurnitureErrorOccured
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ReviewWork> ReviewJobs
+FIELD Public, NotSerialized System.Collections.Generic.List`1<SoftwareWorkItem> FollowerSimulation
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<SoftwareAlpha> PressBuildQueue
+FIELD Public, NotSerialized DictionaryList`2<IStockable,PrintJob> PrintOrders
+FIELD Public, NotSerialized DictionaryList`2<System.UInt32,NetworkPrintDeal> NetworkPrintOrders
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<IStockable,System.UInt32> _printsInStorage
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ProductPrinter> ProductPrinters
+FIELD Public, NotSerialized System.Collections.Generic.List`1<FoodAssemblyInput> FoodAssemblers
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Furniture> GaragePorts
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ProductPallet> ProductPallets
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Conveyor> Recyclers
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<Company/TransactionCategory,System.Collections.Generic.Dictionary`2<System.String,System.Single>> BillsCurrent
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<Company/TransactionCategory,System.Collections.Generic.Dictionary`2<System.String,System.Single>> BillsNext
+FIELD Private System.Collections.Generic.List`1<UndoObject> UndoList
+FIELD Public, Static System.Int32 MaxUndo
+FIELD Public UnityEngine.GameObject UndoButton
+FIELD Public System.Collections.Generic.Dictionary`2<System.Int32,UnityEngine.MeshFilter> FloorRentGrids
+FIELD Public System.Collections.Generic.HashSet`1<System.Int32> DirtyRentGrid
+FIELD Public GUIToolTipper UndoTip
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,RoomGroup> RoomGroups
+FIELD Public, NotSerialized System.Boolean SkipDesignGeneration
+FIELD Public, NotSerialized WriteDictionary ModData
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ElevatorGroup> ElevatorGroups
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<InventoryItem>> FurnitureInventory
+FIELD Public, NotSerialized System.UInt32 PrinterChangeCounter
+FIELD Public, NotSerialized System.Boolean ElevatorsSerialized
+FIELD Public, NotSerialized System.Boolean PermanentUnlock
+FIELD Public, NotSerialized FireReport ActiveFireReport
+FIELD Public System.Boolean PassedFireInspection
+FIELD Private, NotSerialized System.Nullable`1<System.Int32> _dirtyHelipad
+FIELD Public, NotSerialized Subway ActiveSubway
+FIELD Public, NotSerialized System.Boolean HasSubway
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<FurnitureStyle>> _furnStyles
+FIELD Private, NotSerialized System.Collections.Generic.List`1<AssemblyLine> _assemblyLines
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Room> _navRooms
+FIELD Public UnityEngine.GameObject NavIcon
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Battery> Batteries
+FIELD Private, NotSerialized Battery _batteryConsume
+FIELD Private, NotSerialized Battery _batteryFill
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Furniture> OnFire
+FIELD Private, NotSerialized System.Collections.Generic.List`1<UndoObject/UndoAction> _destructionUndo
+FIELD Public, NotSerialized System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.String>>[] AwardWinners
+FIELD Public, NotSerialized System.Single DestructionUndoCost
+FIELD Public, NotSerialized System.Single[] HourWattUse
+FIELD Public, NotSerialized System.Single[] HourWattGen
+FIELD Public, NotSerialized System.Single[] HourWaterUse
+FIELD Public, NotSerialized System.Single[] HourGasUse
+FIELD Public, NotSerialized System.Single[] MonthWattGen
+FIELD Public, NotSerialized System.Single[] MonthWattUse
+FIELD Public, NotSerialized System.Single[] MonthWaterUse
+FIELD Public, NotSerialized System.Single[] MonthGasUse
+FIELD Public, NotSerialized System.String HotDep
+FIELD Public, NotSerialized System.String CoolDep
+FIELD Public, NotSerialized System.DateTime LastSaveTime
+FIELD Public, NotSerialized ObjectPool`1<ScissorLift> ScissorPool
+FIELD Public, NotSerialized GridQuery`1<Actor> ActorGrid
+FIELD Private, NotSerialized AccountingWork _backgroundAccounting
+FIELD Public, NotSerialized UnityEngine.Vector3 BusDir
+FIELD Public, NotSerialized UnityEngine.Vector3 BusStart
+FIELD Public, NotSerialized NetworkMeta NetworkData
+FIELD Public, NotSerialized System.Nullable`1<System.Single> YearlyNetworkIPO
+FIELD Public, NotSerialized System.Boolean PlotAdjacency
+FIELD Public, NotSerialized System.Single RoundLimit
+FIELD Public, NotSerialized SINetworking.NetworkLobby/RoundLimitType RoundType
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Room> QueuedNetworkRooms
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Room> QueuedNetworkEdges
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<RoomSegment,System.Boolean> QueuedNetworkSegments
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Furniture> QueuedNetworkFurniture
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.String> PreferredServerGroup
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> BanList
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.UInt64> SteamInvitedToGame
+FIELD Public UnityEngine.Material SignSDFMat
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Company,System.ValueTuple`2<UnityEngine.RenderTexture,UnityEngine.Material>> _companyBuildingNames
+FIELD Private, NotSerialized System.Boolean DisableAchievements
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Furniture> ITStations
+FIELD Public, NotSerialized HashList`1<Furniture> BrokenIT
+FIELD Public, NotSerialized ITServerTask ITSupportProcess
+FIELD Public, NotSerialized System.String ITSupportServer
+FIELD Public System.Int32 ForceTimeType
+FIELD Public, NotSerialized System.Collections.Generic.List`1<Actor> ResetRooms
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.ValueTuple`2<Team,Team>> TeamTaskComp
+FIELD Public, NotSerialized System.Single ServerCost
+FIELD Public, NotSerialized System.EventHandler OnServersChanged
+FIELD Public, Static System.EventHandler IsDoneLoadingGame
+FIELD Public, Static System.EventHandler GameReady
+FIELD Public, Static System.EventHandler OnHardwareAtlasInitialized
+FIELD Private, Static System.EventHandler OnQuit
+FIELD Public System.Single UndoAutosaveWait
+FIELD Public System.Boolean wasSkipping
+FIELD Public System.Collections.Generic.HashSet`1<System.Object> Cached
+FIELD Public UnityEngine.GameObject PlotPrefab
+FIELD Public UnityEngine.Transform PlotHolder
+FIELD Public, NotSerialized System.Collections.Generic.List`1<PlotArea> Plots
+FIELD Public, NotSerialized System.Collections.Generic.List`1<PlotArea> PlayerPlots
+FIELD Private System.Threading.Thread _simThread
+FIELD Private, Static, InitOnly System.Collections.Generic.HashSet`1<System.String> _stockNameFilter
+FIELD Public, NotSerialized System.Boolean HasToFinalizeTimers
+FIELD Private, NotSerialized System.Collections.Generic.List`1<WorkItem> _workItemUpdateLoopCache
+FIELD Private System.Int32 _refreshFurnEdgeNum
+FIELD Private System.Int32 _refreshFurnEdgeOffset
+FIELD Public System.Single InGameMinute
+FIELD Public System.Single LeaveShakeSpeed
+FIELD Public System.Single LeaveShakeStart
+FIELD Public System.Single LeaveTime
+FIELD Private System.Single _leaveShake
+FIELD Public, NotSerialized System.Boolean PreSimActive
+FIELD Public, NotSerialized System.Boolean PreSimFinished
+FIELD Private System.String presimloadtxt
+FIELD Private System.String presimswtext
+FIELD Private System.Single presimloadbar
+FIELD Private SDateTime presimfinaltime
+FIELD Public, NotSerialized System.Collections.Generic.List`1<EmployeeTermination> SerializedEvents
+FIELD Public, NotSerialized System.Collections.Generic.List`1<TransportBox/SaveBox> SerializedBoxes
+FIELD Public, NotSerialized System.Collections.Generic.List`1<HelicopterData> SerializedHeli
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,MissionGuide/CampaignCharacter> CampaignCharacters
+FIELD Public, NotSerialized System.Collections.Generic.List`1<GameSettings/PlotLoanData> PLoanData
+FIELD Private, NotSerialized System.UInt32 _tempPortal1
+FIELD Private, NotSerialized System.UInt32 _tempPortal2
+FIELD Private, NotSerialized System.Single _fetchCooldown
+FIELD Private, NotSerialized System.Byte[] _lastGrassFetch
+FIELD Private, NotSerialized System.Boolean _fetchingGrass
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Rendering.AsyncGPUReadbackRequest> _lastFetchTask
+FIELD Private, NotSerialized UnityEngine.Texture2D _tempGrassTex
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GameSettings/Lawsuit> _lawsuitQueue
+FIELD Public System.Single GrassTrotUpdate
+FIELD Public System.Int32 TrotSize
+FIELD Private System.Single _grassTrotTime
+FIELD Public UnityEngine.RenderTexture GrassTrot
+FIELD Public UnityEngine.Camera GrassTrotCam
+FIELD Public UnityEngine.Mesh GrassTrotQuad
+FIELD Public UnityEngine.Material GrassTrotMat
+FIELD Public UnityEngine.Material GrassTrotResetMat
+FIELD Public UnityEngine.Material TrotNullMat
+FIELD Public UnityEngine.Texture TrotNullTexture
+FIELD Private SDateTime _lastUpdate
+FIELD Private System.Boolean _dynamicPaths
+FIELD Private System.Collections.Generic.List`1<System.ValueTuple`2<System.UInt32,System.UInt32>> _buyouts
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.Int32,System.Single> _computerPower
+PROPERTY System.Boolean GameSettings::IgnoreBusinessRep()
+PROPERTY System.Int32 GameSettings::DefaultPriority()
+PROPERTY System.Boolean GameSettings::IsNetworkMode()
+PROPERTY System.Boolean GameSettings::AllowModdedFurniture()
+PROPERTY System.Int32 GameSettings::ITStationCount()
+PROPERTY System.Boolean GameSettings::IsHost()
+PROPERTY System.Boolean GameSettings::AchievementsDisabled()
+PROPERTY AccountingWork GameSettings::BackgroundAccounting()
+PROPERTY System.Boolean GameSettings::AnyDestructionUndos()
+PROPERTY System.Int32 GameSettings::UndoCount()
+PROPERTY System.Single GameSettings::GameSpeed()
+PROPERTY System.Boolean GameSettings::ForcePause()
+PROPERTY System.Boolean GameSettings::LawsuitsQueued()
+PROPERTY System.Single GameSettings::HeatPercent()
+METHOD Public, Static, HideBySig System.Int32 GameSettings::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Boolean)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+LOCAL 3 System.Int32
+LOCAL 4 System.Int32
+LOCAL 5 System.Int32
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_000a: brfalse.s IL_0019
+IL_000c: ldarg.0
+IL_000d: ldc.i4.0
+IL_000e: ldc.r4 0.5
+IL_0013: call System.Int32 GameData::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Single)
+IL_0018: ret
+IL_0019: ldarg.1
+IL_001a: brfalse IL_00d0
+IL_001f: ldarg.0
+IL_0020: switch IL_003e,IL_0048,IL_0072,IL_009c,IL_00c6
+IL_0039: br IL_0199
+IL_003e: ldsfld System.String[] Employee::LeadSpecs
+IL_0043: ldlen
+IL_0044: conv.i4
+IL_0045: ldc.i4.3
+IL_0046: mul
+IL_0047: ret
+IL_0048: ldsfld GameSettings GameSettings::Instance
+IL_004d: ldfld System.String[] GameSettings::CodeSpecializations
+IL_0052: ldlen
+IL_0053: conv.i4
+IL_0054: ldc.i4.3
+IL_0055: mul
+IL_0056: stloc.0
+IL_0057: ldarg.2
+IL_0058: brfalse.s IL_0070
+IL_005a: ldloc.0
+IL_005b: ldsfld GameSettings GameSettings::Instance
+IL_0060: ldc.i4.1
+IL_0061: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0066: ldlen
+IL_0067: conv.i4
+IL_0068: ldc.i4.3
+IL_0069: mul
+IL_006a: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_006f: stloc.0
+IL_0070: ldloc.0
+IL_0071: ret
+IL_0072: ldsfld GameSettings GameSettings::Instance
+IL_0077: ldfld System.String[] GameSettings::Specializations
+IL_007c: ldlen
+IL_007d: conv.i4
+IL_007e: ldc.i4.3
+IL_007f: mul
+IL_0080: stloc.1
+IL_0081: ldarg.2
+IL_0082: brfalse.s IL_009a
+IL_0084: ldloc.1
+IL_0085: ldsfld GameSettings GameSettings::Instance
+IL_008a: ldc.i4.2
+IL_008b: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0090: ldlen
+IL_0091: conv.i4
+IL_0092: ldc.i4.3
+IL_0093: mul
+IL_0094: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0099: stloc.1
+IL_009a: ldloc.1
+IL_009b: ret
+IL_009c: ldsfld GameSettings GameSettings::Instance
+IL_00a1: ldfld System.String[] GameSettings::ArtSpecializations
+IL_00a6: ldlen
+IL_00a7: conv.i4
+IL_00a8: ldc.i4.3
+IL_00a9: mul
+IL_00aa: stloc.2
+IL_00ab: ldarg.2
+IL_00ac: brfalse.s IL_00c4
+IL_00ae: ldloc.2
+IL_00af: ldsfld GameSettings GameSettings::Instance
+IL_00b4: ldc.i4.3
+IL_00b5: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_00ba: ldlen
+IL_00bb: conv.i4
+IL_00bc: ldc.i4.3
+IL_00bd: mul
+IL_00be: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_00c3: stloc.2
+IL_00c4: ldloc.2
+IL_00c5: ret
+IL_00c6: ldsfld System.String[] Employee::ServiceSpecs
+IL_00cb: ldlen
+IL_00cc: conv.i4
+IL_00cd: ldc.i4.3
+IL_00ce: mul
+IL_00cf: ret
+IL_00d0: ldarg.0
+IL_00d1: switch IL_00ef,IL_00f5,IL_0127,IL_015d,IL_0193
+IL_00ea: br IL_0199
+IL_00ef: ldsfld System.Int32 Employee::MaxLeadSpec
+IL_00f4: ret
+IL_00f5: ldsfld GameSettings GameSettings::Instance
+IL_00fa: ldfld System.String[] GameSettings::CodeSpecializations
+IL_00ff: ldlen
+IL_0100: conv.i4
+IL_0101: ldc.r4 0.5
+IL_0106: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_010b: stloc.3
+IL_010c: ldarg.2
+IL_010d: brfalse.s IL_0125
+IL_010f: ldloc.3
+IL_0110: ldsfld GameSettings GameSettings::Instance
+IL_0115: ldc.i4.1
+IL_0116: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_011b: ldlen
+IL_011c: conv.i4
+IL_011d: ldc.i4.3
+IL_011e: mul
+IL_011f: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0124: stloc.3
+IL_0125: ldloc.3
+IL_0126: ret
+IL_0127: ldsfld GameSettings GameSettings::Instance
+IL_012c: ldfld System.String[] GameSettings::Specializations
+IL_0131: ldlen
+IL_0132: conv.i4
+IL_0133: ldc.r4 0.5
+IL_0138: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_013d: stloc.s V_4
+IL_013f: ldarg.2
+IL_0140: brfalse.s IL_015a
+IL_0142: ldloc.s V_4
+IL_0144: ldsfld GameSettings GameSettings::Instance
+IL_0149: ldc.i4.2
+IL_014a: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_014f: ldlen
+IL_0150: conv.i4
+IL_0151: ldc.i4.3
+IL_0152: mul
+IL_0153: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0158: stloc.s V_4
+IL_015a: ldloc.s V_4
+IL_015c: ret
+IL_015d: ldsfld GameSettings GameSettings::Instance
+IL_0162: ldfld System.String[] GameSettings::ArtSpecializations
+IL_0167: ldlen
+IL_0168: conv.i4
+IL_0169: ldc.r4 0.5
+IL_016e: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_0173: stloc.s V_5
+IL_0175: ldarg.2
+IL_0176: brfalse.s IL_0190
+IL_0178: ldloc.s V_5
+IL_017a: ldsfld GameSettings GameSettings::Instance
+IL_017f: ldc.i4.3
+IL_0180: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0185: ldlen
+IL_0186: conv.i4
+IL_0187: ldc.i4.3
+IL_0188: mul
+IL_0189: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_018e: stloc.s V_5
+IL_0190: ldloc.s V_5
+IL_0192: ret
+IL_0193: ldsfld System.Int32 Employee::MaxServiceSpec
+IL_0198: ret
+IL_0199: ldstr "role"
+IL_019e: ldarg.0
+IL_019f: box Employee/EmployeeRole
+IL_01a4: ldnull
+IL_01a5: newobj System.Void System.ArgumentOutOfRangeException::.ctor(System.String,System.Object,System.String)
+IL_01aa: throw

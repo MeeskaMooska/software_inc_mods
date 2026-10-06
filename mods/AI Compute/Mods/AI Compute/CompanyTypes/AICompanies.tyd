@@ -1,0 +1,16 @@
+CompanyType
+{
+    Specialization "SDSI Artificial Intelligence"
+    PerYear 0.2
+    Min 2
+    Max 5
+    Frameworks False
+    Types
+    [
+        {
+            Software "Artificial Intelligence"
+            Category "General Purpose AI"
+            Chance 1
+        }
+    ]
+}

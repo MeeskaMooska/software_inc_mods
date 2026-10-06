@@ -1,0 +1,216 @@
+TYPE Employee/<>c__DisplayClass79_0 BASE System.Object
+FIELD Public System.Int32 y
+FIELD Public System.Func`2<SoftwareCategory,System.Boolean> <>9__1
+METHOD Assembly, HideBySig System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__0(SoftwareType)
+LOCAL 0 System.Func`2<SoftwareCategory,System.Boolean>
+IL_0000: ldarg.1
+IL_0001: ldfld System.Boolean SoftwareType::OneClient
+IL_0006: brtrue.s IL_0046
+IL_0008: ldarg.1
+IL_0009: ldarg.0
+IL_000a: ldfld System.Int32 Employee/<>c__DisplayClass79_0::y
+IL_000f: callvirt System.Boolean SoftwareType::IsUnlocked(System.Int32)
+IL_0014: brfalse.s IL_0046
+IL_0016: ldarg.1
+IL_0017: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_001c: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_0021: ldarg.0
+IL_0022: ldfld System.Func`2<SoftwareCategory,System.Boolean> Employee/<>c__DisplayClass79_0::<>9__1
+IL_0027: dup
+IL_0028: brtrue.s IL_0040
+IL_002a: pop
+IL_002b: ldarg.0
+IL_002c: ldarg.0
+IL_002d: ldftn System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__1(SoftwareCategory)
+IL_0033: newobj System.Void System.Func`2<SoftwareCategory,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0038: dup
+IL_0039: stloc.0
+IL_003a: stfld System.Func`2<SoftwareCategory,System.Boolean> Employee/<>c__DisplayClass79_0::<>9__1
+IL_003f: ldloc.0
+IL_0040: call System.Boolean System.Linq.Enumerable::Any<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0045: ret
+IL_0046: ldc.i4.0
+IL_0047: ret
+METHOD Assembly, HideBySig System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__1(SoftwareCategory)
+IL_0000: ldarg.1
+IL_0001: ldarg.0
+IL_0002: ldfld System.Int32 Employee/<>c__DisplayClass79_0::y
+IL_0007: callvirt System.Boolean SoftwareCategory::IsUnlocked(System.Int32)
+IL_000c: ret
+TYPE ActorCustomization/<>c BASE System.Object
+FIELD Public, Static, InitOnly ActorCustomization/<>c <>9
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__161_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__161_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__162_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__163_1
+FIELD Public, Static System.Action`1<ActorBodyItemToggle> <>9__172_0
+FIELD Public, Static System.Func`2<ActorBodyItem/ColorMapping,System.Boolean> <>9__178_2
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__178_3
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__178_4
+FIELD Public, Static System.Func`2<UnityEngine.GameObject,ActorBodyItem> <>9__179_0
+FIELD Public, Static System.Action`1<BodySliderGroup> <>9__183_0
+FIELD Public, Static System.Action`1<BodySliderGroup> <>9__183_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__188_0
+FIELD Public, Static System.Func`2<ActorBodyItem/ColorMapping,System.String> <>9__192_0
+FIELD Public, Static System.Func`2<System.Single,System.String> <>9__212_0
+FIELD Public, Static System.Func`2<SaveGame,System.Boolean> <>9__212_1
+FIELD Public, Static System.Func`2<GUICombobox,System.String> <>9__212_6
+FIELD Public, Static System.Func`2<GUICombobox,System.String> <>9__212_2
+FIELD Public, Static System.Func`2<SoftwareType,System.Boolean> <>9__214_0
+FIELD Public, Static System.Action`1<UnityEngine.GameObject> <>9__216_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__218_0
+FIELD Public, Static System.Func`2<ActorBodyItem/ColorMapping,System.Boolean> <>9__218_2
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__218_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__220_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__220_1
+FIELD Public, Static System.Func`2<Employee/Trait,System.Boolean> <>9__227_0
+FIELD Public, Static System.Func`2<Employee/Trait,System.Boolean> <>9__227_1
+FIELD Public, Static System.Func`2<Employee/Trait,System.Boolean> <>9__227_2
+FIELD Public, Static System.Func`2<GUICombobox,System.String> <>9__228_0
+FIELD Public, Static System.Action`1<UITrait> <>9__228_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__236_0
+FIELD Public, Static System.Func`2<UnityEngine.EventSystems.RaycastResult,System.Boolean> <>9__238_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__238_1
+FIELD Public, Static System.Func`2<FounderManager/FounderDescriptor,System.Boolean> <>9__244_0
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.Int32> <>9__244_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__245_0
+FIELD Public, Static System.Func`2<UnityEngine.UI.Slider,System.Single> <>9__261_0
+FIELD Public, Static System.Func`2<UnityEngine.UI.Slider,System.Single> <>9__261_1
+FIELD Public, Static System.Func`2<UnityEngine.UI.Slider,System.Single> <>9__263_0
+FIELD Public, Static System.Func`2<UnityEngine.UI.Slider,System.Single> <>9__263_1
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__265_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__266_0
+FIELD Public, Static System.Func`2<System.Char,System.Char> <>9__274_0
+FIELD Public, Static System.Func`3<System.String,System.Char,System.String> <>9__274_1
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,CustomActor>,System.String> <>9__280_0
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__280_3
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.String> <>9__280_6
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.Int32> <>9__280_7
+FIELD Public, Static System.Func`2<System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> <>9__280_4
+FIELD Public, Static System.Action`1<System.Collections.Generic.KeyValuePair`2<Employee/Trait,UITrait>> <>9__280_5
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__281_0
+FIELD Public, Static System.Func`2<ActorBodyItem,ActorBodyItem/BodyItemObject> <>9__281_1
+FIELD Public, Static System.Func`2<UnityEngine.UI.Slider,System.Single> <>9__281_2
+FIELD Public, Static System.Func`2<GUICombobox,System.String> <>9__281_3
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<Employee/Trait,UITrait>,System.Boolean> <>9__281_4
+FIELD Public, Static System.Func`2<System.Collections.Generic.KeyValuePair`2<Employee/Trait,UITrait>,Employee/Trait> <>9__281_5
+FIELD Public, Static System.Func`2<ActorBodyItem,System.Boolean> <>9__282_0
+FIELD Public, Static System.Func`2<ActorBodyItem,ActorBodyItem/BodyItemObject> <>9__282_1
+METHOD Assembly, HideBySig System.Boolean ActorCustomization/<>c::<UpdateLeadFocusCombo>b__214_0(SoftwareType)
+IL_0000: ldarg.1
+IL_0001: ldfld System.Boolean SoftwareType::OneClient
+IL_0006: ldc.i4.0
+IL_0007: ceq
+IL_0009: ret
+TYPE GUIListView BASE UnityEngine.MonoBehaviour
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,GUIListView/ColumnDef> ColumnDefinitions
+FIELD Private, NotSerialized EventList`1<System.Object> _items
+FIELD Public, NotSerialized System.Collections.Generic.List`1<System.Object> ActualItems
+FIELD Public, InitOnly EventList`1<System.Int32> Selected
+FIELD Public System.Boolean MultiSelect
+FIELD Public UnityEngine.Rect lastSize
+FIELD Public UnityEngine.GameObject ContentPanel
+FIELD Public System.String[] Columns
+FIELD Public, NotSerialized System.Collections.Generic.List`1<GUIColumn> GUIColumns
+FIELD Public GUIColumn LastSort
+FIELD Public UnityEngine.UI.Scrollbar scrollbar
+FIELD Private, NotSerialized UnityEngine.RectTransform _rect
+FIELD Public, NotSerialized System.Action OnDoubleClick
+FIELD Private, NotSerialized GUIColumn _doubleClickColumn
+FIELD Private, NotSerialized UnityEngine.RectTransform _contentRect
+FIELD Private System.Boolean dirty
+FIELD Public System.Boolean LastSelectDirect
+FIELD Private, NotSerialized System.Boolean _canDoubleClick
+FIELD Public System.Action`1<System.Boolean> OnSelectChange
+FIELD Public System.Boolean IgnoreTranslation
+FIELD Public System.Single NextRefresh
+FIELD Public UnityEngine.GameObject NoFilterMatch
+FIELD Public UnityEngine.Events.UnityEvent OnFilterUpdate
+FIELD Public System.Int32 ColumnConfDirty
+FIELD Public System.Boolean DisableRefresh
+FIELD Public System.String SpecialID
+FIELD Public, NotSerialized System.Boolean CreatedInGame
+FIELD Private, NotSerialized System.Boolean _anyTotals
+FIELD Private System.Boolean _delayedLoad
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.Object,System.Int32> _sortMaintain
+FIELD Private, NotSerialized System.Object[] SelectedBeforeChange
+FIELD Private, NotSerialized System.Boolean Initialized
+FIELD Private System.Int32 _updateIDX
+FIELD Private, NotSerialized System.Single _lastSelection
+PROPERTY EventList`1<System.Object> GUIListView::Items()
+PROPERTY UnityEngine.RectTransform GUIListView::rectTransform()
+PROPERTY UnityEngine.RectTransform GUIListView::ContentRect()
+PROPERTY GUIColumn GUIListView::Item(System.String)
+PROPERTY System.Int32 GUIListView::Scroll()
+PROPERTY System.Boolean GUIListView::IsFocused()
+METHOD Private, Static, HideBySig System.Void GUIListView::ToggleMod(ModPackage,System.Boolean)
+LOCAL 0 ModPackage[]
+LOCAL 1 System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator>
+LOCAL 2 System.String
+LOCAL 3 SoftwareType[]
+IL_0000: ldarg.0
+IL_0001: callvirt System.Boolean ModPackage::get_Enabled()
+IL_0006: ldarg.1
+IL_0007: beq IL_00cf
+IL_000c: ldarg.0
+IL_000d: ldarg.1
+IL_000e: callvirt System.Void ModPackage::set_Enabled(System.Boolean)
+IL_0013: ldarg.0
+IL_0014: callvirt System.Boolean ModPackage::get_Enabled()
+IL_0019: brfalse IL_00a7
+IL_001e: ldsfld System.Collections.Generic.List`1<ModPackage> GameData::ModPackages
+IL_0023: ldsfld System.Func`2<ModPackage,System.Boolean> GUIListView/<>c::<>9__12_0
+IL_0028: dup
+IL_0029: brtrue.s IL_0042
+IL_002b: pop
+IL_002c: ldsfld GUIListView/<>c GUIListView/<>c::<>9
+IL_0031: ldftn System.Boolean GUIListView/<>c::<ToggleMod>b__12_0(ModPackage)
+IL_0037: newobj System.Void System.Func`2<ModPackage,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_003c: dup
+IL_003d: stsfld System.Func`2<ModPackage,System.Boolean> GUIListView/<>c::<>9__12_0
+IL_0042: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<ModPackage>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0047: call !!0[] System.Linq.Enumerable::ToArray<ModPackage>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_004c: stloc.0
+IL_004d: ldloc.0
+IL_004e: call System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,RandomNameGenerator>> GameData::AllNameGenerators(ModPackage[])
+IL_0053: call System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> GameData::MergeGenerators(System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,RandomNameGenerator>>)
+IL_0058: stloc.1
+IL_0059: ldloc.0
+IL_005a: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_005f: call !!0[] System.Linq.Enumerable::ToArray<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0064: stloc.3
+IL_0065: ldloc.3
+IL_0066: call System.String GameData::CheckForErrors(SoftwareType[])
+IL_006b: dup
+IL_006c: brtrue.s IL_0081
+IL_006e: pop
+IL_006f: ldloc.3
+IL_0070: ldloc.0
+IL_0071: call System.Collections.Generic.IEnumerable`1<CompanyType> GameData::AllCompanyTypes(ModPackage[])
+IL_0076: call !!0[] System.Linq.Enumerable::ToArray<CompanyType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_007b: ldloc.1
+IL_007c: call System.String ModPackage::OtherErrors(SoftwareType[],CompanyType[],System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator>)
+IL_0081: stloc.2
+IL_0082: leave.s IL_008c
+IL_0084: callvirt System.String System.Exception::get_Message()
+IL_0089: stloc.2
+IL_008a: leave.s IL_008c
+IL_008c: ldloc.2
+IL_008d: brfalse.s IL_00a7
+IL_008f: ldarg.0
+IL_0090: ldc.i4.0
+IL_0091: callvirt System.Void ModPackage::set_Enabled(System.Boolean)
+IL_0096: ldstr "ModEnableError"
+IL_009b: call System.String Localization::Loc(System.String)
+IL_00a0: ldc.i4.1
+IL_00a1: ldc.i4.2
+IL_00a2: call System.Void WindowManager::SpawnDialog(System.String,System.Boolean,DialogWindow/DialogType)
+IL_00a7: ldsfld ActorCustomization ActorCustomization::Instance
+IL_00ac: callvirt System.Void ActorCustomization::UpdatePersonalities()
+IL_00b1: ldsfld ActorCustomization ActorCustomization::Instance
+IL_00b6: callvirt System.Void ActorCustomization::UpdateSpec()
+IL_00bb: ldsfld ActorCustomization ActorCustomization::Instance
+IL_00c0: callvirt System.Void ActorCustomization::ScaleAllSkillStats()
+IL_00c5: ldsfld ActorCustomization ActorCustomization::Instance
+IL_00ca: callvirt System.Void ActorCustomization::UpdateLeadFocusCombo()
+IL_00cf: ret

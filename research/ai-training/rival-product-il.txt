@@ -1,0 +1,536 @@
+TYPE SimulatedCompany/ProductPrototype BASE System.Object
+INTERFACE IStockable
+INTERFACE ILossable
+INTERFACE IReferenceFix
+INTERFACE IFormatColorObject
+INTERFACE ICalenderItem
+INTERFACE SimulatedCompany/IProjectPrototype
+FIELD Public, InitOnly System.String Name
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory Category
+FIELD Public SoftwareProduct SequelTo
+FIELD Public SoftwareFramework Framework
+FIELD Public, InitOnly System.String NewFramework
+FIELD Public System.Single FrameworkRoyalty
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> Needs
+FIELD Public System.Double CreativityScore
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> Tools
+FIELD Public SoftwareProduct[] OSs
+FIELD Public FeatureBase[] Features
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> Techs
+FIELD Public, InitOnly System.Single Price
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Public, InitOnly System.Double[] Submarkets
+FIELD Public System.Double CodeProgress
+FIELD Public System.Double ArtProgress
+FIELD Public System.Double CodeQuality
+FIELD Public System.Double ArtQuality
+FIELD Public System.Double Quality
+FIELD Public System.Double Loss
+FIELD Public SDateTime DevStart
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Single Reception
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public System.Int32 DevTeam
+FIELD Public System.Single DevTimeLeft
+FIELD Public SDateTime ReleaseDate
+FIELD Public SimulatedCompany DevCompany
+FIELD Public System.Nullable`1<System.UInt32> SWID
+FIELD Public System.Boolean Released
+FIELD Public System.Boolean DevStarted
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Public SoftwareProduct Final
+FIELD Public System.Boolean PrintDeal
+FIELD Private System.UInt32 _physicalCopies
+PROPERTY System.UInt32 SimulatedCompany/ProductPrototype::CopiesPerBox()
+PROPERTY System.Boolean SimulatedCompany/ProductPrototype::IsReadOnlyJob()
+PROPERTY System.Int32 SimulatedCompany/ProductPrototype::HardwareMask()
+PROPERTY System.Int32 SimulatedCompany/ProductPrototype::HardwareInputMask()
+PROPERTY System.Single SimulatedCompany/ProductPrototype::HardwarePrice()
+PROPERTY SoftwareType SimulatedCompany/ProductPrototype::SWType()
+PROPERTY SoftwareCategory SimulatedCompany/ProductPrototype::SWCat()
+PROPERTY IManufacturable SimulatedCompany/ProductPrototype::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SimulatedCompany/ProductPrototype::FeaturesBases()
+PROPERTY System.Boolean SimulatedCompany/ProductPrototype::StockNotifications()
+PROPERTY IStockable SimulatedCompany/ProductPrototype::DeferStock()
+PROPERTY System.UInt32 SimulatedCompany/ProductPrototype::PhysicalCopies()
+METHOD Public, HideBySig SoftwareProduct SimulatedCompany/ProductPrototype::ToProduct(SDateTime,Employee)
+LOCAL 0 System.Int32
+LOCAL 1 System.UInt32
+LOCAL 2 System.Boolean
+LOCAL 3 FeatureBase[]
+LOCAL 4 System.Single
+LOCAL 5 System.Double
+LOCAL 6 SoftwareProduct
+LOCAL 7 System.Collections.Generic.List`1<AddOnProduct>
+LOCAL 8 System.Nullable`1<System.UInt32>
+LOCAL 9 SoftwareWorkItem/FeatureProgress[]
+LOCAL 10 SoftwareWorkItem/FeatureProgress[]
+LOCAL 11 System.Int32
+LOCAL 12 System.Collections.Generic.IEnumerator`1<SoftwareAddOn>
+LOCAL 13 SoftwareAddOn
+LOCAL 14 System.Collections.Generic.List`1<AddOnFeature>
+LOCAL 15 System.Collections.Generic.List`1<System.UInt32>
+LOCAL 16 System.Random
+LOCAL 17 AddOnProduct
+IL_0000: ldarg.0
+IL_0001: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::SequelTo
+IL_0006: brfalse.s IL_0022
+IL_0008: ldarg.0
+IL_0009: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::SequelTo
+IL_000e: ldfld System.Boolean SoftwareProduct::DesignerOwned
+IL_0013: brfalse.s IL_0022
+IL_0015: ldarg.0
+IL_0016: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::SequelTo
+IL_001b: ldfld Employee SoftwareProduct::LeadDesigner
+IL_0020: starg.s leadDesigner
+IL_0022: ldarg.0
+IL_0023: ldc.i4.1
+IL_0024: stfld System.Boolean SimulatedCompany/ProductPrototype::Released
+IL_0029: ldarg.0
+IL_002a: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_002f: ldfld System.Single SimulatedCompany::BusinessSavy
+IL_0034: ldc.r4 0.1
+IL_0039: call MarketSimulation MarketSimulation::get_Active()
+IL_003e: ldfld System.Random MarketSimulation::Random
+IL_0043: call System.Single Utilities::RandomGaussClamped(System.Single,System.Single,System.Random)
+IL_0048: ldarg.0
+IL_0049: ldfld System.Single SimulatedCompany/ProductPrototype::DevTime
+IL_004e: mul
+IL_004f: ldc.r4 50
+IL_0054: mul
+IL_0055: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_005a: stloc.0
+IL_005b: ldsfld GameSettings GameSettings::Instance
+IL_0060: ldfld MarketSimulation GameSettings::simulation
+IL_0065: ldarg.0
+IL_0066: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_006b: ldarg.0
+IL_006c: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_0071: ldarg.0
+IL_0072: ldfld SoftwareProduct[] SimulatedCompany/ProductPrototype::OSs
+IL_0077: callvirt System.UInt32 MarketSimulation::GetFollowerReach(SoftwareType,SoftwareCategory,System.Collections.Generic.IEnumerable`1<SoftwareProduct>)
+IL_007c: conv.r.un
+IL_007d: conv.r4
+IL_007e: ldc.r4 0.1
+IL_0083: mul
+IL_0084: ldarg.0
+IL_0085: ldfld System.Single SimulatedCompany/ProductPrototype::Reception
+IL_008a: mul
+IL_008b: conv.u4
+IL_008c: stloc.1
+IL_008d: ldarg.0
+IL_008e: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_0093: callvirt System.Boolean SoftwareType::get_OSSpecific()
+IL_0098: stloc.2
+IL_0099: ldarg.0
+IL_009a: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_009f: ldarg.0
+IL_00a0: ldfld FeatureBase[] SimulatedCompany/ProductPrototype::Features
+IL_00a5: ldarg.0
+IL_00a6: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_00ab: ldarg.0
+IL_00ac: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_00b1: callvirt FeatureBase[] SoftwareType::FixUp(System.Collections.Generic.IEnumerable`1<FeatureBase>,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,TechLevel>)
+IL_00b6: stloc.3
+IL_00b7: ldc.r4 0.01
+IL_00bc: ldc.r4 1
+IL_00c1: ldarg.0
+IL_00c2: ldfld System.Single SimulatedCompany/ProductPrototype::DevTimeLeft
+IL_00c7: ldc.r4 1
+IL_00cc: ldarg.0
+IL_00cd: ldfld SDateTime SimulatedCompany/ProductPrototype::DevStart
+IL_00d2: ldarg.0
+IL_00d3: ldfld SDateTime SimulatedCompany/ProductPrototype::ReleaseDate
+IL_00d8: call System.Int32 SDateTime::GetMonthsFlat(SDateTime,SDateTime)
+IL_00dd: conv.r4
+IL_00de: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_00e3: div
+IL_00e4: sub
+IL_00e5: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_00ea: stloc.s V_4
+IL_00ec: ldarg.0
+IL_00ed: ldfld System.Double SimulatedCompany/ProductPrototype::CodeProgress
+IL_00f2: ldarg.0
+IL_00f3: ldfld System.Double SimulatedCompany/ProductPrototype::ArtProgress
+IL_00f8: ldarg.0
+IL_00f9: ldfld System.Double SimulatedCompany/ProductPrototype::CodeQuality
+IL_00fe: ldarg.0
+IL_00ff: ldfld System.Double SimulatedCompany/ProductPrototype::ArtQuality
+IL_0104: ldarg.0
+IL_0105: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_010a: ldloc.3
+IL_010b: call System.Double SoftwareAlpha::FinalQualityCalc(System.Double,System.Double,System.Double,System.Double,SoftwareType,System.Collections.Generic.IList`1<FeatureBase>)
+IL_0110: stloc.s V_5
+IL_0112: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0117: ldc.i4.1
+IL_0118: ble.s IL_013b
+IL_011a: ldarg.1
+IL_011b: ldfld System.Int32 SDateTime::Day
+IL_0120: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0125: ldc.i4.1
+IL_0126: sub
+IL_0127: bne.un.s IL_013b
+IL_0129: ldarg.1
+IL_012a: ldc.i4.0
+IL_012b: ldc.i4.1
+IL_012c: ldc.i4.0
+IL_012d: ldc.i4.0
+IL_012e: ldc.i4.0
+IL_012f: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0134: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_0139: starg.s time
+IL_013b: ldarg.2
+IL_013c: brfalse.s IL_0159
+IL_013e: ldarg.2
+IL_013f: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0144: ldarg.0
+IL_0145: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_014a: ldfld System.String SoftwareType::Name
+IL_014f: ldc.r4 1
+IL_0154: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::set_Item(!0,!1)
+IL_0159: ldarg.0
+IL_015a: ldfld System.String SimulatedCompany/ProductPrototype::Name
+IL_015f: ldarg.0
+IL_0160: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_0165: ldarg.0
+IL_0166: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_016b: ldloc.2
+IL_016c: brtrue.s IL_0171
+IL_016e: ldnull
+IL_016f: br.s IL_0177
+IL_0171: ldarg.0
+IL_0172: ldfld SoftwareProduct[] SimulatedCompany/ProductPrototype::OSs
+IL_0177: ldloc.s V_4
+IL_0179: conv.r8
+IL_017a: ldarg.0
+IL_017b: ldfld System.Double SimulatedCompany/ProductPrototype::CodeProgress
+IL_0180: mul
+IL_0181: ldloc.s V_4
+IL_0183: conv.r8
+IL_0184: ldarg.0
+IL_0185: ldfld System.Double SimulatedCompany/ProductPrototype::ArtProgress
+IL_018a: mul
+IL_018b: ldarg.0
+IL_018c: ldfld System.Double SimulatedCompany/ProductPrototype::CodeQuality
+IL_0191: ldarg.0
+IL_0192: ldfld System.Double SimulatedCompany/ProductPrototype::ArtQuality
+IL_0197: ldc.i4.3
+IL_0198: newarr System.Double
+IL_019d: dup
+IL_019e: ldc.i4.0
+IL_019f: ldloc.s V_5
+IL_01a1: stelem.r8
+IL_01a2: dup
+IL_01a3: ldc.i4.1
+IL_01a4: ldloc.s V_5
+IL_01a6: stelem.r8
+IL_01a7: dup
+IL_01a8: ldc.i4.2
+IL_01a9: ldloc.s V_5
+IL_01ab: stelem.r8
+IL_01ac: ldarg.2
+IL_01ad: brtrue.s IL_01b6
+IL_01af: ldc.r4 0.5
+IL_01b4: br.s IL_01bc
+IL_01b6: ldarg.2
+IL_01b7: ldfld System.Single Employee::Creativity
+IL_01bc: conv.r8
+IL_01bd: ldarg.0
+IL_01be: ldfld System.Single SimulatedCompany/ProductPrototype::Price
+IL_01c3: ldarg.0
+IL_01c4: ldfld System.Boolean SimulatedCompany/ProductPrototype::SubscriptionBased
+IL_01c9: ldarg.0
+IL_01ca: ldfld System.Double[] SimulatedCompany/ProductPrototype::Submarkets
+IL_01cf: ldarg.0
+IL_01d0: ldfld SDateTime SimulatedCompany/ProductPrototype::DevStart
+IL_01d5: ldarg.1
+IL_01d6: ldloc.0
+IL_01d7: ldarg.0
+IL_01d8: ldfld System.Boolean SimulatedCompany/ProductPrototype::InHouse
+IL_01dd: ldarg.0
+IL_01de: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_01e3: ldarg.0
+IL_01e4: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::SequelTo
+IL_01e9: ldarg.0
+IL_01ea: ldfld System.Nullable`1<System.UInt32> SimulatedCompany/ProductPrototype::SWID
+IL_01ef: stloc.s V_8
+IL_01f1: ldloca.s V_8
+IL_01f3: call System.Boolean System.Nullable`1<System.UInt32>::get_HasValue()
+IL_01f8: brtrue.s IL_020b
+IL_01fa: ldsfld GameSettings GameSettings::Instance
+IL_01ff: ldfld MarketSimulation GameSettings::simulation
+IL_0204: callvirt System.UInt32 MarketSimulation::GetID()
+IL_0209: br.s IL_0212
+IL_020b: ldloca.s V_8
+IL_020d: call !0 System.Nullable`1<System.UInt32>::GetValueOrDefault()
+IL_0212: ldarg.0
+IL_0213: ldfld System.Double SimulatedCompany/ProductPrototype::Loss
+IL_0218: ldloc.3
+IL_0219: ldarg.0
+IL_021a: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_021f: ldnull
+IL_0220: ldloc.1
+IL_0221: ldarg.0
+IL_0222: ldfld SoftwareFramework SimulatedCompany/ProductPrototype::Framework
+IL_0227: ldarg.0
+IL_0228: ldfld System.Single SimulatedCompany/ProductPrototype::FrameworkRoyalty
+IL_022d: ldarg.0
+IL_022e: ldfld System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> SimulatedCompany/ProductPrototype::Tools
+IL_0233: ldnull
+IL_0234: ldnull
+IL_0235: newobj System.Void SoftwareProduct::.ctor(System.String,SoftwareType,SoftwareCategory,SoftwareProduct[],System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double,System.Single,System.Boolean,System.Double[],SDateTime,SDateTime,System.Int32,System.Boolean,Company,SoftwareProduct,System.UInt32,System.Double,FeatureBase[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.String,System.UInt32,SoftwareFramework,System.Single,System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single>,SoftwareAlpha,System.Byte[])
+IL_023a: stloc.s V_6
+IL_023c: ldloc.s V_6
+IL_023e: callvirt System.Void SoftwareProduct::SendNetwork()
+IL_0243: ldloc.s V_6
+IL_0245: dup
+IL_0246: callvirt System.UInt32 SoftwareProduct::get_PhysicalCopies()
+IL_024b: ldarg.0
+IL_024c: call System.UInt32 SimulatedCompany/ProductPrototype::get_PhysicalCopies()
+IL_0251: add
+IL_0252: callvirt System.Void SoftwareProduct::set_PhysicalCopies(System.UInt32)
+IL_0257: ldarg.0
+IL_0258: ldfld System.String SimulatedCompany/ProductPrototype::NewFramework
+IL_025d: brfalse IL_02f2
+IL_0262: ldarg.0
+IL_0263: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_0268: ldarg.0
+IL_0269: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_026e: ldarg.0
+IL_026f: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_0274: ldloc.3
+IL_0275: ldarg.0
+IL_0276: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_027b: ldnull
+IL_027c: ldarg.0
+IL_027d: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::SequelTo
+IL_0282: ldc.i4.1
+IL_0283: ldnull
+IL_0284: ldnull
+IL_0285: ldnull
+IL_0286: ldc.i4.m1
+IL_0287: call SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::GenerateProgress(SoftwareType,SoftwareCategory,Company,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Collections.Generic.IList`1<SoftwareProduct>,SoftwareProduct,System.Boolean,SoftwareFramework,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.UInt32[],System.Int32)
+IL_028c: stloc.s V_9
+IL_028e: ldloc.s V_9
+IL_0290: stloc.s V_10
+IL_0292: ldc.i4.0
+IL_0293: stloc.s V_11
+IL_0295: br.s IL_02b9
+IL_0297: ldloc.s V_10
+IL_0299: ldloc.s V_11
+IL_029b: ldelem.ref
+IL_029c: dup
+IL_029d: dup
+IL_029e: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_02a3: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_02a8: dup
+IL_02a9: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_02ae: stfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_02b3: ldloc.s V_11
+IL_02b5: ldc.i4.1
+IL_02b6: add
+IL_02b7: stloc.s V_11
+IL_02b9: ldloc.s V_11
+IL_02bb: ldloc.s V_10
+IL_02bd: ldlen
+IL_02be: conv.i4
+IL_02bf: blt.s IL_0297
+IL_02c1: ldsfld GameSettings GameSettings::Instance
+IL_02c6: ldfld MarketSimulation GameSettings::simulation
+IL_02cb: ldarg.0
+IL_02cc: ldfld System.String SimulatedCompany/ProductPrototype::NewFramework
+IL_02d1: ldarg.0
+IL_02d2: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_02d7: ldarg.0
+IL_02d8: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_02dd: ldarg.0
+IL_02de: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_02e3: ldloc.s V_9
+IL_02e5: ldarg.0
+IL_02e6: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_02eb: ldarg.1
+IL_02ec: callvirt SoftwareFramework MarketSimulation::CreateFramework(System.String,Company,SoftwareType,SoftwareCategory,System.Collections.Generic.IEnumerable`1<SoftwareWorkItem/FeatureProgress>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SDateTime)
+IL_02f1: pop
+IL_02f2: ldarg.0
+IL_02f3: ldloc.s V_6
+IL_02f5: stfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_02fa: ldnull
+IL_02fb: stloc.s V_7
+IL_02fd: ldarg.0
+IL_02fe: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_0303: ldarg.0
+IL_0304: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_0309: ldarg.0
+IL_030a: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_030f: ldarg.0
+IL_0310: ldfld FeatureBase[] SimulatedCompany/ProductPrototype::Features
+IL_0315: ldarg.1
+IL_0316: callvirt System.Collections.Generic.IEnumerable`1<SoftwareAddOn> SoftwareType::GetValidAddons(SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Collections.Generic.IList`1<FeatureBase>,SDateTime)
+IL_031b: ldsfld System.Func`2<SoftwareAddOn,System.Boolean> SimulatedCompany/ProductPrototype/<>c::<>9__78_0
+IL_0320: dup
+IL_0321: brtrue.s IL_033a
+IL_0323: pop
+IL_0324: ldsfld SimulatedCompany/ProductPrototype/<>c SimulatedCompany/ProductPrototype/<>c::<>9
+IL_0329: ldftn System.Boolean SimulatedCompany/ProductPrototype/<>c::<ToProduct>b__78_0(SoftwareAddOn)
+IL_032f: newobj System.Void System.Func`2<SoftwareAddOn,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0334: dup
+IL_0335: stsfld System.Func`2<SoftwareAddOn,System.Boolean> SimulatedCompany/ProductPrototype/<>c::<>9__78_0
+IL_033a: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SoftwareAddOn>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_033f: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<SoftwareAddOn>::GetEnumerator()
+IL_0344: stloc.s V_12
+IL_0346: br IL_048e
+IL_034b: ldloc.s V_12
+IL_034d: callvirt !0 System.Collections.Generic.IEnumerator`1<SoftwareAddOn>::get_Current()
+IL_0352: stloc.s V_13
+IL_0354: newobj System.Void System.Collections.Generic.List`1<AddOnFeature>::.ctor()
+IL_0359: stloc.s V_14
+IL_035b: newobj System.Void System.Collections.Generic.List`1<System.UInt32>::.ctor()
+IL_0360: stloc.s V_15
+IL_0362: call MarketSimulation MarketSimulation::get_Active()
+IL_0367: ldfld System.Random MarketSimulation::Random
+IL_036c: stloc.s V_16
+IL_036e: ldloc.s V_13
+IL_0370: ldloc.3
+IL_0371: ldarg.0
+IL_0372: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_0377: ldarg.0
+IL_0378: ldfld System.Double[] SimulatedCompany/ProductPrototype::Submarkets
+IL_037d: ldarg.0
+IL_037e: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_0383: ldloc.s V_16
+IL_0385: ldloc.s V_14
+IL_0387: ldloc.s V_15
+IL_0389: callvirt System.Void SoftwareAddOn::GenerateFeatures(System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Double[],SoftwareCategory,System.Random,System.Collections.Generic.List`1<AddOnFeature>,System.Collections.Generic.List`1<System.UInt32>)
+IL_038e: call MarketSimulation MarketSimulation::get_Active()
+IL_0393: ldarg.0
+IL_0394: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_0399: ldarg.0
+IL_039a: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_039f: ldfld SoftwareProduct SoftwareProduct::SequelTo
+IL_03a4: ldloc.s V_13
+IL_03a6: ldc.i4.1
+IL_03a7: ldloc.s V_16
+IL_03a9: ldc.i4.0
+IL_03aa: callvirt System.String MarketSimulation::GenerateAddonName(SoftwareProduct,SoftwareProduct,SoftwareAddOn,System.Boolean,System.Random,System.Boolean)
+IL_03af: ldloc.s V_13
+IL_03b1: ldarg.0
+IL_03b2: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_03b7: ldloc.s V_14
+IL_03b9: callvirt !0[] System.Collections.Generic.List`1<AddOnFeature>::ToArray()
+IL_03be: ldloc.s V_15
+IL_03c0: callvirt !0[] System.Collections.Generic.List`1<System.UInt32>::ToArray()
+IL_03c5: ldarg.0
+IL_03c6: ldfld SDateTime SimulatedCompany/ProductPrototype::DevStart
+IL_03cb: ldarg.0
+IL_03cc: ldfld SDateTime SimulatedCompany/ProductPrototype::ReleaseDate
+IL_03d1: ldsfld GameSettings GameSettings::Instance
+IL_03d6: ldfld MarketSimulation GameSettings::simulation
+IL_03db: ldloc.s V_13
+IL_03dd: callvirt System.Single MarketSimulation::GetIdealMarketPrice(SoftwareAddOn)
+IL_03e2: conv.r8
+IL_03e3: ldloc.s V_13
+IL_03e5: ldloc.s V_14
+IL_03e7: ldloc.s V_15
+IL_03e9: ldarg.0
+IL_03ea: ldfld SoftwareCategory SimulatedCompany/ProductPrototype::Category
+IL_03ef: ldarg.0
+IL_03f0: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SimulatedCompany/ProductPrototype::Techs
+IL_03f5: callvirt System.Double SoftwareAddOn::PerceivedValue(System.Collections.Generic.IList`1<AddOnFeature>,System.Collections.Generic.IList`1<System.UInt32>,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,TechLevel>)
+IL_03fa: mul
+IL_03fb: conv.r4
+IL_03fc: ldc.r8 0
+IL_0405: ldc.i4.3
+IL_0406: newarr System.Double
+IL_040b: dup
+IL_040c: ldc.i4.0
+IL_040d: ldloc.s V_5
+IL_040f: stelem.r8
+IL_0410: dup
+IL_0411: ldc.i4.1
+IL_0412: ldloc.s V_5
+IL_0414: stelem.r8
+IL_0415: dup
+IL_0416: ldc.i4.2
+IL_0417: ldloc.s V_5
+IL_0419: stelem.r8
+IL_041a: ldarg.0
+IL_041b: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_0420: ldc.i4.0
+IL_0421: ldc.r4 0
+IL_0426: ldloc.1
+IL_0427: ldarg.0
+IL_0428: ldfld System.Double SimulatedCompany/ProductPrototype::CodeProgress
+IL_042d: ldarg.0
+IL_042e: ldfld System.Double SimulatedCompany/ProductPrototype::ArtProgress
+IL_0433: ldarg.0
+IL_0434: ldfld System.Double SimulatedCompany/ProductPrototype::CodeQuality
+IL_0439: ldarg.0
+IL_043a: ldfld System.Double SimulatedCompany/ProductPrototype::ArtQuality
+IL_043f: ldc.i4.1
+IL_0440: ldnull
+IL_0441: newobj System.Void AddOnProduct::.ctor(System.String,SoftwareAddOn,SoftwareProduct,AddOnFeature[],System.UInt32[],SDateTime,SDateTime,System.Single,System.Double,System.Double[],Company,System.UInt32,System.Single,System.UInt32,System.Double,System.Double,System.Double,System.Double,System.Boolean,System.Byte[])
+IL_0446: stloc.s V_17
+IL_0448: ldloc.s V_17
+IL_044a: callvirt System.Void AddOnProduct::SendNetwork()
+IL_044f: ldarg.0
+IL_0450: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_0455: ldfld System.Collections.Generic.List`1<AddOnProduct> Company::AddOns
+IL_045a: ldloc.s V_17
+IL_045c: callvirt System.Void System.Collections.Generic.List`1<AddOnProduct>::Add(!0)
+IL_0461: ldsfld GameSettings GameSettings::Instance
+IL_0466: ldfld MarketSimulation GameSettings::simulation
+IL_046b: ldloc.s V_17
+IL_046d: callvirt System.Void MarketSimulation::AddAddOn(AddOnProduct)
+IL_0472: ldloc.s V_7
+IL_0474: brtrue.s IL_047d
+IL_0476: newobj System.Void System.Collections.Generic.List`1<AddOnProduct>::.ctor()
+IL_047b: stloc.s V_7
+IL_047d: ldloc.s V_7
+IL_047f: ldloc.s V_17
+IL_0481: callvirt System.Void System.Collections.Generic.List`1<AddOnProduct>::Add(!0)
+IL_0486: ldloc.s V_17
+IL_0488: ldc.i4.0
+IL_0489: call System.Void AddOnProduct::HandleNews(AddOnProduct,System.Boolean)
+IL_048e: ldloc.s V_12
+IL_0490: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0495: brtrue IL_034b
+IL_049a: leave.s IL_04a8
+IL_049c: ldloc.s V_12
+IL_049e: brfalse.s IL_04a7
+IL_04a0: ldloc.s V_12
+IL_04a2: callvirt System.Void System.IDisposable::Dispose()
+IL_04a7: endfinally
+IL_04a8: ldloc.s V_7
+IL_04aa: brfalse.s IL_04c9
+IL_04ac: ldarg.0
+IL_04ad: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_04b2: ldloc.s V_7
+IL_04b4: callvirt !0[] System.Collections.Generic.List`1<AddOnProduct>::ToArray()
+IL_04b9: stfld AddOnProduct[] SoftwareProduct::ForcedAddons
+IL_04be: ldarg.0
+IL_04bf: ldfld SoftwareProduct SimulatedCompany/ProductPrototype::Final
+IL_04c4: callvirt System.Void SoftwareProduct::UpdateForcedAddonQualityEffect()
+IL_04c9: ldsfld GameSettings GameSettings::Instance
+IL_04ce: ldarg.0
+IL_04cf: ldloc.s V_6
+IL_04d1: callvirt System.Void GameSettings::MoveStorage(IStockable,IStockable)
+IL_04d6: ldarg.2
+IL_04d7: brfalse.s IL_04f6
+IL_04d9: ldarg.2
+IL_04da: ldloc.s V_6
+IL_04dc: ldc.r4 1
+IL_04e1: ldc.i4.1
+IL_04e2: call MarketSimulation MarketSimulation::get_Active()
+IL_04e7: ldfld System.Random MarketSimulation::Random
+IL_04ec: callvirt System.Int32 System.Random::Next()
+IL_04f1: callvirt System.Void Employee::FinishLeadProject(SoftwareProduct,System.Single,System.Boolean,System.Int32)
+IL_04f6: ldloc.s V_6
+IL_04f8: ldc.i4.0
+IL_04f9: call System.Void SoftwareProduct::HandleNews(SoftwareProduct,System.Boolean)
+IL_04fe: ldloc.s V_6
+IL_0500: callvirt System.Void SoftwareProduct::RunReleaseScripts()
+IL_0505: ldloc.s V_6
+IL_0507: ret

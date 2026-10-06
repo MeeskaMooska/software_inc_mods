@@ -1,0 +1,701 @@
+METHOD System.String[][] GameData::GetUnlockedSpecializations(System.Int32,System.Boolean)
+IL_0000: ldarg.1
+IL_0001: brtrue.s IL_000b
+IL_0003: ldc.i4.3
+IL_0004: newarr System.String[]
+IL_0009: br.s IL_0011
+IL_000b: ldc.i4.5
+IL_000c: newarr System.String[]
+IL_0011: stloc.0
+IL_0012: ldnull
+IL_0013: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_0018: call !!0[] System.Linq.Enumerable::ToArray<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_001d: stloc.1
+IL_001e: ldloc.1
+IL_001f: ldsfld System.Func`2<SoftwareType,System.Boolean> GameData/<>c::<>9__126_0
+IL_0024: dup
+IL_0025: brtrue.s IL_003e
+IL_0027: pop
+IL_0028: ldsfld GameData/<>c GameData/<>c::<>9
+IL_002d: ldftn System.Boolean GameData/<>c::<GetUnlockedSpecializations>b__126_0(SoftwareType)
+IL_0033: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0038: dup
+IL_0039: stsfld System.Func`2<SoftwareType,System.Boolean> GameData/<>c::<>9__126_0
+IL_003e: call !!0 System.Linq.Enumerable::First<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0043: stloc.2
+IL_0044: ldarg.1
+IL_0045: brfalse.s IL_0057
+IL_0047: ldloc.0
+IL_0048: ldc.i4.0
+IL_0049: ldsfld System.String[] Employee::LeadSpecs
+IL_004e: stelem.ref
+IL_004f: ldloc.0
+IL_0050: ldc.i4.4
+IL_0051: ldsfld System.String[] Employee::ServiceSpecs
+IL_0056: stelem.ref
+IL_0057: ldloc.1
+IL_0058: call System.String[][] GameData::GetSpecialization(SoftwareType[])
+IL_005d: stloc.3
+IL_005e: ldloc.0
+IL_005f: ldarg.1
+IL_0060: brtrue.s IL_0065
+IL_0062: ldc.i4.2
+IL_0063: br.s IL_0066
+IL_0065: ldc.i4.3
+IL_0066: ldloc.3
+IL_0067: ldc.i4.2
+IL_0068: ldelem.ref
+IL_0069: ldarg.0
+IL_006a: ldloc.1
+IL_006b: ldloc.2
+IL_006c: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_0071: stelem.ref
+IL_0072: ldloc.0
+IL_0073: ldc.i4.1
+IL_0074: ldloc.3
+IL_0075: ldc.i4.1
+IL_0076: ldelem.ref
+IL_0077: ldarg.0
+IL_0078: ldloc.1
+IL_0079: ldloc.2
+IL_007a: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_007f: stelem.ref
+IL_0080: ldloc.0
+IL_0081: ldarg.1
+IL_0082: brtrue.s IL_0087
+IL_0084: ldc.i4.0
+IL_0085: br.s IL_0088
+IL_0087: ldc.i4.2
+IL_0088: ldloc.3
+IL_0089: ldc.i4.0
+IL_008a: ldelem.ref
+IL_008b: ldarg.0
+IL_008c: ldloc.1
+IL_008d: ldloc.2
+IL_008e: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_0093: stelem.ref
+IL_0094: ldloc.0
+IL_0095: ret
+METHOD System.String[] GameData::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0000: ldnull
+IL_0001: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_0006: call !!0[] System.Linq.Enumerable::ToArray<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_000b: stloc.0
+IL_000c: ldloc.0
+IL_000d: ldsfld System.Func`2<SoftwareType,System.Boolean> GameData/<>c::<>9__127_0
+IL_0012: dup
+IL_0013: brtrue.s IL_002c
+IL_0015: pop
+IL_0016: ldsfld GameData/<>c GameData/<>c::<>9
+IL_001b: ldftn System.Boolean GameData/<>c::<GetUnlockedSpecializations>b__127_0(SoftwareType)
+IL_0021: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0026: dup
+IL_0027: stsfld System.Func`2<SoftwareType,System.Boolean> GameData/<>c::<>9__127_0
+IL_002c: call !!0 System.Linq.Enumerable::First<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0031: stloc.1
+IL_0032: ldloc.0
+IL_0033: call System.String[][] GameData::GetSpecialization(SoftwareType[])
+IL_0038: stloc.2
+IL_0039: ldsfld System.Int32 GameData::ActiveYear
+IL_003e: stloc.3
+IL_003f: ldarg.0
+IL_0040: switch IL_005b,IL_0061,IL_006d,IL_0079,IL_0085
+IL_0059: br.s IL_008b
+IL_005b: ldsfld System.String[] Employee::LeadSpecs
+IL_0060: ret
+IL_0061: ldloc.2
+IL_0062: ldc.i4.1
+IL_0063: ldelem.ref
+IL_0064: ldloc.3
+IL_0065: ldloc.0
+IL_0066: ldloc.1
+IL_0067: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_006c: ret
+IL_006d: ldloc.2
+IL_006e: ldc.i4.0
+IL_006f: ldelem.ref
+IL_0070: ldloc.3
+IL_0071: ldloc.0
+IL_0072: ldloc.1
+IL_0073: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_0078: ret
+IL_0079: ldloc.2
+IL_007a: ldc.i4.2
+IL_007b: ldelem.ref
+IL_007c: ldloc.3
+IL_007d: ldloc.0
+IL_007e: ldloc.1
+IL_007f: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_0084: ret
+IL_0085: ldsfld System.String[] Employee::ServiceSpecs
+IL_008a: ret
+IL_008b: ldstr "role"
+IL_0090: ldarg.0
+IL_0091: box Employee/EmployeeRole
+IL_0096: ldnull
+IL_0097: newobj System.Void System.ArgumentOutOfRangeException::.ctor(System.String,System.Object,System.String)
+IL_009c: throw
+METHOD System.Int32 GameData::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Single)
+IL_0000: ldarg.0
+IL_0001: brtrue.s IL_0016
+IL_0003: ldarg.1
+IL_0004: brfalse.s IL_0010
+IL_0006: ldsfld System.String[] Employee::LeadSpecs
+IL_000b: ldlen
+IL_000c: conv.i4
+IL_000d: ldc.i4.3
+IL_000e: mul
+IL_000f: ret
+IL_0010: ldsfld System.Int32 Employee::MaxLeadSpec
+IL_0015: ret
+IL_0016: ldarg.0
+IL_0017: ldc.i4.4
+IL_0018: bne.un.s IL_002d
+IL_001a: ldarg.1
+IL_001b: brfalse.s IL_0027
+IL_001d: ldsfld System.String[] Employee::ServiceSpecs
+IL_0022: ldlen
+IL_0023: conv.i4
+IL_0024: ldc.i4.3
+IL_0025: mul
+IL_0026: ret
+IL_0027: ldsfld System.Int32 Employee::MaxServiceSpec
+IL_002c: ret
+IL_002d: ldnull
+IL_002e: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_0033: call !!0[] System.Linq.Enumerable::ToArray<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0038: ldarg.0
+IL_0039: call System.Int32 GameData::CountSpecialization(SoftwareType[],Employee/EmployeeRole)
+IL_003e: stloc.0
+IL_003f: ldarg.1
+IL_0040: brfalse.s IL_0046
+IL_0042: ldloc.0
+IL_0043: ldc.i4.3
+IL_0044: mul
+IL_0045: ret
+IL_0046: ldloc.0
+IL_0047: ldarg.2
+IL_0048: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_004d: ret
+METHOD System.String[] GameSettings::GetAllSpecializations(Employee/EmployeeRole)
+IL_0000: ldarg.1
+IL_0001: switch IL_001c,IL_0022,IL_0029,IL_0030,IL_0037
+IL_001a: br.s IL_003d
+IL_001c: ldsfld System.String[] Employee::LeadSpecs
+IL_0021: ret
+IL_0022: ldarg.0
+IL_0023: ldfld System.String[] GameSettings::CodeSpecializations
+IL_0028: ret
+IL_0029: ldarg.0
+IL_002a: ldfld System.String[] GameSettings::Specializations
+IL_002f: ret
+IL_0030: ldarg.0
+IL_0031: ldfld System.String[] GameSettings::ArtSpecializations
+IL_0036: ret
+IL_0037: ldsfld System.String[] Employee::ServiceSpecs
+IL_003c: ret
+IL_003d: ldstr "role"
+IL_0042: ldarg.1
+IL_0043: box Employee/EmployeeRole
+IL_0048: ldnull
+IL_0049: newobj System.Void System.ArgumentOutOfRangeException::.ctor(System.String,System.Object,System.String)
+IL_004e: throw
+METHOD System.Void GameSettings::RefreshSpecCache()
+IL_0000: ldarg.0
+IL_0001: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_0006: stloc.0
+IL_0007: ldc.i4.0
+IL_0008: stloc.1
+IL_0009: ldloc.0
+IL_000a: ldloca.s V_1
+IL_000c: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_0011: ldarg.0
+IL_0012: ldfld System.Boolean GameSettings::CachedSpecs
+IL_0017: brfalse.s IL_0061
+IL_0019: ldarg.0
+IL_001a: ldflda SDateTime GameSettings::LastSpec
+IL_001f: ldfld System.Int32 SDateTime::Day
+IL_0024: ldsfld TimeOfDay TimeOfDay::Instance
+IL_0029: ldfld System.Int32 TimeOfDay::Day
+IL_002e: bne.un.s IL_0061
+IL_0030: ldarg.0
+IL_0031: ldflda SDateTime GameSettings::LastSpec
+IL_0036: ldfld System.Int32 SDateTime::Year
+IL_003b: ldsfld TimeOfDay TimeOfDay::Instance
+IL_0040: ldfld System.Int32 TimeOfDay::Year
+IL_0045: bne.un.s IL_0061
+IL_0047: ldarg.0
+IL_0048: ldflda SDateTime GameSettings::LastSpec
+IL_004d: ldfld System.Int32 SDateTime::Month
+IL_0052: ldsfld TimeOfDay TimeOfDay::Instance
+IL_0057: ldfld System.Int32 TimeOfDay::Month
+IL_005c: beq IL_0116
+IL_0061: ldarg.0
+IL_0062: ldc.i4.1
+IL_0063: stfld System.Boolean GameSettings::CachedSpecs
+IL_0068: ldarg.0
+IL_0069: call SDateTime SDateTime::Now()
+IL_006e: stfld SDateTime GameSettings::LastSpec
+IL_0073: ldarg.0
+IL_0074: ldfld MarketSimulation GameSettings::simulation
+IL_0079: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_007e: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Values()
+IL_0083: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0088: stloc.2
+IL_0089: ldarg.0
+IL_008a: ldfld MarketSimulation GameSettings::simulation
+IL_008f: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_0094: ldstr "Operating System"
+IL_0099: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Item(!0)
+IL_009e: stloc.3
+IL_009f: ldarg.0
+IL_00a0: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_00a5: ldc.i4.0
+IL_00a6: ldsfld System.String[] Employee::LeadSpecs
+IL_00ab: stelem.ref
+IL_00ac: ldarg.0
+IL_00ad: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_00b2: ldc.i4.4
+IL_00b3: ldsfld System.String[] Employee::ServiceSpecs
+IL_00b8: stelem.ref
+IL_00b9: ldarg.0
+IL_00ba: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_00bf: ldc.i4.3
+IL_00c0: ldarg.0
+IL_00c1: ldfld System.String[] GameSettings::ArtSpecializations
+IL_00c6: ldsfld TimeOfDay TimeOfDay::Instance
+IL_00cb: ldfld System.Int32 TimeOfDay::Year
+IL_00d0: ldloc.2
+IL_00d1: ldloc.3
+IL_00d2: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_00d7: stelem.ref
+IL_00d8: ldarg.0
+IL_00d9: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_00de: ldc.i4.1
+IL_00df: ldarg.0
+IL_00e0: ldfld System.String[] GameSettings::CodeSpecializations
+IL_00e5: ldsfld TimeOfDay TimeOfDay::Instance
+IL_00ea: ldfld System.Int32 TimeOfDay::Year
+IL_00ef: ldloc.2
+IL_00f0: ldloc.3
+IL_00f1: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_00f6: stelem.ref
+IL_00f7: ldarg.0
+IL_00f8: ldfld System.String[][] GameSettings::CachedSpecDict
+IL_00fd: ldc.i4.2
+IL_00fe: ldarg.0
+IL_00ff: ldfld System.String[] GameSettings::Specializations
+IL_0104: ldsfld TimeOfDay TimeOfDay::Instance
+IL_0109: ldfld System.Int32 TimeOfDay::Year
+IL_010e: ldloc.2
+IL_010f: ldloc.3
+IL_0110: call System.String[] GameData::FilterUnlockedSpecs(System.String[],System.Int32,System.Collections.Generic.IList`1<SoftwareType>,SoftwareType)
+IL_0115: stelem.ref
+IL_0116: leave.s IL_0122
+IL_0118: ldloc.1
+IL_0119: brfalse.s IL_0121
+IL_011b: ldloc.0
+IL_011c: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_0121: endfinally
+IL_0122: ret
+METHOD System.Int32 GameSettings::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Boolean)
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_000a: brfalse.s IL_0019
+IL_000c: ldarg.0
+IL_000d: ldc.i4.0
+IL_000e: ldc.r4 0.5
+IL_0013: call System.Int32 GameData::GetMaxSpecPoints(Employee/EmployeeRole,System.Boolean,System.Single)
+IL_0018: ret
+IL_0019: ldarg.1
+IL_001a: brfalse IL_00d0
+IL_001f: ldarg.0
+IL_0020: switch IL_003e,IL_0048,IL_0072,IL_009c,IL_00c6
+IL_0039: br IL_0199
+IL_003e: ldsfld System.String[] Employee::LeadSpecs
+IL_0043: ldlen
+IL_0044: conv.i4
+IL_0045: ldc.i4.3
+IL_0046: mul
+IL_0047: ret
+IL_0048: ldsfld GameSettings GameSettings::Instance
+IL_004d: ldfld System.String[] GameSettings::CodeSpecializations
+IL_0052: ldlen
+IL_0053: conv.i4
+IL_0054: ldc.i4.3
+IL_0055: mul
+IL_0056: stloc.0
+IL_0057: ldarg.2
+IL_0058: brfalse.s IL_0070
+IL_005a: ldloc.0
+IL_005b: ldsfld GameSettings GameSettings::Instance
+IL_0060: ldc.i4.1
+IL_0061: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0066: ldlen
+IL_0067: conv.i4
+IL_0068: ldc.i4.3
+IL_0069: mul
+IL_006a: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_006f: stloc.0
+IL_0070: ldloc.0
+IL_0071: ret
+IL_0072: ldsfld GameSettings GameSettings::Instance
+IL_0077: ldfld System.String[] GameSettings::Specializations
+IL_007c: ldlen
+IL_007d: conv.i4
+IL_007e: ldc.i4.3
+IL_007f: mul
+IL_0080: stloc.1
+IL_0081: ldarg.2
+IL_0082: brfalse.s IL_009a
+IL_0084: ldloc.1
+IL_0085: ldsfld GameSettings GameSettings::Instance
+IL_008a: ldc.i4.2
+IL_008b: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0090: ldlen
+IL_0091: conv.i4
+IL_0092: ldc.i4.3
+IL_0093: mul
+IL_0094: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0099: stloc.1
+IL_009a: ldloc.1
+IL_009b: ret
+IL_009c: ldsfld GameSettings GameSettings::Instance
+IL_00a1: ldfld System.String[] GameSettings::ArtSpecializations
+IL_00a6: ldlen
+IL_00a7: conv.i4
+IL_00a8: ldc.i4.3
+IL_00a9: mul
+IL_00aa: stloc.2
+IL_00ab: ldarg.2
+IL_00ac: brfalse.s IL_00c4
+IL_00ae: ldloc.2
+IL_00af: ldsfld GameSettings GameSettings::Instance
+IL_00b4: ldc.i4.3
+IL_00b5: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_00ba: ldlen
+IL_00bb: conv.i4
+IL_00bc: ldc.i4.3
+IL_00bd: mul
+IL_00be: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_00c3: stloc.2
+IL_00c4: ldloc.2
+IL_00c5: ret
+IL_00c6: ldsfld System.String[] Employee::ServiceSpecs
+IL_00cb: ldlen
+IL_00cc: conv.i4
+IL_00cd: ldc.i4.3
+IL_00ce: mul
+IL_00cf: ret
+IL_00d0: ldarg.0
+IL_00d1: switch IL_00ef,IL_00f5,IL_0127,IL_015d,IL_0193
+IL_00ea: br IL_0199
+IL_00ef: ldsfld System.Int32 Employee::MaxLeadSpec
+IL_00f4: ret
+IL_00f5: ldsfld GameSettings GameSettings::Instance
+IL_00fa: ldfld System.String[] GameSettings::CodeSpecializations
+IL_00ff: ldlen
+IL_0100: conv.i4
+IL_0101: ldc.r4 0.5
+IL_0106: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_010b: stloc.3
+IL_010c: ldarg.2
+IL_010d: brfalse.s IL_0125
+IL_010f: ldloc.3
+IL_0110: ldsfld GameSettings GameSettings::Instance
+IL_0115: ldc.i4.1
+IL_0116: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_011b: ldlen
+IL_011c: conv.i4
+IL_011d: ldc.i4.3
+IL_011e: mul
+IL_011f: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0124: stloc.3
+IL_0125: ldloc.3
+IL_0126: ret
+IL_0127: ldsfld GameSettings GameSettings::Instance
+IL_012c: ldfld System.String[] GameSettings::Specializations
+IL_0131: ldlen
+IL_0132: conv.i4
+IL_0133: ldc.r4 0.5
+IL_0138: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_013d: stloc.s V_4
+IL_013f: ldarg.2
+IL_0140: brfalse.s IL_015a
+IL_0142: ldloc.s V_4
+IL_0144: ldsfld GameSettings GameSettings::Instance
+IL_0149: ldc.i4.2
+IL_014a: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_014f: ldlen
+IL_0150: conv.i4
+IL_0151: ldc.i4.3
+IL_0152: mul
+IL_0153: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0158: stloc.s V_4
+IL_015a: ldloc.s V_4
+IL_015c: ret
+IL_015d: ldsfld GameSettings GameSettings::Instance
+IL_0162: ldfld System.String[] GameSettings::ArtSpecializations
+IL_0167: ldlen
+IL_0168: conv.i4
+IL_0169: ldc.r4 0.5
+IL_016e: call System.Int32 GameData::MaxDevSpec(System.Int32,System.Single)
+IL_0173: stloc.s V_5
+IL_0175: ldarg.2
+IL_0176: brfalse.s IL_0190
+IL_0178: ldloc.s V_5
+IL_017a: ldsfld GameSettings GameSettings::Instance
+IL_017f: ldc.i4.3
+IL_0180: callvirt System.String[] GameSettings::GetUnlockedSpecializations(Employee/EmployeeRole)
+IL_0185: ldlen
+IL_0186: conv.i4
+IL_0187: ldc.i4.3
+IL_0188: mul
+IL_0189: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_018e: stloc.s V_5
+IL_0190: ldloc.s V_5
+IL_0192: ret
+IL_0193: ldsfld System.Int32 Employee::MaxServiceSpec
+IL_0198: ret
+IL_0199: ldstr "role"
+IL_019e: ldarg.0
+IL_019f: box Employee/EmployeeRole
+IL_01a4: ldnull
+IL_01a5: newobj System.Void System.ArgumentOutOfRangeException::.ctor(System.String,System.Object,System.String)
+IL_01aa: throw
+METHOD System.Void Employee::.cctor()
+IL_0000: ldc.i4.s 65
+IL_0002: stsfld System.Int32 Employee::RetirementAge
+IL_0007: ldc.i4.s 20
+IL_0009: stsfld System.Int32 Employee::Youngest
+IL_000e: ldc.i4.5
+IL_000f: newarr System.Byte
+IL_0014: dup
+IL_0015: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=5 <PrivateImplementationDetails>::E384E48C8864E90E5084D9FF31BFCC6B97CC2DFD
+IL_001a: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_001f: stsfld System.Byte[] Employee::RoleToBit
+IL_0024: ldc.i4.s 9
+IL_0026: stsfld System.Int32 Employee::MaxLeadSpec
+IL_002b: ldc.i4.4
+IL_002c: stsfld System.Int32 Employee::MaxServiceSpec
+IL_0031: ldc.i4.4
+IL_0032: newarr System.String
+IL_0037: dup
+IL_0038: ldc.i4.0
+IL_0039: ldstr "HR"
+IL_003e: stelem.ref
+IL_003f: dup
+IL_0040: ldc.i4.1
+IL_0041: ldstr "Automation"
+IL_0046: stelem.ref
+IL_0047: dup
+IL_0048: ldc.i4.2
+IL_0049: ldstr "Socialization"
+IL_004e: stelem.ref
+IL_004f: dup
+IL_0050: ldc.i4.3
+IL_0051: ldstr "Multitasking"
+IL_0056: stelem.ref
+IL_0057: stsfld System.String[] Employee::LeadSpecs
+IL_005c: ldc.i4.4
+IL_005d: newarr System.String
+IL_0062: dup
+IL_0063: ldc.i4.0
+IL_0064: ldstr "Support"
+IL_0069: stelem.ref
+IL_006a: dup
+IL_006b: ldc.i4.1
+IL_006c: ldstr "Marketing"
+IL_0071: stelem.ref
+IL_0072: dup
+IL_0073: ldc.i4.2
+IL_0074: ldstr "Law"
+IL_0079: stelem.ref
+IL_007a: dup
+IL_007b: ldc.i4.3
+IL_007c: ldstr "Accounting"
+IL_0081: stelem.ref
+IL_0082: stsfld System.String[] Employee::ServiceSpecs
+IL_0087: ldc.i4.5
+IL_0088: newarr Employee/RoleBit
+IL_008d: dup
+IL_008e: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::43C8D974382D2517F2A7AEB401B2240EE7C8B8EB
+IL_0093: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_0098: stsfld Employee/RoleBit[] Employee::RoleToMask
+IL_009d: ldc.i4.5
+IL_009e: newarr System.Int32
+IL_00a3: dup
+IL_00a4: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::C7536798DFDDBE7D7B0378914755ADA7493C525E
+IL_00a9: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_00ae: stsfld System.Int32[] Employee::RoleOrder
+IL_00b3: ldc.i4.5
+IL_00b4: newarr System.Single
+IL_00b9: dup
+IL_00ba: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::5BB9B21525AE2BA6A5F538118031112EC1AAD19B
+IL_00bf: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_00c4: stsfld System.Single[] Employee::RoleSalaryFactor
+IL_00c9: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::.ctor()
+IL_00ce: dup
+IL_00cf: ldstr "Marketing"
+IL_00d4: ldc.r4 1
+IL_00d9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00de: dup
+IL_00df: ldstr "Support"
+IL_00e4: ldc.r4 0.5
+IL_00e9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00ee: dup
+IL_00ef: ldstr "Law"
+IL_00f4: ldc.r4 1.75
+IL_00f9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00fe: dup
+IL_00ff: ldstr "Accounting"
+IL_0104: ldc.r4 1.5
+IL_0109: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_010e: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::ServiceSalaryFactor
+IL_0113: ldc.i4.4
+IL_0114: newarr System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0119: dup
+IL_011a: ldc.i4.0
+IL_011b: ldstr "Support"
+IL_0120: ldc.r4 0.5
+IL_0125: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_012a: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_012f: dup
+IL_0130: ldc.i4.1
+IL_0131: ldstr "Marketing"
+IL_0136: ldc.r4 1
+IL_013b: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_0140: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0145: dup
+IL_0146: ldc.i4.2
+IL_0147: ldstr "Law"
+IL_014c: ldc.r4 1.75
+IL_0151: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_0156: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_015b: dup
+IL_015c: ldc.i4.3
+IL_015d: ldstr "Accounting"
+IL_0162: ldc.r4 1.5
+IL_0167: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_016c: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0171: stsfld System.Collections.Generic.KeyValuePair`2<System.String,System.Single>[] Employee::ServiceSalaryFactorArr
+IL_0176: ldc.i4.5
+IL_0177: newarr System.Single
+IL_017c: dup
+IL_017d: ldc.i4.0
+IL_017e: ldc.r4 0.2
+IL_0183: stelem.r4
+IL_0184: dup
+IL_0185: ldc.i4.4
+IL_0186: ldc.r4 0.2
+IL_018b: stelem.r4
+IL_018c: stsfld System.Single[] Employee::LowSkillCap
+IL_0191: ldc.r4 750
+IL_0196: stsfld System.Single Employee::AverageWage
+IL_019b: ldc.i4.5
+IL_019c: newarr System.String
+IL_01a1: dup
+IL_01a2: ldc.i4.0
+IL_01a3: ldstr "Lead"
+IL_01a8: stelem.ref
+IL_01a9: dup
+IL_01aa: ldc.i4.1
+IL_01ab: ldstr "Code"
+IL_01b0: stelem.ref
+IL_01b1: dup
+IL_01b2: ldc.i4.2
+IL_01b3: ldstr "Design"
+IL_01b8: stelem.ref
+IL_01b9: dup
+IL_01ba: ldc.i4.3
+IL_01bb: ldstr "Art"
+IL_01c0: stelem.ref
+IL_01c1: dup
+IL_01c2: ldc.i4.4
+IL_01c3: ldstr "Service"
+IL_01c8: stelem.ref
+IL_01c9: stsfld System.String[] Employee::ShortFormRole
+IL_01ce: ldc.i4.5
+IL_01cf: newarr System.Int32
+IL_01d4: dup
+IL_01d5: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::167B1CE5D64308E6E9314745A5A6C5B281EFBFBF
+IL_01da: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_01df: stsfld System.Int32[] Employee::RoleOrderIndex
+IL_01e4: ldc.r4 0.0009259259
+IL_01e9: stsfld System.Single Employee::HungerDrain
+IL_01ee: ldc.r4 0.0010416667
+IL_01f3: stsfld System.Single Employee::BladderDrain
+IL_01f8: ldc.r4 0.0013888889
+IL_01fd: stsfld System.Single Employee::EnergyDrain
+IL_0202: ldc.r4 0.0013888889
+IL_0207: stsfld System.Single Employee::StressDrain
+IL_020c: ldc.r4 0.00011574074
+IL_0211: stsfld System.Single Employee::SocialDrain
+IL_0216: newobj System.Void System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single>::.ctor()
+IL_021b: stsfld System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single> Employee::_friendships
+IL_0220: newobj System.Void System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>>::.ctor()
+IL_0225: stsfld System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>> Employee::_friendCache2
+IL_022a: ldc.i4.5
+IL_022b: newarr System.Int32
+IL_0230: dup
+IL_0231: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::CE6056129FCB74431EA8424E6569D9B23BD02C38
+IL_0236: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_023b: stsfld System.Int32[] Employee::_pointDist
+IL_0240: ldc.i4.2
+IL_0241: stsfld System.Int32 Employee::PersonalityNum
+IL_0246: ldc.r4 0.65
+IL_024b: stsfld System.Single Employee::SkillBase
+IL_0250: ldc.r4 0.6
+IL_0255: stsfld System.Single Employee::SkillFactor
+IL_025a: ldc.r4 0.1
+IL_025f: stsfld System.Single Employee::SeniorityWeight
+IL_0264: ldc.i4.3
+IL_0265: newarr System.Int32[]
+IL_026a: dup
+IL_026b: ldc.i4.0
+IL_026c: ldc.i4.2
+IL_026d: newarr System.Int32
+IL_0272: dup
+IL_0273: ldc.i4.0
+IL_0274: ldc.i4.s 20
+IL_0276: stelem.i4
+IL_0277: dup
+IL_0278: ldc.i4.1
+IL_0279: ldc.i4.s 30
+IL_027b: stelem.i4
+IL_027c: stelem.ref
+IL_027d: dup
+IL_027e: ldc.i4.1
+IL_027f: ldc.i4.2
+IL_0280: newarr System.Int32
+IL_0285: dup
+IL_0286: ldc.i4.0
+IL_0287: ldc.i4.s 30
+IL_0289: stelem.i4
+IL_028a: dup
+IL_028b: ldc.i4.1
+IL_028c: ldc.i4.s 50
+IL_028e: stelem.i4
+IL_028f: stelem.ref
+IL_0290: dup
+IL_0291: ldc.i4.2
+IL_0292: ldc.i4.2
+IL_0293: newarr System.Int32
+IL_0298: dup
+IL_0299: ldc.i4.0
+IL_029a: ldc.i4.s 45
+IL_029c: stelem.i4
+IL_029d: dup
+IL_029e: ldc.i4.1
+IL_029f: ldc.i4.s 62
+IL_02a1: stelem.i4
+IL_02a2: stelem.ref
+IL_02a3: stsfld System.Int32[][] Employee::AgeBrackets
+IL_02a8: ldc.i4.4
+IL_02a9: newarr System.Single
+IL_02ae: dup
+IL_02af: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=16 <PrivateImplementationDetails>::E8BAADB4812420DCFB9E11A192CB40D191CDA8D4
+IL_02b4: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_02b9: newobj System.Void FloatInterpolator::.ctor(System.Single[])
+IL_02be: stsfld FloatInterpolator Employee::_coffeeDrain
+IL_02c3: ret

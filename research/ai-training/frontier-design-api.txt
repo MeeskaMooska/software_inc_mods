@@ -1,0 +1,245 @@
+TYPE CompanyType BASE System.Object
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<System.String,System.String>,System.Single> Types
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<System.String,System.String>,System.Single> Addons
+FIELD Public, InitOnly System.Single PerYear
+FIELD Public, InitOnly System.Int32 Min
+FIELD Public, InitOnly System.Int32 Max
+FIELD Public, InitOnly System.String ForceType
+FIELD Public, InitOnly System.String ForceCat
+FIELD Public, InitOnly System.String NameGen
+FIELD Public, InitOnly System.Boolean LatestTech
+FIELD Public, InitOnly System.Boolean Frameworks
+FIELD Private, NotSerialized SoftwareType[] _distinctTypes
+FIELD Private System.Int32 _lastTypeRefresh
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void CompanyType::.ctor(System.String,System.Collections.Generic.Dictionary`2<System.Collections.Generic.KeyValuePair`2<System.String,System.String>,System.Single>,System.Int32,System.Int32,System.Single,System.String,System.String,System.String)
+METHOD Public, HideBySig SoftwareType[] CompanyType::GetDistinctTypes(SDateTime)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void CompanyType::.ctor(Tyd.TydCollection)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void CompanyType::.ctor()
+METHOD Public, HideBySig System.Single CompanyType::GetEffort(System.String,System.String)
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,System.String[]> CompanyType::GetTypes()
+METHOD Public, HideBySig System.Boolean CompanyType::IsValid(System.Int32)
+METHOD Public, HideBySig System.Boolean CompanyType::OSSupport(SoftwareType)
+METHOD Public, HideBySig System.Boolean CompanyType::HasAddons()
+METHOD Public, Virtual, HideBySig System.String CompanyType::ToString()
+TYPE DesignDocumentWindow BASE UnityEngine.MonoBehaviour
+FIELD Public System.Int32 CurrentPage
+FIELD Public System.Collections.Generic.List`1<DesignDocumentWindow/RectSetups> Pages
+FIELD Public System.Int32 MaxDefaultPages
+FIELD Public System.String[] PageNames
+FIELD Public System.Boolean PageChanged
+FIELD Public UnityEngine.RectTransform PageContent
+FIELD Public FeatureCard FeatureCardPrefab
+FIELD Public GUIWindow Window
+FIELD Public UnityEngine.UI.InputField ProductName
+FIELD Public UnityEngine.UI.InputField PriceText
+FIELD Public UnityEngine.UI.InputField NewFramework
+FIELD Public GUICombobox TypeCombo
+FIELD Public GUICombobox ServerCombo
+FIELD Public GUICombobox SCMCombo
+FIELD Public GUICombobox CategoryCombo
+FIELD Public GUICombobox SubsidiaryCombo
+FIELD Public GUIPieChart[] Pies
+FIELD Public UnityEngine.UI.Text[] Submarkets
+FIELD Public GUIProgressBar[] SubmarketSats
+FIELD Public TriangleSlider SubmarketSlider
+FIELD Public UnityEngine.Color[] SubMarketColors
+FIELD Public UnityEngine.UI.Button NameButton
+FIELD Public UnityEngine.UI.Button IPButton
+FIELD Public UnityEngine.UI.Button PrevPage
+FIELD Public UnityEngine.UI.Button NextPage
+FIELD Public UnityEngine.GameObject ProjManButton
+FIELD Public UnityEngine.GameObject NewFrameworkNameLabel
+FIELD Public UnityEngine.UI.Toggle HouseToggle
+FIELD Public UnityEngine.UI.Toggle NewFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle UseFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle SkipGeneration
+FIELD Public UnityEngine.UI.Toggle SubscriptionToggle
+FIELD Public UnityEngine.UI.Toggle SequelMarketToggle
+FIELD Public UnityEngine.UI.Toggle CompetitionMarketToggle
+FIELD Public UnityEngine.UI.Text IPButtonText
+FIELD Public UnityEngine.UI.Text DesignTeamText
+FIELD Public UnityEngine.UI.Text DevelopTeamText
+FIELD Public UnityEngine.UI.Text TeamIssueText
+FIELD Public UnityEngine.UI.Text PageTitle
+FIELD Public UnityEngine.UI.Text ExistingFramework
+FIELD Public UnityEngine.UI.Text PageNumLabel
+FIELD Public VarValueSheet DescriptionSh
+FIELD Public VarValueSheet LimitSheet
+FIELD Public GUIListView OSList
+FIELD Public UnityEngine.RectTransform NeedsRect
+FIELD Public UnityEngine.RectTransform ForcedAddRect
+FIELD Public UnityEngine.UI.ScrollRect FeatureScroll
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject FeaturePrefab
+FIELD Public FrameworkWindow FrameworkDialog
+FIELD Public UnityEngine.GameObject AdvancedButton
+FIELD Public UnityEngine.GameObject PagePanel
+FIELD Public LeadDesignControl LeadDesigner
+FIELD Public UnityEngine.UI.Text PrevPageLabel
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>> NeedsList
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<SoftwareAddOn,AddonDesignWindow/AddonDesign>> ForcedAddList
+FIELD Public, NotSerialized System.Collections.Generic.List`1<FeatureCard> FeatureCards
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> NeedLabels
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> ForcedAddLabels
+FIELD Private, NotSerialized SoftwareFramework _framework
+FIELD Public UnityEngine.GameObject NeedsSubPanel
+FIELD Public UnityEngine.GameObject OSPanel
+FIELD Public UnityEngine.GameObject OSLabel
+FIELD Public UnityEngine.GameObject NeedsLabel
+FIELD Public UnityEngine.GameObject ForcedAddLabel
+FIELD Public UnityEngine.GameObject ExistingFrameworkButton
+FIELD Public UnityEngine.GameObject ManufactureButton
+FIELD Public UnityEngine.GameObject ManufactureView
+FIELD Public UnityEngine.GameObject HardwareDesignButton
+FIELD Public ManufacturingPanel Manufacturing
+FIELD Public UnityEngine.Gradient InterestGradient
+FIELD Public UnityEngine.RectTransform FeaturePanel
+FIELD Public UnityEngine.GameObject[] DistributionDisable
+FIELD Public System.String DefaultName
+FIELD Public, Static System.String[] BalanceNames
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DesignTeams
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DevelopmentTeams
+FIELD Private, NotSerialized PublisherDeal _publisher
+FIELD Private, NotSerialized System.Byte[] _hardwareDesign
+FIELD Private, NotSerialized SoftwareProduct _sequelTo
+FIELD Private, NotSerialized SoftwareType _swOverride
+FIELD Private, NotSerialized SoftwareCategory _swCatOverride
+FIELD Private, NotSerialized System.Boolean priceHasBeenEdited
+FIELD Public, NotSerialized System.Boolean DisableFeatureUpdate
+FIELD Private System.Boolean _noSubUpdate
+FIELD Private System.String _lastSWType
+FIELD Private System.String _lastSWCat
+FIELD Private System.Boolean _changeSWType
+FIELD Private System.Boolean _checkingWithPublisher
+FIELD Private System.Collections.Generic.List`1<System.String> _varList
+FIELD Private System.Collections.Generic.List`1<System.String> _valueList
+FIELD Private System.Collections.Generic.List`1<System.String> _tipList
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> _teamSpecs
+FIELD Public System.Boolean AutoDev
+FIELD Public PublisherDealWindow PubDealWindow
+FIELD Public UnityEngine.UI.Text PublisherText
+PROPERTY SimulatedCompany DesignDocumentWindow::Subsidiairy()
+PROPERTY SoftwareProduct DesignDocumentWindow::SequelTo()
+PROPERTY SoftwareType DesignDocumentWindow::SelectedType()
+PROPERTY System.Single DesignDocumentWindow::Price()
+PROPERTY SoftwareFramework DesignDocumentWindow::Framework()
+PROPERTY System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> DesignDocumentWindow::TeamSpecs()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SaveCurrentPageSetup(System.Int32)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::LoadPage(System.Int32)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ChangePage(System.Int32)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdatePageTitle()
+METHOD Public, HideBySig, SpecialName SimulatedCompany DesignDocumentWindow::get_Subsidiairy()
+METHOD Public, HideBySig, SpecialName SoftwareProduct DesignDocumentWindow::get_SequelTo()
+METHOD Public, HideBySig, SpecialName System.Void DesignDocumentWindow::set_SequelTo(SoftwareProduct)
+METHOD Public, HideBySig, SpecialName SoftwareType DesignDocumentWindow::get_SelectedType()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateMarketExtraPoints()
+METHOD Public, HideBySig SoftwareCategory DesignDocumentWindow::GetCategory(SoftwareType)
+METHOD Public, HideBySig System.Boolean DesignDocumentWindow::IsDistribution()
+METHOD Public, HideBySig, SpecialName System.Single DesignDocumentWindow::get_Price()
+METHOD Public, HideBySig, SpecialName SoftwareFramework DesignDocumentWindow::get_Framework()
+METHOD Public, HideBySig, SpecialName System.Void DesignDocumentWindow::set_Framework(SoftwareFramework)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::MarketAnalysis()
+METHOD Private, HideBySig System.Single DesignDocumentWindow::GetDefaultPrice()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SelectDefaultPrice()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::PriceEndEdit()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::PickBestLead(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateForcedAddonFeatures()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ChangeDevTeam(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateTeamText()
+METHOD Public, HideBySig System.String DesignDocumentWindow::GetBalanceScore(System.Single)
+METHOD Public, Static, HideBySig System.String DesignDocumentWindow::GetTimeString(System.Single,System.Single,System.Single)
+METHOD Public, Static, HideBySig System.String DesignDocumentWindow::GetArtistString(System.Single)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::Start()
+METHOD Private, HideBySig System.String DesignDocumentWindow::NameWithStars(System.String,System.Single)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdatePieChart()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ToggleVisible()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::PickLeadDesigner()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ShowOverride(SoftwareType,SoftwareCategory)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ShowWith(System.String,System.String)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ShowSequel(SoftwareProduct)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::SelectSequelFeatures()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::ClearFeatures()
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,TechLevel> DesignDocumentWindow::GetTechLevelDict(System.Boolean)
+METHOD Public, HideBySig System.Collections.Generic.List`1<FeatureBase> DesignDocumentWindow::GetFeatures()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::FeatureToggle()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateNeeds()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::FixFeatures()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::AutoBalanceSubmarkets(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateSubmarketSatisfaction()
+METHOD Public, HideBySig System.Double[] DesignDocumentWindow::GetSubmarkets()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ChangeInHouse()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ChangeSoftwareOrCategory(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::EditHardwareDesign()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateTypeRelatedCombos(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateForcedAddons(SoftwareType,SoftwareCategory)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SetAddon(AddOnProduct)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::GenerateFeatures()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::CheckWithPublisher(UnityEngine.UI.Toggle,System.Action)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::CheckWithPublisher(System.Action,System.Action)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SubsidiaryChange()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::ContinueSubChange()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateOSList()
+METHOD Private, HideBySig System.Single DesignDocumentWindow::GetLicenseCost(System.Collections.Generic.IList`1<FeatureBase>,System.Int32)
+METHOD Private, HideBySig System.Single DesignDocumentWindow::GetOSCost()
+METHOD Private, HideBySig System.String DesignDocumentWindow::EmpDiffColor(System.Int32,System.Int32)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateDescription()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::OnEnable()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateOnShow()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateServerCombos()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::UpdateGenerationSkip(System.Boolean)
+METHOD Private, HideBySig System.Boolean DesignDocumentWindow::CheckValid()
+METHOD Private, HideBySig System.Boolean DesignDocumentWindow::CheckAddonValid(AddonDesignWindow/AddonDesign)
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> DesignDocumentWindow::GetNeeds(System.Boolean)
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> DesignDocumentWindow::GetNeedProducts()
+METHOD Public, HideBySig, SpecialName System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> DesignDocumentWindow::get_TeamSpecs()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::RefreshTeamSpecs()
+METHOD Private, Static, HideBySig System.Void DesignDocumentWindow::AddSpecs(System.Collections.Generic.List`1<Team>,Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>)
+METHOD Public, HideBySig SoftwareProduct[] DesignDocumentWindow::GetOSs()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ToggleFramework(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SelectFramework()
+METHOD Private, HideBySig DesignDocument DesignDocumentWindow::Create(System.Boolean,System.Collections.Generic.List`1<DesignDocument>&)
+METHOD Private, HideBySig System.String DesignDocumentWindow::CheckCompetency()
+METHOD Public, Static, HideBySig System.String DesignDocumentWindow::CheckCompetency(System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.IEnumerable`1<Team>,System.Collections.Generic.IEnumerable`1<Team>)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckComplexity(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckPage(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckName(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckServer(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckInHouse(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckMockOS(System.Boolean)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::CheckSize(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::HardDesignTest(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::AutoDevTest(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::DevelopClick(System.Boolean)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::AutoDevClick()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::PickPublishingDeal()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SetPublishingDeal(PublisherDeal)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::GenerateDesign()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::PickNeedsAndOS()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ActuallyGenerateDesign()
+METHOD Public, Static, HideBySig System.Collections.Generic.List`1<SoftwareProduct> DesignDocumentWindow::GenerateOS(SoftwareType,System.Collections.Generic.IList`1<FeatureBase>)
+METHOD Public, Static, HideBySig System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> DesignDocumentWindow::GenerateNeeds(SoftwareType,SoftwareCategory)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::AddOS()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::ActuallyAddOS()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::RemoveOS()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::SelectIP()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::OnToggleSubscription()
+METHOD Public, HideBySig System.Void DesignDocumentWindow::RandomName()
+METHOD Public, HideBySig System.Byte[] DesignDocumentWindow::GetFinalHardwareDesign(SoftwareCategory,System.Collections.Generic.IList`1<FeatureBase>)
+METHOD Public, HideBySig System.Void DesignDocumentWindow::DevelopNow(AutoDevWorkItem,System.Boolean)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocumentWindow::.ctor()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void DesignDocumentWindow::.cctor()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<Start>b__116_0(System.Object,System.EventArgs)
+METHOD Private, HideBySig System.String DesignDocumentWindow::<UpdatePieChart>b__118_4(System.Collections.Generic.KeyValuePair`2<System.String,System.Single[]>)
+METHOD Private, HideBySig System.String DesignDocumentWindow::<UpdatePieChart>b__118_7(System.Collections.Generic.KeyValuePair`2<System.String,System.Single[]>)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<PickLeadDesigner>b__120_2(Employee)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<EditHardwareDesign>b__141_0(System.Byte[])
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<SubsidiaryChange>b__149_0()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<ToggleFramework>b__173_0()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<SelectFramework>b__174_0(SoftwareFramework)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<AutoDevClick>b__189_0()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<PickPublishingDeal>b__192_0()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<PickPublishingDeal>b__192_1(PublisherDeal)
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<RemoveOS>b__201_0()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::<DevelopNow>b__206_0(System.String)

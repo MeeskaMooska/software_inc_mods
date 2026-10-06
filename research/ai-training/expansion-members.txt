@@ -1,0 +1,890 @@
+TYPE SoftwareAlpha BASE SoftwareWorkItem
+INTERFACE IServerItem
+INTERFACE IReferenceFix
+INTERFACE IStockable
+INTERFACE ILossable
+FIELD Public, Static System.Single BugLimitFactor
+FIELD Public System.Boolean InBeta
+FIELD Public System.Boolean Released
+FIELD Public System.Boolean HasFinished
+FIELD Public System.Boolean HasFinishedArt
+FIELD Public System.Boolean HasFinishedCode
+FIELD Public System.Single Bugs
+FIELD Public System.Single FixedBugs
+FIELD Public SoftwareProduct Mock
+FIELD Public IStockable Final
+FIELD Private DesignDocument _child
+FIELD Public SDateTime LastIteration
+FIELD Private System.Single SourceControlBoost
+FIELD Public System.Single[0...,0...,0...] SpecTempQuality
+FIELD Public System.Single[0...,0...,0...] SpecWeight
+FIELD Public System.Single[0...,0...] FinalSpecQuality
+FIELD Public System.Single MaxArtDt
+FIELD Public System.Single MaxDevDt
+FIELD Public System.Single DesignProgress
+FIELD Public SHashSet`1<System.UInt32> EverWorked
+FIELD Private System.UInt32 <PhysicalCopies>k__BackingField
+FIELD Public System.Collections.Generic.List`1<ReviewWindow/ReviewData> PastReviews
+FIELD Public System.Int32 ReviewsDone
+FIELD Public System.Single ReviewScore
+FIELD Public System.Single BugRate
+FIELD Public System.Single DistributionLoss
+FIELD Public System.Boolean DidLastReviewIteration
+FIELD Public System.Collections.Generic.List`1<System.String> DesignTeams
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> Tools
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Private System.Single _lastMaxCodeSkill
+FIELD Private, NotSerialized System.Single _lastMaxCodeSkillTime
+PROPERTY DesignDocument SoftwareAlpha::Child()
+PROPERTY System.UInt32 SoftwareAlpha::PhysicalCopies()
+PROPERTY System.UInt32 SoftwareAlpha::CopiesPerBox()
+PROPERTY System.Int32 SoftwareAlpha::HardwareMask()
+PROPERTY System.Int32 SoftwareAlpha::HardwareInputMask()
+PROPERTY System.Single SoftwareAlpha::HardwarePrice()
+PROPERTY IManufacturable SoftwareAlpha::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SoftwareAlpha::FeaturesBases()
+PROPERTY System.Boolean SoftwareAlpha::StockNotifications()
+PROPERTY IStockable SoftwareAlpha::DeferStock()
+PROPERTY SoftwareType SoftwareAlpha::SWType()
+PROPERTY SoftwareCategory SoftwareAlpha::SWCat()
+PROPERTY System.Boolean SoftwareAlpha::Paused()
+PROPERTY System.Boolean SoftwareAlpha::AlwaysUseLocalStageLabel()
+PROPERTY UnityEngine.Color SoftwareAlpha::BackColor()
+PROPERTY System.Boolean SoftwareAlpha::UsesISP()
+PROPERTY System.Boolean SoftwareAlpha::IsReadOnlyJob()
+PROPERTY System.Boolean SoftwareAlpha::CanOutsourceNetwork()
+PROPERTY System.String SoftwareAlpha::UnitName()
+PROPERTY System.UInt32 SoftwareAlpha::MaxUnits()
+PROPERTY System.Byte SoftwareAlpha::ByteTypeID()
+PROPERTY System.Boolean SoftwareAlpha::HasNaturalNetworkEnd()
+METHOD Public, HideBySig, SpecialName DesignDocument SoftwareAlpha::get_Child()
+METHOD Public, HideBySig, SpecialName System.Void SoftwareAlpha::set_Child(DesignDocument)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.UInt32 SoftwareAlpha::get_PhysicalCopies()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareAlpha::set_PhysicalCopies(System.UInt32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.UInt32 SoftwareAlpha::get_CopiesPerBox()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Int32 SoftwareAlpha::get_HardwareMask()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareAlpha::set_HardwareMask(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Int32 SoftwareAlpha::get_HardwareInputMask()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareAlpha::set_HardwareInputMask(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Single SoftwareAlpha::get_HardwarePrice()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareAlpha::set_HardwarePrice(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName IManufacturable SoftwareAlpha::get_Manufacturing()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.IList`1<FeatureBase> SoftwareAlpha::get_FeaturesBases()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareAlpha::get_StockNotifications()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName IStockable SoftwareAlpha::get_DeferStock()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName SoftwareType SoftwareAlpha::get_SWType()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName SoftwareCategory SoftwareAlpha::get_SWCat()
+METHOD Public, HideBySig System.Void SoftwareAlpha::AddReviewScore(System.Single)
+METHOD Private, HideBySig System.Single SoftwareAlpha::GetReviewFactor()
+METHOD Public, HideBySig System.Single SoftwareAlpha::GetBugReviewFactor()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareAlpha::get_Paused()
+METHOD Public, Virtual, HideBySig, SpecialName System.Void SoftwareAlpha::set_Paused(System.Boolean)
+METHOD Public, Virtual, HideBySig IReferenceFix SoftwareAlpha::FixReferences()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareAlpha::.ctor(System.String)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareAlpha::.ctor()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::DevTeamChange()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareAlpha::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareWorkItem/FeatureProgress[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,System.Single,Company,SoftwareProduct,System.Boolean,System.Double,ContractWork,System.String,System.String,System.Int32,SHashSet`1<System.UInt32>,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.Single,SoftwareFramework,System.Single,System.String,System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<SoftwareProduct>,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareAlpha::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareWorkItem/FeatureProgress[],System.Single,SDateTime,System.Single,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.String,System.Int32,SHashSet`1<System.UInt32>,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.Single,System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<SoftwareProduct>,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+METHOD Public, HideBySig System.Void SoftwareAlpha::CreateMock()
+METHOD Public, HideBySig System.Void SoftwareAlpha::RegisterServer()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareAlpha::get_AlwaysUseLocalStageLabel()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::CurrentStage()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetProgressLabel()
+METHOD Private, HideBySig System.String SoftwareAlpha::GetProgressBeta(System.Int32,System.Int32)
+METHOD Private, HideBySig System.String SoftwareAlpha::GetProgressAlpha(System.Boolean,System.Single,System.Single)
+METHOD Public, Virtual, HideBySig System.Byte[] SoftwareAlpha::SerializeProgressData()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::DeserializeProgressData(System.Byte[])
+METHOD Public, Virtual, HideBySig, SpecialName UnityEngine.Color SoftwareAlpha::get_BackColor()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetIcon()
+METHOD Public, HideBySig System.Single SoftwareAlpha::MaxQualityPercent(Team,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Single SoftwareAlpha::GetMax()
+METHOD Public, Virtual, HideBySig System.Single SoftwareAlpha::GetProgress()
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetCodeArtProgress()
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetQuality()
+METHOD Public, Static, HideBySig System.Single SoftwareAlpha::GetMaxCodeQuality(System.Single)
+METHOD Public, HideBySig System.Double[] SoftwareAlpha::GetQualities()
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetLimitedQuality()
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetLimitedProgress(Team)
+METHOD Public, Virtual, HideBySig System.Boolean SoftwareAlpha::DisableCompCheck()
+METHOD Public, Virtual, HideBySig WorkItem/HasWorkReturn SoftwareAlpha::HasWork(Actor,System.Boolean,System.Boolean)
+METHOD Private, HideBySig System.Single SoftwareAlpha::MaxBugFix(Team)
+METHOD Public, HideBySig System.Single SoftwareAlpha::MaxCodeSkill(Team)
+METHOD Public, HideBySig System.Single SoftwareAlpha::ContractBugFactor(System.Single)
+METHOD Public, HideBySig System.Void SoftwareAlpha::AddQuality(System.Single,System.Single,System.Boolean)
+METHOD Public, Static, HideBySig System.Single SoftwareAlpha::GetBugSpeedDamp(System.Single)
+METHOD Public, Static, HideBySig System.Double SoftwareAlpha::FinalQualityCalc(System.Double,System.Double,System.Double,System.Double,SoftwareType,System.Collections.Generic.IList`1<FeatureBase>)
+METHOD Public, Static, HideBySig System.Double SoftwareAlpha::FinalQualityCalc(System.Double,System.Double,System.Double,System.Double,System.Single)
+METHOD Public, Static, HideBySig System.Double SoftwareAlpha::FinalQualityCalc(System.Double,System.Double)
+METHOD Public, HideBySig System.Single SoftwareAlpha::GetLastProgress()
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetSpQuality(System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::DoWork(Actor,System.Single,System.Single,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Nullable`1<Employee/EmployeeRole> SoftwareAlpha::GetBoostRole(Actor,System.Boolean)
+METHOD Private, HideBySig System.Single SoftwareAlpha::LerpTowards(System.Single,System.Single,System.Single)
+METHOD Public, Virtual, HideBySig System.Single SoftwareAlpha::GetWorkScore()
+METHOD Public, HideBySig System.Void SoftwareAlpha::UserPromote()
+METHOD Public, HideBySig System.Void SoftwareAlpha::PressCheck()
+METHOD Public, HideBySig System.Void SoftwareAlpha::PriceCheck()
+METHOD Public, HideBySig System.Double[] SoftwareAlpha::GetMarketQuality()
+METHOD Private, HideBySig System.Void SoftwareAlpha::UpgradeMocks()
+METHOD Public, HideBySig System.Void SoftwareAlpha::PublisherCheck()
+METHOD Private, HideBySig System.Void SoftwareAlpha::AddRoyalties(IRoyaltyItem)
+METHOD Public, Virtual, HideBySig System.Object SoftwareAlpha::PromoteAction()
+METHOD Private, HideBySig System.Void SoftwareAlpha::StartBeta()
+METHOD Public, Virtual, HideBySig System.Single SoftwareAlpha::StressMultiplier()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::Kill(System.Boolean)
+METHOD Family, Virtual, HideBySig System.Void SoftwareAlpha::Cancelled()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareAlpha::GetLoadRequirement()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareAlpha::HandleLoad(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareAlpha::GetDescription()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetSoftwareWorkType()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareAlpha::SerializeServer(System.String)
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetWorkTypeName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareAlpha::get_UsesISP()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Boolean SoftwareAlpha::CancelOnUnload()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::HightlightButton()
+METHOD Public, Virtual, HideBySig Actor/WorkParticle SoftwareAlpha::EmitType(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Action>> SoftwareAlpha::GetButtons()
+METHOD Public, HideBySig System.Void SoftwareAlpha::StartPrint()
+METHOD Public, HideBySig System.Void SoftwareAlpha::StartSubPrint()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::GetNeeds(System.Collections.Generic.Dictionary`2<HRManagement/EdNeed,System.Int32>[])
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetTypeName()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetGroupType()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareAlpha::GetName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareAlpha::GetIdentifyingName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareAlpha::GetCompanyName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareAlpha::GetPrintPrice(System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareAlpha::GetLastPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareAlpha::GetTotalPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareAlpha::GetSalesMonths()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareAlpha::GetLastMissedPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareAlpha::GetReach()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareAlpha::GetRealQuality()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareAlpha::GetFollowers()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetSubjectName()
+METHOD Public, HideBySig System.Void SoftwareAlpha::ReviewAndIterate()
+METHOD Family, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<Employee/EmployeeRole> SoftwareAlpha::CompCheck()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::AddLoss(System.Single,SoftwareProduct/LossType,System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetTutorial()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::AddLicenseCost(SoftwareProduct,System.Single,System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareAlpha::GetMaxPhysicalCopies(IStockable&)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareAlpha::ChangeAllPhysicalStock(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.IList`1<System.UInt32> SoftwareAlpha::GetFeaturesFactors()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask IProductOrder SoftwareAlpha::PromoteHardware(System.UInt32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareAlpha::get_IsReadOnlyJob()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareAlpha::get_CanOutsourceNetwork()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::OnNetworkComplete(System.IO.Stream)
+METHOD Public, HideBySig System.Void SoftwareAlpha::ReadProgress(System.IO.Stream,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Byte[] SoftwareAlpha::GetNetworkCompletionData(System.Boolean)
+METHOD Public, Virtual, HideBySig, SpecialName System.String SoftwareAlpha::get_UnitName()
+METHOD Public, Virtual, HideBySig, SpecialName System.UInt32 SoftwareAlpha::get_MaxUnits()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::WriteSubData(System.IO.Stream)
+METHOD Public, Virtual, HideBySig, SpecialName System.Byte SoftwareAlpha::get_ByteTypeID()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareAlpha::get_HasNaturalNetworkEnd()
+METHOD Public, Virtual, HideBySig System.Boolean SoftwareAlpha::IsDoneForNetworkDeal()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::ReceiveNetworkDealSync(System.IO.Stream)
+METHOD Public, Virtual, HideBySig System.Byte[] SoftwareAlpha::SubSendNetworkDealSync()
+METHOD Public, Virtual, HideBySig System.Void SoftwareAlpha::InitNetworkDealAccepted()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::GetDetailedTypeName()
+METHOD Public, Virtual, HideBySig System.String SoftwareAlpha::CollapseLabel()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void SoftwareAlpha::.cctor()
+METHOD Private, HideBySig System.Boolean SoftwareAlpha::<PressCheck>b__114_0(MarketingPlan)
+METHOD Private, HideBySig System.Void SoftwareAlpha::<PriceCheck>b__115_0(System.String)
+METHOD Private, HideBySig System.Void SoftwareAlpha::<PublisherCheck>b__118_0()
+METHOD Private, HideBySig System.Boolean SoftwareAlpha::<PromoteAction>b__120_4(SupportWork)
+METHOD Private, HideBySig System.Boolean SoftwareAlpha::<Kill>b__123_1(SoftwarePort/PortProgress)
+METHOD Private, HideBySig System.Boolean SoftwareAlpha::<Kill>b__123_0(MarketingPlan)
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_0()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_1()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_2()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_3()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_4()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_5()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_6()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_7()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<GetButtons>b__136_8()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<StartPrint>b__137_0()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<StartSubPrint>b__138_1()
+METHOD Private, HideBySig System.Void SoftwareAlpha::<OnNetworkComplete>b__167_0(System.IO.Stream)
+METHOD Private, HideBySig System.Void SoftwareAlpha::<ReadProgress>b__168_0(System.IO.Stream)
+TYPE DesignDocument BASE SoftwareWorkItem
+FIELD Public, Static, Literal, HasDefault System.Int32 MaxIteration
+CONSTANT MaxIteration = 4
+FIELD Public WorkItem Result
+FIELD Public SHashSet`1<System.UInt32> EverWorked
+FIELD Public SHashSet`1<System.String> NextPhaseTeam
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> Tools
+FIELD Public Employee LeadDesigner
+FIELD Public System.Boolean HasFinished
+FIELD Public System.Boolean ContractStarted
+FIELD Public System.Int32 Iteration
+FIELD Public System.Single ReviewAccuracy
+FIELD Public System.Single LastProgress
+FIELD Public System.Single LeadProgress
+FIELD Private System.Single _currentProgress
+FIELD Public SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> ReviewSpecs
+FIELD Public, Static UnityEngine.Color32[][] IterationColors
+FIELD Public SoftwareAlpha Parent
+FIELD Public, Static, Literal, HasDefault System.Single MaxLeadProg
+CONSTANT MaxLeadProg = 0.25
+FIELD Public, Static System.Single[] BugRates
+FIELD Public, Static System.Single[] MaxBugFactor
+FIELD Private, NotSerialized System.Boolean _hasWarnedAboutLead
+PROPERTY UnityEngine.Color DesignDocument::BackColor()
+PROPERTY System.Boolean DesignDocument::AlwaysUseLocalProgressLabel()
+PROPERTY System.Boolean DesignDocument::CanOutsourceNetwork()
+PROPERTY System.String DesignDocument::UnitName()
+PROPERTY System.UInt32 DesignDocument::MaxUnits()
+PROPERTY System.Byte DesignDocument::ByteTypeID()
+PROPERTY System.Boolean DesignDocument::HasNaturalNetworkEnd()
+METHOD Public, Virtual, HideBySig IReferenceFix DesignDocument::FixReferences()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,System.Boolean,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,ContractWork,System.String,System.String,SoftwareFramework,System.String,System.Collections.Generic.List`1<SoftwareProduct>,System.Boolean,System.UInt32,NetworkDeal)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.Single,SDateTime,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.UInt32[],System.String,System.Collections.Generic.List`1<SoftwareProduct>,System.Boolean,System.UInt32,NetworkDeal)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(SoftwareAlpha,ReviewWindow/ReviewData)
+METHOD Public, HideBySig System.Boolean DesignDocument::NeedsLead()
+METHOD Public, HideBySig System.Boolean DesignDocument::CanUseLead()
+METHOD Public, HideBySig System.Boolean DesignDocument::CompatibleLead(Employee)
+METHOD Public, HideBySig Actor DesignDocument::FindBestLeadDesigner(DesignDocument)
+METHOD Public, HideBySig System.Void DesignDocument::ResetLeadDesigner()
+METHOD Public, HideBySig System.Void DesignDocument::SetLeadDesigner(Employee)
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::DevTeamChange()
+METHOD Public, Static, HideBySig DesignDocument DesignDocument::CreateWork(System.String,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,System.Boolean,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,ContractWork,System.String,System.String,SoftwareFramework,System.String,System.Collections.Generic.List`1<SoftwareProduct>,System.Boolean)
+METHOD Public, HideBySig System.Double DesignDocument::RawProgress()
+METHOD Public, Virtual, HideBySig System.Single DesignDocument::GetProgress()
+METHOD Public, Virtual, HideBySig System.Single DesignDocument::GetWorkScore()
+METHOD Public, Virtual, HideBySig, SpecialName UnityEngine.Color DesignDocument::get_BackColor()
+METHOD Public, Virtual, HideBySig WorkItem/HasWorkReturn DesignDocument::HasWork(Actor,System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean DesignDocument::get_AlwaysUseLocalProgressLabel()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetProgressLabel()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::CurrentStage()
+METHOD Private, HideBySig System.String DesignDocument::CurrentStageSub(System.Int32,System.Single,System.Single)
+METHOD Public, Virtual, HideBySig System.Byte[] DesignDocument::SerializeProgressData()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::DeserializeProgressData(System.Byte[])
+METHOD Private, HideBySig System.Void DesignDocument::UpdateContractStart(System.Boolean)
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetIcon()
+METHOD Public, Static, HideBySig UnityEngine.Color DesignDocument::GetIterationColor(System.Int32)
+METHOD Public, Virtual, HideBySig UnityEngine.Color DesignDocument::GetProgressColor()
+METHOD Public, Virtual, HideBySig System.Nullable`1<UnityEngine.Color> DesignDocument::GetLastPhaseProgress()
+METHOD Public, HideBySig System.Void DesignDocument::SelectLeadDesigner()
+METHOD Public, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Action>> DesignDocument::GetButtons()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::GetNeeds(System.Collections.Generic.Dictionary`2<HRManagement/EdNeed,System.Int32>[])
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetTypeName()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetGroupType()
+METHOD Public, HideBySig System.Single DesignDocument::GetCurrentProgress()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::DoWork(Actor,System.Single,System.Single,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Nullable`1<Employee/EmployeeRole> DesignDocument::GetBoostRole(Actor,System.Boolean)
+METHOD Public, Static, HideBySig System.Void DesignDocument::FinishIteration(SoftwareAlpha,System.Collections.Generic.IList`1<SoftwareWorkItem/FeatureProgress>,System.Single,System.Collections.Generic.HashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>>)
+METHOD Public, Virtual, HideBySig System.Object DesignDocument::PromoteAction()
+METHOD Public, Virtual, HideBySig System.Single DesignDocument::StressMultiplier()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::Kill(System.Boolean)
+METHOD Family, Virtual, HideBySig System.Void DesignDocument::Cancelled()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetWorkTypeName()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::HightlightButton()
+METHOD Public, Virtual, HideBySig Actor/WorkParticle DesignDocument::EmitType(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetSubjectName()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::AddLoss(System.Single,System.Boolean)
+METHOD Family, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<Employee/EmployeeRole> DesignDocument::CompCheck()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::ProgressTip()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetTutorial()
+METHOD Public, Virtual, HideBySig System.Boolean DesignDocument::DisableCompCheck()
+METHOD Public, Virtual, HideBySig System.Single DesignDocument::GetLicenseAmount()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean DesignDocument::get_CanOutsourceNetwork()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::OnNetworkComplete(System.IO.Stream)
+METHOD Public, HideBySig System.Void DesignDocument::ReadProgress(System.IO.Stream)
+METHOD Public, Virtual, HideBySig System.Byte[] DesignDocument::GetNetworkCompletionData(System.Boolean)
+METHOD Public, Virtual, HideBySig, SpecialName System.String DesignDocument::get_UnitName()
+METHOD Public, Virtual, HideBySig, SpecialName System.UInt32 DesignDocument::get_MaxUnits()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::WriteSubData(System.IO.Stream)
+METHOD Public, Virtual, HideBySig, SpecialName System.Byte DesignDocument::get_ByteTypeID()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean DesignDocument::get_HasNaturalNetworkEnd()
+METHOD Public, Virtual, HideBySig System.Boolean DesignDocument::IsDoneForNetworkDeal()
+METHOD Public, Virtual, HideBySig System.Void DesignDocument::ReceiveNetworkDealSync(System.IO.Stream)
+METHOD Public, Virtual, HideBySig System.Byte[] DesignDocument::SubSendNetworkDealSync()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetSoftwareWorkType()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::GetDetailedTypeName()
+METHOD Public, Virtual, HideBySig System.String DesignDocument::CollapseLabel()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.cctor()
+METHOD Private, HideBySig System.Void DesignDocument::<SelectLeadDesigner>b__48_0()
+METHOD Private, HideBySig System.Boolean DesignDocument::<SelectLeadDesigner>b__48_4(Employee)
+METHOD Private, HideBySig System.Boolean DesignDocument::<SelectLeadDesigner>b__48_2(Employee)
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_0()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_1()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_2()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_3()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_5()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_6()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_9()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_7()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_10()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_11()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_8()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_12()
+METHOD Private, HideBySig System.Void DesignDocument::<GetButtons>b__49_4()
+METHOD Private, HideBySig System.Boolean DesignDocument::<PromoteAction>b__61_0(MarketingPlan)
+METHOD Private, HideBySig System.Boolean DesignDocument::<Kill>b__63_0(MarketingPlan)
+METHOD Private, HideBySig System.Void DesignDocument::<OnNetworkComplete>b__77_0(System.IO.Stream)
+METHOD Private, HideBySig System.Void DesignDocument::<ReadProgress>b__78_0(System.IO.Stream)
+TYPE Company BASE System.Object
+INTERFACE IFormatColorObject
+FIELD Public, Static, Literal, HasDefault System.Int32 BusinessRepStars
+CONSTANT BusinessRepStars = 6
+FIELD Public, Static System.Single StockDefaultPrice
+FIELD Public, InitOnly System.UInt32 ID
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly SDateTime Founded
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareProduct,SHashSet`1<ILossable>> Licenses
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Int32> OSSeats
+FIELD Public System.Collections.Generic.List`1<PublisherDeal> Publishing
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,ScheduledRelease> _scheduledReleases
+FIELD Family System.Collections.Generic.Dictionary`2<System.String,System.Int32> _latestResearch
+FIELD Public System.Collections.Generic.List`1<Employee> NetworkEmployees
+FIELD Public System.Collections.Generic.List`1<MarketEvent> MarketEvents
+FIELD Public System.Int32 CompaniesBought
+FIELD Public System.UInt32 Shares
+FIELD Private System.Double _share
+FIELD Family System.Double _money
+FIELD Private System.Single <Valuation>k__BackingField
+FIELD Private System.Double[] _valuationValues
+FIELD Private System.Int32 _valuationOffset
+FIELD Public System.Boolean LeadBidHappening
+FIELD Public Stock[] Stocks
+FIELD Public EventList`1<Stock> OwnedStock
+FIELD Public System.Byte NetworkPlayerID
+FIELD Public System.Collections.Generic.List`1<NewStock> NewStock
+FIELD Public EventList`1<NewStock> NewOwnedStock
+FIELD Public System.Int32 StockQuarantine
+FIELD Public System.Collections.Generic.List`1<TechLevel> Patents
+FIELD Public SHashSet`1<System.UInt32> Subsidiaries
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,Company/RepEffectItem> RepEffects
+FIELD Public System.Collections.Generic.List`1<SoftwareFramework> Frameworks
+FIELD Public System.Collections.Generic.List`1<AddOnProduct> AddOns
+FIELD Public System.Boolean ForceBuyStocksFrom
+FIELD Public DistributionPlatform Distribution
+FIELD Private System.Collections.Generic.List`1<DistributionPlatform> _activeDistribution
+FIELD Public TaxReport CurrentTaxReport
+FIELD Public TaxReport LastTaxReport
+FIELD Public System.Byte[] Logo
+FIELD Public System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.Int32,System.Byte[]>> PreviousLogos
+FIELD Public System.Boolean DontSync
+FIELD Public System.Single EmployerScore
+FIELD Public System.Collections.Generic.Dictionary`2<Company,System.Int32> WantsDistribution
+FIELD Family System.Collections.Generic.Dictionary`2<Company,System.Single> _playerAcceptRates
+FIELD Public System.Nullable`1<SDateTime> TakeOver
+FIELD Public NetworkServer CloudService
+FIELD Public System.Nullable`1<System.Single> SoftwarePrintMarkup
+FIELD Public System.Collections.Generic.Dictionary`2<IManufacturable,System.Single> HardwarePrintMarkup
+FIELD Family System.Boolean _autoAcceptPlatforms
+FIELD Private System.UInt32 _ownerCompany
+FIELD Private System.UInt32 _cachedFans
+FIELD Private System.Boolean _fanCountDirty
+FIELD Family System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Single> _softwareRep
+FIELD Family System.Collections.Generic.Dictionary`2<SoftwareCategory,System.UInt32> _softwarePop
+FIELD Family System.Collections.Generic.Dictionary`2<SoftwareCategory,SDateTime> _lastRelease
+FIELD Family System.Single _businessReputation
+FIELD Public SHashSet`1<WorkItem> WorkItems
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> Products
+FIELD Public System.Boolean Bankrupt
+FIELD Public System.Boolean Player
+FIELD Public System.Boolean LocalPlayer
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<System.Single>> Cashflow
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> tempCashflow
+FIELD Public System.Double ExtraWorth
+FIELD Public System.Nullable`1<System.Single> DistributionLoad
+FIELD Private, Static System.Collections.Generic.List`1<System.Double> _pcCache
+FIELD Public, Static System.Single FanThresh
+FIELD Private, Static FloatInterpolator _popScore
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.Byte,Company/TakeOverData> _takeOverData
+FIELD Private, Static ObjectPool`1<Company/TakeOverData> _takeOverPool
+PROPERTY System.Single Company::Valuation()
+PROPERTY System.Boolean Company::AutoAcceptPlatforms()
+PROPERTY System.Boolean Company::IsInvestor()
+PROPERTY Company Company::OwnerCompany()
+PROPERTY System.Double Company::Money()
+PROPERTY System.UInt32 Company::Fans()
+PROPERTY System.Single Company::BusinessReputation()
+PROPERTY System.Single Company::DiscreteRep()
+PROPERTY System.Int32 Company::BusinessStars()
+PROPERTY System.Boolean Company::IsLocalPlayer()
+METHOD Private, HideBySig, SpecialName System.Void Company::set_Valuation(System.Single)
+METHOD Public, HideBySig, SpecialName System.Single Company::get_Valuation()
+METHOD Public, HideBySig System.Single Company::GetPrintPrice(IStockable)
+METHOD Public, HideBySig System.Single Company::GetPrintMarkup(IStockable)
+METHOD Public, HideBySig System.Void Company::SetPrintMarkup(IManufacturable,System.Single)
+METHOD Public, HideBySig System.Void Company::BeginTakeover(Company,System.Boolean)
+METHOD Public, HideBySig, SpecialName System.Boolean Company::get_AutoAcceptPlatforms()
+METHOD Public, HideBySig System.Void Company::FixNetworkPlayerReferences(Company,System.Boolean)
+METHOD Public, HideBySig System.Void Company::SetAutoAcceptPlatforms(System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Void Company::HostChangeMoney(System.Double)
+METHOD Public, HideBySig System.Boolean Company::IsSigned(DistributionPlatform)
+METHOD Public, HideBySig System.Collections.Generic.List`1<DistributionPlatform> Company::GetPlatforms()
+METHOD Public, HideBySig System.Void Company::ResetAcceptRates()
+METHOD Public, HideBySig System.Boolean Company::SignPlatform(DistributionPlatform,System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Void Company::ScheduleRelease(System.String,System.UInt32,SoftwareCategory,SoftwareProduct,System.Nullable`1<SDateTime>,System.Boolean)
+METHOD Public, HideBySig System.Void Company::RescheduleRelease(System.UInt32,System.Nullable`1<SDateTime>,System.Boolean)
+METHOD Public, HideBySig System.Void Company::UnscheduleRelease(System.UInt32,System.Boolean)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<ScheduledRelease> Company::GetReleases()
+METHOD Public, HideBySig System.Void Company::GenerateLogo()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean Company::CanTakeStockFrom()
+METHOD Public, HideBySig, SpecialName System.Boolean Company::get_IsInvestor()
+METHOD Public, HideBySig, SpecialName Company Company::get_OwnerCompany()
+METHOD Public, HideBySig, SpecialName System.Void Company::set_OwnerCompany(Company)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<Company> Company::GetSubsidiaries()
+METHOD Public, HideBySig System.Int32 Company::LicenseCount(SoftwareProduct)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<SoftwareProduct> Company::GetLicenses()
+METHOD Public, HideBySig, SpecialName System.Double Company::get_Money()
+METHOD Public, HideBySig, SpecialName System.UInt32 Company::get_Fans()
+METHOD Public, HideBySig System.Void Company::ReleaseNow(SoftwareCategory,SDateTime)
+METHOD Public, HideBySig System.Void Company::AddMarketEvent(MarketEvent,System.Boolean)
+METHOD Public, HideBySig System.Void Company::FixMarketRecognition()
+METHOD Public, HideBySig, SpecialName System.Single Company::get_BusinessReputation()
+METHOD Public, HideBySig System.Void Company::ChangeBusinessRep(System.Single,System.String,System.Single)
+METHOD Public, HideBySig, SpecialName System.Single Company::get_DiscreteRep()
+METHOD Public, HideBySig, SpecialName System.Int32 Company::get_BusinessStars()
+METHOD Public, HideBySig, SpecialName System.Boolean Company::get_IsLocalPlayer()
+METHOD Public, HideBySig System.Double Company::GetMoneyWithInsurance(System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Double Company::GetPlayerExtraWorth()
+METHOD Public, HideBySig System.Double Company::GetShareWorth(System.Boolean)
+METHOD Public, HideBySig System.Int32 Company::GetLocalLatestResearch(System.String,System.Int32)
+METHOD Public, HideBySig System.Int32 Company::GetLatestResearch(System.String,System.Int32)
+METHOD Public, HideBySig System.Int32 Company::GetLatestResearchDetailed(System.String,System.Int32,System.String&,System.String&)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean Company::CanMakeSequel(SoftwareProduct)
+METHOD Public, HideBySig System.Void Company::AddResearch(System.String,System.Int32,System.Boolean)
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Single> Company::GetSoftwareRep()
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<SoftwareCategory,System.UInt32> Company::GetSoftwarePop()
+METHOD Public, HideBySig System.Void Company::AddDistributionLoad(System.Single)
+METHOD Public, HideBySig System.Boolean Company::IsPlayerOwned(System.Boolean)
+METHOD Public, HideBySig System.Boolean Company::IsSubsidiary()
+METHOD Public, HideBySig System.Void Company::MakeSubsidiaryNetwork(Company,SDateTime)
+METHOD Public, HideBySig System.Void Company::MakeSubsidiary(Company,SDateTime)
+METHOD Public, HideBySig System.Double Company::GetShare()
+METHOD Public, HideBySig System.Double Company::GetCompanyShares(Company)
+METHOD Public, HideBySig System.Double Company::GetShareWithFounders()
+METHOD Public, HideBySig System.Single Company::GetOwnShares()
+METHOD Public, HideBySig System.Void Company::UpdateShare()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void Company::.ctor(System.String,System.Double,SDateTime,MarketSimulation,System.Boolean)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void Company::.ctor(System.String,System.Double,SDateTime,System.UInt32)
+METHOD Public, HideBySig System.Void Company::InfiniteMoney()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void Company::.ctor()
+METHOD Public, HideBySig System.Single Company::GetReputation(SoftwareCategory)
+METHOD Private, Static, HideBySig System.Single Company::PopulationToScore(System.UInt32,System.UInt32,System.Single)
+METHOD Public, HideBySig System.Void Company::AddFans(System.Int32,SoftwareCategory)
+METHOD Public, HideBySig System.Void Company::ActuallyAddFans(System.Int32,SoftwareCategory)
+METHOD Private, HideBySig System.Single Company::GetRecBoost(System.Single)
+METHOD Public, HideBySig System.Boolean Company::CanOwnStock(Company)
+METHOD Public, HideBySig System.Boolean Company::TradeStock(Company,System.UInt32,SDateTime,System.Nullable`1<System.Double>,NewStock)
+METHOD Public, HideBySig System.Boolean Company::ActuallyTradeStock(Company,System.UInt32,SDateTime,System.Nullable`1<System.Double>,NewStock)
+METHOD Public, HideBySig System.Void Company::CleanCompany(SDateTime)
+METHOD Public, HideBySig System.Void Company::NetworkBuyout(System.String)
+METHOD Private, HideBySig System.Void Company::SimulateLayoffs()
+METHOD Public, HideBySig System.Void Company::NetworkPlayerBuyout(System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Company::BuyOut(System.Collections.Generic.IList`1<Company>,System.Boolean,SDateTime,System.Boolean)
+METHOD Private, Static, HideBySig Company/TakeOverData Company::GetTakeOverData(System.Byte)
+METHOD Private, Static, HideBySig System.Void Company::ReleaseTakeOverData()
+METHOD Public, Static, HideBySig System.Void Company::GenerateTakeOverMessage(Company,Company/TakeOverData)
+METHOD Public, HideBySig System.Void Company::CleanStock()
+METHOD Private, HideBySig System.Void Company::ClearStock(SDateTime)
+METHOD Private, HideBySig System.Void Company::TransferStock(System.Collections.Generic.IList`1<Company>,SDateTime,System.Int32&,System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Double Company::GetPossibleStockWorth()
+METHOD Public, HideBySig System.Collections.Generic.KeyValuePair`2<System.UInt32,System.Double> Company::GetSharesAndPrice(System.Double)
+METHOD Public, HideBySig System.Void Company::AddLicense(SoftwareProduct,ILossable)
+METHOD Public, HideBySig System.Void Company::RemoveLicense(SoftwareProduct,ILossable,System.Boolean)
+METHOD Public, HideBySig System.Void Company::PayForLicenses(SDateTime)
+METHOD Public, HideBySig System.Boolean Company::CanMakeTransaction(System.Double)
+METHOD Public, HideBySig System.Void Company::AddToCashflow(System.Double,Company/TransactionCategory)
+METHOD Private, Static, HideBySig System.Void Company::AddToLast(System.Collections.Generic.List`1<System.Single>,System.Single,System.Boolean)
+METHOD Public, HideBySig System.Void Company::EndDay(SDateTime,System.Boolean)
+METHOD Private, HideBySig System.Void Company::RefreshValuation()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void Company::EndDayCallback(SDateTime)
+METHOD Private, HideBySig System.String Company::ErrorMessage(System.String,Company/TransactionCategory,System.String)
+METHOD Public, HideBySig System.Void Company::AddTax(TaxReport/TaxType,System.Double)
+METHOD Public, HideBySig System.Void Company::ActuallyAddTax(TaxReport/TaxType,System.Double)
+METHOD Public, HideBySig System.Double Company::GetCurrentStockTax()
+METHOD Public, HideBySig System.Void Company::TurnTaxReport()
+METHOD Public, HideBySig System.Void Company::FinishTaxReport(System.Int32)
+METHOD Public, HideBySig System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,TaxReport/TaxType,System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Company::ActuallyMakeTransaction(System.Double,Company/TransactionCategory,TaxReport/TaxType,SDateTime,System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Company::AddToBill(System.Double,Company/TransactionCategory,System.String)
+METHOD Public, HideBySig System.Boolean Company::IsSoleStock(Company)
+METHOD Public, HideBySig System.Collections.Generic.List`1<Company> Company::GenerateStockCompanyList()
+METHOD Public, HideBySig System.Boolean Company::CanBuyOut(Company)
+METHOD Public, HideBySig System.Double Company::GetBuyOutPrice(Company)
+METHOD Public, Virtual, HideBySig System.String Company::ToString()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String Company::GetActualString()
+METHOD Public, HideBySig System.Void Company::SimulateFanLoss(SDateTime)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void Company::KillCompany()
+METHOD Public, HideBySig System.Void Company::PayDividends()
+METHOD Public, HideBySig System.Int32 Company::GetOSSeats(SoftwareProduct)
+METHOD Public, HideBySig System.Void Company::UpdateOSLicenses(System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Int32>,System.Boolean)
+METHOD Public, HideBySig System.Void Company::UpdateOSLicense(SoftwareProduct,System.Int32,System.Boolean)
+METHOD Public, HideBySig System.Void Company::CancelAllWorkFor(SoftwareProduct)
+METHOD Public, HideBySig System.Void Company::CancelAllWorkFor(AddOnProduct)
+METHOD Public, HideBySig System.Single Company::GetTotalCashflow(System.String)
+METHOD Public, HideBySig System.Void Company::AddWorkItem(WorkItem)
+METHOD Public, HideBySig System.Void Company::CreateFounderStocks(Employee[],MarketSimulation,System.Int32)
+METHOD Public, HideBySig System.Boolean Company::DistributionAcceptedAt(DistributionPlatform,System.Single&)
+METHOD Public, HideBySig System.Void Company::ChangeDistributionAccept(Company,System.Single)
+METHOD Public, HideBySig System.Boolean Company::IsInterested(DistributionPlatform)
+METHOD Public, HideBySig System.Void Company::MarkInterested(Company,System.Boolean,System.Int32,System.Boolean)
+METHOD Public, HideBySig System.Boolean Company::WantLocalPlayerDistribution()
+METHOD Public, HideBySig System.Boolean Company::WantsPlayerDistribution(DistributionPlatform)
+METHOD Public, HideBySig System.Boolean Company::WantsPlayerDistribution(Company)
+METHOD Public, HideBySig System.Boolean Company::PlayerDistributionQuarantined(DistributionPlatform)
+METHOD Public, HideBySig System.Boolean Company::PlayerDistributionQuarantined(Company)
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void Company::.cctor()
+METHOD Private, HideBySig System.Boolean Company::<NetworkPlayerBuyout>b__149_1(PlotArea)
+METHOD Private, HideBySig System.Boolean Company::<NetworkPlayerBuyout>b__149_2(PlotArea)
+TYPE SoftwareProduct BASE System.Object
+INTERFACE IServerItem
+INTERFACE IReferenceFix
+INTERFACE IStockable
+INTERFACE ILossable
+INTERFACE IFormatColorObject
+INTERFACE IDisplayable
+INTERFACE IMarketable
+INTERFACE IRoyaltyItem
+INTERFACE IListDoubleClickable
+FIELD Public, Static, Literal, HasDefault System.Int32 LossTypeCount
+CONSTANT LossTypeCount = 15
+FIELD Public, Static, InitOnly System.Single DieValue
+FIELD Private, InitOnly System.Double[] _quality
+FIELD Public, InitOnly System.Double RealQuality
+FIELD Public System.UInt32 ExternalHosting
+FIELD Public System.Boolean ExternalHostingActive
+FIELD Public System.UInt32 Followers
+FIELD Public SoftwareAlpha MockWork
+FIELD Public SoftwareProduct MockSucceeded
+FIELD Public, InitOnly System.String Name
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory Category
+FIELD Public, InitOnly System.Double[] Submarkets
+FIELD Public, InitOnly System.Double CreativityScore
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> OldOSs
+FIELD Public System.Collections.Generic.List`1<System.UInt32> _oss
+FIELD Public, InitOnly System.UInt32 ID
+FIELD Public System.Int32 MissedPhysicalSales
+FIELD Public SoftwareProduct SequelTo
+FIELD Public SoftwareProduct Sequel
+FIELD Public SoftwareFramework Framework
+FIELD Public, InitOnly System.Single FrameworkRoyalty
+FIELD Public, InitOnly SDateTime DevStart
+FIELD Public, InitOnly SDateTime Release
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public FeatureBase[] Features
+FIELD Public, InitOnly System.Double CodeQuality
+FIELD Public, InitOnly System.Double ArtQuality
+FIELD Public, InitOnly System.Double CodeProgress
+FIELD Public, InitOnly System.Double ArtProgress
+FIELD Public System.Int32 VMajor
+FIELD Public System.Int32 VMinor
+FIELD Public System.Int32 VRev
+FIELD Public Company DevCompany
+FIELD Public PublisherDeal Publishing
+FIELD Public, InitOnly System.Single RandomFactor
+FIELD Public, InitOnly System.Double SequelBonus
+FIELD Public System.Boolean InHouse
+FIELD Public System.UInt32 PositiveReviews
+FIELD Public System.UInt32 NegativeReviews
+FIELD Public System.Collections.Generic.List`1<System.Int32> PositiveReviewList
+FIELD Public System.Collections.Generic.List`1<System.Int32> NegativeReviewList
+FIELD Private System.Int32 _bugs
+FIELD Private System.Int32 _startBugs
+FIELD Public System.Int32 VerifiedBugs
+FIELD Public System.Single Marketing
+FIELD Public System.Single FrameworkPayout
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Private System.Single _awareness
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Double[]> _featureScoreSummation
+FIELD Public System.Single ServerReq
+FIELD Public System.Single Price
+FIELD Public System.Single OriginalPrice
+FIELD Public System.Single LowestPrice
+FIELD Public System.Single PriceChangeFact
+FIELD Public System.Single LicenseCost
+FIELD Public System.Single AddonProfit
+FIELD Public System.String Server
+FIELD Private System.Collections.Generic.List`1<System.Single> _cashflow
+FIELD Private System.Collections.Generic.List`1<System.Single> _licenseCashflow
+FIELD Private System.Collections.Generic.List`1<System.Int32> _unitOnlineSales
+FIELD Private System.Collections.Generic.List`1<System.Int32> _unitOfflineSales
+FIELD Private System.Collections.Generic.List`1<System.Int32> _refunds
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> OldTools
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,System.Single> _tools
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareAddOn,System.Collections.Generic.List`1<AddOnProduct>> Addons
+FIELD Public AddOnProduct[] ForcedAddons
+FIELD Public System.Double AddonQualityEffect
+FIELD Public System.Collections.Generic.List`1<AddOnProduct> IncludedAddons
+FIELD Private ScriptSystem/EntryPoint _entryPoints
+FIELD Public System.Collections.Generic.List`1<System.Single> Rep
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> TechLevels
+FIELD Private SDateTime LastAddedToCashflow
+FIELD Private SDateTime LastAddedToUnits
+FIELD Public System.Double Sum
+FIELD Public System.Double LicenseSum
+FIELD Public System.Single LastMonthGross
+FIELD Public System.Single LastDayGross
+FIELD Public System.Single LastDayLoss
+FIELD Public System.Int32 LastMonthPhysical
+FIELD Public System.UInt32 TotalPhysical
+FIELD Public System.Double ReleaseRelevancy
+FIELD Public System.UInt32 UnitSum
+FIELD Public System.UInt32 RefundSum
+FIELD Public System.UInt32 SubscriptionSum
+FIELD Public System.Int32 Userbase
+FIELD Public System.Boolean _archived
+FIELD Public System.Boolean PlayerArchived
+FIELD Public SDateTime LastSale
+FIELD Public SDateTime LastSaleUpdate
+FIELD Public Employee LeadDesigner
+FIELD Public System.Boolean DesignerOwned
+FIELD Public System.Boolean DesignerRoyalties
+FIELD Public System.Double[] LossBreakdown
+FIELD Public System.Double Loss
+FIELD Public System.Single OSSalesBoost
+FIELD Public System.Nullable`1<SDateTime> LastUpdated
+FIELD Private System.Single _activeLoss
+FIELD Public System.Single BoughtFor
+FIELD Private System.String inventor
+FIELD Public, InitOnly System.UInt32 InventorID
+FIELD Public System.Single[] ProfitAward
+FIELD Public System.Collections.Generic.List`1<MarketEvent> MarketEvents
+FIELD Private System.Double _bigProjectFactor
+FIELD Public DistributionPlatform ExclusiveStore
+FIELD Public SDateTime ExclusiveEnd
+FIELD Public System.Boolean HadOSWarning
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Object> _scriptDictionary
+FIELD Private System.Boolean _stockNotifications
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Private System.Byte[] <HardwareDesign>k__BackingField
+FIELD Public, Static System.Collections.Generic.List`1<System.Single> EmptyFlow
+FIELD Public, Static System.Collections.Generic.List`1<System.Int32> EmptyUnit
+FIELD Public, Static FloatInterpolator CreativityAwarenessFactor
+FIELD Private, Static System.Double[] _priceCache
+FIELD Private, Static FloatInterpolator[] _creativityFactors
+FIELD Private, NotSerialized System.Double[] _cachedWeightedMarketQuality
+FIELD Private, NotSerialized SDateTime _cachedWeightedMarketQualityDate
+FIELD Private System.UInt32 _physicalCopies
+FIELD Private System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> _workRoyalties
+FIELD Public System.Int32 LoadIncidents
+FIELD Public System.Int32 MaxLoadIncidents
+FIELD Private System.Double _cachedPerceivedValue
+FIELD Private SDateTime _cachedPerceivedTime
+FIELD Private System.UInt32 _addonID
+PROPERTY System.Boolean SoftwareProduct::IsMock()
+PROPERTY System.Double[] SoftwareProduct::Quality()
+PROPERTY System.Boolean SoftwareProduct::HasSequel()
+PROPERTY System.Int32 SoftwareProduct::OSCount()
+PROPERTY System.UInt32 SoftwareProduct::CopiesPerBox()
+PROPERTY System.UInt32 SoftwareProduct::PhysicalCopies()
+PROPERTY System.Boolean SoftwareProduct::OpenSource()
+PROPERTY System.Int32 SoftwareProduct::ReleaseYear()
+PROPERTY System.Single SoftwareProduct::ReviewScore()
+PROPERTY System.Int32 SoftwareProduct::Bugss()
+PROPERTY System.Int32 SoftwareProduct::StartBugss()
+PROPERTY System.Int32 SoftwareProduct::FixableBugs()
+PROPERTY System.Int32 SoftwareProduct::ToolCount()
+PROPERTY System.Boolean SoftwareProduct::Traded()
+PROPERTY System.Boolean SoftwareProduct::OriginalOwner()
+PROPERTY System.String SoftwareProduct::Inventor()
+PROPERTY System.Boolean SoftwareProduct::StockNotifications()
+PROPERTY System.Boolean SoftwareProduct::ActualStockNotifications()
+PROPERTY System.Int32 SoftwareProduct::HardwareMask()
+PROPERTY System.Int32 SoftwareProduct::HardwareInputMask()
+PROPERTY System.Single SoftwareProduct::HardwarePrice()
+PROPERTY System.Byte[] SoftwareProduct::HardwareDesign()
+PROPERTY IManufacturable SoftwareProduct::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SoftwareProduct::FeaturesBases()
+PROPERTY IStockable SoftwareProduct::DeferStock()
+PROPERTY SoftwareType SoftwareProduct::SWType()
+PROPERTY SoftwareCategory SoftwareProduct::SWCat()
+PROPERTY System.String SoftwareProduct::Version()
+PROPERTY System.Boolean SoftwareProduct::Archived()
+PROPERTY System.Boolean SoftwareProduct::HasWorkRoyalties()
+PROPERTY System.Boolean SoftwareProduct::UsesISP()
+PROPERTY System.Boolean SoftwareProduct::IsReadOnlyJob()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_IsMock()
+METHOD Public, HideBySig, SpecialName System.Double[] SoftwareProduct::get_Quality()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_HasSequel()
+METHOD Public, HideBySig System.Void SoftwareProduct::InitOS()
+METHOD Public, HideBySig System.Void SoftwareProduct::AddOS(SoftwareProduct)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddOSs(System.Collections.Generic.IList`1<SoftwareProduct>)
+METHOD Public, HideBySig System.Void SoftwareProduct::RemoveOS(SoftwareProduct)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<SoftwareProduct> SoftwareProduct::GetOSs()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::HasOS(SoftwareProduct)
+METHOD Public, HideBySig, SpecialName System.Int32 SoftwareProduct::get_OSCount()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.UInt32 SoftwareProduct::get_CopiesPerBox()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.UInt32 SoftwareProduct::get_PhysicalCopies()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareProduct::set_PhysicalCopies(System.UInt32)
+METHOD Public, HideBySig System.Void SoftwareProduct::ChangePhysicalCopiesDirectly(System.UInt32)
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_OpenSource()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Int32 SoftwareProduct::get_ReleaseYear()
+METHOD Public, HideBySig, SpecialName System.Single SoftwareProduct::get_ReviewScore()
+METHOD Public, HideBySig System.Void SoftwareProduct::AddReviews(System.Int32,System.Int32,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyAddReviews(System.Int32,System.Int32,SDateTime)
+METHOD Public, HideBySig, SpecialName System.Int32 SoftwareProduct::get_Bugss()
+METHOD Public, HideBySig, SpecialName System.Int32 SoftwareProduct::get_StartBugss()
+METHOD Public, HideBySig, SpecialName System.Int32 SoftwareProduct::get_FixableBugs()
+METHOD Public, HideBySig System.Void SoftwareProduct::InitTools()
+METHOD Public, HideBySig System.Void SoftwareProduct::AddTool(SoftwareProduct,System.Single)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddTools(System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single>)
+METHOD Public, HideBySig System.Void SoftwareProduct::RemoveTool(SoftwareProduct)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<System.ValueTuple`2<SoftwareProduct,System.Single>> SoftwareProduct::GetTools()
+METHOD Public, HideBySig System.Single SoftwareProduct::GetToolValue(SoftwareProduct)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::HasTool(SoftwareProduct)
+METHOD Public, HideBySig, SpecialName System.Int32 SoftwareProduct::get_ToolCount()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_Traded()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_OriginalOwner()
+METHOD Public, HideBySig, SpecialName System.String SoftwareProduct::get_Inventor()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareProduct::get_StockNotifications()
+METHOD Public, HideBySig, SpecialName System.Void SoftwareProduct::set_StockNotifications(System.Boolean)
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_ActualStockNotifications()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Int32 SoftwareProduct::get_HardwareMask()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareProduct::set_HardwareMask(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Int32 SoftwareProduct::get_HardwareInputMask()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareProduct::set_HardwareInputMask(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Single SoftwareProduct::get_HardwarePrice()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void SoftwareProduct::set_HardwarePrice(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Byte[] SoftwareProduct::get_HardwareDesign()
+METHOD Public, HideBySig, SpecialName System.Void SoftwareProduct::set_HardwareDesign(System.Byte[])
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName IManufacturable SoftwareProduct::get_Manufacturing()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.IList`1<FeatureBase> SoftwareProduct::get_FeaturesBases()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName IStockable SoftwareProduct::get_DeferStock()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName SoftwareType SoftwareProduct::get_SWType()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName SoftwareCategory SoftwareProduct::get_SWCat()
+METHOD Public, HideBySig, SpecialName System.String SoftwareProduct::get_Version()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareProduct::get_Archived()
+METHOD Public, HideBySig System.Void SoftwareProduct::UpdateForcedAddonQualityEffect()
+METHOD Public, HideBySig System.Void SoftwareProduct::PutVar(System.String,System.Object)
+METHOD Public, HideBySig System.Object SoftwareProduct::GetVar(System.String,System.Object)
+METHOD Public, HideBySig System.Collections.Generic.List`1<System.Single> SoftwareProduct::GetCashflow(System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::RemoveFromGame()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::CanMakeExclusive()
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyRemoveFromGame()
+METHOD Public, HideBySig System.Double SoftwareProduct::GetBigProjectFactor()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::Archive()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::ActuallyArchive()
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<SoftwareProduct> SoftwareProduct::GetEntireIP()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::IsSameIP(SoftwareProduct)
+METHOD Public, HideBySig SoftwareProduct SoftwareProduct::GetFirstRelease()
+METHOD Public, HideBySig System.Collections.Generic.List`1<System.Int32> SoftwareProduct::GetUnitSales(System.Boolean)
+METHOD Public, HideBySig System.Collections.Generic.List`1<System.Int32> SoftwareProduct::GetRefunds()
+METHOD Public, HideBySig System.Single SoftwareProduct::GetLicenseCost(System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddRepChange(System.Int32,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyAddRepChange(System.Int32,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddToCashflow(System.Int32,System.Int32,System.Int32,System.Single,System.Single,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddToCashflow(System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ChangeLastSale(SDateTime,System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyAddToCashflow(System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ClearAddonSalesStats()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareProduct::.ctor()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareProduct::.ctor(System.String,SoftwareType,SoftwareCategory,SoftwareProduct[],System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double,System.Single,System.Boolean,System.Double[],SDateTime,SDateTime,System.Int32,System.Boolean,Company,SoftwareProduct,System.UInt32,System.Double,FeatureBase[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.String,System.UInt32,SoftwareFramework,System.Single,System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single>,SoftwareAlpha,System.Byte[])
+METHOD Public, HideBySig System.Single SoftwareProduct::GetMaxAwareness(AddOnProduct)
+METHOD Public, HideBySig System.Void SoftwareProduct::SendNetwork()
+METHOD Private, Static, HideBySig T SoftwareProduct::GetOrThrow(T,System.String,System.Boolean)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareProduct::.ctor(System.String,System.UInt32,System.UInt32,System.UInt32[],System.Single,System.Single,System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double,System.Single,System.Boolean,System.Double[],SDateTime,SDateTime,System.Int32,System.Boolean,System.UInt32,System.UInt32,System.Double,System.UInt32,System.UInt32[],System.Collections.Generic.Dictionary`2<System.String,System.Int32>,System.UInt32,System.UInt32,System.Single,System.Collections.Generic.Dictionary`2<System.UInt32,System.Single>,System.Byte[])
+METHOD Private, HideBySig System.Void SoftwareProduct::CalculateBigProjectFactor()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareProduct::.ctor(System.String,SoftwareType,SoftwareCategory,SoftwareProduct[],System.Double,System.Double,System.Double,System.Double,System.Double[],System.Double,System.Single,System.Boolean,System.Double[],SDateTime,SDateTime,System.Int32,System.Boolean,Company,SoftwareProduct,System.UInt32,System.Double[],FeatureBase[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.String,System.UInt32,SoftwareFramework,System.Single,System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single>,SoftwareAlpha,System.Byte[])
+METHOD Public, HideBySig System.Void SoftwareProduct::RunReleaseScripts()
+METHOD Public, Static, HideBySig System.Void SoftwareProduct::HandleNews(SoftwareProduct,System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetPrintPrice(System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareProduct::GetLastPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareProduct::GetTotalPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareProduct::GetSalesMonths()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 SoftwareProduct::GetLastMissedPhysicalSales()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareProduct::GetReach()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetRealQuality()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareProduct::GetFollowers()
+METHOD Public, HideBySig System.Double SoftwareProduct::CalculateRelevancy(System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::RunScripts(ScriptSystem/EntryPoint,ScriptSystem/DefaultScope,System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::RegisterOSSupport(SDateTime)
+METHOD Public, Static, HideBySig System.Double SoftwareProduct::CalculateSequelBonus(SoftwareProduct,System.Double,System.Double,System.Double[],System.Boolean,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::GetRoyalties(System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,TechLevel>>)
+METHOD Public, HideBySig System.Void SoftwareProduct::RegisterServer()
+METHOD Public, HideBySig System.Void SoftwareProduct::CancelHostingServices()
+METHOD Public, HideBySig System.Void SoftwareProduct::AddMarketEvent(MarketEvent,System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::Trade(Company,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyTrade(Company,SDateTime)
+METHOD Public, HideBySig System.Double SoftwareProduct::RelativeFeatureScore(MarketSimulation,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::SimulateAwareness(System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareProduct::KillAwareness(System.Boolean)
+METHOD Public, Static, HideBySig System.Double SoftwareProduct::QualityForgiveness(System.Double)
+METHOD Public, HideBySig System.Void SoftwareProduct::GetPriceAdjustedQuality(System.Double[],SDateTime)
+METHOD Public, Static, HideBySig System.Double SoftwareProduct::GetCreativityFactor(System.Double,System.Boolean)
+METHOD Public, HideBySig System.Single SoftwareProduct::GetRep()
+METHOD Public, HideBySig System.Double[] SoftwareProduct::GetWeightedQualityAddition(SDateTime)
+METHOD Public, HideBySig System.Double SoftwareProduct::GetFinalScoreFromSummaryAverage()
+METHOD Public, HideBySig System.Double[] SoftwareProduct::GetQuality(System.Double[],SDateTime)
+METHOD Public, HideBySig System.Double SoftwareProduct::GetMarketWeightedQuality(System.Double[])
+METHOD Public, HideBySig System.Double[] SoftwareProduct::GetQuality(SDateTime)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::ChangePrice(System.Single)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::ActuallyChangePrice(System.Single)
+METHOD Public, HideBySig System.Void SoftwareProduct::Update(System.Int32,System.Int32,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyUpdate(System.Int32,System.Int32,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SDateTime)
+METHOD Public, HideBySig System.Void SoftwareProduct::FixBugs(System.Int32)
+METHOD Public, HideBySig System.Void SoftwareProduct::AddBugs(System.Int32)
+METHOD Public, HideBySig System.Void SoftwareProduct::ChangeBugs(System.Int32,System.Int32)
+METHOD Public, HideBySig System.Void SoftwareProduct::ActuallyChangeBugs(System.Int32,System.Int32)
+METHOD Public, HideBySig System.Double SoftwareProduct::GetTime(SDateTime,System.Single)
+METHOD Public, HideBySig System.Single SoftwareProduct::GetDevFalloff(SDateTime,System.Single,System.Single)
+METHOD Public, HideBySig System.Single SoftwareProduct::RandomPoint()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::AddToMarketing(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Boolean SoftwareProduct::IsMarketable()
+METHOD Public, Virtual, HideBySig System.String SoftwareProduct::ToString()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::OnDoubleClick()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareProduct::get_HasWorkRoyalties()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> SoftwareProduct::GetWorkRoyalties()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::AddWorkRoyalty(Company,System.Single)
+METHOD Public, HideBySig SoftwareProduct SoftwareProduct::FixSubReferences()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask IReferenceFix SoftwareProduct::FixReferences()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetActualString()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetLoadRequirement()
+METHOD Private, HideBySig System.Boolean SoftwareProduct::DropHosting()
+METHOD Public, HideBySig System.Void SoftwareProduct::ChangeUserbase(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::HandleLoad(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetDescription()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::SerializeServer(System.String)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareProduct::get_UsesISP()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Boolean SoftwareProduct::CancelOnUnload()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetLastMonthIncome()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetLastDayIncome(System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetAwareness()
+METHOD Public, HideBySig System.Void SoftwareProduct::SetAwareness(System.Single,System.Boolean)
+METHOD Public, HideBySig System.Single SoftwareProduct::GetRealAwareness()
+METHOD Public, HideBySig SoftwareProduct SoftwareProduct::GetLatestSuccessor()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetTypeName()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask SDateTime SoftwareProduct::GetReleaseDate()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.IList`1<FeatureBase> SoftwareProduct::GetFeatures()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetIdentifyingName()
+METHOD Public, HideBySig System.Void SoftwareProduct::AddLoss(System.Single,System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::AddLoss(System.Single,SoftwareProduct/LossType,System.Boolean,System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::AddLicenseCost(SoftwareProduct,System.Single,System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetLicenseAmount()
+METHOD Public, HideBySig System.Void SoftwareProduct::TurnLoss()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareProduct::GetCompanyName()
+METHOD Public, HideBySig System.Boolean SoftwareProduct::CompatibleWith(ComponentProcess)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::OSOverlap(SoftwareProduct)
+METHOD Public, HideBySig System.Double SoftwareProduct::PerceivedValue(SDateTime,System.Boolean)
+METHOD Public, HideBySig System.Single SoftwareProduct::GetReviewTargetScore(SDateTime,System.Boolean)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::HasToPay(Company)
+METHOD Public, HideBySig System.Boolean SoftwareProduct::FairPrice(SDateTime)
+METHOD Public, HideBySig System.Double SoftwareProduct::SimulateAddonSales(SDateTime,System.Double,System.Double,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.UInt32,TechLevel>>,System.Single,System.UInt32&)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::ChangeAllPhysicalStock(System.Int32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.UInt32 SoftwareProduct::GetMaxPhysicalCopies(IStockable&)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<AddOnProduct> SoftwareProduct::GetAllAddons()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.IList`1<System.UInt32> SoftwareProduct::GetFeaturesFactors()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask IProductOrder SoftwareProduct::PromoteHardware(System.UInt32)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareProduct::get_IsReadOnlyJob()
+METHOD Public, HideBySig System.Double SoftwareProduct::GetRefundRate()
+METHOD Public, HideBySig System.UInt32 SoftwareProduct::GetNextAddonID()
+METHOD Public, HideBySig System.Void SoftwareProduct::ResetAddonID()
+METHOD Public, HideBySig System.Void SoftwareProduct::SetAddonID(System.UInt32)
+METHOD Public, HideBySig AddOnProduct SoftwareProduct::GetAddon(System.UInt32)
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void SoftwareProduct::.cctor()
+METHOD Private, HideBySig FeatureBase SoftwareProduct::<FixSubReferences>b__285_0(FeatureBase)

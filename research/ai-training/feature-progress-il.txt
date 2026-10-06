@@ -1,0 +1,365 @@
+TYPE SoftwareWorkItem/FeatureProgress BASE System.Object
+FIELD Public FeatureBase Feature
+FIELD Public System.Double DevTime
+FIELD Public System.Double CDevTime
+FIELD Public System.Double ADevTime
+FIELD Public System.Double Progress
+FIELD Public System.Double ArtProgress
+FIELD Public System.Double Qual
+FIELD Public System.Double Qual2
+FIELD Public System.Double CodeTargetQual
+FIELD Public System.Double ArtTargetQual
+FIELD Public System.Boolean OS
+FIELD Public System.Boolean CodeDone
+FIELD Public System.Boolean ArtDone
+FIELD Public System.Single LastIterationProg
+FIELD Public System.Int32 Assigned
+FIELD Public System.UInt32 Factor
+FIELD Private, Static FloatInterpolator _speedDamper
+FIELD Public, Static System.Single[] Means
+FIELD Public, Static System.Single[] Deviations
+METHOD Public, HideBySig System.Void SoftwareWorkItem/FeatureProgress::UpdateStatus(System.Boolean,System.Single)
+LOCAL 0 System.Double
+LOCAL 1 System.Double
+IL_0000: ldarg.0
+IL_0001: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_0006: brtrue.s IL_002d
+IL_0008: ldarg.2
+IL_0009: conv.r8
+IL_000a: ldarg.1
+IL_000b: brtrue.s IL_0015
+IL_000d: ldarg.0
+IL_000e: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_0013: br.s IL_001b
+IL_0015: ldarg.0
+IL_0016: ldfld System.Double SoftwareWorkItem/FeatureProgress::DevTime
+IL_001b: mul
+IL_001c: stloc.0
+IL_001d: ldarg.0
+IL_001e: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0023: ldloc.0
+IL_0024: blt.un.s IL_002d
+IL_0026: ldarg.0
+IL_0027: ldc.i4.1
+IL_0028: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_002d: ldarg.0
+IL_002e: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_0033: brtrue.s IL_004f
+IL_0035: ldarg.2
+IL_0036: conv.r8
+IL_0037: ldarg.0
+IL_0038: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_003d: mul
+IL_003e: stloc.1
+IL_003f: ldarg.0
+IL_0040: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0045: ldloc.1
+IL_0046: blt.un.s IL_004f
+IL_0048: ldarg.0
+IL_0049: ldc.i4.1
+IL_004a: stfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_004f: ret
+METHOD Public, HideBySig System.Double SoftwareWorkItem/FeatureProgress::AddProgress(System.Double,Employee/EmployeeRole,System.Boolean,System.Boolean&,System.Double&,System.Double,System.Boolean)
+LOCAL 0 System.Double
+LOCAL 1 System.Double
+LOCAL 2 System.Double
+LOCAL 3 System.Double
+LOCAL 4 System.Double
+LOCAL 5 System.Double
+LOCAL 6 System.Double
+IL_0000: ldarg.s change
+IL_0002: ldc.i4.0
+IL_0003: stind.i1
+IL_0004: ldarg.1
+IL_0005: ldc.r4 1
+IL_000a: ldarg.3
+IL_000b: brtrue.s IL_0014
+IL_000d: ldc.r4 0
+IL_0012: br.s IL_0019
+IL_0014: ldc.r4 0.15
+IL_0019: add
+IL_001a: conv.r8
+IL_001b: mul
+IL_001c: stloc.0
+IL_001d: ldarg.s actuallyAdded
+IL_001f: ldc.r8 0
+IL_0028: stind.r8
+IL_0029: ldarg.2
+IL_002a: ldc.i4.2
+IL_002b: bne.un IL_00cf
+IL_0030: ldarg.0
+IL_0031: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_0036: brfalse.s IL_0042
+IL_0038: ldc.r8 0
+IL_0041: ret
+IL_0042: ldarg.s maxx
+IL_0044: ldarg.0
+IL_0045: ldfld System.Double SoftwareWorkItem/FeatureProgress::DevTime
+IL_004a: mul
+IL_004b: stloc.1
+IL_004c: ldarg.0
+IL_004d: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0052: ldloc.1
+IL_0053: bge.un.s IL_00bf
+IL_0055: ldarg.s actuallyAdded
+IL_0057: ldloc.0
+IL_0058: ldarg.s speedDamp
+IL_005a: brtrue.s IL_0067
+IL_005c: ldc.r8 1
+IL_0065: br.s IL_0083
+IL_0067: ldarg.0
+IL_0068: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_006d: ldarg.0
+IL_006e: ldfld System.Double SoftwareWorkItem/FeatureProgress::DevTime
+IL_0073: ldc.r8 4
+IL_007c: mul
+IL_007d: div
+IL_007e: call System.Double SoftwareWorkItem/FeatureProgress::GetSpeedDamp(System.Double)
+IL_0083: mul
+IL_0084: stind.r8
+IL_0085: ldarg.0
+IL_0086: ldarg.0
+IL_0087: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_008c: ldarg.s actuallyAdded
+IL_008e: ldind.r8
+IL_008f: add
+IL_0090: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0095: ldarg.0
+IL_0096: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_009b: ldloc.1
+IL_009c: blt.un.s IL_00bd
+IL_009e: ldarg.0
+IL_009f: ldc.i4.1
+IL_00a0: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_00a5: ldarg.s change
+IL_00a7: ldc.i4.1
+IL_00a8: stind.i1
+IL_00a9: ldarg.0
+IL_00aa: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_00af: ldloc.1
+IL_00b0: sub
+IL_00b1: stloc.2
+IL_00b2: ldarg.0
+IL_00b3: ldloc.1
+IL_00b4: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_00b9: ldarg.1
+IL_00ba: ldloc.2
+IL_00bb: sub
+IL_00bc: ret
+IL_00bd: ldarg.1
+IL_00be: ret
+IL_00bf: ldarg.s change
+IL_00c1: ldc.i4.1
+IL_00c2: stind.i1
+IL_00c3: ldarg.0
+IL_00c4: ldc.i4.1
+IL_00c5: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_00ca: br IL_0247
+IL_00cf: ldarg.2
+IL_00d0: ldc.i4.1
+IL_00d1: bne.un IL_018b
+IL_00d6: ldarg.0
+IL_00d7: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_00dc: brfalse.s IL_00e8
+IL_00de: ldc.r8 0
+IL_00e7: ret
+IL_00e8: ldarg.s maxx
+IL_00ea: ldarg.0
+IL_00eb: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_00f0: mul
+IL_00f1: stloc.3
+IL_00f2: ldarg.0
+IL_00f3: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_00f8: ldc.r8 0
+IL_0101: ble.un.s IL_017b
+IL_0103: ldarg.0
+IL_0104: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0109: ldloc.3
+IL_010a: bge.un.s IL_017b
+IL_010c: ldarg.s actuallyAdded
+IL_010e: ldloc.0
+IL_010f: ldarg.s speedDamp
+IL_0111: brtrue.s IL_011e
+IL_0113: ldc.r8 1
+IL_011c: br.s IL_013d
+IL_011e: ldarg.0
+IL_011f: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0124: ldarg.0
+IL_0125: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_012a: div
+IL_012b: ldarg.s maxx
+IL_012d: ldc.r8 1
+IL_0136: sub
+IL_0137: sub
+IL_0138: call System.Double SoftwareWorkItem/FeatureProgress::GetSpeedDamp(System.Double)
+IL_013d: mul
+IL_013e: stind.r8
+IL_013f: ldarg.0
+IL_0140: ldarg.0
+IL_0141: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0146: ldarg.s actuallyAdded
+IL_0148: ldind.r8
+IL_0149: add
+IL_014a: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_014f: ldarg.0
+IL_0150: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0155: ldloc.3
+IL_0156: blt.un.s IL_0179
+IL_0158: ldarg.0
+IL_0159: ldc.i4.1
+IL_015a: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_015f: ldarg.s change
+IL_0161: ldc.i4.1
+IL_0162: stind.i1
+IL_0163: ldarg.0
+IL_0164: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0169: ldloc.3
+IL_016a: sub
+IL_016b: stloc.s V_4
+IL_016d: ldarg.0
+IL_016e: ldloc.3
+IL_016f: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0174: ldarg.1
+IL_0175: ldloc.s V_4
+IL_0177: sub
+IL_0178: ret
+IL_0179: ldarg.1
+IL_017a: ret
+IL_017b: ldarg.s change
+IL_017d: ldc.i4.1
+IL_017e: stind.i1
+IL_017f: ldarg.0
+IL_0180: ldc.i4.1
+IL_0181: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_0186: br IL_0247
+IL_018b: ldarg.2
+IL_018c: ldc.i4.3
+IL_018d: bne.un IL_0247
+IL_0192: ldarg.0
+IL_0193: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_0198: brfalse.s IL_01a4
+IL_019a: ldc.r8 0
+IL_01a3: ret
+IL_01a4: ldarg.s maxx
+IL_01a6: ldarg.0
+IL_01a7: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_01ac: mul
+IL_01ad: stloc.s V_5
+IL_01af: ldarg.0
+IL_01b0: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_01b5: ldc.r8 0
+IL_01be: ble.un.s IL_023c
+IL_01c0: ldarg.0
+IL_01c1: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_01c6: ldloc.s V_5
+IL_01c8: bge.un.s IL_023c
+IL_01ca: ldarg.s actuallyAdded
+IL_01cc: ldloc.0
+IL_01cd: ldarg.s speedDamp
+IL_01cf: brtrue.s IL_01dc
+IL_01d1: ldc.r8 1
+IL_01da: br.s IL_01fb
+IL_01dc: ldarg.0
+IL_01dd: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_01e2: ldarg.0
+IL_01e3: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_01e8: div
+IL_01e9: ldarg.s maxx
+IL_01eb: ldc.r8 1
+IL_01f4: sub
+IL_01f5: sub
+IL_01f6: call System.Double SoftwareWorkItem/FeatureProgress::GetSpeedDamp(System.Double)
+IL_01fb: mul
+IL_01fc: stind.r8
+IL_01fd: ldarg.0
+IL_01fe: ldarg.0
+IL_01ff: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0204: ldarg.s actuallyAdded
+IL_0206: ldind.r8
+IL_0207: add
+IL_0208: stfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_020d: ldarg.0
+IL_020e: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0213: ldloc.s V_5
+IL_0215: blt.un.s IL_023a
+IL_0217: ldarg.0
+IL_0218: ldc.i4.1
+IL_0219: stfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_021e: ldarg.s change
+IL_0220: ldc.i4.1
+IL_0221: stind.i1
+IL_0222: ldarg.0
+IL_0223: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0228: ldloc.s V_5
+IL_022a: sub
+IL_022b: stloc.s V_6
+IL_022d: ldarg.0
+IL_022e: ldloc.s V_5
+IL_0230: stfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0235: ldarg.1
+IL_0236: ldloc.s V_6
+IL_0238: sub
+IL_0239: ret
+IL_023a: ldarg.1
+IL_023b: ret
+IL_023c: ldarg.s change
+IL_023e: ldc.i4.1
+IL_023f: stind.i1
+IL_0240: ldarg.0
+IL_0241: ldc.i4.1
+IL_0242: stfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_0247: ldc.r8 0
+IL_0250: ret
+METHOD Public, HideBySig System.Void SoftwareWorkItem/FeatureProgress::AddQuality(System.Double,System.Double,System.Boolean)
+IL_0000: ldarg.3
+IL_0001: brfalse.s IL_0054
+IL_0003: ldarg.0
+IL_0004: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_0009: ldc.r8 0
+IL_0012: ble.un IL_00a1
+IL_0017: ldarg.0
+IL_0018: ldarg.0
+IL_0019: ldfld System.Double SoftwareWorkItem/FeatureProgress::Qual2
+IL_001e: ldarg.2
+IL_001f: ldc.r8 1.5
+IL_0028: mul
+IL_0029: ldarg.1
+IL_002a: mul
+IL_002b: ldarg.0
+IL_002c: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtTargetQual
+IL_0031: mul
+IL_0032: ldarg.0
+IL_0033: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_0038: div
+IL_0039: add
+IL_003a: ldc.r8 0
+IL_0043: ldarg.0
+IL_0044: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtTargetQual
+IL_0049: call System.Double Utilities::Clamp(System.Double,System.Double,System.Double)
+IL_004e: stfld System.Double SoftwareWorkItem/FeatureProgress::Qual2
+IL_0053: ret
+IL_0054: ldarg.0
+IL_0055: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_005a: ldc.r8 0
+IL_0063: ble.un.s IL_00a1
+IL_0065: ldarg.0
+IL_0066: ldarg.0
+IL_0067: ldfld System.Double SoftwareWorkItem/FeatureProgress::Qual
+IL_006c: ldarg.2
+IL_006d: ldc.r8 1.5
+IL_0076: mul
+IL_0077: ldarg.1
+IL_0078: mul
+IL_0079: ldarg.0
+IL_007a: ldfld System.Double SoftwareWorkItem/FeatureProgress::CodeTargetQual
+IL_007f: mul
+IL_0080: ldarg.0
+IL_0081: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_0086: div
+IL_0087: add
+IL_0088: ldc.r8 0
+IL_0091: ldarg.0
+IL_0092: ldfld System.Double SoftwareWorkItem/FeatureProgress::CodeTargetQual
+IL_0097: call System.Double Utilities::Clamp(System.Double,System.Double,System.Double)
+IL_009c: stfld System.Double SoftwareWorkItem/FeatureProgress::Qual
+IL_00a1: ret

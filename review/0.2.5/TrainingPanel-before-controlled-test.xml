@@ -1,0 +1,57 @@
+<Window id="window" NonLocTitle="AI Compute" MinSize="760,720">
+  <ScrollView anchor="fill" position="12,12" size="-24,-24">
+    <VerticalLayout anchor="top" padding="6,6,6,6" spacing="6" childForceExpandHeight="False" childControlHeight="False">
+      <ContentFitter verticalFit="PreferredSize">
+        <Empty height="32">
+          <HorizontalLayout spacing="8" childControlHeight="False">
+            <Button height="32" onClick="ShowSimple()">Simple</Button>
+            <Button height="32" onClick="ShowAdvanced()">Advanced</Button>
+            <Button height="32" onClick="RefreshChoices()">Refresh</Button>
+          </HorizontalLayout>
+        </Empty>
+        <Label id="viewLabel" height="26"></Label>
+        <Label height="22">1. Prepared project</Label>
+        <Combo id="projects" height="30"></Combo>
+        <Label height="22">2. Model size</Label>
+        <Combo id="sizes" height="30"></Combo>
+        <Label id="architectureLabel" height="22">Architecture / precision / context</Label>
+        <Combo id="architectures" height="30"></Combo>
+        <Combo id="quantizations" height="30"></Combo>
+        <Combo id="contexts" height="30"></Combo>
+        <Label id="dataLabel" height="22">Dataset / compute focus</Label>
+        <Combo id="datasets" height="30"></Combo>
+        <Combo id="focuses" height="30"></Combo>
+        <Label height="22">3. Physical server group and allocation</Label>
+        <Combo id="servers" height="30"></Combo>
+        <Combo id="budgets" height="30"></Combo>
+        <Label id="trainingUsage" height="240"></Label>
+        <Empty height="32">
+          <HorizontalLayout spacing="8" childControlHeight="False">
+            <Button height="32" onClick="StartTraining()">Start / resume training</Button>
+            <Button height="32" onClick="PauseTraining()">Pause training</Button>
+          </HorizontalLayout>
+        </Empty>
+        <Button id="cancelTraining" height="26" onClick="CancelTraining()">Cancel this development project</Button>
+        <Label id="status" height="90"></Label>
+        <Label height="24">Company AI assistant</Label>
+        <Combo id="models" height="30"></Combo>
+        <Label id="modelInfo" height="150"></Label>
+        <Label height="22">Inference server group for an owned model</Label>
+        <Combo id="inferenceServers" height="30"></Combo>
+        <Button height="30" onClick="AssignInference()">Assign inference servers</Button>
+        <Button id="acquire" height="30" onClick="AcquireModel()">License selected commercial model</Button>
+        <Button id="cancelAccess" height="26" onClick="CancelAccess()">Cancel paid model access</Button>
+        <Button id="prefer" height="30" onClick="PreferModel()">Prefer selected model</Button>
+        <Button id="automatic" height="26" onClick="AutoSelectModel()">Automatically select the best served model</Button>
+        <Label id="revisionLabel" height="24">Create a successor model</Label>
+        <Button id="fineTune" height="30" onClick="FineTuneModel()">Fine-tune: half window, warm checkpoint</Button>
+        <Button id="retrain" height="30" onClick="RetrainModel()">Full retraining: fresh compute, configurable size</Button>
+        <Button id="subscription" height="30" onClick="CreateSubscriptionModel()">Create a subscription revision</Button>
+        <Label id="billingLabel" height="24">Consumer subscription billing</Label>
+        <Combo id="usage" height="30"></Combo>
+        <Button id="usageBilling" height="30" onClick="SetUsageBilling()">Apply usage-based subscription price</Button>
+        <Button id="flatBilling" height="26" onClick="FixedSubscriptionBilling()">Use flat monthly access price</Button>
+      </ContentFitter>
+    </VerticalLayout>
+  </ScrollView>
+</Window>

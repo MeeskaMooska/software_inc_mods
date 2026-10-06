@@ -1,0 +1,254 @@
+TYPE WindowManager BASE UnityEngine.MonoBehaviour
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ActiveWindows
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ModalWindows
+FIELD Private, NotSerialized System.Boolean _hasModal
+FIELD Public UnityEngine.GameObject DialogPrefab
+FIELD Public UnityEngine.GameObject ColorDialogPrefab
+FIELD Public UnityEngine.GameObject InputDialogPrefab
+FIELD Public UnityEngine.GameObject TableInfoPrefab
+FIELD Public UnityEngine.GameObject FileReaderPrefab
+FIELD Public CustomDifficultyWindow DifficultyWindowPrefab
+FIELD Public UnityEngine.GameObject Canvas
+FIELD Public UnityEngine.UI.CanvasScaler ExtraScaler
+FIELD Public UnityEngine.GameObject MainPanel
+FIELD Public UnityEngine.GameObject BlockPanel
+FIELD Public UnityEngine.GameObject WindowPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject PanelPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject InputPrefab
+FIELD Public UnityEngine.GameObject CheckboxPrefab
+FIELD Public UnityEngine.GameObject ScrollbarPrefab
+FIELD Public UnityEngine.GameObject ScrollViewPrefab
+FIELD Public UnityEngine.GameObject ProgressbarPrefab
+FIELD Public UnityEngine.GameObject GUIListPrefab
+FIELD Public UnityEngine.GameObject SliderPrefab
+FIELD Public UnityEngine.GameObject ComboPrefab
+FIELD Public UnityEngine.RectTransform BlockPrefab
+FIELD Public RectToRectFade Fader
+FIELD Public MultiSelectWindow MultiWindow
+FIELD Public UnityEngine.GameObject FullScreenMessageBlock
+FIELD Public UnityEngine.RectTransform AchievementPanel
+FIELD Public UnityEngine.UI.Text FullScreenMessage
+FIELD Public GUIProgressBar FullScreenProgressBar
+FIELD Public InspectorWindow InspectorWindowPrefab
+FIELD Public, Static WindowManager Instance
+FIELD Public System.Int32 StartIndex
+FIELD Public System.Boolean MainScene
+FIELD Private UnityEngine.Vector2 Corner
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,GUIWindow> InfoTableOpen
+FIELD Private, NotSerialized System.String _overrideCursor
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private GUIWindow _lastActive
+FIELD Private, NotSerialized DG.Tweening.Sequence _activeSequence
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>> _objectTags
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<UnityEngine.GameObject,UnityEngine.Component>> _layoutTags
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _ignoreAttributes
+PROPERTY System.Boolean WindowManager::HasModal()
+METHOD Private, Static, HideBySig System.Void WindowManager::CreateUI(XMLParser/XMLNode,UnityEngine.GameObject,ModBehaviour,System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>)
+LOCAL 0 UnityEngine.GameObject
+LOCAL 1 UnityEngine.Component
+LOCAL 2 System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>
+LOCAL 3 System.String
+LOCAL 4 System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>
+LOCAL 5 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>
+LOCAL 6 System.Boolean
+LOCAL 7 System.Func`2<UnityEngine.GameObject,UnityEngine.Component>
+LOCAL 8 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>
+LOCAL 9 System.Boolean
+LOCAL 10 System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.String>
+LOCAL 11 System.Collections.Generic.KeyValuePair`2<System.String,System.String>
+LOCAL 12 System.Type
+LOCAL 13 System.Reflection.FieldInfo
+LOCAL 14 System.Reflection.PropertyInfo
+LOCAL 15 System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>
+IL_0000: ldsfld System.Collections.Generic.Dictionary`2<System.String,System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>> WindowManager::_objectTags
+IL_0005: ldarg.0
+IL_0006: ldfld System.String XMLParser/XMLNode::Name
+IL_000b: callvirt System.String System.String::ToLower()
+IL_0010: ldloca.s V_2
+IL_0012: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>>::TryGetValue(!0,!1&)
+IL_0017: brfalse.s IL_0076
+IL_0019: ldloc.2
+IL_001a: ldarg.0
+IL_001b: ldfld System.String XMLParser/XMLNode::Value
+IL_0020: callvirt !1 System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>::Invoke(!0)
+IL_0025: stloc.s V_4
+IL_0027: ldarg.0
+IL_0028: ldloca.s V_6
+IL_002a: call System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect> WindowManager::GetPositionFromNode(XMLParser/XMLNode,System.Boolean&)
+IL_002f: stloc.s V_5
+IL_0031: ldloc.s V_4
+IL_0033: ldfld !0 System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::Item1
+IL_0038: isinst GUIWindow
+IL_003d: brtrue.s IL_0064
+IL_003f: ldloc.s V_4
+IL_0041: ldfld !0 System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::Item1
+IL_0046: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_004b: ldarg.1
+IL_004c: callvirt UnityEngine.GameObject UnityEngine.GameObject::get_gameObject()
+IL_0051: ldloc.s V_5
+IL_0053: ldfld !0 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>::Item1
+IL_0058: ldloc.s V_5
+IL_005a: ldfld !1 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>::Item2
+IL_005f: call System.Void WindowManager::AddElementToElement(UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.Rect,UnityEngine.Rect)
+IL_0064: ldloc.s V_4
+IL_0066: ldfld !0 System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::Item1
+IL_006b: stloc.1
+IL_006c: ldloc.s V_4
+IL_006e: ldfld !1 System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::Item2
+IL_0073: stloc.0
+IL_0074: br.s IL_00de
+IL_0076: ldsfld System.Collections.Generic.Dictionary`2<System.String,System.Func`2<UnityEngine.GameObject,UnityEngine.Component>> WindowManager::_layoutTags
+IL_007b: ldarg.0
+IL_007c: ldfld System.String XMLParser/XMLNode::Name
+IL_0081: callvirt System.String System.String::ToLower()
+IL_0086: ldloca.s V_7
+IL_0088: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.Func`2<UnityEngine.GameObject,UnityEngine.Component>>::TryGetValue(!0,!1&)
+IL_008d: brfalse.s IL_00c3
+IL_008f: ldarg.1
+IL_0090: stloc.0
+IL_0091: ldloc.s V_7
+IL_0093: ldarg.1
+IL_0094: callvirt !1 System.Func`2<UnityEngine.GameObject,UnityEngine.Component>::Invoke(!0)
+IL_0099: stloc.1
+IL_009a: ldarg.0
+IL_009b: ldloca.s V_9
+IL_009d: call System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect> WindowManager::GetPositionFromNode(XMLParser/XMLNode,System.Boolean&)
+IL_00a2: stloc.s V_8
+IL_00a4: ldloc.s V_9
+IL_00a6: brfalse.s IL_00de
+IL_00a8: ldarg.1
+IL_00a9: callvirt !!0 UnityEngine.GameObject::GetComponent<UnityEngine.RectTransform>()
+IL_00ae: ldloc.s V_8
+IL_00b0: ldfld !0 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>::Item1
+IL_00b5: ldloc.s V_8
+IL_00b7: ldfld !1 System.ValueTuple`2<UnityEngine.Rect,UnityEngine.Rect>::Item2
+IL_00bc: call System.Void WindowManager::SetElementDimension(UnityEngine.RectTransform,UnityEngine.Rect,UnityEngine.Rect)
+IL_00c1: br.s IL_00de
+IL_00c3: ldstr "Found unknown tag: "
+IL_00c8: ldarg.0
+IL_00c9: ldfld System.String XMLParser/XMLNode::Name
+IL_00ce: ldstr " while trying to create UI from XML"
+IL_00d3: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_00d8: newobj System.Void System.Exception::.ctor(System.String)
+IL_00dd: throw
+IL_00de: ldarg.0
+IL_00df: ldfld System.Collections.Generic.Dictionary`2<System.String,System.String> XMLParser/XMLNode::Attributes
+IL_00e4: ldstr "id"
+IL_00e9: ldloca.s V_3
+IL_00eb: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,System.String>::TryGetValue(!0,!1&)
+IL_00f0: brfalse.s IL_00fa
+IL_00f2: ldarg.3
+IL_00f3: ldloc.3
+IL_00f4: ldloc.1
+IL_00f5: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::set_Item(!0,!1)
+IL_00fa: ldarg.0
+IL_00fb: ldfld System.Collections.Generic.Dictionary`2<System.String,System.String> XMLParser/XMLNode::Attributes
+IL_0100: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.String,System.String>::GetEnumerator()
+IL_0105: stloc.s V_10
+IL_0107: br IL_01f9
+IL_010c: ldloca.s V_10
+IL_010e: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.String>::get_Current()
+IL_0113: stloc.s V_11
+IL_0115: ldsfld System.Collections.Generic.HashSet`1<System.String> WindowManager::_ignoreAttributes
+IL_011a: ldloca.s V_11
+IL_011c: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Key()
+IL_0121: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.String>::Contains(!0)
+IL_0126: brtrue IL_01f9
+IL_012b: ldloc.1
+IL_012c: callvirt System.Type System.Object::GetType()
+IL_0131: stloc.s V_12
+IL_0133: ldloc.s V_12
+IL_0135: ldloca.s V_11
+IL_0137: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Key()
+IL_013c: ldc.i4.s 20
+IL_013e: callvirt System.Reflection.FieldInfo System.Type::GetField(System.String,System.Reflection.BindingFlags)
+IL_0143: stloc.s V_13
+IL_0145: ldloc.s V_13
+IL_0147: ldnull
+IL_0148: call System.Boolean System.Reflection.FieldInfo::op_Inequality(System.Reflection.FieldInfo,System.Reflection.FieldInfo)
+IL_014d: brfalse.s IL_0197
+IL_014f: ldloc.s V_13
+IL_0151: callvirt System.Type System.Reflection.FieldInfo::get_FieldType()
+IL_0156: call System.Boolean WindowManager::IsEvent(System.Type)
+IL_015b: brfalse.s IL_017a
+IL_015d: ldloc.s V_13
+IL_015f: ldloc.1
+IL_0160: callvirt System.Object System.Reflection.FieldInfo::GetValue(System.Object)
+IL_0165: castclass UnityEngine.Events.UnityEvent
+IL_016a: ldarg.2
+IL_016b: ldloca.s V_11
+IL_016d: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Value()
+IL_0172: ldloc.1
+IL_0173: call System.Void WindowManager::SetFunctionCallback(UnityEngine.Events.UnityEvent,ModBehaviour,System.String,UnityEngine.Component)
+IL_0178: br.s IL_01f9
+IL_017a: ldloc.s V_13
+IL_017c: ldloc.1
+IL_017d: ldloca.s V_11
+IL_017f: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Value()
+IL_0184: ldloc.s V_13
+IL_0186: callvirt System.Type System.Reflection.FieldInfo::get_FieldType()
+IL_018b: call System.Object WindowManager::TryConvert(System.String,System.Type)
+IL_0190: callvirt System.Void System.Reflection.FieldInfo::SetValue(System.Object,System.Object)
+IL_0195: br.s IL_01f9
+IL_0197: ldloc.s V_12
+IL_0199: ldloca.s V_11
+IL_019b: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Key()
+IL_01a0: ldc.i4.s 20
+IL_01a2: callvirt System.Reflection.PropertyInfo System.Type::GetProperty(System.String,System.Reflection.BindingFlags)
+IL_01a7: stloc.s V_14
+IL_01a9: ldloc.s V_14
+IL_01ab: ldnull
+IL_01ac: call System.Boolean System.Reflection.PropertyInfo::op_Inequality(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)
+IL_01b1: brfalse.s IL_01f9
+IL_01b3: ldloc.s V_14
+IL_01b5: callvirt System.Type System.Reflection.PropertyInfo::get_PropertyType()
+IL_01ba: call System.Boolean WindowManager::IsEvent(System.Type)
+IL_01bf: brfalse.s IL_01de
+IL_01c1: ldloc.s V_14
+IL_01c3: ldloc.1
+IL_01c4: callvirt System.Object System.Reflection.PropertyInfo::GetValue(System.Object)
+IL_01c9: castclass UnityEngine.Events.UnityEvent
+IL_01ce: ldarg.2
+IL_01cf: ldloca.s V_11
+IL_01d1: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Value()
+IL_01d6: ldloc.1
+IL_01d7: call System.Void WindowManager::SetFunctionCallback(UnityEngine.Events.UnityEvent,ModBehaviour,System.String,UnityEngine.Component)
+IL_01dc: br.s IL_01f9
+IL_01de: ldloc.s V_14
+IL_01e0: ldloc.1
+IL_01e1: ldloca.s V_11
+IL_01e3: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.String>::get_Value()
+IL_01e8: ldloc.s V_14
+IL_01ea: callvirt System.Type System.Reflection.PropertyInfo::get_PropertyType()
+IL_01ef: call System.Object WindowManager::TryConvert(System.String,System.Type)
+IL_01f4: callvirt System.Void System.Reflection.PropertyInfo::SetValue(System.Object,System.Object)
+IL_01f9: ldloca.s V_10
+IL_01fb: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.String>::MoveNext()
+IL_0200: brtrue IL_010c
+IL_0205: leave.s IL_0215
+IL_0207: ldloca.s V_10
+IL_0209: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.String>
+IL_020f: callvirt System.Void System.IDisposable::Dispose()
+IL_0214: endfinally
+IL_0215: ldarg.0
+IL_0216: ldfld System.Collections.Generic.List`1<XMLParser/XMLNode> XMLParser/XMLNode::Children
+IL_021b: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<XMLParser/XMLNode>::GetEnumerator()
+IL_0220: stloc.s V_15
+IL_0222: br.s IL_0233
+IL_0224: ldloca.s V_15
+IL_0226: call !0 System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>::get_Current()
+IL_022b: ldloc.0
+IL_022c: ldarg.2
+IL_022d: ldarg.3
+IL_022e: call System.Void WindowManager::CreateUI(XMLParser/XMLNode,UnityEngine.GameObject,ModBehaviour,System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>)
+IL_0233: ldloca.s V_15
+IL_0235: call System.Boolean System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>::MoveNext()
+IL_023a: brtrue.s IL_0224
+IL_023c: leave.s IL_024c
+IL_023e: ldloca.s V_15
+IL_0240: constrained. System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>
+IL_0246: callvirt System.Void System.IDisposable::Dispose()
+IL_024b: endfinally
+IL_024c: ret

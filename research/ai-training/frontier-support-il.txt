@@ -1,0 +1,59 @@
+TYPE ProductWindow BASE UnityEngine.MonoBehaviour
+FIELD Public, Static System.String[] TechSpecs
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,TechLevel> CurrentTechs
+FIELD Public GUIWindow Window
+FIELD Public UnityEngine.GameObject ProductDetailWindow
+FIELD Public GUIListView ProductList
+FIELD Public UnityEngine.UI.Button OKButton
+FIELD Public UnityEngine.UI.Button CancelButton
+FIELD Public FlexibleGridLayout ButtonPanel
+FIELD Public UnityEngine.GameObject ThumbnailObject
+FIELD Public UnityEngine.UI.RawImage Thumbnail
+FIELD Public, NotSerialized System.Collections.Generic.List`1<SoftwareProduct> Content
+FIELD Private, NotSerialized System.Action`1<SoftwareProduct[]> OnCloseAction
+FIELD Private System.String _title
+FIELD Public, NotSerialized SoftwareProduct PortFilter
+FIELD Public, NotSerialized System.Boolean CategoryDisabled
+FIELD Public, NotSerialized System.Boolean WithMock
+FIELD Public, NotSerialized System.Boolean NotMe
+FIELD Public, NotSerialized System.Boolean LimitTech
+FIELD Private, NotSerialized FeatureBase[] FeatureCheck
+FIELD Public ProductWindowButton[] Buttons
+FIELD Public ProductWindowButton AddonButton
+FIELD Public ProductWindowButton ExclusivityButton
+FIELD Public UnityEngine.UI.Toggle[] ModeToggles
+FIELD Public UnityEngine.UI.Toggle ArchivedToggle
+FIELD Private System.String SWTypeFilter
+FIELD Private System.UInt32 _companyFilter
+FIELD Private System.Collections.Generic.HashSet`1<System.String> SWCategoryFilter
+FIELD Private, NotSerialized System.Boolean _init
+FIELD Public System.Int32 Mode
+FIELD Private System.Boolean _archiveAvailable
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.Int32,System.ValueTuple`2<GUIColumn,System.Boolean>> _sort
+FIELD Private, NotSerialized IDisplayable _lastdisplayed
+FIELD Private, NotSerialized System.Boolean CanApplyFilters
+METHOD Public, HideBySig System.Void ProductWindow::CheckSupport(System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.String[],FeatureBase[])
+IL_0000: ldarg.1
+IL_0001: stsfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> ProductWindow::CurrentTechs
+IL_0006: ldarg.2
+IL_0007: stsfld System.String[] ProductWindow::TechSpecs
+IL_000c: ldarg.0
+IL_000d: ldarg.3
+IL_000e: stfld FeatureBase[] ProductWindow::FeatureCheck
+IL_0013: ldarg.0
+IL_0014: ldfld GUIListView ProductWindow::ProductList
+IL_0019: ldstr "ProductSupport"
+IL_001e: callvirt GUIColumn GUIListView::get_Item(System.String)
+IL_0023: ldc.i4.0
+IL_0024: ldc.i4.1
+IL_0025: callvirt System.Void GUIColumn::ToggleActive(System.Boolean,System.Boolean)
+IL_002a: ldarg.0
+IL_002b: ldfld GUIListView ProductWindow::ProductList
+IL_0030: ldstr "ProductTechLevel"
+IL_0035: callvirt GUIColumn GUIListView::get_Item(System.String)
+IL_003a: ldc.i4.0
+IL_003b: ldarg.2
+IL_003c: ldnull
+IL_003d: cgt.un
+IL_003f: callvirt System.Void GUIColumn::ToggleActive(System.Boolean,System.Boolean)
+IL_0044: ret

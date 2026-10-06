@@ -1,0 +1,526 @@
+TYPE ModController BASE UnityEngine.MonoBehaviour
+FIELD Public, Static, Literal, HasDefault System.String DLLModBuildVersion
+CONSTANT DLLModBuildVersion = 24
+FIELD Public FileReaderWindow ReaderWindowPrefab
+FIELD Private, Static System.Boolean _initialized
+FIELD Public, Static ModController Instance
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ModController/DLLMod> Mods
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _needsVerification
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _eulaPrevent
+FIELD Private, Static System.UInt32 _dllCounter
+FIELD Private, NotSerialized DynamicCSharp.ScriptDomain _modDomain
+FIELD Public, Static System.String ModEula
+FIELD Private, Static System.Threading.Thread _mainThread
+FIELD Private System.Boolean _pendingVerification
+FIELD Private, Static System.Collections.Generic.HashSet`1<ModController/DLLMod> _unload
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _deactivating
+PROPERTY System.String ModController::ModFolder()
+PROPERTY System.Threading.Thread ModController::MainThread()
+METHOD Public, Static, HideBySig System.String ModController::InjectTryBlocks(System.String,System.String)
+LOCAL 0 System.Text.StringBuilder
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+IL_0000: ldc.i4.8
+IL_0001: newarr System.String
+IL_0006: dup
+IL_0007: ldc.i4.0
+IL_0008: ldstr "#define SWINC"
+IL_000d: stelem.ref
+IL_000e: dup
+IL_000f: ldc.i4.1
+IL_0010: call System.String Versioning::get_AlmostExtremelySimpleVersionString()
+IL_0015: callvirt System.String System.String::ToUpper()
+IL_001a: stelem.ref
+IL_001b: dup
+IL_001c: ldc.i4.2
+IL_001d: ldstr "
+#define SWINC"
+IL_0022: stelem.ref
+IL_0023: dup
+IL_0024: ldc.i4.3
+IL_0025: call System.String Versioning::get_ExtremelySimpleVersionString()
+IL_002a: callvirt System.String System.String::ToUpper()
+IL_002f: stelem.ref
+IL_0030: dup
+IL_0031: ldc.i4.4
+IL_0032: ldstr "
+#define SWINC"
+IL_0037: stelem.ref
+IL_0038: dup
+IL_0039: ldc.i4.5
+IL_003a: call System.String Versioning::get_TypeVersionString()
+IL_003f: callvirt System.String System.String::ToUpper()
+IL_0044: stelem.ref
+IL_0045: dup
+IL_0046: ldc.i4.6
+IL_0047: ldstr "
+"
+IL_004c: stelem.ref
+IL_004d: dup
+IL_004e: ldc.i4.7
+IL_004f: ldarg.0
+IL_0050: stelem.ref
+IL_0051: call System.String System.String::Concat(System.String[])
+IL_0056: starg.s input
+IL_0058: call System.Boolean Options::get_InjectMods()
+IL_005d: brtrue.s IL_0061
+IL_005f: ldarg.0
+IL_0060: ret
+IL_0061: ldarg.0
+IL_0062: call System.String ModController::StripComments(System.String)
+IL_0067: starg.s input
+IL_0069: newobj System.Void System.Text.StringBuilder::.ctor()
+IL_006e: stloc.0
+IL_006f: ldc.i4.0
+IL_0070: stloc.1
+IL_0071: ldc.i4.0
+IL_0072: stloc.2
+IL_0073: br.s IL_0097
+IL_0075: ldarg.0
+IL_0076: ldloca.s V_1
+IL_0078: call System.Boolean ModController::FindNextClassOrStruct(System.String,System.Int32&)
+IL_007d: brfalse.s IL_0097
+IL_007f: ldarg.0
+IL_0080: ldloca.s V_1
+IL_0082: ldc.i4.s 123
+IL_0084: call System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+IL_0089: brfalse.s IL_0097
+IL_008b: ldarg.0
+IL_008c: ldloca.s V_1
+IL_008e: ldloca.s V_2
+IL_0090: ldloc.0
+IL_0091: ldarg.1
+IL_0092: call System.Void ModController::HandleObjectParsing(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String)
+IL_0097: ldloc.1
+IL_0098: ldarg.0
+IL_0099: callvirt System.Int32 System.String::get_Length()
+IL_009e: blt.s IL_0075
+IL_00a0: ldloc.0
+IL_00a1: ldarg.0
+IL_00a2: ldloc.2
+IL_00a3: ldloc.1
+IL_00a4: ldloc.2
+IL_00a5: sub
+IL_00a6: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_00ab: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_00b0: pop
+IL_00b1: ldloc.0
+IL_00b2: callvirt System.String System.Object::ToString()
+IL_00b7: ret
+METHOD Private, Static, HideBySig System.String ModController::StripComments(System.String)
+LOCAL 0 System.Text.StringBuilder
+LOCAL 1 System.Boolean
+LOCAL 2 System.Boolean
+LOCAL 3 System.Boolean
+LOCAL 4 System.Int32
+LOCAL 5 System.Char
+LOCAL 6 System.Char
+IL_0000: newobj System.Void System.Text.StringBuilder::.ctor()
+IL_0005: stloc.0
+IL_0006: ldc.i4.0
+IL_0007: stloc.1
+IL_0008: ldc.i4.0
+IL_0009: stloc.2
+IL_000a: ldc.i4.0
+IL_000b: stloc.3
+IL_000c: ldc.i4.0
+IL_000d: stloc.s V_4
+IL_000f: br IL_00de
+IL_0014: ldarg.0
+IL_0015: ldloc.s V_4
+IL_0017: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_001c: stloc.s V_5
+IL_001e: ldloc.1
+IL_001f: brfalse.s IL_0057
+IL_0021: ldloc.s V_5
+IL_0023: ldc.i4.s 42
+IL_0025: bne.un IL_00d8
+IL_002a: ldloc.s V_4
+IL_002c: ldc.i4.1
+IL_002d: add
+IL_002e: ldarg.0
+IL_002f: callvirt System.Int32 System.String::get_Length()
+IL_0034: bge IL_00d8
+IL_0039: ldarg.0
+IL_003a: ldloc.s V_4
+IL_003c: ldc.i4.1
+IL_003d: add
+IL_003e: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0043: ldc.i4.s 47
+IL_0045: bne.un IL_00d8
+IL_004a: ldc.i4.0
+IL_004b: stloc.1
+IL_004c: ldloc.s V_4
+IL_004e: ldc.i4.1
+IL_004f: add
+IL_0050: stloc.s V_4
+IL_0052: br IL_00d8
+IL_0057: ldloc.2
+IL_0058: brfalse.s IL_006a
+IL_005a: ldloc.s V_5
+IL_005c: ldc.i4.s 10
+IL_005e: bne.un.s IL_00d8
+IL_0060: ldc.i4.0
+IL_0061: stloc.2
+IL_0062: ldloc.s V_4
+IL_0064: ldc.i4.1
+IL_0065: sub
+IL_0066: stloc.s V_4
+IL_0068: br.s IL_00d8
+IL_006a: ldloc.s V_5
+IL_006c: ldc.i4.s 34
+IL_006e: beq.s IL_0076
+IL_0070: ldloc.s V_5
+IL_0072: ldc.i4.s 39
+IL_0074: bne.un.s IL_0090
+IL_0076: ldloc.s V_4
+IL_0078: ldc.i4.1
+IL_0079: ble.s IL_0090
+IL_007b: ldarg.0
+IL_007c: ldloc.s V_4
+IL_007e: ldc.i4.1
+IL_007f: sub
+IL_0080: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0085: ldc.i4.s 92
+IL_0087: beq.s IL_0090
+IL_0089: ldloc.3
+IL_008a: ldc.i4.0
+IL_008b: ceq
+IL_008d: stloc.3
+IL_008e: br.s IL_00c9
+IL_0090: ldloc.3
+IL_0091: brtrue.s IL_00c9
+IL_0093: ldloc.s V_5
+IL_0095: ldc.i4.s 47
+IL_0097: bne.un.s IL_00c9
+IL_0099: ldloc.s V_4
+IL_009b: ldc.i4.1
+IL_009c: add
+IL_009d: ldarg.0
+IL_009e: callvirt System.Int32 System.String::get_Length()
+IL_00a3: bge.s IL_00c9
+IL_00a5: ldarg.0
+IL_00a6: ldloc.s V_4
+IL_00a8: ldc.i4.1
+IL_00a9: add
+IL_00aa: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_00af: stloc.s V_6
+IL_00b1: ldloc.s V_6
+IL_00b3: ldc.i4.s 47
+IL_00b5: bne.un.s IL_00c1
+IL_00b7: ldc.i4.1
+IL_00b8: stloc.2
+IL_00b9: ldloc.s V_4
+IL_00bb: ldc.i4.1
+IL_00bc: add
+IL_00bd: stloc.s V_4
+IL_00bf: br.s IL_00c9
+IL_00c1: ldloc.s V_6
+IL_00c3: ldc.i4.s 42
+IL_00c5: bne.un.s IL_00c9
+IL_00c7: ldc.i4.1
+IL_00c8: stloc.1
+IL_00c9: ldloc.2
+IL_00ca: brtrue.s IL_00d8
+IL_00cc: ldloc.1
+IL_00cd: brtrue.s IL_00d8
+IL_00cf: ldloc.0
+IL_00d0: ldloc.s V_5
+IL_00d2: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.Char)
+IL_00d7: pop
+IL_00d8: ldloc.s V_4
+IL_00da: ldc.i4.1
+IL_00db: add
+IL_00dc: stloc.s V_4
+IL_00de: ldloc.s V_4
+IL_00e0: ldarg.0
+IL_00e1: callvirt System.Int32 System.String::get_Length()
+IL_00e6: blt IL_0014
+IL_00eb: ldloc.0
+IL_00ec: callvirt System.String System.Object::ToString()
+IL_00f1: ret
+METHOD Private, Static, HideBySig System.Void ModController::AppendCatch(System.Text.StringBuilder,System.String,System.String)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 18
+IL_0003: newarr System.String
+IL_0008: dup
+IL_0009: ldc.i4.0
+IL_000a: ldstr "
+"
+IL_000f: stelem.ref
+IL_0010: dup
+IL_0011: ldc.i4.1
+IL_0012: ldarg.2
+IL_0013: stelem.ref
+IL_0014: dup
+IL_0015: ldc.i4.2
+IL_0016: ldstr "	}
+"
+IL_001b: stelem.ref
+IL_001c: dup
+IL_001d: ldc.i4.3
+IL_001e: ldarg.2
+IL_001f: stelem.ref
+IL_0020: dup
+IL_0021: ldc.i4.4
+IL_0022: ldstr "catch(ModException) {throw;}
+"
+IL_0027: stelem.ref
+IL_0028: dup
+IL_0029: ldc.i4.5
+IL_002a: ldarg.2
+IL_002b: stelem.ref
+IL_002c: dup
+IL_002d: ldc.i4.6
+IL_002e: ldstr "catch(System.Exception ex)
+"
+IL_0033: stelem.ref
+IL_0034: dup
+IL_0035: ldc.i4.7
+IL_0036: ldarg.2
+IL_0037: stelem.ref
+IL_0038: dup
+IL_0039: ldc.i4.8
+IL_003a: ldstr "	{
+"
+IL_003f: stelem.ref
+IL_0040: dup
+IL_0041: ldc.i4.s 9
+IL_0043: ldarg.2
+IL_0044: stelem.ref
+IL_0045: dup
+IL_0046: ldc.i4.s 10
+IL_0048: ldstr "	ModController.HandleException(""
+IL_004d: stelem.ref
+IL_004e: dup
+IL_004f: ldc.i4.s 11
+IL_0051: ldarg.1
+IL_0052: stelem.ref
+IL_0053: dup
+IL_0054: ldc.i4.s 12
+IL_0056: ldstr "", ex);
+"
+IL_005b: stelem.ref
+IL_005c: dup
+IL_005d: ldc.i4.s 13
+IL_005f: ldarg.2
+IL_0060: stelem.ref
+IL_0061: dup
+IL_0062: ldc.i4.s 14
+IL_0064: ldstr "	throw new ModException();
+"
+IL_0069: stelem.ref
+IL_006a: dup
+IL_006b: ldc.i4.s 15
+IL_006d: ldarg.2
+IL_006e: stelem.ref
+IL_006f: dup
+IL_0070: ldc.i4.s 16
+IL_0072: ldstr "	}
+"
+IL_0077: stelem.ref
+IL_0078: dup
+IL_0079: ldc.i4.s 17
+IL_007b: ldarg.2
+IL_007c: stelem.ref
+IL_007d: call System.String System.String::Concat(System.String[])
+IL_0082: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_0087: pop
+IL_0088: ret
+METHOD Private, Static, HideBySig System.Boolean ModController::FindNextClassOrStruct(System.String,System.Int32&)
+LOCAL 0 System.Boolean
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: br.s IL_005d
+IL_0004: ldloc.0
+IL_0005: brfalse.s IL_0017
+IL_0007: ldarg.0
+IL_0008: ldarg.1
+IL_0009: ldind.i4
+IL_000a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_000f: ldc.i4.s 34
+IL_0011: bne.un.s IL_0057
+IL_0013: ldc.i4.0
+IL_0014: stloc.0
+IL_0015: br.s IL_0057
+IL_0017: ldarg.0
+IL_0018: ldarg.1
+IL_0019: ldind.i4
+IL_001a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_001f: ldc.i4.s 34
+IL_0021: bne.un.s IL_0027
+IL_0023: ldc.i4.1
+IL_0024: stloc.0
+IL_0025: br.s IL_003f
+IL_0027: ldarg.0
+IL_0028: ldarg.1
+IL_0029: ldind.i4
+IL_002a: ldstr "class"
+IL_002f: ldc.i4.1
+IL_0030: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0035: brfalse.s IL_003f
+IL_0037: ldarg.1
+IL_0038: ldarg.1
+IL_0039: ldind.i4
+IL_003a: ldc.i4.5
+IL_003b: add
+IL_003c: stind.i4
+IL_003d: ldc.i4.1
+IL_003e: ret
+IL_003f: ldarg.0
+IL_0040: ldarg.1
+IL_0041: ldind.i4
+IL_0042: ldstr "struct"
+IL_0047: ldc.i4.1
+IL_0048: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_004d: brfalse.s IL_0057
+IL_004f: ldarg.1
+IL_0050: ldarg.1
+IL_0051: ldind.i4
+IL_0052: ldc.i4.6
+IL_0053: add
+IL_0054: stind.i4
+IL_0055: ldc.i4.1
+IL_0056: ret
+IL_0057: ldarg.1
+IL_0058: ldarg.1
+IL_0059: ldind.i4
+IL_005a: ldc.i4.1
+IL_005b: add
+IL_005c: stind.i4
+IL_005d: ldarg.1
+IL_005e: ldind.i4
+IL_005f: ldarg.0
+IL_0060: callvirt System.Int32 System.String::get_Length()
+IL_0065: blt.s IL_0004
+IL_0067: ldc.i4.0
+IL_0068: ret
+METHOD Private, Static, HideBySig System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+LOCAL 0 System.Boolean
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: br.s IL_0040
+IL_0004: ldloc.0
+IL_0005: brfalse.s IL_0017
+IL_0007: ldarg.0
+IL_0008: ldarg.1
+IL_0009: ldind.i4
+IL_000a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_000f: ldc.i4.s 34
+IL_0011: bne.un.s IL_003a
+IL_0013: ldc.i4.0
+IL_0014: stloc.0
+IL_0015: br.s IL_003a
+IL_0017: ldarg.0
+IL_0018: ldarg.1
+IL_0019: ldind.i4
+IL_001a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_001f: ldc.i4.s 34
+IL_0021: bne.un.s IL_0027
+IL_0023: ldc.i4.1
+IL_0024: stloc.0
+IL_0025: br.s IL_003a
+IL_0027: ldarg.0
+IL_0028: ldarg.1
+IL_0029: ldind.i4
+IL_002a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_002f: ldarg.2
+IL_0030: bne.un.s IL_003a
+IL_0032: ldarg.1
+IL_0033: ldarg.1
+IL_0034: ldind.i4
+IL_0035: ldc.i4.1
+IL_0036: add
+IL_0037: stind.i4
+IL_0038: ldc.i4.1
+IL_0039: ret
+IL_003a: ldarg.1
+IL_003b: ldarg.1
+IL_003c: ldind.i4
+IL_003d: ldc.i4.1
+IL_003e: add
+IL_003f: stind.i4
+IL_0040: ldarg.1
+IL_0041: ldind.i4
+IL_0042: ldarg.0
+IL_0043: callvirt System.Int32 System.String::get_Length()
+IL_0048: blt.s IL_0004
+IL_004a: ldc.i4.0
+IL_004b: ret
+METHOD Private, Static, HideBySig System.Int32 ModController::SkipToAvoid(System.String,System.Int32&,System.Char,System.String)
+LOCAL 0 System.Boolean
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: br.s IL_004e
+IL_0004: ldloc.0
+IL_0005: brfalse.s IL_0017
+IL_0007: ldarg.0
+IL_0008: ldarg.1
+IL_0009: ldind.i4
+IL_000a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_000f: ldc.i4.s 34
+IL_0011: bne.un.s IL_0048
+IL_0013: ldc.i4.0
+IL_0014: stloc.0
+IL_0015: br.s IL_0048
+IL_0017: ldarg.0
+IL_0018: ldarg.1
+IL_0019: ldind.i4
+IL_001a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_001f: ldc.i4.s 34
+IL_0021: bne.un.s IL_0027
+IL_0023: ldc.i4.1
+IL_0024: stloc.0
+IL_0025: br.s IL_0048
+IL_0027: ldarg.0
+IL_0028: ldarg.1
+IL_0029: ldind.i4
+IL_002a: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_002f: ldarg.2
+IL_0030: bne.un.s IL_003a
+IL_0032: ldarg.1
+IL_0033: ldarg.1
+IL_0034: ldind.i4
+IL_0035: ldc.i4.1
+IL_0036: add
+IL_0037: stind.i4
+IL_0038: ldc.i4.1
+IL_0039: ret
+IL_003a: ldarg.0
+IL_003b: ldarg.1
+IL_003c: ldind.i4
+IL_003d: ldarg.3
+IL_003e: ldc.i4.0
+IL_003f: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0044: brfalse.s IL_0048
+IL_0046: ldc.i4.2
+IL_0047: ret
+IL_0048: ldarg.1
+IL_0049: ldarg.1
+IL_004a: ldind.i4
+IL_004b: ldc.i4.1
+IL_004c: add
+IL_004d: stind.i4
+IL_004e: ldarg.1
+IL_004f: ldind.i4
+IL_0050: ldarg.0
+IL_0051: callvirt System.Int32 System.String::get_Length()
+IL_0056: blt.s IL_0004
+IL_0058: ldc.i4.0
+IL_0059: ret
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ModController::.cctor()
+IL_0000: ldc.i4.0
+IL_0001: stsfld System.Boolean ModController::_initialized
+IL_0006: ldc.i4.0
+IL_0007: stsfld System.UInt32 ModController::_dllCounter
+IL_000c: ldstr "The game has detected dll-based mods. You must agree to the following before any mods will be loaded:
+
+The following agreement governs all download, installation or use of any assembly file (hereinafter "mods") that modifies the runtime behaviour of Software Inc. If you do not agree to this agreement, you may not install or use mods.
+
+You acknowledge that downloading, installing or using mods may damage your computer and any data stored on it. Your installation or use of mods is at your own discretion and risk, you are solely responsible and Coredumping ApS is not liable for any loss of data or damage to your computer."
+IL_0011: stsfld System.String ModController::ModEula
+IL_0016: newobj System.Void System.Collections.Generic.HashSet`1<ModController/DLLMod>::.ctor()
+IL_001b: stsfld System.Collections.Generic.HashSet`1<ModController/DLLMod> ModController::_unload
+IL_0020: newobj System.Void System.Collections.Generic.HashSet`1<System.String>::.ctor()
+IL_0025: stsfld System.Collections.Generic.HashSet`1<System.String> ModController::_deactivating
+IL_002a: ret

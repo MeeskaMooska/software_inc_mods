@@ -1,0 +1,47 @@
+TYPE GUICombobox BASE UnityEngine.MonoBehaviour
+FIELD Public UnityEngine.UI.Text text
+FIELD Public System.Int32 MaxItems
+FIELD Public System.Boolean LocalizeContent
+FIELD Public System.Boolean SoftwareTypes
+FIELD Public System.Boolean SWCategory
+FIELD Public System.Boolean FeatureComb
+FIELD Public System.Boolean ActionCombo
+FIELD Public System.String Software
+FIELD Public System.String NullName
+FIELD Public System.Boolean LocalizeNullName
+FIELD Public System.String NoSelectionName
+FIELD Private System.Collections.Generic.List`1<System.Object> _items
+FIELD Public System.String[] ToolTips
+FIELD Public UnityEngine.Events.UnityEvent OnSelectedChanged
+FIELD Private System.Int32 _selected
+FIELD Private UnityEngine.UI.CanvasScaler comboPanelParent
+FIELD Public UnityEngine.RectTransform rectTransform
+PROPERTY System.Collections.Generic.List`1<System.Object> GUICombobox::Items()
+PROPERTY System.Boolean GUICombobox::interactable()
+PROPERTY System.Int32 GUICombobox::Selected()
+PROPERTY System.Boolean GUICombobox::IsShown()
+PROPERTY System.Object GUICombobox::SelectedItem()
+PROPERTY System.String GUICombobox::SelectedItemString()
+METHOD Public, HideBySig, SpecialName System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_Items(System.Collections.Generic.List`1<System.Object>)
+METHOD Public, HideBySig, SpecialName System.Boolean GUICombobox::get_interactable()
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_interactable(System.Boolean)
+METHOD Public, HideBySig, SpecialName System.Int32 GUICombobox::get_Selected()
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_Selected(System.Int32)
+METHOD Public, HideBySig, SpecialName System.Boolean GUICombobox::get_IsShown()
+METHOD Public, HideBySig, SpecialName System.Object GUICombobox::get_SelectedItem()
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_SelectedItem(System.Object)
+METHOD Public, HideBySig T GUICombobox::GetSelected()
+METHOD Public, HideBySig, SpecialName System.String GUICombobox::get_SelectedItemString()
+METHOD Public, HideBySig System.Void GUICombobox::UpdateLabel()
+METHOD Public, HideBySig System.Void GUICombobox::OnSelectedChangedRemoveAllListeners()
+METHOD Private, HideBySig System.Void GUICombobox::Awake()
+METHOD Public, HideBySig System.Void GUICombobox::UpdateContent(System.Collections.Generic.IEnumerable`1<T>)
+METHOD Public, HideBySig System.String[] GUICombobox::GetLabelFromObject(System.Object,System.Int32)
+METHOD Private, HideBySig System.String GUICombobox::GetElementLabel(System.Object,System.String)
+METHOD Public, HideBySig System.Void GUICombobox::UpdateContent(System.Collections.Generic.IEnumerable`1<T>,System.Collections.Generic.IEnumerable`1<System.String>)
+METHOD Public, HideBySig System.Void GUICombobox::ToggleDropDown()
+METHOD Public, HideBySig System.Void GUICombobox::UpdateSelection(System.Int32)
+METHOD Public, HideBySig System.Void GUICombobox::UpdateSelectionSupressEvents(System.Int32)
+METHOD Private, HideBySig System.Void GUICombobox::OnDisable()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void GUICombobox::.ctor()

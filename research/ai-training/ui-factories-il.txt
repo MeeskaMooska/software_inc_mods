@@ -1,0 +1,45 @@
+TYPE WindowManager/<>c BASE System.Object
+FIELD Public, Static, InitOnly WindowManager/<>c <>9
+FIELD Public, Static System.Func`2<UnityEngine.EventSystems.EventTrigger/Entry,System.Boolean> <>9__49_0
+FIELD Public, Static System.Func`2<GUIWindow,System.Boolean> <>9__80_0
+FIELD Public, Static System.Func`2<GUIWindow,System.Boolean> <>9__91_0
+FIELD Public, Static System.Action`1<GUIWindow> <>9__97_0
+METHOD Assembly, HideBySig System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject> WindowManager/<>c::<.cctor>b__128_3(System.String)
+LOCAL 0 UnityEngine.UI.Text
+IL_0000: call UnityEngine.UI.Text WindowManager::SpawnLabel()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_000d: ldloc.0
+IL_000e: ldloc.0
+IL_000f: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0014: newobj System.Void System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::.ctor(!0,!1)
+IL_0019: ret
+METHOD Assembly, HideBySig System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject> WindowManager/<>c::<.cctor>b__128_11(System.String)
+LOCAL 0 UnityEngine.UI.ScrollRect
+IL_0000: call UnityEngine.UI.ScrollRect WindowManager::SpawnScrollView()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldloc.0
+IL_0008: callvirt UnityEngine.RectTransform UnityEngine.UI.ScrollRect::get_content()
+IL_000d: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0012: newobj System.Void System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::.ctor(!0,!1)
+IL_0017: ret
+METHOD Assembly, HideBySig System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject> WindowManager/<>c::<.cctor>b__128_12(System.String)
+LOCAL 0 GUIWindow
+IL_0000: call GUIWindow WindowManager::SpawnWindow()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldloc.0
+IL_0008: ldfld UnityEngine.GameObject GUIWindow::MainPanel
+IL_000d: newobj System.Void System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>::.ctor(!0,!1)
+IL_0012: ret
+METHOD Assembly, HideBySig UnityEngine.Component WindowManager/<>c::<.cctor>b__128_16(UnityEngine.GameObject)
+IL_0000: ldarg.1
+IL_0001: callvirt !!0 UnityEngine.GameObject::AddComponent<UnityEngine.UI.VerticalLayoutGroup>()
+IL_0006: ret
+METHOD Assembly, HideBySig UnityEngine.Component WindowManager/<>c::<.cctor>b__128_18(UnityEngine.GameObject)
+IL_0000: ldarg.1
+IL_0001: callvirt !!0 UnityEngine.GameObject::AddComponent<UnityEngine.UI.ContentSizeFitter>()
+IL_0006: ret

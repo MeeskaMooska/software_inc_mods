@@ -1,0 +1,659 @@
+TYPE DesignDocument BASE SoftwareWorkItem
+FIELD Public, Static, Literal, HasDefault System.Int32 MaxIteration
+CONSTANT MaxIteration = 4
+FIELD Public WorkItem Result
+FIELD Public SHashSet`1<System.UInt32> EverWorked
+FIELD Public SHashSet`1<System.String> NextPhaseTeam
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> Tools
+FIELD Public Employee LeadDesigner
+FIELD Public System.Boolean HasFinished
+FIELD Public System.Boolean ContractStarted
+FIELD Public System.Int32 Iteration
+FIELD Public System.Single ReviewAccuracy
+FIELD Public System.Single LastProgress
+FIELD Public System.Single LeadProgress
+FIELD Private System.Single _currentProgress
+FIELD Public SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> ReviewSpecs
+FIELD Public, Static UnityEngine.Color32[][] IterationColors
+FIELD Public SoftwareAlpha Parent
+FIELD Public, Static, Literal, HasDefault System.Single MaxLeadProg
+CONSTANT MaxLeadProg = 0.25
+FIELD Public, Static System.Single[] BugRates
+FIELD Public, Static System.Single[] MaxBugFactor
+FIELD Private, NotSerialized System.Boolean _hasWarnedAboutLead
+PROPERTY UnityEngine.Color DesignDocument::BackColor()
+PROPERTY System.Boolean DesignDocument::AlwaysUseLocalProgressLabel()
+PROPERTY System.Boolean DesignDocument::CanOutsourceNetwork()
+PROPERTY System.String DesignDocument::UnitName()
+PROPERTY System.UInt32 DesignDocument::MaxUnits()
+PROPERTY System.Byte DesignDocument::ByteTypeID()
+PROPERTY System.Boolean DesignDocument::HasNaturalNetworkEnd()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor()
+IL_0000: ldarg.0
+IL_0001: newobj System.Void SHashSet`1<System.UInt32>::.ctor()
+IL_0006: stfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_000b: ldarg.0
+IL_000c: newobj System.Void System.Collections.Generic.List`1<SoftwareProduct>::.ctor()
+IL_0011: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0016: ldarg.0
+IL_0017: ldc.r4 -1
+IL_001c: stfld System.Single DesignDocument::_currentProgress
+IL_0021: ldarg.0
+IL_0022: call System.Void SoftwareWorkItem::.ctor()
+IL_0027: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String)
+IL_0000: ldarg.0
+IL_0001: newobj System.Void SHashSet`1<System.UInt32>::.ctor()
+IL_0006: stfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_000b: ldarg.0
+IL_000c: newobj System.Void System.Collections.Generic.List`1<SoftwareProduct>::.ctor()
+IL_0011: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0016: ldarg.0
+IL_0017: ldc.r4 -1
+IL_001c: stfld System.Single DesignDocument::_currentProgress
+IL_0021: ldarg.0
+IL_0022: ldarg.1
+IL_0023: call System.Void SoftwareWorkItem::.ctor(System.String)
+IL_0028: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,System.Boolean,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,ContractWork,System.String,System.String,SoftwareFramework,System.String,System.Collections.Generic.List`1<SoftwareProduct>,System.Boolean,System.UInt32,NetworkDeal)
+IL_0000: ldarg.0
+IL_0001: newobj System.Void SHashSet`1<System.UInt32>::.ctor()
+IL_0006: stfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_000b: ldarg.0
+IL_000c: newobj System.Void System.Collections.Generic.List`1<SoftwareProduct>::.ctor()
+IL_0011: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0016: ldarg.0
+IL_0017: ldc.r4 -1
+IL_001c: stfld System.Single DesignDocument::_currentProgress
+IL_0021: ldarg.0
+IL_0022: ldarg.1
+IL_0023: ldarg.2
+IL_0024: ldarg.3
+IL_0025: ldarg.s needs
+IL_0027: ldarg.s os
+IL_0029: ldarg.s price
+IL_002b: ldarg.s subscription
+IL_002d: ldarg.s submarkets
+IL_002f: ldarg.s start
+IL_0031: ldarg.s company
+IL_0033: ldarg.s sequelTo
+IL_0035: ldarg.s inHouse
+IL_0037: ldarg.s loss
+IL_0039: ldarg.s features
+IL_003b: ldarg.s techs
+IL_003d: ldarg.s contract
+IL_003f: ldarg.s server
+IL_0041: ldarg.s server2
+IL_0043: ldarg.s createFramework
+IL_0045: ldarg.s framework
+IL_0047: ldarg.s workID
+IL_0049: ldarg.s networkDeal
+IL_004b: call System.Void SoftwareWorkItem::.ctor(System.String,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,System.Boolean,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,ContractWork,System.String,System.String,System.String,SoftwareFramework,System.UInt32,NetworkDeal)
+IL_0050: ldc.i4.1
+IL_0051: call System.Void Achievements.AchievementController::SetInteraction(Achievements.AchievementController/Mechanics)
+IL_0056: ldarg.0
+IL_0057: ldarg.s tools
+IL_0059: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_005e: ldarg.s tut
+IL_0060: brfalse.s IL_0073
+IL_0062: ldsfld TutorialSystem TutorialSystem::Instance
+IL_0067: ldstr "Design work"
+IL_006c: ldc.i4.0
+IL_006d: callvirt System.Boolean TutorialSystem::StartTutorial(System.String,System.Boolean)
+IL_0072: pop
+IL_0073: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(System.String,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.Single,SDateTime,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.UInt32[],System.String,System.Collections.Generic.List`1<SoftwareProduct>,System.Boolean,System.UInt32,NetworkDeal)
+IL_0000: ldarg.0
+IL_0001: newobj System.Void SHashSet`1<System.UInt32>::.ctor()
+IL_0006: stfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_000b: ldarg.0
+IL_000c: newobj System.Void System.Collections.Generic.List`1<SoftwareProduct>::.ctor()
+IL_0011: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0016: ldarg.0
+IL_0017: ldc.r4 -1
+IL_001c: stfld System.Single DesignDocument::_currentProgress
+IL_0021: ldarg.0
+IL_0022: ldarg.1
+IL_0023: ldarg.2
+IL_0024: ldarg.3
+IL_0025: ldarg.s needs
+IL_0027: ldarg.s price
+IL_0029: ldarg.s start
+IL_002b: ldarg.s company
+IL_002d: ldarg.s parent
+IL_002f: ldarg.s parentW
+IL_0031: ldarg.s loss
+IL_0033: ldarg.s features
+IL_0035: ldarg.s factors
+IL_0037: ldarg.s server2
+IL_0039: ldarg.s workID
+IL_003b: ldarg.s networkDeal
+IL_003d: call System.Void SoftwareWorkItem::.ctor(System.String,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.Single,SDateTime,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.UInt32[],System.String,System.UInt32,NetworkDeal)
+IL_0042: ldc.i4.1
+IL_0043: call System.Void Achievements.AchievementController::SetInteraction(Achievements.AchievementController/Mechanics)
+IL_0048: ldarg.0
+IL_0049: ldarg.s tools
+IL_004b: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0050: ldarg.s tut
+IL_0052: brfalse.s IL_0065
+IL_0054: ldsfld TutorialSystem TutorialSystem::Instance
+IL_0059: ldstr "Design work"
+IL_005e: ldc.i4.0
+IL_005f: callvirt System.Boolean TutorialSystem::StartTutorial(System.String,System.Boolean)
+IL_0064: pop
+IL_0065: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void DesignDocument::.ctor(SoftwareAlpha,ReviewWindow/ReviewData)
+LOCAL 0 System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>
+LOCAL 1 System.Collections.Generic.KeyValuePair`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>
+LOCAL 2 System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Single>
+LOCAL 3 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0000: ldarg.0
+IL_0001: newobj System.Void SHashSet`1<System.UInt32>::.ctor()
+IL_0006: stfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_000b: ldarg.0
+IL_000c: newobj System.Void System.Collections.Generic.List`1<SoftwareProduct>::.ctor()
+IL_0011: stfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0016: ldarg.0
+IL_0017: ldc.r4 -1
+IL_001c: stfld System.Single DesignDocument::_currentProgress
+IL_0021: ldarg.0
+IL_0022: ldarg.1
+IL_0023: ldarg.2
+IL_0024: call System.Void SoftwareWorkItem::.ctor(SoftwareAlpha,ReviewWindow/ReviewData)
+IL_0029: ldarg.0
+IL_002a: ldarg.1
+IL_002b: stfld SoftwareAlpha DesignDocument::Parent
+IL_0030: ldarg.0
+IL_0031: ldfld SoftwareAlpha DesignDocument::Parent
+IL_0036: ldarg.0
+IL_0037: callvirt System.Void SoftwareAlpha::set_Child(DesignDocument)
+IL_003c: ldarg.0
+IL_003d: ldarg.2
+IL_003e: ldfld System.Single ReviewWindow/ReviewData::Accuracy
+IL_0043: stfld System.Single DesignDocument::ReviewAccuracy
+IL_0048: ldarg.0
+IL_0049: newobj System.Void SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>>::.ctor()
+IL_004e: stfld SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> DesignDocument::ReviewSpecs
+IL_0053: ldarg.2
+IL_0054: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>> ReviewWindow/ReviewData::Data
+IL_0059: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>::GetEnumerator()
+IL_005e: stloc.0
+IL_005f: br.s IL_00b8
+IL_0061: ldloca.s V_0
+IL_0063: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>::get_Current()
+IL_0068: stloc.1
+IL_0069: ldloca.s V_1
+IL_006b: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>::get_Value()
+IL_0070: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.String,System.Single>::GetEnumerator()
+IL_0075: stloc.2
+IL_0076: br.s IL_009f
+IL_0078: ldloca.s V_2
+IL_007a: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Single>::get_Current()
+IL_007f: stloc.3
+IL_0080: ldarg.0
+IL_0081: ldfld SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> DesignDocument::ReviewSpecs
+IL_0086: ldloca.s V_1
+IL_0088: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>::get_Key()
+IL_008d: ldloca.s V_3
+IL_008f: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::get_Key()
+IL_0094: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.String>::.ctor(!0,!1)
+IL_0099: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>>::Add(!0)
+IL_009e: pop
+IL_009f: ldloca.s V_2
+IL_00a1: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Single>::MoveNext()
+IL_00a6: brtrue.s IL_0078
+IL_00a8: leave.s IL_00b8
+IL_00aa: ldloca.s V_2
+IL_00ac: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Single>
+IL_00b2: callvirt System.Void System.IDisposable::Dispose()
+IL_00b7: endfinally
+IL_00b8: ldloca.s V_0
+IL_00ba: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>::MoveNext()
+IL_00bf: brtrue.s IL_0061
+IL_00c1: leave.s IL_00d1
+IL_00c3: ldloca.s V_0
+IL_00c5: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Single>>
+IL_00cb: callvirt System.Void System.IDisposable::Dispose()
+IL_00d0: endfinally
+IL_00d1: ret
+METHOD Public, Virtual, HideBySig System.Object DesignDocument::PromoteAction()
+LOCAL 0 System.Double
+LOCAL 1 System.Int32
+LOCAL 2 System.Single
+LOCAL 3 SoftwareAlpha
+LOCAL 4 System.Double
+LOCAL 5 System.Collections.Generic.List`1<MarketingPlan>
+LOCAL 6 System.Int32
+LOCAL 7 System.Int32
+IL_0000: ldarg.0
+IL_0001: ldfld SoftwareAlpha DesignDocument::Parent
+IL_0006: brfalse.s IL_002e
+IL_0008: ldarg.0
+IL_0009: ldfld SoftwareAlpha DesignDocument::Parent
+IL_000e: ldarg.0
+IL_000f: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0014: ldarg.0
+IL_0015: ldfld System.Single DesignDocument::ReviewAccuracy
+IL_001a: ldarg.0
+IL_001b: ldfld SHashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> DesignDocument::ReviewSpecs
+IL_0020: call System.Void DesignDocument::FinishIteration(SoftwareAlpha,System.Collections.Generic.IList`1<SoftwareWorkItem/FeatureProgress>,System.Single,System.Collections.Generic.HashSet`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>>)
+IL_0025: ldarg.0
+IL_0026: ldc.i4.0
+IL_0027: callvirt System.Void WorkItem::Kill(System.Boolean)
+IL_002c: ldnull
+IL_002d: ret
+IL_002e: ldarg.0
+IL_002f: call WorkDeal WorkItem::get_ActiveDeal()
+IL_0034: brfalse.s IL_004c
+IL_0036: ldarg.0
+IL_0037: call WorkDeal WorkItem::get_ActiveDeal()
+IL_003c: callvirt System.Boolean Deal::get_Incoming()
+IL_0041: brfalse.s IL_004c
+IL_0043: ldarg.0
+IL_0044: ldc.i4.0
+IL_0045: callvirt System.Void WorkItem::Kill(System.Boolean)
+IL_004a: ldnull
+IL_004b: ret
+IL_004c: ldarg.0
+IL_004d: call System.Boolean DesignDocument::NeedsLead()
+IL_0052: brfalse.s IL_008d
+IL_0054: ldarg.0
+IL_0055: ldfld System.Collections.Generic.Dictionary`2<Employee,System.Single> SoftwareWorkItem::LeadWork
+IL_005a: brtrue.s IL_008d
+IL_005c: ldarg.0
+IL_005d: ldfld System.Boolean DesignDocument::_hasWarnedAboutLead
+IL_0062: brtrue.s IL_008b
+IL_0064: ldarg.0
+IL_0065: ldfld System.Boolean WorkItem::AutoDev
+IL_006a: brtrue.s IL_008b
+IL_006c: ldarg.0
+IL_006d: ldc.i4.1
+IL_006e: stfld System.Boolean DesignDocument::_hasWarnedAboutLead
+IL_0073: ldsfld WindowManager WindowManager::Instance
+IL_0078: ldstr "DesignNoProgress"
+IL_007d: call System.String Localization::Loc(System.String)
+IL_0082: ldc.i4.0
+IL_0083: ldc.i4.2
+IL_0084: ldnull
+IL_0085: callvirt DialogWindow WindowManager::ShowMessageBox(System.String,System.Boolean,DialogWindow/DialogType,GUIWindow)
+IL_008a: pop
+IL_008b: ldnull
+IL_008c: ret
+IL_008d: ldarg.0
+IL_008e: call System.Double DesignDocument::RawProgress()
+IL_0093: stloc.0
+IL_0094: ldsfld System.Single[] DesignDocument::MaxBugFactor
+IL_0099: ldloc.0
+IL_009a: conv.r4
+IL_009b: call System.Single Utilities::FuzzyIndex(System.Collections.Generic.IList`1<System.Single>,System.Single)
+IL_00a0: ldarg.0
+IL_00a1: ldfld System.Int32 SoftwareWorkItem::MaxBugs
+IL_00a6: conv.r4
+IL_00a7: ldc.r4 2
+IL_00ac: div
+IL_00ad: mul
+IL_00ae: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_00b3: stloc.1
+IL_00b4: ldsfld System.Single[] DesignDocument::BugRates
+IL_00b9: ldloc.0
+IL_00ba: conv.r4
+IL_00bb: call System.Single Utilities::FuzzyIndex(System.Collections.Generic.IList`1<System.Single>,System.Single)
+IL_00c0: stloc.2
+IL_00c1: ldarg.0
+IL_00c2: call System.Void SoftwareWorkItem::PublisherInstaMarket()
+IL_00c7: ldarg.0
+IL_00c8: ldfld System.Double SoftwareWorkItem::CreativityScore
+IL_00cd: ldloc.0
+IL_00ce: call System.Double Utilities::Clamp01(System.Double)
+IL_00d3: mul
+IL_00d4: stloc.s V_4
+IL_00d6: ldarg.0
+IL_00d7: call System.Boolean SoftwareWorkItem::get_AddOn()
+IL_00dc: brfalse IL_01a1
+IL_00e1: ldarg.0
+IL_00e2: call System.String WorkItem::get_Name()
+IL_00e7: ldarg.0
+IL_00e8: ldfld System.Nullable`1<System.UInt32> SoftwareWorkItem::SWID
+IL_00ed: ldarg.0
+IL_00ee: ldfld SoftwareAddOn SoftwareWorkItem::AddonType
+IL_00f3: ldarg.0
+IL_00f4: ldfld SoftwareCategory SoftwareWorkItem::SWCategory
+IL_00f9: ldarg.0
+IL_00fa: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> SoftwareWorkItem::Needs
+IL_00ff: ldarg.0
+IL_0100: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0105: ldarg.0
+IL_0106: ldfld System.Single SoftwareWorkItem::Price
+IL_010b: ldarg.0
+IL_010c: ldfld SDateTime SoftwareWorkItem::DevStart
+IL_0111: ldc.r4 0
+IL_0116: ldarg.0
+IL_0117: ldfld Company SoftwareWorkItem::MyCompany
+IL_011c: ldarg.0
+IL_011d: ldfld SoftwareProduct SoftwareWorkItem::AddonParent
+IL_0122: ldarg.0
+IL_0123: ldfld SoftwareWorkItem SoftwareWorkItem::AddonWorkParent
+IL_0128: ldarg.0
+IL_0129: ldfld System.Double WorkItem::Loss
+IL_012e: ldarg.0
+IL_012f: ldfld System.String SoftwareWorkItem::Server2
+IL_0134: ldarg.0
+IL_0135: ldfld GUIWorkItem WorkItem::guiItem
+IL_013a: ldnull
+IL_013b: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0140: brtrue.s IL_0154
+IL_0142: ldarg.0
+IL_0143: ldfld GUIWorkItem WorkItem::guiItem
+IL_0148: callvirt UnityEngine.Transform UnityEngine.Component::get_transform()
+IL_014d: callvirt System.Int32 UnityEngine.Transform::GetSiblingIndex()
+IL_0152: br.s IL_0155
+IL_0154: ldc.i4.m1
+IL_0155: ldarg.0
+IL_0156: ldfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_015b: ldarg.0
+IL_015c: call System.Single SoftwareWorkItem::get_Followers()
+IL_0161: ldarg.0
+IL_0162: ldfld System.UInt32 SoftwareWorkItem::MaxFollowers
+IL_0167: ldarg.0
+IL_0168: ldfld System.Single SoftwareWorkItem::FollowerChange
+IL_016d: ldarg.0
+IL_016e: ldfld System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0173: ldloc.1
+IL_0174: ldloc.2
+IL_0175: ldarg.0
+IL_0176: ldfld SHashSet`1<System.String> WorkItem::DevTeams
+IL_017b: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0180: ldarg.0
+IL_0181: ldfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_0186: ldloc.s V_4
+IL_0188: ldarg.0
+IL_0189: ldfld System.Boolean SoftwareWorkItem::_anyMarketing
+IL_018e: ldarg.0
+IL_018f: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> SoftwareWorkItem::_workRoyalties
+IL_0194: ldc.i4.0
+IL_0195: ldnull
+IL_0196: newobj System.Void SoftwareAlpha::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareWorkItem/FeatureProgress[],System.Single,SDateTime,System.Single,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.String,System.Int32,SHashSet`1<System.UInt32>,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.Single,System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<SoftwareProduct>,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+IL_019b: stloc.3
+IL_019c: br IL_0292
+IL_01a1: ldarg.0
+IL_01a2: call System.String WorkItem::get_Name()
+IL_01a7: ldarg.0
+IL_01a8: ldfld System.Nullable`1<System.UInt32> SoftwareWorkItem::SWID
+IL_01ad: ldarg.0
+IL_01ae: ldfld SoftwareType SoftwareWorkItem::Type
+IL_01b3: ldarg.0
+IL_01b4: ldfld SoftwareCategory SoftwareWorkItem::SWCategory
+IL_01b9: ldarg.0
+IL_01ba: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> SoftwareWorkItem::Needs
+IL_01bf: ldarg.0
+IL_01c0: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_01c5: ldarg.0
+IL_01c6: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareWorkItem::TechLevels
+IL_01cb: ldarg.0
+IL_01cc: ldfld SoftwareProduct[] SoftwareWorkItem::OSs
+IL_01d1: ldarg.0
+IL_01d2: ldfld System.Single SoftwareWorkItem::Price
+IL_01d7: ldarg.0
+IL_01d8: ldfld System.Boolean SoftwareWorkItem::SubscriptionBased
+IL_01dd: ldarg.0
+IL_01de: ldfld System.Double[] SoftwareWorkItem::Submarkets
+IL_01e3: ldarg.0
+IL_01e4: ldfld SDateTime SoftwareWorkItem::DevStart
+IL_01e9: ldc.r4 0
+IL_01ee: ldarg.0
+IL_01ef: ldfld Company SoftwareWorkItem::MyCompany
+IL_01f4: ldarg.0
+IL_01f5: ldfld SoftwareProduct SoftwareWorkItem::SequelTo
+IL_01fa: ldarg.0
+IL_01fb: ldfld System.Boolean SoftwareWorkItem::InHouse
+IL_0200: ldarg.0
+IL_0201: ldfld System.Double WorkItem::Loss
+IL_0206: ldarg.0
+IL_0207: ldfld ContractWork WorkItem::contract
+IL_020c: ldarg.0
+IL_020d: ldfld System.String SoftwareWorkItem::Server
+IL_0212: ldarg.0
+IL_0213: ldfld System.String SoftwareWorkItem::Server2
+IL_0218: ldarg.0
+IL_0219: ldfld GUIWorkItem WorkItem::guiItem
+IL_021e: ldnull
+IL_021f: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0224: brtrue.s IL_0238
+IL_0226: ldarg.0
+IL_0227: ldfld GUIWorkItem WorkItem::guiItem
+IL_022c: callvirt UnityEngine.Transform UnityEngine.Component::get_transform()
+IL_0231: callvirt System.Int32 UnityEngine.Transform::GetSiblingIndex()
+IL_0236: br.s IL_0239
+IL_0238: ldc.i4.m1
+IL_0239: ldarg.0
+IL_023a: ldfld SHashSet`1<System.UInt32> DesignDocument::EverWorked
+IL_023f: ldarg.0
+IL_0240: call System.Single SoftwareWorkItem::get_Followers()
+IL_0245: ldarg.0
+IL_0246: ldfld System.UInt32 SoftwareWorkItem::MaxFollowers
+IL_024b: ldarg.0
+IL_024c: ldfld System.Single SoftwareWorkItem::FollowerChange
+IL_0251: ldarg.0
+IL_0252: ldfld System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0257: ldloc.1
+IL_0258: ldloc.2
+IL_0259: ldarg.0
+IL_025a: ldfld SoftwareFramework SoftwareWorkItem::Framework
+IL_025f: ldarg.0
+IL_0260: ldfld System.Single SoftwareWorkItem::FrameworkRoyalty
+IL_0265: ldarg.0
+IL_0266: ldfld System.String SoftwareWorkItem::CreateFramework
+IL_026b: ldarg.0
+IL_026c: ldfld SHashSet`1<System.String> WorkItem::DevTeams
+IL_0271: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0276: ldarg.0
+IL_0277: ldfld System.Collections.Generic.List`1<SoftwareProduct> DesignDocument::Tools
+IL_027c: ldloc.s V_4
+IL_027e: ldarg.0
+IL_027f: ldfld System.Boolean SoftwareWorkItem::_anyMarketing
+IL_0284: ldarg.0
+IL_0285: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> SoftwareWorkItem::_workRoyalties
+IL_028a: ldc.i4.0
+IL_028b: ldnull
+IL_028c: newobj System.Void SoftwareAlpha::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareWorkItem/FeatureProgress[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,System.Single,Company,SoftwareProduct,System.Boolean,System.Double,ContractWork,System.String,System.String,System.Int32,SHashSet`1<System.UInt32>,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.Single,SoftwareFramework,System.Single,System.String,System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<SoftwareProduct>,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+IL_0291: stloc.3
+IL_0292: ldloc.3
+IL_0293: ldc.r4 1
+IL_0298: ldarg.0
+IL_0299: ldfld System.Single DesignDocument::LastProgress
+IL_029e: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_02a3: stfld System.Single SoftwareAlpha::DesignProgress
+IL_02a8: ldarg.0
+IL_02a9: ldfld SoftwareWorkItem SoftwareWorkItem::AddonWorkParent
+IL_02ae: brfalse.s IL_02c2
+IL_02b0: ldarg.0
+IL_02b1: ldfld SoftwareWorkItem SoftwareWorkItem::AddonWorkParent
+IL_02b6: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_02bb: ldarg.0
+IL_02bc: callvirt System.Boolean System.Collections.Generic.List`1<SoftwareWorkItem>::Remove(!0)
+IL_02c1: pop
+IL_02c2: ldc.i4.0
+IL_02c3: stloc.s V_6
+IL_02c5: br.s IL_02e0
+IL_02c7: ldarg.0
+IL_02c8: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_02cd: ldloc.s V_6
+IL_02cf: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_02d4: ldloc.3
+IL_02d5: stfld SoftwareWorkItem SoftwareWorkItem::AddonWorkParent
+IL_02da: ldloc.s V_6
+IL_02dc: ldc.i4.1
+IL_02dd: add
+IL_02de: stloc.s V_6
+IL_02e0: ldloc.s V_6
+IL_02e2: ldarg.0
+IL_02e3: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_02e8: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_02ed: blt.s IL_02c7
+IL_02ef: ldloc.3
+IL_02f0: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_02f5: ldarg.0
+IL_02f6: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_02fb: callvirt System.Void System.Collections.Generic.List`1<SoftwareWorkItem>::AddRange(System.Collections.Generic.IEnumerable`1<!0>)
+IL_0300: ldarg.0
+IL_0301: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> SoftwareWorkItem::AddonWorkChildren
+IL_0306: callvirt System.Void System.Collections.Generic.List`1<SoftwareWorkItem>::Clear()
+IL_030b: ldloc.3
+IL_030c: ldarg.0
+IL_030d: ldfld System.Byte[] SoftwareWorkItem::HardwareDesign
+IL_0312: stfld System.Byte[] SoftwareWorkItem::HardwareDesign
+IL_0317: ldloc.3
+IL_0318: ldarg.0
+IL_0319: ldfld System.Collections.Generic.Dictionary`2<Employee,System.Single> SoftwareWorkItem::LeadWork
+IL_031e: stfld System.Collections.Generic.Dictionary`2<Employee,System.Single> SoftwareWorkItem::LeadWork
+IL_0323: ldarg.0
+IL_0324: ldfld PublisherDeal SoftwareWorkItem::Publishing
+IL_0329: brfalse.s IL_034a
+IL_032b: ldloc.3
+IL_032c: ldarg.0
+IL_032d: ldfld PublisherDeal SoftwareWorkItem::Publishing
+IL_0332: stfld PublisherDeal SoftwareWorkItem::Publishing
+IL_0337: ldarg.0
+IL_0338: ldfld PublisherDeal SoftwareWorkItem::Publishing
+IL_033d: ldloc.3
+IL_033e: stfld SoftwareWorkItem PublisherDeal::WorkTarget
+IL_0343: ldarg.0
+IL_0344: ldnull
+IL_0345: stfld PublisherDeal SoftwareWorkItem::Publishing
+IL_034a: ldarg.0
+IL_034b: ldloc.3
+IL_034c: stfld WorkItem DesignDocument::Result
+IL_0351: ldarg.0
+IL_0352: ldfld System.UInt32 WorkItem::deal
+IL_0357: brtrue.s IL_0393
+IL_0359: ldarg.0
+IL_035a: ldfld ContractWork WorkItem::contract
+IL_035f: brtrue.s IL_0393
+IL_0361: ldarg.0
+IL_0362: call Company WorkItem::GetWorkOwner()
+IL_0367: callvirt System.Boolean Company::get_IsLocalPlayer()
+IL_036c: brfalse.s IL_0393
+IL_036e: ldarg.0
+IL_036f: ldfld SoftwareType SoftwareWorkItem::Type
+IL_0374: ldfld System.String SoftwareType::Name
+IL_0379: ldstr "Operating System"
+IL_037e: callvirt System.Boolean System.String::Equals(System.String)
+IL_0383: brfalse.s IL_0393
+IL_0385: ldarg.0
+IL_0386: call System.Boolean SoftwareWorkItem::get_AddOn()
+IL_038b: brtrue.s IL_0393
+IL_038d: ldloc.3
+IL_038e: callvirt System.Void SoftwareAlpha::CreateMock()
+IL_0393: ldarg.0
+IL_0394: ldfld Company SoftwareWorkItem::MyCompany
+IL_0399: ldarg.0
+IL_039a: ldfld WorkItem DesignDocument::Result
+IL_039f: callvirt System.Void Company::AddWorkItem(WorkItem)
+IL_03a4: ldarg.0
+IL_03a5: ldfld System.Boolean WorkItem::AutoDev
+IL_03aa: brtrue.s IL_041e
+IL_03ac: ldarg.0
+IL_03ad: ldfld WorkItem DesignDocument::Result
+IL_03b2: ldarg.0
+IL_03b3: ldfld SHashSet`1<System.String> DesignDocument::NextPhaseTeam
+IL_03b8: dup
+IL_03b9: brtrue.s IL_03c2
+IL_03bb: pop
+IL_03bc: ldarg.0
+IL_03bd: ldfld SHashSet`1<System.String> WorkItem::DevTeams
+IL_03c2: callvirt System.Void WorkItem::AddDevTeams(System.Collections.Generic.IEnumerable`1<System.String>)
+IL_03c7: ldarg.0
+IL_03c8: call System.Single SoftwareWorkItem::get_Followers()
+IL_03cd: ldc.r4 0
+IL_03d2: bne.un.s IL_041e
+IL_03d4: ldarg.0
+IL_03d5: ldfld System.Boolean SoftwareWorkItem::InHouse
+IL_03da: brtrue.s IL_041e
+IL_03dc: ldarg.0
+IL_03dd: ldfld ContractWork WorkItem::contract
+IL_03e2: brtrue.s IL_041e
+IL_03e4: ldarg.0
+IL_03e5: ldstr "Marketing"
+IL_03ea: call System.Boolean PublisherDeal::HasDeal(SoftwareWorkItem,System.String)
+IL_03ef: brtrue.s IL_041e
+IL_03f1: ldarg.0
+IL_03f2: call System.Boolean SoftwareWorkItem::get_DistributionPlatform()
+IL_03f7: brtrue.s IL_041e
+IL_03f9: ldloc.3
+IL_03fa: ldstr "NoPreMarketWarning"
+IL_03ff: ldc.i4.1
+IL_0400: newarr System.Object
+IL_0405: dup
+IL_0406: ldc.i4.0
+IL_0407: ldarg.0
+IL_0408: stelem.ref
+IL_0409: call System.String Localization::LocColor(System.String,System.Object[])
+IL_040e: ldstr "Newspaper"
+IL_0413: ldc.i4.1
+IL_0414: newobj System.Void WorkItemNotification::.ctor(WorkItem,System.String,System.String,NotificationManager/NotificationType)
+IL_0419: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_041e: ldarg.0
+IL_041f: ldfld WorkItem DesignDocument::Result
+IL_0424: ldarg.0
+IL_0425: ldfld System.Boolean WorkItem::Collapsed
+IL_042a: stfld System.Boolean WorkItem::Collapsed
+IL_042f: ldarg.0
+IL_0430: ldfld WorkItem DesignDocument::Result
+IL_0435: ldarg.0
+IL_0436: call System.Boolean WorkItem::get_Hidden()
+IL_043b: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0440: ldarg.0
+IL_0441: ldfld WorkItem DesignDocument::Result
+IL_0446: ldarg.0
+IL_0447: ldfld System.Int32 WorkItem::Priority
+IL_044c: stfld System.Int32 WorkItem::Priority
+IL_0451: ldloc.3
+IL_0452: callvirt System.Void SoftwareWorkItem::CheckCompetency()
+IL_0457: ldsfld GameSettings GameSettings::Instance
+IL_045c: ldfld Company GameSettings::MyCompany
+IL_0461: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0466: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<MarketingPlan>(System.Collections.IEnumerable)
+IL_046b: ldarg.0
+IL_046c: ldftn System.Boolean DesignDocument::<PromoteAction>b__61_0(MarketingPlan)
+IL_0472: newobj System.Void System.Func`2<MarketingPlan,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0477: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<MarketingPlan>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_047c: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<MarketingPlan>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0481: stloc.s V_5
+IL_0483: ldc.i4.0
+IL_0484: stloc.s V_7
+IL_0486: br.s IL_04d0
+IL_0488: ldarg.0
+IL_0489: ldfld System.Boolean WorkItem::AutoDev
+IL_048e: brfalse.s IL_04b1
+IL_0490: ldloc.s V_5
+IL_0492: ldloc.s V_7
+IL_0494: callvirt !0 System.Collections.Generic.List`1<MarketingPlan>::get_Item(System.Int32)
+IL_0499: ldfld MarketingPlan/TaskType MarketingPlan::Type
+IL_049e: ldc.i4.2
+IL_049f: bne.un.s IL_04b1
+IL_04a1: ldloc.s V_5
+IL_04a3: ldloc.s V_7
+IL_04a5: callvirt !0 System.Collections.Generic.List`1<MarketingPlan>::get_Item(System.Int32)
+IL_04aa: callvirt System.Void MarketingPlan::StopMarketing()
+IL_04af: br.s IL_04ca
+IL_04b1: ldloc.s V_5
+IL_04b3: ldloc.s V_7
+IL_04b5: callvirt !0 System.Collections.Generic.List`1<MarketingPlan>::get_Item(System.Int32)
+IL_04ba: ldarg.0
+IL_04bb: ldfld WorkItem DesignDocument::Result
+IL_04c0: castclass SoftwareWorkItem
+IL_04c5: stfld SoftwareWorkItem MarketingPlan::TargetItem
+IL_04ca: ldloc.s V_7
+IL_04cc: ldc.i4.1
+IL_04cd: add
+IL_04ce: stloc.s V_7
+IL_04d0: ldloc.s V_7
+IL_04d2: ldloc.s V_5
+IL_04d4: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_04d9: blt.s IL_0488
+IL_04db: ldarg.0
+IL_04dc: ldc.i4.0
+IL_04dd: callvirt System.Void WorkItem::Kill(System.Boolean)
+IL_04e2: ldarg.0
+IL_04e3: ldfld WorkItem DesignDocument::Result
+IL_04e8: ret

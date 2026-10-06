@@ -1,0 +1,392 @@
+TYPE ActorCustomization BASE UnityEngine.MonoBehaviour
+INTERFACE IStylable
+INTERFACE ISpecController
+FIELD Private, Static, Literal, HasDefault System.Single FaceEditThreshold
+CONSTANT FaceEditThreshold = 0.8
+FIELD Public, Static ActorBodyItem/BlendTransform[] FetchedTranslations
+FIELD Public UnityEngine.UI.Image[] Colors
+FIELD Public UnityEngine.UI.Text GenderText
+FIELD Public UnityEngine.UI.Text DaysPerMonthLabel
+FIELD Public VarValueSheet MoneyDesc
+FIELD Public UnityEngine.UI.InputField CompanyName
+FIELD Public UnityEngine.UI.InputField FounderName
+FIELD Public, Static System.Single[] RoundLimits
+FIELD Public, Static System.Int32[] StartLoans
+FIELD Public, Static System.Int32 StartLoanMonths
+FIELD Public, Static System.Int32[] StartYears
+FIELD Public FounderManager FManager
+FIELD Public GUICombobox Difficulty
+FIELD Public GUICombobox Year
+FIELD Public GUICombobox Animation
+FIELD Public GUICombobox[] PersonalityChosen
+FIELD Public UnityEngine.UI.Slider[] Skill
+FIELD Public UnityEngine.UI.Slider StartMoney
+FIELD Public UnityEngine.UI.Slider DaysPerMonth
+FIELD Public UnityEngine.Transform[] CameraPositions
+FIELD Public System.Int32 CurrentCameraPosition
+FIELD Public UnityEngine.Transform MainCamera
+FIELD Public ActorBodyItemToggle ThumbnailButtonPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject IPOLabel
+FIELD Public UnityEngine.GameObject PlotAdjecencyLabel
+FIELD Public UnityEngine.GameObject RoundLimitLabel
+FIELD Public UnityEngine.GameObject RoundTypeLabel
+FIELD Public UnityEngine.GameObject FurnModsLabel
+FIELD Public UnityEngine.GameObject CodeModsLabel
+FIELD Public UnityEngine.GameObject FounderStylePanel
+FIELD Public UnityEngine.GameObject FounderSkillPanel
+FIELD Public UnityEngine.UI.Slider IPOSlider
+FIELD Public UnityEngine.UI.Slider AgeSlider
+FIELD Public GUICombobox RoundLimit
+FIELD Public GUICombobox RoundType
+FIELD Public UnityEngine.UI.Toggle PlotAdjacency
+FIELD Public UnityEngine.UI.Toggle FurnMods
+FIELD Public UnityEngine.UI.Toggle CodeMods
+FIELD Public UnityEngine.UI.Text IPOSliderLabel
+FIELD Public UnityEngine.UI.Text AgeLabel
+FIELD Public BodySliderGroup BodyGroupPrefab
+FIELD Public UnityEngine.GameObject BodyPartPanel
+FIELD Public UnityEngine.GameObject HeadSliderPanel
+FIELD Public UnityEngine.GameObject ColorPanel
+FIELD Public UnityEngine.Transform BodyPartContent
+FIELD Public UnityEngine.Transform HeadSliderContent
+FIELD Public UnityEngine.Transform ColorContent
+FIELD Public UnityEngine.Transform TraitPanel
+FIELD Public UnityEngine.UI.Scrollbar BodyPartScroll
+FIELD Public UnityEngine.UI.Scrollbar HeadSliderScroll
+FIELD Public UnityEngine.UI.Scrollbar ColorScroll
+FIELD Public SpecializationChart SpecChart
+FIELD Public UITrait TraitPrefab
+FIELD Public UnityEngine.Material TriangleHighlight
+FIELD Public UnityEngine.RectTransform DiffTipHolder
+FIELD Public UnityEngine.RectTransform FounderPanel
+FIELD Public ColorWindow ColorDialog
+FIELD Public UnityEngine.UI.Text DifficultyTip
+FIELD Public UnityEngine.UI.Toggle UnlockBlends
+FIELD Public UnityEngine.UI.Toggle LODToggle
+FIELD Public UnityEngine.UI.Image[] BlendIcons
+FIELD Public System.Single DiffTipWidth
+FIELD Public System.Single DiffTipHeight
+FIELD Public UnityEngine.GameObject[] DisableOnCampaign
+FIELD Public UnityEngine.GameObject[] DisableOnNetwork
+FIELD Public UnityEngine.GameObject[] DisableOnNetworkClient
+FIELD Public UnityEngine.GameObject[] DisableOnRestartCompany
+FIELD Public UnityEngine.UI.Text StartLabel
+FIELD Public ActorPatternPanel PatternPanel
+FIELD Public DynamicGridLayout GameConfLayout
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Color> _colorsUsed
+FIELD Private, NotSerialized DifficultyValues/DifficultySetting _customDifficulty
+FIELD Private, NotSerialized Employee _forcedFounder
+FIELD Public UnityEngine.UI.Image[] Tabs
+FIELD Public UnityEngine.Color ActiveTabColor
+FIELD Public GUIListView ModList
+FIELD Public SSAOPro SSAO
+FIELD Public BloomOptimized bloom
+FIELD Public UnityStandardAssets.ImageEffects.Antialiasing FXAA
+FIELD Public UnityStandardAssets.CinematicEffects.AntiAliasing SMAA
+FIELD Public GammaSaturation GSat
+FIELD Public MadGoat_SSAA.MadGoatSSAA SSAAScript
+FIELD Public UnityEngine.Light[] lights
+FIELD Public UnityEngine.Transform HeadBone
+FIELD Public System.Boolean Female
+FIELD Public System.Int32 CurrentCategory
+FIELD Public UnityEngine.Color[] SkinColors
+FIELD Public UnityEngine.Color[] HairColors
+FIELD Public UnityEngine.GameObject FinalActor
+FIELD Public UnityEngine.GameObject LoadingPanel
+FIELD Public UnityEngine.UI.Text LoadingPanelLabel
+FIELD Public UnityEngine.Texture2D[] MaleEyes
+FIELD Public UnityEngine.Texture2D[] FemaleEyes
+FIELD Public UnityEngine.Texture2D ColorMap
+FIELD Public UnityEngine.Texture2D LightMap
+FIELD Public UnityEngine.Sprite MaleVoid
+FIELD Public UnityEngine.Sprite FemaleVoid
+FIELD Private System.Single drag
+FIELD Private System.Boolean dragNow
+FIELD Private System.Boolean DisableStat
+FIELD Private System.Boolean DisablePerson
+FIELD Public, Static ActorCustomization Instance
+FIELD Public UnityEngine.Animator Anim
+FIELD Public System.Int32 PersonalityCounter
+FIELD Public System.Single CurrentZoom
+FIELD Public System.Single TargetZoom
+FIELD Public EyeScript Eyes
+FIELD Private System.Single RandomAnim
+FIELD Public UnityEngine.UI.Slider CreativitySlider
+FIELD Public UnityEngine.UI.Text CreativityLabel
+FIELD Public UnityEngine.Transform DemandPanel
+FIELD Public UnityEngine.RectTransform[] SkillCap
+FIELD Public GUICombobox LeadFocus
+FIELD Public UnityEngine.GameObject LeadFocusLabel
+FIELD Public UnityEngine.UI.RawImage LogoImage
+FIELD Public, NotSerialized SDFCreator/ISDFNode Logo
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<SDFCreator/SDFParameterExport>> LogoParameters
+FIELD Private UnityEngine.RenderTexture LogoTexture
+FIELD Public UnityEngine.GameObject SkinTonePanel
+FIELD Public UnityEngine.UI.Slider SkinToneSlider
+FIELD Public SkinToneGraph SkinToneGraph
+FIELD Private System.Boolean _isMorphDragging
+FIELD Private, NotSerialized ActorBodyItem/BlendKeys[] _currentMorphDrag
+FIELD Private UnityEngine.Vector3[] _morphStart
+FIELD Private UnityEngine.Vector3[] _morphEnd
+FIELD Private, NotSerialized System.Boolean _faceMeshDirty
+FIELD Private System.Collections.Generic.List`1<System.Int32> _faceTriangles
+FIELD Private System.Collections.Generic.List`1<UnityEngine.Vector3> _faceVertices
+FIELD Public System.Boolean SliderHover
+FIELD Private, Static System.Single[] _creativityRanges
+FIELD Private, Static LeadDesignDemands/Demand[][] _demands
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItem> _bodyItems
+FIELD Private UnityEngine.Transform _rootBone
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> <Rig>k__BackingField
+FIELD Private, NotSerialized ActorBodyItem _watch
+FIELD Public UnityEngine.UI.GridLayoutGroup BodyItemLayout
+FIELD Public UnityEngine.UI.Button MainColorButton
+FIELD Public GUIToolTipper MainColorTip
+FIELD Public UnityEngine.UI.Image MainColorImage
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItemToggle> BodyButtons
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/Trait,UITrait> _traitToggles
+FIELD Public, Static System.Collections.Generic.List`1<Employee/Trait> TraitPriority
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee/Trait> _dummyTraits
+FIELD Private, NotSerialized Employee/Trait _forcedTraits
+FIELD Private System.Boolean _disableSkinUpdate
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.String> SliderToGroup
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,BodySliderGroup> SliderGroups
+FIELD Private System.Boolean _directSliderChange
+FIELD Private System.Boolean _styleDirty
+FIELD Public UnityEngine.UI.Image TransitionImage
+FIELD Public GUIToolTipper DaysPerMonthsKnob
+FIELD Private System.String defaultCompanyName
+FIELD Private DG.Tweening.Tweener _diffTween
+FIELD Private, NotSerialized System.Boolean _initializing
+FIELD Public System.Boolean UsingSkinColor
+FIELD Public UnityEngine.GameObject[] DeactivateDuringColor
+FIELD Private, NotSerialized System.Boolean _founderLoading
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private System.Single _changeArms
+FIELD Public, NotSerialized UnityEngine.Color SkinColor
+FIELD Private System.Boolean _isSettingName
+FIELD Public System.String UseStyle
+FIELD Private, Static, InitOnly System.Single[] CampaignSkills
+FIELD Private, Static, InitOnly System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] CampaignSpecs
+FIELD Private System.Boolean _waitingForHost
+FIELD Public System.Boolean AdvancedMode
+FIELD Public UnityEngine.RectTransform SpecTrans
+FIELD Public UnityEngine.RectTransform CreaTrans
+FIELD Public UnityEngine.RectTransform AdvancedTrans
+FIELD Public UnityEngine.UI.Image SkillHeader
+PROPERTY System.Int32 ActorCustomization::StartYear()
+PROPERTY System.Collections.Generic.List`1<ActorBodyItem> ActorCustomization::BodyItems()
+PROPERTY UnityEngine.Transform ActorCustomization::RootBone()
+PROPERTY System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> ActorCustomization::Rig()
+PROPERTY System.Boolean ActorCustomization::UsesLOD1()
+PROPERTY System.Boolean ActorCustomization::NeedsDestruction()
+PROPERTY System.Collections.Generic.HashSet`1<Employee/Trait> ActorCustomization::_activeTraits()
+METHOD Public, HideBySig UnityEngine.GameObject[] ActorCustomization::GetShouldDisable()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateCreativity()
+METHOD Public, HideBySig, SpecialName System.Int32 ActorCustomization::get_StartYear()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.List`1<ActorBodyItem> ActorCustomization::get_BodyItems()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void ActorCustomization::set_BodyItems(System.Collections.Generic.List`1<ActorBodyItem>)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName UnityEngine.Transform ActorCustomization::get_RootBone()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void ActorCustomization::set_RootBone(UnityEngine.Transform)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> ActorCustomization::get_Rig()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void ActorCustomization::set_Rig(System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform>)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean ActorCustomization::get_UsesLOD1()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean ActorCustomization::get_NeedsDestruction()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.Transform ActorCustomization::GetTransform()
+METHOD Public, HideBySig System.Void ActorCustomization::SetMainColor(System.String,UnityEngine.Events.UnityAction)
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateColorButtonColor()
+METHOD Public, HideBySig System.Void ActorCustomization::SetSkinColor()
+METHOD Private, HideBySig UnityEngine.Color ActorCustomization::GetEyebrowColor()
+METHOD Public, HideBySig System.Void ActorCustomization::SetEyebrowColor()
+METHOD Public, HideBySig System.Void ActorCustomization::ChangeCategory(System.Int32)
+METHOD Private, HideBySig, SpecialName System.Collections.Generic.HashSet`1<Employee/Trait> ActorCustomization::get__activeTraits()
+METHOD Private, HideBySig System.Void ActorCustomization::UpdateBodyButtons()
+METHOD Public, HideBySig System.Void ActorCustomization::SkinToneChange()
+METHOD Public, HideBySig System.Void ActorCustomization::SetSkinTone(System.Int32)
+METHOD Public, HideBySig System.Void ActorCustomization::RandomizeCompanyName()
+METHOD Private, HideBySig System.Void ActorCustomization::CreateVoidItem(System.String,UnityEngine.Sprite,ActorBodyItem/GenderType,ActorBodyItem/BodyType,ActorBodyItem/GUICategory)
+METHOD Private, HideBySig System.Void ActorCustomization::CreateBodyButton(ActorBodyItem,System.Boolean)
+METHOD Private, HideBySig System.Void ActorCustomization::GenerateBodyButtons()
+METHOD Public, HideBySig System.Void ActorCustomization::ResetSliders()
+METHOD Private, HideBySig System.Void ActorCustomization::UpdateSliders(ActorBodyItem)
+METHOD Private, HideBySig UnityEngine.UI.Slider ActorCustomization::GetSlider(System.String)
+METHOD Public, HideBySig System.Void ActorCustomization::RandomizeAllBlends()
+METHOD Public, HideBySig System.Void ActorCustomization::UnlockBlendToggle()
+METHOD Private, HideBySig System.Void ActorCustomization::GenerateSliderCat(ActorBodyItem/BodyType)
+METHOD Private, HideBySig System.Void ActorCustomization::GenerateSliders()
+METHOD Public, HideBySig System.Void ActorCustomization::SetSkinColor(UnityEngine.Color,System.Int32)
+METHOD Private, Static, HideBySig System.Void ActorCustomization::ChangeColor(ActorBodyItem,System.Collections.Generic.List`1<ActorBodyItem/ColorMapping>,ColorBarButton)
+METHOD Private, HideBySig System.Void ActorCustomization::Awake()
+METHOD Private, HideBySig System.Void ActorCustomization::UpdateBodyParts()
+METHOD Private, HideBySig System.Boolean ActorCustomization::GenderMatch(ActorBodyItem/GenderType)
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateDifficultyTips()
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleDiffPanel()
+METHOD Public, HideBySig System.Void ActorCustomization::SetColor(System.String,UnityEngine.Color)
+METHOD Public, HideBySig UnityEngine.Color ActorCustomization::GetColor(System.String)
+METHOD Public, HideBySig System.Void ActorCustomization::InitColors(System.Boolean)
+METHOD Public, HideBySig System.Void ActorCustomization::ChangeAnimation()
+METHOD Public, HideBySig System.Void ActorCustomization::ApplyColor()
+METHOD Private, HideBySig System.Void ActorCustomization::OnDestroy()
+METHOD Public, HideBySig System.Void ActorCustomization::RefreshLogo()
+METHOD Public, HideBySig System.Void ActorCustomization::IPOChange()
+METHOD Private, HideBySig System.Void ActorCustomization::Start()
+METHOD Public, HideBySig System.Void ActorCustomization::OnFocusChange()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateLeadFocusCombo()
+METHOD Public, HideBySig System.Void ActorCustomization::ShowColorDialog(System.Action`1<UnityEngine.Color>,UnityEngine.Color,System.Collections.Generic.HashSet`1<UnityEngine.Color>)
+METHOD Public, HideBySig System.Void ActorCustomization::ApplyAge(System.Single,System.Nullable`1<UnityEngine.Color>)
+METHOD Public, HideBySig System.Void ActorCustomization::AgeChange()
+METHOD Public, HideBySig System.Void ActorCustomization::LoadFounder(FounderManager/FounderDescriptor,System.Int32)
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleZoom()
+METHOD Public, Static, HideBySig Employee/Trait ActorCustomization::SelectOptimalTraits(Employee/Trait,PersonalityGraph)
+METHOD Public, HideBySig System.Void ActorCustomization::UpdatePersonalities()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateTraitsUI()
+METHOD Private, HideBySig System.Boolean ActorCustomization::CheckValid(Employee/Trait)
+METHOD Public, Static, HideBySig Employee/Trait ActorCustomization::GetForcedTraits(System.String[],PersonalityGraph)
+METHOD Public, HideBySig System.Void ActorCustomization::TryForceTrait(Employee/Trait)
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateTraits()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateTraitEnabled()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateSpec()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 ActorCustomization::GetMaxPoints(Employee/EmployeeRole,System.Int32)
+METHOD Public, HideBySig DifficultyValues/DifficultySetting ActorCustomization::GetDifficulty()
+METHOD Public, HideBySig System.Void ActorCustomization::ChangeGender(System.Boolean)
+METHOD Private, HideBySig System.Void ActorCustomization::UpdateIncompatibilities(System.Int32)
+METHOD Private, HideBySig System.Void ActorCustomization::CacheFaceMeshData()
+METHOD Private, HideBySig System.Void ActorCustomization::Update()
+METHOD Public, HideBySig System.Void ActorCustomization::GetAllBlendTranslations(System.Int32,ActorBodyItem,UnityEngine.Mesh)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<System.String> ActorCustomization::GetPrioritizedSpecs(Employee/EmployeeRole,System.String[][],System.Collections.Generic.IList`1<SoftwareType>)
+METHOD Private, HideBySig System.Void ActorCustomization::OnDrawGizmos()
+METHOD Public, HideBySig PersonalityGraph ActorCustomization::GetPersonalities()
+METHOD Public, HideBySig System.Int32 ActorCustomization::GetStartYear()
+METHOD Public, HideBySig Actor[] ActorCustomization::GenerateActors()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void ActorCustomization::UpdateEyes()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void ActorCustomization::UpdateHairColor(UnityEngine.Color)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void ActorCustomization::UpdateSkinColor(UnityEngine.Color)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void ActorCustomization::PostUpdate(System.Boolean)
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleLOD()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void ActorCustomization::SetLOD2Color(System.String,UnityEngine.Color)
+METHOD Public, HideBySig System.Void ActorCustomization::FounderNameChanged()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateSkillStat(System.Int32)
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateSEducationStat(System.Int32)
+METHOD Private, HideBySig System.Single ActorCustomization::GetMaxSkill()
+METHOD Private, HideBySig System.Single ActorCustomization::GetMaxSkill(System.Int32)
+METHOD Private, HideBySig System.Int32 ActorCustomization::GetCreativityIndex(System.Single)
+METHOD Private, HideBySig System.Single ActorCustomization::GetMaxSkill(System.Single)
+METHOD Private, HideBySig System.Single ActorCustomization::GetMaxSkillSum(System.Single)
+METHOD Public, HideBySig System.Void ActorCustomization::ScaleSkillStats(System.Int32)
+METHOD Public, HideBySig System.Void ActorCustomization::ScaleAllSkillStats()
+METHOD Private, HideBySig System.Void ActorCustomization::UpdateStat(System.Int32,System.Boolean)
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleGender()
+METHOD Public, HideBySig System.Void ActorCustomization::InitHead()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateMoneyDescription()
+METHOD Public, HideBySig System.Void ActorCustomization::StartGameClick()
+METHOD Private, HideBySig System.Void ActorCustomization::CheckTraits()
+METHOD Private, HideBySig System.Void ActorCustomization::CheckSpec()
+METHOD Public, HideBySig System.String ActorCustomization::MakeBobName(System.String)
+METHOD Private, HideBySig System.Void ActorCustomization::StartGame()
+METHOD Public, Static, HideBySig System.Single ActorCustomization::GetDefaultStartMoney()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateDaysPerMonth()
+METHOD Public, HideBySig System.Void ActorCustomization::CancelClick()
+METHOD Public, HideBySig System.Void ActorCustomization::CancelDirectly()
+METHOD Public, HideBySig System.Void ActorCustomization::PickStyle()
+METHOD Public, HideBySig System.Void ActorCustomization::SaveStyle()
+METHOD Public, HideBySig System.Void ActorCustomization::SaveActiveStyle()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateActiveThumb()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String[][] ActorCustomization::GetUnlockedSpecializations()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Int32 ActorCustomization::GetMaxPoints(Employee/EmployeeRole)
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleAdvancedMode(System.Boolean)
+METHOD Public, HideBySig System.Void ActorCustomization::SetCustomDifficulty()
+METHOD Public, HideBySig System.Void ActorCustomization::WaitThenApplyTransform()
+METHOD Private, HideBySig System.Collections.IEnumerator ActorCustomization::WaitApply()
+METHOD Public, HideBySig System.Void ActorCustomization::ResetCustomDifficulty()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void ActorCustomization::.ctor()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ActorCustomization::.cctor()
+METHOD Private, HideBySig System.Void ActorCustomization::<SetSkinColor>b__161_2(UnityEngine.Color)
+METHOD Private, HideBySig System.Void ActorCustomization::<SetEyebrowColor>b__163_0(UnityEngine.Color)
+METHOD Private, HideBySig System.Void ActorCustomization::<UpdateDifficultyTips>b__199_0()
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleDiffPanel>b__201_0()
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleDiffPanel>b__201_1()
+METHOD Private, HideBySig System.Void ActorCustomization::<ShowColorDialog>b__216_0()
+METHOD Private, HideBySig System.Boolean ActorCustomization::<Update>b__238_2(UnityEngine.RaycastHit)
+METHOD Private, HideBySig System.Void ActorCustomization::<StartGame>b__275_0(System.String)
+METHOD Private, HideBySig System.Void ActorCustomization::<StartGame>b__275_1(SaveGame)
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleAdvancedMode>b__291_0()
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleAdvancedMode>b__291_1()
+METHOD Private, HideBySig System.Void ActorCustomization::<SetCustomDifficulty>b__292_0(DifficultyValues/DifficultySetting)
+TYPE ModPackage BASE IWorkshopItem
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareType> SoftwareTypes
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareTypeOverride> SoftwareTypeOverrides
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,CompanyType> CompanyTypes
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> NameGenerators
+FIELD Public HardwareDesign[] HardwareDesigns
+FIELD Public, InitOnly System.String[] DeleteCompanyTypes
+FIELD Public, InitOnly PersonalityGraph Personalities
+FIELD Private System.Boolean _enabled
+PROPERTY System.Boolean ModPackage::Enabled()
+METHOD Public, HideBySig, SpecialName System.Boolean ModPackage::get_Enabled()
+METHOD Public, HideBySig, SpecialName System.Void ModPackage::set_Enabled(System.Boolean)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void ModPackage::.ctor(System.String,System.Collections.Generic.Dictionary`2<System.String,SoftwareType>,System.Collections.Generic.Dictionary`2<System.String,SoftwareTypeOverride>,System.Collections.Generic.Dictionary`2<System.String,CompanyType>,System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator>,PersonalityGraph,System.String[],System.Collections.Generic.List`1<HardwareDesign>,System.Single)
+METHOD Public, Static, HideBySig ModPackage ModPackage::Load(System.String)
+METHOD Public, Static, HideBySig System.String ModPackage::OtherErrors(SoftwareType[],CompanyType[],System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator>)
+METHOD Public, Virtual, HideBySig System.String ModPackage::ToString()
+METHOD Public, Virtual, HideBySig System.String ModPackage::GetWorkshopType()
+METHOD Public, Virtual, HideBySig System.String[] ModPackage::GetValidExts()
+METHOD Public, Virtual, HideBySig System.String[] ModPackage::ExtraTags()
+METHOD Public, Virtual, HideBySig System.String ModPackage::GetActualString()
+METHOD Public, Virtual, HideBySig System.Boolean ModPackage::GenerateLocalization()
+METHOD Public, HideBySig System.Void ModPackage::Unload()
+METHOD Public, Virtual, HideBySig System.String ModPackage::GetExtraInfo()
+METHOD Public, Virtual, HideBySig System.Int32 ModPackage::GetCount()
+TYPE ModController BASE UnityEngine.MonoBehaviour
+FIELD Public, Static, Literal, HasDefault System.String DLLModBuildVersion
+CONSTANT DLLModBuildVersion = 24
+FIELD Public FileReaderWindow ReaderWindowPrefab
+FIELD Private, Static System.Boolean _initialized
+FIELD Public, Static ModController Instance
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ModController/DLLMod> Mods
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _needsVerification
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _eulaPrevent
+FIELD Private, Static System.UInt32 _dllCounter
+FIELD Private, NotSerialized DynamicCSharp.ScriptDomain _modDomain
+FIELD Public, Static System.String ModEula
+FIELD Private, Static System.Threading.Thread _mainThread
+FIELD Private System.Boolean _pendingVerification
+FIELD Private, Static System.Collections.Generic.HashSet`1<ModController/DLLMod> _unload
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _deactivating
+PROPERTY System.String ModController::ModFolder()
+PROPERTY System.Threading.Thread ModController::MainThread()
+METHOD Public, Static, HideBySig System.String ModController::GetMetaName(System.String)
+METHOD Public, Static, HideBySig, SpecialName System.String ModController::get_ModFolder()
+METHOD Public, Static, HideBySig System.Boolean ModController::HasMods()
+METHOD Private, HideBySig IWorkshopItem ModController::FinalizeAssembly(System.String,System.Reflection.Assembly,System.String,System.Boolean,System.Single)
+METHOD Private, HideBySig IWorkshopItem ModController::HandleException(System.Exception,System.String,System.String)
+METHOD Public, HideBySig System.Void ModController::UnloadMod(System.String,System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Void ModController::UnloadMod(ModController/DLLMod,System.Boolean)
+METHOD Public, HideBySig System.Void ModController::UnloadAllMods()
+METHOD Public, HideBySig System.Void ModController::ReloadMod(System.String,System.Boolean,System.Boolean)
+METHOD Private, HideBySig System.Void ModController::ActuallyLoadMod(System.String,System.Boolean,System.Boolean)
+METHOD Private, HideBySig System.Void ModController::ActuallyLoadMod(ModController/DLLMod,System.Boolean,System.Boolean)
+METHOD Private, Static, HideBySig System.Byte[] ModController::GetScriptBytes(System.String)
+METHOD Private, Static, HideBySig System.Byte[] ModController::UniqeHash(System.Byte[])
+METHOD Private, Static, HideBySig System.Int32 ModController::VerifyMod(System.String,System.String,System.Boolean,System.Boolean)
+METHOD Public, HideBySig IWorkshopItem ModController::LoadMod(System.String,System.Boolean,System.Boolean,System.Boolean,System.String)
+METHOD Private, HideBySig System.Void ModController::LoadMods()
+METHOD Private, HideBySig System.Void ModController::QueryNextVerification(System.Boolean)
+METHOD Public, Static, HideBySig System.Void ModController::Initialize(System.Boolean)
+METHOD Public, Static, HideBySig, SpecialName System.Threading.Thread ModController::get_MainThread()
+METHOD Private, HideBySig System.Void ModController::Awake()
+METHOD Private, HideBySig System.Void ModController::Update()
+METHOD Private, Static, HideBySig System.Void ModController::UnloadAndDeactivateMod(ModController/DLLMod)
+METHOD Public, Static, HideBySig System.Void ModController::HandleException(System.String,System.Exception)
+METHOD Private, HideBySig ModController/DLLMod ModController::GetMod(System.String)
+METHOD Public, Static, HideBySig System.String ModController::InjectTryBlocks(System.String,System.String)
+METHOD Private, Static, HideBySig System.String ModController::StripComments(System.String)
+METHOD Private, Static, HideBySig System.Void ModController::HandleObjectParsing(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String)
+METHOD Private, Static, HideBySig System.Boolean ModController::HasYield(System.String,System.Int32)
+METHOD Private, Static, HideBySig System.Boolean ModController::MatchBrace(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String,System.Boolean)
+METHOD Private, Static, HideBySig System.Void ModController::AppendCatch(System.Text.StringBuilder,System.String,System.String)
+METHOD Private, Static, HideBySig System.Boolean ModController::FindNextClassOrStruct(System.String,System.Int32&)
+METHOD Private, Static, HideBySig System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+METHOD Private, Static, HideBySig System.Int32 ModController::SkipToAvoid(System.String,System.Int32&,System.Char,System.String)
+METHOD Private, Static, HideBySig System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void ModController::.ctor()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ModController::.cctor()

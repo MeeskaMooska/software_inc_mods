@@ -1,0 +1,206 @@
+TYPE SoftwareAlpha BASE SoftwareWorkItem
+INTERFACE IServerItem
+INTERFACE IReferenceFix
+INTERFACE IStockable
+INTERFACE ILossable
+FIELD Public, Static System.Single BugLimitFactor
+FIELD Public System.Boolean InBeta
+FIELD Public System.Boolean Released
+FIELD Public System.Boolean HasFinished
+FIELD Public System.Boolean HasFinishedArt
+FIELD Public System.Boolean HasFinishedCode
+FIELD Public System.Single Bugs
+FIELD Public System.Single FixedBugs
+FIELD Public SoftwareProduct Mock
+FIELD Public IStockable Final
+FIELD Private DesignDocument _child
+FIELD Public SDateTime LastIteration
+FIELD Private System.Single SourceControlBoost
+FIELD Public System.Single[0...,0...,0...] SpecTempQuality
+FIELD Public System.Single[0...,0...,0...] SpecWeight
+FIELD Public System.Single[0...,0...] FinalSpecQuality
+FIELD Public System.Single MaxArtDt
+FIELD Public System.Single MaxDevDt
+FIELD Public System.Single DesignProgress
+FIELD Public SHashSet`1<System.UInt32> EverWorked
+FIELD Private System.UInt32 <PhysicalCopies>k__BackingField
+FIELD Public System.Collections.Generic.List`1<ReviewWindow/ReviewData> PastReviews
+FIELD Public System.Int32 ReviewsDone
+FIELD Public System.Single ReviewScore
+FIELD Public System.Single BugRate
+FIELD Public System.Single DistributionLoss
+FIELD Public System.Boolean DidLastReviewIteration
+FIELD Public System.Collections.Generic.List`1<System.String> DesignTeams
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> Tools
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Private System.Single _lastMaxCodeSkill
+FIELD Private, NotSerialized System.Single _lastMaxCodeSkillTime
+PROPERTY DesignDocument SoftwareAlpha::Child()
+PROPERTY System.UInt32 SoftwareAlpha::PhysicalCopies()
+PROPERTY System.UInt32 SoftwareAlpha::CopiesPerBox()
+PROPERTY System.Int32 SoftwareAlpha::HardwareMask()
+PROPERTY System.Int32 SoftwareAlpha::HardwareInputMask()
+PROPERTY System.Single SoftwareAlpha::HardwarePrice()
+PROPERTY IManufacturable SoftwareAlpha::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SoftwareAlpha::FeaturesBases()
+PROPERTY System.Boolean SoftwareAlpha::StockNotifications()
+PROPERTY IStockable SoftwareAlpha::DeferStock()
+PROPERTY SoftwareType SoftwareAlpha::SWType()
+PROPERTY SoftwareCategory SoftwareAlpha::SWCat()
+PROPERTY System.Boolean SoftwareAlpha::Paused()
+PROPERTY System.Boolean SoftwareAlpha::AlwaysUseLocalStageLabel()
+PROPERTY UnityEngine.Color SoftwareAlpha::BackColor()
+PROPERTY System.Boolean SoftwareAlpha::UsesISP()
+PROPERTY System.Boolean SoftwareAlpha::IsReadOnlyJob()
+PROPERTY System.Boolean SoftwareAlpha::CanOutsourceNetwork()
+PROPERTY System.String SoftwareAlpha::UnitName()
+PROPERTY System.UInt32 SoftwareAlpha::MaxUnits()
+PROPERTY System.Byte SoftwareAlpha::ByteTypeID()
+PROPERTY System.Boolean SoftwareAlpha::HasNaturalNetworkEnd()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareAlpha::get_Paused()
+IL_0000: ldarg.0
+IL_0001: call DesignDocument SoftwareAlpha::get_Child()
+IL_0006: brtrue.s IL_000f
+IL_0008: ldarg.0
+IL_0009: call System.Boolean WorkItem::get_Paused()
+IL_000e: ret
+IL_000f: ldc.i4.1
+IL_0010: ret
+METHOD Public, Virtual, HideBySig, SpecialName System.Void SoftwareAlpha::set_Paused(System.Boolean)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: call System.Void WorkItem::set_Paused(System.Boolean)
+IL_0007: ret
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetQuality()
+IL_0000: ldarg.0
+IL_0001: ldc.i4.1
+IL_0002: ldc.i4.0
+IL_0003: call System.Double SoftwareWorkItem::GetSpProgress(System.Boolean,System.Boolean)
+IL_0008: ldarg.0
+IL_0009: ldc.i4.1
+IL_000a: ldc.i4.0
+IL_000b: call System.Double SoftwareAlpha::GetSpQuality(System.Boolean,System.Boolean)
+IL_0010: call System.Double SoftwareAlpha::FinalQualityCalc(System.Double,System.Double)
+IL_0015: ret
+METHOD Public, HideBySig System.Double[] SoftwareAlpha::GetQualities()
+IL_0000: ldc.i4.4
+IL_0001: newarr System.Double
+IL_0006: dup
+IL_0007: ldc.i4.0
+IL_0008: ldarg.0
+IL_0009: ldc.i4.0
+IL_000a: ldc.i4.0
+IL_000b: call System.Double SoftwareWorkItem::GetSpProgress(System.Boolean,System.Boolean)
+IL_0010: stelem.r8
+IL_0011: dup
+IL_0012: ldc.i4.1
+IL_0013: ldarg.0
+IL_0014: ldc.i4.0
+IL_0015: ldc.i4.1
+IL_0016: call System.Double SoftwareWorkItem::GetSpProgress(System.Boolean,System.Boolean)
+IL_001b: stelem.r8
+IL_001c: dup
+IL_001d: ldc.i4.2
+IL_001e: ldarg.0
+IL_001f: ldc.i4.0
+IL_0020: ldc.i4.0
+IL_0021: call System.Double SoftwareAlpha::GetSpQuality(System.Boolean,System.Boolean)
+IL_0026: stelem.r8
+IL_0027: dup
+IL_0028: ldc.i4.3
+IL_0029: ldarg.0
+IL_002a: ldc.i4.0
+IL_002b: ldc.i4.1
+IL_002c: call System.Double SoftwareAlpha::GetSpQuality(System.Boolean,System.Boolean)
+IL_0031: stelem.r8
+IL_0032: ret
+METHOD Public, HideBySig System.Double SoftwareAlpha::GetSpQuality(System.Boolean,System.Boolean)
+LOCAL 0 System.Double
+LOCAL 1 System.Double
+LOCAL 2 System.Int32
+IL_0000: ldc.r8 0
+IL_0009: stloc.0
+IL_000a: ldc.r8 0
+IL_0013: stloc.1
+IL_0014: ldc.i4.0
+IL_0015: stloc.2
+IL_0016: br.s IL_0092
+IL_0018: ldarg.0
+IL_0019: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_001e: ldloc.2
+IL_001f: ldelem.ref
+IL_0020: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::OS
+IL_0025: brtrue.s IL_008e
+IL_0027: ldarg.1
+IL_0028: ldarg.2
+IL_0029: or
+IL_002a: brfalse.s IL_005a
+IL_002c: ldloc.0
+IL_002d: ldarg.0
+IL_002e: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0033: ldloc.2
+IL_0034: ldelem.ref
+IL_0035: ldfld System.Double SoftwareWorkItem/FeatureProgress::Qual2
+IL_003a: ldarg.0
+IL_003b: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0040: ldloc.2
+IL_0041: ldelem.ref
+IL_0042: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_0047: mul
+IL_0048: add
+IL_0049: stloc.0
+IL_004a: ldloc.1
+IL_004b: ldarg.0
+IL_004c: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0051: ldloc.2
+IL_0052: ldelem.ref
+IL_0053: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_0058: add
+IL_0059: stloc.1
+IL_005a: ldarg.1
+IL_005b: brtrue.s IL_0060
+IL_005d: ldarg.2
+IL_005e: brtrue.s IL_008e
+IL_0060: ldloc.0
+IL_0061: ldarg.0
+IL_0062: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0067: ldloc.2
+IL_0068: ldelem.ref
+IL_0069: ldfld System.Double SoftwareWorkItem/FeatureProgress::Qual
+IL_006e: ldarg.0
+IL_006f: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0074: ldloc.2
+IL_0075: ldelem.ref
+IL_0076: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_007b: mul
+IL_007c: add
+IL_007d: stloc.0
+IL_007e: ldloc.1
+IL_007f: ldarg.0
+IL_0080: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0085: ldloc.2
+IL_0086: ldelem.ref
+IL_0087: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_008c: add
+IL_008d: stloc.1
+IL_008e: ldloc.2
+IL_008f: ldc.i4.1
+IL_0090: add
+IL_0091: stloc.2
+IL_0092: ldloc.2
+IL_0093: ldarg.0
+IL_0094: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0099: ldlen
+IL_009a: conv.i4
+IL_009b: blt IL_0018
+IL_00a0: ldloc.1
+IL_00a1: ldc.r8 0
+IL_00aa: beq.s IL_00b0
+IL_00ac: ldloc.0
+IL_00ad: ldloc.1
+IL_00ae: div
+IL_00af: ret
+IL_00b0: ldc.r8 0
+IL_00b9: ret

@@ -1,0 +1,214 @@
+TYPE WindowManager BASE UnityEngine.MonoBehaviour
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ActiveWindows
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ModalWindows
+FIELD Private, NotSerialized System.Boolean _hasModal
+FIELD Public UnityEngine.GameObject DialogPrefab
+FIELD Public UnityEngine.GameObject ColorDialogPrefab
+FIELD Public UnityEngine.GameObject InputDialogPrefab
+FIELD Public UnityEngine.GameObject TableInfoPrefab
+FIELD Public UnityEngine.GameObject FileReaderPrefab
+FIELD Public CustomDifficultyWindow DifficultyWindowPrefab
+FIELD Public UnityEngine.GameObject Canvas
+FIELD Public UnityEngine.UI.CanvasScaler ExtraScaler
+FIELD Public UnityEngine.GameObject MainPanel
+FIELD Public UnityEngine.GameObject BlockPanel
+FIELD Public UnityEngine.GameObject WindowPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject PanelPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject InputPrefab
+FIELD Public UnityEngine.GameObject CheckboxPrefab
+FIELD Public UnityEngine.GameObject ScrollbarPrefab
+FIELD Public UnityEngine.GameObject ScrollViewPrefab
+FIELD Public UnityEngine.GameObject ProgressbarPrefab
+FIELD Public UnityEngine.GameObject GUIListPrefab
+FIELD Public UnityEngine.GameObject SliderPrefab
+FIELD Public UnityEngine.GameObject ComboPrefab
+FIELD Public UnityEngine.RectTransform BlockPrefab
+FIELD Public RectToRectFade Fader
+FIELD Public MultiSelectWindow MultiWindow
+FIELD Public UnityEngine.GameObject FullScreenMessageBlock
+FIELD Public UnityEngine.RectTransform AchievementPanel
+FIELD Public UnityEngine.UI.Text FullScreenMessage
+FIELD Public GUIProgressBar FullScreenProgressBar
+FIELD Public InspectorWindow InspectorWindowPrefab
+FIELD Public, Static WindowManager Instance
+FIELD Public System.Int32 StartIndex
+FIELD Public System.Boolean MainScene
+FIELD Private UnityEngine.Vector2 Corner
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,GUIWindow> InfoTableOpen
+FIELD Private, NotSerialized System.String _overrideCursor
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private GUIWindow _lastActive
+FIELD Private, NotSerialized DG.Tweening.Sequence _activeSequence
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>> _objectTags
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<UnityEngine.GameObject,UnityEngine.Component>> _layoutTags
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _ignoreAttributes
+PROPERTY System.Boolean WindowManager::HasModal()
+METHOD Private, Static, HideBySig System.Object WindowManager::TryConvert(System.String,System.Type)
+LOCAL 0 UnityEngine.Color
+LOCAL 1 UnityEngine.Vector4
+LOCAL 2 UnityEngine.Vector4
+IL_0000: ldarg.1
+IL_0001: ldtoken UnityEngine.Color
+IL_0006: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_000b: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_0010: brfalse.s IL_0043
+IL_0012: ldstr "#"
+IL_0017: ldarg.0
+IL_0018: ldstr "#"
+IL_001d: ldstr ""
+IL_0022: callvirt System.String System.String::Replace(System.String,System.String)
+IL_0027: call System.String System.String::Concat(System.String,System.String)
+IL_002c: ldloca.s V_0
+IL_002e: call System.Boolean UnityEngine.ColorUtility::TryParseHtmlString(System.String,UnityEngine.Color&)
+IL_0033: brtrue.s IL_003c
+IL_0035: call UnityEngine.Color UnityEngine.Color::get_white()
+IL_003a: br.s IL_003d
+IL_003c: ldloc.0
+IL_003d: box UnityEngine.Color
+IL_0042: ret
+IL_0043: ldarg.1
+IL_0044: ldtoken UnityEngine.RectOffset
+IL_0049: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_004e: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_0053: brfalse.s IL_007e
+IL_0055: ldarg.0
+IL_0056: call UnityEngine.Vector4 WindowManager::GetVectorFromXML(System.String)
+IL_005b: stloc.1
+IL_005c: ldloc.1
+IL_005d: ldfld System.Single UnityEngine.Vector4::x
+IL_0062: conv.i4
+IL_0063: ldloc.1
+IL_0064: ldfld System.Single UnityEngine.Vector4::y
+IL_0069: conv.i4
+IL_006a: ldloc.1
+IL_006b: ldfld System.Single UnityEngine.Vector4::z
+IL_0070: conv.i4
+IL_0071: ldloc.1
+IL_0072: ldfld System.Single UnityEngine.Vector4::w
+IL_0077: conv.i4
+IL_0078: newobj System.Void UnityEngine.RectOffset::.ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+IL_007d: ret
+IL_007e: ldarg.1
+IL_007f: ldtoken UnityEngine.Vector2
+IL_0084: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_0089: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_008e: brfalse.s IL_00a1
+IL_0090: ldarg.0
+IL_0091: call UnityEngine.Vector4 WindowManager::GetVectorFromXML(System.String)
+IL_0096: call UnityEngine.Vector2 UnityEngine.Vector4::op_Implicit(UnityEngine.Vector4)
+IL_009b: box UnityEngine.Vector2
+IL_00a0: ret
+IL_00a1: ldarg.1
+IL_00a2: ldtoken UnityEngine.Vector3
+IL_00a7: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_00ac: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_00b1: brfalse.s IL_00c4
+IL_00b3: ldarg.0
+IL_00b4: call UnityEngine.Vector4 WindowManager::GetVectorFromXML(System.String)
+IL_00b9: call UnityEngine.Vector3 UnityEngine.Vector4::op_Implicit(UnityEngine.Vector4)
+IL_00be: box UnityEngine.Vector3
+IL_00c3: ret
+IL_00c4: ldarg.1
+IL_00c5: ldtoken UnityEngine.Vector4
+IL_00ca: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_00cf: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_00d4: brfalse.s IL_00e2
+IL_00d6: ldarg.0
+IL_00d7: call UnityEngine.Vector4 WindowManager::GetVectorFromXML(System.String)
+IL_00dc: box UnityEngine.Vector4
+IL_00e1: ret
+IL_00e2: ldarg.1
+IL_00e3: ldtoken UnityEngine.Rect
+IL_00e8: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_00ed: call System.Boolean System.Type::op_Equality(System.Type,System.Type)
+IL_00f2: brfalse.s IL_0126
+IL_00f4: ldarg.0
+IL_00f5: call UnityEngine.Vector4 WindowManager::GetVectorFromXML(System.String)
+IL_00fa: stloc.2
+IL_00fb: ldloc.2
+IL_00fc: ldfld System.Single UnityEngine.Vector4::x
+IL_0101: conv.i4
+IL_0102: conv.r4
+IL_0103: ldloc.2
+IL_0104: ldfld System.Single UnityEngine.Vector4::y
+IL_0109: conv.i4
+IL_010a: conv.r4
+IL_010b: ldloc.2
+IL_010c: ldfld System.Single UnityEngine.Vector4::z
+IL_0111: conv.i4
+IL_0112: conv.r4
+IL_0113: ldloc.2
+IL_0114: ldfld System.Single UnityEngine.Vector4::w
+IL_0119: conv.i4
+IL_011a: conv.r4
+IL_011b: newobj System.Void UnityEngine.Rect::.ctor(System.Single,System.Single,System.Single,System.Single)
+IL_0120: box UnityEngine.Rect
+IL_0125: ret
+IL_0126: ldarg.1
+IL_0127: call System.ComponentModel.TypeConverter System.ComponentModel.TypeDescriptor::GetConverter(System.Type)
+IL_012c: ldarg.0
+IL_012d: callvirt System.Object System.ComponentModel.TypeConverter::ConvertFrom(System.Object)
+IL_0132: ret
+METHOD Private, Static, HideBySig System.Void WindowManager::SetFunctionCallback(UnityEngine.Events.UnityEvent,ModBehaviour,System.String,UnityEngine.Component)
+LOCAL 0 WindowManager/<>c__DisplayClass126_0
+LOCAL 1 System.Type
+IL_0000: newobj System.Void WindowManager/<>c__DisplayClass126_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld ModBehaviour WindowManager/<>c__DisplayClass126_0::callback
+IL_000d: ldloc.0
+IL_000e: ldarg.2
+IL_000f: ldloc.0
+IL_0010: ldflda System.String[] WindowManager/<>c__DisplayClass126_0::args
+IL_0015: call System.String WindowManager::GetFunctionCall(System.String,System.String[]&)
+IL_001a: stfld System.String WindowManager/<>c__DisplayClass126_0::fCall
+IL_001f: ldloc.0
+IL_0020: ldfld ModBehaviour WindowManager/<>c__DisplayClass126_0::callback
+IL_0025: callvirt System.Type System.Object::GetType()
+IL_002a: stloc.1
+IL_002b: ldloc.0
+IL_002c: ldloc.1
+IL_002d: ldc.i4.s 20
+IL_002f: callvirt System.Reflection.MethodInfo[] System.Type::GetMethods(System.Reflection.BindingFlags)
+IL_0034: ldloc.0
+IL_0035: ldftn System.Boolean WindowManager/<>c__DisplayClass126_0::<SetFunctionCallback>b__0(System.Reflection.MethodInfo)
+IL_003b: newobj System.Void System.Func`2<System.Reflection.MethodInfo,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0040: ldnull
+IL_0041: call T Utilities::FirstOrDefault<System.Reflection.MethodInfo>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>,T)
+IL_0046: stfld System.Reflection.MethodInfo WindowManager/<>c__DisplayClass126_0::m
+IL_004b: ldloc.0
+IL_004c: ldfld System.Reflection.MethodInfo WindowManager/<>c__DisplayClass126_0::m
+IL_0051: ldnull
+IL_0052: call System.Boolean System.Reflection.MethodInfo::op_Equality(System.Reflection.MethodInfo,System.Reflection.MethodInfo)
+IL_0057: brfalse.s IL_0075
+IL_0059: ldstr "Could not find function call: "
+IL_005e: ldarg.2
+IL_005f: ldstr " for "
+IL_0064: ldloc.1
+IL_0065: callvirt System.String System.Reflection.MemberInfo::get_Name()
+IL_006a: call System.String System.String::Concat(System.String,System.String,System.String,System.String)
+IL_006f: newobj System.Void System.Exception::.ctor(System.String)
+IL_0074: throw
+IL_0075: ldloc.0
+IL_0076: ldloc.0
+IL_0077: ldfld System.String[] WindowManager/<>c__DisplayClass126_0::args
+IL_007c: ldlen
+IL_007d: brfalse.s IL_0093
+IL_007f: ldloc.0
+IL_0080: ldfld System.String[] WindowManager/<>c__DisplayClass126_0::args
+IL_0085: ldloc.0
+IL_0086: ldfld System.Reflection.MethodInfo WindowManager/<>c__DisplayClass126_0::m
+IL_008b: ldarg.3
+IL_008c: call System.Object[] WindowManager::ConvertArgs(System.String[],System.Reflection.MethodInfo,UnityEngine.Component)
+IL_0091: br.s IL_0094
+IL_0093: ldnull
+IL_0094: stfld System.Object[] WindowManager/<>c__DisplayClass126_0::fArgs
+IL_0099: ldarg.0
+IL_009a: ldloc.0
+IL_009b: ldftn System.Void WindowManager/<>c__DisplayClass126_0::<SetFunctionCallback>b__1()
+IL_00a1: newobj System.Void UnityEngine.Events.UnityAction::.ctor(System.Object,System.IntPtr)
+IL_00a6: callvirt System.Void UnityEngine.Events.UnityEvent::AddListener(UnityEngine.Events.UnityAction)
+IL_00ab: ret

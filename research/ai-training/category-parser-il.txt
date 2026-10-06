@@ -1,0 +1,415 @@
+TYPE SoftwareCategory BASE System.Object
+INTERFACE IFormatColorObject
+INTERFACE IManufacturable
+INTERFACE IReferenceFix
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.String Description
+FIELD Public, InitOnly SoftwareType Parent
+FIELD Public, InitOnly System.Single Retention
+FIELD Public, InitOnly System.Single TimeScale
+FIELD Public, InitOnly System.Single Iterative
+FIELD Public System.Single Popularity
+FIELD Public System.Double[] SubmarketEq
+FIELD Public System.Single[][] SubmarketHistory
+FIELD Public System.Int32 SubmarketHistoryIndex
+FIELD Private System.String _nameGen
+FIELD Public System.Nullable`1<System.Int32> Unlock
+FIELD Public System.Nullable`1<System.Int32> LagBehind
+FIELD Public, InitOnly System.Single IdealPrice
+FIELD Public, InitOnly System.Boolean IsDefault
+FIELD Public, InitOnly System.Boolean Hardware
+FIELD Public, InitOnly System.Boolean ForcePopularity
+FIELD Public, InitOnly Manufacturing Manufacturing
+FIELD Public System.Boolean Hidden
+FIELD Public System.UInt32 ID
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareCategory::.ctor(SoftwareType,SoftwareCategory,System.String,System.Nullable`1<System.Single>,System.Nullable`1<System.Boolean>,Manufacturing)
+LOCAL 0 System.Exception
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 12
+IL_0003: newarr System.Single[]
+IL_0008: stfld System.Single[][] SoftwareCategory::SubmarketHistory
+IL_000d: ldarg.0
+IL_000e: ldc.i4.1
+IL_000f: stfld System.UInt32 SoftwareCategory::ID
+IL_0014: ldarg.0
+IL_0015: call System.Void System.Object::.ctor()
+IL_001a: ldarg.0
+IL_001b: ldarg.2
+IL_001c: ldfld System.String SoftwareCategory::Name
+IL_0021: stfld System.String SoftwareCategory::Name
+IL_0026: ldarg.0
+IL_0027: ldarg.2
+IL_0028: ldfld System.String SoftwareCategory::Description
+IL_002d: stfld System.String SoftwareCategory::Description
+IL_0032: ldarg.0
+IL_0033: ldarg.1
+IL_0034: stfld SoftwareType SoftwareCategory::Parent
+IL_0039: ldarg.0
+IL_003a: ldarg.2
+IL_003b: ldfld System.Single SoftwareCategory::Retention
+IL_0040: stfld System.Single SoftwareCategory::Retention
+IL_0045: ldarg.0
+IL_0046: ldarg.2
+IL_0047: ldfld System.Single SoftwareCategory::TimeScale
+IL_004c: stfld System.Single SoftwareCategory::TimeScale
+IL_0051: ldarg.0
+IL_0052: ldarg.2
+IL_0053: ldfld System.Single SoftwareCategory::Popularity
+IL_0058: stfld System.Single SoftwareCategory::Popularity
+IL_005d: ldarg.0
+IL_005e: ldarg.2
+IL_005f: ldfld System.Single SoftwareCategory::Iterative
+IL_0064: stfld System.Single SoftwareCategory::Iterative
+IL_0069: ldarg.0
+IL_006a: ldarg.3
+IL_006b: dup
+IL_006c: brtrue.s IL_0075
+IL_006e: pop
+IL_006f: ldarg.2
+IL_0070: ldfld System.String SoftwareCategory::_nameGen
+IL_0075: stfld System.String SoftwareCategory::_nameGen
+IL_007a: ldarg.0
+IL_007b: ldarg.2
+IL_007c: ldfld System.Nullable`1<System.Int32> SoftwareCategory::Unlock
+IL_0081: stfld System.Nullable`1<System.Int32> SoftwareCategory::Unlock
+IL_0086: ldarg.0
+IL_0087: ldarg.2
+IL_0088: ldfld System.Double[] SoftwareCategory::SubmarketEq
+IL_008d: stfld System.Double[] SoftwareCategory::SubmarketEq
+IL_0092: ldarg.0
+IL_0093: ldarg.2
+IL_0094: ldfld System.Boolean SoftwareCategory::IsDefault
+IL_0099: stfld System.Boolean SoftwareCategory::IsDefault
+IL_009e: ldarg.0
+IL_009f: ldarg.2
+IL_00a0: ldfld System.Nullable`1<System.Int32> SoftwareCategory::LagBehind
+IL_00a5: stfld System.Nullable`1<System.Int32> SoftwareCategory::LagBehind
+IL_00aa: ldarg.0
+IL_00ab: ldarg.2
+IL_00ac: ldfld System.Boolean SoftwareCategory::Hardware
+IL_00b1: stfld System.Boolean SoftwareCategory::Hardware
+IL_00b6: ldarg.0
+IL_00b7: ldarga.s idealPrice
+IL_00b9: call System.Boolean System.Nullable`1<System.Single>::get_HasValue()
+IL_00be: brtrue.s IL_00c8
+IL_00c0: ldarg.2
+IL_00c1: ldfld System.Single SoftwareCategory::IdealPrice
+IL_00c6: br.s IL_00cf
+IL_00c8: ldarga.s idealPrice
+IL_00ca: call !0 System.Nullable`1<System.Single>::get_Value()
+IL_00cf: stfld System.Single SoftwareCategory::IdealPrice
+IL_00d4: ldarg.0
+IL_00d5: ldarga.s hardware
+IL_00d7: call System.Boolean System.Nullable`1<System.Boolean>::get_HasValue()
+IL_00dc: brtrue.s IL_00e6
+IL_00de: ldarg.2
+IL_00df: ldfld System.Boolean SoftwareCategory::Hardware
+IL_00e4: br.s IL_00ed
+IL_00e6: ldarga.s hardware
+IL_00e8: call !0 System.Nullable`1<System.Boolean>::get_Value()
+IL_00ed: stfld System.Boolean SoftwareCategory::Hardware
+IL_00f2: ldarg.0
+IL_00f3: ldarg.2
+IL_00f4: ldfld System.Boolean SoftwareCategory::Hidden
+IL_00f9: stfld System.Boolean SoftwareCategory::Hidden
+IL_00fe: ldarg.0
+IL_00ff: ldarg.2
+IL_0100: ldfld System.Boolean SoftwareCategory::ForcePopularity
+IL_0105: stfld System.Boolean SoftwareCategory::ForcePopularity
+IL_010a: ldarg.0
+IL_010b: ldfld System.Boolean SoftwareCategory::Hardware
+IL_0110: brfalse.s IL_014f
+IL_0112: ldarg.s manufacturing
+IL_0114: brfalse.s IL_0127
+IL_0116: ldarg.0
+IL_0117: ldarg.s manufacturing
+IL_0119: ldarg.1
+IL_011a: ldarg.0
+IL_011b: newobj System.Void Manufacturing::.ctor(Manufacturing,SoftwareType,IManufacturable)
+IL_0120: stfld Manufacturing SoftwareCategory::Manufacturing
+IL_0125: br.s IL_014f
+IL_0127: ldarg.2
+IL_0128: ldfld Manufacturing SoftwareCategory::Manufacturing
+IL_012d: brfalse.s IL_0144
+IL_012f: ldarg.0
+IL_0130: ldarg.2
+IL_0131: ldfld Manufacturing SoftwareCategory::Manufacturing
+IL_0136: ldarg.1
+IL_0137: ldarg.0
+IL_0138: newobj System.Void Manufacturing::.ctor(Manufacturing,SoftwareType,IManufacturable)
+IL_013d: stfld Manufacturing SoftwareCategory::Manufacturing
+IL_0142: br.s IL_014f
+IL_0144: ldstr "Hardware category missing manufacturing process"
+IL_0149: newobj System.Void System.Exception::.ctor(System.String)
+IL_014e: throw
+IL_014f: leave.s IL_0177
+IL_0151: stloc.0
+IL_0152: ldstr "Error in category {0}: {1}"
+IL_0157: ldarg.0
+IL_0158: ldfld System.String SoftwareCategory::Name
+IL_015d: dup
+IL_015e: brtrue.s IL_0166
+IL_0160: pop
+IL_0161: ldstr ""
+IL_0166: ldloc.0
+IL_0167: callvirt System.String System.Exception::get_Message()
+IL_016c: call System.String System.String::Format(System.String,System.Object,System.Object)
+IL_0171: newobj System.Void System.Exception::.ctor(System.String)
+IL_0176: throw
+IL_0177: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareCategory::.ctor(SoftwareType,Tyd.TydCollection,System.String,System.Nullable`1<System.Single>,System.Nullable`1<System.Boolean>,Manufacturing,System.String)
+LOCAL 0 System.Nullable`1<System.Single>
+LOCAL 1 System.Nullable`1<System.Int32>
+LOCAL 2 System.Nullable`1<System.Boolean>
+LOCAL 3 Tyd.TydTable
+LOCAL 4 System.Exception
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 12
+IL_0003: newarr System.Single[]
+IL_0008: stfld System.Single[][] SoftwareCategory::SubmarketHistory
+IL_000d: ldarg.0
+IL_000e: ldc.i4.1
+IL_000f: stfld System.UInt32 SoftwareCategory::ID
+IL_0014: ldarg.0
+IL_0015: call System.Void System.Object::.ctor()
+IL_001a: ldarg.0
+IL_001b: ldarg.2
+IL_001c: ldstr "Name"
+IL_0021: ldc.i4.1
+IL_0022: callvirt System.String Tyd.TydCollection::GetChildValue(System.String,System.Boolean)
+IL_0027: stfld System.String SoftwareCategory::Name
+IL_002c: ldarg.0
+IL_002d: ldarg.2
+IL_002e: ldstr "Description"
+IL_0033: ldc.i4.0
+IL_0034: callvirt System.String Tyd.TydCollection::GetChildValue(System.String,System.Boolean)
+IL_0039: stfld System.String SoftwareCategory::Description
+IL_003e: ldarg.0
+IL_003f: ldarg.1
+IL_0040: stfld SoftwareType SoftwareCategory::Parent
+IL_0045: ldarg.0
+IL_0046: ldarg.2
+IL_0047: ldstr "Retention"
+IL_004c: ldc.i4.1
+IL_004d: ldc.r4 0
+IL_0052: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0057: call System.Single UnityEngine.Mathf::Abs(System.Single)
+IL_005c: stfld System.Single SoftwareCategory::Retention
+IL_0061: ldarg.0
+IL_0062: ldarg.2
+IL_0063: ldstr "TimeScale"
+IL_0068: ldc.i4.1
+IL_0069: ldc.r4 0
+IL_006e: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_0073: call System.Single UnityEngine.Mathf::Abs(System.Single)
+IL_0078: stfld System.Single SoftwareCategory::TimeScale
+IL_007d: ldarg.0
+IL_007e: ldarg.2
+IL_007f: ldstr "Popularity"
+IL_0084: ldc.i4.1
+IL_0085: ldc.r4 0
+IL_008a: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_008f: call System.Single UnityEngine.Mathf::Abs(System.Single)
+IL_0094: stfld System.Single SoftwareCategory::Popularity
+IL_0099: ldarg.0
+IL_009a: ldarg.2
+IL_009b: ldstr "Iterative"
+IL_00a0: ldc.i4.1
+IL_00a1: ldc.r4 0
+IL_00a6: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Single>(System.String,System.Boolean,!!0)
+IL_00ab: call System.Single UnityEngine.Mathf::Abs(System.Single)
+IL_00b0: stfld System.Single SoftwareCategory::Iterative
+IL_00b5: ldarg.0
+IL_00b6: ldarg.2
+IL_00b7: ldstr "Unlock"
+IL_00bc: ldc.i4.0
+IL_00bd: ldloca.s V_1
+IL_00bf: initobj System.Nullable`1<System.Int32>
+IL_00c5: ldloc.1
+IL_00c6: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Int32>>(System.String,System.Boolean,!!0)
+IL_00cb: stfld System.Nullable`1<System.Int32> SoftwareCategory::Unlock
+IL_00d0: ldarg.0
+IL_00d1: ldarg.2
+IL_00d2: ldstr "LagBehind"
+IL_00d7: ldc.i4.0
+IL_00d8: ldloca.s V_1
+IL_00da: initobj System.Nullable`1<System.Int32>
+IL_00e0: ldloc.1
+IL_00e1: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Int32>>(System.String,System.Boolean,!!0)
+IL_00e6: stfld System.Nullable`1<System.Int32> SoftwareCategory::LagBehind
+IL_00eb: ldarg.0
+IL_00ec: ldarg.2
+IL_00ed: ldstr "ForcePopularity"
+IL_00f2: ldc.i4.0
+IL_00f3: ldc.i4.0
+IL_00f4: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_00f9: stfld System.Boolean SoftwareCategory::ForcePopularity
+IL_00fe: ldarg.2
+IL_00ff: ldstr "IdealPrice"
+IL_0104: ldc.i4.0
+IL_0105: ldarg.s idealPrice
+IL_0107: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Nullable`1<System.Single>>(System.String,System.Boolean,!!0)
+IL_010c: stloc.0
+IL_010d: ldloca.s V_0
+IL_010f: call System.Boolean System.Nullable`1<System.Single>::get_HasValue()
+IL_0114: brtrue.s IL_0121
+IL_0116: ldstr "Ideal price not defined"
+IL_011b: newobj System.Void System.Exception::.ctor(System.String)
+IL_0120: throw
+IL_0121: ldarg.0
+IL_0122: ldloca.s V_0
+IL_0124: call !0 System.Nullable`1<System.Single>::get_Value()
+IL_0129: stfld System.Single SoftwareCategory::IdealPrice
+IL_012e: ldarg.0
+IL_012f: ldarg.2
+IL_0130: ldstr "NameGenerator"
+IL_0135: ldc.i4.0
+IL_0136: ldarg.3
+IL_0137: callvirt !!0 Tyd.TydCollection::GetChildValue<System.String>(System.String,System.Boolean,!!0)
+IL_013c: stfld System.String SoftwareCategory::_nameGen
+IL_0141: ldarg.0
+IL_0142: ldc.i4.0
+IL_0143: stfld System.Boolean SoftwareCategory::IsDefault
+IL_0148: ldarg.0
+IL_0149: ldarg.2
+IL_014a: ldstr "Hardware"
+IL_014f: ldc.i4.0
+IL_0150: ldarg.s hardware
+IL_0152: stloc.2
+IL_0153: ldloca.s V_2
+IL_0155: call System.Boolean System.Nullable`1<System.Boolean>::get_HasValue()
+IL_015a: brtrue.s IL_015f
+IL_015c: ldc.i4.0
+IL_015d: br.s IL_0166
+IL_015f: ldloca.s V_2
+IL_0161: call !0 System.Nullable`1<System.Boolean>::GetValueOrDefault()
+IL_0166: callvirt !!0 Tyd.TydCollection::GetChildValue<System.Boolean>(System.String,System.Boolean,!!0)
+IL_016b: stfld System.Boolean SoftwareCategory::Hardware
+IL_0170: ldarg.0
+IL_0171: ldarg.2
+IL_0172: ldstr "Submarkets"
+IL_0177: ldc.i4.1
+IL_0178: callvirt Tyd.TydNode Tyd.TydCollection::GetChild(System.String,System.Boolean)
+IL_017d: ldc.i4.0
+IL_017e: call System.Double[] SoftwareType::GetSoftwareEq(Tyd.TydNode,System.Boolean)
+IL_0183: stfld System.Double[] SoftwareCategory::SubmarketEq
+IL_0188: ldarg.0
+IL_0189: ldfld System.Boolean SoftwareCategory::Hardware
+IL_018e: brfalse.s IL_01d2
+IL_0190: ldarg.2
+IL_0191: ldstr "Manufacturing"
+IL_0196: ldc.i4.0
+IL_0197: callvirt !!0 Tyd.TydCollection::GetChild<Tyd.TydTable>(System.String,System.Boolean)
+IL_019c: stloc.3
+IL_019d: ldloc.3
+IL_019e: brfalse.s IL_01b2
+IL_01a0: ldarg.0
+IL_01a1: ldloc.3
+IL_01a2: ldarg.1
+IL_01a3: ldarg.0
+IL_01a4: ldarg.s modPath
+IL_01a6: newobj System.Void Manufacturing::.ctor(Tyd.TydTable,SoftwareType,IManufacturable,System.String)
+IL_01ab: stfld Manufacturing SoftwareCategory::Manufacturing
+IL_01b0: br.s IL_01d2
+IL_01b2: ldarg.s manufacturing
+IL_01b4: brfalse.s IL_01c7
+IL_01b6: ldarg.0
+IL_01b7: ldarg.s manufacturing
+IL_01b9: ldarg.1
+IL_01ba: ldarg.0
+IL_01bb: newobj System.Void Manufacturing::.ctor(Manufacturing,SoftwareType,IManufacturable)
+IL_01c0: stfld Manufacturing SoftwareCategory::Manufacturing
+IL_01c5: br.s IL_01d2
+IL_01c7: ldstr "Hardware category missing manufacturing process"
+IL_01cc: newobj System.Void System.Exception::.ctor(System.String)
+IL_01d1: throw
+IL_01d2: leave.s IL_01fc
+IL_01d4: stloc.s V_4
+IL_01d6: ldstr "Error in category {0}: {1}"
+IL_01db: ldarg.0
+IL_01dc: ldfld System.String SoftwareCategory::Name
+IL_01e1: dup
+IL_01e2: brtrue.s IL_01ea
+IL_01e4: pop
+IL_01e5: ldstr ""
+IL_01ea: ldloc.s V_4
+IL_01ec: callvirt System.String System.Exception::get_Message()
+IL_01f1: call System.String System.String::Format(System.String,System.Object,System.Object)
+IL_01f6: newobj System.Void System.Exception::.ctor(System.String)
+IL_01fb: throw
+IL_01fc: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareCategory::.ctor(SoftwareType,System.String,System.String,System.Single,System.Single,System.Single,System.Boolean,System.Single,System.Double[],System.Single,System.String,System.Boolean,System.Boolean,Manufacturing)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 12
+IL_0003: newarr System.Single[]
+IL_0008: stfld System.Single[][] SoftwareCategory::SubmarketHistory
+IL_000d: ldarg.0
+IL_000e: ldc.i4.1
+IL_000f: stfld System.UInt32 SoftwareCategory::ID
+IL_0014: ldarg.0
+IL_0015: call System.Void System.Object::.ctor()
+IL_001a: ldarg.0
+IL_001b: ldarg.2
+IL_001c: stfld System.String SoftwareCategory::Name
+IL_0021: ldarg.0
+IL_0022: ldarg.1
+IL_0023: stfld SoftwareType SoftwareCategory::Parent
+IL_0028: ldarg.0
+IL_0029: ldarg.3
+IL_002a: stfld System.String SoftwareCategory::Description
+IL_002f: ldarg.0
+IL_0030: ldarg.s retention
+IL_0032: stfld System.Single SoftwareCategory::Retention
+IL_0037: ldarg.0
+IL_0038: ldarg.s timescale
+IL_003a: stfld System.Single SoftwareCategory::TimeScale
+IL_003f: ldarg.0
+IL_0040: ldarg.s popularity
+IL_0042: stfld System.Single SoftwareCategory::Popularity
+IL_0047: ldarg.0
+IL_0048: ldarg.s iterative
+IL_004a: stfld System.Single SoftwareCategory::Iterative
+IL_004f: ldarg.0
+IL_0050: ldarg.s idealPrice
+IL_0052: stfld System.Single SoftwareCategory::IdealPrice
+IL_0057: ldarg.0
+IL_0058: ldarg.s nameGen
+IL_005a: stfld System.String SoftwareCategory::_nameGen
+IL_005f: ldarg.0
+IL_0060: ldarg.s submarketeq
+IL_0062: stfld System.Double[] SoftwareCategory::SubmarketEq
+IL_0067: ldarg.0
+IL_0068: ldarg.s forcePopularity
+IL_006a: stfld System.Boolean SoftwareCategory::ForcePopularity
+IL_006f: ldarg.0
+IL_0070: ldarg.s isDefault
+IL_0072: stfld System.Boolean SoftwareCategory::IsDefault
+IL_0077: ldarg.0
+IL_0078: ldarg.s hardware
+IL_007a: stfld System.Boolean SoftwareCategory::Hardware
+IL_007f: ldarg.0
+IL_0080: ldfld System.Boolean SoftwareCategory::Hardware
+IL_0085: brfalse.s IL_00a5
+IL_0087: ldarg.s manufacturing
+IL_0089: brtrue.s IL_0096
+IL_008b: ldstr "Hardware category missing manufacturing process"
+IL_0090: newobj System.Void System.Exception::.ctor(System.String)
+IL_0095: throw
+IL_0096: ldarg.0
+IL_0097: ldarg.s manufacturing
+IL_0099: ldarg.1
+IL_009a: ldarg.0
+IL_009b: newobj System.Void Manufacturing::.ctor(Manufacturing,SoftwareType,IManufacturable)
+IL_00a0: stfld Manufacturing SoftwareCategory::Manufacturing
+IL_00a5: ret
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareCategory::.ctor()
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 12
+IL_0003: newarr System.Single[]
+IL_0008: stfld System.Single[][] SoftwareCategory::SubmarketHistory
+IL_000d: ldarg.0
+IL_000e: ldc.i4.1
+IL_000f: stfld System.UInt32 SoftwareCategory::ID
+IL_0014: ldarg.0
+IL_0015: call System.Void System.Object::.ctor()
+IL_001a: ret

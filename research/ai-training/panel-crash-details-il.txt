@@ -1,0 +1,836 @@
+TYPE ModErrorWindow BASE UnityEngine.MonoBehaviour
+FIELD Public, Static ModErrorWindow Instance
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _triggered
+FIELD Private, Static System.Boolean _emptyTriggered
+FIELD Private, Static System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> _queue
+FIELD Public UnityEngine.UI.InputField ErrMsg
+FIELD Public UnityEngine.UI.Text ErrPrompt
+FIELD Public GUIWindow Window
+METHOD Public, Static, HideBySig System.Void ModErrorWindow::Show(ModController/DLLMod,System.Exception)
+LOCAL 0 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>>
+LOCAL 1 System.Boolean
+IL_0000: ldarg.0
+IL_0001: brtrue.s IL_003e
+IL_0003: ldsfld System.Boolean ModErrorWindow::_emptyTriggered
+IL_0008: brfalse.s IL_000b
+IL_000a: ret
+IL_000b: ldc.i4.1
+IL_000c: stsfld System.Boolean ModErrorWindow::_emptyTriggered
+IL_0011: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0016: stloc.0
+IL_0017: ldc.i4.0
+IL_0018: stloc.1
+IL_0019: ldloc.0
+IL_001a: ldloca.s V_1
+IL_001c: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_0021: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0026: ldnull
+IL_0027: ldarg.1
+IL_0028: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>::.ctor(!0,!1)
+IL_002d: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>>::Add(!0)
+IL_0032: leave.s IL_0083
+IL_0034: ldloc.1
+IL_0035: brfalse.s IL_003d
+IL_0037: ldloc.0
+IL_0038: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_003d: endfinally
+IL_003e: ldsfld System.Collections.Generic.HashSet`1<System.String> ModErrorWindow::_triggered
+IL_0043: ldarg.0
+IL_0044: callvirt System.String IWorkshopItem::get_ItemTitle()
+IL_0049: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.String>::Add(!0)
+IL_004e: brtrue.s IL_0051
+IL_0050: ret
+IL_0051: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0056: stloc.0
+IL_0057: ldc.i4.0
+IL_0058: stloc.1
+IL_0059: ldloc.0
+IL_005a: ldloca.s V_1
+IL_005c: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_0061: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0066: ldarg.0
+IL_0067: callvirt System.String IWorkshopItem::get_ItemTitle()
+IL_006c: ldarg.1
+IL_006d: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>::.ctor(!0,!1)
+IL_0072: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>>::Add(!0)
+IL_0077: leave.s IL_0083
+IL_0079: ldloc.1
+IL_007a: brfalse.s IL_0082
+IL_007c: ldloc.0
+IL_007d: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_0082: endfinally
+IL_0083: ret
+METHOD Public, Static, HideBySig System.Void ModErrorWindow::Show(System.String,System.Exception)
+LOCAL 0 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>>
+LOCAL 1 System.Boolean
+IL_0000: ldarg.0
+IL_0001: brtrue.s IL_0011
+IL_0003: ldsfld System.Boolean ModErrorWindow::_emptyTriggered
+IL_0008: brfalse.s IL_000b
+IL_000a: ret
+IL_000b: ldc.i4.1
+IL_000c: stsfld System.Boolean ModErrorWindow::_emptyTriggered
+IL_0011: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0016: stloc.0
+IL_0017: ldc.i4.0
+IL_0018: stloc.1
+IL_0019: ldloc.0
+IL_001a: ldloca.s V_1
+IL_001c: call System.Void System.Threading.Monitor::Enter(System.Object,System.Boolean&)
+IL_0021: ldsfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>> ModErrorWindow::_queue
+IL_0026: ldarg.0
+IL_0027: ldarg.1
+IL_0028: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>::.ctor(!0,!1)
+IL_002d: callvirt System.Void System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Exception>>::Add(!0)
+IL_0032: leave.s IL_003e
+IL_0034: ldloc.1
+IL_0035: brfalse.s IL_003d
+IL_0037: ldloc.0
+IL_0038: call System.Void System.Threading.Monitor::Exit(System.Object)
+IL_003d: endfinally
+IL_003e: ret
+METHOD Private, HideBySig System.Void ModErrorWindow::Awake()
+IL_0000: ldarg.0
+IL_0001: stsfld ModErrorWindow ModErrorWindow::Instance
+IL_0006: ret
+METHOD Public, HideBySig System.Void ModErrorWindow::ShowMe(System.String,System.Exception)
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_000a: brtrue.s IL_0016
+IL_000c: ldc.r4 0
+IL_0011: call System.Void GameSettings::set_GameSpeed(System.Single)
+IL_0016: ldarg.0
+IL_0017: ldfld UnityEngine.UI.Text ModErrorWindow::ErrPrompt
+IL_001c: ldarg.1
+IL_001d: brfalse.s IL_003a
+IL_001f: ldstr "SpecificModErrorMessage"
+IL_0024: ldc.i4.1
+IL_0025: newarr System.Object
+IL_002a: dup
+IL_002b: ldc.i4.0
+IL_002c: ldarg.1
+IL_002d: call System.String Utilities::FontBold(System.String)
+IL_0032: stelem.ref
+IL_0033: call System.String Localization::Loc(System.String,System.Object[])
+IL_0038: br.s IL_0044
+IL_003a: ldstr "NonSpecificModErrorMessage"
+IL_003f: call System.String Localization::Loc(System.String)
+IL_0044: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_0049: ldarg.0
+IL_004a: ldfld UnityEngine.UI.InputField ModErrorWindow::ErrMsg
+IL_004f: ldarg.2
+IL_0050: callvirt System.String System.Object::ToString()
+IL_0055: callvirt System.Void UnityEngine.UI.InputField::set_text(System.String)
+IL_005a: ldarg.0
+IL_005b: ldfld GUIWindow ModErrorWindow::Window
+IL_0060: ldc.i4.0
+IL_0061: stfld System.Boolean GUIWindow::StartHidden
+IL_0066: ldarg.0
+IL_0067: ldfld GUIWindow ModErrorWindow::Window
+IL_006c: ldc.i4.1
+IL_006d: ldc.i4.1
+IL_006e: callvirt System.Void GUIWindow::Show(System.Boolean,System.Boolean)
+IL_0073: ret
+TYPE GUICombobox BASE UnityEngine.MonoBehaviour
+FIELD Public UnityEngine.UI.Text text
+FIELD Public System.Int32 MaxItems
+FIELD Public System.Boolean LocalizeContent
+FIELD Public System.Boolean SoftwareTypes
+FIELD Public System.Boolean SWCategory
+FIELD Public System.Boolean FeatureComb
+FIELD Public System.Boolean ActionCombo
+FIELD Public System.String Software
+FIELD Public System.String NullName
+FIELD Public System.Boolean LocalizeNullName
+FIELD Public System.String NoSelectionName
+FIELD Private System.Collections.Generic.List`1<System.Object> _items
+FIELD Public System.String[] ToolTips
+FIELD Public UnityEngine.Events.UnityEvent OnSelectedChanged
+FIELD Private System.Int32 _selected
+FIELD Private UnityEngine.UI.CanvasScaler comboPanelParent
+FIELD Public UnityEngine.RectTransform rectTransform
+PROPERTY System.Collections.Generic.List`1<System.Object> GUICombobox::Items()
+PROPERTY System.Boolean GUICombobox::interactable()
+PROPERTY System.Int32 GUICombobox::Selected()
+PROPERTY System.Boolean GUICombobox::IsShown()
+PROPERTY System.Object GUICombobox::SelectedItem()
+PROPERTY System.String GUICombobox::SelectedItemString()
+METHOD Public, HideBySig, SpecialName System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.List`1<System.Object> GUICombobox::_items
+IL_0006: ret
+METHOD Public, HideBySig, SpecialName System.Boolean GUICombobox::get_interactable()
+IL_0000: ldarg.0
+IL_0001: call !!0 UnityEngine.Component::GetComponent<UnityEngine.UI.Button>()
+IL_0006: callvirt System.Boolean UnityEngine.UI.Selectable::get_interactable()
+IL_000b: ret
+METHOD Public, HideBySig, SpecialName System.Int32 GUICombobox::get_Selected()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Int32 GUICombobox::_selected
+IL_0006: ret
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_Selected(System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: stfld System.Int32 GUICombobox::_selected
+IL_0007: ldarg.0
+IL_0008: call System.Void GUICombobox::UpdateLabel()
+IL_000d: ldarg.0
+IL_000e: ldfld System.Boolean GUICombobox::ActionCombo
+IL_0013: brfalse.s IL_002b
+IL_0015: ldarg.0
+IL_0016: call T GUICombobox::GetSelected<GUICombobox/ComboAction>()
+IL_001b: dup
+IL_001c: brtrue.s IL_0021
+IL_001e: pop
+IL_001f: br.s IL_002b
+IL_0021: ldfld System.Action GUICombobox/ComboAction::DoAction
+IL_0026: callvirt System.Void System.Action::Invoke()
+IL_002b: ldarg.0
+IL_002c: ldfld UnityEngine.Events.UnityEvent GUICombobox::OnSelectedChanged
+IL_0031: brfalse.s IL_0054
+IL_0033: ldarg.0
+IL_0034: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0039: brfalse.s IL_0054
+IL_003b: ldarg.0
+IL_003c: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0041: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::get_Count()
+IL_0046: ldc.i4.0
+IL_0047: ble.s IL_0054
+IL_0049: ldarg.0
+IL_004a: ldfld UnityEngine.Events.UnityEvent GUICombobox::OnSelectedChanged
+IL_004f: callvirt System.Void UnityEngine.Events.UnityEvent::Invoke()
+IL_0054: ret
+METHOD Public, HideBySig, SpecialName System.Boolean GUICombobox::get_IsShown()
+IL_0000: call GUICombobox ComboboxPanel::get_OpenCombo()
+IL_0005: ldarg.0
+IL_0006: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000b: ret
+METHOD Public, HideBySig, SpecialName System.Object GUICombobox::get_SelectedItem()
+IL_0000: ldarg.0
+IL_0001: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0006: brfalse.s IL_0024
+IL_0008: ldarg.0
+IL_0009: call System.Int32 GUICombobox::get_Selected()
+IL_000e: ldc.i4.m1
+IL_000f: ble.s IL_0024
+IL_0011: ldarg.0
+IL_0012: call System.Int32 GUICombobox::get_Selected()
+IL_0017: ldarg.0
+IL_0018: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_001d: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::get_Count()
+IL_0022: blt.s IL_0026
+IL_0024: ldnull
+IL_0025: ret
+IL_0026: ldarg.0
+IL_0027: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_002c: ldarg.0
+IL_002d: call System.Int32 GUICombobox::get_Selected()
+IL_0032: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_0037: ret
+METHOD Public, HideBySig, SpecialName System.Void GUICombobox::set_SelectedItem(System.Object)
+IL_0000: ldarg.0
+IL_0001: ldarg.0
+IL_0002: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0007: ldarg.1
+IL_0008: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::IndexOf(!0)
+IL_000d: call System.Void GUICombobox::set_Selected(System.Int32)
+IL_0012: ret
+METHOD Public, HideBySig T GUICombobox::GetSelected()
+LOCAL 0 T
+IL_0000: ldarg.0
+IL_0001: call System.Object GUICombobox::get_SelectedItem()
+IL_0006: isinst T
+IL_000b: brtrue.s IL_0017
+IL_000d: ldloca.s V_0
+IL_000f: initobj T
+IL_0015: ldloc.0
+IL_0016: ret
+IL_0017: ldarg.0
+IL_0018: call System.Object GUICombobox::get_SelectedItem()
+IL_001d: unbox.any T
+IL_0022: ret
+METHOD Public, HideBySig, SpecialName System.String GUICombobox::get_SelectedItemString()
+IL_0000: ldarg.0
+IL_0001: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0006: brfalse.s IL_0024
+IL_0008: ldarg.0
+IL_0009: call System.Int32 GUICombobox::get_Selected()
+IL_000e: ldc.i4.m1
+IL_000f: ble.s IL_0024
+IL_0011: ldarg.0
+IL_0012: call System.Int32 GUICombobox::get_Selected()
+IL_0017: ldarg.0
+IL_0018: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_001d: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::get_Count()
+IL_0022: blt.s IL_0026
+IL_0024: ldnull
+IL_0025: ret
+IL_0026: ldarg.0
+IL_0027: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_002c: ldarg.0
+IL_002d: call System.Int32 GUICombobox::get_Selected()
+IL_0032: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_0037: brtrue.s IL_003b
+IL_0039: ldnull
+IL_003a: ret
+IL_003b: ldarg.0
+IL_003c: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0041: ldarg.0
+IL_0042: call System.Int32 GUICombobox::get_Selected()
+IL_0047: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_004c: callvirt System.String System.Object::ToString()
+IL_0051: ret
+METHOD Public, HideBySig System.Void GUICombobox::UpdateLabel()
+LOCAL 0 System.String
+LOCAL 1 System.String[]
+LOCAL 2 System.String
+LOCAL 3 SoftwareCategory
+LOCAL 4 System.Object
+LOCAL 5 IFormatColorObject
+IL_0000: ldarg.0
+IL_0001: ldfld System.Boolean GUICombobox::ActionCombo
+IL_0006: brtrue.s IL_002c
+IL_0008: ldarg.0
+IL_0009: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_000e: brfalse.s IL_002c
+IL_0010: ldarg.0
+IL_0011: call System.Int32 GUICombobox::get_Selected()
+IL_0016: ldc.i4.0
+IL_0017: blt.s IL_002c
+IL_0019: ldarg.0
+IL_001a: call System.Int32 GUICombobox::get_Selected()
+IL_001f: ldarg.0
+IL_0020: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0025: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::get_Count()
+IL_002a: blt.s IL_0043
+IL_002c: ldarg.0
+IL_002d: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_0032: ldarg.0
+IL_0033: ldfld System.String GUICombobox::NoSelectionName
+IL_0038: call System.String Localization::Loc(System.String)
+IL_003d: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_0042: ret
+IL_0043: ldarg.0
+IL_0044: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0049: ldarg.0
+IL_004a: call System.Int32 GUICombobox::get_Selected()
+IL_004f: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_0054: brtrue.s IL_0074
+IL_0056: ldarg.0
+IL_0057: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_005c: ldarg.0
+IL_005d: ldfld System.String GUICombobox::NoSelectionName
+IL_0062: call System.String Localization::Loc(System.String)
+IL_0067: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_006c: ldarg.0
+IL_006d: ldc.i4.m1
+IL_006e: stfld System.Int32 GUICombobox::_selected
+IL_0073: ret
+IL_0074: ldarg.0
+IL_0075: ldfld System.Boolean GUICombobox::FeatureComb
+IL_007a: brfalse.s IL_00f5
+IL_007c: ldarg.0
+IL_007d: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0082: ldarg.0
+IL_0083: call System.Int32 GUICombobox::get_Selected()
+IL_0088: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_008d: callvirt System.String System.Object::ToString()
+IL_0092: stloc.0
+IL_0093: ldstr "Any"
+IL_0098: ldloc.0
+IL_0099: call System.Boolean System.String::Equals(System.String)
+IL_009e: brfalse.s IL_00b6
+IL_00a0: ldarg.0
+IL_00a1: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_00a6: ldstr "Any"
+IL_00ab: call System.String Localization::Loc(System.String)
+IL_00b0: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00b5: ret
+IL_00b6: ldstr "Nothing selected"
+IL_00bb: ldloc.0
+IL_00bc: call System.Boolean System.String::Equals(System.String)
+IL_00c1: brfalse.s IL_00d9
+IL_00c3: ldarg.0
+IL_00c4: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_00c9: ldstr "Nothingselected"
+IL_00ce: call System.String Localization::Loc(System.String)
+IL_00d3: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00d8: ret
+IL_00d9: ldarg.0
+IL_00da: ldfld System.String GUICombobox::Software
+IL_00df: ldloc.0
+IL_00e0: call System.String[] Localization::GetFeature(System.String,System.String)
+IL_00e5: stloc.1
+IL_00e6: ldarg.0
+IL_00e7: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_00ec: ldloc.1
+IL_00ed: ldc.i4.0
+IL_00ee: ldelem.ref
+IL_00ef: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00f4: ret
+IL_00f5: ldarg.0
+IL_00f6: ldfld System.Boolean GUICombobox::SoftwareTypes
+IL_00fb: brfalse IL_01c0
+IL_0100: ldarg.0
+IL_0101: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0106: ldarg.0
+IL_0107: call System.Int32 GUICombobox::get_Selected()
+IL_010c: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_0111: callvirt System.String System.Object::ToString()
+IL_0116: stloc.2
+IL_0117: ldstr "All"
+IL_011c: ldloc.2
+IL_011d: call System.Boolean System.String::Equals(System.String)
+IL_0122: brfalse.s IL_013a
+IL_0124: ldarg.0
+IL_0125: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_012a: ldstr "All"
+IL_012f: call System.String Localization::Loc(System.String)
+IL_0134: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_0139: ret
+IL_013a: ldarg.0
+IL_013b: ldfld System.Boolean GUICombobox::SWCategory
+IL_0140: brfalse.s IL_019f
+IL_0142: ldarg.0
+IL_0143: call System.Object GUICombobox::get_SelectedItem()
+IL_0148: isinst SoftwareCategory
+IL_014d: stloc.3
+IL_014e: ldloc.3
+IL_014f: brfalse.s IL_0178
+IL_0151: ldarg.0
+IL_0152: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_0157: ldloc.3
+IL_0158: ldfld System.String SoftwareCategory::Name
+IL_015d: ldloc.3
+IL_015e: ldfld SoftwareType SoftwareCategory::Parent
+IL_0163: ldfld System.String SoftwareType::Name
+IL_0168: call FormatColorString Localization::LocSWC(System.String,System.String)
+IL_016d: call System.String FormatColorString::op_Implicit(FormatColorString)
+IL_0172: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_0177: ret
+IL_0178: ldarg.0
+IL_0179: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_017e: ldarg.0
+IL_017f: call System.Object GUICombobox::get_SelectedItem()
+IL_0184: callvirt System.String System.Object::ToString()
+IL_0189: ldarg.0
+IL_018a: ldfld System.String GUICombobox::Software
+IL_018f: call FormatColorString Localization::LocSWC(System.String,System.String)
+IL_0194: call System.String FormatColorString::op_Implicit(FormatColorString)
+IL_0199: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_019e: ret
+IL_019f: ldarg.0
+IL_01a0: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_01a5: ldarg.0
+IL_01a6: call System.Object GUICombobox::get_SelectedItem()
+IL_01ab: callvirt System.String System.Object::ToString()
+IL_01b0: call FormatColorString Localization::LocSW(System.String)
+IL_01b5: call System.String FormatColorString::op_Implicit(FormatColorString)
+IL_01ba: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_01bf: ret
+IL_01c0: ldarg.0
+IL_01c1: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_01c6: ldarg.0
+IL_01c7: call System.Int32 GUICombobox::get_Selected()
+IL_01cc: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_01d1: stloc.s V_4
+IL_01d3: ldloc.s V_4
+IL_01d5: isinst IFormatColorObject
+IL_01da: stloc.s V_5
+IL_01dc: ldloc.s V_5
+IL_01de: brfalse.s IL_01f3
+IL_01e0: ldarg.0
+IL_01e1: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_01e6: ldloc.s V_5
+IL_01e8: callvirt System.String IFormatColorObject::GetActualString()
+IL_01ed: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_01f2: ret
+IL_01f3: ldarg.0
+IL_01f4: ldfld UnityEngine.UI.Text GUICombobox::text
+IL_01f9: ldarg.0
+IL_01fa: ldfld System.Boolean GUICombobox::LocalizeContent
+IL_01ff: brtrue.s IL_0219
+IL_0201: ldarg.0
+IL_0202: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0207: ldarg.0
+IL_0208: call System.Int32 GUICombobox::get_Selected()
+IL_020d: callvirt !0 System.Collections.Generic.List`1<System.Object>::get_Item(System.Int32)
+IL_0212: callvirt System.String System.Object::ToString()
+IL_0217: br.s IL_0225
+IL_0219: ldloc.s V_4
+IL_021b: callvirt System.String System.Object::ToString()
+IL_0220: call System.String Localization::LocTry(System.String)
+IL_0225: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_022a: ret
+METHOD Public, HideBySig System.Void GUICombobox::OnSelectedChangedRemoveAllListeners()
+IL_0000: ldarg.0
+IL_0001: ldfld UnityEngine.Events.UnityEvent GUICombobox::OnSelectedChanged
+IL_0006: brtrue.s IL_0014
+IL_0008: ldarg.0
+IL_0009: newobj System.Void UnityEngine.Events.UnityEvent::.ctor()
+IL_000e: stfld UnityEngine.Events.UnityEvent GUICombobox::OnSelectedChanged
+IL_0013: ret
+IL_0014: ldarg.0
+IL_0015: ldfld UnityEngine.Events.UnityEvent GUICombobox::OnSelectedChanged
+IL_001a: callvirt System.Void UnityEngine.Events.UnityEventBase::RemoveAllListeners()
+IL_001f: ret
+METHOD Private, HideBySig System.Void GUICombobox::Awake()
+IL_0000: ldarg.0
+IL_0001: call System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0006: brtrue.s IL_0013
+IL_0008: ldarg.0
+IL_0009: newobj System.Void System.Collections.Generic.List`1<System.Object>::.ctor()
+IL_000e: call System.Void GUICombobox::set_Items(System.Collections.Generic.List`1<System.Object>)
+IL_0013: ret
+METHOD Public, HideBySig System.String[] GUICombobox::GetLabelFromObject(System.Object,System.Int32)
+LOCAL 0 System.String[]
+LOCAL 1 SoftwareType
+LOCAL 2 SoftwareCategory
+IL_0000: ldarg.1
+IL_0001: brtrue.s IL_0030
+IL_0003: ldc.i4.2
+IL_0004: newarr System.String
+IL_0009: dup
+IL_000a: ldc.i4.0
+IL_000b: ldarg.0
+IL_000c: ldfld System.Boolean GUICombobox::LocalizeNullName
+IL_0011: brtrue.s IL_001b
+IL_0013: ldarg.0
+IL_0014: ldfld System.String GUICombobox::NullName
+IL_0019: br.s IL_0026
+IL_001b: ldarg.0
+IL_001c: ldfld System.String GUICombobox::NullName
+IL_0021: call System.String Localization::Loc(System.String)
+IL_0026: stelem.ref
+IL_0027: dup
+IL_0028: ldc.i4.1
+IL_0029: ldstr ""
+IL_002e: stelem.ref
+IL_002f: ret
+IL_0030: ldc.i4.2
+IL_0031: newarr System.String
+IL_0036: dup
+IL_0037: ldc.i4.0
+IL_0038: ldstr "Error"
+IL_003d: stelem.ref
+IL_003e: dup
+IL_003f: ldc.i4.1
+IL_0040: ldstr "Error"
+IL_0045: stelem.ref
+IL_0046: stloc.0
+IL_0047: ldarg.0
+IL_0048: ldfld System.Boolean GUICombobox::SoftwareTypes
+IL_004d: brfalse.s IL_0082
+IL_004f: ldstr "All"
+IL_0054: ldarg.1
+IL_0055: callvirt System.String System.Object::ToString()
+IL_005a: call System.Boolean System.String::Equals(System.String)
+IL_005f: brfalse.s IL_0082
+IL_0061: ldc.i4.2
+IL_0062: newarr System.String
+IL_0067: dup
+IL_0068: ldc.i4.0
+IL_0069: ldstr "All"
+IL_006e: call System.String Localization::Loc(System.String)
+IL_0073: stelem.ref
+IL_0074: dup
+IL_0075: ldc.i4.1
+IL_0076: ldstr "N/A"
+IL_007b: stelem.ref
+IL_007c: stloc.0
+IL_007d: br IL_0153
+IL_0082: ldarg.0
+IL_0083: ldfld System.Boolean GUICombobox::FeatureComb
+IL_0088: brfalse.s IL_00bd
+IL_008a: ldstr "Any"
+IL_008f: ldarg.1
+IL_0090: callvirt System.String System.Object::ToString()
+IL_0095: call System.Boolean System.String::Equals(System.String)
+IL_009a: brfalse.s IL_00bd
+IL_009c: ldc.i4.2
+IL_009d: newarr System.String
+IL_00a2: dup
+IL_00a3: ldc.i4.0
+IL_00a4: ldstr "Any"
+IL_00a9: call System.String Localization::Loc(System.String)
+IL_00ae: stelem.ref
+IL_00af: dup
+IL_00b0: ldc.i4.1
+IL_00b1: ldstr "N/A"
+IL_00b6: stelem.ref
+IL_00b7: stloc.0
+IL_00b8: br IL_0153
+IL_00bd: ldarg.0
+IL_00be: ldfld System.Boolean GUICombobox::SoftwareTypes
+IL_00c3: brfalse.s IL_0139
+IL_00c5: ldarg.0
+IL_00c6: ldfld System.Boolean GUICombobox::SWCategory
+IL_00cb: brfalse.s IL_00e9
+IL_00cd: ldarg.1
+IL_00ce: isinst SoftwareCategory
+IL_00d3: stloc.2
+IL_00d4: ldloc.2
+IL_00d5: brfalse.s IL_00e9
+IL_00d7: ldloc.2
+IL_00d8: ldfld SoftwareType SoftwareCategory::Parent
+IL_00dd: ldloc.2
+IL_00de: ldfld System.String SoftwareCategory::Name
+IL_00e3: call System.String[] Localization::GetSoftwareCat(SoftwareType,System.String)
+IL_00e8: ret
+IL_00e9: ldarg.1
+IL_00ea: isinst SoftwareType
+IL_00ef: dup
+IL_00f0: brtrue.s IL_0118
+IL_00f2: pop
+IL_00f3: call MarketSimulation MarketSimulation::get_Active()
+IL_00f8: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_00fd: ldarg.0
+IL_00fe: ldfld System.Boolean GUICombobox::SWCategory
+IL_0103: brtrue.s IL_010d
+IL_0105: ldarg.1
+IL_0106: callvirt System.String System.Object::ToString()
+IL_010b: br.s IL_0113
+IL_010d: ldarg.0
+IL_010e: ldfld System.String GUICombobox::Software
+IL_0113: call TValue Utilities::GetOrNull<System.String,SoftwareType>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey)
+IL_0118: stloc.1
+IL_0119: ldloc.1
+IL_011a: brfalse.s IL_0139
+IL_011c: ldarg.0
+IL_011d: ldfld System.Boolean GUICombobox::SWCategory
+IL_0122: brtrue.s IL_012c
+IL_0124: ldloc.1
+IL_0125: call System.String[] Localization::GetSoftware(SoftwareType)
+IL_012a: br.s IL_0138
+IL_012c: ldloc.1
+IL_012d: ldarg.1
+IL_012e: callvirt System.String System.Object::ToString()
+IL_0133: call System.String[] Localization::GetSoftwareCat(SoftwareType,System.String)
+IL_0138: stloc.0
+IL_0139: ldarg.0
+IL_013a: ldfld System.Boolean GUICombobox::FeatureComb
+IL_013f: brfalse.s IL_0153
+IL_0141: ldarg.0
+IL_0142: ldfld System.String GUICombobox::Software
+IL_0147: ldarg.1
+IL_0148: callvirt System.String System.Object::ToString()
+IL_014d: call System.String[] Localization::GetFeature(System.String,System.String)
+IL_0152: stloc.0
+IL_0153: ldc.i4.2
+IL_0154: newarr System.String
+IL_0159: dup
+IL_015a: ldc.i4.0
+IL_015b: ldarg.0
+IL_015c: ldarg.1
+IL_015d: ldloc.0
+IL_015e: ldc.i4.0
+IL_015f: ldelem.ref
+IL_0160: call System.String GUICombobox::GetElementLabel(System.Object,System.String)
+IL_0165: stelem.ref
+IL_0166: dup
+IL_0167: ldc.i4.1
+IL_0168: ldarg.0
+IL_0169: ldfld System.Boolean GUICombobox::SoftwareTypes
+IL_016e: brfalse.s IL_0176
+IL_0170: ldloc.0
+IL_0171: ldlen
+IL_0172: conv.i4
+IL_0173: ldc.i4.1
+IL_0174: bgt.s IL_018f
+IL_0176: ldarg.0
+IL_0177: ldfld System.String[] GUICombobox::ToolTips
+IL_017c: brfalse.s IL_0188
+IL_017e: ldarg.0
+IL_017f: ldfld System.String[] GUICombobox::ToolTips
+IL_0184: ldarg.2
+IL_0185: ldelem.ref
+IL_0186: br.s IL_0192
+IL_0188: ldstr ""
+IL_018d: br.s IL_0192
+IL_018f: ldloc.0
+IL_0190: ldc.i4.1
+IL_0191: ldelem.ref
+IL_0192: stelem.ref
+IL_0193: ret
+METHOD Private, HideBySig System.String GUICombobox::GetElementLabel(System.Object,System.String)
+LOCAL 0 IFormatColorObject
+IL_0000: ldarg.1
+IL_0001: brtrue.s IL_001e
+IL_0003: ldarg.0
+IL_0004: ldfld System.Boolean GUICombobox::LocalizeNullName
+IL_0009: brtrue.s IL_0012
+IL_000b: ldarg.0
+IL_000c: ldfld System.String GUICombobox::NullName
+IL_0011: ret
+IL_0012: ldarg.0
+IL_0013: ldfld System.String GUICombobox::NullName
+IL_0018: call System.String Localization::Loc(System.String)
+IL_001d: ret
+IL_001e: ldarg.0
+IL_001f: ldfld System.Boolean GUICombobox::SoftwareTypes
+IL_0024: brtrue.s IL_002e
+IL_0026: ldarg.0
+IL_0027: ldfld System.Boolean GUICombobox::FeatureComb
+IL_002c: brfalse.s IL_0030
+IL_002e: ldarg.2
+IL_002f: ret
+IL_0030: ldarg.1
+IL_0031: isinst IFormatColorObject
+IL_0036: stloc.0
+IL_0037: ldloc.0
+IL_0038: brfalse.s IL_0041
+IL_003a: ldloc.0
+IL_003b: callvirt System.String IFormatColorObject::GetActualString()
+IL_0040: ret
+IL_0041: ldarg.0
+IL_0042: ldfld System.Boolean GUICombobox::LocalizeContent
+IL_0047: brtrue.s IL_0050
+IL_0049: ldarg.1
+IL_004a: callvirt System.String System.Object::ToString()
+IL_004f: ret
+IL_0050: ldarg.1
+IL_0051: callvirt System.String System.Object::ToString()
+IL_0056: call System.String Localization::LocTry(System.String)
+IL_005b: ret
+TYPE Server BASE Writeable
+INTERFACE IServerHost
+FIELD Public, Static, Literal, HasDefault System.Single ISPCost
+CONSTANT ISPCost = 18
+FIELD Private System.String _serverName
+FIELD Public, NotSerialized Server WiredTo
+FIELD Private, NotSerialized Furniture _furn
+FIELD Public UnityEngine.TextMesh TextObj
+FIELD Public, NotSerialized System.Boolean Selected
+FIELD Private System.Single _power
+FIELD Public, NotSerialized System.Single _available
+FIELD Public, NotSerialized System.Boolean PreWired
+PROPERTY System.String Server::TServerName()
+PROPERTY System.String Server::ServerName()
+PROPERTY Furniture Server::furn()
+PROPERTY System.Single Server::Available()
+PROPERTY ServerGroup Server::Group()
+PROPERTY Upgradable Server::Upg()
+PROPERTY System.Single Server::Power()
+METHOD Public, Static, HideBySig System.Single Server::GetISPCost()
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: ldfld EnvironmentPreset GameSettings::Environment
+IL_000a: ldfld System.Single EnvironmentPreset::ISPCostFactor
+IL_000f: ldc.r4 18
+IL_0014: mul
+IL_0015: ret
+METHOD Public, HideBySig, SpecialName System.String Server::get_TServerName()
+IL_0000: ldarg.0
+IL_0001: ldfld System.String Server::_serverName
+IL_0006: ret
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.String Server::get_ServerName()
+IL_0000: ldarg.0
+IL_0001: call System.String Server::get_TServerName()
+IL_0006: ret
+METHOD Public, HideBySig, SpecialName Furniture Server::get_furn()
+IL_0000: ldarg.0
+IL_0001: ldfld Furniture Server::_furn
+IL_0006: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_000b: brfalse.s IL_001b
+IL_000d: ldarg.0
+IL_000e: ldarg.0
+IL_000f: call !!0 UnityEngine.Component::GetComponent<Furniture>()
+IL_0014: stfld Furniture Server::_furn
+IL_0019: br.s IL_002a
+IL_001b: ldarg.0
+IL_001c: ldfld Furniture Server::_furn
+IL_0021: callvirt System.Boolean Writeable::get_IsGOActive()
+IL_0026: brtrue.s IL_002a
+IL_0028: ldnull
+IL_0029: ret
+IL_002a: ldarg.0
+IL_002b: ldfld Furniture Server::_furn
+IL_0030: ret
+METHOD Public, HideBySig, SpecialName System.Single Server::get_Available()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single Server::_available
+IL_0006: ret
+METHOD Public, HideBySig, SpecialName ServerGroup Server::get_Group()
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: ldarg.0
+IL_0006: call System.String Server::get_ServerName()
+IL_000b: callvirt ServerGroup GameSettings::GetServerGroup(System.String)
+IL_0010: ret
+METHOD Private, HideBySig, SpecialName Upgradable Server::get_Upg()
+IL_0000: ldarg.0
+IL_0001: call Furniture Server::get_furn()
+IL_0006: ldnull
+IL_0007: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000c: brtrue.s IL_001a
+IL_000e: ldarg.0
+IL_000f: call Furniture Server::get_furn()
+IL_0014: ldfld Upgradable Furniture::upg
+IL_0019: ret
+IL_001a: ldnull
+IL_001b: ret
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Single Server::get_Power()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single Server::_power
+IL_0006: ret
+METHOD Private, HideBySig System.Void Server::Start()
+IL_0000: ldarg.0
+IL_0001: call Furniture Server::get_furn()
+IL_0006: ldnull
+IL_0007: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000c: brtrue.s IL_0028
+IL_000e: ldarg.0
+IL_000f: call Furniture Server::get_furn()
+IL_0014: ldfld System.Boolean Furniture::isTemporary
+IL_0019: brtrue.s IL_0028
+IL_001b: ldarg.0
+IL_001c: call Furniture Server::get_furn()
+IL_0021: ldfld PlayerMap Furniture::Map
+IL_0026: brfalse.s IL_0029
+IL_0028: ret
+IL_0029: ldarg.0
+IL_002a: call System.Void Writeable::InitWritable()
+IL_002f: ldarg.0
+IL_0030: ldfld System.Boolean Writeable::Deserialized
+IL_0035: brtrue.s IL_007a
+IL_0037: ldsfld TutorialSystem TutorialSystem::Instance
+IL_003c: ldstr "Server"
+IL_0041: ldc.i4.0
+IL_0042: callvirt System.Boolean TutorialSystem::StartTutorial(System.String,System.Boolean)
+IL_0047: pop
+IL_0048: ldarg.0
+IL_0049: ldfld System.Boolean Server::PreWired
+IL_004e: brtrue.s IL_0060
+IL_0050: ldarg.0
+IL_0051: ldsfld GameSettings GameSettings::Instance
+IL_0056: callvirt System.String GameSettings::GenerateServerName()
+IL_005b: call System.Void Server::set_ServerName(System.String)
+IL_0060: ldsfld CameraScript CameraScript::Instance
+IL_0065: ldfld ServerWireRenderer CameraScript::WireRender
+IL_006a: ldc.i4.1
+IL_006b: stfld System.Boolean ServerWireRenderer::ForceDirty
+IL_0070: ldc.i4 2048
+IL_0075: call System.Void Achievements.AchievementController::SetInteraction(Achievements.AchievementController/Mechanics)
+IL_007a: ldsfld System.Collections.Generic.HashSet`1<System.String> GameSettings::CalculateServerPowerNow
+IL_007f: ldarg.0
+IL_0080: call System.String Server::get_ServerName()
+IL_0085: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.String>::Add(!0)
+IL_008a: pop
+IL_008b: ret
+METHOD Public, HideBySig System.Single Server::GetGroupAvailable()
+LOCAL 0 ServerGroup
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: ldarg.0
+IL_0006: call System.String Server::get_ServerName()
+IL_000b: callvirt ServerGroup GameSettings::GetServerGroup(System.String)
+IL_0010: stloc.0
+IL_0011: ldloc.0
+IL_0012: brtrue.s IL_001a
+IL_0014: ldc.r4 1
+IL_0019: ret
+IL_001a: ldloc.0
+IL_001b: ldfld System.Single ServerGroup::Available
+IL_0020: ret
+TYPE IServerHost BASE 
+PROPERTY System.String IServerHost::ServerName()
+PROPERTY System.Single IServerHost::Power()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName System.String IServerHost::get_ServerName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract, SpecialName System.Single IServerHost::get_Power()

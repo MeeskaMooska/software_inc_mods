@@ -1,0 +1,2695 @@
+TYPE AutoDevWorkItem BASE WorkItem
+FIELD Public System.Single LastLicensePaid
+FIELD Public System.String LastDesign
+FIELD Public System.String LastAlpha
+FIELD Public System.String LastAlpha2
+FIELD Public, Static, Literal, HasDefault System.Single MaxEffectiveness
+CONSTANT MaxEffectiveness = 3
+FIELD Public System.Single LastEffectiveness
+FIELD Public System.Single LastEffLoss
+FIELD Public System.Single LastEffGain
+FIELD Public SDateTime LastEffGainTime
+FIELD Private System.Nullable`1<SDateTime> NextReleaseDate
+FIELD Public System.Collections.Generic.List`1<SupportWork> SupportItems
+FIELD Public System.Collections.Generic.List`1<MarketingPlan> MarketingItems
+FIELD Public System.Collections.Generic.List`1<SoftwarePort> PortingItems
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> PastReleases
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> PreviousSoftware
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> UpdateTasks
+FIELD Public System.String MainServer
+FIELD Public System.String SCMServer
+FIELD Public SHashSet`1<System.String> DesignTeams
+FIELD Public SHashSet`1<System.String> SDevTeams
+FIELD Public SHashSet`1<System.String> SecondaryDevTeams
+FIELD Public SHashSet`1<System.String> MarketingTeams
+FIELD Public SHashSet`1<System.String> PostMarketingTeams
+FIELD Public SHashSet`1<System.String> SupportTeams
+FIELD Public SHashSet`1<System.String> UpdateTeams
+FIELD Public SHashSet`1<System.String> PortingTeams
+FIELD Public System.Boolean Hype
+FIELD Public System.Boolean AutoProject
+FIELD Public System.Boolean OnlySequels
+FIELD Public System.Boolean PostMarketing
+FIELD Public System.Boolean HandleMarketing
+FIELD Public System.Boolean SingleIP
+FIELD Public System.Boolean UseOwnLicenses
+FIELD Public System.Boolean AutoSupport
+FIELD Public System.Boolean PhysicalCopyRel
+FIELD Public System.Boolean PrintingCopyRel
+FIELD Public System.Boolean UseFrameworks
+FIELD Public System.Boolean Updates
+FIELD Public System.Boolean TechUpdates
+FIELD Public System.Boolean AutoDistribution
+FIELD Public System.Boolean Porting
+FIELD Public System.Single DevTimeMultiplier
+FIELD Public System.UInt32 PhysicalCopies
+FIELD Public System.UInt32 PrintingCopies
+FIELD Public System.Int32 IterationCoolDown
+FIELD Public System.Int32 UpdateCooldown
+FIELD Public System.Int32 UpdateMonths
+FIELD Public System.Int32 ReleaseCooldown
+FIELD Public, NotSerialized Employee LastDesignError
+FIELD Private System.UInt32 _lastLeader
+FIELD Public EventList`1<AutoDevWorkItem/AutoDevItem> Items
+FIELD Public System.Collections.Generic.List`1<System.String> Mistakes
+FIELD Private, NotSerialized Actor _leader
+FIELD Public, NotSerialized System.Boolean IsViewed
+FIELD Public System.UInt32 LeaderID
+FIELD Public, Static System.Int32[] MaxActionCounts
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _pCache
+PROPERTY Actor AutoDevWorkItem::Leader()
+PROPERTY UnityEngine.Color AutoDevWorkItem::BackColor()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdatePostItems()
+LOCAL 0 System.Boolean
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+LOCAL 3 System.Int32
+LOCAL 4 System.Collections.Generic.List`1/Enumerator<SoftwareUpdate>
+LOCAL 5 SoftwareUpdate
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: br.s IL_002f
+IL_0006: ldarg.0
+IL_0007: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_000c: ldloc.1
+IL_000d: callvirt !0 System.Collections.Generic.List`1<MarketingPlan>::get_Item(System.Int32)
+IL_0012: ldfld System.Boolean WorkItem::Done
+IL_0017: brfalse.s IL_002b
+IL_0019: ldarg.0
+IL_001a: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_001f: ldloc.1
+IL_0020: callvirt System.Void System.Collections.Generic.List`1<MarketingPlan>::RemoveAt(System.Int32)
+IL_0025: ldc.i4.1
+IL_0026: stloc.0
+IL_0027: ldloc.1
+IL_0028: ldc.i4.1
+IL_0029: sub
+IL_002a: stloc.1
+IL_002b: ldloc.1
+IL_002c: ldc.i4.1
+IL_002d: add
+IL_002e: stloc.1
+IL_002f: ldloc.1
+IL_0030: ldarg.0
+IL_0031: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0036: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_003b: blt.s IL_0006
+IL_003d: ldc.i4.0
+IL_003e: stloc.2
+IL_003f: br.s IL_006a
+IL_0041: ldarg.0
+IL_0042: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0047: ldloc.2
+IL_0048: callvirt !0 System.Collections.Generic.List`1<SupportWork>::get_Item(System.Int32)
+IL_004d: ldfld System.Boolean WorkItem::Done
+IL_0052: brfalse.s IL_0066
+IL_0054: ldarg.0
+IL_0055: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_005a: ldloc.2
+IL_005b: callvirt System.Void System.Collections.Generic.List`1<SupportWork>::RemoveAt(System.Int32)
+IL_0060: ldc.i4.1
+IL_0061: stloc.0
+IL_0062: ldloc.2
+IL_0063: ldc.i4.1
+IL_0064: sub
+IL_0065: stloc.2
+IL_0066: ldloc.2
+IL_0067: ldc.i4.1
+IL_0068: add
+IL_0069: stloc.2
+IL_006a: ldloc.2
+IL_006b: ldarg.0
+IL_006c: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0071: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::get_Count()
+IL_0076: blt.s IL_0041
+IL_0078: ldc.i4.0
+IL_0079: stloc.3
+IL_007a: br.s IL_00a5
+IL_007c: ldarg.0
+IL_007d: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_0082: ldloc.3
+IL_0083: callvirt !0 System.Collections.Generic.List`1<SoftwarePort>::get_Item(System.Int32)
+IL_0088: ldfld System.Boolean WorkItem::Done
+IL_008d: brfalse.s IL_00a1
+IL_008f: ldarg.0
+IL_0090: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_0095: ldloc.3
+IL_0096: callvirt System.Void System.Collections.Generic.List`1<SoftwarePort>::RemoveAt(System.Int32)
+IL_009b: ldc.i4.1
+IL_009c: stloc.0
+IL_009d: ldloc.3
+IL_009e: ldc.i4.1
+IL_009f: sub
+IL_00a0: stloc.3
+IL_00a1: ldloc.3
+IL_00a2: ldc.i4.1
+IL_00a3: add
+IL_00a4: stloc.3
+IL_00a5: ldloc.3
+IL_00a6: ldarg.0
+IL_00a7: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_00ac: callvirt System.Int32 System.Collections.Generic.List`1<SoftwarePort>::get_Count()
+IL_00b1: blt.s IL_007c
+IL_00b3: ldarg.0
+IL_00b4: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_00b9: callvirt System.Int32 System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Count()
+IL_00be: ldc.i4.0
+IL_00bf: ble.s IL_0115
+IL_00c1: ldarg.0
+IL_00c2: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_00c7: callvirt System.Collections.Generic.Dictionary`2/KeyCollection<!0,!1> System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Keys()
+IL_00cc: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareUpdate>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00d1: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<SoftwareUpdate>::GetEnumerator()
+IL_00d6: stloc.s V_4
+IL_00d8: br.s IL_00fc
+IL_00da: ldloca.s V_4
+IL_00dc: call !0 System.Collections.Generic.List`1/Enumerator<SoftwareUpdate>::get_Current()
+IL_00e1: stloc.s V_5
+IL_00e3: ldloc.s V_5
+IL_00e5: ldfld System.Boolean WorkItem::Done
+IL_00ea: brfalse.s IL_00fc
+IL_00ec: ldarg.0
+IL_00ed: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_00f2: ldloc.s V_5
+IL_00f4: callvirt System.Boolean System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::Remove(!0)
+IL_00f9: pop
+IL_00fa: ldc.i4.1
+IL_00fb: stloc.0
+IL_00fc: ldloca.s V_4
+IL_00fe: call System.Boolean System.Collections.Generic.List`1/Enumerator<SoftwareUpdate>::MoveNext()
+IL_0103: brtrue.s IL_00da
+IL_0105: leave.s IL_0115
+IL_0107: ldloca.s V_4
+IL_0109: constrained. System.Collections.Generic.List`1/Enumerator<SoftwareUpdate>
+IL_010f: callvirt System.Void System.IDisposable::Dispose()
+IL_0114: endfinally
+IL_0115: ldloc.0
+IL_0116: brfalse.s IL_011e
+IL_0118: ldarg.0
+IL_0119: call System.Void AutoDevWorkItem::UpdateLists()
+IL_011e: ret
+METHOD Public, HideBySig System.Void AutoDevWorkItem::CleanupWork()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0006: ldsfld System.Predicate`1<MarketingPlan> AutoDevWorkItem/<>c::<>9__61_0
+IL_000b: dup
+IL_000c: brtrue.s IL_0025
+IL_000e: pop
+IL_000f: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_0014: ldftn System.Boolean AutoDevWorkItem/<>c::<CleanupWork>b__61_0(MarketingPlan)
+IL_001a: newobj System.Void System.Predicate`1<MarketingPlan>::.ctor(System.Object,System.IntPtr)
+IL_001f: dup
+IL_0020: stsfld System.Predicate`1<MarketingPlan> AutoDevWorkItem/<>c::<>9__61_0
+IL_0025: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::RemoveAll(System.Predicate`1<!0>)
+IL_002a: pop
+IL_002b: ldarg.0
+IL_002c: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0031: ldsfld System.Predicate`1<SupportWork> AutoDevWorkItem/<>c::<>9__61_1
+IL_0036: dup
+IL_0037: brtrue.s IL_0050
+IL_0039: pop
+IL_003a: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_003f: ldftn System.Boolean AutoDevWorkItem/<>c::<CleanupWork>b__61_1(SupportWork)
+IL_0045: newobj System.Void System.Predicate`1<SupportWork>::.ctor(System.Object,System.IntPtr)
+IL_004a: dup
+IL_004b: stsfld System.Predicate`1<SupportWork> AutoDevWorkItem/<>c::<>9__61_1
+IL_0050: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::RemoveAll(System.Predicate`1<!0>)
+IL_0055: pop
+IL_0056: ldarg.0
+IL_0057: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_005c: ldsfld System.Predicate`1<SoftwarePort> AutoDevWorkItem/<>c::<>9__61_2
+IL_0061: dup
+IL_0062: brtrue.s IL_007b
+IL_0064: pop
+IL_0065: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_006a: ldftn System.Boolean AutoDevWorkItem/<>c::<CleanupWork>b__61_2(SoftwarePort)
+IL_0070: newobj System.Void System.Predicate`1<SoftwarePort>::.ctor(System.Object,System.IntPtr)
+IL_0075: dup
+IL_0076: stsfld System.Predicate`1<SoftwarePort> AutoDevWorkItem/<>c::<>9__61_2
+IL_007b: callvirt System.Int32 System.Collections.Generic.List`1<SoftwarePort>::RemoveAll(System.Predicate`1<!0>)
+IL_0080: pop
+IL_0081: ret
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdateLists()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Boolean AutoDevWorkItem::IsViewed
+IL_0006: brfalse IL_00e3
+IL_000b: ldsfld HUD HUD::Instance
+IL_0010: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_0015: ldfld GUIListView AutoDevWindow::WorkList
+IL_001a: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_001f: callvirt System.Void EventList`1<System.Object>::Clear()
+IL_0024: ldsfld HUD HUD::Instance
+IL_0029: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_002e: ldfld GUIListView AutoDevWindow::WorkList
+IL_0033: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0038: ldarg.0
+IL_0039: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_003e: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_0043: ldsfld HUD HUD::Instance
+IL_0048: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_004d: ldfld GUIListView AutoDevWindow::WorkList
+IL_0052: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0057: ldarg.0
+IL_0058: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_005d: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_0062: ldsfld HUD HUD::Instance
+IL_0067: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_006c: ldfld GUIListView AutoDevWindow::WorkList
+IL_0071: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_0076: ldarg.0
+IL_0077: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_007c: callvirt System.Collections.Generic.Dictionary`2/KeyCollection<!0,!1> System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Keys()
+IL_0081: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_0086: ldsfld HUD HUD::Instance
+IL_008b: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_0090: ldfld GUIListView AutoDevWindow::WorkList
+IL_0095: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_009a: ldarg.0
+IL_009b: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_00a0: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_00a5: ldsfld HUD HUD::Instance
+IL_00aa: ldfld AutoDevWindow HUD::AutoDevWindow
+IL_00af: ldfld GUIListView AutoDevWindow::WorkList
+IL_00b4: callvirt EventList`1<System.Object> GUIListView::get_Items()
+IL_00b9: ldsfld GameSettings GameSettings::Instance
+IL_00be: ldfld Company GameSettings::MyCompany
+IL_00c3: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_00c8: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<MarketingPlan>(System.Collections.IEnumerable)
+IL_00cd: ldarg.0
+IL_00ce: ldftn System.Boolean AutoDevWorkItem::<UpdateLists>b__63_0(MarketingPlan)
+IL_00d4: newobj System.Void System.Func`2<MarketingPlan,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_00d9: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<MarketingPlan>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_00de: callvirt System.Void EventList`1<System.Object>::AddRange(System.Collections.Generic.IEnumerable`1<T>)
+IL_00e3: ret
+METHOD Private, HideBySig System.Void AutoDevWorkItem::UpdateSpecLevels()
+IL_0000: ret
+METHOD Public, Virtual, HideBySig WorkItem/HasWorkReturn AutoDevWorkItem::HasWork(Actor,System.Boolean,System.Boolean)
+IL_0000: ldarg.1
+IL_0001: ldarg.0
+IL_0002: call Actor AutoDevWorkItem::get_Leader()
+IL_0007: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000c: brfalse.s IL_0064
+IL_000e: ldarg.0
+IL_000f: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0014: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::get_Count()
+IL_0019: ldc.i4.0
+IL_001a: bgt.s IL_0072
+IL_001c: ldarg.0
+IL_001d: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0022: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_0027: ldc.i4.0
+IL_0028: bgt.s IL_0072
+IL_002a: ldarg.0
+IL_002b: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_0030: callvirt System.Int32 System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Count()
+IL_0035: ldc.i4.0
+IL_0036: bgt.s IL_0072
+IL_0038: ldarg.0
+IL_0039: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_003e: ldsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__82_0
+IL_0043: dup
+IL_0044: brtrue.s IL_005d
+IL_0046: pop
+IL_0047: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_004c: ldftn System.Boolean AutoDevWorkItem/<>c::<HasWork>b__82_0(AutoDevWorkItem/AutoDevItem)
+IL_0052: newobj System.Void System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0057: dup
+IL_0058: stsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__82_0
+IL_005d: call System.Boolean Utilities::Any<AutoDevWorkItem/AutoDevItem>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0062: brtrue.s IL_0072
+IL_0064: ldarg.0
+IL_0065: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_006a: callvirt System.Int32 System.Collections.Generic.List`1<SoftwarePort>::get_Count()
+IL_006f: ldc.i4.0
+IL_0070: ble.s IL_0074
+IL_0072: ldc.i4.0
+IL_0073: ret
+IL_0074: ldc.i4.1
+IL_0075: ret
+METHOD Public, Virtual, HideBySig System.Void AutoDevWorkItem::DoWork(Actor,System.Single,System.Single,System.Boolean)
+LOCAL 0 System.Single
+LOCAL 1 System.Single
+IL_0000: ldarg.1
+IL_0001: callvirt Employee Actor::get_employee()
+IL_0006: ldc.i4.0
+IL_0007: callvirt System.Single Employee::GetSkill(Employee/EmployeeRole)
+IL_000c: stloc.0
+IL_000d: ldarg.2
+IL_000e: ldarg.1
+IL_000f: ldc.i4.0
+IL_0010: callvirt System.Single Actor::GetPCAddonBonus(Employee/EmployeeRole)
+IL_0015: mul
+IL_0016: ldloc.0
+IL_0017: mul
+IL_0018: ldloc.0
+IL_0019: mul
+IL_001a: stloc.1
+IL_001b: ldarg.0
+IL_001c: ldloc.1
+IL_001d: stfld System.Single AutoDevWorkItem::LastEffGain
+IL_0022: ldloc.1
+IL_0023: ldc.r4 3
+IL_0028: mul
+IL_0029: stloc.1
+IL_002a: ldarg.0
+IL_002b: ldc.r4 3
+IL_0030: ldarg.0
+IL_0031: ldfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0036: ldloc.1
+IL_0037: ldarg.3
+IL_0038: ldc.i4.1
+IL_0039: call System.Single Utilities::PerDay(System.Single,System.Single,System.Boolean)
+IL_003e: add
+IL_003f: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_0044: stfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0049: ldarg.0
+IL_004a: call SDateTime SDateTime::Now()
+IL_004f: stfld SDateTime AutoDevWorkItem::LastEffGainTime
+IL_0054: ret
+METHOD Public, Virtual, HideBySig System.Single AutoDevWorkItem::GetWorkBoost(Employee/EmployeeRole,System.Single)
+IL_0000: ldc.r4 1
+IL_0005: ret
+METHOD Public, HideBySig System.Void AutoDevWorkItem::Update(System.Single)
+LOCAL 0 System.Boolean
+LOCAL 1 System.Boolean
+LOCAL 2 System.Boolean
+LOCAL 3 System.Int32
+LOCAL 4 AutoDevWorkItem/AutoDevItem
+LOCAL 5 System.Boolean
+LOCAL 6 System.Int32
+LOCAL 7 System.Boolean
+LOCAL 8 System.Int32
+LOCAL 9 System.Object[]
+LOCAL 10 SupportWork
+LOCAL 11 SoftwareProduct
+LOCAL 12 System.Boolean
+LOCAL 13 System.Int32
+LOCAL 14 MarketingPlan
+LOCAL 15 System.UInt32
+LOCAL 16 System.Single
+LOCAL 17 System.Int32
+LOCAL 18 System.Int32
+LOCAL 19 SDateTime
+LOCAL 20 SDateTime
+LOCAL 21 System.Single
+LOCAL 22 System.Single
+LOCAL 23 SoftwareWorkItem/FeatureProgress[]
+LOCAL 24 System.Int32
+LOCAL 25 System.Int32
+LOCAL 26 SoftwareAlpha
+LOCAL 27 MarketingPlan
+LOCAL 28 System.Object
+LOCAL 29 SDateTime
+LOCAL 30 SDateTime
+LOCAL 31 System.Single
+LOCAL 32 SoftwareAlpha
+LOCAL 33 AutoDevWorkItem/AutoDevItem
+LOCAL 34 System.Int32
+LOCAL 35 SoftwareWorkItem
+LOCAL 36 System.Single
+LOCAL 37 MarketingPlan
+LOCAL 38 AutoDevWorkItem/AutoDevItem
+LOCAL 39 System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>
+LOCAL 40 SoftwareWorkItem
+LOCAL 41 SoftwareWorkItem
+LOCAL 42 AutoDevWorkItem/AutoDevItem
+LOCAL 43 SoftwareWorkItem
+LOCAL 44 System.Collections.Generic.List`1<SoftwareWorkItem>
+LOCAL 45 SoftwareWorkItem
+LOCAL 46 System.Single
+IL_0000: ldarg.0
+IL_0001: call Actor AutoDevWorkItem::get_Leader()
+IL_0006: ldnull
+IL_0007: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000c: brtrue.s IL_0016
+IL_000e: ldarg.0
+IL_000f: callvirt System.Boolean WorkItem::get_Paused()
+IL_0014: brfalse.s IL_0017
+IL_0016: ret
+IL_0017: ldc.i4.0
+IL_0018: stloc.0
+IL_0019: ldc.i4.0
+IL_001a: stloc.1
+IL_001b: ldc.i4.0
+IL_001c: stloc.2
+IL_001d: ldc.i4.0
+IL_001e: stloc.3
+IL_001f: br IL_0ba2
+IL_0024: ldarg.0
+IL_0025: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_002a: ldloc.3
+IL_002b: callvirt T EventList`1<AutoDevWorkItem/AutoDevItem>::get_Item(System.Int32)
+IL_0030: stloc.s V_4
+IL_0032: ldloc.s V_4
+IL_0034: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::Queued
+IL_0039: brtrue IL_0b9e
+IL_003e: ldloc.s V_4
+IL_0040: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0045: brfalse IL_087d
+IL_004a: ldc.i4.0
+IL_004b: stloc.s V_5
+IL_004d: ldarg.0
+IL_004e: ldloc.s V_4
+IL_0050: ldc.i4.1
+IL_0051: ldloca.s V_1
+IL_0053: ldloca.s V_2
+IL_0055: call System.Void AutoDevWorkItem::SetDev(AutoDevWorkItem/AutoDevItem,System.Boolean,System.Boolean&,System.Boolean&)
+IL_005a: ldloc.s V_4
+IL_005c: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0061: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_0066: brfalse IL_048c
+IL_006b: ldc.i4.0
+IL_006c: stloc.s V_6
+IL_006e: br.s IL_00a4
+IL_0070: ldloc.s V_4
+IL_0072: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0077: ldloc.s V_6
+IL_0079: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_007e: castclass SoftwareAlpha
+IL_0083: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_0088: brtrue.s IL_009e
+IL_008a: ldloc.s V_4
+IL_008c: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0091: ldloc.s V_6
+IL_0093: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_0098: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_009d: pop
+IL_009e: ldloc.s V_6
+IL_00a0: ldc.i4.1
+IL_00a1: add
+IL_00a2: stloc.s V_6
+IL_00a4: ldloc.s V_6
+IL_00a6: ldloc.s V_4
+IL_00a8: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_00ad: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_00b2: blt.s IL_0070
+IL_00b4: call SDateTime SDateTime::Now()
+IL_00b9: ldloc.s V_4
+IL_00bb: ldc.r4 1
+IL_00c0: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_00c5: ldc.i4.0
+IL_00c6: ldc.i4.3
+IL_00c7: ldc.i4.0
+IL_00c8: ldc.i4.0
+IL_00c9: ldc.i4.0
+IL_00ca: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_00cf: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_00d4: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_00d9: brfalse IL_0726
+IL_00de: ldc.i4.1
+IL_00df: stloc.s V_7
+IL_00e1: ldc.i4.0
+IL_00e2: stloc.s V_8
+IL_00e4: br.s IL_0109
+IL_00e6: ldloc.s V_4
+IL_00e8: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_00ed: ldloc.s V_8
+IL_00ef: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_00f4: castclass SoftwareAlpha
+IL_00f9: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_00fe: brtrue.s IL_0103
+IL_0100: ldc.i4.0
+IL_0101: stloc.s V_7
+IL_0103: ldloc.s V_8
+IL_0105: ldc.i4.1
+IL_0106: add
+IL_0107: stloc.s V_8
+IL_0109: ldloc.s V_8
+IL_010b: ldloc.s V_4
+IL_010d: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0112: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_0117: blt.s IL_00e6
+IL_0119: ldloc.s V_7
+IL_011b: brfalse IL_0726
+IL_0120: ldarg.0
+IL_0121: ldloc.s V_4
+IL_0123: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0128: call System.Void AutoDevWorkItem::EndMarketingFor(WorkItem)
+IL_012d: ldloc.s V_4
+IL_012f: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0134: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_0139: castclass System.Object[]
+IL_013e: stloc.s V_9
+IL_0140: ldloc.s V_9
+IL_0142: brfalse IL_0726
+IL_0147: ldsfld HUD HUD::Instance
+IL_014c: ldstr "AutoLogPMRelease"
+IL_0151: ldc.i4.2
+IL_0152: newarr System.Object
+IL_0157: dup
+IL_0158: ldc.i4.0
+IL_0159: ldarg.0
+IL_015a: ldfld System.String WorkItem::_name
+IL_015f: stelem.ref
+IL_0160: dup
+IL_0161: ldc.i4.1
+IL_0162: ldloc.s V_4
+IL_0164: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0169: stelem.ref
+IL_016a: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_016f: ldarg.0
+IL_0170: ldarg.0
+IL_0171: ldloc.s V_4
+IL_0173: call System.Nullable`1<SDateTime> AutoDevWorkItem::GetNextReleaseDate(AutoDevWorkItem/AutoDevItem)
+IL_0178: stfld System.Nullable`1<SDateTime> AutoDevWorkItem::NextReleaseDate
+IL_017d: ldloc.s V_4
+IL_017f: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::Secondary
+IL_0184: brfalse.s IL_018f
+IL_0186: ldarg.0
+IL_0187: ldnull
+IL_0188: stfld System.String AutoDevWorkItem::LastAlpha2
+IL_018d: br.s IL_0196
+IL_018f: ldarg.0
+IL_0190: ldnull
+IL_0191: stfld System.String AutoDevWorkItem::LastAlpha
+IL_0196: ldloc.s V_9
+IL_0198: ldc.i4.0
+IL_0199: ldelem.ref
+IL_019a: castclass SupportWork
+IL_019f: stloc.s V_10
+IL_01a1: ldloc.s V_9
+IL_01a3: ldc.i4.1
+IL_01a4: ldelem.ref
+IL_01a5: castclass SoftwareProduct
+IL_01aa: stloc.s V_11
+IL_01ac: ldarg.0
+IL_01ad: ldc.i4.0
+IL_01ae: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_01b3: call System.Single Utilities::get_RandomValue()
+IL_01b8: ble.un.s IL_0203
+IL_01ba: ldarg.0
+IL_01bb: ldc.i4 190
+IL_01c0: ldc.i4 210
+IL_01c5: call System.Int32 Utilities::RandomRange(System.Int32,System.Int32)
+IL_01ca: conv.r4
+IL_01cb: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_01d0: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_01d5: stloc.s V_13
+IL_01d7: ldloc.s V_13
+IL_01d9: ldc.i4.1
+IL_01da: ble.s IL_0203
+IL_01dc: ldloc.s V_11
+IL_01de: ldloc.s V_13
+IL_01e0: callvirt System.Void SoftwareProduct::AddBugs(System.Int32)
+IL_01e5: ldarg.0
+IL_01e6: ldstr "Beta"
+IL_01eb: ldloc.s V_4
+IL_01ed: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_01f2: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_01f7: ldloca.s V_13
+IL_01f9: call System.String System.Int32::ToString()
+IL_01fe: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_0203: ldc.i4.0
+IL_0204: stloc.s V_12
+IL_0206: ldarg.0
+IL_0207: ldarg.0
+IL_0208: ldfld System.Boolean AutoDevWorkItem::AutoSupport
+IL_020d: ldc.i4.3
+IL_020e: ldc.i4.0
+IL_020f: call T AutoDevWorkItem::GetSpecValue<System.Boolean>(T,System.Int32,T)
+IL_0214: brfalse.s IL_025e
+IL_0216: ldloc.s V_10
+IL_0218: ldc.i4.1
+IL_0219: stfld System.Boolean WorkItem::AutoDev
+IL_021e: ldloc.s V_10
+IL_0220: ldc.i4.1
+IL_0221: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0226: ldarg.0
+IL_0227: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_022c: ldloc.s V_10
+IL_022e: callvirt System.Void System.Collections.Generic.List`1<SupportWork>::Add(!0)
+IL_0233: ldsfld HUD HUD::Instance
+IL_0238: ldstr "AutoLogPMStartSupport"
+IL_023d: ldc.i4.2
+IL_023e: newarr System.Object
+IL_0243: dup
+IL_0244: ldc.i4.0
+IL_0245: ldarg.0
+IL_0246: ldfld System.String WorkItem::_name
+IL_024b: stelem.ref
+IL_024c: dup
+IL_024d: ldc.i4.1
+IL_024e: ldloc.s V_11
+IL_0250: ldfld System.String SoftwareProduct::Name
+IL_0255: stelem.ref
+IL_0256: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_025b: ldc.i4.1
+IL_025c: stloc.s V_12
+IL_025e: ldarg.0
+IL_025f: ldloc.s V_10
+IL_0261: ldarg.0
+IL_0262: ldfld SHashSet`1<System.String> AutoDevWorkItem::SupportTeams
+IL_0267: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_026c: ldarg.0
+IL_026d: ldloc.s V_11
+IL_026f: call System.Void AutoDevWorkItem::AddPastRelease(SoftwareProduct)
+IL_0274: ldarg.0
+IL_0275: ldarg.0
+IL_0276: ldfld System.Boolean AutoDevWorkItem::PostMarketing
+IL_027b: ldc.i4.3
+IL_027c: ldc.i4.0
+IL_027d: call T AutoDevWorkItem::GetSpecValue<System.Boolean>(T,System.Int32,T)
+IL_0282: brfalse IL_030f
+IL_0287: ldloc.s V_4
+IL_0289: callvirt System.Boolean AutoDevWorkItem/AutoDevItem::get_InHouse()
+IL_028e: brtrue.s IL_030f
+IL_0290: ldc.r4 0
+IL_0295: ldloc.s V_11
+IL_0297: ldc.i4.0
+IL_0298: ldnull
+IL_0299: newobj System.Void MarketingPlan::.ctor(System.Single,IMarketable,System.UInt32,NetworkDeal)
+IL_029e: stloc.s V_14
+IL_02a0: ldarg.0
+IL_02a1: ldloc.s V_14
+IL_02a3: ldarg.0
+IL_02a4: ldfld SHashSet`1<System.String> AutoDevWorkItem::PostMarketingTeams
+IL_02a9: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_02ae: ldsfld GameSettings GameSettings::Instance
+IL_02b3: ldfld Company GameSettings::MyCompany
+IL_02b8: ldloc.s V_14
+IL_02ba: callvirt System.Void Company::AddWorkItem(WorkItem)
+IL_02bf: ldarg.0
+IL_02c0: ldfld System.Boolean AutoDevWorkItem::HandleMarketing
+IL_02c5: brfalse.s IL_030f
+IL_02c7: ldloc.s V_14
+IL_02c9: ldc.i4.1
+IL_02ca: stfld System.Boolean WorkItem::AutoDev
+IL_02cf: ldloc.s V_14
+IL_02d1: ldc.i4.1
+IL_02d2: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_02d7: ldarg.0
+IL_02d8: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_02dd: ldloc.s V_14
+IL_02df: callvirt System.Void System.Collections.Generic.List`1<MarketingPlan>::Add(!0)
+IL_02e4: ldsfld HUD HUD::Instance
+IL_02e9: ldstr "AutoLogPMStartMarketing"
+IL_02ee: ldc.i4.2
+IL_02ef: newarr System.Object
+IL_02f4: dup
+IL_02f5: ldc.i4.0
+IL_02f6: ldarg.0
+IL_02f7: ldfld System.String WorkItem::_name
+IL_02fc: stelem.ref
+IL_02fd: dup
+IL_02fe: ldc.i4.1
+IL_02ff: ldloc.s V_11
+IL_0301: ldfld System.String SoftwareProduct::Name
+IL_0306: stelem.ref
+IL_0307: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_030c: ldc.i4.1
+IL_030d: stloc.s V_12
+IL_030f: ldloc.s V_12
+IL_0311: brfalse.s IL_0319
+IL_0313: ldarg.0
+IL_0314: call System.Void AutoDevWorkItem::UpdateLists()
+IL_0319: ldarg.0
+IL_031a: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_031f: ldloc.s V_4
+IL_0321: callvirt System.Boolean EventList`1<AutoDevWorkItem/AutoDevItem>::Remove(T)
+IL_0326: pop
+IL_0327: ldloc.3
+IL_0328: ldc.i4.1
+IL_0329: sub
+IL_032a: stloc.3
+IL_032b: ldarg.0
+IL_032c: ldloc.s V_4
+IL_032e: ldc.i4.0
+IL_032f: ldloca.s V_1
+IL_0331: ldloca.s V_2
+IL_0333: call System.Void AutoDevWorkItem::SetDev(AutoDevWorkItem/AutoDevItem,System.Boolean,System.Boolean&,System.Boolean&)
+IL_0338: ldarg.0
+IL_0339: ldarg.0
+IL_033a: ldfld System.UInt32 AutoDevWorkItem::PhysicalCopies
+IL_033f: ldc.i4.3
+IL_0340: ldc.i4.0
+IL_0341: call T AutoDevWorkItem::GetSpecValue<System.UInt32>(T,System.Int32,T)
+IL_0346: ldc.i4.0
+IL_0347: ble.un IL_03f0
+IL_034c: ldarg.0
+IL_034d: ldfld System.UInt32 AutoDevWorkItem::PhysicalCopies
+IL_0352: stloc.s V_15
+IL_0354: ldarg.0
+IL_0355: ldfld System.Boolean AutoDevWorkItem::PhysicalCopyRel
+IL_035a: brfalse.s IL_0377
+IL_035c: ldloc.s V_11
+IL_035e: ldfld System.UInt32 SoftwareProduct::Followers
+IL_0363: conv.r.un
+IL_0364: conv.r4
+IL_0365: ldarg.0
+IL_0366: ldfld System.UInt32 AutoDevWorkItem::PhysicalCopies
+IL_036b: conv.r.un
+IL_036c: conv.r4
+IL_036d: ldc.r4 100
+IL_0372: div
+IL_0373: mul
+IL_0374: conv.u4
+IL_0375: stloc.s V_15
+IL_0377: ldloc.s V_15
+IL_0379: conv.r.un
+IL_037a: conv.r4
+IL_037b: ldloc.s V_11
+IL_037d: ldc.i4.0
+IL_037e: callvirt System.Single SoftwareProduct::GetPrintPrice(System.Boolean)
+IL_0383: mul
+IL_0384: stloc.s V_16
+IL_0386: ldsfld GameSettings GameSettings::Instance
+IL_038b: ldfld Company GameSettings::MyCompany
+IL_0390: ldloc.s V_16
+IL_0392: neg
+IL_0393: conv.r8
+IL_0394: ldc.i4.s 14
+IL_0396: ldc.i4.1
+IL_0397: ldstr "Copy order"
+IL_039c: ldc.i4.0
+IL_039d: callvirt System.Void Company::MakeTransaction(System.Double,Company/TransactionCategory,System.Boolean,System.String,System.Boolean)
+IL_03a2: ldloc.s V_11
+IL_03a4: ldloc.s V_16
+IL_03a6: ldc.i4.3
+IL_03a7: ldc.i4.1
+IL_03a8: ldc.i4.0
+IL_03a9: callvirt System.Void SoftwareProduct::AddLoss(System.Single,SoftwareProduct/LossType,System.Boolean,System.Boolean)
+IL_03ae: ldloc.s V_11
+IL_03b0: dup
+IL_03b1: callvirt System.UInt32 SoftwareProduct::get_PhysicalCopies()
+IL_03b6: ldloc.s V_15
+IL_03b8: add
+IL_03b9: callvirt System.Void SoftwareProduct::set_PhysicalCopies(System.UInt32)
+IL_03be: ldsfld HUD HUD::Instance
+IL_03c3: ldstr "AutoLogPMOrderCopy"
+IL_03c8: ldc.i4.3
+IL_03c9: newarr System.Object
+IL_03ce: dup
+IL_03cf: ldc.i4.0
+IL_03d0: ldarg.0
+IL_03d1: ldfld System.String WorkItem::_name
+IL_03d6: stelem.ref
+IL_03d7: dup
+IL_03d8: ldc.i4.1
+IL_03d9: ldloc.s V_15
+IL_03db: box System.UInt32
+IL_03e0: stelem.ref
+IL_03e1: dup
+IL_03e2: ldc.i4.2
+IL_03e3: ldloc.s V_4
+IL_03e5: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_03ea: stelem.ref
+IL_03eb: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_03f0: ldloc.s V_11
+IL_03f2: ldfld AddOnProduct[] SoftwareProduct::ForcedAddons
+IL_03f7: brfalse.s IL_0421
+IL_03f9: ldc.i4.0
+IL_03fa: stloc.s V_17
+IL_03fc: br.s IL_0414
+IL_03fe: ldarg.0
+IL_03ff: ldloc.s V_11
+IL_0401: ldfld AddOnProduct[] SoftwareProduct::ForcedAddons
+IL_0406: ldloc.s V_17
+IL_0408: ldelem.ref
+IL_0409: call System.Void AutoDevWorkItem::PromoteAddon(AddOnProduct)
+IL_040e: ldloc.s V_17
+IL_0410: ldc.i4.1
+IL_0411: add
+IL_0412: stloc.s V_17
+IL_0414: ldloc.s V_17
+IL_0416: ldloc.s V_11
+IL_0418: ldfld AddOnProduct[] SoftwareProduct::ForcedAddons
+IL_041d: ldlen
+IL_041e: conv.i4
+IL_041f: blt.s IL_03fe
+IL_0421: ldloc.s V_11
+IL_0423: ldstr "ProjectManagementRelease"
+IL_0428: ldc.i4.4
+IL_0429: newarr System.Object
+IL_042e: dup
+IL_042f: ldc.i4.0
+IL_0430: ldarg.0
+IL_0431: call System.String WorkItem::get_Name()
+IL_0436: stelem.ref
+IL_0437: dup
+IL_0438: ldc.i4.1
+IL_0439: ldstr ""
+IL_043e: stelem.ref
+IL_043f: dup
+IL_0440: ldc.i4.2
+IL_0441: ldloc.s V_11
+IL_0443: ldfld SoftwareType SoftwareProduct::Type
+IL_0448: ldfld System.String SoftwareType::Name
+IL_044d: ldloc.s V_11
+IL_044f: ldfld SoftwareCategory SoftwareProduct::Category
+IL_0454: ldfld System.String SoftwareCategory::Name
+IL_0459: call FormatColorString Localization::LocSWFull(System.String,System.String)
+IL_045e: box FormatColorString
+IL_0463: stelem.ref
+IL_0464: dup
+IL_0465: ldc.i4.3
+IL_0466: ldloc.s V_11
+IL_0468: stelem.ref
+IL_0469: call System.String Localization::Loc(System.String,System.Object[])
+IL_046e: ldstr "Software"
+IL_0473: call SDateTime SDateTime::Now()
+IL_0478: ldc.i4.2
+IL_0479: ldnull
+IL_047a: newobj System.Void ProductDetailNotification::.ctor(SoftwareProduct,System.String,System.String,SDateTime,NotificationManager/NotificationType,System.String)
+IL_047f: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_0484: ldc.i4.1
+IL_0485: stloc.s V_5
+IL_0487: br IL_0726
+IL_048c: ldloc.s V_4
+IL_048e: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0493: ldfld System.Boolean SoftwareAlpha::HasFinished
+IL_0498: brtrue.s IL_04c7
+IL_049a: call SDateTime SDateTime::Now()
+IL_049f: ldloc.s V_4
+IL_04a1: ldsfld System.Single SoftwareType::DesignRatio
+IL_04a6: ldc.r4 0.75
+IL_04ab: ldc.r4 1
+IL_04b0: ldsfld System.Single SoftwareType::DesignRatio
+IL_04b5: sub
+IL_04b6: mul
+IL_04b7: add
+IL_04b8: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_04bd: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_04c2: brfalse IL_06dc
+IL_04c7: ldloc.s V_4
+IL_04c9: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_04ce: ldfld System.Boolean SoftwareAlpha::HasFinished
+IL_04d3: brfalse IL_0589
+IL_04d8: ldloc.s V_4
+IL_04da: ldsfld System.Single SoftwareType::DesignRatio
+IL_04df: ldc.r4 0.75
+IL_04e4: ldc.r4 1
+IL_04e9: ldsfld System.Single SoftwareType::DesignRatio
+IL_04ee: sub
+IL_04ef: mul
+IL_04f0: add
+IL_04f1: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_04f6: stloc.s V_19
+IL_04f8: call SDateTime SDateTime::Now()
+IL_04fd: stloc.s V_20
+IL_04ff: ldloc.s V_20
+IL_0501: ldloc.s V_19
+IL_0503: call System.Boolean SDateTime::op_LessThan(SDateTime,SDateTime)
+IL_0508: brfalse.s IL_0589
+IL_050a: ldloc.s V_20
+IL_050c: ldloc.s V_19
+IL_050e: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0513: stloc.s V_21
+IL_0515: ldloc.s V_21
+IL_0517: ldc.r4 1
+IL_051c: ble.un.s IL_0589
+IL_051e: ldloc.s V_4
+IL_0520: dup
+IL_0521: ldfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_0526: ldloc.s V_21
+IL_0528: sub
+IL_0529: stfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_052e: ldloc.s V_4
+IL_0530: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0535: ldc.i4.2
+IL_0536: newarr SDateTime
+IL_053b: dup
+IL_053c: ldc.i4.0
+IL_053d: call SDateTime SDateTime::Now()
+IL_0542: ldc.i4.1
+IL_0543: call SDateTime SDateTime::op_Addition(SDateTime,System.Int32)
+IL_0548: stelem.any SDateTime
+IL_054d: dup
+IL_054e: ldc.i4.1
+IL_054f: ldloc.s V_4
+IL_0551: ldc.r4 1
+IL_0556: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_055b: stelem.any SDateTime
+IL_0560: call SDateTime SDateTime::Max(SDateTime[])
+IL_0565: newobj System.Void System.Nullable`1<SDateTime>::.ctor(!0)
+IL_056a: stfld System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_056f: ldloc.s V_4
+IL_0571: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0576: ldc.i4.0
+IL_0577: callvirt System.Void SoftwareWorkItem::NetworkSchedule(System.Boolean)
+IL_057c: ldarg.0
+IL_057d: ldarg.0
+IL_057e: ldnull
+IL_057f: call System.Nullable`1<SDateTime> AutoDevWorkItem::GetNextReleaseDate(AutoDevWorkItem/AutoDevItem)
+IL_0584: stfld System.Nullable`1<SDateTime> AutoDevWorkItem::NextReleaseDate
+IL_0589: ldloc.s V_4
+IL_058b: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0590: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_0595: pop
+IL_0596: ldloc.s V_4
+IL_0598: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_059d: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_05a2: brfalse IL_06dc
+IL_05a7: ldarg.0
+IL_05a8: ldc.i4.0
+IL_05a9: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_05ae: call System.Single Utilities::get_RandomValue()
+IL_05b3: ble.un IL_063f
+IL_05b8: ldarg.0
+IL_05b9: ldc.r4 0.25
+IL_05be: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_05c3: stloc.s V_22
+IL_05c5: ldloc.s V_22
+IL_05c7: ldc.r4 0.01
+IL_05cc: blt.un.s IL_063f
+IL_05ce: ldloc.s V_4
+IL_05d0: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_05d5: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_05da: stloc.s V_23
+IL_05dc: ldc.i4.0
+IL_05dd: stloc.s V_24
+IL_05df: br.s IL_0617
+IL_05e1: ldloc.s V_23
+IL_05e3: ldloc.s V_24
+IL_05e5: ldelem.ref
+IL_05e6: dup
+IL_05e7: dup
+IL_05e8: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_05ed: ldc.r4 1
+IL_05f2: ldloc.s V_22
+IL_05f4: sub
+IL_05f5: conv.r8
+IL_05f6: mul
+IL_05f7: stfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_05fc: dup
+IL_05fd: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0602: ldc.r4 1
+IL_0607: ldloc.s V_22
+IL_0609: sub
+IL_060a: conv.r8
+IL_060b: mul
+IL_060c: stfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0611: ldloc.s V_24
+IL_0613: ldc.i4.1
+IL_0614: add
+IL_0615: stloc.s V_24
+IL_0617: ldloc.s V_24
+IL_0619: ldloc.s V_23
+IL_061b: ldlen
+IL_061c: conv.i4
+IL_061d: blt.s IL_05e1
+IL_061f: ldarg.0
+IL_0620: ldstr "Alpha"
+IL_0625: ldloc.s V_4
+IL_0627: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_062c: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_0631: ldloc.s V_22
+IL_0633: ldc.i4.1
+IL_0634: ldc.i4.0
+IL_0635: call System.String Utilities::ToPercent(System.Single,System.Boolean,System.Boolean)
+IL_063a: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_063f: ldc.i4.0
+IL_0640: stloc.s V_25
+IL_0642: br.s IL_0688
+IL_0644: ldloc.s V_4
+IL_0646: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_064b: ldloc.s V_25
+IL_064d: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_0652: castclass SoftwareAlpha
+IL_0657: stloc.s V_26
+IL_0659: ldloc.s V_26
+IL_065b: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_0660: brtrue.s IL_0682
+IL_0662: ldloc.s V_26
+IL_0664: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_0669: pop
+IL_066a: ldloc.s V_26
+IL_066c: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_0671: brfalse.s IL_0682
+IL_0673: ldarg.0
+IL_0674: ldloc.s V_26
+IL_0676: ldloc.s V_4
+IL_0678: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::hasPrinted
+IL_067d: call System.Void AutoDevWorkItem::StartPrintJob(SoftwareAlpha,System.Boolean)
+IL_0682: ldloc.s V_25
+IL_0684: ldc.i4.1
+IL_0685: add
+IL_0686: stloc.s V_25
+IL_0688: ldloc.s V_25
+IL_068a: ldloc.s V_4
+IL_068c: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0691: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_0696: blt.s IL_0644
+IL_0698: ldsfld HUD HUD::Instance
+IL_069d: ldstr "AutoLogPMBeta"
+IL_06a2: ldc.i4.2
+IL_06a3: newarr System.Object
+IL_06a8: dup
+IL_06a9: ldc.i4.0
+IL_06aa: ldarg.0
+IL_06ab: ldfld System.String WorkItem::_name
+IL_06b0: stelem.ref
+IL_06b1: dup
+IL_06b2: ldc.i4.1
+IL_06b3: ldloc.s V_4
+IL_06b5: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_06ba: stelem.ref
+IL_06bb: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_06c0: ldarg.0
+IL_06c1: ldloc.s V_4
+IL_06c3: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_06c8: ldloc.s V_4
+IL_06ca: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::hasPrinted
+IL_06cf: call System.Void AutoDevWorkItem::StartPrintJob(SoftwareAlpha,System.Boolean)
+IL_06d4: ldloc.s V_4
+IL_06d6: ldc.i4.1
+IL_06d7: stfld System.Boolean AutoDevWorkItem/AutoDevItem::hasPrinted
+IL_06dc: ldarg.0
+IL_06dd: ldarg.0
+IL_06de: ldfld System.Int32 AutoDevWorkItem::IterationCoolDown
+IL_06e3: ldc.i4.2
+IL_06e4: ldc.i4.0
+IL_06e5: call T AutoDevWorkItem::GetSpecValue<System.Int32>(T,System.Int32,T)
+IL_06ea: stloc.s V_18
+IL_06ec: ldloc.s V_4
+IL_06ee: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_06f3: ldfld System.Boolean SoftwareAlpha::InBeta
+IL_06f8: brtrue.s IL_0726
+IL_06fa: ldloc.s V_18
+IL_06fc: ldc.i4.0
+IL_06fd: ble.s IL_0726
+IL_06ff: ldloc.s V_4
+IL_0701: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0706: ldfld SDateTime SoftwareAlpha::LastIteration
+IL_070b: call SDateTime SDateTime::Now()
+IL_0710: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0715: ldloc.s V_18
+IL_0717: conv.r4
+IL_0718: blt.un.s IL_0726
+IL_071a: ldloc.s V_4
+IL_071c: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0721: callvirt System.Void SoftwareAlpha::ReviewAndIterate()
+IL_0726: ldloc.s V_5
+IL_0728: brtrue IL_07fc
+IL_072d: ldloc.s V_4
+IL_072f: callvirt System.Boolean AutoDevWorkItem/AutoDevItem::get_InHouse()
+IL_0734: brtrue IL_07fc
+IL_0739: ldloc.s V_4
+IL_073b: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::PressRelease
+IL_0740: brtrue IL_07fc
+IL_0745: ldarg.0
+IL_0746: ldfld SHashSet`1<System.String> AutoDevWorkItem::MarketingTeams
+IL_074b: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0750: ldc.i4.0
+IL_0751: ble IL_07fc
+IL_0756: call SDateTime SDateTime::Now()
+IL_075b: ldloc.s V_4
+IL_075d: ldsfld System.Single SoftwareType::DesignRatio
+IL_0762: ldc.r4 1
+IL_0767: ldsfld System.Single SoftwareType::DesignRatio
+IL_076c: sub
+IL_076d: ldc.r4 0.5
+IL_0772: mul
+IL_0773: add
+IL_0774: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_0779: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_077e: brfalse.s IL_07fc
+IL_0780: ldloc.s V_4
+IL_0782: ldc.i4.1
+IL_0783: stfld System.Boolean AutoDevWorkItem/AutoDevItem::PressRelease
+IL_0788: ldloc.s V_4
+IL_078a: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_078f: ldc.i4.2
+IL_0790: ldc.i4.7
+IL_0791: ldloc.s V_4
+IL_0793: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0798: ldfld GUIWorkItem WorkItem::guiItem
+IL_079d: ldnull
+IL_079e: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_07a3: brtrue.s IL_07bf
+IL_07a5: ldloc.s V_4
+IL_07a7: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_07ac: ldfld GUIWorkItem WorkItem::guiItem
+IL_07b1: callvirt UnityEngine.Transform UnityEngine.Component::get_transform()
+IL_07b6: callvirt System.Int32 UnityEngine.Transform::GetSiblingIndex()
+IL_07bb: ldc.i4.1
+IL_07bc: add
+IL_07bd: br.s IL_07c0
+IL_07bf: ldc.i4.m1
+IL_07c0: newobj System.Void MarketingPlan::.ctor(SoftwareWorkItem,MarketingPlan/TaskType,MarketingPlan/PressOption,System.Int32)
+IL_07c5: stloc.s V_27
+IL_07c7: ldloc.s V_27
+IL_07c9: ldc.i4.1
+IL_07ca: stfld System.Boolean WorkItem::AutoDev
+IL_07cf: ldloc.s V_27
+IL_07d1: ldc.i4.1
+IL_07d2: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_07d7: ldarg.0
+IL_07d8: ldloc.s V_27
+IL_07da: ldarg.0
+IL_07db: ldfld SHashSet`1<System.String> AutoDevWorkItem::MarketingTeams
+IL_07e0: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_07e5: ldsfld GameSettings GameSettings::Instance
+IL_07ea: ldfld Company GameSettings::MyCompany
+IL_07ef: ldloc.s V_27
+IL_07f1: callvirt System.Void Company::AddWorkItem(WorkItem)
+IL_07f6: ldarg.0
+IL_07f7: call System.Void AutoDevWorkItem::UpdateLists()
+IL_07fc: ldloc.s V_5
+IL_07fe: brtrue.s IL_0869
+IL_0800: ldloc.s V_4
+IL_0802: callvirt System.Boolean AutoDevWorkItem/AutoDevItem::get_InHouse()
+IL_0807: brtrue.s IL_0869
+IL_0809: ldloc.s V_4
+IL_080b: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::PressBuild
+IL_0810: brtrue.s IL_0869
+IL_0812: ldarg.0
+IL_0813: ldfld SHashSet`1<System.String> AutoDevWorkItem::MarketingTeams
+IL_0818: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_081d: ldc.i4.0
+IL_081e: ble.s IL_0869
+IL_0820: call SDateTime SDateTime::Now()
+IL_0825: ldloc.s V_4
+IL_0827: ldsfld System.Single SoftwareType::DesignRatio
+IL_082c: ldc.r4 1
+IL_0831: ldsfld System.Single SoftwareType::DesignRatio
+IL_0836: sub
+IL_0837: ldc.r4 0.75
+IL_083c: mul
+IL_083d: add
+IL_083e: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_0843: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_0848: brfalse.s IL_0869
+IL_084a: ldsfld GameSettings GameSettings::Instance
+IL_084f: ldfld System.Collections.Generic.HashSet`1<SoftwareAlpha> GameSettings::PressBuildQueue
+IL_0854: ldloc.s V_4
+IL_0856: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_085b: callvirt System.Boolean System.Collections.Generic.HashSet`1<SoftwareAlpha>::Add(!0)
+IL_0860: pop
+IL_0861: ldloc.s V_4
+IL_0863: ldc.i4.1
+IL_0864: stfld System.Boolean AutoDevWorkItem/AutoDevItem::PressBuild
+IL_0869: ldloc.s V_5
+IL_086b: brtrue IL_0b9e
+IL_0870: ldarg.0
+IL_0871: ldloc.s V_4
+IL_0873: call System.Void AutoDevWorkItem::RefreshHype(AutoDevWorkItem/AutoDevItem)
+IL_0878: br IL_0b9e
+IL_087d: ldc.i4.1
+IL_087e: stloc.0
+IL_087f: ldloc.s V_4
+IL_0881: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0886: ldfld Employee DesignDocument::LeadDesigner
+IL_088b: brtrue.s IL_08b7
+IL_088d: ldloc.s V_4
+IL_088f: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0894: ldc.i4.3
+IL_0895: call System.Boolean WorkIssueNotification::CheckAggregate(WorkItem,WorkIssueNotification/Issue)
+IL_089a: brtrue.s IL_08b7
+IL_089c: ldc.i4.3
+IL_089d: ldc.i4.1
+IL_089e: newarr WorkItem
+IL_08a3: dup
+IL_08a4: ldc.i4.0
+IL_08a5: ldloc.s V_4
+IL_08a7: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_08ac: stelem.ref
+IL_08ad: newobj System.Void WorkIssueNotification::.ctor(WorkIssueNotification/Issue,WorkItem[])
+IL_08b2: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_08b7: ldloc.s V_4
+IL_08b9: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_08be: ldfld System.Boolean DesignDocument::HasFinished
+IL_08c3: brtrue.s IL_08e0
+IL_08c5: call SDateTime SDateTime::Now()
+IL_08ca: ldloc.s V_4
+IL_08cc: ldsfld System.Single SoftwareType::DesignRatio
+IL_08d1: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_08d6: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_08db: brfalse IL_0aca
+IL_08e0: ldloc.s V_4
+IL_08e2: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_08e7: ldfld System.Boolean DesignDocument::HasFinished
+IL_08ec: brfalse.s IL_0932
+IL_08ee: ldloc.s V_4
+IL_08f0: ldsfld System.Single SoftwareType::DesignRatio
+IL_08f5: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_08fa: stloc.s V_29
+IL_08fc: call SDateTime SDateTime::Now()
+IL_0901: stloc.s V_30
+IL_0903: ldloc.s V_30
+IL_0905: ldloc.s V_29
+IL_0907: call System.Boolean SDateTime::op_LessThan(SDateTime,SDateTime)
+IL_090c: brfalse.s IL_0932
+IL_090e: ldloc.s V_30
+IL_0910: ldloc.s V_29
+IL_0912: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0917: stloc.s V_31
+IL_0919: ldloc.s V_31
+IL_091b: ldc.r4 1
+IL_0920: ble.un.s IL_0932
+IL_0922: ldloc.s V_4
+IL_0924: dup
+IL_0925: ldfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_092a: ldloc.s V_31
+IL_092c: sub
+IL_092d: stfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_0932: ldarg.0
+IL_0933: ldloc.s V_4
+IL_0935: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_093a: call System.Void AutoDevWorkItem::EndMarketingFor(WorkItem)
+IL_093f: ldloc.s V_4
+IL_0941: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0946: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_094b: stloc.s V_28
+IL_094d: ldloc.s V_28
+IL_094f: brfalse IL_0aca
+IL_0954: ldc.i4.0
+IL_0955: stloc.s V_34
+IL_0957: br.s IL_09a9
+IL_0959: ldloc.s V_4
+IL_095b: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0960: ldloc.s V_34
+IL_0962: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_0967: stloc.s V_35
+IL_0969: ldloc.s V_4
+IL_096b: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0970: ldloc.s V_34
+IL_0972: ldloc.s V_35
+IL_0974: callvirt System.Object SoftwareWorkItem::PromoteAction()
+IL_0979: castclass SoftwareAlpha
+IL_097e: callvirt System.Void System.Collections.Generic.List`1<SoftwareWorkItem>::set_Item(System.Int32,!0)
+IL_0983: ldloc.s V_4
+IL_0985: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_098a: ldloc.s V_34
+IL_098c: callvirt !0 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Item(System.Int32)
+IL_0991: stloc.s V_35
+IL_0993: ldloc.s V_35
+IL_0995: ldc.i4.1
+IL_0996: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_099b: ldloc.s V_35
+IL_099d: ldc.i4.1
+IL_099e: stfld System.Boolean WorkItem::AutoDev
+IL_09a3: ldloc.s V_34
+IL_09a5: ldc.i4.1
+IL_09a6: add
+IL_09a7: stloc.s V_34
+IL_09a9: ldloc.s V_34
+IL_09ab: ldloc.s V_4
+IL_09ad: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_09b2: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareWorkItem>::get_Count()
+IL_09b7: blt.s IL_0959
+IL_09b9: ldarg.0
+IL_09ba: ldnull
+IL_09bb: stfld System.String AutoDevWorkItem::LastDesign
+IL_09c0: ldloc.s V_28
+IL_09c2: castclass SoftwareAlpha
+IL_09c7: stloc.s V_32
+IL_09c9: ldarg.0
+IL_09ca: ldc.i4.0
+IL_09cb: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_09d0: call System.Single Utilities::get_RandomValue()
+IL_09d5: ble.un.s IL_0a54
+IL_09d7: ldarg.0
+IL_09d8: ldc.r4 0.25
+IL_09dd: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_09e2: stloc.s V_36
+IL_09e4: ldloc.s V_36
+IL_09e6: ldc.r4 0.01
+IL_09eb: blt.un.s IL_0a54
+IL_09ed: ldloc.s V_32
+IL_09ef: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_09f4: stloc.s V_23
+IL_09f6: ldc.i4.0
+IL_09f7: stloc.s V_24
+IL_09f9: br.s IL_0a31
+IL_09fb: ldloc.s V_23
+IL_09fd: ldloc.s V_24
+IL_09ff: ldelem.ref
+IL_0a00: dup
+IL_0a01: dup
+IL_0a02: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtTargetQual
+IL_0a07: ldc.r4 1
+IL_0a0c: ldloc.s V_36
+IL_0a0e: sub
+IL_0a0f: conv.r8
+IL_0a10: mul
+IL_0a11: stfld System.Double SoftwareWorkItem/FeatureProgress::ArtTargetQual
+IL_0a16: dup
+IL_0a17: ldfld System.Double SoftwareWorkItem/FeatureProgress::CodeTargetQual
+IL_0a1c: ldc.r4 1
+IL_0a21: ldloc.s V_36
+IL_0a23: sub
+IL_0a24: conv.r8
+IL_0a25: mul
+IL_0a26: stfld System.Double SoftwareWorkItem/FeatureProgress::CodeTargetQual
+IL_0a2b: ldloc.s V_24
+IL_0a2d: ldc.i4.1
+IL_0a2e: add
+IL_0a2f: stloc.s V_24
+IL_0a31: ldloc.s V_24
+IL_0a33: ldloc.s V_23
+IL_0a35: ldlen
+IL_0a36: conv.i4
+IL_0a37: blt.s IL_09fb
+IL_0a39: ldarg.0
+IL_0a3a: ldstr "Design"
+IL_0a3f: ldloc.s V_32
+IL_0a41: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_0a46: ldloc.s V_36
+IL_0a48: ldc.i4.1
+IL_0a49: ldc.i4.0
+IL_0a4a: call System.String Utilities::ToPercent(System.Single,System.Boolean,System.Boolean)
+IL_0a4f: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_0a54: ldloc.s V_32
+IL_0a56: ldc.i4.1
+IL_0a57: stfld System.Boolean WorkItem::AutoDev
+IL_0a5c: ldloc.s V_32
+IL_0a5e: ldc.i4.1
+IL_0a5f: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0a64: ldloc.s V_32
+IL_0a66: ldloc.s V_4
+IL_0a68: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0a6d: ldarg.0
+IL_0a6e: newobj System.Void AutoDevWorkItem/AutoDevItem::.ctor(SoftwareWorkItem,System.Collections.Generic.List`1<SoftwareWorkItem>,AutoDevWorkItem)
+IL_0a73: stloc.s V_33
+IL_0a75: ldloc.s V_33
+IL_0a77: ldloc.s V_4
+IL_0a79: ldfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_0a7e: stfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_0a83: ldloc.s V_33
+IL_0a85: ldloc.s V_4
+IL_0a87: ldfld SDateTime AutoDevWorkItem/AutoDevItem::ActualStartDate
+IL_0a8c: call SDateTime SDateTime::Now()
+IL_0a91: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0a96: stfld System.Single AutoDevWorkItem/AutoDevItem::AlreadyDev
+IL_0a9b: ldloc.s V_33
+IL_0a9d: ldloc.s V_4
+IL_0a9f: ldfld MarketingPlan AutoDevWorkItem/AutoDevItem::Hype
+IL_0aa4: stfld MarketingPlan AutoDevWorkItem/AutoDevItem::Hype
+IL_0aa9: ldarg.0
+IL_0aaa: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0aaf: ldloc.s V_33
+IL_0ab1: callvirt System.Void EventList`1<AutoDevWorkItem/AutoDevItem>::Add(T)
+IL_0ab6: ldarg.0
+IL_0ab7: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0abc: ldloc.s V_4
+IL_0abe: callvirt System.Boolean EventList`1<AutoDevWorkItem/AutoDevItem>::Remove(T)
+IL_0ac3: pop
+IL_0ac4: ldloc.3
+IL_0ac5: ldc.i4.1
+IL_0ac6: sub
+IL_0ac7: stloc.3
+IL_0ac8: ldc.i4.0
+IL_0ac9: stloc.0
+IL_0aca: ldloc.0
+IL_0acb: brfalse IL_0b93
+IL_0ad0: ldloc.s V_4
+IL_0ad2: callvirt System.Boolean AutoDevWorkItem/AutoDevItem::get_InHouse()
+IL_0ad7: brtrue IL_0b93
+IL_0adc: ldloc.s V_4
+IL_0ade: ldfld System.Boolean AutoDevWorkItem/AutoDevItem::PressRelease
+IL_0ae3: brtrue IL_0b93
+IL_0ae8: ldarg.0
+IL_0ae9: ldfld SHashSet`1<System.String> AutoDevWorkItem::MarketingTeams
+IL_0aee: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0af3: ldc.i4.0
+IL_0af4: ble IL_0b93
+IL_0af9: call SDateTime SDateTime::Now()
+IL_0afe: ldloc.s V_4
+IL_0b00: ldsfld System.Single SoftwareType::DesignRatio
+IL_0b05: ldc.r4 0.5
+IL_0b0a: mul
+IL_0b0b: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_0b10: call System.Boolean SDateTime::op_GreaterThan(SDateTime,SDateTime)
+IL_0b15: brfalse.s IL_0b93
+IL_0b17: ldloc.s V_4
+IL_0b19: ldc.i4.1
+IL_0b1a: stfld System.Boolean AutoDevWorkItem/AutoDevItem::PressRelease
+IL_0b1f: ldloc.s V_4
+IL_0b21: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0b26: ldc.i4.2
+IL_0b27: ldc.i4.7
+IL_0b28: ldloc.s V_4
+IL_0b2a: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0b2f: ldfld GUIWorkItem WorkItem::guiItem
+IL_0b34: ldnull
+IL_0b35: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0b3a: brtrue.s IL_0b56
+IL_0b3c: ldloc.s V_4
+IL_0b3e: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0b43: ldfld GUIWorkItem WorkItem::guiItem
+IL_0b48: callvirt UnityEngine.Transform UnityEngine.Component::get_transform()
+IL_0b4d: callvirt System.Int32 UnityEngine.Transform::GetSiblingIndex()
+IL_0b52: ldc.i4.1
+IL_0b53: add
+IL_0b54: br.s IL_0b57
+IL_0b56: ldc.i4.m1
+IL_0b57: newobj System.Void MarketingPlan::.ctor(SoftwareWorkItem,MarketingPlan/TaskType,MarketingPlan/PressOption,System.Int32)
+IL_0b5c: stloc.s V_37
+IL_0b5e: ldloc.s V_37
+IL_0b60: ldc.i4.1
+IL_0b61: stfld System.Boolean WorkItem::AutoDev
+IL_0b66: ldloc.s V_37
+IL_0b68: ldc.i4.1
+IL_0b69: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0b6e: ldarg.0
+IL_0b6f: ldloc.s V_37
+IL_0b71: ldarg.0
+IL_0b72: ldfld SHashSet`1<System.String> AutoDevWorkItem::MarketingTeams
+IL_0b77: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0b7c: ldsfld GameSettings GameSettings::Instance
+IL_0b81: ldfld Company GameSettings::MyCompany
+IL_0b86: ldloc.s V_37
+IL_0b88: callvirt System.Void Company::AddWorkItem(WorkItem)
+IL_0b8d: ldarg.0
+IL_0b8e: call System.Void AutoDevWorkItem::UpdateLists()
+IL_0b93: ldloc.0
+IL_0b94: brfalse.s IL_0b9e
+IL_0b96: ldarg.0
+IL_0b97: ldloc.s V_4
+IL_0b99: call System.Void AutoDevWorkItem::RefreshHype(AutoDevWorkItem/AutoDevItem)
+IL_0b9e: ldloc.3
+IL_0b9f: ldc.i4.1
+IL_0ba0: add
+IL_0ba1: stloc.3
+IL_0ba2: ldloc.3
+IL_0ba3: ldarg.0
+IL_0ba4: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0ba9: callvirt System.Int32 EventList`1<AutoDevWorkItem/AutoDevItem>::get_Count()
+IL_0bae: blt IL_0024
+IL_0bb3: ldloc.1
+IL_0bb4: brtrue.s IL_0bc4
+IL_0bb6: ldarg.0
+IL_0bb7: ldfld SHashSet`1<System.String> AutoDevWorkItem::SDevTeams
+IL_0bbc: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0bc1: ldc.i4.0
+IL_0bc2: bgt.s IL_0bdb
+IL_0bc4: ldloc.2
+IL_0bc5: brtrue IL_0d80
+IL_0bca: ldarg.0
+IL_0bcb: ldfld SHashSet`1<System.String> AutoDevWorkItem::SecondaryDevTeams
+IL_0bd0: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0bd5: ldc.i4.0
+IL_0bd6: ble IL_0d80
+IL_0bdb: ldarg.0
+IL_0bdc: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0be1: ldsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_0
+IL_0be6: dup
+IL_0be7: brtrue.s IL_0c00
+IL_0be9: pop
+IL_0bea: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_0bef: ldftn System.Boolean AutoDevWorkItem/<>c::<Update>b__106_0(AutoDevWorkItem/AutoDevItem)
+IL_0bf5: newobj System.Void System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0bfa: dup
+IL_0bfb: stsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_0
+IL_0c00: callvirt T EventList`1<AutoDevWorkItem/AutoDevItem>::FirstOrDefault(System.Func`2<T,System.Boolean>)
+IL_0c05: stloc.s V_38
+IL_0c07: ldloc.s V_38
+IL_0c09: brfalse IL_0d80
+IL_0c0e: ldsfld HUD HUD::Instance
+IL_0c13: ldstr "AutoLogPMAlpha"
+IL_0c18: ldc.i4.2
+IL_0c19: newarr System.Object
+IL_0c1e: dup
+IL_0c1f: ldc.i4.0
+IL_0c20: ldarg.0
+IL_0c21: ldfld System.String WorkItem::_name
+IL_0c26: stelem.ref
+IL_0c27: dup
+IL_0c28: ldc.i4.1
+IL_0c29: ldloc.s V_38
+IL_0c2b: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0c30: stelem.ref
+IL_0c31: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_0c36: ldloc.s V_38
+IL_0c38: call SDateTime SDateTime::Now()
+IL_0c3d: stfld SDateTime AutoDevWorkItem/AutoDevItem::ActualStartDate
+IL_0c42: ldloc.s V_38
+IL_0c44: callvirt SoftwareWorkItem AutoDevWorkItem/AutoDevItem::get_SWWorkItem()
+IL_0c49: ldc.i4.2
+IL_0c4a: newarr SDateTime
+IL_0c4f: dup
+IL_0c50: ldc.i4.0
+IL_0c51: call SDateTime SDateTime::Now()
+IL_0c56: ldc.i4.1
+IL_0c57: call SDateTime SDateTime::op_Addition(SDateTime,System.Int32)
+IL_0c5c: stelem.any SDateTime
+IL_0c61: dup
+IL_0c62: ldc.i4.1
+IL_0c63: ldloc.s V_38
+IL_0c65: ldc.r4 1
+IL_0c6a: callvirt SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_0c6f: stelem.any SDateTime
+IL_0c74: call SDateTime SDateTime::Max(SDateTime[])
+IL_0c79: newobj System.Void System.Nullable`1<SDateTime>::.ctor(!0)
+IL_0c7e: stfld System.Nullable`1<SDateTime> SoftwareWorkItem::ReleaseDate
+IL_0c83: ldloc.s V_38
+IL_0c85: callvirt SoftwareWorkItem AutoDevWorkItem/AutoDevItem::get_SWWorkItem()
+IL_0c8a: ldc.i4.0
+IL_0c8b: callvirt System.Void SoftwareWorkItem::NetworkSchedule(System.Boolean)
+IL_0c90: ldloc.s V_38
+IL_0c92: ldc.i4.0
+IL_0c93: stfld System.Boolean AutoDevWorkItem/AutoDevItem::Queued
+IL_0c98: ldarg.0
+IL_0c99: ldarg.0
+IL_0c9a: ldnull
+IL_0c9b: call System.Nullable`1<SDateTime> AutoDevWorkItem::GetNextReleaseDate(AutoDevWorkItem/AutoDevItem)
+IL_0ca0: stfld System.Nullable`1<SDateTime> AutoDevWorkItem::NextReleaseDate
+IL_0ca5: ldloc.1
+IL_0ca6: brtrue.s IL_0d18
+IL_0ca8: ldarg.0
+IL_0ca9: ldfld SHashSet`1<System.String> AutoDevWorkItem::SDevTeams
+IL_0cae: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0cb3: ldc.i4.0
+IL_0cb4: ble.s IL_0d18
+IL_0cb6: ldarg.0
+IL_0cb7: ldloc.s V_38
+IL_0cb9: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0cbe: ldarg.0
+IL_0cbf: ldfld SHashSet`1<System.String> AutoDevWorkItem::SDevTeams
+IL_0cc4: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0cc9: ldloc.s V_38
+IL_0ccb: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0cd0: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<SoftwareWorkItem>::GetEnumerator()
+IL_0cd5: stloc.s V_39
+IL_0cd7: br.s IL_0cf0
+IL_0cd9: ldloca.s V_39
+IL_0cdb: call !0 System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::get_Current()
+IL_0ce0: stloc.s V_40
+IL_0ce2: ldarg.0
+IL_0ce3: ldloc.s V_40
+IL_0ce5: ldarg.0
+IL_0ce6: ldfld SHashSet`1<System.String> AutoDevWorkItem::SDevTeams
+IL_0ceb: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0cf0: ldloca.s V_39
+IL_0cf2: call System.Boolean System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::MoveNext()
+IL_0cf7: brtrue.s IL_0cd9
+IL_0cf9: leave.s IL_0d09
+IL_0cfb: ldloca.s V_39
+IL_0cfd: constrained. System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>
+IL_0d03: callvirt System.Void System.IDisposable::Dispose()
+IL_0d08: endfinally
+IL_0d09: ldarg.0
+IL_0d0a: ldloc.s V_38
+IL_0d0c: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0d11: stfld System.String AutoDevWorkItem::LastAlpha
+IL_0d16: br.s IL_0d80
+IL_0d18: ldarg.0
+IL_0d19: ldloc.s V_38
+IL_0d1b: ldfld SoftwareAlpha AutoDevWorkItem/AutoDevItem::Alpha
+IL_0d20: ldarg.0
+IL_0d21: ldfld SHashSet`1<System.String> AutoDevWorkItem::SecondaryDevTeams
+IL_0d26: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0d2b: ldloc.s V_38
+IL_0d2d: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0d32: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<SoftwareWorkItem>::GetEnumerator()
+IL_0d37: stloc.s V_39
+IL_0d39: br.s IL_0d52
+IL_0d3b: ldloca.s V_39
+IL_0d3d: call !0 System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::get_Current()
+IL_0d42: stloc.s V_41
+IL_0d44: ldarg.0
+IL_0d45: ldloc.s V_41
+IL_0d47: ldarg.0
+IL_0d48: ldfld SHashSet`1<System.String> AutoDevWorkItem::SecondaryDevTeams
+IL_0d4d: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0d52: ldloca.s V_39
+IL_0d54: call System.Boolean System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::MoveNext()
+IL_0d59: brtrue.s IL_0d3b
+IL_0d5b: leave.s IL_0d6b
+IL_0d5d: ldloca.s V_39
+IL_0d5f: constrained. System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>
+IL_0d65: callvirt System.Void System.IDisposable::Dispose()
+IL_0d6a: endfinally
+IL_0d6b: ldloc.s V_38
+IL_0d6d: ldc.i4.1
+IL_0d6e: stfld System.Boolean AutoDevWorkItem/AutoDevItem::Secondary
+IL_0d73: ldarg.0
+IL_0d74: ldloc.s V_38
+IL_0d76: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0d7b: stfld System.String AutoDevWorkItem::LastAlpha2
+IL_0d80: ldloc.0
+IL_0d81: brtrue IL_0ef4
+IL_0d86: ldarg.0
+IL_0d87: ldfld SHashSet`1<System.String> AutoDevWorkItem::DesignTeams
+IL_0d8c: callvirt System.Int32 System.Collections.Generic.HashSet`1<System.String>::get_Count()
+IL_0d91: ldc.i4.0
+IL_0d92: ble IL_0ef4
+IL_0d97: ldarg.0
+IL_0d98: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0d9d: ldsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_1
+IL_0da2: dup
+IL_0da3: brtrue.s IL_0dbc
+IL_0da5: pop
+IL_0da6: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_0dab: ldftn System.Boolean AutoDevWorkItem/<>c::<Update>b__106_1(AutoDevWorkItem/AutoDevItem)
+IL_0db1: newobj System.Void System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0db6: dup
+IL_0db7: stsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_1
+IL_0dbc: callvirt T EventList`1<AutoDevWorkItem/AutoDevItem>::FirstOrDefault(System.Func`2<T,System.Boolean>)
+IL_0dc1: stloc.s V_42
+IL_0dc3: ldloc.s V_42
+IL_0dc5: brfalse IL_0e69
+IL_0dca: ldsfld HUD HUD::Instance
+IL_0dcf: ldstr "AutoLogPMDesign"
+IL_0dd4: ldc.i4.2
+IL_0dd5: newarr System.Object
+IL_0dda: dup
+IL_0ddb: ldc.i4.0
+IL_0ddc: ldarg.0
+IL_0ddd: ldfld System.String WorkItem::_name
+IL_0de2: stelem.ref
+IL_0de3: dup
+IL_0de4: ldc.i4.1
+IL_0de5: ldloc.s V_42
+IL_0de7: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0dec: stelem.ref
+IL_0ded: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_0df2: ldloc.s V_42
+IL_0df4: call SDateTime SDateTime::Now()
+IL_0df9: stfld SDateTime AutoDevWorkItem/AutoDevItem::ActualStartDate
+IL_0dfe: ldloc.s V_42
+IL_0e00: ldc.i4.0
+IL_0e01: stfld System.Boolean AutoDevWorkItem/AutoDevItem::Queued
+IL_0e06: ldarg.0
+IL_0e07: ldloc.s V_42
+IL_0e09: callvirt System.String AutoDevWorkItem/AutoDevItem::get_Name()
+IL_0e0e: stfld System.String AutoDevWorkItem::LastDesign
+IL_0e13: ldarg.0
+IL_0e14: ldloc.s V_42
+IL_0e16: ldfld DesignDocument AutoDevWorkItem/AutoDevItem::Document
+IL_0e1b: ldarg.0
+IL_0e1c: ldfld SHashSet`1<System.String> AutoDevWorkItem::DesignTeams
+IL_0e21: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0e26: ldloc.s V_42
+IL_0e28: ldfld System.Collections.Generic.List`1<SoftwareWorkItem> AutoDevWorkItem/AutoDevItem::Addons
+IL_0e2d: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<SoftwareWorkItem>::GetEnumerator()
+IL_0e32: stloc.s V_39
+IL_0e34: br.s IL_0e4d
+IL_0e36: ldloca.s V_39
+IL_0e38: call !0 System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::get_Current()
+IL_0e3d: stloc.s V_43
+IL_0e3f: ldarg.0
+IL_0e40: ldloc.s V_43
+IL_0e42: ldarg.0
+IL_0e43: ldfld SHashSet`1<System.String> AutoDevWorkItem::DesignTeams
+IL_0e48: call System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+IL_0e4d: ldloca.s V_39
+IL_0e4f: call System.Boolean System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>::MoveNext()
+IL_0e54: brtrue.s IL_0e36
+IL_0e56: leave IL_0ef4
+IL_0e5b: ldloca.s V_39
+IL_0e5d: constrained. System.Collections.Generic.List`1/Enumerator<SoftwareWorkItem>
+IL_0e63: callvirt System.Void System.IDisposable::Dispose()
+IL_0e68: endfinally
+IL_0e69: ldarg.0
+IL_0e6a: ldfld System.Boolean AutoDevWorkItem::AutoProject
+IL_0e6f: brfalse.s IL_0edf
+IL_0e71: ldarg.0
+IL_0e72: ldloca.s V_44
+IL_0e74: call SoftwareWorkItem AutoDevWorkItem::GenerateProduct(System.Collections.Generic.List`1<SoftwareWorkItem>&)
+IL_0e79: stloc.s V_45
+IL_0e7b: ldloc.s V_45
+IL_0e7d: brfalse.s IL_0ef4
+IL_0e7f: ldsfld HUD HUD::Instance
+IL_0e84: ldstr "AutoLogPMNewProj"
+IL_0e89: ldc.i4.2
+IL_0e8a: newarr System.Object
+IL_0e8f: dup
+IL_0e90: ldc.i4.0
+IL_0e91: ldarg.0
+IL_0e92: ldfld System.String WorkItem::_name
+IL_0e97: stelem.ref
+IL_0e98: dup
+IL_0e99: ldc.i4.1
+IL_0e9a: ldloc.s V_45
+IL_0e9c: ldfld System.String SoftwareWorkItem::SoftwareName
+IL_0ea1: stelem.ref
+IL_0ea2: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_0ea7: ldloc.s V_45
+IL_0ea9: ldc.i4.1
+IL_0eaa: stfld System.Boolean WorkItem::AutoDev
+IL_0eaf: ldloc.s V_45
+IL_0eb1: ldc.i4.1
+IL_0eb2: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0eb7: ldsfld GameSettings GameSettings::Instance
+IL_0ebc: ldfld Company GameSettings::MyCompany
+IL_0ec1: ldloc.s V_45
+IL_0ec3: callvirt System.Void Company::AddWorkItem(WorkItem)
+IL_0ec8: ldarg.0
+IL_0ec9: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0ece: ldloc.s V_45
+IL_0ed0: ldloc.s V_44
+IL_0ed2: ldarg.0
+IL_0ed3: newobj System.Void AutoDevWorkItem/AutoDevItem::.ctor(SoftwareWorkItem,System.Collections.Generic.List`1<SoftwareWorkItem>,AutoDevWorkItem)
+IL_0ed8: callvirt System.Void EventList`1<AutoDevWorkItem/AutoDevItem>::Add(T)
+IL_0edd: br.s IL_0ef4
+IL_0edf: ldarg.0
+IL_0ee0: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0ee5: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0eea: ldc.i4.0
+IL_0eeb: ble.s IL_0ef4
+IL_0eed: ldarg.0
+IL_0eee: ldc.i4.0
+IL_0eef: call System.Void NotificationManager::RemoveAggregate<AutoDevAssignNotification>(System.Object,System.UInt32)
+IL_0ef4: ldloc.0
+IL_0ef5: ldloc.1
+IL_0ef6: or
+IL_0ef7: ldloc.2
+IL_0ef8: or
+IL_0ef9: brtrue.s IL_0f36
+IL_0efb: ldarg.0
+IL_0efc: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0f01: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_0f06: ldc.i4.0
+IL_0f07: bgt.s IL_0f36
+IL_0f09: ldarg.0
+IL_0f0a: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0f0f: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::get_Count()
+IL_0f14: ldc.i4.0
+IL_0f15: bgt.s IL_0f36
+IL_0f17: ldarg.0
+IL_0f18: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_0f1d: callvirt System.Int32 System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Count()
+IL_0f22: ldc.i4.0
+IL_0f23: bgt.s IL_0f36
+IL_0f25: ldarg.0
+IL_0f26: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_0f2b: callvirt System.Int32 System.Collections.Generic.List`1<SoftwarePort>::get_Count()
+IL_0f30: ldc.i4.0
+IL_0f31: ble IL_0fe1
+IL_0f36: ldarg.0
+IL_0f37: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0f3c: ldsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_2
+IL_0f41: dup
+IL_0f42: brtrue.s IL_0f5b
+IL_0f44: pop
+IL_0f45: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_0f4a: ldftn System.Boolean AutoDevWorkItem/<>c::<Update>b__106_2(AutoDevWorkItem/AutoDevItem)
+IL_0f50: newobj System.Void System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0f55: dup
+IL_0f56: stsfld System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean> AutoDevWorkItem/<>c::<>9__106_2
+IL_0f5b: call System.Int32 Utilities::Count<AutoDevWorkItem/AutoDevItem>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0f60: conv.r4
+IL_0f61: ldarg.0
+IL_0f62: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0f67: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_0f6c: conv.r4
+IL_0f6d: ldc.r4 0.25
+IL_0f72: mul
+IL_0f73: add
+IL_0f74: ldarg.0
+IL_0f75: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0f7a: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::get_Count()
+IL_0f7f: conv.r4
+IL_0f80: ldc.r4 0.1
+IL_0f85: mul
+IL_0f86: add
+IL_0f87: ldarg.0
+IL_0f88: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_0f8d: callvirt System.Int32 System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Count()
+IL_0f92: conv.r4
+IL_0f93: ldc.r4 0.1
+IL_0f98: mul
+IL_0f99: add
+IL_0f9a: ldarg.0
+IL_0f9b: ldfld System.Collections.Generic.List`1<SoftwarePort> AutoDevWorkItem::PortingItems
+IL_0fa0: callvirt System.Int32 System.Collections.Generic.List`1<SoftwarePort>::get_Count()
+IL_0fa5: conv.r4
+IL_0fa6: ldc.r4 0.25
+IL_0fab: mul
+IL_0fac: add
+IL_0fad: stloc.s V_46
+IL_0faf: ldloc.s V_46
+IL_0fb1: ldc.r4 4
+IL_0fb6: div
+IL_0fb7: stloc.s V_46
+IL_0fb9: ldarg.0
+IL_0fba: ldloc.s V_46
+IL_0fbc: stfld System.Single AutoDevWorkItem::LastEffLoss
+IL_0fc1: ldarg.0
+IL_0fc2: ldc.r4 0
+IL_0fc7: ldarg.0
+IL_0fc8: ldfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0fcd: ldloc.s V_46
+IL_0fcf: ldarg.1
+IL_0fd0: ldc.i4.0
+IL_0fd1: call System.Single Utilities::PerDay(System.Single,System.Single,System.Boolean)
+IL_0fd6: sub
+IL_0fd7: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_0fdc: stfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0fe1: ret
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdateSupportMarket(System.Boolean)
+LOCAL 0 System.Boolean
+LOCAL 1 SDateTime
+LOCAL 2 System.Int32
+LOCAL 3 SupportWork
+LOCAL 4 SoftwareProduct
+LOCAL 5 System.Int32
+LOCAL 6 System.Int32
+LOCAL 7 MarketingPlan
+LOCAL 8 IMarketable
+LOCAL 9 System.Single
+LOCAL 10 System.Int32
+LOCAL 11 System.Single
+LOCAL 12 SoftwareProduct
+LOCAL 13 System.Single
+LOCAL 14 AddOnProduct
+LOCAL 15 SoftwareProduct
+LOCAL 16 System.Single
+LOCAL 17 System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>
+LOCAL 18 System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>
+LOCAL 19 SoftwareUpdate
+LOCAL 20 System.Int32
+LOCAL 21 System.Int32
+LOCAL 22 System.Int32
+LOCAL 23 System.Int32
+LOCAL 24 System.Int32
+LOCAL 25 System.Collections.Generic.List`1<SoftwareProduct>
+LOCAL 26 System.Int32
+LOCAL 27 System.Int32
+IL_0000: ldarg.1
+IL_0001: brfalse.s IL_001a
+IL_0003: ldarg.0
+IL_0004: call Actor AutoDevWorkItem::get_Leader()
+IL_0009: ldnull
+IL_000a: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000f: brtrue.s IL_0019
+IL_0011: ldarg.0
+IL_0012: callvirt System.Boolean WorkItem::get_Paused()
+IL_0017: brfalse.s IL_001a
+IL_0019: ret
+IL_001a: ldc.i4.0
+IL_001b: stloc.0
+IL_001c: call SDateTime SDateTime::Now()
+IL_0021: stloc.1
+IL_0022: ldc.i4.0
+IL_0023: stloc.2
+IL_0024: br IL_0107
+IL_0029: ldarg.0
+IL_002a: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_002f: ldloc.2
+IL_0030: callvirt !0 System.Collections.Generic.List`1<SupportWork>::get_Item(System.Int32)
+IL_0035: stloc.3
+IL_0036: ldloc.3
+IL_0037: ldfld SoftwareProduct SupportWork::TargetProduct
+IL_003c: stloc.s V_4
+IL_003e: ldloc.s V_4
+IL_0040: ldfld SDateTime SoftwareProduct::Release
+IL_0045: ldloc.1
+IL_0046: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_004b: ldc.r4 3
+IL_0050: blt.un.s IL_00a9
+IL_0052: ldloc.s V_4
+IL_0054: callvirt System.Int32 SoftwareProduct::get_Bugss()
+IL_0059: brfalse.s IL_0066
+IL_005b: ldloc.s V_4
+IL_005d: ldfld System.Int32 SoftwareProduct::Userbase
+IL_0062: ldc.i4.s 100
+IL_0064: bge.s IL_00a9
+IL_0066: ldsfld HUD HUD::Instance
+IL_006b: ldstr "AutoLogPMEndSupport"
+IL_0070: ldc.i4.2
+IL_0071: newarr System.Object
+IL_0076: dup
+IL_0077: ldc.i4.0
+IL_0078: ldarg.0
+IL_0079: ldfld System.String WorkItem::_name
+IL_007e: stelem.ref
+IL_007f: dup
+IL_0080: ldc.i4.1
+IL_0081: ldloc.s V_4
+IL_0083: ldfld System.String SoftwareProduct::Name
+IL_0088: stelem.ref
+IL_0089: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_008e: ldarg.0
+IL_008f: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_0094: ldloc.2
+IL_0095: callvirt System.Void System.Collections.Generic.List`1<SupportWork>::RemoveAt(System.Int32)
+IL_009a: ldloc.3
+IL_009b: ldc.i4.0
+IL_009c: callvirt System.Void SupportWork::CancelSupport(System.Boolean)
+IL_00a1: ldc.i4.1
+IL_00a2: stloc.0
+IL_00a3: ldloc.2
+IL_00a4: ldc.i4.1
+IL_00a5: sub
+IL_00a6: stloc.2
+IL_00a7: br.s IL_0103
+IL_00a9: ldarg.1
+IL_00aa: brfalse.s IL_0103
+IL_00ac: ldarg.0
+IL_00ad: ldc.i4.1
+IL_00ae: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_00b3: call System.Single Utilities::get_RandomValue()
+IL_00b8: ble.un.s IL_0103
+IL_00ba: ldarg.0
+IL_00bb: ldloc.s V_4
+IL_00bd: callvirt System.Int32 SoftwareProduct::get_FixableBugs()
+IL_00c2: conv.r4
+IL_00c3: ldc.r4 0.5
+IL_00c8: mul
+IL_00c9: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_00ce: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_00d3: stloc.s V_5
+IL_00d5: ldloc.s V_5
+IL_00d7: ldc.i4.1
+IL_00d8: ble.s IL_0103
+IL_00da: ldloc.s V_4
+IL_00dc: dup
+IL_00dd: ldfld System.Int32 SoftwareProduct::VerifiedBugs
+IL_00e2: ldloc.s V_5
+IL_00e4: sub
+IL_00e5: stfld System.Int32 SoftwareProduct::VerifiedBugs
+IL_00ea: ldarg.0
+IL_00eb: ldstr "Support"
+IL_00f0: ldloc.s V_4
+IL_00f2: ldfld System.String SoftwareProduct::Name
+IL_00f7: ldloca.s V_5
+IL_00f9: call System.String System.Int32::ToString()
+IL_00fe: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_0103: ldloc.2
+IL_0104: ldc.i4.1
+IL_0105: add
+IL_0106: stloc.2
+IL_0107: ldloc.2
+IL_0108: ldarg.0
+IL_0109: ldfld System.Collections.Generic.List`1<SupportWork> AutoDevWorkItem::SupportItems
+IL_010e: callvirt System.Int32 System.Collections.Generic.List`1<SupportWork>::get_Count()
+IL_0113: blt IL_0029
+IL_0118: ldc.i4.0
+IL_0119: stloc.s V_6
+IL_011b: br IL_02c8
+IL_0120: ldarg.0
+IL_0121: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0126: ldloc.s V_6
+IL_0128: callvirt !0 System.Collections.Generic.List`1<MarketingPlan>::get_Item(System.Int32)
+IL_012d: stloc.s V_7
+IL_012f: ldloc.s V_7
+IL_0131: ldfld IMarketable MarketingPlan::TargetProduct
+IL_0136: stloc.s V_8
+IL_0138: ldc.r4 0
+IL_013d: stloc.s V_9
+IL_013f: ldloc.s V_8
+IL_0141: callvirt System.Int32 IMarketable::GetSalesMonths()
+IL_0146: stloc.s V_10
+IL_0148: ldloc.s V_10
+IL_014a: ldc.i4.0
+IL_014b: ble IL_0253
+IL_0150: ldc.r4 5000
+IL_0155: stloc.s V_11
+IL_0157: ldloc.s V_8
+IL_0159: isinst SoftwareProduct
+IL_015e: dup
+IL_015f: stloc.s V_12
+IL_0161: brfalse.s IL_0188
+IL_0163: call MarketSimulation MarketSimulation::get_Active()
+IL_0168: ldloc.s V_12
+IL_016a: callvirt System.Single MarketSimulation::GetMaxAwareness(SoftwareProduct)
+IL_016f: ldloc.s V_12
+IL_0171: callvirt System.Single SoftwareProduct::GetRealAwareness()
+IL_0176: sub
+IL_0177: ldsfld System.Single MarketingPlan::PostMarketingPrice
+IL_017c: mul
+IL_017d: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0182: conv.r4
+IL_0183: div
+IL_0184: stloc.s V_11
+IL_0186: br.s IL_01b9
+IL_0188: ldloc.s V_8
+IL_018a: isinst AddOnProduct
+IL_018f: dup
+IL_0190: stloc.s V_14
+IL_0192: brfalse.s IL_01b9
+IL_0194: ldloc.s V_14
+IL_0196: ldfld SoftwareProduct AddOnProduct::Parent
+IL_019b: ldloc.s V_14
+IL_019d: callvirt System.Single SoftwareProduct::GetMaxAwareness(AddOnProduct)
+IL_01a2: ldloc.s V_14
+IL_01a4: callvirt System.Single AddOnProduct::GetRealAwareness()
+IL_01a9: sub
+IL_01aa: ldsfld System.Single MarketingPlan::PostMarketingPrice
+IL_01af: mul
+IL_01b0: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_01b5: conv.r4
+IL_01b6: div
+IL_01b7: stloc.s V_11
+IL_01b9: ldc.r4 0
+IL_01be: ldloc.s V_11
+IL_01c0: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_01c5: stloc.s V_11
+IL_01c7: ldloc.s V_8
+IL_01c9: ldc.i4.1
+IL_01ca: callvirt System.Single IMarketable::GetLastDayIncome(System.Boolean)
+IL_01cf: stloc.s V_13
+IL_01d1: ldloc.s V_10
+IL_01d3: ldc.i4.3
+IL_01d4: blt.s IL_022f
+IL_01d6: ldloc.s V_13
+IL_01d8: ldc.r4 1000
+IL_01dd: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_01e2: conv.r4
+IL_01e3: div
+IL_01e4: bge.un.s IL_022f
+IL_01e6: ldsfld HUD HUD::Instance
+IL_01eb: ldstr "AutoLogPMEndMarketing"
+IL_01f0: ldc.i4.2
+IL_01f1: newarr System.Object
+IL_01f6: dup
+IL_01f7: ldc.i4.0
+IL_01f8: ldarg.0
+IL_01f9: ldfld System.String WorkItem::_name
+IL_01fe: stelem.ref
+IL_01ff: dup
+IL_0200: ldc.i4.1
+IL_0201: ldloc.s V_8
+IL_0203: callvirt System.String IMarketable::GetName()
+IL_0208: stelem.ref
+IL_0209: callvirt System.Void HUD::LogAuto(System.String,System.Object[])
+IL_020e: ldarg.0
+IL_020f: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_0214: ldloc.s V_6
+IL_0216: callvirt System.Void System.Collections.Generic.List`1<MarketingPlan>::RemoveAt(System.Int32)
+IL_021b: ldloc.s V_7
+IL_021d: callvirt System.Void MarketingPlan::StopMarketing()
+IL_0222: ldc.i4.1
+IL_0223: stloc.0
+IL_0224: ldloc.s V_6
+IL_0226: ldc.i4.1
+IL_0227: sub
+IL_0228: stloc.s V_6
+IL_022a: br IL_02c2
+IL_022f: ldloc.s V_10
+IL_0231: ldc.i4.3
+IL_0232: bgt.s IL_0238
+IL_0234: ldloc.s V_11
+IL_0236: br.s IL_0251
+IL_0238: ldloc.s V_11
+IL_023a: ldc.r4 5000
+IL_023f: ldloc.s V_13
+IL_0241: ldc.r4 4
+IL_0246: div
+IL_0247: call System.Single UnityEngine.Mathf::Max(System.Single,System.Single)
+IL_024c: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_0251: stloc.s V_9
+IL_0253: ldloc.s V_7
+IL_0255: ldloc.s V_9
+IL_0257: stfld System.Single MarketingPlan::MaxBudget
+IL_025c: ldarg.1
+IL_025d: brfalse.s IL_02c2
+IL_025f: ldloc.s V_8
+IL_0261: isinst SoftwareProduct
+IL_0266: dup
+IL_0267: stloc.s V_15
+IL_0269: brfalse.s IL_02c2
+IL_026b: ldarg.0
+IL_026c: ldc.i4.1
+IL_026d: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_0272: call System.Single Utilities::get_RandomValue()
+IL_0277: ble.un.s IL_02c2
+IL_0279: ldarg.0
+IL_027a: ldc.r4 0.25
+IL_027f: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_0284: stloc.s V_16
+IL_0286: ldloc.s V_16
+IL_0288: ldc.r4 0.01
+IL_028d: blt.un.s IL_02c2
+IL_028f: ldloc.s V_15
+IL_0291: ldloc.s V_15
+IL_0293: callvirt System.Single SoftwareProduct::GetRealAwareness()
+IL_0298: ldc.r4 1
+IL_029d: ldloc.s V_16
+IL_029f: sub
+IL_02a0: mul
+IL_02a1: ldc.i4.0
+IL_02a2: callvirt System.Void SoftwareProduct::SetAwareness(System.Single,System.Boolean)
+IL_02a7: ldarg.0
+IL_02a8: ldstr "Marketing"
+IL_02ad: ldloc.s V_15
+IL_02af: ldfld System.String SoftwareProduct::Name
+IL_02b4: ldloc.s V_16
+IL_02b6: ldc.i4.1
+IL_02b7: ldc.i4.0
+IL_02b8: call System.String Utilities::ToPercent(System.Single,System.Boolean,System.Boolean)
+IL_02bd: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_02c2: ldloc.s V_6
+IL_02c4: ldc.i4.1
+IL_02c5: add
+IL_02c6: stloc.s V_6
+IL_02c8: ldloc.s V_6
+IL_02ca: ldarg.0
+IL_02cb: ldfld System.Collections.Generic.List`1<MarketingPlan> AutoDevWorkItem::MarketingItems
+IL_02d0: callvirt System.Int32 System.Collections.Generic.List`1<MarketingPlan>::get_Count()
+IL_02d5: blt IL_0120
+IL_02da: ldarg.0
+IL_02db: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_02e0: callvirt System.Int32 System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::get_Count()
+IL_02e5: ldc.i4.0
+IL_02e6: ble IL_03c5
+IL_02eb: ldarg.0
+IL_02ec: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_02f1: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_02f6: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>::GetEnumerator()
+IL_02fb: stloc.s V_17
+IL_02fd: br IL_03a9
+IL_0302: ldloca.s V_17
+IL_0304: call !0 System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>::get_Current()
+IL_0309: stloc.s V_18
+IL_030b: ldloca.s V_18
+IL_030d: call !0 System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>::get_Key()
+IL_0312: stloc.s V_19
+IL_0314: ldloc.s V_19
+IL_0316: ldfld System.Boolean SoftwareUpdate::HasFinished
+IL_031b: brfalse IL_03a9
+IL_0320: ldloca.s V_18
+IL_0322: call !1 System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>::get_Value()
+IL_0327: ldloc.1
+IL_0328: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_032d: ldarg.0
+IL_032e: ldfld System.Int32 AutoDevWorkItem::UpdateCooldown
+IL_0333: conv.r4
+IL_0334: blt.un.s IL_03a9
+IL_0336: ldarg.0
+IL_0337: ldc.i4.0
+IL_0338: call System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+IL_033d: call System.Single Utilities::get_RandomValue()
+IL_0342: ble.un.s IL_0392
+IL_0344: ldarg.0
+IL_0345: ldloc.s V_19
+IL_0347: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_034c: ldc.r4 0.5
+IL_0351: mul
+IL_0352: call System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+IL_0357: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_035c: stloc.s V_20
+IL_035e: ldloc.s V_20
+IL_0360: ldc.i4.1
+IL_0361: ble.s IL_0392
+IL_0363: ldloc.s V_19
+IL_0365: dup
+IL_0366: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_036b: ldloc.s V_20
+IL_036d: conv.r4
+IL_036e: sub
+IL_036f: stfld System.Single SoftwareUpdate::FixedBugs
+IL_0374: ldarg.0
+IL_0375: ldstr "Update"
+IL_037a: ldloc.s V_19
+IL_037c: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_0381: ldfld System.String SoftwareProduct::Name
+IL_0386: ldloca.s V_20
+IL_0388: call System.String System.Int32::ToString()
+IL_038d: call System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+IL_0392: ldloc.s V_19
+IL_0394: callvirt System.Void SoftwareUpdate::Finish()
+IL_0399: ldarg.0
+IL_039a: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_039f: ldloc.s V_19
+IL_03a1: callvirt System.Boolean System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::Remove(!0)
+IL_03a6: pop
+IL_03a7: ldc.i4.1
+IL_03a8: stloc.0
+IL_03a9: ldloca.s V_17
+IL_03ab: call System.Boolean System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>::MoveNext()
+IL_03b0: brtrue IL_0302
+IL_03b5: leave.s IL_03c5
+IL_03b7: ldloca.s V_17
+IL_03b9: constrained. System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<SoftwareUpdate,SDateTime>>
+IL_03bf: callvirt System.Void System.IDisposable::Dispose()
+IL_03c4: endfinally
+IL_03c5: ldarg.0
+IL_03c6: ldarg.0
+IL_03c7: ldfld System.Boolean AutoDevWorkItem::Updates
+IL_03cc: ldc.i4.3
+IL_03cd: ldc.i4.0
+IL_03ce: call T AutoDevWorkItem::GetSpecValue<System.Boolean>(T,System.Int32,T)
+IL_03d3: brfalse.s IL_0437
+IL_03d5: ldc.i4.0
+IL_03d6: stloc.s V_21
+IL_03d8: br.s IL_03f7
+IL_03da: ldloc.0
+IL_03db: ldarg.0
+IL_03dc: ldarg.0
+IL_03dd: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_03e2: ldloc.s V_21
+IL_03e4: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_03e9: ldloc.1
+IL_03ea: call System.Boolean AutoDevWorkItem::UpdateCheck(SoftwareProduct,SDateTime)
+IL_03ef: or
+IL_03f0: stloc.0
+IL_03f1: ldloc.s V_21
+IL_03f3: ldc.i4.1
+IL_03f4: add
+IL_03f5: stloc.s V_21
+IL_03f7: ldloc.s V_21
+IL_03f9: ldarg.0
+IL_03fa: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_03ff: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0404: blt.s IL_03da
+IL_0406: ldc.i4.0
+IL_0407: stloc.s V_22
+IL_0409: br.s IL_0428
+IL_040b: ldloc.0
+IL_040c: ldarg.0
+IL_040d: ldarg.0
+IL_040e: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0413: ldloc.s V_22
+IL_0415: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_041a: ldloc.1
+IL_041b: call System.Boolean AutoDevWorkItem::UpdateCheck(SoftwareProduct,SDateTime)
+IL_0420: or
+IL_0421: stloc.0
+IL_0422: ldloc.s V_22
+IL_0424: ldc.i4.1
+IL_0425: add
+IL_0426: stloc.s V_22
+IL_0428: ldloc.s V_22
+IL_042a: ldarg.0
+IL_042b: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0430: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0435: blt.s IL_040b
+IL_0437: ldarg.0
+IL_0438: ldarg.0
+IL_0439: ldfld System.Boolean AutoDevWorkItem::AutoDistribution
+IL_043e: ldc.i4.3
+IL_043f: ldc.i4.0
+IL_0440: call T AutoDevWorkItem::GetSpecValue<System.Boolean>(T,System.Int32,T)
+IL_0445: brfalse.s IL_04a3
+IL_0447: ldc.i4.0
+IL_0448: stloc.s V_23
+IL_044a: br.s IL_0466
+IL_044c: ldarg.0
+IL_044d: ldarg.0
+IL_044e: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_0453: ldloc.s V_23
+IL_0455: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_045a: ldloc.1
+IL_045b: call System.Void AutoDevWorkItem::DistributionCheck(SoftwareProduct,SDateTime)
+IL_0460: ldloc.s V_23
+IL_0462: ldc.i4.1
+IL_0463: add
+IL_0464: stloc.s V_23
+IL_0466: ldloc.s V_23
+IL_0468: ldarg.0
+IL_0469: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_046e: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0473: blt.s IL_044c
+IL_0475: ldc.i4.0
+IL_0476: stloc.s V_24
+IL_0478: br.s IL_0494
+IL_047a: ldarg.0
+IL_047b: ldarg.0
+IL_047c: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0481: ldloc.s V_24
+IL_0483: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_0488: ldloc.1
+IL_0489: call System.Void AutoDevWorkItem::DistributionCheck(SoftwareProduct,SDateTime)
+IL_048e: ldloc.s V_24
+IL_0490: ldc.i4.1
+IL_0491: add
+IL_0492: stloc.s V_24
+IL_0494: ldloc.s V_24
+IL_0496: ldarg.0
+IL_0497: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_049c: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_04a1: blt.s IL_047a
+IL_04a3: ldarg.0
+IL_04a4: ldarg.0
+IL_04a5: ldfld System.Boolean AutoDevWorkItem::Porting
+IL_04aa: ldc.i4.3
+IL_04ab: ldc.i4.0
+IL_04ac: call T AutoDevWorkItem::GetSpecValue<System.Boolean>(T,System.Int32,T)
+IL_04b1: brfalse IL_054a
+IL_04b6: call MarketSimulation MarketSimulation::get_Active()
+IL_04bb: ldc.i4.0
+IL_04bc: callvirt System.Collections.Generic.IEnumerable`1<SoftwareProduct> MarketSimulation::GetAllProducts(System.Boolean)
+IL_04c1: ldsfld System.Func`2<SoftwareProduct,System.Boolean> AutoDevWorkItem/<>c::<>9__109_0
+IL_04c6: dup
+IL_04c7: brtrue.s IL_04e0
+IL_04c9: pop
+IL_04ca: ldsfld AutoDevWorkItem/<>c AutoDevWorkItem/<>c::<>9
+IL_04cf: ldftn System.Boolean AutoDevWorkItem/<>c::<UpdateSupportMarket>b__109_0(SoftwareProduct)
+IL_04d5: newobj System.Void System.Func`2<SoftwareProduct,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_04da: dup
+IL_04db: stsfld System.Func`2<SoftwareProduct,System.Boolean> AutoDevWorkItem/<>c::<>9__109_0
+IL_04e0: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SoftwareProduct>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_04e5: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareProduct>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_04ea: stloc.s V_25
+IL_04ec: ldc.i4.0
+IL_04ed: stloc.s V_26
+IL_04ef: br.s IL_050c
+IL_04f1: ldarg.0
+IL_04f2: ldarg.0
+IL_04f3: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_04f8: ldloc.s V_26
+IL_04fa: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_04ff: ldloc.s V_25
+IL_0501: call System.Void AutoDevWorkItem::PortCheck(SoftwareProduct,System.Collections.Generic.List`1<SoftwareProduct>)
+IL_0506: ldloc.s V_26
+IL_0508: ldc.i4.1
+IL_0509: add
+IL_050a: stloc.s V_26
+IL_050c: ldloc.s V_26
+IL_050e: ldarg.0
+IL_050f: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PastReleases
+IL_0514: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0519: blt.s IL_04f1
+IL_051b: ldc.i4.0
+IL_051c: stloc.s V_27
+IL_051e: br.s IL_053b
+IL_0520: ldarg.0
+IL_0521: ldarg.0
+IL_0522: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0527: ldloc.s V_27
+IL_0529: callvirt !0 System.Collections.Generic.List`1<SoftwareProduct>::get_Item(System.Int32)
+IL_052e: ldloc.s V_25
+IL_0530: call System.Void AutoDevWorkItem::PortCheck(SoftwareProduct,System.Collections.Generic.List`1<SoftwareProduct>)
+IL_0535: ldloc.s V_27
+IL_0537: ldc.i4.1
+IL_0538: add
+IL_0539: stloc.s V_27
+IL_053b: ldloc.s V_27
+IL_053d: ldarg.0
+IL_053e: ldfld System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::PreviousSoftware
+IL_0543: callvirt System.Int32 System.Collections.Generic.List`1<SoftwareProduct>::get_Count()
+IL_0548: blt.s IL_0520
+IL_054a: ldloc.0
+IL_054b: brfalse.s IL_0553
+IL_054d: ldarg.0
+IL_054e: call System.Void AutoDevWorkItem::UpdateLists()
+IL_0553: ret
+METHOD Private, HideBySig System.Void AutoDevWorkItem::UpdateZeroPrintJob(IStockable,System.Boolean)
+LOCAL 0 PrintJob
+IL_0000: ldsfld GameSettings GameSettings::Instance
+IL_0005: ldarg.1
+IL_0006: callvirt PrintJob GameSettings::GetPrintJob(IStockable)
+IL_000b: stloc.0
+IL_000c: ldloc.0
+IL_000d: brfalse.s IL_002b
+IL_000f: ldarg.2
+IL_0010: brfalse.s IL_001f
+IL_0012: ldsfld GameSettings GameSettings::Instance
+IL_0017: ldloc.0
+IL_0018: ldc.i4.0
+IL_0019: callvirt System.Void GameSettings::CancelPrintOrder(PrintJob,System.Boolean)
+IL_001e: ret
+IL_001f: ldloc.0
+IL_0020: ldc.i4.0
+IL_0021: newobj System.Void System.Nullable`1<System.UInt32>::.ctor(!0)
+IL_0026: stfld System.Nullable`1<System.UInt32> PrintJob::Maximum
+IL_002b: ret
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::UpdateCheck(SoftwareProduct,SDateTime)
+LOCAL 0 AutoDevWorkItem/<>c__DisplayClass115_0
+LOCAL 1 System.Collections.Generic.Dictionary`2<System.String,TechLevel>
+LOCAL 2 System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>
+LOCAL 3 System.Collections.Generic.Dictionary`2/Enumerator<System.String,TechLevel>
+LOCAL 4 System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>
+LOCAL 5 AutoDevWorkItem/<>c__DisplayClass115_1
+LOCAL 6 TechLevel
+LOCAL 7 SpecFeature
+LOCAL 8 System.Boolean
+LOCAL 9 System.String[]
+LOCAL 10 System.Int32
+LOCAL 11 System.String
+LOCAL 12 SoftwareProduct
+LOCAL 13 TechLevel
+LOCAL 14 SoftwareProduct
+LOCAL 15 SoftwareUpdate
+IL_0000: newobj System.Void AutoDevWorkItem/<>c__DisplayClass115_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_000d: ldloc.0
+IL_000e: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_0013: callvirt System.Boolean SoftwareProduct::get_Archived()
+IL_0018: brfalse.s IL_001c
+IL_001a: ldc.i4.0
+IL_001b: ret
+IL_001c: ldloc.0
+IL_001d: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_0022: callvirt System.Int32 SoftwareProduct::get_FixableBugs()
+IL_0027: ldc.i4.0
+IL_0028: bgt.s IL_0035
+IL_002a: ldarg.0
+IL_002b: ldfld System.Boolean AutoDevWorkItem::TechUpdates
+IL_0030: brfalse IL_028b
+IL_0035: ldloc.0
+IL_0036: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_003b: ldfld SDateTime SoftwareProduct::Release
+IL_0040: ldarg.2
+IL_0041: call System.Single SDateTime::GetMonths(SDateTime,SDateTime)
+IL_0046: ldarg.0
+IL_0047: ldfld System.Int32 AutoDevWorkItem::UpdateMonths
+IL_004c: conv.r4
+IL_004d: bgt.un IL_028b
+IL_0052: ldsfld GameSettings GameSettings::Instance
+IL_0057: ldfld Company GameSettings::MyCompany
+IL_005c: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_0061: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SoftwareUpdate>(System.Collections.IEnumerable)
+IL_0066: ldloc.0
+IL_0067: ldftn System.Boolean AutoDevWorkItem/<>c__DisplayClass115_0::<UpdateCheck>b__0(SoftwareUpdate)
+IL_006d: newobj System.Void System.Func`2<SoftwareUpdate,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0072: call System.Boolean Utilities::None<SoftwareUpdate>(System.Collections.Generic.IEnumerable`1<TSource>,System.Func`2<TSource,System.Boolean>)
+IL_0077: brfalse IL_028b
+IL_007c: ldnull
+IL_007d: stloc.1
+IL_007e: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>::.ctor()
+IL_0083: stloc.2
+IL_0084: ldarg.0
+IL_0085: ldfld System.Boolean AutoDevWorkItem::TechUpdates
+IL_008a: brfalse IL_0216
+IL_008f: ldloc.0
+IL_0090: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_0095: callvirt System.Boolean SoftwareProduct::get_HasSequel()
+IL_009a: brtrue IL_0216
+IL_009f: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,TechLevel>::.ctor()
+IL_00a4: stloc.1
+IL_00a5: ldloc.0
+IL_00a6: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_00ab: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareProduct::TechLevels
+IL_00b0: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.String,TechLevel>::GetEnumerator()
+IL_00b5: stloc.3
+IL_00b6: br IL_01ea
+IL_00bb: ldloca.s V_3
+IL_00bd: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.String,TechLevel>::get_Current()
+IL_00c2: stloc.s V_4
+IL_00c4: newobj System.Void AutoDevWorkItem/<>c__DisplayClass115_1::.ctor()
+IL_00c9: stloc.s V_5
+IL_00cb: ldloc.s V_5
+IL_00cd: ldloca.s V_4
+IL_00cf: call !0 System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>::get_Key()
+IL_00d4: stfld System.String AutoDevWorkItem/<>c__DisplayClass115_1::spec
+IL_00d9: ldsfld GameSettings GameSettings::Instance
+IL_00de: ldfld MarketSimulation GameSettings::simulation
+IL_00e3: ldloc.s V_5
+IL_00e5: ldfld System.String AutoDevWorkItem/<>c__DisplayClass115_1::spec
+IL_00ea: call SDateTime SDateTime::Now()
+IL_00ef: ldloc.0
+IL_00f0: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_00f5: callvirt SoftwareCategory SoftwareProduct::get_SWCat()
+IL_00fa: ldsfld GameSettings GameSettings::Instance
+IL_00ff: ldfld Company GameSettings::MyCompany
+IL_0104: callvirt TechLevel MarketSimulation::GetLatestTech(System.String,SDateTime,SoftwareCategory,Company)
+IL_0109: stloc.s V_6
+IL_010b: ldloc.s V_6
+IL_010d: ldfld System.Int32 TechLevel::Year
+IL_0112: ldloca.s V_4
+IL_0114: call !1 System.Collections.Generic.KeyValuePair`2<System.String,TechLevel>::get_Value()
+IL_0119: ldfld System.Int32 TechLevel::Year
+IL_011e: ble IL_01ea
+IL_0123: ldloc.0
+IL_0124: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_0129: ldfld FeatureBase[] SoftwareProduct::Features
+IL_012e: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SpecFeature>(System.Collections.IEnumerable)
+IL_0133: ldloc.s V_5
+IL_0135: ldftn System.Boolean AutoDevWorkItem/<>c__DisplayClass115_1::<UpdateCheck>b__1(SpecFeature)
+IL_013b: newobj System.Void System.Func`2<SpecFeature,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0140: call !!0 System.Linq.Enumerable::FirstOrDefault<SpecFeature>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0145: stloc.s V_7
+IL_0147: ldloc.s V_7
+IL_0149: brfalse IL_01ea
+IL_014e: ldc.i4.1
+IL_014f: stloc.s V_8
+IL_0151: ldloc.s V_7
+IL_0153: ldfld System.String[] SpecFeature::Dependencies
+IL_0158: stloc.s V_9
+IL_015a: ldc.i4.0
+IL_015b: stloc.s V_10
+IL_015d: br.s IL_01cf
+IL_015f: ldloc.s V_9
+IL_0161: ldloc.s V_10
+IL_0163: ldelem.ref
+IL_0164: stloc.s V_11
+IL_0166: ldloc.2
+IL_0167: ldloc.s V_11
+IL_0169: ldloca.s V_12
+IL_016b: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>::TryGetValue(!0,!1&)
+IL_0170: brfalse.s IL_019e
+IL_0172: ldloc.s V_12
+IL_0174: ldfld System.Collections.Generic.Dictionary`2<System.String,TechLevel> SoftwareProduct::TechLevels
+IL_0179: ldloc.s V_5
+IL_017b: ldfld System.String AutoDevWorkItem/<>c__DisplayClass115_1::spec
+IL_0180: ldloca.s V_13
+IL_0182: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,TechLevel>::TryGetValue(!0,!1&)
+IL_0187: brfalse.s IL_0199
+IL_0189: ldloc.s V_13
+IL_018b: ldfld System.Int32 TechLevel::Year
+IL_0190: ldloc.s V_6
+IL_0192: ldfld System.Int32 TechLevel::Year
+IL_0197: bgt.s IL_01c9
+IL_0199: ldc.i4.0
+IL_019a: stloc.s V_8
+IL_019c: br.s IL_01d7
+IL_019e: ldloc.s V_5
+IL_01a0: ldfld System.String AutoDevWorkItem/<>c__DisplayClass115_1::spec
+IL_01a5: ldloc.s V_11
+IL_01a7: ldloc.s V_6
+IL_01a9: ldarg.0
+IL_01aa: ldfld System.Boolean AutoDevWorkItem::UseOwnLicenses
+IL_01af: call SoftwareProduct AutoDevWorkItem::GetNeed(System.String,System.String,TechLevel,System.Boolean)
+IL_01b4: stloc.s V_14
+IL_01b6: ldloc.s V_14
+IL_01b8: brtrue.s IL_01bf
+IL_01ba: ldc.i4.0
+IL_01bb: stloc.s V_8
+IL_01bd: br.s IL_01d7
+IL_01bf: ldloc.2
+IL_01c0: ldloc.s V_11
+IL_01c2: ldloc.s V_14
+IL_01c4: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>::set_Item(!0,!1)
+IL_01c9: ldloc.s V_10
+IL_01cb: ldc.i4.1
+IL_01cc: add
+IL_01cd: stloc.s V_10
+IL_01cf: ldloc.s V_10
+IL_01d1: ldloc.s V_9
+IL_01d3: ldlen
+IL_01d4: conv.i4
+IL_01d5: blt.s IL_015f
+IL_01d7: ldloc.s V_8
+IL_01d9: brfalse.s IL_01ea
+IL_01db: ldloc.1
+IL_01dc: ldloc.s V_5
+IL_01de: ldfld System.String AutoDevWorkItem/<>c__DisplayClass115_1::spec
+IL_01e3: ldloc.s V_6
+IL_01e5: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,TechLevel>::set_Item(!0,!1)
+IL_01ea: ldloca.s V_3
+IL_01ec: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.String,TechLevel>::MoveNext()
+IL_01f1: brtrue IL_00bb
+IL_01f6: leave.s IL_0206
+IL_01f8: ldloca.s V_3
+IL_01fa: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.String,TechLevel>
+IL_0200: callvirt System.Void System.IDisposable::Dispose()
+IL_0205: endfinally
+IL_0206: ldloc.1
+IL_0207: callvirt System.Int32 System.Collections.Generic.Dictionary`2<System.String,TechLevel>::get_Count()
+IL_020c: brtrue.s IL_0216
+IL_020e: ldnull
+IL_020f: stloc.1
+IL_0210: ldloc.2
+IL_0211: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>::Clear()
+IL_0216: ldloc.0
+IL_0217: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_021c: callvirt System.Int32 SoftwareProduct::get_FixableBugs()
+IL_0221: ldc.i4.0
+IL_0222: bgt.s IL_0227
+IL_0224: ldloc.1
+IL_0225: brfalse.s IL_028b
+IL_0227: ldloc.0
+IL_0228: ldfld SoftwareProduct AutoDevWorkItem/<>c__DisplayClass115_0::p
+IL_022d: ldc.i4.1
+IL_022e: ldloc.1
+IL_022f: ldloc.2
+IL_0230: ldarg.0
+IL_0231: ldfld System.String AutoDevWorkItem::SCMServer
+IL_0236: ldc.i4.m1
+IL_0237: ldc.i4.0
+IL_0238: ldnull
+IL_0239: newobj System.Void SoftwareUpdate::.ctor(SoftwareProduct,System.Boolean,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.String,System.Int32,System.UInt32,NetworkDeal)
+IL_023e: stloc.s V_15
+IL_0240: ldloc.s V_15
+IL_0242: ldc.i4.1
+IL_0243: stfld System.Boolean WorkItem::AutoDev
+IL_0248: ldloc.s V_15
+IL_024a: ldc.i4.1
+IL_024b: callvirt System.Void WorkItem::set_Hidden(System.Boolean)
+IL_0250: ldloc.s V_15
+IL_0252: ldarg.0
+IL_0253: ldfld SHashSet`1<System.String> AutoDevWorkItem::UpdateTeams
+IL_0258: callvirt System.Void WorkItem::AddDevTeams(System.Collections.Generic.IEnumerable`1<System.String>)
+IL_025d: ldsfld GameSettings GameSettings::Instance
+IL_0262: ldfld Company GameSettings::MyCompany
+IL_0267: ldfld SHashSet`1<WorkItem> Company::WorkItems
+IL_026c: ldloc.s V_15
+IL_026e: callvirt System.Boolean System.Collections.Generic.HashSet`1<WorkItem>::Add(!0)
+IL_0273: pop
+IL_0274: ldloc.s V_15
+IL_0276: callvirt System.Void SoftwareWorkItem::CheckCompetency()
+IL_027b: ldarg.0
+IL_027c: ldfld System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> AutoDevWorkItem::UpdateTasks
+IL_0281: ldloc.s V_15
+IL_0283: ldarg.2
+IL_0284: callvirt System.Void System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime>::Add(!0,!1)
+IL_0289: ldc.i4.1
+IL_028a: ret
+IL_028b: ldc.i4.0
+IL_028c: ret
+METHOD Private, HideBySig System.String AutoDevWorkItem::GetAlphaWork()
+IL_0000: ldarg.0
+IL_0001: ldfld System.String AutoDevWorkItem::LastAlpha
+IL_0006: brfalse.s IL_001c
+IL_0008: ldarg.0
+IL_0009: ldfld System.String AutoDevWorkItem::LastAlpha2
+IL_000e: brfalse.s IL_001c
+IL_0010: ldstr "Product"
+IL_0015: ldc.i4.2
+IL_0016: call System.String Localization::LocPlural(System.String,System.Int32)
+IL_001b: ret
+IL_001c: ldarg.0
+IL_001d: ldfld System.String AutoDevWorkItem::LastAlpha
+IL_0022: brfalse.s IL_002b
+IL_0024: ldarg.0
+IL_0025: ldfld System.String AutoDevWorkItem::LastAlpha
+IL_002a: ret
+IL_002b: ldarg.0
+IL_002c: ldfld System.String AutoDevWorkItem::LastAlpha2
+IL_0031: brfalse.s IL_003a
+IL_0033: ldarg.0
+IL_0034: ldfld System.String AutoDevWorkItem::LastAlpha2
+IL_0039: ret
+IL_003a: ldstr "None"
+IL_003f: call System.String Localization::Loc(System.String)
+IL_0044: ret
+METHOD Public, Virtual, HideBySig System.Int32 AutoDevWorkItem::GUIWorkItemType()
+IL_0000: ldc.i4.1
+IL_0001: ret
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetWorkTypeName()
+IL_0000: ldstr "Project management"
+IL_0005: ret
+METHOD Public, Virtual, HideBySig System.Single AutoDevWorkItem::GetProgress()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0006: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_000b: ret
+METHOD Public, Virtual, HideBySig UnityEngine.Color AutoDevWorkItem::GetProgressColor()
+IL_0000: ldc.i4.2
+IL_0001: call UnityEngine.Color HUD::GetThemeColor(System.Int32)
+IL_0006: ldarg.0
+IL_0007: call UnityEngine.Color WorkItem::GetProgressColor()
+IL_000c: ldarg.0
+IL_000d: ldfld System.Single AutoDevWorkItem::LastEffectiveness
+IL_0012: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_0017: call UnityEngine.Color UnityEngine.Color::Lerp(UnityEngine.Color,UnityEngine.Color,System.Single)
+IL_001c: ret
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::<UpdateLists>b__63_0(MarketingPlan)
+LOCAL 0 AutoDevWorkItem/<>c__DisplayClass63_0
+IL_0000: newobj System.Void AutoDevWorkItem/<>c__DisplayClass63_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldarg.1
+IL_0008: stfld MarketingPlan AutoDevWorkItem/<>c__DisplayClass63_0::x
+IL_000d: ldloc.0
+IL_000e: ldfld MarketingPlan AutoDevWorkItem/<>c__DisplayClass63_0::x
+IL_0013: ldfld SoftwareWorkItem MarketingPlan::TargetItem
+IL_0018: brfalse.s IL_0032
+IL_001a: ldarg.0
+IL_001b: ldfld EventList`1<AutoDevWorkItem/AutoDevItem> AutoDevWorkItem::Items
+IL_0020: ldloc.0
+IL_0021: ldftn System.Boolean AutoDevWorkItem/<>c__DisplayClass63_0::<UpdateLists>b__1(AutoDevWorkItem/AutoDevItem)
+IL_0027: newobj System.Void System.Func`2<AutoDevWorkItem/AutoDevItem,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_002c: call System.Boolean Utilities::Any<AutoDevWorkItem/AutoDevItem>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0031: ret
+IL_0032: ldc.i4.0
+IL_0033: ret

@@ -1,0 +1,30 @@
+TYPE FeatureCard BASE UnityEngine.MonoBehaviour
+FIELD Public UnityEngine.UI.Toggle SubFeaturePrefab
+FIELD Public UnityEngine.UI.Toggle MainToggle
+FIELD Public UnityEngine.UI.Text Name
+FIELD Public UnityEngine.UI.Text Spec
+FIELD Public UnityEngine.UI.Text Description
+FIELD Public UnityEngine.UI.Text TechLevel
+FIELD Public UnityEngine.UI.Button TechDown
+FIELD Public UnityEngine.UI.Button TechUp
+FIELD Public UnityEngine.Sprite[] HeaderSprites
+FIELD Private System.Int32 _minTech
+FIELD Private System.Int32 _maxTech
+FIELD Private System.String _maxTechReason
+FIELD Public GUIToolTipper TechUpTip
+FIELD Public GUIToolTipper TechDownTip
+FIELD Public UnityEngine.RectTransform MainPanel
+FIELD Public UnityEngine.RectTransform SubFeaturePanel
+FIELD Public GUIProgressBar TechProg
+FIELD Public, NotSerialized SpecFeature Feature
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<SubFeature,UnityEngine.UI.Toggle> SubFeatures
+FIELD Private, NotSerialized TechLevel _tech
+FIELD Public DesignDocumentWindow Parent
+FIELD Public UnityEngine.Color ShortDev
+FIELD Public UnityEngine.Color SeqDev
+FIELD Public UnityEngine.Color FrameDev
+FIELD Public UnityEngine.Color InvalidDev
+FIELD Public UnityEngine.GameObject TechPanel
+FIELD Public, NotSerialized SoftwareCategory ForcedCat
+FIELD Public FeatureTipperTarget MainTipper
+PROPERTY TechLevel FeatureCard::Tech()

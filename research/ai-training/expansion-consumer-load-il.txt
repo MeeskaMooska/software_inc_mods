@@ -1,0 +1,354 @@
+TYPE SoftwareProduct BASE System.Object
+INTERFACE IServerItem
+INTERFACE IReferenceFix
+INTERFACE IStockable
+INTERFACE ILossable
+INTERFACE IFormatColorObject
+INTERFACE IDisplayable
+INTERFACE IMarketable
+INTERFACE IRoyaltyItem
+INTERFACE IListDoubleClickable
+FIELD Public, Static, Literal, HasDefault System.Int32 LossTypeCount
+CONSTANT LossTypeCount = 15
+FIELD Public, Static, InitOnly System.Single DieValue
+FIELD Private, InitOnly System.Double[] _quality
+FIELD Public, InitOnly System.Double RealQuality
+FIELD Public System.UInt32 ExternalHosting
+FIELD Public System.Boolean ExternalHostingActive
+FIELD Public System.UInt32 Followers
+FIELD Public SoftwareAlpha MockWork
+FIELD Public SoftwareProduct MockSucceeded
+FIELD Public, InitOnly System.String Name
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory Category
+FIELD Public, InitOnly System.Double[] Submarkets
+FIELD Public, InitOnly System.Double CreativityScore
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> OldOSs
+FIELD Public System.Collections.Generic.List`1<System.UInt32> _oss
+FIELD Public, InitOnly System.UInt32 ID
+FIELD Public System.Int32 MissedPhysicalSales
+FIELD Public SoftwareProduct SequelTo
+FIELD Public SoftwareProduct Sequel
+FIELD Public SoftwareFramework Framework
+FIELD Public, InitOnly System.Single FrameworkRoyalty
+FIELD Public, InitOnly SDateTime DevStart
+FIELD Public, InitOnly SDateTime Release
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public FeatureBase[] Features
+FIELD Public, InitOnly System.Double CodeQuality
+FIELD Public, InitOnly System.Double ArtQuality
+FIELD Public, InitOnly System.Double CodeProgress
+FIELD Public, InitOnly System.Double ArtProgress
+FIELD Public System.Int32 VMajor
+FIELD Public System.Int32 VMinor
+FIELD Public System.Int32 VRev
+FIELD Public Company DevCompany
+FIELD Public PublisherDeal Publishing
+FIELD Public, InitOnly System.Single RandomFactor
+FIELD Public, InitOnly System.Double SequelBonus
+FIELD Public System.Boolean InHouse
+FIELD Public System.UInt32 PositiveReviews
+FIELD Public System.UInt32 NegativeReviews
+FIELD Public System.Collections.Generic.List`1<System.Int32> PositiveReviewList
+FIELD Public System.Collections.Generic.List`1<System.Int32> NegativeReviewList
+FIELD Private System.Int32 _bugs
+FIELD Private System.Int32 _startBugs
+FIELD Public System.Int32 VerifiedBugs
+FIELD Public System.Single Marketing
+FIELD Public System.Single FrameworkPayout
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Private System.Single _awareness
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Double[]> _featureScoreSummation
+FIELD Public System.Single ServerReq
+FIELD Public System.Single Price
+FIELD Public System.Single OriginalPrice
+FIELD Public System.Single LowestPrice
+FIELD Public System.Single PriceChangeFact
+FIELD Public System.Single LicenseCost
+FIELD Public System.Single AddonProfit
+FIELD Public System.String Server
+FIELD Private System.Collections.Generic.List`1<System.Single> _cashflow
+FIELD Private System.Collections.Generic.List`1<System.Single> _licenseCashflow
+FIELD Private System.Collections.Generic.List`1<System.Int32> _unitOnlineSales
+FIELD Private System.Collections.Generic.List`1<System.Int32> _unitOfflineSales
+FIELD Private System.Collections.Generic.List`1<System.Int32> _refunds
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> OldTools
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,System.Single> _tools
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareAddOn,System.Collections.Generic.List`1<AddOnProduct>> Addons
+FIELD Public AddOnProduct[] ForcedAddons
+FIELD Public System.Double AddonQualityEffect
+FIELD Public System.Collections.Generic.List`1<AddOnProduct> IncludedAddons
+FIELD Private ScriptSystem/EntryPoint _entryPoints
+FIELD Public System.Collections.Generic.List`1<System.Single> Rep
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> TechLevels
+FIELD Private SDateTime LastAddedToCashflow
+FIELD Private SDateTime LastAddedToUnits
+FIELD Public System.Double Sum
+FIELD Public System.Double LicenseSum
+FIELD Public System.Single LastMonthGross
+FIELD Public System.Single LastDayGross
+FIELD Public System.Single LastDayLoss
+FIELD Public System.Int32 LastMonthPhysical
+FIELD Public System.UInt32 TotalPhysical
+FIELD Public System.Double ReleaseRelevancy
+FIELD Public System.UInt32 UnitSum
+FIELD Public System.UInt32 RefundSum
+FIELD Public System.UInt32 SubscriptionSum
+FIELD Public System.Int32 Userbase
+FIELD Public System.Boolean _archived
+FIELD Public System.Boolean PlayerArchived
+FIELD Public SDateTime LastSale
+FIELD Public SDateTime LastSaleUpdate
+FIELD Public Employee LeadDesigner
+FIELD Public System.Boolean DesignerOwned
+FIELD Public System.Boolean DesignerRoyalties
+FIELD Public System.Double[] LossBreakdown
+FIELD Public System.Double Loss
+FIELD Public System.Single OSSalesBoost
+FIELD Public System.Nullable`1<SDateTime> LastUpdated
+FIELD Private System.Single _activeLoss
+FIELD Public System.Single BoughtFor
+FIELD Private System.String inventor
+FIELD Public, InitOnly System.UInt32 InventorID
+FIELD Public System.Single[] ProfitAward
+FIELD Public System.Collections.Generic.List`1<MarketEvent> MarketEvents
+FIELD Private System.Double _bigProjectFactor
+FIELD Public DistributionPlatform ExclusiveStore
+FIELD Public SDateTime ExclusiveEnd
+FIELD Public System.Boolean HadOSWarning
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Object> _scriptDictionary
+FIELD Private System.Boolean _stockNotifications
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Private System.Byte[] <HardwareDesign>k__BackingField
+FIELD Public, Static System.Collections.Generic.List`1<System.Single> EmptyFlow
+FIELD Public, Static System.Collections.Generic.List`1<System.Int32> EmptyUnit
+FIELD Public, Static FloatInterpolator CreativityAwarenessFactor
+FIELD Private, Static System.Double[] _priceCache
+FIELD Private, Static FloatInterpolator[] _creativityFactors
+FIELD Private, NotSerialized System.Double[] _cachedWeightedMarketQuality
+FIELD Private, NotSerialized SDateTime _cachedWeightedMarketQualityDate
+FIELD Private System.UInt32 _physicalCopies
+FIELD Private System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> _workRoyalties
+FIELD Public System.Int32 LoadIncidents
+FIELD Public System.Int32 MaxLoadIncidents
+FIELD Private System.Double _cachedPerceivedValue
+FIELD Private SDateTime _cachedPerceivedTime
+FIELD Private System.UInt32 _addonID
+PROPERTY System.Boolean SoftwareProduct::IsMock()
+PROPERTY System.Double[] SoftwareProduct::Quality()
+PROPERTY System.Boolean SoftwareProduct::HasSequel()
+PROPERTY System.Int32 SoftwareProduct::OSCount()
+PROPERTY System.UInt32 SoftwareProduct::CopiesPerBox()
+PROPERTY System.UInt32 SoftwareProduct::PhysicalCopies()
+PROPERTY System.Boolean SoftwareProduct::OpenSource()
+PROPERTY System.Int32 SoftwareProduct::ReleaseYear()
+PROPERTY System.Single SoftwareProduct::ReviewScore()
+PROPERTY System.Int32 SoftwareProduct::Bugss()
+PROPERTY System.Int32 SoftwareProduct::StartBugss()
+PROPERTY System.Int32 SoftwareProduct::FixableBugs()
+PROPERTY System.Int32 SoftwareProduct::ToolCount()
+PROPERTY System.Boolean SoftwareProduct::Traded()
+PROPERTY System.Boolean SoftwareProduct::OriginalOwner()
+PROPERTY System.String SoftwareProduct::Inventor()
+PROPERTY System.Boolean SoftwareProduct::StockNotifications()
+PROPERTY System.Boolean SoftwareProduct::ActualStockNotifications()
+PROPERTY System.Int32 SoftwareProduct::HardwareMask()
+PROPERTY System.Int32 SoftwareProduct::HardwareInputMask()
+PROPERTY System.Single SoftwareProduct::HardwarePrice()
+PROPERTY System.Byte[] SoftwareProduct::HardwareDesign()
+PROPERTY IManufacturable SoftwareProduct::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SoftwareProduct::FeaturesBases()
+PROPERTY IStockable SoftwareProduct::DeferStock()
+PROPERTY SoftwareType SoftwareProduct::SWType()
+PROPERTY SoftwareCategory SoftwareProduct::SWCat()
+PROPERTY System.String SoftwareProduct::Version()
+PROPERTY System.Boolean SoftwareProduct::Archived()
+PROPERTY System.Boolean SoftwareProduct::HasWorkRoyalties()
+PROPERTY System.Boolean SoftwareProduct::UsesISP()
+PROPERTY System.Boolean SoftwareProduct::IsReadOnlyJob()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single SoftwareProduct::GetLoadRequirement()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single SoftwareProduct::ServerReq
+IL_0006: ldarg.0
+IL_0007: ldfld System.Int32 SoftwareProduct::Userbase
+IL_000c: conv.r4
+IL_000d: mul
+IL_000e: ret
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareProduct::HandleLoad(System.Single)
+LOCAL 0 System.Single
+LOCAL 1 System.Single
+IL_0000: ldarg.0
+IL_0001: call System.Boolean SoftwareProduct::DropHosting()
+IL_0006: brfalse.s IL_0023
+IL_0008: ldarg.0
+IL_0009: ldfld System.Boolean SoftwareProduct::ExternalHostingActive
+IL_000e: brfalse.s IL_0017
+IL_0010: ldarg.0
+IL_0011: call System.Void SoftwareProduct::CancelHostingServices()
+IL_0016: ret
+IL_0017: ldsfld GameSettings GameSettings::Instance
+IL_001c: ldarg.0
+IL_001d: callvirt System.Void GameSettings::DeregisterServerItem(IServerItem)
+IL_0022: ret
+IL_0023: ldarg.0
+IL_0024: call System.Single SoftwareProduct::GetLoadRequirement()
+IL_0029: ldc.r4 0.001
+IL_002e: bge.un.s IL_005e
+IL_0030: ldarg.0
+IL_0031: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_0036: ldc.i4.0
+IL_0037: ble.s IL_005d
+IL_0039: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_003e: brfalse.s IL_004f
+IL_0040: ldarg.0
+IL_0041: ldfld System.UInt32 SoftwareProduct::ID
+IL_0046: ldc.i4.0
+IL_0047: ldc.i4.4
+IL_0048: ldc.i4.0
+IL_0049: call System.Boolean SINetworking.NetworkMessaging::SendAddProductLoadIncident(System.UInt32,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_004e: pop
+IL_004f: ldarg.0
+IL_0050: ldarg.0
+IL_0051: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_0056: ldc.i4.1
+IL_0057: sub
+IL_0058: stfld System.Int32 SoftwareProduct::LoadIncidents
+IL_005d: ret
+IL_005e: ldarg.1
+IL_005f: ldc.r4 0.75
+IL_0064: bge.un IL_018f
+IL_0069: ldarg.1
+IL_006a: ldc.r4 0.75
+IL_006f: div
+IL_0070: starg.s load
+IL_0072: ldc.r4 1
+IL_0077: ldarg.1
+IL_0078: sub
+IL_0079: ldc.r4 0.9
+IL_007e: ldc.r4 0.05
+IL_0083: ldc.r4 1.25
+IL_0088: ldarg.0
+IL_0089: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_008e: conv.r4
+IL_008f: call System.Single UnityEngine.Mathf::Pow(System.Single,System.Single)
+IL_0094: mul
+IL_0095: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_009a: mul
+IL_009b: stloc.0
+IL_009c: ldarg.0
+IL_009d: ldarg.0
+IL_009e: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_00a3: ldc.i4.1
+IL_00a4: add
+IL_00a5: stfld System.Int32 SoftwareProduct::LoadIncidents
+IL_00aa: ldarg.0
+IL_00ab: ldarg.0
+IL_00ac: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_00b1: ldarg.0
+IL_00b2: ldfld System.Int32 SoftwareProduct::MaxLoadIncidents
+IL_00b7: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_00bc: stfld System.Int32 SoftwareProduct::MaxLoadIncidents
+IL_00c1: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_00c6: brfalse.s IL_00d7
+IL_00c8: ldarg.0
+IL_00c9: ldfld System.UInt32 SoftwareProduct::ID
+IL_00ce: ldc.i4.1
+IL_00cf: ldc.i4.4
+IL_00d0: ldc.i4.0
+IL_00d1: call System.Boolean SINetworking.NetworkMessaging::SendAddProductLoadIncident(System.UInt32,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_00d6: pop
+IL_00d7: ldarg.0
+IL_00d8: ldfld System.Boolean SoftwareProduct::ExternalHostingActive
+IL_00dd: brtrue.s IL_010d
+IL_00df: ldc.r4 1
+IL_00e4: ldarg.1
+IL_00e5: sub
+IL_00e6: ldc.r4 0.25
+IL_00eb: mul
+IL_00ec: stloc.1
+IL_00ed: ldarg.0
+IL_00ee: ldfld Company SoftwareProduct::DevCompany
+IL_00f3: ldloc.1
+IL_00f4: ldarg.0
+IL_00f5: ldfld System.Int32 SoftwareProduct::Userbase
+IL_00fa: conv.r4
+IL_00fb: mul
+IL_00fc: call System.Int32 UnityEngine.Mathf::CeilToInt(System.Single)
+IL_0101: neg
+IL_0102: ldarg.0
+IL_0103: ldfld SoftwareCategory SoftwareProduct::Category
+IL_0108: callvirt System.Void Company::AddFans(System.Int32,SoftwareCategory)
+IL_010d: ldc.r4 1
+IL_0112: ldloc.0
+IL_0113: sub
+IL_0114: stloc.0
+IL_0115: ldarg.0
+IL_0116: ldarg.0
+IL_0117: ldfld System.Int32 SoftwareProduct::Userbase
+IL_011c: conv.r4
+IL_011d: ldloc.0
+IL_011e: mul
+IL_011f: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0124: stfld System.Int32 SoftwareProduct::Userbase
+IL_0129: ldarg.0
+IL_012a: ldfld System.UInt32 SoftwareProduct::ID
+IL_012f: ldarg.0
+IL_0130: ldfld System.Int32 SoftwareProduct::Userbase
+IL_0135: ldc.i4.1
+IL_0136: ldc.i4.0
+IL_0137: call System.Boolean SINetworking.NetworkMessaging::SendProductUserbase(System.UInt32,System.Int32,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_013c: pop
+IL_013d: ldarg.0
+IL_013e: ldarg.0
+IL_013f: ldfld System.Single SoftwareProduct::_awareness
+IL_0144: ldloc.0
+IL_0145: mul
+IL_0146: stfld System.Single SoftwareProduct::_awareness
+IL_014b: ldarg.0
+IL_014c: ldfld System.UInt32 SoftwareProduct::ID
+IL_0151: ldc.i4.0
+IL_0152: ldarg.0
+IL_0153: ldfld System.Single SoftwareProduct::_awareness
+IL_0158: ldc.i4.0
+IL_0159: ldc.i4.1
+IL_015a: ldc.i4.0
+IL_015b: ldc.i4.0
+IL_015c: call System.Boolean SINetworking.NetworkMessaging::SendUpdateMarketing(System.UInt32,System.UInt32,System.Single,System.Boolean,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_0161: pop
+IL_0162: ldarg.0
+IL_0163: ldfld Company SoftwareProduct::DevCompany
+IL_0168: callvirt System.Boolean Company::get_IsLocalPlayer()
+IL_016d: brfalse.s IL_01bc
+IL_016f: ldarg.0
+IL_0170: ldfld System.String SoftwareProduct::Server
+IL_0175: ldc.i4.0
+IL_0176: ldc.i4.0
+IL_0177: call System.Boolean NotificationManager::CheckAggregate<ServerIssueNotification>(System.Object,System.UInt32,System.Boolean)
+IL_017c: brtrue.s IL_01bc
+IL_017e: ldarg.0
+IL_017f: ldfld System.String SoftwareProduct::Server
+IL_0184: newobj System.Void ServerIssueNotification::.ctor(System.String)
+IL_0189: call System.Void NotificationManager::AddNotification(NotificationMessage)
+IL_018e: ret
+IL_018f: ldarg.0
+IL_0190: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_0195: ldc.i4.0
+IL_0196: ble.s IL_01bc
+IL_0198: call System.Boolean SINetworking.NetworkManager::get_IsClient()
+IL_019d: brfalse.s IL_01ae
+IL_019f: ldarg.0
+IL_01a0: ldfld System.UInt32 SoftwareProduct::ID
+IL_01a5: ldc.i4.0
+IL_01a6: ldc.i4.4
+IL_01a7: ldc.i4.0
+IL_01a8: call System.Boolean SINetworking.NetworkMessaging::SendAddProductLoadIncident(System.UInt32,System.Boolean,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_01ad: pop
+IL_01ae: ldarg.0
+IL_01af: ldarg.0
+IL_01b0: ldfld System.Int32 SoftwareProduct::LoadIncidents
+IL_01b5: ldc.i4.1
+IL_01b6: sub
+IL_01b7: stfld System.Int32 SoftwareProduct::LoadIncidents
+IL_01bc: ret

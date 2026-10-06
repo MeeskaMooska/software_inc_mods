@@ -1,0 +1,293 @@
+TYPE ServerGroup BASE System.Object
+FIELD Public System.String Name
+FIELD Public System.String Fallback
+FIELD Public System.Single Available
+FIELD Public System.Single PowerSum
+FIELD Public System.Single LastUsed
+FIELD Public System.Boolean Broken
+FIELD Public System.Boolean IsCloud
+FIELD Public UnityEngine.Color WireColor
+FIELD Public Server Rep
+FIELD Public System.Collections.Generic.HashSet`1<IServerHost> Servers
+FIELD Public System.Collections.Generic.HashSet`1<IServerItem> Items
+FIELD Private, Static System.Collections.Generic.List`1<MinimumSpanningTree`2/TreeNode<Server,UnityEngine.Vector3>> _cachedResult
+PROPERTY System.Byte ServerGroup::CloudProvider()
+METHOD Public, HideBySig System.Void ServerGroup::RefreshPower()
+LOCAL 0 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+LOCAL 1 IServerHost
+LOCAL 2 Server
+LOCAL 3 Furniture
+IL_0000: ldarg.0
+IL_0001: ldc.i4.0
+IL_0002: stfld System.Boolean ServerGroup::Broken
+IL_0007: ldarg.0
+IL_0008: ldc.r4 0
+IL_000d: stfld System.Single ServerGroup::PowerSum
+IL_0012: ldarg.0
+IL_0013: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_0018: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<IServerHost>::GetEnumerator()
+IL_001d: stloc.0
+IL_001e: br.s IL_008a
+IL_0020: ldloca.s V_0
+IL_0022: call !0 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::get_Current()
+IL_0027: stloc.1
+IL_0028: ldloc.1
+IL_0029: isinst Server
+IL_002e: dup
+IL_002f: stloc.2
+IL_0030: brfalse.s IL_0077
+IL_0032: ldloc.2
+IL_0033: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0038: brtrue.s IL_0077
+IL_003a: ldloc.2
+IL_003b: callvirt Furniture Server::get_furn()
+IL_0040: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0045: brtrue.s IL_0077
+IL_0047: ldloc.2
+IL_0048: callvirt Furniture Server::get_furn()
+IL_004d: stloc.3
+IL_004e: ldloc.3
+IL_004f: ldfld System.Boolean Furniture::HasUpg
+IL_0054: brfalse.s IL_0077
+IL_0056: ldloc.3
+IL_0057: ldfld Upgradable Furniture::upg
+IL_005c: ldfld System.Boolean Upgradable::Broken
+IL_0061: brfalse.s IL_0077
+IL_0063: ldarg.0
+IL_0064: ldc.i4.1
+IL_0065: stfld System.Boolean ServerGroup::Broken
+IL_006a: ldarg.0
+IL_006b: ldc.r4 0
+IL_0070: stfld System.Single ServerGroup::PowerSum
+IL_0075: leave.s IL_00a3
+IL_0077: ldarg.0
+IL_0078: ldarg.0
+IL_0079: ldfld System.Single ServerGroup::PowerSum
+IL_007e: ldloc.1
+IL_007f: callvirt System.Single IServerHost::get_Power()
+IL_0084: add
+IL_0085: stfld System.Single ServerGroup::PowerSum
+IL_008a: ldloca.s V_0
+IL_008c: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::MoveNext()
+IL_0091: brtrue.s IL_0020
+IL_0093: leave.s IL_00a3
+IL_0095: ldloca.s V_0
+IL_0097: constrained. System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+IL_009d: callvirt System.Void System.IDisposable::Dispose()
+IL_00a2: endfinally
+IL_00a3: ldarg.0
+IL_00a4: call System.Void ServerGroup::RefreshUsage()
+IL_00a9: ret
+METHOD Public, HideBySig System.Void ServerGroup::RefreshUsage()
+LOCAL 0 System.Single
+LOCAL 1 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+LOCAL 2 Server
+IL_0000: ldc.r4 1
+IL_0005: ldarg.0
+IL_0006: ldfld System.Single ServerGroup::LastUsed
+IL_000b: ldarg.0
+IL_000c: ldfld System.Single ServerGroup::PowerSum
+IL_0011: div
+IL_0012: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_0017: stloc.0
+IL_0018: ldarg.0
+IL_0019: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_001e: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<IServerHost>::GetEnumerator()
+IL_0023: stloc.1
+IL_0024: br.s IL_0054
+IL_0026: ldloca.s V_1
+IL_0028: call !0 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::get_Current()
+IL_002d: isinst Server
+IL_0032: stloc.2
+IL_0033: ldloc.2
+IL_0034: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0039: brtrue.s IL_0054
+IL_003b: ldloc.2
+IL_003c: callvirt Furniture Server::get_furn()
+IL_0041: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0046: brtrue.s IL_0054
+IL_0048: ldloc.2
+IL_0049: callvirt Furniture Server::get_furn()
+IL_004e: ldloc.0
+IL_004f: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0054: ldloca.s V_1
+IL_0056: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::MoveNext()
+IL_005b: brtrue.s IL_0026
+IL_005d: leave.s IL_006d
+IL_005f: ldloca.s V_1
+IL_0061: constrained. System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+IL_0067: callvirt System.Void System.IDisposable::Dispose()
+IL_006c: endfinally
+IL_006d: ret
+METHOD Public, HideBySig WriteDictionary ServerGroup::Serialize()
+LOCAL 0 WriteDictionary
+IL_0000: ldstr "ServerGroup"
+IL_0005: newobj System.Void WriteDictionary::.ctor(System.String)
+IL_000a: stloc.0
+IL_000b: ldloc.0
+IL_000c: ldstr "Name"
+IL_0011: ldarg.0
+IL_0012: ldfld System.String ServerGroup::Name
+IL_0017: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_001c: ldloc.0
+IL_001d: ldstr "Fallback"
+IL_0022: ldarg.0
+IL_0023: ldfld System.String ServerGroup::Fallback
+IL_0028: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_002d: ldloc.0
+IL_002e: ldstr "Available"
+IL_0033: ldarg.0
+IL_0034: ldfld System.Single ServerGroup::Available
+IL_0039: box System.Single
+IL_003e: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_0043: ldloc.0
+IL_0044: ldstr "PowerSum"
+IL_0049: ldarg.0
+IL_004a: ldfld System.Single ServerGroup::PowerSum
+IL_004f: box System.Single
+IL_0054: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_0059: ldloc.0
+IL_005a: ldstr "WireColor"
+IL_005f: ldarg.0
+IL_0060: ldfld UnityEngine.Color ServerGroup::WireColor
+IL_0065: call SVector3 SVector3::op_Implicit(UnityEngine.Color)
+IL_006a: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_006f: ldloc.0
+IL_0070: ldstr "Broken"
+IL_0075: ldarg.0
+IL_0076: ldfld System.Boolean ServerGroup::Broken
+IL_007b: box System.Boolean
+IL_0080: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_0085: ldloc.0
+IL_0086: ldstr "LastUsed"
+IL_008b: ldarg.0
+IL_008c: ldfld System.Single ServerGroup::LastUsed
+IL_0091: box System.Single
+IL_0096: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_009b: ldloc.0
+IL_009c: ldstr "Cloud"
+IL_00a1: ldarg.0
+IL_00a2: ldfld System.Boolean ServerGroup::IsCloud
+IL_00a7: box System.Boolean
+IL_00ac: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_00b1: ldarg.0
+IL_00b2: call System.Byte ServerGroup::get_CloudProvider()
+IL_00b7: ldc.i4.0
+IL_00b8: ble.s IL_00d0
+IL_00ba: ldloc.0
+IL_00bb: ldstr "CloudProvider"
+IL_00c0: ldarg.0
+IL_00c1: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_00c6: call !!0 System.Linq.Enumerable::First<IServerHost>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00cb: callvirt System.Void WriteDictionary::set_Item(System.String,System.Object)
+IL_00d0: ldloc.0
+IL_00d1: ret
+METHOD Public, Static, HideBySig ServerGroup ServerGroup::Deserialize(WriteDictionary)
+LOCAL 0 ServerGroup
+IL_0000: ldarg.0
+IL_0001: ldstr "Name"
+IL_0006: callvirt System.Object WriteDictionary::get_Item(System.String)
+IL_000b: callvirt System.String System.Object::ToString()
+IL_0010: newobj System.Void ServerGroup::.ctor(System.String)
+IL_0015: stloc.0
+IL_0016: ldloc.0
+IL_0017: ldarg.0
+IL_0018: ldstr "Fallback"
+IL_001d: ldnull
+IL_001e: callvirt T WriteDictionary::Get<System.String>(System.String,T)
+IL_0023: stfld System.String ServerGroup::Fallback
+IL_0028: ldloc.0
+IL_0029: ldarg.0
+IL_002a: ldstr "Available"
+IL_002f: ldc.r4 1
+IL_0034: callvirt T WriteDictionary::Get<System.Single>(System.String,T)
+IL_0039: stfld System.Single ServerGroup::Available
+IL_003e: ldloc.0
+IL_003f: ldarg.0
+IL_0040: ldstr "PowerSum"
+IL_0045: ldc.r4 0
+IL_004a: callvirt T WriteDictionary::Get<System.Single>(System.String,T)
+IL_004f: stfld System.Single ServerGroup::PowerSum
+IL_0054: ldloc.0
+IL_0055: ldarg.0
+IL_0056: ldstr "WireColor"
+IL_005b: ldsfld GameSettings GameSettings::Instance
+IL_0060: ldc.i4.0
+IL_0061: ldc.i4.1
+IL_0062: callvirt System.Collections.Generic.IEnumerable`1<ServerGroup> GameSettings::GetAllServerGroups(System.Boolean,System.Boolean)
+IL_0067: ldsfld System.Func`2<ServerGroup,UnityEngine.Color> ServerGroup/<>c::<>9__26_0
+IL_006c: dup
+IL_006d: brtrue.s IL_0086
+IL_006f: pop
+IL_0070: ldsfld ServerGroup/<>c ServerGroup/<>c::<>9
+IL_0075: ldftn UnityEngine.Color ServerGroup/<>c::<Deserialize>b__26_0(ServerGroup)
+IL_007b: newobj System.Void System.Func`2<ServerGroup,UnityEngine.Color>::.ctor(System.Object,System.IntPtr)
+IL_0080: dup
+IL_0081: stsfld System.Func`2<ServerGroup,UnityEngine.Color> ServerGroup/<>c::<>9__26_0
+IL_0086: call System.Collections.Generic.IEnumerable`1<!!1> System.Linq.Enumerable::Select<ServerGroup,UnityEngine.Color>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_008b: ldc.r4 0.75
+IL_0090: ldc.r4 1
+IL_0095: call SVector3 ServerGroup::CreateColor(System.Collections.Generic.IEnumerable`1<UnityEngine.Color>,System.Single,System.Single)
+IL_009a: callvirt T WriteDictionary::Get<SVector3>(System.String,T)
+IL_009f: call UnityEngine.Color SVector3::op_Implicit(SVector3)
+IL_00a4: stfld UnityEngine.Color ServerGroup::WireColor
+IL_00a9: ldloc.0
+IL_00aa: ldarg.0
+IL_00ab: ldstr "Broken"
+IL_00b0: ldc.i4.0
+IL_00b1: callvirt T WriteDictionary::Get<System.Boolean>(System.String,T)
+IL_00b6: stfld System.Boolean ServerGroup::Broken
+IL_00bb: ldloc.0
+IL_00bc: ldarg.0
+IL_00bd: ldstr "LastUsed"
+IL_00c2: ldc.r4 0
+IL_00c7: callvirt T WriteDictionary::Get<System.Single>(System.String,T)
+IL_00cc: stfld System.Single ServerGroup::LastUsed
+IL_00d1: ldloc.0
+IL_00d2: ldarg.0
+IL_00d3: ldstr "Cloud"
+IL_00d8: ldc.i4.0
+IL_00d9: callvirt T WriteDictionary::Get<System.Boolean>(System.String,T)
+IL_00de: stfld System.Boolean ServerGroup::IsCloud
+IL_00e3: ldarg.0
+IL_00e4: ldstr "CloudProvider"
+IL_00e9: callvirt System.Boolean WriteDictionary::Contains(System.String)
+IL_00ee: brfalse.s IL_0107
+IL_00f0: ldloc.0
+IL_00f1: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_00f6: ldarg.0
+IL_00f7: ldstr "CloudProvider"
+IL_00fc: callvirt T WriteDictionary::Get<NetworkServer>(System.String)
+IL_0101: callvirt System.Boolean System.Collections.Generic.HashSet`1<IServerHost>::Add(!0)
+IL_0106: pop
+IL_0107: ldloc.0
+IL_0108: ret
+METHOD Public, HideBySig System.Void ServerGroup::FixReferences()
+IL_0000: ldarg.0
+IL_0001: ldarg.0
+IL_0002: ldfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_0007: ldsfld System.Func`2<IServerItem,IServerItem> ServerGroup/<>c::<>9__27_0
+IL_000c: dup
+IL_000d: brtrue.s IL_0026
+IL_000f: pop
+IL_0010: ldsfld ServerGroup/<>c ServerGroup/<>c::<>9
+IL_0015: ldftn IServerItem ServerGroup/<>c::<FixReferences>b__27_0(IServerItem)
+IL_001b: newobj System.Void System.Func`2<IServerItem,IServerItem>::.ctor(System.Object,System.IntPtr)
+IL_0020: dup
+IL_0021: stsfld System.Func`2<IServerItem,IServerItem> ServerGroup/<>c::<>9__27_0
+IL_0026: call System.Collections.Generic.IEnumerable`1<TOut> Utilities::SelectNotNull<IServerItem,IServerItem>(System.Collections.Generic.IEnumerable`1<T>,System.Func`2<T,TOut>)
+IL_002b: call System.Collections.Generic.HashSet`1<T> Utilities::ToHashSet<IServerItem>(System.Collections.Generic.IEnumerable`1<T>)
+IL_0030: stfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_0035: ldarg.0
+IL_0036: ldfld System.Collections.Generic.HashSet`1<IServerItem> ServerGroup::Items
+IL_003b: ldarg.0
+IL_003c: ldftn System.Void ServerGroup::<FixReferences>b__27_1(IServerItem)
+IL_0042: newobj System.Void System.Action`1<IServerItem>::.ctor(System.Object,System.IntPtr)
+IL_0047: call System.Void Utilities::ForEachEnum<IServerItem>(System.Collections.Generic.HashSet`1<T>,System.Action`1<T>)
+IL_004c: ret
+METHOD Private, HideBySig System.Void ServerGroup::<FixReferences>b__27_1(IServerItem)
+IL_0000: ldarg.1
+IL_0001: ldarg.0
+IL_0002: ldfld System.String ServerGroup::Name
+IL_0007: callvirt System.Void IServerItem::SerializeServer(System.String)
+IL_000c: ret

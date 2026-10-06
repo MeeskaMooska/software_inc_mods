@@ -1,0 +1,79 @@
+TYPE WindowManager BASE UnityEngine.MonoBehaviour
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ActiveWindows
+FIELD Private, NotSerialized System.Collections.Generic.List`1<GUIWindow> ModalWindows
+FIELD Private, NotSerialized System.Boolean _hasModal
+FIELD Public UnityEngine.GameObject DialogPrefab
+FIELD Public UnityEngine.GameObject ColorDialogPrefab
+FIELD Public UnityEngine.GameObject InputDialogPrefab
+FIELD Public UnityEngine.GameObject TableInfoPrefab
+FIELD Public UnityEngine.GameObject FileReaderPrefab
+FIELD Public CustomDifficultyWindow DifficultyWindowPrefab
+FIELD Public UnityEngine.GameObject Canvas
+FIELD Public UnityEngine.UI.CanvasScaler ExtraScaler
+FIELD Public UnityEngine.GameObject MainPanel
+FIELD Public UnityEngine.GameObject BlockPanel
+FIELD Public UnityEngine.GameObject WindowPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject PanelPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject InputPrefab
+FIELD Public UnityEngine.GameObject CheckboxPrefab
+FIELD Public UnityEngine.GameObject ScrollbarPrefab
+FIELD Public UnityEngine.GameObject ScrollViewPrefab
+FIELD Public UnityEngine.GameObject ProgressbarPrefab
+FIELD Public UnityEngine.GameObject GUIListPrefab
+FIELD Public UnityEngine.GameObject SliderPrefab
+FIELD Public UnityEngine.GameObject ComboPrefab
+FIELD Public UnityEngine.RectTransform BlockPrefab
+FIELD Public RectToRectFade Fader
+FIELD Public MultiSelectWindow MultiWindow
+FIELD Public UnityEngine.GameObject FullScreenMessageBlock
+FIELD Public UnityEngine.RectTransform AchievementPanel
+FIELD Public UnityEngine.UI.Text FullScreenMessage
+FIELD Public GUIProgressBar FullScreenProgressBar
+FIELD Public InspectorWindow InspectorWindowPrefab
+FIELD Public, Static WindowManager Instance
+FIELD Public System.Int32 StartIndex
+FIELD Public System.Boolean MainScene
+FIELD Private UnityEngine.Vector2 Corner
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,GUIWindow> InfoTableOpen
+FIELD Private, NotSerialized System.String _overrideCursor
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private GUIWindow _lastActive
+FIELD Private, NotSerialized DG.Tweening.Sequence _activeSequence
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<System.String,System.ValueTuple`2<UnityEngine.Component,UnityEngine.GameObject>>> _objectTags
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`2<UnityEngine.GameObject,UnityEngine.Component>> _layoutTags
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _ignoreAttributes
+PROPERTY System.Boolean WindowManager::HasModal()
+METHOD Public, Static, HideBySig System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component> WindowManager::GenerateUI(System.Collections.Generic.List`1<XMLParser/XMLNode>,UnityEngine.GameObject,ModBehaviour)
+LOCAL 0 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>
+LOCAL 1 System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>
+IL_0000: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::.ctor()
+IL_0005: stloc.0
+IL_0006: ldarg.1
+IL_0007: ldnull
+IL_0008: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_000d: brfalse.s IL_001b
+IL_000f: ldsfld WindowManager WindowManager::Instance
+IL_0014: ldfld UnityEngine.GameObject WindowManager::Canvas
+IL_0019: starg.s parent
+IL_001b: ldarg.0
+IL_001c: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<XMLParser/XMLNode>::GetEnumerator()
+IL_0021: stloc.1
+IL_0022: br.s IL_0033
+IL_0024: ldloca.s V_1
+IL_0026: call !0 System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>::get_Current()
+IL_002b: ldarg.1
+IL_002c: ldarg.2
+IL_002d: ldloc.0
+IL_002e: call System.Void WindowManager::CreateUI(XMLParser/XMLNode,UnityEngine.GameObject,ModBehaviour,System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>)
+IL_0033: ldloca.s V_1
+IL_0035: call System.Boolean System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>::MoveNext()
+IL_003a: brtrue.s IL_0024
+IL_003c: leave.s IL_004c
+IL_003e: ldloca.s V_1
+IL_0040: constrained. System.Collections.Generic.List`1/Enumerator<XMLParser/XMLNode>
+IL_0046: callvirt System.Void System.IDisposable::Dispose()
+IL_004b: endfinally
+IL_004c: ldloc.0
+IL_004d: ret

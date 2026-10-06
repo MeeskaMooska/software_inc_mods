@@ -1,0 +1,91 @@
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: ldstr "architectures"
+IL_0007: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_000c: castclass GUICombobox
+IL_0011: stfld GUICombobox SDSI.AI.AIComputeController::architectures
+IL_0016: ldarg.0
+IL_0017: ldarg.1
+IL_0018: ldstr "quantizations"
+IL_001d: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_0022: castclass GUICombobox
+IL_0027: stfld GUICombobox SDSI.AI.AIComputeController::quantizations
+IL_002c: ldarg.0
+IL_002d: ldarg.1
+IL_002e: ldstr "contexts"
+IL_0033: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_0038: castclass GUICombobox
+IL_003d: stfld GUICombobox SDSI.AI.AIComputeController::contexts
+IL_0042: ldarg.0
+IL_0043: ldarg.1
+IL_0044: ldstr "datasets"
+IL_0049: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_004e: castclass GUICombobox
+IL_0053: stfld GUICombobox SDSI.AI.AIComputeController::datasets
+IL_0058: ldarg.0
+IL_0059: ldarg.1
+IL_005a: ldstr "focuses"
+IL_005f: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_0064: castclass GUICombobox
+IL_0069: stfld GUICombobox SDSI.AI.AIComputeController::focuses
+IL_006e: ldarg.0
+IL_006f: ldarg.1
+IL_0070: ldstr "usage"
+IL_0075: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Component>::get_Item(!0)
+IL_007a: castclass GUICombobox
+IL_007f: stfld GUICombobox SDSI.AI.AIComputeController::usage
+IL_0084: ldarg.0
+IL_0085: ldfld GUICombobox SDSI.AI.AIComputeController::architectures
+IL_008a: ldsfld System.String[] SDSI.AI.ExpansionRules::Architectures
+IL_008f: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0094: ldarg.0
+IL_0095: ldfld GUICombobox SDSI.AI.AIComputeController::quantizations
+IL_009a: ldsfld System.String[] SDSI.AI.ExpansionRules::Quantizations
+IL_009f: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00a4: ldarg.0
+IL_00a5: ldfld GUICombobox SDSI.AI.AIComputeController::contexts
+IL_00aa: ldsfld System.String[] SDSI.AI.ExpansionRules::Contexts
+IL_00af: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00b4: ldarg.0
+IL_00b5: ldfld GUICombobox SDSI.AI.AIComputeController::datasets
+IL_00ba: ldsfld System.String[] SDSI.AI.ExpansionRules::Datasets
+IL_00bf: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00c4: ldarg.0
+IL_00c5: ldfld GUICombobox SDSI.AI.AIComputeController::focuses
+IL_00ca: ldsfld System.String[] SDSI.AI.ExpansionRules::Focuses
+IL_00cf: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00d4: ldarg.0
+IL_00d5: ldfld GUICombobox SDSI.AI.AIComputeController::usage
+IL_00da: ldc.i4.3
+IL_00db: newarr System.String
+IL_00e0: dup
+IL_00e1: ldc.i4.0
+IL_00e2: ldstr "Light: 30 usage units / user / month"
+IL_00e7: stelem.ref
+IL_00e8: dup
+IL_00e9: ldc.i4.1
+IL_00ea: ldstr "Standard: 100 usage units / user / month"
+IL_00ef: stelem.ref
+IL_00f0: dup
+IL_00f1: ldc.i4.2
+IL_00f2: ldstr "Heavy: 300 usage units / user / month"
+IL_00f7: stelem.ref
+IL_00f8: callvirt System.Void GUICombobox::UpdateContent<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00fd: ldarg.0
+IL_00fe: ldfld GUICombobox SDSI.AI.AIComputeController::usage
+IL_0103: ldc.i4.1
+IL_0104: callvirt System.Void GUICombobox::UpdateSelectionSupressEvents(System.Int32)
+IL_0109: ldarg.0
+IL_010a: call System.Void SDSI.AI.AIComputeController::RefreshTiers()
+IL_010f: leave IL_0133
+IL_0114: pop
+IL_0115: rethrow
+IL_0117: leave IL_0133
+IL_011c: stloc.0
+IL_011d: ldstr "ai compute"
+IL_0122: ldloc.0
+IL_0123: call System.Void ModController::HandleException(System.String,System.Exception)
+IL_0128: newobj System.Void ModException::.ctor()
+IL_012d: throw
+IL_012e: leave IL_0133
+IL_0133: ret

@@ -1,0 +1,206 @@
+TYPE MarketSimulation BASE System.Object
+FIELD Public, Static, Literal, HasDefault System.Double SubscriptionFactor
+CONSTANT SubscriptionFactor = 0.08
+FIELD Public, Static, Literal, HasDefault System.Int32 SpawnGraceMonths
+CONSTANT SpawnGraceMonths = 6
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareType> SoftwareTypes
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,CompanyType> CompanyTypes
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> RNG
+FIELD Public SoftwareType DigitalDistSoft
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareProduct> Products
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareProduct> MockProducts
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareProduct> ArchivedProducts
+FIELD Public System.Collections.Generic.List`1<AddOnProduct> AddOnProducts
+FIELD Public System.Collections.Generic.Dictionary`2<System.UInt32,SimulatedCompany> Companies
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<TechLevel>> TechLevels
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Int32>> MarketTechLevels
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> TechComplexity
+FIELD Public System.Collections.Generic.List`1<SoftwareFramework> Frameworks
+FIELD Public System.Collections.Generic.HashSet`1<Employee> FreeLeads
+FIELD Private EventList`1<Company> AllCompanies
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,Company> AllCompanyDict
+FIELD Public, Static System.Int32 MagicFactor
+FIELD Public, Static System.Int32 MagicRepFactor
+FIELD Public, Static System.UInt32 Population
+FIELD Public, Static System.UInt32 FanPopulation
+FIELD Public, Static System.UInt32 FollowerPopulation
+FIELD Public, Static System.Double HypeFactor
+FIELD Public, InitOnly System.Boolean SimulateCompanies
+FIELD Private SDateTime LastCache
+FIELD Private SDateTime LastFCache
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Double[]> CachedMarketQuality
+FIELD Private System.Collections.Generic.Dictionary`2<System.UInt32,System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Double[]>> PerOSQuality
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Single> Awareness
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Double> NewCachedFeatures
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareCategory,SHashSet`1<SoftwareProduct>> MissingOSSupport
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Double[]> SubMarkets
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareCategory,System.Single> _currentIdealMarketPrice
+FIELD Private System.Collections.Generic.Dictionary`2<SoftwareAddOn,System.Single> _currentIdealAddonPrice
+FIELD Public EventList`1<DistributionPlatform> DistributionPlatforms
+FIELD Public System.Collections.Generic.List`1<MarketEvent> MarketEvents
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Company> DistributionQueryChange
+FIELD Private System.UInt32 nextID
+FIELD Private, NotSerialized System.Collections.Generic.List`1<System.UInt32> _networkIDs
+FIELD Private, NotSerialized System.Collections.Generic.List`1<System.UInt32> _networkFrameIDs
+FIELD Private System.UInt32 nextCompanyID
+FIELD Private System.UInt32 nextDealID
+FIELD Private System.UInt32 nextFrameworkID
+FIELD Public System.Int32 Layoffs
+FIELD Private System.Single _distMaxDevTime
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> ConsumerBuckets
+FIELD Private System.Boolean NewStockFix
+FIELD Public Company PrivateInvestors
+FIELD Public Company PublicDomain
+FIELD Public System.Random Random
+FIELD Private System.EventHandler`1<SoftwareProduct> OnProductReleased
+FIELD Private System.EventHandler`1<SoftwareProduct> OnProductRemoved
+FIELD Private System.EventHandler`1<AddOnProduct> OnAddOnReleased
+FIELD Private System.EventHandler`1<AddOnProduct> OnAddOnRemoved
+FIELD Private System.EventHandler`1<Company> OnCompanyFounded
+FIELD Private System.EventHandler`1<Company> OnCompanyClosed
+FIELD Private System.EventHandler`1<TechLevel> OnTechResearched
+FIELD Private System.EventHandler`1<SoftwareFramework> OnFrameworkReleased
+FIELD Private System.Collections.Generic.Dictionary`2<CompanyType,System.Int32> _spawnGrace
+FIELD Public, NotSerialized System.Boolean RaiseEvents
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Int32> ManufacturingAtlas
+FIELD Public, NotSerialized UnityEngine.Texture2D ManufacturingIcons
+FIELD Public, NotSerialized System.Boolean ManufacturingIconsInitialized
+FIELD Public, NotSerialized System.Int32 ManAtlasWidth
+FIELD Public, NotSerialized System.Int32 ManAtlasHeight
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Byte[]> _serializedAtlas
+FIELD Public, Static, Literal, HasDefault System.Int32 AtlasImgSize
+CONSTANT AtlasImgSize = 128
+FIELD Public, Static System.Double[] TimeFactor
+FIELD Public, Static System.Double[] PhysicalVsDigital
+FIELD Public System.Collections.Generic.List`1<System.Single> PlayerDigitalShare
+FIELD Public, Static System.Single DistributionStandardCut
+FIELD Public, Static System.Single PhysicalSubscriptionCutFactor
+FIELD Public, Static System.Single PhysicalCopyPrice
+FIELD Public, Static System.Single HardwareCopyPriceFactor
+FIELD Private, Static System.Int32 MaxPresim
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<System.String> OSBacked
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareType> _swCache
+FIELD Private, Static System.Double[] _defaultSubMarket
+FIELD Private, Static System.Double[] _fullQuality
+FIELD Public, Static FloatInterpolator PriceFactEval
+FIELD Private, Static System.Collections.Generic.List`1<SimulatedCompany> AICompCache
+FIELD Private, NotSerialized ScriptSystem/SaleScope _saleScope
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> _osPortCache
+FIELD Private, Static System.Collections.Generic.List`1<Employee> _leadCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,System.UInt32> _distributionSums
+FIELD Private, Static System.Collections.Generic.List`1<Company> _rejectDistCache
+FIELD Private, Static System.Collections.Generic.List`1<Company> _acceptDistCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.Byte,System.Collections.Generic.Dictionary`2<System.UInt32,System.Single>> _distributionLoads
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,System.Single> _fullDistributionLoads
+FIELD Private, Static, InitOnly System.Collections.Generic.HashSet`1<SoftwareProduct> CoverageCache
+FIELD Private, Static, InitOnly System.Collections.Generic.HashSet`1<SoftwareProduct> CompatibleCache
+PROPERTY MarketSimulation MarketSimulation::Active()
+PROPERTY System.Int32 MarketSimulation::CompanyCount()
+METHOD Public, HideBySig System.Void MarketSimulation::InitialReleases(SDateTime)
+LOCAL 0 System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,CompanyType>
+LOCAL 1 CompanyType
+LOCAL 2 SoftwareType
+LOCAL 3 SoftwareCategory
+LOCAL 4 SimulatedCompany
+LOCAL 5 SoftwareProduct
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.Dictionary`2<System.String,CompanyType> MarketSimulation::CompanyTypes
+IL_0006: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,CompanyType>::get_Values()
+IL_000b: callvirt System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2/ValueCollection<System.String,CompanyType>::GetEnumerator()
+IL_0010: stloc.0
+IL_0011: br IL_0108
+IL_0016: ldloca.s V_0
+IL_0018: call !1 System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,CompanyType>::get_Current()
+IL_001d: stloc.1
+IL_001e: ldloc.1
+IL_001f: ldfld System.String CompanyType::ForceType
+IL_0024: brfalse IL_0108
+IL_0029: ldarg.0
+IL_002a: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_002f: ldloc.1
+IL_0030: ldfld System.String CompanyType::ForceType
+IL_0035: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Item(!0)
+IL_003a: stloc.2
+IL_003b: ldloc.2
+IL_003c: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_0041: callvirt System.Int32 System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Count()
+IL_0046: ldc.i4.1
+IL_0047: beq.s IL_0087
+IL_0049: ldloc.1
+IL_004a: ldfld System.String CompanyType::ForceCat
+IL_004f: brfalse.s IL_0064
+IL_0051: ldloc.2
+IL_0052: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_0057: ldloc.1
+IL_0058: ldfld System.String CompanyType::ForceCat
+IL_005d: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Item(!0)
+IL_0062: br.s IL_0097
+IL_0064: ldloc.2
+IL_0065: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_006a: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_006f: ldloc.2
+IL_0070: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_0075: callvirt System.Int32 System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Count()
+IL_007a: ldarg.0
+IL_007b: ldfld System.Random MarketSimulation::Random
+IL_0080: call T Utilities::GetRandom<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<T>,System.Int32,System.Random)
+IL_0085: br.s IL_0097
+IL_0087: ldloc.2
+IL_0088: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_008d: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_0092: call !!0 System.Linq.Enumerable::First<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0097: stloc.3
+IL_0098: ldloc.2
+IL_0099: ldarg.1
+IL_009a: ldfld System.Int32 SDateTime::Year
+IL_009f: callvirt System.Boolean SoftwareType::IsUnlocked(System.Int32)
+IL_00a4: brfalse.s IL_0108
+IL_00a6: ldloc.3
+IL_00a7: ldarg.1
+IL_00a8: ldfld System.Int32 SDateTime::Year
+IL_00ad: callvirt System.Boolean SoftwareCategory::IsUnlocked(System.Int32)
+IL_00b2: brfalse.s IL_0108
+IL_00b4: ldloc.3
+IL_00b5: ldfld System.Boolean SoftwareCategory::Hidden
+IL_00ba: brtrue.s IL_0108
+IL_00bc: ldarg.0
+IL_00bd: ldloc.1
+IL_00be: ldfld System.String CompanyType::NameGen
+IL_00c3: call System.String MarketSimulation::GenerateCompanyName(System.String)
+IL_00c8: ldarg.1
+IL_00c9: ldloc.1
+IL_00ca: ldloc.1
+IL_00cb: callvirt System.Collections.Generic.Dictionary`2<System.String,System.String[]> CompanyType::GetTypes()
+IL_00d0: ldc.r4 1
+IL_00d5: ldarg.0
+IL_00d6: newobj System.Void SimulatedCompany::.ctor(System.String,SDateTime,CompanyType,System.Collections.Generic.Dictionary`2<System.String,System.String[]>,System.Single,MarketSimulation)
+IL_00db: stloc.s V_4
+IL_00dd: ldloc.s V_4
+IL_00df: ldloc.1
+IL_00e0: ldarg.1
+IL_00e1: callvirt System.Void SimulatedCompany::InitialLeadDesigner(CompanyType,SDateTime)
+IL_00e6: ldarg.0
+IL_00e7: ldloc.s V_4
+IL_00e9: ldc.i4.1
+IL_00ea: call System.Void MarketSimulation::AddCompany(Company,System.Boolean)
+IL_00ef: ldloc.s V_4
+IL_00f1: ldloc.2
+IL_00f2: ldloc.3
+IL_00f3: ldarg.1
+IL_00f4: callvirt SoftwareProduct SimulatedCompany::ReleaseNow(SoftwareType,SoftwareCategory,SDateTime)
+IL_00f9: stloc.s V_5
+IL_00fb: ldloc.s V_5
+IL_00fd: brfalse.s IL_0108
+IL_00ff: ldarg.0
+IL_0100: ldloc.s V_5
+IL_0102: ldc.i4.0
+IL_0103: call System.Void MarketSimulation::AddProduct(SoftwareProduct,System.Boolean)
+IL_0108: ldloca.s V_0
+IL_010a: call System.Boolean System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,CompanyType>::MoveNext()
+IL_010f: brtrue IL_0016
+IL_0114: leave.s IL_0124
+IL_0116: ldloca.s V_0
+IL_0118: constrained. System.Collections.Generic.Dictionary`2/ValueCollection/Enumerator<System.String,CompanyType>
+IL_011e: callvirt System.Void System.IDisposable::Dispose()
+IL_0123: endfinally
+IL_0124: ret

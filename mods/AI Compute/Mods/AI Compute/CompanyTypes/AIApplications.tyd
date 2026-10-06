@@ -1,0 +1,15 @@
+CompanyType
+{
+    Specialization "SDSI AI Applications"
+    PerYear 0.1
+    Min 0
+    Max 3
+    Frameworks False
+    Types
+    [
+        {
+            Software "AI Application"
+            Chance 1
+        }
+    ]
+}

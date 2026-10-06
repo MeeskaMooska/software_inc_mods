@@ -1,0 +1,438 @@
+TYPE ActorCustomization BASE UnityEngine.MonoBehaviour
+INTERFACE IStylable
+INTERFACE ISpecController
+FIELD Private, Static, Literal, HasDefault System.Single FaceEditThreshold
+CONSTANT FaceEditThreshold = 0.8
+FIELD Public, Static ActorBodyItem/BlendTransform[] FetchedTranslations
+FIELD Public UnityEngine.UI.Image[] Colors
+FIELD Public UnityEngine.UI.Text GenderText
+FIELD Public UnityEngine.UI.Text DaysPerMonthLabel
+FIELD Public VarValueSheet MoneyDesc
+FIELD Public UnityEngine.UI.InputField CompanyName
+FIELD Public UnityEngine.UI.InputField FounderName
+FIELD Public, Static System.Single[] RoundLimits
+FIELD Public, Static System.Int32[] StartLoans
+FIELD Public, Static System.Int32 StartLoanMonths
+FIELD Public, Static System.Int32[] StartYears
+FIELD Public FounderManager FManager
+FIELD Public GUICombobox Difficulty
+FIELD Public GUICombobox Year
+FIELD Public GUICombobox Animation
+FIELD Public GUICombobox[] PersonalityChosen
+FIELD Public UnityEngine.UI.Slider[] Skill
+FIELD Public UnityEngine.UI.Slider StartMoney
+FIELD Public UnityEngine.UI.Slider DaysPerMonth
+FIELD Public UnityEngine.Transform[] CameraPositions
+FIELD Public System.Int32 CurrentCameraPosition
+FIELD Public UnityEngine.Transform MainCamera
+FIELD Public ActorBodyItemToggle ThumbnailButtonPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject IPOLabel
+FIELD Public UnityEngine.GameObject PlotAdjecencyLabel
+FIELD Public UnityEngine.GameObject RoundLimitLabel
+FIELD Public UnityEngine.GameObject RoundTypeLabel
+FIELD Public UnityEngine.GameObject FurnModsLabel
+FIELD Public UnityEngine.GameObject CodeModsLabel
+FIELD Public UnityEngine.GameObject FounderStylePanel
+FIELD Public UnityEngine.GameObject FounderSkillPanel
+FIELD Public UnityEngine.UI.Slider IPOSlider
+FIELD Public UnityEngine.UI.Slider AgeSlider
+FIELD Public GUICombobox RoundLimit
+FIELD Public GUICombobox RoundType
+FIELD Public UnityEngine.UI.Toggle PlotAdjacency
+FIELD Public UnityEngine.UI.Toggle FurnMods
+FIELD Public UnityEngine.UI.Toggle CodeMods
+FIELD Public UnityEngine.UI.Text IPOSliderLabel
+FIELD Public UnityEngine.UI.Text AgeLabel
+FIELD Public BodySliderGroup BodyGroupPrefab
+FIELD Public UnityEngine.GameObject BodyPartPanel
+FIELD Public UnityEngine.GameObject HeadSliderPanel
+FIELD Public UnityEngine.GameObject ColorPanel
+FIELD Public UnityEngine.Transform BodyPartContent
+FIELD Public UnityEngine.Transform HeadSliderContent
+FIELD Public UnityEngine.Transform ColorContent
+FIELD Public UnityEngine.Transform TraitPanel
+FIELD Public UnityEngine.UI.Scrollbar BodyPartScroll
+FIELD Public UnityEngine.UI.Scrollbar HeadSliderScroll
+FIELD Public UnityEngine.UI.Scrollbar ColorScroll
+FIELD Public SpecializationChart SpecChart
+FIELD Public UITrait TraitPrefab
+FIELD Public UnityEngine.Material TriangleHighlight
+FIELD Public UnityEngine.RectTransform DiffTipHolder
+FIELD Public UnityEngine.RectTransform FounderPanel
+FIELD Public ColorWindow ColorDialog
+FIELD Public UnityEngine.UI.Text DifficultyTip
+FIELD Public UnityEngine.UI.Toggle UnlockBlends
+FIELD Public UnityEngine.UI.Toggle LODToggle
+FIELD Public UnityEngine.UI.Image[] BlendIcons
+FIELD Public System.Single DiffTipWidth
+FIELD Public System.Single DiffTipHeight
+FIELD Public UnityEngine.GameObject[] DisableOnCampaign
+FIELD Public UnityEngine.GameObject[] DisableOnNetwork
+FIELD Public UnityEngine.GameObject[] DisableOnNetworkClient
+FIELD Public UnityEngine.GameObject[] DisableOnRestartCompany
+FIELD Public UnityEngine.UI.Text StartLabel
+FIELD Public ActorPatternPanel PatternPanel
+FIELD Public DynamicGridLayout GameConfLayout
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Color> _colorsUsed
+FIELD Private, NotSerialized DifficultyValues/DifficultySetting _customDifficulty
+FIELD Private, NotSerialized Employee _forcedFounder
+FIELD Public UnityEngine.UI.Image[] Tabs
+FIELD Public UnityEngine.Color ActiveTabColor
+FIELD Public GUIListView ModList
+FIELD Public SSAOPro SSAO
+FIELD Public BloomOptimized bloom
+FIELD Public UnityStandardAssets.ImageEffects.Antialiasing FXAA
+FIELD Public UnityStandardAssets.CinematicEffects.AntiAliasing SMAA
+FIELD Public GammaSaturation GSat
+FIELD Public MadGoat_SSAA.MadGoatSSAA SSAAScript
+FIELD Public UnityEngine.Light[] lights
+FIELD Public UnityEngine.Transform HeadBone
+FIELD Public System.Boolean Female
+FIELD Public System.Int32 CurrentCategory
+FIELD Public UnityEngine.Color[] SkinColors
+FIELD Public UnityEngine.Color[] HairColors
+FIELD Public UnityEngine.GameObject FinalActor
+FIELD Public UnityEngine.GameObject LoadingPanel
+FIELD Public UnityEngine.UI.Text LoadingPanelLabel
+FIELD Public UnityEngine.Texture2D[] MaleEyes
+FIELD Public UnityEngine.Texture2D[] FemaleEyes
+FIELD Public UnityEngine.Texture2D ColorMap
+FIELD Public UnityEngine.Texture2D LightMap
+FIELD Public UnityEngine.Sprite MaleVoid
+FIELD Public UnityEngine.Sprite FemaleVoid
+FIELD Private System.Single drag
+FIELD Private System.Boolean dragNow
+FIELD Private System.Boolean DisableStat
+FIELD Private System.Boolean DisablePerson
+FIELD Public, Static ActorCustomization Instance
+FIELD Public UnityEngine.Animator Anim
+FIELD Public System.Int32 PersonalityCounter
+FIELD Public System.Single CurrentZoom
+FIELD Public System.Single TargetZoom
+FIELD Public EyeScript Eyes
+FIELD Private System.Single RandomAnim
+FIELD Public UnityEngine.UI.Slider CreativitySlider
+FIELD Public UnityEngine.UI.Text CreativityLabel
+FIELD Public UnityEngine.Transform DemandPanel
+FIELD Public UnityEngine.RectTransform[] SkillCap
+FIELD Public GUICombobox LeadFocus
+FIELD Public UnityEngine.GameObject LeadFocusLabel
+FIELD Public UnityEngine.UI.RawImage LogoImage
+FIELD Public, NotSerialized SDFCreator/ISDFNode Logo
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<SDFCreator/SDFParameterExport>> LogoParameters
+FIELD Private UnityEngine.RenderTexture LogoTexture
+FIELD Public UnityEngine.GameObject SkinTonePanel
+FIELD Public UnityEngine.UI.Slider SkinToneSlider
+FIELD Public SkinToneGraph SkinToneGraph
+FIELD Private System.Boolean _isMorphDragging
+FIELD Private, NotSerialized ActorBodyItem/BlendKeys[] _currentMorphDrag
+FIELD Private UnityEngine.Vector3[] _morphStart
+FIELD Private UnityEngine.Vector3[] _morphEnd
+FIELD Private, NotSerialized System.Boolean _faceMeshDirty
+FIELD Private System.Collections.Generic.List`1<System.Int32> _faceTriangles
+FIELD Private System.Collections.Generic.List`1<UnityEngine.Vector3> _faceVertices
+FIELD Public System.Boolean SliderHover
+FIELD Private, Static System.Single[] _creativityRanges
+FIELD Private, Static LeadDesignDemands/Demand[][] _demands
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItem> _bodyItems
+FIELD Private UnityEngine.Transform _rootBone
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> <Rig>k__BackingField
+FIELD Private, NotSerialized ActorBodyItem _watch
+FIELD Public UnityEngine.UI.GridLayoutGroup BodyItemLayout
+FIELD Public UnityEngine.UI.Button MainColorButton
+FIELD Public GUIToolTipper MainColorTip
+FIELD Public UnityEngine.UI.Image MainColorImage
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItemToggle> BodyButtons
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/Trait,UITrait> _traitToggles
+FIELD Public, Static System.Collections.Generic.List`1<Employee/Trait> TraitPriority
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee/Trait> _dummyTraits
+FIELD Private, NotSerialized Employee/Trait _forcedTraits
+FIELD Private System.Boolean _disableSkinUpdate
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.String> SliderToGroup
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,BodySliderGroup> SliderGroups
+FIELD Private System.Boolean _directSliderChange
+FIELD Private System.Boolean _styleDirty
+FIELD Public UnityEngine.UI.Image TransitionImage
+FIELD Public GUIToolTipper DaysPerMonthsKnob
+FIELD Private System.String defaultCompanyName
+FIELD Private DG.Tweening.Tweener _diffTween
+FIELD Private, NotSerialized System.Boolean _initializing
+FIELD Public System.Boolean UsingSkinColor
+FIELD Public UnityEngine.GameObject[] DeactivateDuringColor
+FIELD Private, NotSerialized System.Boolean _founderLoading
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private System.Single _changeArms
+FIELD Public, NotSerialized UnityEngine.Color SkinColor
+FIELD Private System.Boolean _isSettingName
+FIELD Public System.String UseStyle
+FIELD Private, Static, InitOnly System.Single[] CampaignSkills
+FIELD Private, Static, InitOnly System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] CampaignSpecs
+FIELD Private System.Boolean _waitingForHost
+FIELD Public System.Boolean AdvancedMode
+FIELD Public UnityEngine.RectTransform SpecTrans
+FIELD Public UnityEngine.RectTransform CreaTrans
+FIELD Public UnityEngine.RectTransform AdvancedTrans
+FIELD Public UnityEngine.UI.Image SkillHeader
+PROPERTY System.Int32 ActorCustomization::StartYear()
+PROPERTY System.Collections.Generic.List`1<ActorBodyItem> ActorCustomization::BodyItems()
+PROPERTY UnityEngine.Transform ActorCustomization::RootBone()
+PROPERTY System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> ActorCustomization::Rig()
+PROPERTY System.Boolean ActorCustomization::UsesLOD1()
+PROPERTY System.Boolean ActorCustomization::NeedsDestruction()
+PROPERTY System.Collections.Generic.HashSet`1<Employee/Trait> ActorCustomization::_activeTraits()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ActorCustomization::.cctor()
+IL_0000: ldnull
+IL_0001: stsfld ActorBodyItem/BlendTransform[] ActorCustomization::FetchedTranslations
+IL_0006: ldc.i4.7
+IL_0007: newarr System.Single
+IL_000c: dup
+IL_000d: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=28 <PrivateImplementationDetails>::C3BEC7E9A214FFA9B6D32334BDF4C6A67932AD60
+IL_0012: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_0017: stsfld System.Single[] ActorCustomization::RoundLimits
+IL_001c: ldc.i4.4
+IL_001d: newarr System.Int32
+IL_0022: dup
+IL_0023: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=16 <PrivateImplementationDetails>::0FC34FA0532467443A211AF5D5C988FCFCA70B1A
+IL_0028: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_002d: stsfld System.Int32[] ActorCustomization::StartLoans
+IL_0032: ldc.i4.s 60
+IL_0034: stsfld System.Int32 ActorCustomization::StartLoanMonths
+IL_0039: ldc.i4.4
+IL_003a: newarr System.Int32
+IL_003f: dup
+IL_0040: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=16 <PrivateImplementationDetails>::2AEA612B66864131E2FF1E19E39EE0E9B6F4052B
+IL_0045: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_004a: stsfld System.Int32[] ActorCustomization::StartYears
+IL_004f: ldc.i4.3
+IL_0050: newarr System.Single
+IL_0055: dup
+IL_0056: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=12 <PrivateImplementationDetails>::F9F968A08FAC2EC978559A5AF4B8C847978CC8CA
+IL_005b: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_0060: stsfld System.Single[] ActorCustomization::_creativityRanges
+IL_0065: ldc.i4.3
+IL_0066: newarr LeadDesignDemands/Demand[]
+IL_006b: dup
+IL_006c: ldc.i4.0
+IL_006d: ldc.i4.0
+IL_006e: newarr LeadDesignDemands/Demand
+IL_0073: stelem.ref
+IL_0074: dup
+IL_0075: ldc.i4.1
+IL_0076: ldc.i4.2
+IL_0077: newarr LeadDesignDemands/Demand
+IL_007c: dup
+IL_007d: ldc.i4.0
+IL_007e: ldc.i4.s 32
+IL_0080: stelem.i4
+IL_0081: dup
+IL_0082: ldc.i4.1
+IL_0083: ldc.i4 128
+IL_0088: stelem.i4
+IL_0089: stelem.ref
+IL_008a: dup
+IL_008b: ldc.i4.2
+IL_008c: ldc.i4.3
+IL_008d: newarr LeadDesignDemands/Demand
+IL_0092: dup
+IL_0093: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=12 <PrivateImplementationDetails>::B14B35300C76AC9BA703884ED349B11B88877AA8
+IL_0098: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_009d: stelem.ref
+IL_009e: stsfld LeadDesignDemands/Demand[][] ActorCustomization::_demands
+IL_00a3: newobj System.Void System.Collections.Generic.List`1<Employee/Trait>::.ctor()
+IL_00a8: dup
+IL_00a9: ldc.i4.s 64
+IL_00ab: conv.i8
+IL_00ac: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00b1: dup
+IL_00b2: ldc.i4 8388608
+IL_00b7: conv.i8
+IL_00b8: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00bd: dup
+IL_00be: ldc.i4 4194304
+IL_00c3: conv.i8
+IL_00c4: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00c9: dup
+IL_00ca: ldc.i4 -2147483648
+IL_00cf: conv.u8
+IL_00d0: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00d5: dup
+IL_00d6: ldc.i4.1
+IL_00d7: conv.i8
+IL_00d8: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00dd: dup
+IL_00de: ldc.i4.s 16
+IL_00e0: conv.i8
+IL_00e1: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00e6: dup
+IL_00e7: ldc.i4 536870912
+IL_00ec: conv.i8
+IL_00ed: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00f2: dup
+IL_00f3: ldc.i4 134217728
+IL_00f8: conv.i8
+IL_00f9: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_00fe: dup
+IL_00ff: ldc.i4 268435456
+IL_0104: conv.i8
+IL_0105: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_010a: dup
+IL_010b: ldc.i4.4
+IL_010c: conv.i8
+IL_010d: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0112: dup
+IL_0113: ldc.i4 1073741824
+IL_0118: conv.i8
+IL_0119: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_011e: dup
+IL_011f: ldc.i4 256
+IL_0124: conv.i8
+IL_0125: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_012a: dup
+IL_012b: ldc.i4 512
+IL_0130: conv.i8
+IL_0131: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0136: dup
+IL_0137: ldc.i4 8192
+IL_013c: conv.i8
+IL_013d: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0142: dup
+IL_0143: ldc.i4 262144
+IL_0148: conv.i8
+IL_0149: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_014e: dup
+IL_014f: ldc.i4 33554432
+IL_0154: conv.i8
+IL_0155: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_015a: dup
+IL_015b: ldc.i4 16777216
+IL_0160: conv.i8
+IL_0161: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0166: dup
+IL_0167: ldc.i4 2097152
+IL_016c: conv.i8
+IL_016d: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0172: dup
+IL_0173: ldc.i4 1024
+IL_0178: conv.i8
+IL_0179: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_017e: dup
+IL_017f: ldc.i8 4294967296
+IL_0188: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_018d: dup
+IL_018e: ldc.i4 524288
+IL_0193: conv.i8
+IL_0194: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_0199: dup
+IL_019a: ldc.i4 1048576
+IL_019f: conv.i8
+IL_01a0: callvirt System.Void System.Collections.Generic.List`1<Employee/Trait>::Add(!0)
+IL_01a5: stsfld System.Collections.Generic.List`1<Employee/Trait> ActorCustomization::TraitPriority
+IL_01aa: newobj System.Void System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult>::.ctor()
+IL_01af: stsfld System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> ActorCustomization::CastResult
+IL_01b4: ldc.i4.5
+IL_01b5: newarr System.Single
+IL_01ba: dup
+IL_01bb: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::47095EF2F098A3082EF5246191E521A8AEC4309D
+IL_01c0: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_01c5: stsfld System.Single[] ActorCustomization::CampaignSkills
+IL_01ca: ldc.i4.5
+IL_01cb: newarr System.Collections.Generic.Dictionary`2<System.String,System.Int32>
+IL_01d0: dup
+IL_01d1: ldc.i4.0
+IL_01d2: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_01d7: dup
+IL_01d8: ldstr "HR"
+IL_01dd: ldc.i4.3
+IL_01de: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_01e3: dup
+IL_01e4: ldstr "Socialization"
+IL_01e9: ldc.i4.3
+IL_01ea: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_01ef: dup
+IL_01f0: ldstr "Multitasking"
+IL_01f5: ldc.i4.3
+IL_01f6: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_01fb: stelem.ref
+IL_01fc: dup
+IL_01fd: ldc.i4.1
+IL_01fe: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_0203: dup
+IL_0204: ldstr "System"
+IL_0209: ldc.i4.2
+IL_020a: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_020f: dup
+IL_0210: ldstr "2D"
+IL_0215: ldc.i4.2
+IL_0216: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_021b: dup
+IL_021c: ldstr "Audio"
+IL_0221: ldc.i4.2
+IL_0222: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0227: dup
+IL_0228: ldstr "3D"
+IL_022d: ldc.i4.2
+IL_022e: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0233: dup
+IL_0234: ldstr "Network"
+IL_0239: ldc.i4.1
+IL_023a: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_023f: stelem.ref
+IL_0240: dup
+IL_0241: ldc.i4.2
+IL_0242: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_0247: dup
+IL_0248: ldstr "System"
+IL_024d: ldc.i4.2
+IL_024e: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0253: dup
+IL_0254: ldstr "2D"
+IL_0259: ldc.i4.2
+IL_025a: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_025f: dup
+IL_0260: ldstr "Audio"
+IL_0265: ldc.i4.2
+IL_0266: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_026b: dup
+IL_026c: ldstr "3D"
+IL_0271: ldc.i4.2
+IL_0272: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0277: dup
+IL_0278: ldstr "Network"
+IL_027d: ldc.i4.1
+IL_027e: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0283: stelem.ref
+IL_0284: dup
+IL_0285: ldc.i4.3
+IL_0286: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_028b: dup
+IL_028c: ldstr "2D"
+IL_0291: ldc.i4.2
+IL_0292: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_0297: dup
+IL_0298: ldstr "Audio"
+IL_029d: ldc.i4.1
+IL_029e: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_02a3: dup
+IL_02a4: ldstr "3D"
+IL_02a9: ldc.i4.1
+IL_02aa: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_02af: stelem.ref
+IL_02b0: dup
+IL_02b1: ldc.i4.4
+IL_02b2: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_02b7: dup
+IL_02b8: ldstr "Support"
+IL_02bd: ldc.i4.1
+IL_02be: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_02c3: dup
+IL_02c4: ldstr "Marketing"
+IL_02c9: ldc.i4.2
+IL_02ca: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_02cf: dup
+IL_02d0: ldstr "Accounting"
+IL_02d5: ldc.i4.1
+IL_02d6: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::Add(!0,!1)
+IL_02db: stelem.ref
+IL_02dc: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] ActorCustomization::CampaignSpecs
+IL_02e1: ret

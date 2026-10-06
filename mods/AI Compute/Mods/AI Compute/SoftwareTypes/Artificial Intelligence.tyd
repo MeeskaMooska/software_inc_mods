@@ -1,0 +1,221 @@
+SoftwareType
+{
+    Name "Artificial Intelligence"
+    Description "Prepare with employees, choose datasets and architecture, train on servers, evaluate and release. Available as a visionary focus. Private assistants, commercial licenses and consumer subscriptions. Specialist AI starts in 2018; larger models and capabilities unlock over time."
+    Unlock 2018
+    Random 0
+    OptimalDevTime 75
+    OneClient False
+    InHouse True
+    NameGenerator SDSIAIModels
+    SubmarketNames [ "Personal assistants"; "Software development"; "Enterprise intelligence" ]
+    Categories
+    [
+        {
+            Name "General Purpose AI"
+            Description "A broad AI market with the same popularity ceiling as computer operating systems. Model size is selected in the AI Compute training panel."
+            Popularity 1
+            ForcePopularity True
+            Submarkets [ 1; 1; 1 ]
+            Retention 96
+            TimeScale 1
+            Iterative 0.8
+            IdealPrice 250
+        }
+    ]
+    Features
+    [
+        {
+            Name "Reasoning foundation"
+            Spec System
+            Description "A mandatory reasoning foundation. Training compute chiefly determines the resulting reasoning score."
+            DevTime 8
+            CodeArt 1
+            Server 0.001
+            Submarkets [ 2; 1; 2 ]
+            Features
+            [
+                {
+                    Name "Reasoning problem solving"
+                    Description "Structured problem solving for individuals and companies."
+                    Level 1
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 2; 1; 2 ]
+                }
+                {
+                    Name "Reasoning long context"
+                    Unlock 2021
+                    Description "More advanced reasoning over long inputs."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 1; 1; 3 ]
+                }
+            ]
+        }
+        {
+            Name "Coding foundation"
+            Unlock 2019
+            Spec Network
+            Optional True
+            Description "Code understanding and generation. Coding capability contributes most to company development assistance."
+            DevTime 6
+            CodeArt 1
+            Server 0.0005
+            Submarkets [ 0; 5; 1 ]
+            Features
+            [
+                {
+                    Name "Coding implementation"
+                    Description "Generate and improve software implementations."
+                    Level 1
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 0; 5; 1 ]
+                }
+                {
+                    Name "Coding verification"
+                    Unlock 2021
+                    Description "Evaluate code, identify defects and assist maintenance."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 0; 4; 2 ]
+                }
+            ]
+        }
+        {
+            Name "Knowledge foundation"
+            Spec Algorithm
+            Optional True
+            Description "Knowledge retrieval and analysis. Improves enterprise appeal and development assistance."
+            DevTime 6
+            CodeArt 1
+            Server 0.0005
+            Submarkets [ 1; 1; 4 ]
+            Features
+            [
+                {
+                    Name "Knowledge retrieval"
+                    Description "Retrieve relevant information from company data."
+                    Level 1
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 1; 1; 4 ]
+                }
+                {
+                    Name "Knowledge analysis"
+                    Unlock 2019
+                    Description "Analyze documents and research complex questions."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 1; 1; 4 ]
+                }
+                {
+                    Name "Knowledge company data integration"
+                    Unlock 2021
+                    Description "Connect company information for retrieval-augmented assistance. Adds knowledge training complexity and enterprise appeal."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 0; 1; 5 ]
+                }
+            ]
+        }
+        {
+            Name "Vision foundation"
+            Unlock 2021
+            Spec "2D"
+            Optional True
+            Description "Image understanding. Can be omitted for a text-only model."
+            DevTime 6
+            CodeArt 1
+            Server 0.0005
+            Submarkets [ 4; 0; 1 ]
+            Features
+            [
+                {
+                    Name "Vision recognition"
+                    Description "Recognize objects and understand visual inputs."
+                    Level 1
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 4; 0; 1 ]
+                }
+                {
+                    Name "Vision document understanding"
+                    Unlock 2021
+                    Description "Interpret diagrams, charts and scanned documents."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 2; 0; 3 ]
+                }
+                {
+                    Name "Vision image generation"
+                    Unlock 2022
+                    Description "Generate visual assets. Enables assistance with 2D and 3D art work; adds training and hosting demand."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.001
+                    Submarkets [ 4; 1; 1 ]
+                }
+            ]
+        }
+        {
+            Name "Speech foundation"
+            Unlock 2021
+            Spec Audio
+            Optional True
+            Description "Speech input and output. Can be omitted for a text-only model."
+            DevTime 6
+            CodeArt 1
+            Server 0.0005
+            Submarkets [ 4; 0; 1 ]
+            Features
+            [
+                {
+                    Name "Speech transcription"
+                    Description "Understand spoken requests and conversations."
+                    Level 1
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 4; 0; 1 ]
+                }
+                {
+                    Name "Speech conversation"
+                    Unlock 2020
+                    Description "Natural spoken responses for assistants and enterprise applications."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 3; 0; 2 ]
+                }
+                {
+                    Name "Speech audio generation"
+                    Unlock 2023
+                    Description "Generate audio assets. Enables assistance with audio art work; adds training and hosting demand."
+                    Level 2
+                    DevTime 12
+                    CodeArt 1
+                    Server 0.001
+                    Submarkets [ 4; 1; 1 ]
+                }
+            ]
+        }
+    ]
+}

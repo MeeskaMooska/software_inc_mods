@@ -1,0 +1,38 @@
+TYPE OptionsWindow/<>c__DisplayClass48_0 BASE System.Object
+FIELD Public ModController/DLLMod mod
+FIELD Public UnityEngine.GameObject content
+METHOD Assembly, HideBySig System.Void OptionsWindow/<>c__DisplayClass48_0::<AddModOption>b__0(System.Boolean)
+LOCAL 0 System.Exception
+IL_0000: ldarg.0
+IL_0001: ldfld ModController/DLLMod OptionsWindow/<>c__DisplayClass48_0::mod
+IL_0006: ldarg.1
+IL_0007: callvirt System.Void ModController/DLLMod::Activate(System.Boolean)
+IL_000c: leave.s IL_0047
+IL_000e: stloc.0
+IL_000f: ldstr "Error activating/deactivating dll mod "
+IL_0014: ldarg.0
+IL_0015: ldfld ModController/DLLMod OptionsWindow/<>c__DisplayClass48_0::mod
+IL_001a: ldfld System.String ModController/DLLMod::FileName
+IL_001f: ldstr ":
+"
+IL_0024: ldloc.0
+IL_0025: callvirt System.String System.Object::ToString()
+IL_002a: call System.String System.String::Concat(System.String,System.String,System.String,System.String)
+IL_002f: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_0034: ldstr "ModActivateError"
+IL_0039: call System.String Localization::Loc(System.String)
+IL_003e: ldc.i4.1
+IL_003f: ldc.i4.2
+IL_0040: call System.Void WindowManager::SpawnDialog(System.String,System.Boolean,DialogWindow/DialogType)
+IL_0045: leave.s IL_0047
+IL_0047: ret
+METHOD Assembly, HideBySig System.Void OptionsWindow/<>c__DisplayClass48_0::<AddModOption>b__1()
+IL_0000: ldarg.0
+IL_0001: ldfld UnityEngine.GameObject OptionsWindow/<>c__DisplayClass48_0::content
+IL_0006: ldarg.0
+IL_0007: ldfld UnityEngine.GameObject OptionsWindow/<>c__DisplayClass48_0::content
+IL_000c: callvirt System.Boolean UnityEngine.GameObject::get_activeSelf()
+IL_0011: ldc.i4.0
+IL_0012: ceq
+IL_0014: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0019: ret

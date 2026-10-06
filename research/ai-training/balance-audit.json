@@ -1,0 +1,51 @@
+{
+  "gameRuntimeExecuted": false,
+  "fixedCapacity": 2000,
+  "preparation": 1,
+  "tiers": [
+    {
+      "name": "60B parameters",
+      "months": 2.0,
+      "overallAt2000": 66.08988,
+      "advancedDomainAt2000": 68.733475,
+      "referenceComputeMonths": 4000.0,
+      "referenceOverall": 66.08988,
+      "maximumRCKMultiplier": 1.841052,
+      "corporateCapacityPerCompany": 100.0
+    },
+    {
+      "name": "175B parameters",
+      "months": 4.0,
+      "overallAt2000": 38.108563,
+      "advancedDomainAt2000": 39.632905,
+      "referenceComputeMonths": 32000.0,
+      "referenceOverall": 75.26903,
+      "maximumRCKMultiplier": 2.090902,
+      "corporateCapacityPerCompany": 300.0
+    },
+    {
+      "name": "600B parameters",
+      "months": 6.0,
+      "overallAt2000": 14.123681,
+      "advancedDomainAt2000": 14.688629,
+      "referenceComputeMonths": 180000.0,
+      "referenceOverall": 84.44818,
+      "maximumRCKMultiplier": 2.373199,
+      "corporateCapacityPerCompany": 1000.0
+    },
+    {
+      "name": "1T parameters",
+      "months": 9.0,
+      "overallAt2000": 7.995559,
+      "advancedDomainAt2000": 8.315381,
+      "referenceComputeMonths": 540000.0,
+      "referenceOverall": 91.7915,
+      "maximumRCKMultiplier": 2.5,
+      "corporateCapacityPerCompany": 1800.0
+    }
+  ],
+  "lowestPreparationDomainFraction": 0.836,
+  "RCKAtReferenceMultiplier": 1.708644,
+  "RCKVisionSpeechAtReferenceMultiplier": 1.708644,
+  "referenceComputeRatio1TTo60B": 135.0
+}

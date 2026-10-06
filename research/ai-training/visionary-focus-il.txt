@@ -1,0 +1,570 @@
+TYPE Employee BASE System.Object
+INTERFACE IFormatColorObject
+INTERFACE SINetworking.INetworkID
+FIELD Public, Static System.Int32 RetirementAge
+FIELD Public, Static System.Int32 Youngest
+FIELD Public, Static, Literal, HasDefault System.Int32 RoleCount
+CONSTANT RoleCount = 5
+FIELD Public, Static System.Byte[] RoleToBit
+FIELD Public, Static System.Int32 MaxLeadSpec
+FIELD Public, Static System.Int32 MaxServiceSpec
+FIELD Public, Static System.String[] LeadSpecs
+FIELD Public, Static System.String[] ServiceSpecs
+FIELD Public, Static Employee/RoleBit[] RoleToMask
+FIELD Public, Static, Literal, HasDefault Employee/Trait DeprecatedTraits
+CONSTANT DeprecatedTraits = 67108864
+FIELD Public, Static, Literal, HasDefault Employee/Trait GoodTraits
+CONSTANT GoodTraits = 3087007871
+FIELD Public, Static, Literal, HasDefault Employee/Trait NeutralTraits
+CONSTANT NeutralTraits = 1082146688
+FIELD Public, Static, Literal, HasDefault Employee/Trait BadTraits
+CONSTANT BadTraits = 4353671168
+FIELD Public, Static, Literal, HasDefault Employee/Trait FounderTraits
+CONSTANT FounderTraits = 8522590037
+FIELD Private, Static System.Int32[] RoleOrder
+FIELD Private, Static System.Single[] RoleSalaryFactor
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> ServiceSalaryFactor
+FIELD Private, Static System.Collections.Generic.KeyValuePair`2<System.String,System.Single>[] ServiceSalaryFactorArr
+FIELD Private, NotSerialized System.String _maxServiceSpec
+FIELD Public, Static System.Single[] LowSkillCap
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] SpecializationLevels
+FIELD Private System.Single[] SpecializationExp
+FIELD Private System.Int32[] SpecUsed
+FIELD Public, Static System.Single AverageWage
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.Boolean Female
+FIELD Public, InitOnly System.Single Creativity
+FIELD Public, InitOnly System.Single InspirationTime
+FIELD Public System.Single CreativityKnown
+FIELD Public System.Single Inspiration
+FIELD Public System.Single LastDemandScore
+FIELD Public SDateTime LastInpirationUse
+FIELD Public SDateTime LastBid
+FIELD Public System.String NickName
+FIELD Public System.Boolean ActiveComplaint
+FIELD Public System.Boolean Filter
+FIELD Public System.Boolean PreviousEmployment
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> CustomBenefits
+FIELD Public ActorBodyItem/BodyItemObject[] StyleGen
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareType,System.Single> LeadSpecialization
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> LeadSpecializationFix
+FIELD Public, NotSerialized System.String LeadSpecPick
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> LeadProjects
+FIELD Public System.Collections.Generic.List`1<System.UInt32> LeadProjectsFix
+FIELD Public System.UInt32 DemandsMet
+FIELD Public System.UInt32 DemandsRequested
+FIELD Public, InitOnly System.Single InitialLeadExperience
+FIELD Public LeadDesignDemands/Demand DemandResults
+FIELD Public Company Employer
+FIELD Public NetworkedID`1<System.UInt32> EmployerID
+FIELD Public System.Single[] LastCreatity
+FIELD Public System.Int32 AgeMonth
+FIELD Public System.Single SkillCeiling
+FIELD Public System.Single LowestSatisfaction
+FIELD Public, NotSerialized System.UInt32 _leadUpdateCount
+FIELD Private Employee/RoleBit _currentRole
+FIELD Private Employee/RoleBit _secondaryRole
+FIELD Public, Static System.String[] ShortFormRole
+FIELD Public, Static System.Int32[] RoleOrderIndex
+FIELD Public Employee/EmployeeRole HiredFor
+FIELD Public, Static System.Single HungerDrain
+FIELD Public, Static System.Single BladderDrain
+FIELD Public, Static System.Single EnergyDrain
+FIELD Public, Static System.Single StressDrain
+FIELD Public, Static System.Single SocialDrain
+FIELD Public System.Single Hunger
+FIELD Public System.Single Energy
+FIELD Public System.Single Bladder
+FIELD Public System.Single Social
+FIELD Public System.Single Stress
+FIELD Public System.Single Posture
+FIELD Public System.Single CoffeeQual
+FIELD Public System.Boolean SatisfactionHitZero
+FIELD Public System.Boolean InteractedWithBestFriend
+FIELD Private, Static System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single> _friendships
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> Friendships
+FIELD Public Employee/Trait Traits
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee> _localFriendCache
+FIELD Private, Static System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>> _friendCache2
+FIELD Public DictionaryList`2<System.String,Employee/ThoughtEffect> Thoughts
+FIELD Public System.Boolean HadProperFood
+FIELD Public System.Single JobSatisfaction
+FIELD Private System.Single[] Skill
+FIELD Public System.String[] PersonalityTraits
+FIELD Public System.Single Salary
+FIELD Public System.Single AskedFor
+FIELD Public System.Single Demanded
+FIELD Public System.Single UpfrontDemand
+FIELD Public SDateTime Hired
+FIELD Public SDateTime LastWage
+FIELD Public System.Nullable`1<SDateTime> PlayerQuarantine
+FIELD Public System.Boolean Founder
+FIELD Public System.Boolean MadeCEO
+FIELD Public System.Boolean Dismissed
+FIELD Public System.Boolean Retired
+FIELD Public SDateTime BirthDate
+FIELD Public, NotSerialized Actor MyActor
+FIELD Private, Static, InitOnly System.Int32[] _pointDist
+FIELD Private, Static System.Int32 PersonalityNum
+FIELD Public System.Single SkillFact
+FIELD Public, Static System.Single SkillBase
+FIELD Public, Static System.Single SkillFactor
+FIELD Public, Static System.Single SeniorityWeight
+FIELD Public, Static System.Int32[][] AgeBrackets
+FIELD Private, Static FloatInterpolator _coffeeDrain
+FIELD Private System.UInt32 <NetworkID>k__BackingField
+PROPERTY Company Employee::MyEmployer()
+PROPERTY System.String Employee::FullName()
+PROPERTY System.String Employee::ExtraName()
+PROPERTY Employee/RoleBit Employee::CurrentRoleBit()
+PROPERTY Employee/RoleBit Employee::SecondaryRole()
+PROPERTY System.String Employee::RoleString()
+PROPERTY System.Collections.Generic.HashSet`1<Employee> Employee::LocalFriendCache()
+PROPERTY System.UInt32 Employee::NetworkID()
+PROPERTY UnityEngine.GameObject Employee::GO()
+METHOD Private, HideBySig System.Void Employee::RandomizeLeadSpec(SoftwareType[])
+LOCAL 0 Employee/<>c__DisplayClass79_0
+LOCAL 1 System.Int32
+LOCAL 2 System.Collections.Generic.HashSet`1<SoftwareType>
+LOCAL 3 System.Single
+LOCAL 4 System.Int32
+LOCAL 5 System.Int32
+LOCAL 6 SoftwareType
+IL_0000: newobj System.Void Employee/<>c__DisplayClass79_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldarg.0
+IL_0007: ldfld System.Single Employee::CreativityKnown
+IL_000c: ldc.r4 0
+IL_0011: ldc.r4 1
+IL_0016: ldc.r4 0
+IL_001b: ldc.r4 5
+IL_0020: ldc.i4.0
+IL_0021: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0026: call System.Int32 UnityEngine.Mathf::CeilToInt(System.Single)
+IL_002b: stloc.1
+IL_002c: ldloc.0
+IL_002d: call SDateTime SDateTime::Now()
+IL_0032: ldfld System.Int32 SDateTime::Year
+IL_0037: stfld System.Int32 Employee/<>c__DisplayClass79_0::y
+IL_003c: ldloc.1
+IL_003d: ldc.i4.0
+IL_003e: ble IL_0101
+IL_0043: call MarketSimulation MarketSimulation::get_Active()
+IL_0048: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_004d: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Values()
+IL_0052: ldloc.0
+IL_0053: ldftn System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__0(SoftwareType)
+IL_0059: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_005e: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0063: call System.Collections.Generic.HashSet`1<T> Utilities::ToHashSet<SoftwareType>(System.Collections.Generic.IEnumerable`1<T>)
+IL_0068: stloc.2
+IL_0069: ldarg.1
+IL_006a: brfalse.s IL_00a8
+IL_006c: ldc.i4.0
+IL_006d: stloc.s V_4
+IL_006f: br.s IL_009b
+IL_0071: ldarg.0
+IL_0072: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0077: ldarg.1
+IL_0078: ldloc.s V_4
+IL_007a: ldelem.ref
+IL_007b: ldfld System.String SoftwareType::Name
+IL_0080: ldc.r4 1
+IL_0085: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::set_Item(!0,!1)
+IL_008a: ldloc.2
+IL_008b: ldarg.1
+IL_008c: ldloc.s V_4
+IL_008e: ldelem.ref
+IL_008f: callvirt System.Boolean System.Collections.Generic.HashSet`1<SoftwareType>::Remove(!0)
+IL_0094: pop
+IL_0095: ldloc.s V_4
+IL_0097: ldc.i4.1
+IL_0098: add
+IL_0099: stloc.s V_4
+IL_009b: ldloc.s V_4
+IL_009d: ldarg.1
+IL_009e: ldlen
+IL_009f: conv.i4
+IL_00a0: blt.s IL_0071
+IL_00a2: ldloc.1
+IL_00a3: ldarg.1
+IL_00a4: ldlen
+IL_00a5: conv.i4
+IL_00a6: sub
+IL_00a7: stloc.1
+IL_00a8: ldarg.0
+IL_00a9: ldfld System.Single Employee::CreativityKnown
+IL_00ae: ldc.r4 0.5
+IL_00b3: div
+IL_00b4: stloc.3
+IL_00b5: ldc.i4.0
+IL_00b6: stloc.s V_5
+IL_00b8: br.s IL_00fc
+IL_00ba: ldloc.2
+IL_00bb: ldloc.2
+IL_00bc: callvirt System.Int32 System.Collections.Generic.HashSet`1<SoftwareType>::get_Count()
+IL_00c1: call T Utilities::GetRandom<SoftwareType>(System.Collections.Generic.IEnumerable`1<T>,System.Int32)
+IL_00c6: stloc.s V_6
+IL_00c8: ldarg.0
+IL_00c9: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_00ce: ldloc.s V_6
+IL_00d0: ldfld System.String SoftwareType::Name
+IL_00d5: ldc.r4 1
+IL_00da: ldloc.3
+IL_00db: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_00e0: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::set_Item(!0,!1)
+IL_00e5: ldloc.3
+IL_00e6: ldc.r4 2
+IL_00eb: div
+IL_00ec: stloc.3
+IL_00ed: ldloc.2
+IL_00ee: ldloc.s V_6
+IL_00f0: callvirt System.Boolean System.Collections.Generic.HashSet`1<SoftwareType>::Remove(!0)
+IL_00f5: pop
+IL_00f6: ldloc.s V_5
+IL_00f8: ldc.i4.1
+IL_00f9: add
+IL_00fa: stloc.s V_5
+IL_00fc: ldloc.s V_5
+IL_00fe: ldloc.1
+IL_00ff: blt.s IL_00ba
+IL_0101: ret
+METHOD Public, Static, HideBySig System.Single Employee::GetInspirationReloadTime(System.Single)
+LOCAL 0 System.Single
+IL_0000: ldarg.0
+IL_0001: ldc.r4 0
+IL_0006: ldc.r4 1
+IL_000b: ldc.r4 1
+IL_0010: ldc.r4 6
+IL_0015: ldc.i4.0
+IL_0016: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_001b: stloc.0
+IL_001c: ldc.r4 1
+IL_0021: ldloc.0
+IL_0022: call System.Single Utilities::RandomRange(System.Single,System.Single)
+IL_0027: ret
+METHOD Public, HideBySig System.Single Employee::GetWeightedLeadSpecFactor(SoftwareType)
+IL_0000: ldarg.1
+IL_0001: call MarketSimulation MarketSimulation::get_Active()
+IL_0006: ldfld SoftwareType MarketSimulation::DigitalDistSoft
+IL_000b: bne.un.s IL_0013
+IL_000d: ldc.r4 1
+IL_0012: ret
+IL_0013: ldarg.0
+IL_0014: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0019: ldarg.1
+IL_001a: ldfld System.String SoftwareType::Name
+IL_001f: ldc.r4 0
+IL_0024: call TValue Utilities::GetOrDefault<System.String,System.Single>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0029: ldc.r4 0
+IL_002e: ldc.r4 1
+IL_0033: ldc.r4 0.5
+IL_0038: ldc.r4 1
+IL_003d: ldarg.0
+IL_003e: ldfld System.Single Employee::Creativity
+IL_0043: sub
+IL_0044: ldc.r4 0.5
+IL_0049: mul
+IL_004a: add
+IL_004b: ldc.r4 1
+IL_0050: ldc.i4.0
+IL_0051: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0056: ret
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void Employee::.cctor()
+IL_0000: ldc.i4.s 65
+IL_0002: stsfld System.Int32 Employee::RetirementAge
+IL_0007: ldc.i4.s 20
+IL_0009: stsfld System.Int32 Employee::Youngest
+IL_000e: ldc.i4.5
+IL_000f: newarr System.Byte
+IL_0014: dup
+IL_0015: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=5 <PrivateImplementationDetails>::E384E48C8864E90E5084D9FF31BFCC6B97CC2DFD
+IL_001a: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_001f: stsfld System.Byte[] Employee::RoleToBit
+IL_0024: ldc.i4.s 9
+IL_0026: stsfld System.Int32 Employee::MaxLeadSpec
+IL_002b: ldc.i4.4
+IL_002c: stsfld System.Int32 Employee::MaxServiceSpec
+IL_0031: ldc.i4.4
+IL_0032: newarr System.String
+IL_0037: dup
+IL_0038: ldc.i4.0
+IL_0039: ldstr "HR"
+IL_003e: stelem.ref
+IL_003f: dup
+IL_0040: ldc.i4.1
+IL_0041: ldstr "Automation"
+IL_0046: stelem.ref
+IL_0047: dup
+IL_0048: ldc.i4.2
+IL_0049: ldstr "Socialization"
+IL_004e: stelem.ref
+IL_004f: dup
+IL_0050: ldc.i4.3
+IL_0051: ldstr "Multitasking"
+IL_0056: stelem.ref
+IL_0057: stsfld System.String[] Employee::LeadSpecs
+IL_005c: ldc.i4.4
+IL_005d: newarr System.String
+IL_0062: dup
+IL_0063: ldc.i4.0
+IL_0064: ldstr "Support"
+IL_0069: stelem.ref
+IL_006a: dup
+IL_006b: ldc.i4.1
+IL_006c: ldstr "Marketing"
+IL_0071: stelem.ref
+IL_0072: dup
+IL_0073: ldc.i4.2
+IL_0074: ldstr "Law"
+IL_0079: stelem.ref
+IL_007a: dup
+IL_007b: ldc.i4.3
+IL_007c: ldstr "Accounting"
+IL_0081: stelem.ref
+IL_0082: stsfld System.String[] Employee::ServiceSpecs
+IL_0087: ldc.i4.5
+IL_0088: newarr Employee/RoleBit
+IL_008d: dup
+IL_008e: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::43C8D974382D2517F2A7AEB401B2240EE7C8B8EB
+IL_0093: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_0098: stsfld Employee/RoleBit[] Employee::RoleToMask
+IL_009d: ldc.i4.5
+IL_009e: newarr System.Int32
+IL_00a3: dup
+IL_00a4: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::C7536798DFDDBE7D7B0378914755ADA7493C525E
+IL_00a9: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_00ae: stsfld System.Int32[] Employee::RoleOrder
+IL_00b3: ldc.i4.5
+IL_00b4: newarr System.Single
+IL_00b9: dup
+IL_00ba: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::5BB9B21525AE2BA6A5F538118031112EC1AAD19B
+IL_00bf: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_00c4: stsfld System.Single[] Employee::RoleSalaryFactor
+IL_00c9: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::.ctor()
+IL_00ce: dup
+IL_00cf: ldstr "Marketing"
+IL_00d4: ldc.r4 1
+IL_00d9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00de: dup
+IL_00df: ldstr "Support"
+IL_00e4: ldc.r4 0.5
+IL_00e9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00ee: dup
+IL_00ef: ldstr "Law"
+IL_00f4: ldc.r4 1.75
+IL_00f9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_00fe: dup
+IL_00ff: ldstr "Accounting"
+IL_0104: ldc.r4 1.5
+IL_0109: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::Add(!0,!1)
+IL_010e: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::ServiceSalaryFactor
+IL_0113: ldc.i4.4
+IL_0114: newarr System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0119: dup
+IL_011a: ldc.i4.0
+IL_011b: ldstr "Support"
+IL_0120: ldc.r4 0.5
+IL_0125: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_012a: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_012f: dup
+IL_0130: ldc.i4.1
+IL_0131: ldstr "Marketing"
+IL_0136: ldc.r4 1
+IL_013b: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_0140: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0145: dup
+IL_0146: ldc.i4.2
+IL_0147: ldstr "Law"
+IL_014c: ldc.r4 1.75
+IL_0151: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_0156: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_015b: dup
+IL_015c: ldc.i4.3
+IL_015d: ldstr "Accounting"
+IL_0162: ldc.r4 1.5
+IL_0167: newobj System.Void System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::.ctor(!0,!1)
+IL_016c: stelem.any System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0171: stsfld System.Collections.Generic.KeyValuePair`2<System.String,System.Single>[] Employee::ServiceSalaryFactorArr
+IL_0176: ldc.i4.5
+IL_0177: newarr System.Single
+IL_017c: dup
+IL_017d: ldc.i4.0
+IL_017e: ldc.r4 0.2
+IL_0183: stelem.r4
+IL_0184: dup
+IL_0185: ldc.i4.4
+IL_0186: ldc.r4 0.2
+IL_018b: stelem.r4
+IL_018c: stsfld System.Single[] Employee::LowSkillCap
+IL_0191: ldc.r4 750
+IL_0196: stsfld System.Single Employee::AverageWage
+IL_019b: ldc.i4.5
+IL_019c: newarr System.String
+IL_01a1: dup
+IL_01a2: ldc.i4.0
+IL_01a3: ldstr "Lead"
+IL_01a8: stelem.ref
+IL_01a9: dup
+IL_01aa: ldc.i4.1
+IL_01ab: ldstr "Code"
+IL_01b0: stelem.ref
+IL_01b1: dup
+IL_01b2: ldc.i4.2
+IL_01b3: ldstr "Design"
+IL_01b8: stelem.ref
+IL_01b9: dup
+IL_01ba: ldc.i4.3
+IL_01bb: ldstr "Art"
+IL_01c0: stelem.ref
+IL_01c1: dup
+IL_01c2: ldc.i4.4
+IL_01c3: ldstr "Service"
+IL_01c8: stelem.ref
+IL_01c9: stsfld System.String[] Employee::ShortFormRole
+IL_01ce: ldc.i4.5
+IL_01cf: newarr System.Int32
+IL_01d4: dup
+IL_01d5: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::167B1CE5D64308E6E9314745A5A6C5B281EFBFBF
+IL_01da: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_01df: stsfld System.Int32[] Employee::RoleOrderIndex
+IL_01e4: ldc.r4 0.0009259259
+IL_01e9: stsfld System.Single Employee::HungerDrain
+IL_01ee: ldc.r4 0.0010416667
+IL_01f3: stsfld System.Single Employee::BladderDrain
+IL_01f8: ldc.r4 0.0013888889
+IL_01fd: stsfld System.Single Employee::EnergyDrain
+IL_0202: ldc.r4 0.0013888889
+IL_0207: stsfld System.Single Employee::StressDrain
+IL_020c: ldc.r4 0.00011574074
+IL_0211: stsfld System.Single Employee::SocialDrain
+IL_0216: newobj System.Void System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single>::.ctor()
+IL_021b: stsfld System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single> Employee::_friendships
+IL_0220: newobj System.Void System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>>::.ctor()
+IL_0225: stsfld System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>> Employee::_friendCache2
+IL_022a: ldc.i4.5
+IL_022b: newarr System.Int32
+IL_0230: dup
+IL_0231: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=20 <PrivateImplementationDetails>::CE6056129FCB74431EA8424E6569D9B23BD02C38
+IL_0236: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_023b: stsfld System.Int32[] Employee::_pointDist
+IL_0240: ldc.i4.2
+IL_0241: stsfld System.Int32 Employee::PersonalityNum
+IL_0246: ldc.r4 0.65
+IL_024b: stsfld System.Single Employee::SkillBase
+IL_0250: ldc.r4 0.6
+IL_0255: stsfld System.Single Employee::SkillFactor
+IL_025a: ldc.r4 0.1
+IL_025f: stsfld System.Single Employee::SeniorityWeight
+IL_0264: ldc.i4.3
+IL_0265: newarr System.Int32[]
+IL_026a: dup
+IL_026b: ldc.i4.0
+IL_026c: ldc.i4.2
+IL_026d: newarr System.Int32
+IL_0272: dup
+IL_0273: ldc.i4.0
+IL_0274: ldc.i4.s 20
+IL_0276: stelem.i4
+IL_0277: dup
+IL_0278: ldc.i4.1
+IL_0279: ldc.i4.s 30
+IL_027b: stelem.i4
+IL_027c: stelem.ref
+IL_027d: dup
+IL_027e: ldc.i4.1
+IL_027f: ldc.i4.2
+IL_0280: newarr System.Int32
+IL_0285: dup
+IL_0286: ldc.i4.0
+IL_0287: ldc.i4.s 30
+IL_0289: stelem.i4
+IL_028a: dup
+IL_028b: ldc.i4.1
+IL_028c: ldc.i4.s 50
+IL_028e: stelem.i4
+IL_028f: stelem.ref
+IL_0290: dup
+IL_0291: ldc.i4.2
+IL_0292: ldc.i4.2
+IL_0293: newarr System.Int32
+IL_0298: dup
+IL_0299: ldc.i4.0
+IL_029a: ldc.i4.s 45
+IL_029c: stelem.i4
+IL_029d: dup
+IL_029e: ldc.i4.1
+IL_029f: ldc.i4.s 62
+IL_02a1: stelem.i4
+IL_02a2: stelem.ref
+IL_02a3: stsfld System.Int32[][] Employee::AgeBrackets
+IL_02a8: ldc.i4.4
+IL_02a9: newarr System.Single
+IL_02ae: dup
+IL_02af: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=16 <PrivateImplementationDetails>::E8BAADB4812420DCFB9E11A192CB40D191CDA8D4
+IL_02b4: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_02b9: newobj System.Void FloatInterpolator::.ctor(System.Single[])
+IL_02be: stsfld FloatInterpolator Employee::_coffeeDrain
+IL_02c3: ret
+TYPE SoftwareType BASE System.Object
+INTERFACE IFormatColorObject
+FIELD Public, Static System.Single SequelBoost
+FIELD Public, Static System.Single RoyaltySum
+FIELD Private, Static System.Int32 AwarenessLabelCount
+FIELD Private, Static System.Int32 PerceptionLabelCount
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.String Description
+FIELD Public, InitOnly System.Single RandomFactor
+FIELD Public, InitOnly System.Single OptimalDevTime
+FIELD Public, InitOnly System.String[] SubMarkets
+FIELD Private, InitOnly System.String[] _OSLimits
+FIELD Public, InitOnly System.Boolean OneClient
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,FeatureBase> Features
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> Categories
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareAddOn> AddOns
+FIELD Public, InitOnly System.Nullable`1<System.Int32> Unlock
+FIELD Public, InitOnly System.Boolean Modded
+FIELD Public System.String ModName
+FIELD Public System.Boolean CanOverride
+FIELD Public System.UInt32 ID
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,FeatureBase> _featCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareAddOn> _addonCache
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.UInt32,SoftwareCategory> _catCache
+FIELD Private System.Collections.Generic.List`1<System.String> _specCache
+FIELD Public, Static System.Single DesignRatio
+FIELD Public, Static FloatInterpolator QualityLevel
+FIELD Public, Static FloatInterpolator CreativityLevel
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Int32> _osSpecCounter
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<System.String>> _toolRatioCache
+PROPERTY System.Boolean SoftwareType::OSSpecific()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void SoftwareType::.cctor()
+IL_0000: ldc.r4 0.9
+IL_0005: stsfld System.Single SoftwareType::SequelBoost
+IL_000a: ldc.r4 0.2
+IL_000f: stsfld System.Single SoftwareType::RoyaltySum
+IL_0014: ldc.i4.5
+IL_0015: stsfld System.Int32 SoftwareType::AwarenessLabelCount
+IL_001a: ldc.i4.5
+IL_001b: stsfld System.Int32 SoftwareType::PerceptionLabelCount
+IL_0020: ldc.r4 0.33333334
+IL_0025: stsfld System.Single SoftwareType::DesignRatio
+IL_002a: ldc.i4.s 21
+IL_002c: newarr System.Single
+IL_0031: dup
+IL_0032: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=84 <PrivateImplementationDetails>::0E05FC50DE6092F0542A6EF2E1C61BBA4B44945C
+IL_0037: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_003c: newobj System.Void FloatInterpolator::.ctor(System.Single[])
+IL_0041: stsfld FloatInterpolator SoftwareType::QualityLevel
+IL_0046: ldc.i4.s 21
+IL_0048: newarr System.Single
+IL_004d: dup
+IL_004e: ldtoken <PrivateImplementationDetails>/__StaticArrayInitTypeSize=84 <PrivateImplementationDetails>::9AC4C72ACF39974D55EAAA41092DB12EAB59033B
+IL_0053: call System.Void System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)
+IL_0058: newobj System.Void FloatInterpolator::.ctor(System.Single[])
+IL_005d: stsfld FloatInterpolator SoftwareType::CreativityLevel
+IL_0062: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::.ctor()
+IL_0067: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Int32> SoftwareType::_osSpecCounter
+IL_006c: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<System.String>>::.ctor()
+IL_0071: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.HashSet`1<System.String>> SoftwareType::_toolRatioCache
+IL_0076: ret

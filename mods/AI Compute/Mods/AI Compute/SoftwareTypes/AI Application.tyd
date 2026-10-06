@@ -1,0 +1,180 @@
+SoftwareType
+{
+    Name "AI Application"
+    Description "A customer-facing product built around an Artificial Intelligence model. Choose a chat service, coding harness or image studio; each has its own market and hosting load."
+    Unlock 2018
+    Random 0
+    OptimalDevTime 36
+    OneClient False
+    InHouse True
+    NameGenerator SDSIAIApps
+    SubmarketNames [ "Everyday access"; "Developer productivity"; "Creative workflows" ]
+    Categories
+    [
+        {
+            Name "Chat Interface"
+            Description "A hosted conversation service backed by an AI model. Everyday users create ongoing bandwidth demand."
+            Unlock 2018
+            Popularity 0.28
+            Submarkets [ 5; 1; 1 ]
+            Retention 36
+            TimeScale 0.7
+            Iterative 0.7
+            IdealPrice 40
+        }
+        {
+            Name "Coding Harness"
+            Description "A developer workspace around a coding-capable AI model, with repository context and verification tools."
+            Unlock 2019
+            Popularity 0.16
+            Submarkets [ 1; 5; 1 ]
+            Retention 48
+            TimeScale 0.9
+            Iterative 0.75
+            IdealPrice 90
+        }
+        {
+            Name "Image Studio"
+            Description "An image-generation workspace connected to an AI model and a 2D Editor. Available from 2022."
+            Unlock 2022
+            Popularity 0.18
+            Submarkets [ 1; 1; 5 ]
+            Retention 42
+            TimeScale 1
+            Iterative 0.75
+            IdealPrice 100
+        }
+    ]
+    Features
+    [
+        {
+            Name "Hosted model connection"
+            Spec System
+            Dependencies "Artificial Intelligence"
+            Description "Connects this application to a released AI product. Hosting bandwidth scales with active users."
+            DevTime 5
+            CodeArt 1
+            Server 0.002
+            Submarkets [ 2; 2; 2 ]
+            Features
+            [
+                {
+                    Name "Reliable model routing"
+                    Description "Handle busy periods and maintain access to the selected model."
+                    Level 1
+                    DevTime 6
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 2; 2; 2 ]
+                }
+                {
+                    Name "Usage controls"
+                    Unlock 2021
+                    Description "Give customers clear limits and account controls for hosted AI use."
+                    Level 2
+                    DevTime 6
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 2; 2; 2 ]
+                }
+            ]
+        }
+        {
+            Name "Conversation interface"
+            Spec Network
+            SoftwareCategories "Chat Interface"
+            Description "A usable chat product on top of a trained model."
+            DevTime 6
+            CodeArt 1
+            Server 0.0005
+            Submarkets [ 5; 0; 1 ]
+            Features
+            [
+                {
+                    Name "Conversation history"
+                    Description "Let users return to earlier conversations."
+                    Level 1
+                    DevTime 7
+                    CodeArt 1
+                    Server 0.0005
+                    Submarkets [ 5; 0; 1 ]
+                }
+                {
+                    Name "Document conversations"
+                    Unlock 2021
+                    Description "Bring documents into a conversation for analysis."
+                    Level 2
+                    DevTime 8
+                    CodeArt 1
+                    Server 0.001
+                    Submarkets [ 4; 1; 1 ]
+                }
+            ]
+        }
+        {
+            Name "Coding workspace"
+            Spec Algorithm
+            SoftwareCategories "Coding Harness"
+            Description "Tools for applying a coding-capable model to real software projects."
+            DevTime 8
+            CodeArt 1
+            Server 0.001
+            Submarkets [ 0; 5; 0 ]
+            Features
+            [
+                {
+                    Name "Repository context"
+                    Description "Let the assistant reason about a codebase instead of isolated snippets."
+                    Level 1
+                    DevTime 9
+                    CodeArt 1
+                    Server 0.001
+                    Submarkets [ 0; 5; 0 ]
+                }
+                {
+                    Name "Test and review loop"
+                    Unlock 2021
+                    Description "Run checks and present AI-assisted reviews to developers."
+                    Level 2
+                    DevTime 10
+                    CodeArt 1
+                    Server 0.001
+                    Submarkets [ 0; 5; 0 ]
+                }
+            ]
+        }
+        {
+            Name "Image workspace"
+            Spec "2D"
+            SoftwareCategories "Image Studio"
+            Dependencies "2D Editor"
+            Description "Generate and refine images with an AI model and a 2D editing tool."
+            DevTime 9
+            CodeArt 0.6
+            Server 0.005
+            Submarkets [ 0; 0; 5 ]
+            Features
+            [
+                {
+                    Name "Prompt canvas"
+                    Description "Compose images and iterate on results."
+                    Level 1
+                    DevTime 10
+                    CodeArt 0.6
+                    Server 0.002
+                    Submarkets [ 0; 0; 5 ]
+                }
+                {
+                    Name "Selective image editing"
+                    Unlock 2023
+                    Description "Refine chosen parts of an image while retaining the rest."
+                    Level 2
+                    DevTime 12
+                    CodeArt 0.5
+                    Server 0.003
+                    Submarkets [ 0; 0; 5 ]
+                }
+            ]
+        }
+    ]
+}

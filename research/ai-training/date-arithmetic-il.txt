@@ -1,0 +1,191 @@
+TYPE SDateTime BASE System.ValueType
+INTERFACE System.IComparable`1<SDateTime>
+INTERFACE IByteData
+FIELD Public, Static System.String[] Months
+FIELD Public, Static, Literal, HasDefault System.Int32 BaseYear
+CONSTANT BaseYear = 1900
+FIELD Public, Static System.Boolean AMPM
+FIELD Public, InitOnly System.Int32 Minute
+FIELD Public, InitOnly System.Int32 Hour
+FIELD Public, InitOnly System.Int32 Month
+FIELD Public, InitOnly System.Int32 Year
+FIELD Public, InitOnly System.Int32 Day
+PROPERTY System.Int32 SDateTime::RealYear()
+PROPERTY System.Single SDateTime::HourFraction()
+METHOD Public, HideBySig System.Int32 SDateTime::ToInt()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Int32 SDateTime::Minute
+IL_0006: ldarg.0
+IL_0007: ldfld System.Int32 SDateTime::Hour
+IL_000c: ldarg.0
+IL_000d: ldfld System.Int32 SDateTime::Day
+IL_0012: ldarg.0
+IL_0013: ldfld System.Int32 SDateTime::Month
+IL_0018: ldarg.0
+IL_0019: ldfld System.Int32 SDateTime::Year
+IL_001e: ldc.i4.s 12
+IL_0020: mul
+IL_0021: add
+IL_0022: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0027: mul
+IL_0028: add
+IL_0029: ldc.i4.s 24
+IL_002b: mul
+IL_002c: add
+IL_002d: ldc.i4.s 60
+IL_002f: mul
+IL_0030: add
+IL_0031: ret
+METHOD Public, Static, HideBySig SDateTime SDateTime::FromInt(System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldsfld GameSettings GameSettings::Instance
+IL_0006: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_000b: brtrue.s IL_0014
+IL_000d: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_0012: br.s IL_0019
+IL_0014: ldsfld System.Int32 GameData::DaysPerMonth
+IL_0019: call SDateTime SDateTime::FromInt(System.Int32,System.Int32)
+IL_001e: ret
+METHOD Public, Static, HideBySig SDateTime SDateTime::FromInt(System.Int32,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldc.i4.s 60
+IL_0003: rem
+IL_0004: ldarg.0
+IL_0005: ldc.i4.s 60
+IL_0007: div
+IL_0008: ldc.i4.s 24
+IL_000a: rem
+IL_000b: ldarg.0
+IL_000c: ldc.i4 1440
+IL_0011: div
+IL_0012: ldarg.1
+IL_0013: rem
+IL_0014: ldarg.0
+IL_0015: ldc.i4.s 60
+IL_0017: ldarg.1
+IL_0018: mul
+IL_0019: ldc.i4.s 24
+IL_001b: mul
+IL_001c: div
+IL_001d: ldc.i4.s 12
+IL_001f: rem
+IL_0020: ldarg.0
+IL_0021: ldc.i4.s 60
+IL_0023: ldarg.1
+IL_0024: mul
+IL_0025: ldc.i4.s 24
+IL_0027: mul
+IL_0028: ldc.i4.s 12
+IL_002a: mul
+IL_002b: div
+IL_002c: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0031: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_0000: ldarga.s d1
+IL_0002: call System.Int32 SDateTime::ToInt()
+IL_0007: ldarga.s d2
+IL_0009: call System.Int32 SDateTime::ToInt()
+IL_000e: sub
+IL_000f: call SDateTime SDateTime::FromInt(System.Int32)
+IL_0014: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Subtraction(SDateTime,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: ldc.i4.0
+IL_0003: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32)
+IL_0008: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_000d: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Addition(SDateTime,System.Int32)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: ldc.i4.0
+IL_0003: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32)
+IL_0008: call SDateTime SDateTime::op_Addition(SDateTime,SDateTime)
+IL_000d: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Addition(SDateTime,System.Double)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: conv.r4
+IL_0003: call SDateTime SDateTime::op_Addition(SDateTime,System.Single)
+IL_0008: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Addition(SDateTime,System.Single)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+LOCAL 3 SDateTime
+IL_0000: ldarg.1
+IL_0001: ldc.r4 0
+IL_0006: call System.Boolean UnityEngine.Mathf::Approximately(System.Single,System.Single)
+IL_000b: brfalse.s IL_000f
+IL_000d: ldarg.0
+IL_000e: ret
+IL_000f: ldarg.1
+IL_0010: ldc.r4 0
+IL_0015: clt
+IL_0017: dup
+IL_0018: brfalse.s IL_001e
+IL_001a: ldarg.1
+IL_001b: neg
+IL_001c: starg.s n
+IL_001e: ldarg.1
+IL_001f: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0024: stloc.0
+IL_0025: ldarg.1
+IL_0026: ldloc.0
+IL_0027: conv.r4
+IL_0028: sub
+IL_0029: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_002e: conv.r4
+IL_002f: mul
+IL_0030: starg.s n
+IL_0032: ldarg.1
+IL_0033: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_0038: stloc.1
+IL_0039: ldarg.1
+IL_003a: ldloc.1
+IL_003b: conv.r4
+IL_003c: sub
+IL_003d: ldc.r4 24
+IL_0042: mul
+IL_0043: starg.s n
+IL_0045: ldarg.1
+IL_0046: call System.Int32 UnityEngine.Mathf::FloorToInt(System.Single)
+IL_004b: stloc.2
+IL_004c: ldarg.1
+IL_004d: ldloc.2
+IL_004e: conv.r4
+IL_004f: sub
+IL_0050: ldc.r4 60
+IL_0055: mul
+IL_0056: starg.s n
+IL_0058: ldloca.s V_3
+IL_005a: ldarg.1
+IL_005b: call System.Int32 UnityEngine.Mathf::RoundToInt(System.Single)
+IL_0060: ldloc.2
+IL_0061: ldloc.1
+IL_0062: ldloc.0
+IL_0063: ldc.i4.0
+IL_0064: call System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0069: brtrue.s IL_0073
+IL_006b: ldarg.0
+IL_006c: ldloc.3
+IL_006d: call SDateTime SDateTime::op_Addition(SDateTime,SDateTime)
+IL_0072: ret
+IL_0073: ldarg.0
+IL_0074: ldloc.3
+IL_0075: call SDateTime SDateTime::op_Subtraction(SDateTime,SDateTime)
+IL_007a: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Subtraction(SDateTime,System.Single)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: neg
+IL_0003: call SDateTime SDateTime::op_Addition(SDateTime,System.Single)
+IL_0008: ret
+METHOD Public, Static, HideBySig, SpecialName SDateTime SDateTime::op_Addition(SDateTime,SDateTime)
+IL_0000: ldarga.s d1
+IL_0002: call System.Int32 SDateTime::ToInt()
+IL_0007: ldarga.s d2
+IL_0009: call System.Int32 SDateTime::ToInt()
+IL_000e: add
+IL_000f: call SDateTime SDateTime::FromInt(System.Int32)
+IL_0014: ret

@@ -1,0 +1,108 @@
+TYPE SimulatedCompany/ProductPrototype BASE System.Object
+INTERFACE IStockable
+INTERFACE ILossable
+INTERFACE IReferenceFix
+INTERFACE IFormatColorObject
+INTERFACE ICalenderItem
+INTERFACE SimulatedCompany/IProjectPrototype
+FIELD Public, InitOnly System.String Name
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory Category
+FIELD Public SoftwareProduct SequelTo
+FIELD Public SoftwareFramework Framework
+FIELD Public, InitOnly System.String NewFramework
+FIELD Public System.Single FrameworkRoyalty
+FIELD Public, InitOnly System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> Needs
+FIELD Public System.Double CreativityScore
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareProduct,System.Single> Tools
+FIELD Public SoftwareProduct[] OSs
+FIELD Public FeatureBase[] Features
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> Techs
+FIELD Public, InitOnly System.Single Price
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Public, InitOnly System.Double[] Submarkets
+FIELD Public System.Double CodeProgress
+FIELD Public System.Double ArtProgress
+FIELD Public System.Double CodeQuality
+FIELD Public System.Double ArtQuality
+FIELD Public System.Double Quality
+FIELD Public System.Double Loss
+FIELD Public SDateTime DevStart
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Single Reception
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public System.Int32 DevTeam
+FIELD Public System.Single DevTimeLeft
+FIELD Public SDateTime ReleaseDate
+FIELD Public SimulatedCompany DevCompany
+FIELD Public System.Nullable`1<System.UInt32> SWID
+FIELD Public System.Boolean Released
+FIELD Public System.Boolean DevStarted
+FIELD Private System.Int32 _hardwareMask
+FIELD Private System.Int32 _hardwareInputMask
+FIELD Private System.Single _hardwarePrice
+FIELD Public SoftwareProduct Final
+FIELD Public System.Boolean PrintDeal
+FIELD Private System.UInt32 _physicalCopies
+PROPERTY System.UInt32 SimulatedCompany/ProductPrototype::CopiesPerBox()
+PROPERTY System.Boolean SimulatedCompany/ProductPrototype::IsReadOnlyJob()
+PROPERTY System.Int32 SimulatedCompany/ProductPrototype::HardwareMask()
+PROPERTY System.Int32 SimulatedCompany/ProductPrototype::HardwareInputMask()
+PROPERTY System.Single SimulatedCompany/ProductPrototype::HardwarePrice()
+PROPERTY SoftwareType SimulatedCompany/ProductPrototype::SWType()
+PROPERTY SoftwareCategory SimulatedCompany/ProductPrototype::SWCat()
+PROPERTY IManufacturable SimulatedCompany/ProductPrototype::Manufacturing()
+PROPERTY System.Collections.Generic.IList`1<FeatureBase> SimulatedCompany/ProductPrototype::FeaturesBases()
+PROPERTY System.Boolean SimulatedCompany/ProductPrototype::StockNotifications()
+PROPERTY IStockable SimulatedCompany/ProductPrototype::DeferStock()
+PROPERTY System.UInt32 SimulatedCompany/ProductPrototype::PhysicalCopies()
+METHOD Public, HideBySig System.Void SimulatedCompany/ProductPrototype::SetQuality(System.Double,System.Double,System.Double,System.Double,System.Boolean)
+IL_0000: ldarg.s fromNetwork
+IL_0002: brtrue.s IL_0034
+IL_0004: ldarg.0
+IL_0005: ldflda System.Nullable`1<System.UInt32> SimulatedCompany/ProductPrototype::SWID
+IL_000a: call System.Boolean System.Nullable`1<System.UInt32>::get_HasValue()
+IL_000f: brfalse.s IL_0034
+IL_0011: ldarg.0
+IL_0012: ldfld SimulatedCompany SimulatedCompany/ProductPrototype::DevCompany
+IL_0017: ldfld System.UInt32 Company::ID
+IL_001c: ldarg.0
+IL_001d: ldflda System.Nullable`1<System.UInt32> SimulatedCompany/ProductPrototype::SWID
+IL_0022: call !0 System.Nullable`1<System.UInt32>::get_Value()
+IL_0027: ldarg.1
+IL_0028: ldarg.2
+IL_0029: ldarg.3
+IL_002a: ldarg.s artQ
+IL_002c: ldc.i4.1
+IL_002d: ldc.i4.0
+IL_002e: call System.Boolean SINetworking.NetworkMessaging::SendUpdateProtoQuality(System.UInt32,System.UInt32,System.Double,System.Double,System.Double,System.Double,SINetworking.NetworkMessaging/MessageTarget,System.Byte)
+IL_0033: pop
+IL_0034: ldarg.0
+IL_0035: ldarg.1
+IL_0036: stfld System.Double SimulatedCompany/ProductPrototype::CodeProgress
+IL_003b: ldarg.0
+IL_003c: ldarg.2
+IL_003d: stfld System.Double SimulatedCompany/ProductPrototype::ArtProgress
+IL_0042: ldarg.0
+IL_0043: ldarg.3
+IL_0044: stfld System.Double SimulatedCompany/ProductPrototype::CodeQuality
+IL_0049: ldarg.0
+IL_004a: ldarg.s artQ
+IL_004c: stfld System.Double SimulatedCompany/ProductPrototype::ArtQuality
+IL_0051: ldarg.0
+IL_0052: ldarg.0
+IL_0053: ldfld SoftwareType SimulatedCompany/ProductPrototype::Type
+IL_0058: ldarg.0
+IL_0059: ldfld System.Double SimulatedCompany/ProductPrototype::CodeProgress
+IL_005e: ldarg.0
+IL_005f: ldfld System.Double SimulatedCompany/ProductPrototype::ArtProgress
+IL_0064: ldarg.0
+IL_0065: ldfld System.Double SimulatedCompany/ProductPrototype::CodeQuality
+IL_006a: ldarg.0
+IL_006b: ldfld System.Double SimulatedCompany/ProductPrototype::ArtQuality
+IL_0070: ldarg.0
+IL_0071: ldfld FeatureBase[] SimulatedCompany/ProductPrototype::Features
+IL_0076: callvirt System.Double SoftwareType::FinalQualityCalc(System.Double,System.Double,System.Double,System.Double,System.Collections.Generic.IList`1<FeatureBase>)
+IL_007b: call System.Double Utilities::Clamp01(System.Double)
+IL_0080: stfld System.Double SimulatedCompany/ProductPrototype::Quality
+IL_0085: ret

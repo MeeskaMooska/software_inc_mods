@@ -1,0 +1,162 @@
+TYPE DesignDocumentWindow BASE UnityEngine.MonoBehaviour
+FIELD Public System.Int32 CurrentPage
+FIELD Public System.Collections.Generic.List`1<DesignDocumentWindow/RectSetups> Pages
+FIELD Public System.Int32 MaxDefaultPages
+FIELD Public System.String[] PageNames
+FIELD Public System.Boolean PageChanged
+FIELD Public UnityEngine.RectTransform PageContent
+FIELD Public FeatureCard FeatureCardPrefab
+FIELD Public GUIWindow Window
+FIELD Public UnityEngine.UI.InputField ProductName
+FIELD Public UnityEngine.UI.InputField PriceText
+FIELD Public UnityEngine.UI.InputField NewFramework
+FIELD Public GUICombobox TypeCombo
+FIELD Public GUICombobox ServerCombo
+FIELD Public GUICombobox SCMCombo
+FIELD Public GUICombobox CategoryCombo
+FIELD Public GUICombobox SubsidiaryCombo
+FIELD Public GUIPieChart[] Pies
+FIELD Public UnityEngine.UI.Text[] Submarkets
+FIELD Public GUIProgressBar[] SubmarketSats
+FIELD Public TriangleSlider SubmarketSlider
+FIELD Public UnityEngine.Color[] SubMarketColors
+FIELD Public UnityEngine.UI.Button NameButton
+FIELD Public UnityEngine.UI.Button IPButton
+FIELD Public UnityEngine.UI.Button PrevPage
+FIELD Public UnityEngine.UI.Button NextPage
+FIELD Public UnityEngine.GameObject ProjManButton
+FIELD Public UnityEngine.GameObject NewFrameworkNameLabel
+FIELD Public UnityEngine.UI.Toggle HouseToggle
+FIELD Public UnityEngine.UI.Toggle NewFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle UseFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle SkipGeneration
+FIELD Public UnityEngine.UI.Toggle SubscriptionToggle
+FIELD Public UnityEngine.UI.Toggle SequelMarketToggle
+FIELD Public UnityEngine.UI.Toggle CompetitionMarketToggle
+FIELD Public UnityEngine.UI.Text IPButtonText
+FIELD Public UnityEngine.UI.Text DesignTeamText
+FIELD Public UnityEngine.UI.Text DevelopTeamText
+FIELD Public UnityEngine.UI.Text TeamIssueText
+FIELD Public UnityEngine.UI.Text PageTitle
+FIELD Public UnityEngine.UI.Text ExistingFramework
+FIELD Public UnityEngine.UI.Text PageNumLabel
+FIELD Public VarValueSheet DescriptionSh
+FIELD Public VarValueSheet LimitSheet
+FIELD Public GUIListView OSList
+FIELD Public UnityEngine.RectTransform NeedsRect
+FIELD Public UnityEngine.RectTransform ForcedAddRect
+FIELD Public UnityEngine.UI.ScrollRect FeatureScroll
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject FeaturePrefab
+FIELD Public FrameworkWindow FrameworkDialog
+FIELD Public UnityEngine.GameObject AdvancedButton
+FIELD Public UnityEngine.GameObject PagePanel
+FIELD Public LeadDesignControl LeadDesigner
+FIELD Public UnityEngine.UI.Text PrevPageLabel
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>> NeedsList
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<SoftwareAddOn,AddonDesignWindow/AddonDesign>> ForcedAddList
+FIELD Public, NotSerialized System.Collections.Generic.List`1<FeatureCard> FeatureCards
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> NeedLabels
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> ForcedAddLabels
+FIELD Private, NotSerialized SoftwareFramework _framework
+FIELD Public UnityEngine.GameObject NeedsSubPanel
+FIELD Public UnityEngine.GameObject OSPanel
+FIELD Public UnityEngine.GameObject OSLabel
+FIELD Public UnityEngine.GameObject NeedsLabel
+FIELD Public UnityEngine.GameObject ForcedAddLabel
+FIELD Public UnityEngine.GameObject ExistingFrameworkButton
+FIELD Public UnityEngine.GameObject ManufactureButton
+FIELD Public UnityEngine.GameObject ManufactureView
+FIELD Public UnityEngine.GameObject HardwareDesignButton
+FIELD Public ManufacturingPanel Manufacturing
+FIELD Public UnityEngine.Gradient InterestGradient
+FIELD Public UnityEngine.RectTransform FeaturePanel
+FIELD Public UnityEngine.GameObject[] DistributionDisable
+FIELD Public System.String DefaultName
+FIELD Public, Static System.String[] BalanceNames
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DesignTeams
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DevelopmentTeams
+FIELD Private, NotSerialized PublisherDeal _publisher
+FIELD Private, NotSerialized System.Byte[] _hardwareDesign
+FIELD Private, NotSerialized SoftwareProduct _sequelTo
+FIELD Private, NotSerialized SoftwareType _swOverride
+FIELD Private, NotSerialized SoftwareCategory _swCatOverride
+FIELD Private, NotSerialized System.Boolean priceHasBeenEdited
+FIELD Public, NotSerialized System.Boolean DisableFeatureUpdate
+FIELD Private System.Boolean _noSubUpdate
+FIELD Private System.String _lastSWType
+FIELD Private System.String _lastSWCat
+FIELD Private System.Boolean _changeSWType
+FIELD Private System.Boolean _checkingWithPublisher
+FIELD Private System.Collections.Generic.List`1<System.String> _varList
+FIELD Private System.Collections.Generic.List`1<System.String> _valueList
+FIELD Private System.Collections.Generic.List`1<System.String> _tipList
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> _teamSpecs
+FIELD Public System.Boolean AutoDev
+FIELD Public PublisherDealWindow PubDealWindow
+FIELD Public UnityEngine.UI.Text PublisherText
+PROPERTY SimulatedCompany DesignDocumentWindow::Subsidiairy()
+PROPERTY SoftwareProduct DesignDocumentWindow::SequelTo()
+PROPERTY SoftwareType DesignDocumentWindow::SelectedType()
+PROPERTY System.Single DesignDocumentWindow::Price()
+PROPERTY SoftwareFramework DesignDocumentWindow::Framework()
+PROPERTY System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> DesignDocumentWindow::TeamSpecs()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::UpdateNeeds()
+LOCAL 0 System.Boolean
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> DesignDocumentWindow::NeedLabels
+IL_0006: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,UnityEngine.GameObject>,System.Boolean> DesignDocumentWindow/<>c::<>9__130_0
+IL_000b: dup
+IL_000c: brtrue.s IL_0025
+IL_000e: pop
+IL_000f: ldsfld DesignDocumentWindow/<>c DesignDocumentWindow/<>c::<>9
+IL_0014: ldftn System.Boolean DesignDocumentWindow/<>c::<UpdateNeeds>b__130_0(System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,UnityEngine.GameObject>)
+IL_001a: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,UnityEngine.GameObject>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_001f: dup
+IL_0020: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,UnityEngine.GameObject>,System.Boolean> DesignDocumentWindow/<>c::<>9__130_0
+IL_0025: call System.Boolean System.Linq.Enumerable::Any<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,UnityEngine.GameObject>>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_002a: stloc.0
+IL_002b: ldarg.0
+IL_002c: ldfld UnityEngine.RectTransform DesignDocumentWindow::NeedsRect
+IL_0031: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0036: ldloc.0
+IL_0037: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_003c: ldarg.0
+IL_003d: ldfld UnityEngine.GameObject DesignDocumentWindow::NeedsLabel
+IL_0042: ldloc.0
+IL_0043: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0048: ret
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> DesignDocumentWindow::GetNeedProducts()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>> DesignDocumentWindow::NeedsList
+IL_0006: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.Boolean> DesignDocumentWindow/<>c::<>9__166_0
+IL_000b: dup
+IL_000c: brtrue.s IL_0025
+IL_000e: pop
+IL_000f: ldsfld DesignDocumentWindow/<>c DesignDocumentWindow/<>c::<>9
+IL_0014: ldftn System.Boolean DesignDocumentWindow/<>c::<GetNeedProducts>b__166_0(System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>)
+IL_001a: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_001f: dup
+IL_0020: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.Boolean> DesignDocumentWindow/<>c::<>9__166_0
+IL_0025: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_002a: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.String> DesignDocumentWindow/<>c::<>9__166_1
+IL_002f: dup
+IL_0030: brtrue.s IL_0049
+IL_0032: pop
+IL_0033: ldsfld DesignDocumentWindow/<>c DesignDocumentWindow/<>c::<>9
+IL_0038: ldftn System.String DesignDocumentWindow/<>c::<GetNeedProducts>b__166_1(System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>)
+IL_003e: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.String>::.ctor(System.Object,System.IntPtr)
+IL_0043: dup
+IL_0044: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.String> DesignDocumentWindow/<>c::<>9__166_1
+IL_0049: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,SoftwareProduct> DesignDocumentWindow/<>c::<>9__166_2
+IL_004e: dup
+IL_004f: brtrue.s IL_0068
+IL_0051: pop
+IL_0052: ldsfld DesignDocumentWindow/<>c DesignDocumentWindow/<>c::<>9
+IL_0057: ldftn SoftwareProduct DesignDocumentWindow/<>c::<GetNeedProducts>b__166_2(System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>)
+IL_005d: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,SoftwareProduct>::.ctor(System.Object,System.IntPtr)
+IL_0062: dup
+IL_0063: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,SoftwareProduct> DesignDocumentWindow/<>c::<>9__166_2
+IL_0068: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<System.Collections.Generic.KeyValuePair`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>>,System.String,SoftwareProduct>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_006d: ret

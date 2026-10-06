@@ -1,0 +1,128 @@
+TYPE SoftwareWorkItem BASE WorkItem
+INTERFACE ICalenderItem
+INTERFACE IRoyaltyItem
+FIELD Public, Static, Literal, HasDefault System.Single LevelThreeSpeedBoost
+CONSTANT LevelThreeSpeedBoost = 0.15
+FIELD Public System.String SoftwareName
+FIELD Public System.String CreateFramework
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory SWCategory
+FIELD Public SoftwareFramework Framework
+FIELD Public System.Single FrameworkRoyalty
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> Needs
+FIELD Public SoftwareProduct[] OSs
+FIELD Public SDateTime DevStart
+FIELD Public PublisherDeal Publishing
+FIELD Public System.Int32 MaxBugs
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public Company MyCompany
+FIELD Public SoftwareProduct SequelTo
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Public System.Collections.Generic.HashSet`1<System.UInt32> LastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> LeadWork
+FIELD Family System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> _workRoyalties
+FIELD Private System.Nullable`1<System.Int32> _networkLastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> TechLevels
+FIELD Public SoftwareWorkItem/FeatureProgress[] Features
+FIELD Public System.Double[] Submarkets
+FIELD Public System.Byte[] HardwareDesign
+FIELD Public, InitOnly System.String Server
+FIELD Public System.String Server2
+FIELD Public System.Single Price
+FIELD Public System.Single PressReleaseEffect
+FIELD Public System.Single PressBuildEffect
+FIELD Private System.Single _followers
+FIELD Public System.UInt32 MaxFollowers
+FIELD Public System.Single FollowerChange
+FIELD Public System.Nullable`1<SDateTime> ReleaseDate
+FIELD Public System.Single CodeArtRatio
+FIELD Public System.Single WorkDevTime
+FIELD Public System.Double CreativityScore
+FIELD Family System.Boolean _anyMarketing
+FIELD Public System.UInt32 AddonIDOffset
+FIELD Private System.Boolean _hypeWarned
+FIELD Public SoftwareAddOn AddonType
+FIELD Public SoftwareProduct AddonParent
+FIELD Public SoftwareWorkItem AddonWorkParent
+FIELD Public System.Collections.Generic.List`1<SoftwareWorkItem> AddonWorkChildren
+FIELD Public System.Nullable`1<System.UInt32> SWID
+FIELD Public TwoWayDictionary`2<Employee,SoftwareWorkItem/FeatureProgress> NewWorking
+PROPERTY System.Boolean SoftwareWorkItem::AddOn()
+PROPERTY System.Boolean SoftwareWorkItem::WorkAddOn()
+PROPERTY System.Boolean SoftwareWorkItem::DistributionPlatform()
+PROPERTY System.Nullable`1<System.UInt32> SoftwareWorkItem::AddonParentSWID()
+PROPERTY System.Single SoftwareWorkItem::Followers()
+PROPERTY System.Single SoftwareWorkItem::PremarketingBoost()
+PROPERTY System.Boolean SoftwareWorkItem::AlwaysUseLocalCategory()
+PROPERTY System.Boolean SoftwareWorkItem::HasWorkRoyalties()
+METHOD Public, HideBySig System.Double SoftwareWorkItem::GetSpProgress(System.Boolean,System.Boolean)
+LOCAL 0 System.Double
+LOCAL 1 System.Double
+LOCAL 2 System.Int32
+IL_0000: ldc.r8 0
+IL_0009: stloc.0
+IL_000a: ldc.r8 0
+IL_0013: stloc.1
+IL_0014: ldc.i4.0
+IL_0015: stloc.2
+IL_0016: br.s IL_0067
+IL_0018: ldarg.1
+IL_0019: ldarg.2
+IL_001a: or
+IL_001b: brfalse.s IL_003d
+IL_001d: ldloc.0
+IL_001e: ldarg.0
+IL_001f: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0024: ldloc.2
+IL_0025: ldelem.ref
+IL_0026: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_002b: add
+IL_002c: stloc.0
+IL_002d: ldloc.1
+IL_002e: ldarg.0
+IL_002f: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0034: ldloc.2
+IL_0035: ldelem.ref
+IL_0036: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_003b: add
+IL_003c: stloc.1
+IL_003d: ldarg.1
+IL_003e: brtrue.s IL_0043
+IL_0040: ldarg.2
+IL_0041: brtrue.s IL_0063
+IL_0043: ldloc.0
+IL_0044: ldarg.0
+IL_0045: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_004a: ldloc.2
+IL_004b: ldelem.ref
+IL_004c: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0051: add
+IL_0052: stloc.0
+IL_0053: ldloc.1
+IL_0054: ldarg.0
+IL_0055: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_005a: ldloc.2
+IL_005b: ldelem.ref
+IL_005c: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_0061: add
+IL_0062: stloc.1
+IL_0063: ldloc.2
+IL_0064: ldc.i4.1
+IL_0065: add
+IL_0066: stloc.2
+IL_0067: ldloc.2
+IL_0068: ldarg.0
+IL_0069: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_006e: ldlen
+IL_006f: conv.i4
+IL_0070: blt.s IL_0018
+IL_0072: ldloc.1
+IL_0073: ldc.r8 0
+IL_007c: beq.s IL_0082
+IL_007e: ldloc.0
+IL_007f: ldloc.1
+IL_0080: div
+IL_0081: ret
+IL_0082: ldc.r8 0
+IL_008b: ret

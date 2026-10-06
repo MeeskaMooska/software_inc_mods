@@ -1,0 +1,158 @@
+Initialize engine version: 2018.4.36f1 (6cd387d23174)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon AI PRO R9700 (ID=0x7551)
+    Vendor:   
+    VRAM:     32476 MB
+    Driver:   32.0.31036.15
+Begin MonoManager ReloadAssembly
+- Completed reload, in  0.072 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.416500 ms
+Software Inc. Beta Steam 1.8.42, WindowsPlayerx64
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Localization load time: 29 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Player preferences load time: 148 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Steamworks successfully initialized
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading Random Name Generators
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading Sentence Generators
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading mood effects
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading Software Types
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading Company Types
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Loading Reward Tasks
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Data mod load time: 17 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Blueprint load time: 110 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+User image load time: 1 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Data load time: 199 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Initializing save games: 28 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Modded furniture load time: 0.560 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Fallback handler could not load library C:/Program Files (x86)/Steam/steamapps/common/Software Inc/Software Inc_Data/Mono/data-000001C11CDDD020.dll
+material texture build time: 1 ms for 38 textures
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.988700 ms
+
+Unloading 104 unused Assets to reduce memory usage. Loaded Objects now: 24427.
+Total: 35.825300 ms (FindLiveObjects: 0.960400 ms CreateObjectMapping: 0.267800 ms MarkObjects: 34.509400 ms  DeleteObjects: 0.087300 ms)
+
+Fallback handler could not load library C:/Program Files (x86)/Steam/steamapps/common/Software Inc/Software Inc_Data/Mono/data-000001C180E4E010.dll
+Activated DLL mod: AI Compute
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Error loading dll mod 1534952584 with load errors:
+System.Exception: [CS]: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+  at Mono.CSharp.Location..ctor (Mono.CSharp.SourceFile file, System.Int32 row, System.Int32 column) [0x00046] in <a1c1f79be49c4b2f906d07ecc2ddc791>:0 
+  at Mono.CSharp.Tokenizer.get_Location () [0x00000] in <a1c1f79be49c4b2f906d07ecc2ddc791>:0 
+  at Mono.CSharp.CSharpParser.parse () [0x000aa] in <a1c1f79be49c4b2f906d07ecc2ddc791>:0 
+  at DynamicCSharp.Compiler.McsDriver.Parse (Mono.CSharp.SeekableStreamReader reader, Mono.CSharp.SourceFile source, Mono.CSharp.ModuleContainer module, Mono.CSharp.ParserSession session, Mono.CSharp.Report report) [0x00019] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at DynamicCSharp.Compiler.McsDriver.Parse (Mono.CSharp.SourceFile source, Mono.CSharp.ModuleContainer module, Mono.CSharp.ParserSession session, Mono.CSharp.Report report) [0x00082] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at DynamicCSharp.Compiler.McsDriver.Parse (Mono.CSharp.ModuleContainer module) [0x00068] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at DynamicCSharp.Compiler.McsDriver.Compile (System.Reflection.Emit.AssemblyBuilder& assembly, System.AppDomain domain, System.Boolean generateInMemory) [0x000c9] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at DynamicCSharp.Compiler.McsCompiler.CompileFromSettings (Mono.CSharp.CompilerSettings settings, System.Boolean generateInMemory) [0x0002c] in <07b4923c0ada443f8df87bcf49af9bd0>:0  in  at [0, 0]
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.845200 ms
+Loading game: AI Compute Review 025.sav
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+
+Unloading 445 unused Assets to reduce memory usage. Loaded Objects now: 91534.
+Total: 89.675700 ms (FindLiveObjects: 3.089700 ms CreateObjectMapping: 0.747300 ms MarkObjects: 85.363400 ms  DeleteObjects: 0.474900 ms)
+
+Tree combine time: 0.000 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+AI Compute 0.2.5 recovered UI error during opening the training window: System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+  at System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item (TKey key) [0x0001e] in <c8d0d7b9135640958bff528a1e374758>:0 
+  at SDSI.AI.AIComputeController.OpenPanel () [0x00172] in <91b909fde6b94a5195a9bb63380324a5>:0 
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Save construction time: 20 ms - Serialization time: 215 ms - Compress time: 86 ms - Effect: 18.6% - File write time: 2 ms - App time: 14:53 m - Depth: 98 (AI Compute Review 025 Checkpoint.sav)
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 46.747600 ms
+
+Unloading 1668 unused Assets to reduce memory usage. Loaded Objects now: 34667.
+Total: 96.966600 ms (FindLiveObjects: 1.213700 ms CreateObjectMapping: 0.308600 ms MarkObjects: 92.975700 ms  DeleteObjects: 2.468300 ms)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.107200 ms
+Loading game: AI Compute Review 025 Checkpoint.sav
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+
+Unloading 476 unused Assets to reduce memory usage. Loaded Objects now: 91605.
+Total: 112.583700 ms (FindLiveObjects: 4.136800 ms CreateObjectMapping: 1.306200 ms MarkObjects: 106.360400 ms  DeleteObjects: 0.779800 ms)
+
+Tree combine time: 0.000 ms
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Setting up 6 worker threads for Enlighten.
+  Thread -> id: 1214 -> priority: 1 
+  Thread -> id: 69e8 -> priority: 1 
+  Thread -> id: 46e8 -> priority: 1 
+  Thread -> id: 3340 -> priority: 1 
+  Thread -> id: 988 -> priority: 1 
+  Thread -> id: 2428 -> priority: 1 

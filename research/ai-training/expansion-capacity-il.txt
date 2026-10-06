@@ -1,0 +1,55 @@
+TYPE ServerGroup BASE System.Object
+FIELD Public System.String Name
+FIELD Public System.String Fallback
+FIELD Public System.Single Available
+FIELD Public System.Single PowerSum
+FIELD Public System.Single LastUsed
+FIELD Public System.Boolean Broken
+FIELD Public System.Boolean IsCloud
+FIELD Public UnityEngine.Color WireColor
+FIELD Public Server Rep
+FIELD Public System.Collections.Generic.HashSet`1<IServerHost> Servers
+FIELD Public System.Collections.Generic.HashSet`1<IServerItem> Items
+FIELD Private, Static System.Collections.Generic.List`1<MinimumSpanningTree`2/TreeNode<Server,UnityEngine.Vector3>> _cachedResult
+PROPERTY System.Byte ServerGroup::CloudProvider()
+METHOD Public, HideBySig System.Void ServerGroup::RefreshUsage()
+LOCAL 0 System.Single
+LOCAL 1 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+LOCAL 2 Server
+IL_0000: ldc.r4 1
+IL_0005: ldarg.0
+IL_0006: ldfld System.Single ServerGroup::LastUsed
+IL_000b: ldarg.0
+IL_000c: ldfld System.Single ServerGroup::PowerSum
+IL_0011: div
+IL_0012: call System.Single UnityEngine.Mathf::Min(System.Single,System.Single)
+IL_0017: stloc.0
+IL_0018: ldarg.0
+IL_0019: ldfld System.Collections.Generic.HashSet`1<IServerHost> ServerGroup::Servers
+IL_001e: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<IServerHost>::GetEnumerator()
+IL_0023: stloc.1
+IL_0024: br.s IL_0054
+IL_0026: ldloca.s V_1
+IL_0028: call !0 System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::get_Current()
+IL_002d: isinst Server
+IL_0032: stloc.2
+IL_0033: ldloc.2
+IL_0034: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0039: brtrue.s IL_0054
+IL_003b: ldloc.2
+IL_003c: callvirt Furniture Server::get_furn()
+IL_0041: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0046: brtrue.s IL_0054
+IL_0048: ldloc.2
+IL_0049: callvirt Furniture Server::get_furn()
+IL_004e: ldloc.0
+IL_004f: callvirt System.Void Furniture::set_UseModifier(System.Single)
+IL_0054: ldloca.s V_1
+IL_0056: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<IServerHost>::MoveNext()
+IL_005b: brtrue.s IL_0026
+IL_005d: leave.s IL_006d
+IL_005f: ldloca.s V_1
+IL_0061: constrained. System.Collections.Generic.HashSet`1/Enumerator<IServerHost>
+IL_0067: callvirt System.Void System.IDisposable::Dispose()
+IL_006c: endfinally
+IL_006d: ret

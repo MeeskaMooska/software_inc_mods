@@ -1,0 +1,1616 @@
+TYPE ModController BASE UnityEngine.MonoBehaviour
+FIELD Public, Static, Literal, HasDefault System.String DLLModBuildVersion
+CONSTANT DLLModBuildVersion = 24
+FIELD Public FileReaderWindow ReaderWindowPrefab
+FIELD Private, Static System.Boolean _initialized
+FIELD Public, Static ModController Instance
+FIELD Public, NotSerialized System.Collections.Generic.List`1<ModController/DLLMod> Mods
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _needsVerification
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ModController/DLLVerify> _eulaPrevent
+FIELD Private, Static System.UInt32 _dllCounter
+FIELD Private, NotSerialized DynamicCSharp.ScriptDomain _modDomain
+FIELD Public, Static System.String ModEula
+FIELD Private, Static System.Threading.Thread _mainThread
+FIELD Private System.Boolean _pendingVerification
+FIELD Private, Static System.Collections.Generic.HashSet`1<ModController/DLLMod> _unload
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _deactivating
+PROPERTY System.String ModController::ModFolder()
+PROPERTY System.Threading.Thread ModController::MainThread()
+METHOD Private, Static, HideBySig System.Void ModController::HandleObjectParsing(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String)
+LOCAL 0 System.Int32
+LOCAL 1 System.Boolean
+LOCAL 2 System.Int32
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: br IL_00f0
+IL_0009: ldloc.1
+IL_000a: brfalse.s IL_0022
+IL_000c: ldarg.0
+IL_000d: ldarg.1
+IL_000e: ldind.i4
+IL_000f: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0014: ldc.i4.s 34
+IL_0016: bne.un IL_00ea
+IL_001b: ldc.i4.0
+IL_001c: stloc.1
+IL_001d: br IL_00ea
+IL_0022: ldarg.0
+IL_0023: ldarg.1
+IL_0024: ldind.i4
+IL_0025: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_002a: ldc.i4.s 34
+IL_002c: bne.un.s IL_0035
+IL_002e: ldc.i4.1
+IL_002f: stloc.1
+IL_0030: br IL_00ea
+IL_0035: ldarg.0
+IL_0036: ldarg.1
+IL_0037: ldind.i4
+IL_0038: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_003d: ldc.i4.s 123
+IL_003f: bne.un.s IL_004a
+IL_0041: ldloc.0
+IL_0042: ldc.i4.1
+IL_0043: add
+IL_0044: stloc.0
+IL_0045: br IL_00ea
+IL_004a: ldarg.0
+IL_004b: ldarg.1
+IL_004c: ldind.i4
+IL_004d: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0052: ldc.i4.s 125
+IL_0054: bne.un.s IL_005f
+IL_0056: ldloc.0
+IL_0057: ldc.i4.1
+IL_0058: sub
+IL_0059: stloc.0
+IL_005a: br IL_00ea
+IL_005f: ldloc.0
+IL_0060: brtrue IL_00ea
+IL_0065: ldarg.0
+IL_0066: ldarg.1
+IL_0067: ldind.i4
+IL_0068: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_006d: ldc.i4.s 40
+IL_006f: bne.un.s IL_00ea
+IL_0071: ldarg.0
+IL_0072: ldarg.1
+IL_0073: ldc.i4.s 123
+IL_0075: ldstr "=>"
+IL_007a: call System.Int32 ModController::SkipToAvoid(System.String,System.Int32&,System.Char,System.String)
+IL_007f: stloc.2
+IL_0080: ldloc.2
+IL_0081: ldc.i4.1
+IL_0082: bne.un.s IL_00d9
+IL_0084: ldarg.3
+IL_0085: ldarg.0
+IL_0086: ldarg.2
+IL_0087: ldind.i4
+IL_0088: ldarg.1
+IL_0089: ldind.i4
+IL_008a: ldarg.2
+IL_008b: ldind.i4
+IL_008c: sub
+IL_008d: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_0092: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_0097: pop
+IL_0098: ldarg.2
+IL_0099: ldarg.1
+IL_009a: ldind.i4
+IL_009b: stind.i4
+IL_009c: ldarg.0
+IL_009d: ldarg.1
+IL_009e: ldind.i4
+IL_009f: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_00a4: ldc.i4.s 125
+IL_00a6: bne.un.s IL_00c3
+IL_00a8: ldarg.3
+IL_00a9: ldarg.0
+IL_00aa: ldarg.1
+IL_00ab: ldind.i4
+IL_00ac: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_00b1: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.Char)
+IL_00b6: pop
+IL_00b7: ldarg.1
+IL_00b8: ldarg.1
+IL_00b9: ldind.i4
+IL_00ba: ldc.i4.1
+IL_00bb: add
+IL_00bc: stind.i4
+IL_00bd: ldarg.2
+IL_00be: ldarg.1
+IL_00bf: ldind.i4
+IL_00c0: stind.i4
+IL_00c1: br.s IL_00ea
+IL_00c3: ldarg.0
+IL_00c4: ldarg.1
+IL_00c5: ldarg.2
+IL_00c6: ldarg.3
+IL_00c7: ldarg.s modName
+IL_00c9: ldarg.0
+IL_00ca: ldarg.1
+IL_00cb: ldind.i4
+IL_00cc: call System.Boolean ModController::HasYield(System.String,System.Int32)
+IL_00d1: call System.Boolean ModController::MatchBrace(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String,System.Boolean)
+IL_00d6: brtrue.s IL_00ea
+IL_00d8: ret
+IL_00d9: ldloc.2
+IL_00da: ldc.i4.2
+IL_00db: bne.un.s IL_00e9
+IL_00dd: ldarg.0
+IL_00de: ldarg.1
+IL_00df: ldc.i4.s 59
+IL_00e1: call System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+IL_00e6: brtrue.s IL_00ea
+IL_00e8: ret
+IL_00e9: ret
+IL_00ea: ldarg.1
+IL_00eb: ldarg.1
+IL_00ec: ldind.i4
+IL_00ed: ldc.i4.1
+IL_00ee: add
+IL_00ef: stind.i4
+IL_00f0: ldarg.1
+IL_00f1: ldind.i4
+IL_00f2: ldarg.0
+IL_00f3: callvirt System.Int32 System.String::get_Length()
+IL_00f8: bge.s IL_0101
+IL_00fa: ldloc.0
+IL_00fb: ldc.i4.0
+IL_00fc: bge IL_0009
+IL_0101: ret
+METHOD Private, Static, HideBySig System.Boolean ModController::HasYield(System.String,System.Int32)
+LOCAL 0 System.Boolean
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: ldarg.1
+IL_0005: stloc.2
+IL_0006: br.s IL_0064
+IL_0008: ldloc.0
+IL_0009: brfalse.s IL_001a
+IL_000b: ldarg.0
+IL_000c: ldloc.2
+IL_000d: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0012: ldc.i4.s 34
+IL_0014: bne.un.s IL_0060
+IL_0016: ldc.i4.0
+IL_0017: stloc.0
+IL_0018: br.s IL_0060
+IL_001a: ldarg.0
+IL_001b: ldloc.2
+IL_001c: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0021: ldc.i4.s 34
+IL_0023: bne.un.s IL_0029
+IL_0025: ldc.i4.1
+IL_0026: stloc.0
+IL_0027: br.s IL_0060
+IL_0029: ldarg.0
+IL_002a: ldloc.2
+IL_002b: ldstr "yield"
+IL_0030: ldc.i4.1
+IL_0031: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0036: brfalse.s IL_003a
+IL_0038: ldc.i4.1
+IL_0039: ret
+IL_003a: ldarg.0
+IL_003b: ldloc.2
+IL_003c: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0041: ldc.i4.s 123
+IL_0043: bne.un.s IL_004b
+IL_0045: ldloc.1
+IL_0046: ldc.i4.1
+IL_0047: add
+IL_0048: stloc.1
+IL_0049: br.s IL_0060
+IL_004b: ldarg.0
+IL_004c: ldloc.2
+IL_004d: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0052: ldc.i4.s 125
+IL_0054: bne.un.s IL_0060
+IL_0056: ldloc.1
+IL_0057: ldc.i4.1
+IL_0058: sub
+IL_0059: stloc.1
+IL_005a: ldloc.1
+IL_005b: ldc.i4.0
+IL_005c: bge.s IL_0060
+IL_005e: ldc.i4.0
+IL_005f: ret
+IL_0060: ldloc.2
+IL_0061: ldc.i4.1
+IL_0062: add
+IL_0063: stloc.2
+IL_0064: ldloc.2
+IL_0065: ldarg.0
+IL_0066: callvirt System.Int32 System.String::get_Length()
+IL_006b: blt.s IL_0008
+IL_006d: ldc.i4.0
+IL_006e: ret
+METHOD Private, Static, HideBySig System.Boolean ModController::MatchBrace(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String,System.Boolean)
+LOCAL 0 System.Boolean
+LOCAL 1 System.Int32
+LOCAL 2 System.Text.StringBuilder
+LOCAL 3 System.Boolean
+LOCAL 4 System.String
+LOCAL 5 System.String
+LOCAL 6 System.String
+LOCAL 7 System.String
+LOCAL 8 System.String
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: newobj System.Void System.Text.StringBuilder::.ctor()
+IL_0009: stloc.2
+IL_000a: ldc.i4.1
+IL_000b: stloc.3
+IL_000c: br IL_0294
+IL_0011: ldloc.0
+IL_0012: brfalse.s IL_002a
+IL_0014: ldarg.0
+IL_0015: ldarg.1
+IL_0016: ldind.i4
+IL_0017: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_001c: ldc.i4.s 34
+IL_001e: bne.un IL_028e
+IL_0023: ldc.i4.0
+IL_0024: stloc.0
+IL_0025: br IL_028e
+IL_002a: ldarg.0
+IL_002b: ldarg.1
+IL_002c: ldind.i4
+IL_002d: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0032: ldc.i4.s 10
+IL_0034: bne.un.s IL_0041
+IL_0036: ldloc.2
+IL_0037: callvirt System.Text.StringBuilder System.Text.StringBuilder::Clear()
+IL_003c: pop
+IL_003d: ldc.i4.1
+IL_003e: stloc.3
+IL_003f: br.s IL_0066
+IL_0041: ldloc.3
+IL_0042: brfalse.s IL_0066
+IL_0044: ldarg.0
+IL_0045: ldarg.1
+IL_0046: ldind.i4
+IL_0047: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_004c: call System.Boolean System.Char::IsWhiteSpace(System.Char)
+IL_0051: brfalse.s IL_0064
+IL_0053: ldloc.2
+IL_0054: ldarg.0
+IL_0055: ldarg.1
+IL_0056: ldind.i4
+IL_0057: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_005c: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.Char)
+IL_0061: pop
+IL_0062: br.s IL_0066
+IL_0064: ldc.i4.0
+IL_0065: stloc.3
+IL_0066: ldarg.s hasYield
+IL_0068: brfalse IL_01ee
+IL_006d: ldarg.0
+IL_006e: ldarg.1
+IL_006f: ldind.i4
+IL_0070: ldstr "yield"
+IL_0075: ldc.i4.1
+IL_0076: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_007b: brfalse IL_010a
+IL_0080: ldarg.1
+IL_0081: ldarg.1
+IL_0082: ldind.i4
+IL_0083: ldc.i4.1
+IL_0084: sub
+IL_0085: stind.i4
+IL_0086: ldarg.0
+IL_0087: ldarg.2
+IL_0088: ldind.i4
+IL_0089: ldarg.1
+IL_008a: ldind.i4
+IL_008b: ldarg.2
+IL_008c: ldind.i4
+IL_008d: sub
+IL_008e: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_0093: stloc.s V_4
+IL_0095: ldloc.s V_4
+IL_0097: call System.Boolean System.String::IsNullOrWhiteSpace(System.String)
+IL_009c: brtrue.s IL_00d3
+IL_009e: ldloc.2
+IL_009f: callvirt System.String System.Object::ToString()
+IL_00a4: stloc.s V_5
+IL_00a6: ldarg.3
+IL_00a7: ldstr "
+"
+IL_00ac: ldloc.s V_5
+IL_00ae: ldstr "try {
+"
+IL_00b3: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_00b8: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_00bd: pop
+IL_00be: ldarg.3
+IL_00bf: ldloc.s V_4
+IL_00c1: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_00c6: pop
+IL_00c7: ldarg.3
+IL_00c8: ldarg.s modName
+IL_00ca: ldloc.s V_5
+IL_00cc: call System.Void ModController::AppendCatch(System.Text.StringBuilder,System.String,System.String)
+IL_00d1: br.s IL_00dc
+IL_00d3: ldarg.3
+IL_00d4: ldloc.s V_4
+IL_00d6: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_00db: pop
+IL_00dc: ldarg.2
+IL_00dd: ldarg.1
+IL_00de: ldind.i4
+IL_00df: stind.i4
+IL_00e0: ldarg.0
+IL_00e1: ldarg.1
+IL_00e2: ldc.i4.s 59
+IL_00e4: call System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+IL_00e9: brfalse.s IL_0108
+IL_00eb: ldarg.3
+IL_00ec: ldarg.0
+IL_00ed: ldarg.2
+IL_00ee: ldind.i4
+IL_00ef: ldarg.1
+IL_00f0: ldind.i4
+IL_00f1: ldarg.2
+IL_00f2: ldind.i4
+IL_00f3: sub
+IL_00f4: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_00f9: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_00fe: pop
+IL_00ff: ldarg.2
+IL_0100: ldarg.1
+IL_0101: ldind.i4
+IL_0102: stind.i4
+IL_0103: br IL_01ee
+IL_0108: ldc.i4.0
+IL_0109: ret
+IL_010a: ldarg.0
+IL_010b: ldarg.1
+IL_010c: ldind.i4
+IL_010d: ldstr "while"
+IL_0112: ldc.i4.1
+IL_0113: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0118: brtrue.s IL_016d
+IL_011a: ldarg.0
+IL_011b: ldarg.1
+IL_011c: ldind.i4
+IL_011d: ldstr "if"
+IL_0122: ldc.i4.1
+IL_0123: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0128: brtrue.s IL_016d
+IL_012a: ldarg.0
+IL_012b: ldarg.1
+IL_012c: ldind.i4
+IL_012d: ldstr "for"
+IL_0132: ldc.i4.1
+IL_0133: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0138: brtrue.s IL_016d
+IL_013a: ldarg.0
+IL_013b: ldarg.1
+IL_013c: ldind.i4
+IL_013d: ldstr "foreach"
+IL_0142: ldc.i4.1
+IL_0143: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0148: brtrue.s IL_016d
+IL_014a: ldarg.0
+IL_014b: ldarg.1
+IL_014c: ldind.i4
+IL_014d: ldstr "do"
+IL_0152: ldc.i4.1
+IL_0153: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0158: brtrue.s IL_016d
+IL_015a: ldarg.0
+IL_015b: ldarg.1
+IL_015c: ldind.i4
+IL_015d: ldstr "else"
+IL_0162: ldc.i4.1
+IL_0163: call System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+IL_0168: brfalse IL_01ee
+IL_016d: ldarg.1
+IL_016e: ldarg.1
+IL_016f: ldind.i4
+IL_0170: ldc.i4.1
+IL_0171: sub
+IL_0172: stind.i4
+IL_0173: ldarg.0
+IL_0174: ldarg.2
+IL_0175: ldind.i4
+IL_0176: ldarg.1
+IL_0177: ldind.i4
+IL_0178: ldarg.2
+IL_0179: ldind.i4
+IL_017a: sub
+IL_017b: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_0180: stloc.s V_6
+IL_0182: ldarg.3
+IL_0183: ldloc.s V_6
+IL_0185: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_018a: pop
+IL_018b: ldarg.2
+IL_018c: ldarg.1
+IL_018d: ldind.i4
+IL_018e: stind.i4
+IL_018f: ldarg.0
+IL_0190: ldarg.1
+IL_0191: ldc.i4.s 123
+IL_0193: call System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+IL_0198: brfalse.s IL_01ec
+IL_019a: ldarg.3
+IL_019b: ldarg.0
+IL_019c: ldarg.2
+IL_019d: ldind.i4
+IL_019e: ldarg.1
+IL_019f: ldind.i4
+IL_01a0: ldarg.2
+IL_01a1: ldind.i4
+IL_01a2: sub
+IL_01a3: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_01a8: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_01ad: pop
+IL_01ae: ldarg.2
+IL_01af: ldarg.1
+IL_01b0: ldind.i4
+IL_01b1: stind.i4
+IL_01b2: ldarg.0
+IL_01b3: ldarg.1
+IL_01b4: ldarg.2
+IL_01b5: ldarg.3
+IL_01b6: ldarg.s modName
+IL_01b8: ldc.i4.1
+IL_01b9: call System.Boolean ModController::MatchBrace(System.String,System.Int32&,System.Int32&,System.Text.StringBuilder,System.String,System.Boolean)
+IL_01be: brfalse.s IL_01ea
+IL_01c0: ldarg.0
+IL_01c1: ldarg.1
+IL_01c2: ldc.i4.s 125
+IL_01c4: call System.Boolean ModController::SkipTo(System.String,System.Int32&,System.Char)
+IL_01c9: brfalse.s IL_01e8
+IL_01cb: ldarg.3
+IL_01cc: ldarg.0
+IL_01cd: ldarg.2
+IL_01ce: ldind.i4
+IL_01cf: ldarg.1
+IL_01d0: ldind.i4
+IL_01d1: ldarg.2
+IL_01d2: ldind.i4
+IL_01d3: sub
+IL_01d4: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_01d9: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_01de: pop
+IL_01df: ldarg.2
+IL_01e0: ldarg.1
+IL_01e1: ldind.i4
+IL_01e2: stind.i4
+IL_01e3: br IL_028e
+IL_01e8: ldc.i4.0
+IL_01e9: ret
+IL_01ea: ldc.i4.0
+IL_01eb: ret
+IL_01ec: ldc.i4.0
+IL_01ed: ret
+IL_01ee: ldarg.0
+IL_01ef: ldarg.1
+IL_01f0: ldind.i4
+IL_01f1: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_01f6: ldc.i4.s 34
+IL_01f8: bne.un.s IL_0201
+IL_01fa: ldc.i4.1
+IL_01fb: stloc.0
+IL_01fc: br IL_028e
+IL_0201: ldarg.0
+IL_0202: ldarg.1
+IL_0203: ldind.i4
+IL_0204: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0209: ldc.i4.s 123
+IL_020b: bne.un.s IL_0213
+IL_020d: ldloc.1
+IL_020e: ldc.i4.1
+IL_020f: add
+IL_0210: stloc.1
+IL_0211: br.s IL_028e
+IL_0213: ldarg.0
+IL_0214: ldarg.1
+IL_0215: ldind.i4
+IL_0216: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_021b: ldc.i4.s 125
+IL_021d: bne.un.s IL_028e
+IL_021f: ldloc.1
+IL_0220: ldc.i4.1
+IL_0221: sub
+IL_0222: stloc.1
+IL_0223: ldloc.1
+IL_0224: ldc.i4.0
+IL_0225: bge.s IL_028e
+IL_0227: ldarg.1
+IL_0228: ldarg.1
+IL_0229: ldind.i4
+IL_022a: ldc.i4.1
+IL_022b: sub
+IL_022c: stind.i4
+IL_022d: ldarg.0
+IL_022e: ldarg.2
+IL_022f: ldind.i4
+IL_0230: ldarg.1
+IL_0231: ldind.i4
+IL_0232: ldarg.2
+IL_0233: ldind.i4
+IL_0234: sub
+IL_0235: callvirt System.String System.String::Substring(System.Int32,System.Int32)
+IL_023a: stloc.s V_7
+IL_023c: ldloc.s V_7
+IL_023e: call System.Boolean System.String::IsNullOrWhiteSpace(System.String)
+IL_0243: brtrue.s IL_0279
+IL_0245: ldloc.2
+IL_0246: callvirt System.String System.Object::ToString()
+IL_024b: stloc.s V_8
+IL_024d: ldarg.3
+IL_024e: ldstr "
+"
+IL_0253: ldloc.2
+IL_0254: ldstr "try {
+"
+IL_0259: call System.String System.String::Concat(System.Object,System.Object,System.Object)
+IL_025e: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_0263: pop
+IL_0264: ldarg.3
+IL_0265: ldloc.s V_7
+IL_0267: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_026c: pop
+IL_026d: ldarg.3
+IL_026e: ldarg.s modName
+IL_0270: ldloc.s V_8
+IL_0272: call System.Void ModController::AppendCatch(System.Text.StringBuilder,System.String,System.String)
+IL_0277: br.s IL_0282
+IL_0279: ldarg.3
+IL_027a: ldloc.s V_7
+IL_027c: callvirt System.Text.StringBuilder System.Text.StringBuilder::Append(System.String)
+IL_0281: pop
+IL_0282: ldarg.1
+IL_0283: ldarg.1
+IL_0284: ldind.i4
+IL_0285: ldc.i4.1
+IL_0286: add
+IL_0287: stind.i4
+IL_0288: ldarg.2
+IL_0289: ldarg.1
+IL_028a: ldind.i4
+IL_028b: stind.i4
+IL_028c: ldc.i4.1
+IL_028d: ret
+IL_028e: ldarg.1
+IL_028f: ldarg.1
+IL_0290: ldind.i4
+IL_0291: ldc.i4.1
+IL_0292: add
+IL_0293: stind.i4
+IL_0294: ldarg.1
+IL_0295: ldind.i4
+IL_0296: ldarg.0
+IL_0297: callvirt System.Int32 System.String::get_Length()
+IL_029c: blt IL_0011
+IL_02a1: ldc.i4.0
+IL_02a2: ret
+METHOD Private, Static, HideBySig System.Boolean ModController::CheckForName(System.String,System.Int32,System.String,System.Boolean)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+LOCAL 2 System.Char
+IL_0000: ldarg.3
+IL_0001: brfalse.s IL_001b
+IL_0003: ldarg.1
+IL_0004: ldc.i4.1
+IL_0005: sub
+IL_0006: ldc.i4.0
+IL_0007: blt.s IL_001b
+IL_0009: ldarg.0
+IL_000a: ldarg.1
+IL_000b: ldc.i4.1
+IL_000c: sub
+IL_000d: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0012: call System.Boolean System.Char::IsWhiteSpace(System.Char)
+IL_0017: brtrue.s IL_001b
+IL_0019: ldc.i4.0
+IL_001a: ret
+IL_001b: ldc.i4.0
+IL_001c: stloc.0
+IL_001d: br.s IL_0044
+IL_001f: ldarg.1
+IL_0020: ldloc.0
+IL_0021: add
+IL_0022: stloc.1
+IL_0023: ldloc.1
+IL_0024: ldarg.0
+IL_0025: callvirt System.Int32 System.String::get_Length()
+IL_002a: bge.s IL_003e
+IL_002c: ldarg.0
+IL_002d: ldloc.1
+IL_002e: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_0033: ldarg.2
+IL_0034: ldloc.0
+IL_0035: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_003a: beq.s IL_0040
+IL_003c: ldc.i4.0
+IL_003d: ret
+IL_003e: ldc.i4.0
+IL_003f: ret
+IL_0040: ldloc.0
+IL_0041: ldc.i4.1
+IL_0042: add
+IL_0043: stloc.0
+IL_0044: ldloc.0
+IL_0045: ldarg.2
+IL_0046: callvirt System.Int32 System.String::get_Length()
+IL_004b: blt.s IL_001f
+IL_004d: ldarg.3
+IL_004e: brfalse.s IL_007e
+IL_0050: ldarg.1
+IL_0051: ldarg.2
+IL_0052: callvirt System.Int32 System.String::get_Length()
+IL_0057: add
+IL_0058: ldarg.0
+IL_0059: callvirt System.Int32 System.String::get_Length()
+IL_005e: bge.s IL_007e
+IL_0060: ldarg.0
+IL_0061: ldarg.1
+IL_0062: ldarg.2
+IL_0063: callvirt System.Int32 System.String::get_Length()
+IL_0068: add
+IL_0069: callvirt System.Char System.String::get_Chars(System.Int32)
+IL_006e: stloc.2
+IL_006f: ldloc.2
+IL_0070: call System.Boolean System.Char::IsWhiteSpace(System.Char)
+IL_0075: brtrue.s IL_007e
+IL_0077: ldloc.2
+IL_0078: ldc.i4.s 40
+IL_007a: beq.s IL_007e
+IL_007c: ldc.i4.0
+IL_007d: ret
+IL_007e: ldc.i4.1
+IL_007f: ret
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ModController::.cctor()
+IL_0000: ldc.i4.0
+IL_0001: stsfld System.Boolean ModController::_initialized
+IL_0006: ldc.i4.0
+IL_0007: stsfld System.UInt32 ModController::_dllCounter
+IL_000c: ldstr "The game has detected dll-based mods. You must agree to the following before any mods will be loaded:
+
+The following agreement governs all download, installation or use of any assembly file (hereinafter "mods") that modifies the runtime behaviour of Software Inc. If you do not agree to this agreement, you may not install or use mods.
+
+You acknowledge that downloading, installing or using mods may damage your computer and any data stored on it. Your installation or use of mods is at your own discretion and risk, you are solely responsible and Coredumping ApS is not liable for any loss of data or damage to your computer."
+IL_0011: stsfld System.String ModController::ModEula
+IL_0016: newobj System.Void System.Collections.Generic.HashSet`1<ModController/DLLMod>::.ctor()
+IL_001b: stsfld System.Collections.Generic.HashSet`1<ModController/DLLMod> ModController::_unload
+IL_0020: newobj System.Void System.Collections.Generic.HashSet`1<System.String>::.ctor()
+IL_0025: stsfld System.Collections.Generic.HashSet`1<System.String> ModController::_deactivating
+IL_002a: ret
+TYPE Options BASE System.Object
+FIELD Private, Static System.Boolean DisableResolutionChange
+FIELD Public, Static System.Nullable`1<UnityEngine.Vector2> MainPanelOffset
+FIELD Private, Static System.Boolean FailedToLoad
+FIELD Private, Static System.Boolean Loaded
+FIELD Private, Static System.Boolean _edgeScroll
+FIELD Private, Static System.Boolean _ambientOcclusion
+FIELD Private, Static System.Int32 _ssaa
+FIELD Private, Static System.Int32 _secondSpeed
+FIELD Private, Static System.Boolean _ssr
+FIELD Private, Static System.Boolean _fxaa
+FIELD Private, Static System.Boolean _smaa
+FIELD Private, Static System.Boolean _tiltShift
+FIELD Private, Static System.Boolean _bloom
+FIELD Private, Static System.Boolean _opaqueGlass
+FIELD Private, Static System.Boolean _hideGrid
+FIELD Private, Static System.Single _scrollSpeed
+FIELD Private, Static System.Single _zoomSpeed
+FIELD Private, Static System.Single _rotationSpeed
+FIELD Private, Static UnityEngine.FullScreenMode _lastFullscreen
+FIELD Private, Static UnityEngine.Resolution _lastResolution
+FIELD Private, Static System.Boolean _consoleOnError
+FIELD Private, Static System.Single _uiSize
+FIELD Private, Static System.Boolean _uiPixelPerfect
+FIELD Private, Static System.Single _gamma
+FIELD Private, Static System.Int32 _grassQuality
+FIELD Private, Static System.Boolean _grassOutdoor
+FIELD Private, Static System.String _lastVersion
+FIELD Private, Static System.Boolean _injectMods
+FIELD Private, Static UnityEngine.Color[] _customColors
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> UnlockedRewards
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> IgnoreQuestions
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _favFurns
+FIELD Public, Static System.String SteamJoinLobby
+FIELD Public, Static System.Boolean ForceLAN
+FIELD Private, Static System.Boolean <AutoSkip>k__BackingField
+FIELD Private, Static System.Boolean <AutoSave>k__BackingField
+FIELD Private, Static System.Int32 <BuildModeSaveInterval>k__BackingField
+FIELD Private, Static System.Boolean <Backup>k__BackingField
+FIELD Private, Static System.Boolean <ShiftToPlace>k__BackingField
+FIELD Private, Static System.Boolean <Tutorial>k__BackingField
+FIELD Private, Static System.Boolean <HintsEnabled>k__BackingField
+FIELD Private, Static System.String <Currency>k__BackingField
+FIELD Private, Static System.Boolean <CurrencyShortForm>k__BackingField
+FIELD Private, Static System.Boolean <Celsius>k__BackingField
+FIELD Private, Static System.Int32 <ColorBlindness>k__BackingField
+FIELD Private, Static System.Boolean <CustomCursor>k__BackingField
+FIELD Private, Static System.Boolean <GridPanel>k__BackingField
+FIELD Private, Static System.Boolean <DiagonalRoomHighlights>k__BackingField
+FIELD Private, Static System.Boolean <SaveConsole>k__BackingField
+FIELD Private, Static System.Boolean <FurnTexCompression>k__BackingField
+FIELD Private, Static System.Boolean <MoreShadow>k__BackingField
+FIELD Private, Static System.Boolean <EnvEffects>k__BackingField
+FIELD Private, Static System.Boolean <Clouds>k__BackingField
+FIELD Private, Static System.Boolean <Flickering>k__BackingField
+FIELD Private, Static System.Boolean <DynamicPaths>k__BackingField
+FIELD Private, Static System.Int32 <WorldBackground>k__BackingField
+FIELD Private, Static System.Boolean <EmployeesAllFloor>k__BackingField
+FIELD Private, Static System.Boolean <AskReporting>k__BackingField
+FIELD Private, Static System.Boolean <CustomizationAdvanced>k__BackingField
+FIELD Private, Static System.Boolean <ConsoleVerbose>k__BackingField
+FIELD Private, Static System.Boolean <ColorBrightnessSlider>k__BackingField
+FIELD Private, Static System.String <LastIP>k__BackingField
+FIELD Private, Static System.String <ForcedIP>k__BackingField
+FIELD Private, Static System.Int32 <GamePort>k__BackingField
+FIELD Private, Static System.Int32 <LobbyPort>k__BackingField
+FIELD Private, Static System.Boolean <LocalizationFallback>k__BackingField
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,SVector3> WindowSizes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> ColumnWidths
+FIELD Private, Static System.Boolean[] Hints
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,Options/VariableInfo> SettingFields
+FIELD Private, Static, Literal, HasDefault System.Int32 SW_MAXIMIZE
+CONSTANT SW_MAXIMIZE = 3
+FIELD Private, Static, Literal, HasDefault System.Int32 SW_NORMAL
+CONSTANT SW_NORMAL = 1
+FIELD Private, Static, Literal, HasDefault System.UInt32 SW_MAXIMIZEBOX
+CONSTANT SW_MAXIMIZEBOX = 65536
+FIELD Private, Static System.Int32 _unityWindowHandle
+FIELD Private, Static System.Boolean _unityWindowFound
+FIELD Public, Static System.Boolean DisableSaving
+FIELD Public, Static System.String CommandLines
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>> ComboContentFunctions
+PROPERTY System.String Options::SettingsFile()
+PROPERTY System.String Options::SharedSettingsFile()
+PROPERTY System.String Options::WindowSizeFile()
+PROPERTY System.String Options::ColumnWidthFile()
+PROPERTY System.String Options::HintFile()
+PROPERTY System.Boolean Options::InjectMods()
+PROPERTY System.String Options::Password()
+PROPERTY System.Single Options::DayLimit()
+PROPERTY SINetworking.NetworkLobby/RoundLimitType Options::RoundType()
+PROPERTY DifficultyValues/DifficultySetting Options::Difficulty()
+PROPERTY System.Boolean Options::CustomDifficulty()
+PROPERTY System.Int32 Options::SecondSpeed()
+PROPERTY System.Int32 Options::DefaultPriority()
+PROPERTY System.Boolean Options::AutoSkip()
+PROPERTY System.Boolean Options::AutoSave()
+PROPERTY System.Int32 Options::BuildModeSaveInterval()
+PROPERTY System.Boolean Options::Backup()
+PROPERTY System.Boolean Options::RunInBackground()
+PROPERTY System.Boolean Options::ShiftToPlace()
+PROPERTY System.Boolean Options::PermanentUnlock()
+PROPERTY System.Boolean Options::ShouldAutoSave()
+PROPERTY System.Boolean Options::EdgeScroll()
+PROPERTY System.Single Options::ScrollSpeed()
+PROPERTY System.Single Options::ZoomSpeed()
+PROPERTY System.Single Options::RotationSpeed()
+PROPERTY System.Boolean Options::Tutorial()
+PROPERTY System.Boolean Options::HintsEnabled()
+PROPERTY System.Boolean Options::ResetHint()
+PROPERTY System.String Options::Currency()
+PROPERTY System.Boolean Options::CurrencyShortForm()
+PROPERTY System.Boolean Options::AMPM()
+PROPERTY System.Boolean Options::Celsius()
+PROPERTY System.Int32 Options::ColorBlindness()
+PROPERTY UnityEngine.Color[] Options::CustomColors()
+PROPERTY System.Single Options::UISize()
+PROPERTY System.Boolean Options::CustomCursor()
+PROPERTY System.Boolean Options::ResetWindowSizes()
+PROPERTY System.Boolean Options::ResetColumnWidths()
+PROPERTY System.Boolean Options::ResetDialogs()
+PROPERTY System.Boolean Options::GridPanel()
+PROPERTY System.Boolean Options::DiagonalRoomHighlights()
+PROPERTY System.Boolean Options::HideGrid()
+PROPERTY System.Boolean Options::SaveConsole()
+PROPERTY System.Boolean Options::FurnTexCompression()
+PROPERTY System.ValueTuple`2<System.Int32,System.Int32> Options::SResolution()
+PROPERTY UnityEngine.FullScreenMode Options::Fullscreen()
+PROPERTY System.Boolean Options::AutoGraphicsTest()
+PROPERTY System.Int32 Options::GraphicsQuality()
+PROPERTY System.Int32 Options::VSync()
+PROPERTY System.Int32 Options::TargetFrameRate()
+PROPERTY System.Single Options::Gamma()
+PROPERTY System.Boolean Options::FXAA()
+PROPERTY System.Boolean Options::SMAA()
+PROPERTY System.Int32 Options::SSAA()
+PROPERTY System.Boolean Options::Shadows()
+PROPERTY System.Int32 Options::ShadowQuality()
+PROPERTY System.Boolean Options::MoreShadow()
+PROPERTY System.Boolean Options::AmbientOcclusion()
+PROPERTY System.Boolean Options::TiltShift()
+PROPERTY System.Boolean Options::Bloom()
+PROPERTY System.Boolean Options::SSR()
+PROPERTY System.Int32 Options::GrassQuality()
+PROPERTY System.Boolean Options::GrassOutdoors()
+PROPERTY System.Boolean Options::EnvEffects()
+PROPERTY System.Boolean Options::Clouds()
+PROPERTY System.Boolean Options::Flickering()
+PROPERTY System.Boolean Options::DynamicPaths()
+PROPERTY System.Int32 Options::WorldBackground()
+PROPERTY System.Boolean Options::OpaqueGlass()
+PROPERTY System.Boolean Options::EmployeesAllFloor()
+PROPERTY System.Boolean Options::UIPP()
+PROPERTY System.Boolean Options::AskReporting()
+PROPERTY System.Boolean Options::CustomizationAdvanced()
+PROPERTY System.Boolean Options::ConsoleOnError()
+PROPERTY System.Boolean Options::ConsoleVerbose()
+PROPERTY System.Boolean Options::ColorBrightnessSlider()
+PROPERTY System.String Options::LastVersion()
+PROPERTY System.String Options::LastIP()
+PROPERTY System.String Options::ForcedIP()
+PROPERTY System.Int32 Options::GamePort()
+PROPERTY System.Int32 Options::LobbyPort()
+PROPERTY System.Boolean Options::LocalizationFallback()
+METHOD Public, Static, HideBySig, SpecialName System.Boolean Options::get_InjectMods()
+IL_0000: ldsfld System.Boolean Options::_injectMods
+IL_0005: ret
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void Options::.cctor()
+LOCAL 0 System.Single
+LOCAL 1 System.String[]
+LOCAL 2 System.Boolean
+LOCAL 3 System.Int32
+LOCAL 4 System.Int32
+LOCAL 5 ConfigFile
+LOCAL 6 System.Collections.Generic.List`1<System.String>
+LOCAL 7 System.Collections.Generic.List`1<System.String>
+LOCAL 8 System.Collections.Generic.List`1<System.String>
+LOCAL 9 System.Boolean
+LOCAL 10 System.Collections.Generic.List`1<System.String>
+LOCAL 11 System.Collections.Generic.List`1<System.String>
+LOCAL 12 UnityEngine.Vector2Int
+LOCAL 13 System.Int32
+LOCAL 14 System.String
+LOCAL 15 System.String[]
+LOCAL 16 System.Double
+LOCAL 17 System.Double
+LOCAL 18 System.String
+LOCAL 19 System.String
+LOCAL 20 ConfigFile
+LOCAL 21 System.String[]
+LOCAL 22 System.Reflection.PropertyInfo[]
+LOCAL 23 System.Int32
+LOCAL 24 System.Reflection.PropertyInfo
+LOCAL 25 Options/SettingAttribute
+LOCAL 26 Options/VariableInfo
+IL_0000: ldc.i4.0
+IL_0001: stsfld System.Boolean Options::DisableResolutionChange
+IL_0006: ldsflda System.Nullable`1<UnityEngine.Vector2> Options::MainPanelOffset
+IL_000b: initobj System.Nullable`1<UnityEngine.Vector2>
+IL_0011: ldc.i4.0
+IL_0012: stsfld System.Boolean Options::FailedToLoad
+IL_0017: ldc.i4.0
+IL_0018: stsfld System.Boolean Options::Loaded
+IL_001d: ldc.i4.0
+IL_001e: stsfld System.Boolean Options::_edgeScroll
+IL_0023: ldc.i4.1
+IL_0024: stsfld System.Boolean Options::_ambientOcclusion
+IL_0029: ldc.i4.s 10
+IL_002b: stsfld System.Int32 Options::_ssaa
+IL_0030: ldc.i4.s 10
+IL_0032: stsfld System.Int32 Options::_secondSpeed
+IL_0037: ldc.i4.0
+IL_0038: stsfld System.Boolean Options::_ssr
+IL_003d: ldc.i4.1
+IL_003e: stsfld System.Boolean Options::_fxaa
+IL_0043: ldc.i4.0
+IL_0044: stsfld System.Boolean Options::_smaa
+IL_0049: ldc.i4.1
+IL_004a: stsfld System.Boolean Options::_tiltShift
+IL_004f: ldc.i4.1
+IL_0050: stsfld System.Boolean Options::_bloom
+IL_0055: ldc.i4.0
+IL_0056: stsfld System.Boolean Options::_opaqueGlass
+IL_005b: ldc.i4.0
+IL_005c: stsfld System.Boolean Options::_hideGrid
+IL_0061: ldc.r4 100
+IL_0066: stsfld System.Single Options::_scrollSpeed
+IL_006b: ldc.r4 50
+IL_0070: stsfld System.Single Options::_zoomSpeed
+IL_0075: ldc.r4 10
+IL_007a: stsfld System.Single Options::_rotationSpeed
+IL_007f: ldc.i4.3
+IL_0080: stsfld UnityEngine.FullScreenMode Options::_lastFullscreen
+IL_0085: ldc.i4.1
+IL_0086: stsfld System.Boolean Options::_consoleOnError
+IL_008b: ldc.r4 1
+IL_0090: stsfld System.Single Options::_uiSize
+IL_0095: ldc.i4.1
+IL_0096: stsfld System.Boolean Options::_uiPixelPerfect
+IL_009b: ldc.r4 0.5
+IL_00a0: stsfld System.Single Options::_gamma
+IL_00a5: ldc.i4.1
+IL_00a6: stsfld System.Int32 Options::_grassQuality
+IL_00ab: ldc.i4.0
+IL_00ac: stsfld System.Boolean Options::_grassOutdoor
+IL_00b1: ldstr "Alpha 10.10.11"
+IL_00b6: stsfld System.String Options::_lastVersion
+IL_00bb: ldc.i4.1
+IL_00bc: stsfld System.Boolean Options::_injectMods
+IL_00c1: ldnull
+IL_00c2: stsfld UnityEngine.Color[] Options::_customColors
+IL_00c7: newobj System.Void System.Collections.Generic.HashSet`1<System.String>::.ctor()
+IL_00cc: stsfld System.Collections.Generic.HashSet`1<System.String> Options::UnlockedRewards
+IL_00d1: newobj System.Void System.Collections.Generic.HashSet`1<System.String>::.ctor()
+IL_00d6: stsfld System.Collections.Generic.HashSet`1<System.String> Options::IgnoreQuestions
+IL_00db: newobj System.Void System.Collections.Generic.HashSet`1<System.String>::.ctor()
+IL_00e0: stsfld System.Collections.Generic.HashSet`1<System.String> Options::_favFurns
+IL_00e5: ldnull
+IL_00e6: stsfld System.String Options::SteamJoinLobby
+IL_00eb: ldc.i4.0
+IL_00ec: stsfld System.Boolean Options::ForceLAN
+IL_00f1: ldc.i4 58588
+IL_00f6: stsfld System.Int32 Options::<GamePort>k__BackingField
+IL_00fb: ldc.i4 58585
+IL_0100: stsfld System.Int32 Options::<LobbyPort>k__BackingField
+IL_0105: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,SVector3>::.ctor()
+IL_010a: stsfld System.Collections.Generic.Dictionary`2<System.String,SVector3> Options::WindowSizes
+IL_010f: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Single>::.ctor()
+IL_0114: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Options::ColumnWidths
+IL_0119: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,Options/VariableInfo>::.ctor()
+IL_011e: stsfld System.Collections.Generic.Dictionary`2<System.String,Options/VariableInfo> Options::SettingFields
+IL_0123: ldc.i4.0
+IL_0124: stsfld System.Boolean Options::_unityWindowFound
+IL_0129: ldc.i4.0
+IL_012a: stsfld System.Boolean Options::DisableSaving
+IL_012f: newobj System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::.ctor()
+IL_0134: dup
+IL_0135: ldstr "GetDifficulties"
+IL_013a: ldnull
+IL_013b: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetDifficulties()
+IL_0141: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_0146: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_014b: dup
+IL_014c: ldstr "GetCurrencies"
+IL_0151: ldnull
+IL_0152: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetCurrencies()
+IL_0158: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_015d: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0162: dup
+IL_0163: ldstr "GetResolutions"
+IL_0168: ldnull
+IL_0169: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetResolutions()
+IL_016f: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_0174: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0179: dup
+IL_017a: ldstr "GetScreenResolutions"
+IL_017f: ldnull
+IL_0180: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetScreenResolutions()
+IL_0186: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_018b: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0190: dup
+IL_0191: ldstr "GetFullScreenOptions"
+IL_0196: ldnull
+IL_0197: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetFullScreenOptions()
+IL_019d: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_01a2: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_01a7: dup
+IL_01a8: ldstr "GetHz"
+IL_01ad: ldnull
+IL_01ae: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetHz()
+IL_01b4: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_01b9: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_01be: dup
+IL_01bf: ldstr "GetUISizes"
+IL_01c4: ldnull
+IL_01c5: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetUISizes()
+IL_01cb: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_01d0: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_01d5: dup
+IL_01d6: ldstr "GetVSyncs"
+IL_01db: ldnull
+IL_01dc: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetVSyncs()
+IL_01e2: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_01e7: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_01ec: dup
+IL_01ed: ldstr "GetWorldBackground"
+IL_01f2: ldnull
+IL_01f3: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetWorldBackground()
+IL_01f9: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_01fe: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0203: dup
+IL_0204: ldstr "GetQualityOptions"
+IL_0209: ldnull
+IL_020a: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetQualityOptions()
+IL_0210: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_0215: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_021a: dup
+IL_021b: ldstr "GetColorBlindness"
+IL_0220: ldnull
+IL_0221: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetColorBlindness()
+IL_0227: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_022c: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0231: dup
+IL_0232: ldstr "GetRoundLimits"
+IL_0237: ldnull
+IL_0238: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetRoundLimits()
+IL_023e: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_0243: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_0248: dup
+IL_0249: ldstr "GetRoundTypes"
+IL_024e: ldnull
+IL_024f: ldftn System.Collections.Generic.Dictionary`2<System.String,System.Object> Options::GetRoundTypes()
+IL_0255: newobj System.Void System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>::.ctor(System.Object,System.IntPtr)
+IL_025a: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>>::Add(!0,!1)
+IL_025f: stsfld System.Collections.Generic.Dictionary`2<System.String,System.Func`1<System.Collections.Generic.Dictionary`2<System.String,System.Object>>> Options::ComboContentFunctions
+IL_0264: ldc.i4 1024
+IL_0269: ldc.i4 768
+IL_026e: ldc.i4.s 60
+IL_0270: call UnityEngine.Resolution Options::FindRes(System.Int32,System.Int32,System.Int32)
+IL_0275: stsfld UnityEngine.Resolution Options::_lastResolution
+IL_027a: call System.Single UnityEngine.Time::get_realtimeSinceStartup()
+IL_027f: stloc.0
+IL_0280: call System.String[] System.Environment::GetCommandLineArgs()
+IL_0285: stloc.1
+IL_0286: ldstr "
+"
+IL_028b: ldloc.1
+IL_028c: call System.String System.String::Join(System.String,System.String[])
+IL_0291: stsfld System.String Options::CommandLines
+IL_0296: ldc.i4.0
+IL_0297: stloc.2
+IL_0298: ldc.i4.0
+IL_0299: stloc.3
+IL_029a: ldc.i4.0
+IL_029b: stloc.s V_4
+IL_029d: ldnull
+IL_029e: ldftn System.Boolean Options::EnumWindowsCallBack(System.Int32,System.IntPtr)
+IL_02a4: newobj System.Void Options/EnumWindowsProc::.ctor(System.Object,System.IntPtr)
+IL_02a9: ldsfld System.IntPtr System.IntPtr::Zero
+IL_02ae: call System.Boolean Options::EnumWindows(Options/EnumWindowsProc,System.IntPtr)
+IL_02b3: pop
+IL_02b4: call UnityEngine.Vector2Int Options::GetMainWindowPosition()
+IL_02b9: stloc.s V_12
+IL_02bb: ldloca.s V_12
+IL_02bd: call System.Int32 UnityEngine.Vector2Int::get_x()
+IL_02c2: stloc.3
+IL_02c3: ldloca.s V_12
+IL_02c5: call System.Int32 UnityEngine.Vector2Int::get_y()
+IL_02ca: stloc.s V_4
+IL_02cc: leave.s IL_02d1
+IL_02ce: pop
+IL_02cf: leave.s IL_02d1
+IL_02d1: ldc.i4.0
+IL_02d2: stloc.s V_13
+IL_02d4: br IL_041d
+IL_02d9: ldloc.1
+IL_02da: ldloc.s V_13
+IL_02dc: ldelem.ref
+IL_02dd: callvirt System.String System.String::ToLower()
+IL_02e2: stloc.s V_14
+IL_02e4: ldloc.s V_14
+IL_02e6: ldstr "-disableresolution"
+IL_02eb: callvirt System.Boolean System.String::Equals(System.String)
+IL_02f0: brfalse.s IL_02fd
+IL_02f2: ldc.i4.1
+IL_02f3: stsfld System.Boolean Options::DisableResolutionChange
+IL_02f8: br IL_0417
+IL_02fd: ldloc.s V_14
+IL_02ff: ldstr "-resizepanel"
+IL_0304: callvirt System.Boolean System.String::Equals(System.String)
+IL_0309: brfalse.s IL_036e
+IL_030b: ldloc.s V_13
+IL_030d: ldc.i4.1
+IL_030e: add
+IL_030f: ldloc.1
+IL_0310: ldlen
+IL_0311: conv.i4
+IL_0312: bge.s IL_036e
+IL_0314: ldloc.1
+IL_0315: ldloc.s V_13
+IL_0317: ldc.i4.1
+IL_0318: add
+IL_0319: ldelem.ref
+IL_031a: ldc.i4.1
+IL_031b: newarr System.Char
+IL_0320: dup
+IL_0321: ldc.i4.0
+IL_0322: ldc.i4.s 44
+IL_0324: stelem.i2
+IL_0325: callvirt System.String[] System.String::Split(System.Char[])
+IL_032a: stloc.s V_15
+IL_032c: ldloc.s V_15
+IL_032e: ldlen
+IL_032f: conv.i4
+IL_0330: ldc.i4.2
+IL_0331: bne.un.s IL_0363
+IL_0333: ldloc.s V_15
+IL_0335: ldc.i4.0
+IL_0336: ldelem.ref
+IL_0337: call System.Double System.Convert::ToDouble(System.String)
+IL_033c: stloc.s V_16
+IL_033e: ldloc.s V_15
+IL_0340: ldc.i4.1
+IL_0341: ldelem.ref
+IL_0342: call System.Double System.Convert::ToDouble(System.String)
+IL_0347: stloc.s V_17
+IL_0349: ldloc.s V_16
+IL_034b: conv.r4
+IL_034c: ldloc.s V_17
+IL_034e: conv.r4
+IL_034f: newobj System.Void UnityEngine.Vector2::.ctor(System.Single,System.Single)
+IL_0354: newobj System.Void System.Nullable`1<UnityEngine.Vector2>::.ctor(!0)
+IL_0359: stsfld System.Nullable`1<UnityEngine.Vector2> Options::MainPanelOffset
+IL_035e: leave.s IL_0363
+IL_0360: pop
+IL_0361: leave.s IL_0363
+IL_0363: ldloc.s V_13
+IL_0365: ldc.i4.1
+IL_0366: add
+IL_0367: stloc.s V_13
+IL_0369: br IL_0417
+IL_036e: ldloc.s V_14
+IL_0370: ldstr "-disablemoderrors"
+IL_0375: callvirt System.Boolean System.String::Equals(System.String)
+IL_037a: brfalse.s IL_0387
+IL_037c: ldc.i4.0
+IL_037d: stsfld System.Boolean Options::_injectMods
+IL_0382: br IL_0417
+IL_0387: ldloc.s V_14
+IL_0389: ldstr "-offsetwindow"
+IL_038e: callvirt System.Boolean System.String::Equals(System.String)
+IL_0393: brfalse.s IL_03b4
+IL_0395: ldloc.s V_13
+IL_0397: ldc.i4.1
+IL_0398: add
+IL_0399: ldloc.1
+IL_039a: ldlen
+IL_039b: conv.i4
+IL_039c: bge.s IL_03b4
+IL_039e: ldloc.1
+IL_039f: ldloc.s V_13
+IL_03a1: ldc.i4.1
+IL_03a2: add
+IL_03a3: ldelem.ref
+IL_03a4: call System.Int32 System.Convert::ToInt32(System.String)
+IL_03a9: stloc.3
+IL_03aa: ldc.i4.1
+IL_03ab: stloc.2
+IL_03ac: ldloc.s V_13
+IL_03ae: ldc.i4.1
+IL_03af: add
+IL_03b0: stloc.s V_13
+IL_03b2: br.s IL_0417
+IL_03b4: ldloc.s V_14
+IL_03b6: ldstr "-offsetwindowy"
+IL_03bb: callvirt System.Boolean System.String::Equals(System.String)
+IL_03c0: brfalse.s IL_03e2
+IL_03c2: ldloc.s V_13
+IL_03c4: ldc.i4.1
+IL_03c5: add
+IL_03c6: ldloc.1
+IL_03c7: ldlen
+IL_03c8: conv.i4
+IL_03c9: bge.s IL_03e2
+IL_03cb: ldloc.1
+IL_03cc: ldloc.s V_13
+IL_03ce: ldc.i4.1
+IL_03cf: add
+IL_03d0: ldelem.ref
+IL_03d1: call System.Int32 System.Convert::ToInt32(System.String)
+IL_03d6: stloc.s V_4
+IL_03d8: ldc.i4.1
+IL_03d9: stloc.2
+IL_03da: ldloc.s V_13
+IL_03dc: ldc.i4.1
+IL_03dd: add
+IL_03de: stloc.s V_13
+IL_03e0: br.s IL_0417
+IL_03e2: ldloc.s V_14
+IL_03e4: ldstr "+connect_lobby"
+IL_03e9: callvirt System.Boolean System.String::Equals(System.String)
+IL_03ee: brfalse.s IL_0403
+IL_03f0: ldloc.1
+IL_03f1: ldloc.s V_13
+IL_03f3: ldc.i4.1
+IL_03f4: add
+IL_03f5: ldelem.ref
+IL_03f6: stsfld System.String Options::SteamJoinLobby
+IL_03fb: ldloc.s V_13
+IL_03fd: ldc.i4.1
+IL_03fe: add
+IL_03ff: stloc.s V_13
+IL_0401: br.s IL_0417
+IL_0403: ldloc.s V_14
+IL_0405: ldstr "-lanmode"
+IL_040a: callvirt System.Boolean System.String::Equals(System.String)
+IL_040f: brfalse.s IL_0417
+IL_0411: ldc.i4.1
+IL_0412: stsfld System.Boolean Options::ForceLAN
+IL_0417: ldloc.s V_13
+IL_0419: ldc.i4.1
+IL_041a: add
+IL_041b: stloc.s V_13
+IL_041d: ldloc.s V_13
+IL_041f: ldloc.1
+IL_0420: ldlen
+IL_0421: conv.i4
+IL_0422: blt IL_02d9
+IL_0427: ldloc.2
+IL_0428: brfalse.s IL_0437
+IL_042a: ldloc.3
+IL_042b: ldloc.s V_4
+IL_042d: call System.Void Options::OffsetMainWindow(System.Int32,System.Int32)
+IL_0432: leave.s IL_0437
+IL_0434: pop
+IL_0435: leave.s IL_0437
+IL_0437: call System.Threading.Thread System.Threading.Thread::get_CurrentThread()
+IL_043c: call System.Globalization.CultureInfo System.Globalization.CultureInfo::get_InvariantCulture()
+IL_0441: callvirt System.Void System.Threading.Thread::set_CurrentCulture(System.Globalization.CultureInfo)
+IL_0446: newobj System.Void ConfigFile::.ctor()
+IL_044b: stloc.s V_5
+IL_044d: call System.String Options::get_SettingsFile()
+IL_0452: stloc.s V_18
+IL_0454: ldloc.s V_18
+IL_0456: call System.Boolean System.IO.File::Exists(System.String)
+IL_045b: brtrue.s IL_0461
+IL_045d: ldloc.s V_5
+IL_045f: br.s IL_046d
+IL_0461: ldloc.s V_18
+IL_0463: call System.String Utilities::ReadOnlyReadAllText(System.String)
+IL_0468: call ConfigFile ConfigFile::Load(System.String)
+IL_046d: stloc.s V_5
+IL_046f: leave.s IL_0482
+IL_0471: callvirt System.String System.Object::ToString()
+IL_0476: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_047b: call System.Void Options::ShowFileLoadError()
+IL_0480: leave.s IL_0482
+IL_0482: nop
+IL_0483: call System.String Options::get_SharedSettingsFile()
+IL_0488: stloc.s V_19
+IL_048a: ldloc.s V_19
+IL_048c: call System.Boolean System.IO.File::Exists(System.String)
+IL_0491: brfalse.s IL_04aa
+IL_0493: ldloc.s V_19
+IL_0495: call System.String Utilities::ReadOnlyReadAllText(System.String)
+IL_049a: call ConfigFile ConfigFile::Load(System.String)
+IL_049f: stloc.s V_20
+IL_04a1: ldloc.s V_5
+IL_04a3: ldloc.s V_20
+IL_04a5: callvirt System.Void ConfigFile::Combine(ConfigFile)
+IL_04aa: leave.s IL_04bd
+IL_04ac: callvirt System.String System.Object::ToString()
+IL_04b1: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_04b6: call System.Void Options::ShowFileLoadError()
+IL_04bb: leave.s IL_04bd
+IL_04bd: ldloc.s V_5
+IL_04bf: ldstr "Resolution"
+IL_04c4: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_04c9: stloc.s V_6
+IL_04cb: ldloc.s V_6
+IL_04cd: brfalse IL_0596
+IL_04d2: ldloc.s V_6
+IL_04d4: callvirt System.Int32 System.Collections.Generic.List`1<System.String>::get_Count()
+IL_04d9: ldc.i4.2
+IL_04da: ble.s IL_052e
+IL_04dc: ldloc.s V_5
+IL_04de: ldstr "ScreenResolution"
+IL_04e3: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_04e8: dup
+IL_04e9: ldloc.s V_6
+IL_04eb: ldc.i4.0
+IL_04ec: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_04f1: ldstr "x"
+IL_04f6: ldloc.s V_6
+IL_04f8: ldc.i4.1
+IL_04f9: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_04fe: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_0503: callvirt System.Void System.Collections.Generic.List`1<System.String>::Add(!0)
+IL_0508: callvirt System.Void ConfigFile::set_Item(System.String,System.Collections.Generic.List`1<System.String>)
+IL_050d: ldloc.s V_5
+IL_050f: ldstr "RefreshRate"
+IL_0514: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_0519: dup
+IL_051a: ldloc.s V_6
+IL_051c: ldc.i4.2
+IL_051d: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_0522: callvirt System.Void System.Collections.Generic.List`1<System.String>::Add(!0)
+IL_0527: callvirt System.Void ConfigFile::set_Item(System.String,System.Collections.Generic.List`1<System.String>)
+IL_052c: br.s IL_0596
+IL_052e: ldloc.s V_6
+IL_0530: callvirt System.Int32 System.Collections.Generic.List`1<System.String>::get_Count()
+IL_0535: ldc.i4.1
+IL_0536: bne.un.s IL_0596
+IL_0538: ldloc.s V_6
+IL_053a: ldc.i4.0
+IL_053b: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_0540: ldc.i4.1
+IL_0541: newarr System.Char
+IL_0546: dup
+IL_0547: ldc.i4.0
+IL_0548: ldc.i4.s 120
+IL_054a: stelem.i2
+IL_054b: callvirt System.String[] System.String::Split(System.Char[])
+IL_0550: stloc.s V_21
+IL_0552: ldloc.s V_5
+IL_0554: ldstr "ScreenResolution"
+IL_0559: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_055e: dup
+IL_055f: ldloc.s V_21
+IL_0561: ldc.i4.0
+IL_0562: ldelem.ref
+IL_0563: ldstr "x"
+IL_0568: ldloc.s V_21
+IL_056a: ldc.i4.1
+IL_056b: ldelem.ref
+IL_056c: call System.String System.String::Concat(System.String,System.String,System.String)
+IL_0571: callvirt System.Void System.Collections.Generic.List`1<System.String>::Add(!0)
+IL_0576: callvirt System.Void ConfigFile::set_Item(System.String,System.Collections.Generic.List`1<System.String>)
+IL_057b: ldloc.s V_5
+IL_057d: ldstr "RefreshRate"
+IL_0582: newobj System.Void System.Collections.Generic.List`1<System.String>::.ctor()
+IL_0587: dup
+IL_0588: ldloc.s V_21
+IL_058a: ldc.i4.2
+IL_058b: ldelem.ref
+IL_058c: callvirt System.Void System.Collections.Generic.List`1<System.String>::Add(!0)
+IL_0591: callvirt System.Void ConfigFile::set_Item(System.String,System.Collections.Generic.List`1<System.String>)
+IL_0596: ldloc.s V_5
+IL_0598: ldstr "Fullscreen"
+IL_059d: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_05a2: stloc.s V_6
+IL_05a4: ldloc.s V_6
+IL_05a6: brfalse.s IL_05f6
+IL_05a8: ldloc.s V_6
+IL_05aa: callvirt System.Int32 System.Collections.Generic.List`1<System.String>::get_Count()
+IL_05af: ldc.i4.0
+IL_05b0: ble.s IL_05f6
+IL_05b2: ldstr "True"
+IL_05b7: ldloc.s V_6
+IL_05b9: ldc.i4.0
+IL_05ba: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_05bf: call System.Boolean System.String::Equals(System.String)
+IL_05c4: brfalse.s IL_05d5
+IL_05c6: ldloc.s V_6
+IL_05c8: ldc.i4.0
+IL_05c9: ldstr "FullScreenWindow"
+IL_05ce: callvirt System.Void System.Collections.Generic.List`1<System.String>::set_Item(System.Int32,!0)
+IL_05d3: br.s IL_05f6
+IL_05d5: ldstr "False"
+IL_05da: ldloc.s V_6
+IL_05dc: ldc.i4.0
+IL_05dd: callvirt !0 System.Collections.Generic.List`1<System.String>::get_Item(System.Int32)
+IL_05e2: call System.Boolean System.String::Equals(System.String)
+IL_05e7: brfalse.s IL_05f6
+IL_05e9: ldloc.s V_6
+IL_05eb: ldc.i4.0
+IL_05ec: ldstr "Windowed"
+IL_05f1: callvirt System.Void System.Collections.Generic.List`1<System.String>::set_Item(System.Int32,!0)
+IL_05f6: ldloc.s V_5
+IL_05f8: ldstr "FavoriteFurniture"
+IL_05fd: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_0602: stloc.s V_7
+IL_0604: ldloc.s V_7
+IL_0606: brfalse.s IL_0614
+IL_0608: ldsfld System.Collections.Generic.HashSet`1<System.String> Options::_favFurns
+IL_060d: ldloc.s V_7
+IL_060f: call System.Void Utilities::AddRange<System.String>(System.Collections.Generic.HashSet`1<T>,System.Collections.Generic.IList`1<T>)
+IL_0614: ldloc.s V_5
+IL_0616: ldstr "CustomColors"
+IL_061b: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_0620: stloc.s V_8
+IL_0622: ldloc.s V_8
+IL_0624: brfalse.s IL_064d
+IL_0626: ldloc.s V_8
+IL_0628: callvirt System.Int32 System.Collections.Generic.List`1<System.String>::get_Count()
+IL_062d: ldc.i4.s 22
+IL_062f: bne.un.s IL_064d
+IL_0631: ldloc.s V_8
+IL_0633: ldsfld Options/<>c Options/<>c::<>9
+IL_0638: ldftn UnityEngine.Color Options/<>c::<.cctor>b__346_0(System.String)
+IL_063e: newobj System.Void System.Func`2<System.String,UnityEngine.Color>::.ctor(System.Object,System.IntPtr)
+IL_0643: call T2[] Utilities::SelectInPlace<System.String,UnityEngine.Color>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,T2>)
+IL_0648: stsfld UnityEngine.Color[] Options::_customColors
+IL_064d: ldloc.s V_5
+IL_064f: ldstr "Language"
+IL_0654: ldstr "English"
+IL_0659: callvirt System.String ConfigFile::GetOrDefault(System.String,System.String)
+IL_065e: stsfld System.String Localization::OriginalTranslation
+IL_0663: ldsfld System.String Localization::OriginalTranslation
+IL_0668: call System.Void Localization::SetTranslation(System.String)
+IL_066d: call System.String UnityEngine.SystemInfo::get_graphicsDeviceVendor()
+IL_0672: call System.String UnityEngine.SystemInfo::get_graphicsDeviceName()
+IL_0677: call System.String System.String::Concat(System.String,System.String)
+IL_067c: callvirt System.String System.String::ToLower()
+IL_0681: ldstr "intel"
+IL_0686: callvirt System.Boolean System.String::Contains(System.String)
+IL_068b: stloc.s V_9
+IL_068d: ldtoken Options
+IL_0692: call System.Type System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)
+IL_0697: ldc.i4.s 56
+IL_0699: callvirt System.Reflection.PropertyInfo[] System.Type::GetProperties(System.Reflection.BindingFlags)
+IL_069e: stloc.s V_22
+IL_06a0: ldc.i4.0
+IL_06a1: stloc.s V_23
+IL_06a3: br.s IL_0700
+IL_06a5: ldloc.s V_22
+IL_06a7: ldloc.s V_23
+IL_06a9: ldelem.ref
+IL_06aa: stloc.s V_24
+IL_06ac: ldloc.s V_24
+IL_06ae: ldc.i4.0
+IL_06af: callvirt System.Object[] System.Reflection.MemberInfo::GetCustomAttributes(System.Boolean)
+IL_06b4: call T Utilities::FirstOrDefaultOf<Options/SettingAttribute>(System.Collections.IList)
+IL_06b9: stloc.s V_25
+IL_06bb: ldloc.s V_25
+IL_06bd: brfalse.s IL_06fa
+IL_06bf: ldloc.s V_25
+IL_06c1: ldfld System.String Options/SettingAttribute::Name
+IL_06c6: brfalse.s IL_06fa
+IL_06c8: ldloc.s V_24
+IL_06ca: ldloc.s V_25
+IL_06cc: newobj System.Void Options/VariableInfo::.ctor(System.Reflection.PropertyInfo,Options/SettingAttribute)
+IL_06d1: stloc.s V_26
+IL_06d3: ldsfld System.Collections.Generic.Dictionary`2<System.String,Options/VariableInfo> Options::SettingFields
+IL_06d8: ldloc.s V_25
+IL_06da: ldfld System.String Options/SettingAttribute::Name
+IL_06df: ldloc.s V_26
+IL_06e1: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,Options/VariableInfo>::set_Item(!0,!1)
+IL_06e6: ldloc.s V_25
+IL_06e8: ldfld System.Boolean Options/SettingAttribute::SaveToConfig
+IL_06ed: brfalse.s IL_06fa
+IL_06ef: ldloc.s V_26
+IL_06f1: ldloc.s V_5
+IL_06f3: ldloc.s V_9
+IL_06f5: callvirt System.Void Options/VariableInfo::LoadConf(ConfigFile,System.Boolean)
+IL_06fa: ldloc.s V_23
+IL_06fc: ldc.i4.1
+IL_06fd: add
+IL_06fe: stloc.s V_23
+IL_0700: ldloc.s V_23
+IL_0702: ldloc.s V_22
+IL_0704: ldlen
+IL_0705: conv.i4
+IL_0706: blt.s IL_06a5
+IL_0708: ldloc.s V_5
+IL_070a: ldstr "IgnoreQuestions"
+IL_070f: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_0714: stloc.s V_10
+IL_0716: ldloc.s V_10
+IL_0718: brfalse.s IL_0726
+IL_071a: ldsfld System.Collections.Generic.HashSet`1<System.String> Options::IgnoreQuestions
+IL_071f: ldloc.s V_10
+IL_0721: call System.Void Utilities::AddRange<System.String>(System.Collections.Generic.HashSet`1<T>,System.Collections.Generic.IList`1<T>)
+IL_0726: ldloc.s V_5
+IL_0728: ldstr "UnlockedRewards"
+IL_072d: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_0732: stloc.s V_11
+IL_0734: ldloc.s V_11
+IL_0736: brfalse.s IL_0744
+IL_0738: ldsfld System.Collections.Generic.HashSet`1<System.String> Options::UnlockedRewards
+IL_073d: ldloc.s V_11
+IL_073f: call System.Void Utilities::AddRange<System.String>(System.Collections.Generic.HashSet`1<T>,System.Collections.Generic.IList`1<T>)
+IL_0744: ldloc.s V_5
+IL_0746: ldstr "Keys"
+IL_074b: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_0750: ldloc.s V_5
+IL_0752: ldstr "AltKeys"
+IL_0757: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_075c: call System.Void InputController::LoadConfig(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.String>)
+IL_0761: ldloc.s V_5
+IL_0763: ldstr "AudioLevels"
+IL_0768: callvirt System.Collections.Generic.List`1<System.String> ConfigFile::get_Item(System.String)
+IL_076d: call System.Void AudioManager::LoadConfig(System.Collections.Generic.List`1<System.String>)
+IL_0772: ldc.i4.1
+IL_0773: stsfld System.Boolean Options::Loaded
+IL_0778: call System.Void Options::LoadSizes()
+IL_077d: call System.Void Options::LoadWidths()
+IL_0782: call System.Void Options::SaveToFile()
+IL_0787: call System.Void Options::InitHints()
+IL_078c: ldstr "Player preferences load time: "
+IL_0791: call System.Single UnityEngine.Time::get_realtimeSinceStartup()
+IL_0796: ldloc.0
+IL_0797: sub
+IL_0798: ldc.i4.1
+IL_0799: call System.String Utilities::SecondsToTime(System.Single,System.Boolean)
+IL_079e: call System.String System.String::Concat(System.String,System.String)
+IL_07a3: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_07a8: ldstr "Finished loading player preferences"
+IL_07ad: call System.Int32 LoadDebugger::AddInfo(System.String)
+IL_07b2: pop
+IL_07b3: ret
+TYPE Versioning BASE UnityEngine.MonoBehaviour
+FIELD Public, Static, InitOnly System.String[] Types
+FIELD Public, Static, Literal, HasDefault System.Int32 Type
+CONSTANT Type = 2
+FIELD Public, Static, Literal, HasDefault System.Int32 Major
+CONSTANT Major = 1
+FIELD Public, Static, Literal, HasDefault System.Int32 Minor
+CONSTANT Minor = 8
+FIELD Public, Static, Literal, HasDefault System.Int32 Revision
+CONSTANT Revision = 42
+FIELD Public, Static System.Boolean Demo
+FIELD Public, Static System.Boolean Steam
+FIELD Public UnityEngine.UI.Text text
+FIELD Public, Static, InitOnly Versioning/Version CurrentVersion
+PROPERTY Versioning/VersionType Versioning::TypeEnum()
+PROPERTY System.String Versioning::VersionString()
+PROPERTY System.String Versioning::NetworkVersionString()
+PROPERTY System.String Versioning::SimpleVersionString()
+PROPERTY System.String Versioning::AlmostExtremelySimpleVersionString()
+PROPERTY System.String Versioning::ExtremelySimpleVersionString()
+PROPERTY System.String Versioning::TypeVersionString()
+PROPERTY System.String Versioning::SimpleNetworkVersionString()
+METHOD Public, Static, HideBySig, SpecialName System.String Versioning::get_AlmostExtremelySimpleVersionString()
+IL_0000: ldc.i4.4
+IL_0001: newarr System.Object
+IL_0006: dup
+IL_0007: ldc.i4.0
+IL_0008: ldsfld System.String[] Versioning::Types
+IL_000d: ldc.i4.2
+IL_000e: ldelem.ref
+IL_000f: stelem.ref
+IL_0010: dup
+IL_0011: ldc.i4.1
+IL_0012: ldc.i4.1
+IL_0013: box System.Int32
+IL_0018: stelem.ref
+IL_0019: dup
+IL_001a: ldc.i4.2
+IL_001b: ldstr "_"
+IL_0020: stelem.ref
+IL_0021: dup
+IL_0022: ldc.i4.3
+IL_0023: ldc.i4.8
+IL_0024: box System.Int32
+IL_0029: stelem.ref
+IL_002a: call System.String System.String::Concat(System.Object[])
+IL_002f: ret
+METHOD Public, Static, HideBySig, SpecialName System.String Versioning::get_ExtremelySimpleVersionString()
+IL_0000: ldsfld System.String[] Versioning::Types
+IL_0005: ldc.i4.2
+IL_0006: ldelem.ref
+IL_0007: ldc.i4.1
+IL_0008: box System.Int32
+IL_000d: call System.String System.String::Concat(System.Object,System.Object)
+IL_0012: ret
+METHOD Public, Static, HideBySig, SpecialName System.String Versioning::get_TypeVersionString()
+IL_0000: ldsfld System.String[] Versioning::Types
+IL_0005: ldc.i4.2
+IL_0006: ldelem.ref
+IL_0007: ret
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void Versioning::.cctor()
+IL_0000: ldc.i4.4
+IL_0001: newarr System.String
+IL_0006: dup
+IL_0007: ldc.i4.0
+IL_0008: ldstr "Pre-alpha"
+IL_000d: stelem.ref
+IL_000e: dup
+IL_000f: ldc.i4.1
+IL_0010: ldstr "Alpha"
+IL_0015: stelem.ref
+IL_0016: dup
+IL_0017: ldc.i4.2
+IL_0018: ldstr "Beta"
+IL_001d: stelem.ref
+IL_001e: dup
+IL_001f: ldc.i4.3
+IL_0020: ldstr "Release"
+IL_0025: stelem.ref
+IL_0026: stsfld System.String[] Versioning::Types
+IL_002b: ldc.i4.0
+IL_002c: stsfld System.Boolean Versioning::Demo
+IL_0031: ldc.i4.1
+IL_0032: stsfld System.Boolean Versioning::Steam
+IL_0037: ldc.i4.2
+IL_0038: ldc.i4.1
+IL_0039: ldc.i4.8
+IL_003a: ldc.i4.s 42
+IL_003c: ldsfld System.Boolean Versioning::Steam
+IL_0041: ldsfld System.Boolean Versioning::Demo
+IL_0046: newobj System.Void Versioning/Version::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)
+IL_004b: stsfld Versioning/Version Versioning::CurrentVersion
+IL_0050: ret

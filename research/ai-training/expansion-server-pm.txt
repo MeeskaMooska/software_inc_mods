@@ -1,0 +1,178 @@
+TYPE ServerGroup BASE System.Object
+FIELD Public System.String Name
+FIELD Public System.String Fallback
+FIELD Public System.Single Available
+FIELD Public System.Single PowerSum
+FIELD Public System.Single LastUsed
+FIELD Public System.Boolean Broken
+FIELD Public System.Boolean IsCloud
+FIELD Public UnityEngine.Color WireColor
+FIELD Public Server Rep
+FIELD Public System.Collections.Generic.HashSet`1<IServerHost> Servers
+FIELD Public System.Collections.Generic.HashSet`1<IServerItem> Items
+FIELD Private, Static System.Collections.Generic.List`1<MinimumSpanningTree`2/TreeNode<Server,UnityEngine.Vector3>> _cachedResult
+PROPERTY System.Byte ServerGroup::CloudProvider()
+METHOD Public, HideBySig, SpecialName System.Byte ServerGroup::get_CloudProvider()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void ServerGroup::.ctor(System.String)
+METHOD Public, HideBySig System.Single ServerGroup::GetCost()
+METHOD Public, HideBySig System.String ServerGroup::GetDisplayName()
+METHOD Public, HideBySig System.String ServerGroup::GetLoadAfter(System.Single,IServerItem[])
+METHOD Public, HideBySig NetworkServerItem ServerGroup::GetItemFor(System.Byte)
+METHOD Public, HideBySig System.Single ServerGroup::GetLoadFor(System.Byte)
+METHOD Public, HideBySig System.Void ServerGroup::RefreshRep()
+METHOD Public, HideBySig System.Void ServerGroup::RefreshPower()
+METHOD Public, HideBySig System.Void ServerGroup::RefreshUsage()
+METHOD Public, Static, HideBySig SVector3 ServerGroup::CreateColor(System.Collections.Generic.IEnumerable`1<UnityEngine.Color>,System.Single,System.Single)
+METHOD Public, HideBySig System.Void ServerGroup::FixWiring()
+METHOD Public, HideBySig WriteDictionary ServerGroup::Serialize()
+METHOD Public, Static, HideBySig ServerGroup ServerGroup::Deserialize(WriteDictionary)
+METHOD Public, HideBySig System.Void ServerGroup::FixReferences()
+METHOD Public, HideBySig System.Void ServerGroup::ReWireAll()
+METHOD Public, Virtual, HideBySig System.String ServerGroup::ToString()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void ServerGroup::.cctor()
+METHOD Private, HideBySig System.Void ServerGroup::<FixReferences>b__27_1(IServerItem)
+TYPE AutoDevWorkItem BASE WorkItem
+FIELD Public System.Single LastLicensePaid
+FIELD Public System.String LastDesign
+FIELD Public System.String LastAlpha
+FIELD Public System.String LastAlpha2
+FIELD Public, Static, Literal, HasDefault System.Single MaxEffectiveness
+CONSTANT MaxEffectiveness = 3
+FIELD Public System.Single LastEffectiveness
+FIELD Public System.Single LastEffLoss
+FIELD Public System.Single LastEffGain
+FIELD Public SDateTime LastEffGainTime
+FIELD Private System.Nullable`1<SDateTime> NextReleaseDate
+FIELD Public System.Collections.Generic.List`1<SupportWork> SupportItems
+FIELD Public System.Collections.Generic.List`1<MarketingPlan> MarketingItems
+FIELD Public System.Collections.Generic.List`1<SoftwarePort> PortingItems
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> PastReleases
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> PreviousSoftware
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareUpdate,SDateTime> UpdateTasks
+FIELD Public System.String MainServer
+FIELD Public System.String SCMServer
+FIELD Public SHashSet`1<System.String> DesignTeams
+FIELD Public SHashSet`1<System.String> SDevTeams
+FIELD Public SHashSet`1<System.String> SecondaryDevTeams
+FIELD Public SHashSet`1<System.String> MarketingTeams
+FIELD Public SHashSet`1<System.String> PostMarketingTeams
+FIELD Public SHashSet`1<System.String> SupportTeams
+FIELD Public SHashSet`1<System.String> UpdateTeams
+FIELD Public SHashSet`1<System.String> PortingTeams
+FIELD Public System.Boolean Hype
+FIELD Public System.Boolean AutoProject
+FIELD Public System.Boolean OnlySequels
+FIELD Public System.Boolean PostMarketing
+FIELD Public System.Boolean HandleMarketing
+FIELD Public System.Boolean SingleIP
+FIELD Public System.Boolean UseOwnLicenses
+FIELD Public System.Boolean AutoSupport
+FIELD Public System.Boolean PhysicalCopyRel
+FIELD Public System.Boolean PrintingCopyRel
+FIELD Public System.Boolean UseFrameworks
+FIELD Public System.Boolean Updates
+FIELD Public System.Boolean TechUpdates
+FIELD Public System.Boolean AutoDistribution
+FIELD Public System.Boolean Porting
+FIELD Public System.Single DevTimeMultiplier
+FIELD Public System.UInt32 PhysicalCopies
+FIELD Public System.UInt32 PrintingCopies
+FIELD Public System.Int32 IterationCoolDown
+FIELD Public System.Int32 UpdateCooldown
+FIELD Public System.Int32 UpdateMonths
+FIELD Public System.Int32 ReleaseCooldown
+FIELD Public, NotSerialized Employee LastDesignError
+FIELD Private System.UInt32 _lastLeader
+FIELD Public EventList`1<AutoDevWorkItem/AutoDevItem> Items
+FIELD Public System.Collections.Generic.List`1<System.String> Mistakes
+FIELD Private, NotSerialized Actor _leader
+FIELD Public, NotSerialized System.Boolean IsViewed
+FIELD Public System.UInt32 LeaderID
+FIELD Public, Static System.Int32[] MaxActionCounts
+FIELD Private, Static System.Collections.Generic.HashSet`1<System.String> _pCache
+PROPERTY Actor AutoDevWorkItem::Leader()
+PROPERTY UnityEngine.Color AutoDevWorkItem::BackColor()
+METHOD Public, Virtual, HideBySig IReferenceFix AutoDevWorkItem::FixReferences()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::RefreshNextReleaseDate()
+METHOD Public, HideBySig T AutoDevWorkItem::GetSpecValue(T,System.Int32,T)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdatePostItems()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::LogMistake(System.String,System.String,System.String)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::AddPreviousSoftware(SoftwareProduct)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::CleanupWork()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::RemovePreviousSoftware(SoftwareProduct)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdateLists()
+METHOD Public, HideBySig, SpecialName Actor AutoDevWorkItem::get_Leader()
+METHOD Public, HideBySig, SpecialName System.Void AutoDevWorkItem::set_Leader(Actor)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::UpdateSpecLevels()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::AddPastRelease(SoftwareProduct)
+METHOD Public, HideBySig SoftwareProduct AutoDevWorkItem::GetValidSequel(Employee&)
+METHOD Public, HideBySig SoftwareProduct AutoDevWorkItem::GetLatestRelease()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void AutoDevWorkItem::.ctor()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void AutoDevWorkItem::.ctor(System.String)
+METHOD Public, HideBySig System.Single AutoDevWorkItem::MaxActions()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::RefreshTeams()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void AutoDevWorkItem::.ctor(System.String,Actor)
+METHOD Public, Virtual, HideBySig, SpecialName UnityEngine.Color AutoDevWorkItem::get_BackColor()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetIcon()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::AssignTeams(WorkItem,System.Collections.Generic.HashSet`1<System.String>)
+METHOD Public, Virtual, HideBySig WorkItem/HasWorkReturn AutoDevWorkItem::HasWork(Actor,System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Void AutoDevWorkItem::DoWork(Actor,System.Single,System.Single,System.Boolean)
+METHOD Public, HideBySig System.Single AutoDevWorkItem::GetLastEffGain()
+METHOD Public, Virtual, HideBySig System.Single AutoDevWorkItem::GetWorkBoost(Employee/EmployeeRole,System.Single)
+METHOD Public, Virtual, HideBySig System.Nullable`1<Employee/EmployeeRole> AutoDevWorkItem::GetBoostRole(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig Actor/WorkParticle AutoDevWorkItem::EmitType(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Action>> AutoDevWorkItem::GetButtons()
+METHOD Public, Virtual, HideBySig System.Void AutoDevWorkItem::GetNeeds(System.Collections.Generic.Dictionary`2<HRManagement/EdNeed,System.Int32>[])
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetTypeName()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetGroupType()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetGroupProject()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetGroupProjectLabel()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetGroupTypeLabel()
+METHOD Public, Virtual, HideBySig System.Boolean AutoDevWorkItem::HasProjectGrouping()
+METHOD Private, HideBySig System.Void AutoDevWorkItem::RefreshHype(AutoDevWorkItem/AutoDevItem)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::AssignProject(SoftwareWorkItem,System.Collections.Generic.List`1<SoftwareWorkItem>)
+METHOD Public, Virtual, HideBySig System.Void AutoDevWorkItem::PauseChange()
+METHOD Private, HideBySig System.Void AutoDevWorkItem::SetDev(AutoDevWorkItem/AutoDevItem,System.Boolean,System.Boolean&,System.Boolean&)
+METHOD Private, HideBySig System.Nullable`1<SDateTime> AutoDevWorkItem::GetNextReleaseDate(AutoDevWorkItem/AutoDevItem)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::StartPrintJob(SoftwareAlpha,System.Boolean)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::PromoteAddon(AddOnProduct)
+METHOD Private, HideBySig System.Single AutoDevWorkItem::RawMistakeChance()
+METHOD Public, HideBySig System.Single AutoDevWorkItem::GetMistakeChance(System.Boolean)
+METHOD Public, HideBySig System.Single AutoDevWorkItem::GetMistakeAmount(System.Single)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::Update(System.Single)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::EndMarketingFor(WorkItem)
+METHOD Public, HideBySig System.Boolean AutoDevWorkItem::TakeOverTask(WorkItem)
+METHOD Public, HideBySig System.Void AutoDevWorkItem::UpdateSupportMarket(System.Boolean)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::PortCheck(SoftwareProduct,System.Collections.Generic.List`1<SoftwareProduct>)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::DistributionCheck(SoftwareProduct,SDateTime)
+METHOD Private, HideBySig System.Int32 AutoDevWorkItem::CheckAddon(AddOnProduct,System.Double)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::UpdateZeroPrintJob(IStockable,System.Boolean)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::BuyCopies(IStockable,System.Int32)
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::UpdateCheck(SoftwareProduct,SDateTime)
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::CheckLead(SoftwareProduct)
+METHOD Public, HideBySig System.Boolean AutoDevWorkItem::Owns(WorkItem)
+METHOD Public, HideBySig System.Boolean AutoDevWorkItem::IsFunctionallySingleIP()
+METHOD Public, HideBySig SoftwareWorkItem AutoDevWorkItem::GenerateProduct(System.Collections.Generic.List`1<SoftwareWorkItem>&)
+METHOD Public, HideBySig System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> AutoDevWorkItem::GetNeeds(System.Double&,SoftwareProduct)
+METHOD Public, Static, HideBySig SoftwareProduct AutoDevWorkItem::GetNeed(System.String,System.String,TechLevel,System.Boolean)
+METHOD Public, Static, HideBySig System.Collections.Generic.List`1<SoftwareProduct> AutoDevWorkItem::GetOSs(System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareType,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Void AutoDevWorkItem::Kill(System.Boolean)
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::CurrentStage()
+METHOD Private, HideBySig System.String AutoDevWorkItem::GetAlphaWork()
+METHOD Public, Virtual, HideBySig System.Int32 AutoDevWorkItem::GUIWorkItemType()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::Category()
+METHOD Public, HideBySig System.Void AutoDevWorkItem::OpenOptions()
+METHOD Public, HideBySig System.Int32 AutoDevWorkItem::GetActiveProjectCount()
+METHOD Public, Virtual, HideBySig System.Single AutoDevWorkItem::StressMultiplier()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetWorkTypeName()
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetTeam(UnityEngine.UI.Text)
+METHOD Public, Virtual, HideBySig System.String AutoDevWorkItem::GetSubjectName()
+METHOD Public, Virtual, HideBySig System.Boolean AutoDevWorkItem::IsLeaderTask()
+METHOD Public, Virtual, HideBySig System.Single AutoDevWorkItem::GetProgress()
+METHOD Public, Virtual, HideBySig UnityEngine.Color AutoDevWorkItem::GetProgressColor()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void AutoDevWorkItem::.cctor()
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::<UpdateLists>b__63_0(MarketingPlan)
+METHOD Private, HideBySig System.Boolean AutoDevWorkItem::<GetLatestRelease>b__71_0(SoftwareProduct)
+METHOD Private, HideBySig System.Void AutoDevWorkItem::<GetButtons>b__88_0()
+METHOD Private, HideBySig System.Void AutoDevWorkItem::<GetButtons>b__88_1()
+METHOD Private, HideBySig System.Void AutoDevWorkItem::<GetButtons>b__88_5()

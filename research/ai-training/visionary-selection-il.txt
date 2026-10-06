@@ -1,0 +1,1239 @@
+TYPE LeadDesignControl BASE ComplexListItem
+INTERFACE ICursorOverride
+FIELD Public UnityEngine.UI.RawImage Thumb
+FIELD Public UnityEngine.Texture NoDesigner
+FIELD Public GUIProgressBar Creativity
+FIELD Public GUIProgressBar Inspiration
+FIELD Public GUIProgressBar SkillProg
+FIELD Public UnityEngine.UI.Text Name
+FIELD Public UnityEngine.UI.Text CreatvityRange1
+FIELD Public UnityEngine.UI.Text CreatvityRange2
+FIELD Public UnityEngine.UI.Text ActiveProjects
+FIELD Public UnityEngine.UI.Text RelevantDemand
+FIELD Public UnityEngine.UI.Text SkillLabel
+FIELD Public UnityEngine.GameObject Portfolio
+FIELD Public UnityEngine.GameObject CheckMark
+FIELD Public UnityEngine.RectTransform SkillPanel
+FIELD Public UnityEngine.Color CheckColor
+FIELD Public UnityEngine.Color NotCheckColor
+FIELD Public UnityEngine.Color GoodProg
+FIELD Public UnityEngine.Color BadProg
+FIELD Public UnityEngine.UI.Image Back
+FIELD Public System.Boolean Checkable
+FIELD Public System.Action`2<System.Boolean,Employee> OnToggle
+FIELD Private System.Single[] _lastCrea
+FIELD Private System.Single _creaLerp
+FIELD Private System.Single _lastCreateKnown
+FIELD Public, NotSerialized Employee CurrentEmployee
+FIELD Private, NotSerialized System.UInt32 _updateCount
+FIELD Private, NotSerialized System.String _spec
+FIELD Private, NotSerialized DG.Tweening.Tweener _activeTween
+FIELD Public System.Boolean UseInspiration
+FIELD Public System.Boolean UsePortfolio
+FIELD Public System.Boolean UseActiveProjects
+FIELD Public System.Boolean UseRelevantDemands
+FIELD Public System.Boolean UseName
+FIELD Public System.Boolean UseThumb
+PROPERTY System.Boolean LeadDesignControl::IsChecked()
+PROPERTY System.String LeadDesignControl::CursorOverrideName()
+METHOD Public, HideBySig System.Void LeadDesignControl::RefreshSpec()
+LOCAL 0 System.String
+LOCAL 1 SoftwareType
+LOCAL 2 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+IL_0000: ldarg.0
+IL_0001: ldfld System.String LeadDesignControl::_spec
+IL_0006: stloc.0
+IL_0007: ldloc.0
+IL_0008: brtrue.s IL_0055
+IL_000a: ldarg.0
+IL_000b: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_0010: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0015: callvirt System.Int32 System.Collections.Generic.Dictionary`2<System.String,System.Single>::get_Count()
+IL_001a: ldc.i4.0
+IL_001b: ble.s IL_0055
+IL_001d: ldarg.0
+IL_001e: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_0023: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0028: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single> LeadDesignControl/<>c::<>9__49_0
+IL_002d: dup
+IL_002e: brtrue.s IL_0047
+IL_0030: pop
+IL_0031: ldsfld LeadDesignControl/<>c LeadDesignControl/<>c::<>9
+IL_0036: ldftn System.Single LeadDesignControl/<>c::<RefreshSpec>b__49_0(System.Collections.Generic.KeyValuePair`2<System.String,System.Single>)
+IL_003c: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single>::.ctor(System.Object,System.IntPtr)
+IL_0041: dup
+IL_0042: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single> LeadDesignControl/<>c::<>9__49_0
+IL_0047: call T Utilities::MaxInstance<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>>(System.Collections.Generic.IEnumerable`1<T>,System.Func`2<T,System.Single>)
+IL_004c: stloc.2
+IL_004d: ldloca.s V_2
+IL_004f: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::get_Key()
+IL_0054: stloc.0
+IL_0055: ldloc.0
+IL_0056: brfalse.s IL_00a0
+IL_0058: call MarketSimulation MarketSimulation::get_Active()
+IL_005d: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_0062: ldloc.0
+IL_0063: ldloca.s V_1
+IL_0065: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::TryGetValue(!0,!1&)
+IL_006a: brfalse.s IL_00a0
+IL_006c: ldarg.0
+IL_006d: ldfld GUIProgressBar LeadDesignControl::SkillProg
+IL_0072: ldarg.0
+IL_0073: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_0078: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_007d: ldloc.0
+IL_007e: ldc.r4 0
+IL_0083: call TValue Utilities::GetOrDefault<System.String,System.Single>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0088: callvirt System.Void GUIProgressBar::set_Value(System.Single)
+IL_008d: ldarg.0
+IL_008e: ldfld UnityEngine.UI.Text LeadDesignControl::SkillLabel
+IL_0093: ldloc.1
+IL_0094: callvirt System.String SoftwareType::GetActualString()
+IL_0099: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_009e: br.s IL_00c5
+IL_00a0: ldarg.0
+IL_00a1: ldfld GUIProgressBar LeadDesignControl::SkillProg
+IL_00a6: ldc.r4 0
+IL_00ab: callvirt System.Void GUIProgressBar::set_Value(System.Single)
+IL_00b0: ldarg.0
+IL_00b1: ldfld UnityEngine.UI.Text LeadDesignControl::SkillLabel
+IL_00b6: ldstr "NotApplicableAbbr"
+IL_00bb: call System.String Localization::Loc(System.String)
+IL_00c0: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00c5: ldarg.0
+IL_00c6: ldloc.0
+IL_00c7: call System.Void LeadDesignControl::InitSpecs(System.String)
+IL_00cc: ldarg.0
+IL_00cd: ldarg.0
+IL_00ce: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_00d3: ldfld System.UInt32 Employee::_leadUpdateCount
+IL_00d8: stfld System.UInt32 LeadDesignControl::_updateCount
+IL_00dd: ret
+METHOD Private, HideBySig System.Void LeadDesignControl::InitSpecs(System.String)
+LOCAL 0 System.Int32
+LOCAL 1 System.Collections.Generic.IEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>>
+LOCAL 2 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>
+LOCAL 3 UnityEngine.Transform
+LOCAL 4 System.Int32
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldarg.0
+IL_0003: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_0008: brfalse IL_00fd
+IL_000d: ldarg.0
+IL_000e: ldfld Employee LeadDesignControl::CurrentEmployee
+IL_0013: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Single> Employee::LeadSpecializationFix
+IL_0018: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single> LeadDesignControl/<>c::<>9__51_0
+IL_001d: dup
+IL_001e: brtrue.s IL_0037
+IL_0020: pop
+IL_0021: ldsfld LeadDesignControl/<>c LeadDesignControl/<>c::<>9
+IL_0026: ldftn System.Single LeadDesignControl/<>c::<InitSpecs>b__51_0(System.Collections.Generic.KeyValuePair`2<System.String,System.Single>)
+IL_002c: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single>::.ctor(System.Object,System.IntPtr)
+IL_0031: dup
+IL_0032: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single> LeadDesignControl/<>c::<>9__51_0
+IL_0037: call System.Linq.IOrderedEnumerable`1<!!0> System.Linq.Enumerable::OrderByDescending<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>,System.Single>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_003c: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>>::GetEnumerator()
+IL_0041: stloc.1
+IL_0042: br IL_00e6
+IL_0047: ldloc.1
+IL_0048: callvirt !0 System.Collections.Generic.IEnumerator`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Single>>::get_Current()
+IL_004d: stloc.2
+IL_004e: ldloca.s V_2
+IL_0050: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::get_Key()
+IL_0055: ldarg.1
+IL_0056: call System.Boolean System.String::op_Equality(System.String,System.String)
+IL_005b: brtrue IL_00e6
+IL_0060: ldloc.0
+IL_0061: ldarg.0
+IL_0062: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0067: callvirt System.Int32 UnityEngine.Transform::get_childCount()
+IL_006c: bge.s IL_007d
+IL_006e: ldarg.0
+IL_006f: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0074: ldloc.0
+IL_0075: callvirt UnityEngine.Transform UnityEngine.Transform::GetChild(System.Int32)
+IL_007a: stloc.3
+IL_007b: br.s IL_009e
+IL_007d: ldarg.0
+IL_007e: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0083: ldc.i4.0
+IL_0084: callvirt UnityEngine.Transform UnityEngine.Transform::GetChild(System.Int32)
+IL_0089: stloc.3
+IL_008a: ldloc.3
+IL_008b: call !!0 UnityEngine.Object::Instantiate<UnityEngine.Transform>(!!0)
+IL_0090: stloc.3
+IL_0091: ldloc.3
+IL_0092: ldarg.0
+IL_0093: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0098: ldc.i4.0
+IL_0099: callvirt System.Void UnityEngine.Transform::SetParent(UnityEngine.Transform,System.Boolean)
+IL_009e: ldloc.3
+IL_009f: callvirt !!0 UnityEngine.Component::GetComponent<GUIProgressBar>()
+IL_00a4: ldloca.s V_2
+IL_00a6: call !1 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::get_Value()
+IL_00ab: callvirt System.Void GUIProgressBar::set_Value(System.Single)
+IL_00b0: ldloc.3
+IL_00b1: callvirt !!0 UnityEngine.Component::GetComponentInChildren<UnityEngine.UI.Text>()
+IL_00b6: call MarketSimulation MarketSimulation::get_Active()
+IL_00bb: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> MarketSimulation::SoftwareTypes
+IL_00c0: ldloca.s V_2
+IL_00c2: call !0 System.Collections.Generic.KeyValuePair`2<System.String,System.Single>::get_Key()
+IL_00c7: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Item(!0)
+IL_00cc: callvirt System.String SoftwareType::GetActualString()
+IL_00d1: callvirt System.Void UnityEngine.UI.Text::set_text(System.String)
+IL_00d6: ldloc.3
+IL_00d7: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_00dc: ldc.i4.1
+IL_00dd: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_00e2: ldloc.0
+IL_00e3: ldc.i4.1
+IL_00e4: add
+IL_00e5: stloc.0
+IL_00e6: ldloc.1
+IL_00e7: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_00ec: brtrue IL_0047
+IL_00f1: leave.s IL_00fd
+IL_00f3: ldloc.1
+IL_00f4: brfalse.s IL_00fc
+IL_00f6: ldloc.1
+IL_00f7: callvirt System.Void System.IDisposable::Dispose()
+IL_00fc: endfinally
+IL_00fd: ldloc.0
+IL_00fe: stloc.s V_4
+IL_0100: br.s IL_0120
+IL_0102: ldarg.0
+IL_0103: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0108: ldloc.s V_4
+IL_010a: callvirt UnityEngine.Transform UnityEngine.Transform::GetChild(System.Int32)
+IL_010f: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0114: ldc.i4.0
+IL_0115: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_011a: ldloc.s V_4
+IL_011c: ldc.i4.1
+IL_011d: add
+IL_011e: stloc.s V_4
+IL_0120: ldloc.s V_4
+IL_0122: ldarg.0
+IL_0123: ldfld UnityEngine.RectTransform LeadDesignControl::SkillPanel
+IL_0128: callvirt System.Int32 UnityEngine.Transform::get_childCount()
+IL_012d: blt.s IL_0102
+IL_012f: ret
+TYPE ActorCustomization BASE UnityEngine.MonoBehaviour
+INTERFACE IStylable
+INTERFACE ISpecController
+FIELD Private, Static, Literal, HasDefault System.Single FaceEditThreshold
+CONSTANT FaceEditThreshold = 0.8
+FIELD Public, Static ActorBodyItem/BlendTransform[] FetchedTranslations
+FIELD Public UnityEngine.UI.Image[] Colors
+FIELD Public UnityEngine.UI.Text GenderText
+FIELD Public UnityEngine.UI.Text DaysPerMonthLabel
+FIELD Public VarValueSheet MoneyDesc
+FIELD Public UnityEngine.UI.InputField CompanyName
+FIELD Public UnityEngine.UI.InputField FounderName
+FIELD Public, Static System.Single[] RoundLimits
+FIELD Public, Static System.Int32[] StartLoans
+FIELD Public, Static System.Int32 StartLoanMonths
+FIELD Public, Static System.Int32[] StartYears
+FIELD Public FounderManager FManager
+FIELD Public GUICombobox Difficulty
+FIELD Public GUICombobox Year
+FIELD Public GUICombobox Animation
+FIELD Public GUICombobox[] PersonalityChosen
+FIELD Public UnityEngine.UI.Slider[] Skill
+FIELD Public UnityEngine.UI.Slider StartMoney
+FIELD Public UnityEngine.UI.Slider DaysPerMonth
+FIELD Public UnityEngine.Transform[] CameraPositions
+FIELD Public System.Int32 CurrentCameraPosition
+FIELD Public UnityEngine.Transform MainCamera
+FIELD Public ActorBodyItemToggle ThumbnailButtonPrefab
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject IPOLabel
+FIELD Public UnityEngine.GameObject PlotAdjecencyLabel
+FIELD Public UnityEngine.GameObject RoundLimitLabel
+FIELD Public UnityEngine.GameObject RoundTypeLabel
+FIELD Public UnityEngine.GameObject FurnModsLabel
+FIELD Public UnityEngine.GameObject CodeModsLabel
+FIELD Public UnityEngine.GameObject FounderStylePanel
+FIELD Public UnityEngine.GameObject FounderSkillPanel
+FIELD Public UnityEngine.UI.Slider IPOSlider
+FIELD Public UnityEngine.UI.Slider AgeSlider
+FIELD Public GUICombobox RoundLimit
+FIELD Public GUICombobox RoundType
+FIELD Public UnityEngine.UI.Toggle PlotAdjacency
+FIELD Public UnityEngine.UI.Toggle FurnMods
+FIELD Public UnityEngine.UI.Toggle CodeMods
+FIELD Public UnityEngine.UI.Text IPOSliderLabel
+FIELD Public UnityEngine.UI.Text AgeLabel
+FIELD Public BodySliderGroup BodyGroupPrefab
+FIELD Public UnityEngine.GameObject BodyPartPanel
+FIELD Public UnityEngine.GameObject HeadSliderPanel
+FIELD Public UnityEngine.GameObject ColorPanel
+FIELD Public UnityEngine.Transform BodyPartContent
+FIELD Public UnityEngine.Transform HeadSliderContent
+FIELD Public UnityEngine.Transform ColorContent
+FIELD Public UnityEngine.Transform TraitPanel
+FIELD Public UnityEngine.UI.Scrollbar BodyPartScroll
+FIELD Public UnityEngine.UI.Scrollbar HeadSliderScroll
+FIELD Public UnityEngine.UI.Scrollbar ColorScroll
+FIELD Public SpecializationChart SpecChart
+FIELD Public UITrait TraitPrefab
+FIELD Public UnityEngine.Material TriangleHighlight
+FIELD Public UnityEngine.RectTransform DiffTipHolder
+FIELD Public UnityEngine.RectTransform FounderPanel
+FIELD Public ColorWindow ColorDialog
+FIELD Public UnityEngine.UI.Text DifficultyTip
+FIELD Public UnityEngine.UI.Toggle UnlockBlends
+FIELD Public UnityEngine.UI.Toggle LODToggle
+FIELD Public UnityEngine.UI.Image[] BlendIcons
+FIELD Public System.Single DiffTipWidth
+FIELD Public System.Single DiffTipHeight
+FIELD Public UnityEngine.GameObject[] DisableOnCampaign
+FIELD Public UnityEngine.GameObject[] DisableOnNetwork
+FIELD Public UnityEngine.GameObject[] DisableOnNetworkClient
+FIELD Public UnityEngine.GameObject[] DisableOnRestartCompany
+FIELD Public UnityEngine.UI.Text StartLabel
+FIELD Public ActorPatternPanel PatternPanel
+FIELD Public DynamicGridLayout GameConfLayout
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Color> _colorsUsed
+FIELD Private, NotSerialized DifficultyValues/DifficultySetting _customDifficulty
+FIELD Private, NotSerialized Employee _forcedFounder
+FIELD Public UnityEngine.UI.Image[] Tabs
+FIELD Public UnityEngine.Color ActiveTabColor
+FIELD Public GUIListView ModList
+FIELD Public SSAOPro SSAO
+FIELD Public BloomOptimized bloom
+FIELD Public UnityStandardAssets.ImageEffects.Antialiasing FXAA
+FIELD Public UnityStandardAssets.CinematicEffects.AntiAliasing SMAA
+FIELD Public GammaSaturation GSat
+FIELD Public MadGoat_SSAA.MadGoatSSAA SSAAScript
+FIELD Public UnityEngine.Light[] lights
+FIELD Public UnityEngine.Transform HeadBone
+FIELD Public System.Boolean Female
+FIELD Public System.Int32 CurrentCategory
+FIELD Public UnityEngine.Color[] SkinColors
+FIELD Public UnityEngine.Color[] HairColors
+FIELD Public UnityEngine.GameObject FinalActor
+FIELD Public UnityEngine.GameObject LoadingPanel
+FIELD Public UnityEngine.UI.Text LoadingPanelLabel
+FIELD Public UnityEngine.Texture2D[] MaleEyes
+FIELD Public UnityEngine.Texture2D[] FemaleEyes
+FIELD Public UnityEngine.Texture2D ColorMap
+FIELD Public UnityEngine.Texture2D LightMap
+FIELD Public UnityEngine.Sprite MaleVoid
+FIELD Public UnityEngine.Sprite FemaleVoid
+FIELD Private System.Single drag
+FIELD Private System.Boolean dragNow
+FIELD Private System.Boolean DisableStat
+FIELD Private System.Boolean DisablePerson
+FIELD Public, Static ActorCustomization Instance
+FIELD Public UnityEngine.Animator Anim
+FIELD Public System.Int32 PersonalityCounter
+FIELD Public System.Single CurrentZoom
+FIELD Public System.Single TargetZoom
+FIELD Public EyeScript Eyes
+FIELD Private System.Single RandomAnim
+FIELD Public UnityEngine.UI.Slider CreativitySlider
+FIELD Public UnityEngine.UI.Text CreativityLabel
+FIELD Public UnityEngine.Transform DemandPanel
+FIELD Public UnityEngine.RectTransform[] SkillCap
+FIELD Public GUICombobox LeadFocus
+FIELD Public UnityEngine.GameObject LeadFocusLabel
+FIELD Public UnityEngine.UI.RawImage LogoImage
+FIELD Public, NotSerialized SDFCreator/ISDFNode Logo
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.List`1<SDFCreator/SDFParameterExport>> LogoParameters
+FIELD Private UnityEngine.RenderTexture LogoTexture
+FIELD Public UnityEngine.GameObject SkinTonePanel
+FIELD Public UnityEngine.UI.Slider SkinToneSlider
+FIELD Public SkinToneGraph SkinToneGraph
+FIELD Private System.Boolean _isMorphDragging
+FIELD Private, NotSerialized ActorBodyItem/BlendKeys[] _currentMorphDrag
+FIELD Private UnityEngine.Vector3[] _morphStart
+FIELD Private UnityEngine.Vector3[] _morphEnd
+FIELD Private, NotSerialized System.Boolean _faceMeshDirty
+FIELD Private System.Collections.Generic.List`1<System.Int32> _faceTriangles
+FIELD Private System.Collections.Generic.List`1<UnityEngine.Vector3> _faceVertices
+FIELD Public System.Boolean SliderHover
+FIELD Private, Static System.Single[] _creativityRanges
+FIELD Private, Static LeadDesignDemands/Demand[][] _demands
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItem> _bodyItems
+FIELD Private UnityEngine.Transform _rootBone
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> <Rig>k__BackingField
+FIELD Private, NotSerialized ActorBodyItem _watch
+FIELD Public UnityEngine.UI.GridLayoutGroup BodyItemLayout
+FIELD Public UnityEngine.UI.Button MainColorButton
+FIELD Public GUIToolTipper MainColorTip
+FIELD Public UnityEngine.UI.Image MainColorImage
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItemToggle> BodyButtons
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/Trait,UITrait> _traitToggles
+FIELD Public, Static System.Collections.Generic.List`1<Employee/Trait> TraitPriority
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee/Trait> _dummyTraits
+FIELD Private, NotSerialized Employee/Trait _forcedTraits
+FIELD Private System.Boolean _disableSkinUpdate
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.String> SliderToGroup
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,BodySliderGroup> SliderGroups
+FIELD Private System.Boolean _directSliderChange
+FIELD Private System.Boolean _styleDirty
+FIELD Public UnityEngine.UI.Image TransitionImage
+FIELD Public GUIToolTipper DaysPerMonthsKnob
+FIELD Private System.String defaultCompanyName
+FIELD Private DG.Tweening.Tweener _diffTween
+FIELD Private, NotSerialized System.Boolean _initializing
+FIELD Public System.Boolean UsingSkinColor
+FIELD Public UnityEngine.GameObject[] DeactivateDuringColor
+FIELD Private, NotSerialized System.Boolean _founderLoading
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.EventSystems.RaycastResult> CastResult
+FIELD Private System.Single _changeArms
+FIELD Public, NotSerialized UnityEngine.Color SkinColor
+FIELD Private System.Boolean _isSettingName
+FIELD Public System.String UseStyle
+FIELD Private, Static, InitOnly System.Single[] CampaignSkills
+FIELD Private, Static, InitOnly System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] CampaignSpecs
+FIELD Private System.Boolean _waitingForHost
+FIELD Public System.Boolean AdvancedMode
+FIELD Public UnityEngine.RectTransform SpecTrans
+FIELD Public UnityEngine.RectTransform CreaTrans
+FIELD Public UnityEngine.RectTransform AdvancedTrans
+FIELD Public UnityEngine.UI.Image SkillHeader
+PROPERTY System.Int32 ActorCustomization::StartYear()
+PROPERTY System.Collections.Generic.List`1<ActorBodyItem> ActorCustomization::BodyItems()
+PROPERTY UnityEngine.Transform ActorCustomization::RootBone()
+PROPERTY System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> ActorCustomization::Rig()
+PROPERTY System.Boolean ActorCustomization::UsesLOD1()
+PROPERTY System.Boolean ActorCustomization::NeedsDestruction()
+PROPERTY System.Collections.Generic.HashSet`1<Employee/Trait> ActorCustomization::_activeTraits()
+METHOD Public, HideBySig System.Void ActorCustomization::UpdateLeadFocusCombo()
+LOCAL 0 ActorCustomization/<>c__DisplayClass214_0
+LOCAL 1 System.Collections.Generic.List`1<SoftwareType>
+LOCAL 2 System.Int32
+LOCAL 3 ActorCustomization/<>c__DisplayClass214_1
+LOCAL 4 SoftwareType
+IL_0000: newobj System.Void ActorCustomization/<>c__DisplayClass214_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldloc.0
+IL_0007: ldnull
+IL_0008: stfld System.String ActorCustomization/<>c__DisplayClass214_0::bef
+IL_000d: ldarg.0
+IL_000e: ldfld GUICombobox ActorCustomization::LeadFocus
+IL_0013: callvirt System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0018: brfalse.s IL_003e
+IL_001a: ldarg.0
+IL_001b: ldfld GUICombobox ActorCustomization::LeadFocus
+IL_0020: callvirt System.Collections.Generic.List`1<System.Object> GUICombobox::get_Items()
+IL_0025: callvirt System.Int32 System.Collections.Generic.List`1<System.Object>::get_Count()
+IL_002a: ldc.i4.0
+IL_002b: ble.s IL_003e
+IL_002d: ldloc.0
+IL_002e: ldarg.0
+IL_002f: ldfld GUICombobox ActorCustomization::LeadFocus
+IL_0034: callvirt System.String GUICombobox::get_SelectedItemString()
+IL_0039: stfld System.String ActorCustomization/<>c__DisplayClass214_0::bef
+IL_003e: ldnull
+IL_003f: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_0044: ldsfld System.Func`2<SoftwareType,System.Boolean> ActorCustomization/<>c::<>9__214_0
+IL_0049: dup
+IL_004a: brtrue.s IL_0063
+IL_004c: pop
+IL_004d: ldsfld ActorCustomization/<>c ActorCustomization/<>c::<>9
+IL_0052: ldftn System.Boolean ActorCustomization/<>c::<UpdateLeadFocusCombo>b__214_0(SoftwareType)
+IL_0058: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_005d: dup
+IL_005e: stsfld System.Func`2<SoftwareType,System.Boolean> ActorCustomization/<>c::<>9__214_0
+IL_0063: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0068: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_006d: stloc.1
+IL_006e: ldarg.0
+IL_006f: ldfld GUICombobox ActorCustomization::LeadFocus
+IL_0074: ldloc.1
+IL_0075: callvirt System.Void GUICombobox::UpdateContent<SoftwareType>(System.Collections.Generic.IEnumerable`1<T>)
+IL_007a: ldc.i4.0
+IL_007b: stloc.2
+IL_007c: br.s IL_00c7
+IL_007e: newobj System.Void ActorCustomization/<>c__DisplayClass214_1::.ctor()
+IL_0083: stloc.3
+IL_0084: ldloc.3
+IL_0085: ldarg.0
+IL_0086: ldfld FounderManager ActorCustomization::FManager
+IL_008b: ldfld FounderManager/FounderDescriptor[] FounderManager::Founders
+IL_0090: ldloc.2
+IL_0091: ldelem.ref
+IL_0092: stfld FounderManager/FounderDescriptor ActorCustomization/<>c__DisplayClass214_1::f
+IL_0097: ldloc.3
+IL_0098: ldfld FounderManager/FounderDescriptor ActorCustomization/<>c__DisplayClass214_1::f
+IL_009d: brfalse.s IL_00c3
+IL_009f: ldloc.1
+IL_00a0: ldloc.3
+IL_00a1: ldftn System.Boolean ActorCustomization/<>c__DisplayClass214_1::<UpdateLeadFocusCombo>b__1(SoftwareType)
+IL_00a7: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_00ac: call System.Boolean Utilities::None<SoftwareType>(System.Collections.Generic.IList`1<TSource>,System.Func`2<TSource,System.Boolean>)
+IL_00b1: brfalse.s IL_00c3
+IL_00b3: ldloc.3
+IL_00b4: ldfld FounderManager/FounderDescriptor ActorCustomization/<>c__DisplayClass214_1::f
+IL_00b9: ldstr "Operating System"
+IL_00be: stfld System.String FounderManager/FounderDescriptor::LeadFocus
+IL_00c3: ldloc.2
+IL_00c4: ldc.i4.1
+IL_00c5: add
+IL_00c6: stloc.2
+IL_00c7: ldloc.2
+IL_00c8: ldarg.0
+IL_00c9: ldfld FounderManager ActorCustomization::FManager
+IL_00ce: ldfld FounderManager/FounderDescriptor[] FounderManager::Founders
+IL_00d3: ldlen
+IL_00d4: conv.i4
+IL_00d5: blt.s IL_007e
+IL_00d7: ldloc.0
+IL_00d8: ldfld System.String ActorCustomization/<>c__DisplayClass214_0::bef
+IL_00dd: brfalse.s IL_0105
+IL_00df: ldloc.1
+IL_00e0: ldloc.0
+IL_00e1: ldftn System.Boolean ActorCustomization/<>c__DisplayClass214_0::<UpdateLeadFocusCombo>b__2(SoftwareType)
+IL_00e7: newobj System.Void System.Func`2<SoftwareType,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_00ec: ldnull
+IL_00ed: call T Utilities::FirstOrDefault<SoftwareType>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>,T)
+IL_00f2: stloc.s V_4
+IL_00f4: ldloc.s V_4
+IL_00f6: brfalse.s IL_0105
+IL_00f8: ldarg.0
+IL_00f9: ldfld GUICombobox ActorCustomization::LeadFocus
+IL_00fe: ldloc.s V_4
+IL_0100: callvirt System.Void GUICombobox::set_SelectedItem(System.Object)
+IL_0105: ret
+METHOD Public, HideBySig Actor[] ActorCustomization::GenerateActors()
+LOCAL 0 PersonalityGraph
+LOCAL 1 Actor[]
+LOCAL 2 System.Int32
+LOCAL 3 FounderManager/FounderDescriptor
+LOCAL 4 Actor
+LOCAL 5 Actor
+LOCAL 6 Employee/Trait
+LOCAL 7 System.Int32
+LOCAL 8 LeadDesignDemands/Demand[]
+LOCAL 9 System.Collections.Generic.HashSet`1/Enumerator<Employee/Trait>
+LOCAL 10 Employee/Trait
+LOCAL 11 System.String[][]
+LOCAL 12 System.Collections.Generic.List`1<SoftwareType>
+LOCAL 13 System.Int32
+LOCAL 14 Employee/EmployeeRole
+LOCAL 15 System.Int32
+LOCAL 16 System.Int32
+LOCAL 17 System.Collections.Generic.IEnumerator`1<System.String>
+LOCAL 18 System.String
+LOCAL 19 System.Int32
+LOCAL 20 System.Int32
+LOCAL 21 System.String
+LOCAL 22 System.Int32
+LOCAL 23 System.Int32
+LOCAL 24 System.Nullable`1<Employee/EmployeeRole>
+LOCAL 25 System.Int32
+LOCAL 26 LeadDesignDemands/DemandChoice
+IL_0000: ldarg.0
+IL_0001: call PersonalityGraph ActorCustomization::GetPersonalities()
+IL_0006: stloc.0
+IL_0007: ldarg.0
+IL_0008: ldfld FounderManager ActorCustomization::FManager
+IL_000d: ldfld FounderManager/FounderDescriptor[] FounderManager::Founders
+IL_0012: ldsfld System.Func`2<FounderManager/FounderDescriptor,System.Boolean> ActorCustomization/<>c::<>9__244_0
+IL_0017: dup
+IL_0018: brtrue.s IL_0031
+IL_001a: pop
+IL_001b: ldsfld ActorCustomization/<>c ActorCustomization/<>c::<>9
+IL_0020: ldftn System.Boolean ActorCustomization/<>c::<GenerateActors>b__244_0(FounderManager/FounderDescriptor)
+IL_0026: newobj System.Void System.Func`2<FounderManager/FounderDescriptor,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_002b: dup
+IL_002c: stsfld System.Func`2<FounderManager/FounderDescriptor,System.Boolean> ActorCustomization/<>c::<>9__244_0
+IL_0031: call System.Int32 Utilities::Count<FounderManager/FounderDescriptor>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0036: newarr Actor
+IL_003b: stloc.1
+IL_003c: ldc.i4.0
+IL_003d: stloc.2
+IL_003e: br IL_03e7
+IL_0043: ldloc.2
+IL_0044: brtrue.s IL_009d
+IL_0046: ldarg.0
+IL_0047: ldfld Employee ActorCustomization::_forcedFounder
+IL_004c: brfalse.s IL_009d
+IL_004e: ldarg.0
+IL_004f: ldfld UnityEngine.GameObject ActorCustomization::FinalActor
+IL_0054: call !!0 UnityEngine.Object::Instantiate<UnityEngine.GameObject>(!!0)
+IL_0059: callvirt !!0 UnityEngine.GameObject::GetComponent<Actor>()
+IL_005e: stloc.s V_4
+IL_0060: ldloc.s V_4
+IL_0062: ldarg.0
+IL_0063: ldfld Employee ActorCustomization::_forcedFounder
+IL_0068: ldfld System.Boolean Employee::Female
+IL_006d: stfld System.Boolean Actor::Female
+IL_0072: ldloc.s V_4
+IL_0074: ldarg.0
+IL_0075: ldfld Employee ActorCustomization::_forcedFounder
+IL_007a: callvirt System.Void Actor::set_employee(Employee)
+IL_007f: ldloc.s V_4
+IL_0081: ldc.i4.0
+IL_0082: callvirt System.Void UnityEngine.Behaviour::set_enabled(System.Boolean)
+IL_0087: ldloc.s V_4
+IL_0089: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_008e: call System.Void UnityEngine.Object::DontDestroyOnLoad(UnityEngine.Object)
+IL_0093: ldloc.1
+IL_0094: ldloc.2
+IL_0095: ldloc.s V_4
+IL_0097: stelem.ref
+IL_0098: br IL_03e3
+IL_009d: ldarg.0
+IL_009e: ldfld FounderManager ActorCustomization::FManager
+IL_00a3: ldfld FounderManager/FounderDescriptor[] FounderManager::Founders
+IL_00a8: ldloc.2
+IL_00a9: ldelem.ref
+IL_00aa: stloc.3
+IL_00ab: ldloc.3
+IL_00ac: brfalse IL_03fa
+IL_00b1: ldarg.0
+IL_00b2: ldfld UnityEngine.GameObject ActorCustomization::FinalActor
+IL_00b7: call !!0 UnityEngine.Object::Instantiate<UnityEngine.GameObject>(!!0)
+IL_00bc: callvirt !!0 UnityEngine.GameObject::GetComponent<Actor>()
+IL_00c1: stloc.s V_5
+IL_00c3: ldloc.s V_5
+IL_00c5: ldloc.3
+IL_00c6: ldfld System.Boolean FounderManager/FounderDescriptor::Female
+IL_00cb: stfld System.Boolean Actor::Female
+IL_00d0: ldc.i4.0
+IL_00d1: conv.i8
+IL_00d2: stloc.s V_6
+IL_00d4: ldloc.3
+IL_00d5: ldfld System.Collections.Generic.HashSet`1<Employee/Trait> FounderManager/FounderDescriptor::Traits
+IL_00da: callvirt System.Collections.Generic.HashSet`1/Enumerator<!0> System.Collections.Generic.HashSet`1<Employee/Trait>::GetEnumerator()
+IL_00df: stloc.s V_9
+IL_00e1: br.s IL_00f3
+IL_00e3: ldloca.s V_9
+IL_00e5: call !0 System.Collections.Generic.HashSet`1/Enumerator<Employee/Trait>::get_Current()
+IL_00ea: stloc.s V_10
+IL_00ec: ldloc.s V_6
+IL_00ee: ldloc.s V_10
+IL_00f0: or
+IL_00f1: stloc.s V_6
+IL_00f3: ldloca.s V_9
+IL_00f5: call System.Boolean System.Collections.Generic.HashSet`1/Enumerator<Employee/Trait>::MoveNext()
+IL_00fa: brtrue.s IL_00e3
+IL_00fc: leave.s IL_010c
+IL_00fe: ldloca.s V_9
+IL_0100: constrained. System.Collections.Generic.HashSet`1/Enumerator<Employee/Trait>
+IL_0106: callvirt System.Void System.IDisposable::Dispose()
+IL_010b: endfinally
+IL_010c: ldarg.0
+IL_010d: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0112: brtrue IL_02b7
+IL_0117: ldarg.0
+IL_0118: ldfld SpecializationChart ActorCustomization::SpecChart
+IL_011d: ldloc.3
+IL_011e: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_0123: ldloc.2
+IL_0124: callvirt System.Boolean SpecializationChart::Spent(System.Collections.Generic.Dictionary`2<System.String,System.Int32>[],System.Int32)
+IL_0129: brtrue IL_02b7
+IL_012e: ldarg.0
+IL_012f: call System.String[][] ActorCustomization::GetUnlockedSpecializations()
+IL_0134: stloc.s V_11
+IL_0136: ldnull
+IL_0137: call System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+IL_013c: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0141: stloc.s V_12
+IL_0143: ldc.i4.0
+IL_0144: stloc.s V_13
+IL_0146: br IL_02af
+IL_014b: ldloc.s V_13
+IL_014d: stloc.s V_14
+IL_014f: ldloc.s V_11
+IL_0151: ldloc.s V_13
+IL_0153: ldelem.ref
+IL_0154: ldlen
+IL_0155: conv.i4
+IL_0156: ldc.i4.3
+IL_0157: mul
+IL_0158: ldarg.0
+IL_0159: ldloc.s V_14
+IL_015b: ldloc.2
+IL_015c: call System.Int32 ActorCustomization::GetMaxPoints(Employee/EmployeeRole,System.Int32)
+IL_0161: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_0166: stloc.s V_15
+IL_0168: ldloc.3
+IL_0169: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_016e: ldloc.s V_14
+IL_0170: ldelem.ref
+IL_0171: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.Int32> ActorCustomization/<>c::<>9__244_1
+IL_0176: dup
+IL_0177: brtrue.s IL_0190
+IL_0179: pop
+IL_017a: ldsfld ActorCustomization/<>c ActorCustomization/<>c::<>9
+IL_017f: ldftn System.Int32 ActorCustomization/<>c::<GenerateActors>b__244_1(System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>)
+IL_0185: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.Int32>::.ctor(System.Object,System.IntPtr)
+IL_018a: dup
+IL_018b: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>,System.Int32> ActorCustomization/<>c::<>9__244_1
+IL_0190: call System.Int32 Utilities::SumSafe<System.Collections.Generic.KeyValuePair`2<System.String,System.Int32>>(System.Collections.Generic.IEnumerable`1<T>,System.Func`2<T,System.Int32>)
+IL_0195: stloc.s V_16
+IL_0197: ldloc.s V_16
+IL_0199: ldloc.s V_15
+IL_019b: bge IL_02a9
+IL_01a0: ldloc.s V_14
+IL_01a2: brfalse IL_0228
+IL_01a7: ldarg.0
+IL_01a8: ldloc.s V_14
+IL_01aa: ldloc.s V_11
+IL_01ac: ldloc.s V_12
+IL_01ae: call System.Collections.Generic.IEnumerable`1<System.String> ActorCustomization::GetPrioritizedSpecs(Employee/EmployeeRole,System.String[][],System.Collections.Generic.IList`1<SoftwareType>)
+IL_01b3: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<System.String>::GetEnumerator()
+IL_01b8: stloc.s V_17
+IL_01ba: br.s IL_0211
+IL_01bc: ldloc.s V_17
+IL_01be: callvirt !0 System.Collections.Generic.IEnumerator`1<System.String>::get_Current()
+IL_01c3: stloc.s V_18
+IL_01c5: ldloc.3
+IL_01c6: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_01cb: ldloc.s V_14
+IL_01cd: ldelem.ref
+IL_01ce: ldloc.s V_18
+IL_01d0: ldc.i4.0
+IL_01d1: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_01d6: stloc.s V_19
+IL_01d8: ldloc.s V_19
+IL_01da: ldc.i4.2
+IL_01db: bge.s IL_0211
+IL_01dd: ldc.i4.2
+IL_01de: ldloc.s V_19
+IL_01e0: sub
+IL_01e1: ldloc.s V_15
+IL_01e3: ldloc.s V_16
+IL_01e5: sub
+IL_01e6: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_01eb: stloc.s V_20
+IL_01ed: ldloc.3
+IL_01ee: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_01f3: ldloc.s V_14
+IL_01f5: ldelem.ref
+IL_01f6: ldloc.s V_18
+IL_01f8: ldloc.s V_19
+IL_01fa: ldloc.s V_20
+IL_01fc: add
+IL_01fd: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::set_Item(!0,!1)
+IL_0202: ldloc.s V_16
+IL_0204: ldloc.s V_20
+IL_0206: add
+IL_0207: stloc.s V_16
+IL_0209: ldloc.s V_16
+IL_020b: ldloc.s V_15
+IL_020d: blt.s IL_0211
+IL_020f: leave.s IL_0228
+IL_0211: ldloc.s V_17
+IL_0213: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0218: brtrue.s IL_01bc
+IL_021a: leave.s IL_0228
+IL_021c: ldloc.s V_17
+IL_021e: brfalse.s IL_0227
+IL_0220: ldloc.s V_17
+IL_0222: callvirt System.Void System.IDisposable::Dispose()
+IL_0227: endfinally
+IL_0228: ldarg.0
+IL_0229: ldloc.s V_14
+IL_022b: ldloc.s V_11
+IL_022d: ldloc.s V_12
+IL_022f: call System.Collections.Generic.IEnumerable`1<System.String> ActorCustomization::GetPrioritizedSpecs(Employee/EmployeeRole,System.String[][],System.Collections.Generic.IList`1<SoftwareType>)
+IL_0234: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<System.String>::GetEnumerator()
+IL_0239: stloc.s V_17
+IL_023b: br.s IL_0292
+IL_023d: ldloc.s V_17
+IL_023f: callvirt !0 System.Collections.Generic.IEnumerator`1<System.String>::get_Current()
+IL_0244: stloc.s V_21
+IL_0246: ldloc.3
+IL_0247: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_024c: ldloc.s V_14
+IL_024e: ldelem.ref
+IL_024f: ldloc.s V_21
+IL_0251: ldc.i4.0
+IL_0252: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0257: stloc.s V_22
+IL_0259: ldloc.s V_22
+IL_025b: ldc.i4.3
+IL_025c: bge.s IL_0292
+IL_025e: ldc.i4.3
+IL_025f: ldloc.s V_22
+IL_0261: sub
+IL_0262: ldloc.s V_15
+IL_0264: ldloc.s V_16
+IL_0266: sub
+IL_0267: call System.Int32 UnityEngine.Mathf::Min(System.Int32,System.Int32)
+IL_026c: stloc.s V_23
+IL_026e: ldloc.3
+IL_026f: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_0274: ldloc.s V_14
+IL_0276: ldelem.ref
+IL_0277: ldloc.s V_21
+IL_0279: ldloc.s V_22
+IL_027b: ldloc.s V_23
+IL_027d: add
+IL_027e: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,System.Int32>::set_Item(!0,!1)
+IL_0283: ldloc.s V_16
+IL_0285: ldloc.s V_23
+IL_0287: add
+IL_0288: stloc.s V_16
+IL_028a: ldloc.s V_16
+IL_028c: ldloc.s V_15
+IL_028e: blt.s IL_0292
+IL_0290: leave.s IL_02a9
+IL_0292: ldloc.s V_17
+IL_0294: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0299: brtrue.s IL_023d
+IL_029b: leave.s IL_02a9
+IL_029d: ldloc.s V_17
+IL_029f: brfalse.s IL_02a8
+IL_02a1: ldloc.s V_17
+IL_02a3: callvirt System.Void System.IDisposable::Dispose()
+IL_02a8: endfinally
+IL_02a9: ldloc.s V_13
+IL_02ab: ldc.i4.1
+IL_02ac: add
+IL_02ad: stloc.s V_13
+IL_02af: ldloc.s V_13
+IL_02b1: ldc.i4.5
+IL_02b2: blt IL_014b
+IL_02b7: ldloc.s V_5
+IL_02b9: ldarg.0
+IL_02ba: call System.Int32 ActorCustomization::GetStartYear()
+IL_02bf: newobj System.Void SDateTime::.ctor(System.Int32)
+IL_02c4: ldloc.3
+IL_02c5: ldfld System.Boolean FounderManager/FounderDescriptor::Female
+IL_02ca: ldloc.3
+IL_02cb: ldfld System.String FounderManager/FounderDescriptor::Name
+IL_02d0: ldloc.3
+IL_02d1: ldfld System.Single[] FounderManager/FounderDescriptor::Skills
+IL_02d6: ldloc.3
+IL_02d7: ldfld System.Single FounderManager/FounderDescriptor::Creativity
+IL_02dc: ldloc.3
+IL_02dd: ldfld System.String[] FounderManager/FounderDescriptor::Personality
+IL_02e2: ldloc.s V_6
+IL_02e4: ldloc.3
+IL_02e5: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] FounderManager/FounderDescriptor::Specializations
+IL_02ea: ldloc.0
+IL_02eb: ldloc.3
+IL_02ec: ldfld ActorBodyItem/BodyItemObject[] FounderManager/FounderDescriptor::Style
+IL_02f1: ldloc.3
+IL_02f2: ldfld System.Collections.Generic.HashSet`1<Employee/Trait> FounderManager/FounderDescriptor::Traits
+IL_02f7: ldc.i4.4
+IL_02f8: conv.i8
+IL_02f9: callvirt System.Boolean System.Collections.Generic.HashSet`1<Employee/Trait>::Contains(!0)
+IL_02fe: brtrue.s IL_030c
+IL_0300: ldloca.s V_24
+IL_0302: initobj System.Nullable`1<Employee/EmployeeRole>
+IL_0308: ldloc.s V_24
+IL_030a: br.s IL_0312
+IL_030c: ldloc.3
+IL_030d: ldfld System.Nullable`1<Employee/EmployeeRole> FounderManager/FounderDescriptor::ForcedBrain
+IL_0312: ldloc.3
+IL_0313: ldfld System.Single FounderManager/FounderDescriptor::Age
+IL_0318: conv.i4
+IL_0319: newobj System.Void Employee::.ctor(SDateTime,System.Boolean,System.String,System.Single[],System.Single,System.String[],Employee/Trait,System.Collections.Generic.Dictionary`2<System.String,System.Int32>[],PersonalityGraph,ActorBodyItem/BodyItemObject[],System.Nullable`1<Employee/EmployeeRole>,System.Int32)
+IL_031e: callvirt System.Void Actor::set_employee(Employee)
+IL_0323: ldsfld System.Boolean GameData::CampaignMode
+IL_0328: brtrue.s IL_0338
+IL_032a: ldarg.0
+IL_032b: ldloc.3
+IL_032c: ldfld System.Single FounderManager/FounderDescriptor::Creativity
+IL_0331: call System.Int32 ActorCustomization::GetCreativityIndex(System.Single)
+IL_0336: br.s IL_0339
+IL_0338: ldc.i4.0
+IL_0339: stloc.s V_7
+IL_033b: ldloc.s V_5
+IL_033d: callvirt Employee Actor::get_employee()
+IL_0342: ldarg.0
+IL_0343: ldloc.s V_7
+IL_0345: call System.Single ActorCustomization::GetMaxSkill(System.Int32)
+IL_034a: stfld System.Single Employee::SkillCeiling
+IL_034f: ldloc.s V_7
+IL_0351: ldc.i4.0
+IL_0352: ble.s IL_0366
+IL_0354: ldloc.s V_5
+IL_0356: callvirt Employee Actor::get_employee()
+IL_035b: ldloc.3
+IL_035c: ldfld System.String FounderManager/FounderDescriptor::LeadFocus
+IL_0361: stfld System.String Employee::LeadSpecPick
+IL_0366: ldsfld LeadDesignDemands/Demand[][] ActorCustomization::_demands
+IL_036b: ldloc.s V_7
+IL_036d: ldelem.ref
+IL_036e: stloc.s V_8
+IL_0370: ldc.i4.0
+IL_0371: stloc.s V_25
+IL_0373: br.s IL_03a2
+IL_0375: ldloc.s V_8
+IL_0377: ldloc.s V_25
+IL_0379: ldelem.i4
+IL_037a: call LeadDesignDemands/DemandChoice LeadDesignDemands::GetChoice(LeadDesignDemands/Demand)
+IL_037f: stloc.s V_26
+IL_0381: ldloc.s V_5
+IL_0383: callvirt Employee Actor::get_employee()
+IL_0388: ldloc.s V_26
+IL_038a: ldloc.s V_26
+IL_038c: ldloc.s V_8
+IL_038e: ldloc.s V_25
+IL_0390: ldelem.i4
+IL_0391: callvirt System.Int32 LeadDesignDemands/DemandChoice::GetChoiceIndex(LeadDesignDemands/Demand)
+IL_0396: ldc.i4.0
+IL_0397: callvirt System.Void Employee::AcceptDemand(LeadDesignDemands/DemandChoice,System.Int32,System.Boolean)
+IL_039c: ldloc.s V_25
+IL_039e: ldc.i4.1
+IL_039f: add
+IL_03a0: stloc.s V_25
+IL_03a2: ldloc.s V_25
+IL_03a4: ldloc.s V_8
+IL_03a6: ldlen
+IL_03a7: conv.i4
+IL_03a8: blt.s IL_0375
+IL_03aa: ldloc.s V_5
+IL_03ac: ldc.i4.0
+IL_03ad: callvirt System.Void UnityEngine.Behaviour::set_enabled(System.Boolean)
+IL_03b2: ldarg.0
+IL_03b3: ldfld ActorBodyItem ActorCustomization::_watch
+IL_03b8: ldnull
+IL_03b9: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_03be: brfalse.s IL_03d2
+IL_03c0: ldarg.0
+IL_03c1: call System.Collections.Generic.List`1<ActorBodyItem> ActorCustomization::get_BodyItems()
+IL_03c6: ldarg.0
+IL_03c7: ldfld ActorBodyItem ActorCustomization::_watch
+IL_03cc: callvirt System.Boolean System.Collections.Generic.List`1<ActorBodyItem>::Remove(!0)
+IL_03d1: pop
+IL_03d2: ldloc.s V_5
+IL_03d4: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_03d9: call System.Void UnityEngine.Object::DontDestroyOnLoad(UnityEngine.Object)
+IL_03de: ldloc.1
+IL_03df: ldloc.2
+IL_03e0: ldloc.s V_5
+IL_03e2: stelem.ref
+IL_03e3: ldloc.2
+IL_03e4: ldc.i4.1
+IL_03e5: add
+IL_03e6: stloc.2
+IL_03e7: ldloc.2
+IL_03e8: ldarg.0
+IL_03e9: ldfld FounderManager ActorCustomization::FManager
+IL_03ee: ldfld FounderManager/FounderDescriptor[] FounderManager::Founders
+IL_03f3: ldlen
+IL_03f4: conv.i4
+IL_03f5: blt IL_0043
+IL_03fa: ldloc.1
+IL_03fb: ret
+METHOD Public, HideBySig System.Void ActorCustomization::ToggleAdvancedMode(System.Boolean)
+LOCAL 0 UnityEngine.Rect
+IL_0000: ldarg.0
+IL_0001: ldarg.0
+IL_0002: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0007: ldc.i4.0
+IL_0008: ceq
+IL_000a: stfld System.Boolean ActorCustomization::AdvancedMode
+IL_000f: call System.Boolean Options::get_CustomizationAdvanced()
+IL_0014: ldarg.0
+IL_0015: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_001a: beq.s IL_002c
+IL_001c: ldarg.0
+IL_001d: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0022: call System.Void Options::set_CustomizationAdvanced(System.Boolean)
+IL_0027: call System.Void Options::SaveToFile()
+IL_002c: ldarg.0
+IL_002d: ldfld UnityEngine.UI.Image ActorCustomization::SkillHeader
+IL_0032: ldarg.0
+IL_0033: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0038: brtrue.s IL_004a
+IL_003a: call ObjectDatabase ObjectDatabase::get_Instance()
+IL_003f: ldc.i4.1
+IL_0040: ldc.i4.0
+IL_0041: ldc.i4.0
+IL_0042: ldc.i4.1
+IL_0043: callvirt UnityEngine.Sprite ObjectDatabase::GetSprite(System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+IL_0048: br.s IL_004b
+IL_004a: ldnull
+IL_004b: callvirt System.Void UnityEngine.UI.Image::set_sprite(UnityEngine.Sprite)
+IL_0050: ldarg.1
+IL_0051: brfalse IL_0129
+IL_0056: ldarg.0
+IL_0057: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_005c: callvirt UnityEngine.Transform UnityEngine.Transform::get_parent()
+IL_0061: callvirt UnityEngine.Transform UnityEngine.Transform::get_parent()
+IL_0066: callvirt !!0 UnityEngine.Component::GetComponent<UnityEngine.RectTransform>()
+IL_006b: call System.Void UnityEngine.UI.LayoutRebuilder::ForceRebuildLayoutImmediate(UnityEngine.RectTransform)
+IL_0070: ldarg.0
+IL_0071: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_0076: ldarg.0
+IL_0077: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_007c: brtrue.s IL_0081
+IL_007e: ldc.i4.0
+IL_007f: br.s IL_0082
+IL_0081: ldc.i4.1
+IL_0082: conv.r4
+IL_0083: ldc.r4 1
+IL_0088: ldc.r4 1
+IL_008d: newobj System.Void UnityEngine.Vector3::.ctor(System.Single,System.Single,System.Single)
+IL_0092: callvirt System.Void UnityEngine.Transform::set_localScale(UnityEngine.Vector3)
+IL_0097: ldarg.0
+IL_0098: ldfld UnityEngine.RectTransform ActorCustomization::CreaTrans
+IL_009d: ldc.r4 1
+IL_00a2: ldarg.0
+IL_00a3: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_00a8: brtrue.s IL_00ad
+IL_00aa: ldc.i4.0
+IL_00ab: br.s IL_00ae
+IL_00ad: ldc.i4.1
+IL_00ae: conv.r4
+IL_00af: ldc.r4 1
+IL_00b4: newobj System.Void UnityEngine.Vector3::.ctor(System.Single,System.Single,System.Single)
+IL_00b9: callvirt System.Void UnityEngine.Transform::set_localScale(UnityEngine.Vector3)
+IL_00be: ldarg.0
+IL_00bf: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_00c4: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_00c9: ldarg.0
+IL_00ca: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_00cf: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_00d4: ldarg.0
+IL_00d5: ldfld UnityEngine.RectTransform ActorCustomization::CreaTrans
+IL_00da: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_00df: ldarg.0
+IL_00e0: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_00e5: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_00ea: ldarg.0
+IL_00eb: ldfld UnityEngine.RectTransform ActorCustomization::AdvancedTrans
+IL_00f0: ldarg.0
+IL_00f1: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_00f6: brtrue.s IL_0114
+IL_00f8: ldarg.0
+IL_00f9: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_00fe: callvirt UnityEngine.Rect UnityEngine.RectTransform::get_rect()
+IL_0103: stloc.0
+IL_0104: ldloca.s V_0
+IL_0106: call System.Single UnityEngine.Rect::get_width()
+IL_010b: neg
+IL_010c: ldc.r4 1
+IL_0111: sub
+IL_0112: br.s IL_0119
+IL_0114: ldc.r4 0
+IL_0119: ldc.r4 0
+IL_011e: newobj System.Void UnityEngine.Vector2::.ctor(System.Single,System.Single)
+IL_0123: callvirt System.Void UnityEngine.RectTransform::set_anchoredPosition(UnityEngine.Vector2)
+IL_0128: ret
+IL_0129: ldarg.0
+IL_012a: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_012f: brtrue.s IL_0138
+IL_0131: ldstr "SlideOut2"
+IL_0136: br.s IL_013d
+IL_0138: ldstr "SlideIn2"
+IL_013d: ldc.r4 -1
+IL_0142: ldc.r4 0
+IL_0147: ldc.i4.0
+IL_0148: call System.Void UISoundFX::PlaySFX(System.String,System.Single,System.Single,System.Boolean)
+IL_014d: ldarg.0
+IL_014e: ldfld UnityEngine.RectTransform ActorCustomization::CreaTrans
+IL_0153: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0158: ldc.i4.1
+IL_0159: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_015e: ldarg.0
+IL_015f: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_0164: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0169: ldc.i4.1
+IL_016a: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_016f: ldarg.0
+IL_0170: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_0175: ldarg.0
+IL_0176: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_017b: brtrue.s IL_0180
+IL_017d: ldc.i4.0
+IL_017e: br.s IL_0181
+IL_0180: ldc.i4.1
+IL_0181: conv.r4
+IL_0182: ldc.r4 0.5
+IL_0187: call DG.Tweening.Tweener DG.Tweening.ShortcutExtensions::DOScaleX(UnityEngine.Transform,System.Single,System.Single)
+IL_018c: ldc.i4.s 9
+IL_018e: call !!0 DG.Tweening.TweenSettingsExtensions::SetEase<DG.Tweening.Tweener>(!!0,DG.Tweening.Ease)
+IL_0193: ldarg.0
+IL_0194: ldftn System.Void ActorCustomization::<ToggleAdvancedMode>b__291_0()
+IL_019a: newobj System.Void DG.Tweening.TweenCallback::.ctor(System.Object,System.IntPtr)
+IL_019f: call !!0 DG.Tweening.TweenSettingsExtensions::OnComplete<DG.Tweening.Tweener>(!!0,DG.Tweening.TweenCallback)
+IL_01a4: pop
+IL_01a5: ldarg.0
+IL_01a6: ldfld UnityEngine.RectTransform ActorCustomization::CreaTrans
+IL_01ab: ldarg.0
+IL_01ac: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_01b1: brtrue.s IL_01b6
+IL_01b3: ldc.i4.0
+IL_01b4: br.s IL_01b7
+IL_01b6: ldc.i4.1
+IL_01b7: conv.r4
+IL_01b8: ldc.r4 0.5
+IL_01bd: call DG.Tweening.Tweener DG.Tweening.ShortcutExtensions::DOScaleY(UnityEngine.Transform,System.Single,System.Single)
+IL_01c2: ldc.i4.s 9
+IL_01c4: call !!0 DG.Tweening.TweenSettingsExtensions::SetEase<DG.Tweening.Tweener>(!!0,DG.Tweening.Ease)
+IL_01c9: ldarg.0
+IL_01ca: ldftn System.Void ActorCustomization::<ToggleAdvancedMode>b__291_1()
+IL_01d0: newobj System.Void DG.Tweening.TweenCallback::.ctor(System.Object,System.IntPtr)
+IL_01d5: call !!0 DG.Tweening.TweenSettingsExtensions::OnComplete<DG.Tweening.Tweener>(!!0,DG.Tweening.TweenCallback)
+IL_01da: pop
+IL_01db: ldarg.0
+IL_01dc: ldfld UnityEngine.RectTransform ActorCustomization::AdvancedTrans
+IL_01e1: ldarg.0
+IL_01e2: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_01e7: brtrue.s IL_0205
+IL_01e9: ldarg.0
+IL_01ea: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_01ef: callvirt UnityEngine.Rect UnityEngine.RectTransform::get_rect()
+IL_01f4: stloc.0
+IL_01f5: ldloca.s V_0
+IL_01f7: call System.Single UnityEngine.Rect::get_width()
+IL_01fc: neg
+IL_01fd: ldc.r4 1
+IL_0202: sub
+IL_0203: br.s IL_020a
+IL_0205: ldc.r4 0
+IL_020a: ldc.r4 0
+IL_020f: newobj System.Void UnityEngine.Vector2::.ctor(System.Single,System.Single)
+IL_0214: ldc.r4 0.5
+IL_0219: ldc.i4.0
+IL_021a: call DG.Tweening.Tweener DG.Tweening.ShortcutExtensions46::DOAnchorPos(UnityEngine.RectTransform,UnityEngine.Vector2,System.Single,System.Boolean)
+IL_021f: ldc.i4.s 9
+IL_0221: call !!0 DG.Tweening.TweenSettingsExtensions::SetEase<DG.Tweening.Tweener>(!!0,DG.Tweening.Ease)
+IL_0226: pop
+IL_0227: ret
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleAdvancedMode>b__291_0()
+IL_0000: ldarg.0
+IL_0001: ldfld UnityEngine.RectTransform ActorCustomization::SpecTrans
+IL_0006: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_000b: ldarg.0
+IL_000c: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0011: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0016: ret
+METHOD Private, HideBySig System.Void ActorCustomization::<ToggleAdvancedMode>b__291_1()
+IL_0000: ldarg.0
+IL_0001: ldfld UnityEngine.RectTransform ActorCustomization::CreaTrans
+IL_0006: callvirt UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_000b: ldarg.0
+IL_000c: ldfld System.Boolean ActorCustomization::AdvancedMode
+IL_0011: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0016: ret
+TYPE GameData BASE System.Object
+FIELD Public, Static System.String[] ObsoleteDifficultySettings
+FIELD Private, Static System.String[] FemaleNames
+FIELD Private, Static System.String[] MaleNames
+FIELD Private, Static System.String[] LastNames
+FIELD Private, Static System.String[] FemaleLastNames
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,SoftwareType> SoftwareTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,CompanyType> CompanyTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> NameGens
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,Currency> CurrencyRates
+FIELD Public, Static System.Collections.Generic.List`1<ModPackage> ModPackages
+FIELD Public, Static System.Collections.Generic.List`1<RewardTask> Tasks
+FIELD Private, Static Currency cachedCurrency
+FIELD Private, Static System.Boolean hasCachedCurrency
+FIELD Private, Static System.String cachedCurrencyName
+FIELD Public, Static SaveGame LoadFile
+FIELD Public, Static SDateTime CompanyDate
+FIELD Public, Static System.Byte[] CompanyData
+FIELD Public, Static System.Boolean LoadBackup
+FIELD Public, Static System.String CompanyName
+FIELD Public, Static System.Boolean LoadBuildingOnLoad
+FIELD Public, Static System.Boolean LoadCompanyOnLoad
+FIELD Public, Static System.Boolean EditMode
+FIELD Public, Static System.Boolean CampaignMode
+FIELD Public, Static System.String BobName
+FIELD Public, Static System.Boolean MultiplayerMode
+FIELD Public, Static System.Boolean DoCampaignInit
+FIELD Public, Static System.Boolean RestartCompany
+FIELD Public, Static System.Collections.Generic.List`1<MarketEvent> RestartEvents
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartCompletedMissions
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartActiveMissions
+FIELD Public, Static System.UInt32 RestartCompanyID
+FIELD Public, Static PersonalityGraph RestartCompanyPersonalities
+FIELD Public, Static System.String[][] RestartCompanySpecs
+FIELD Public, Static System.Double RestartCompanyFunds
+FIELD Public, Static System.Byte[] RestartCompanyFounder
+FIELD Public, Static System.String LobbyName
+FIELD Public, Static System.String LobbyPassword
+FIELD Public, Static System.Boolean NetworkAllowCodeMods
+FIELD Public, Static System.Boolean NetworkAllowFurnitureMods
+FIELD Public, Static System.Nullable`1<System.Single> ForcedIPO
+FIELD Public, Static System.Single RoundLimit
+FIELD Public, Static SINetworking.NetworkLobby/RoundLimitType RoundType
+FIELD Public, Static System.Boolean PlotAdjacency
+FIELD Public, Static System.Double StartingMoney
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,SentenceGenerator> SentenceGen
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,MoodEffect> MoodEffects
+FIELD Private, Static PersonalityGraph Personalities
+FIELD Public, Static System.Int32 ActiveYear
+FIELD Public, Static Actor[] Founders
+FIELD Public, Static System.Boolean IntroDone
+FIELD Public, Static System.Boolean RuralBigPlots
+FIELD Public, Static DifficultyValues/DifficultySetting SelectedDifficulty
+FIELD Public, Static System.Int32 DaysPerMonth
+FIELD Public, Static System.Int32 LoanAmount
+FIELD Public, Static System.Int32 LoadYear
+FIELD Public, Static System.Byte[] CompanyLogo
+FIELD Public, Static System.Byte[] NetworkSaveData
+FIELD Public, Static NetworkMeta NetworkData
+FIELD Public, Static InitialNetworkSettings NetworkSettings
+FIELD Public, Static System.Nullable`1<SDateTime> HostDate
+FIELD Public, Static GameData/EnvironmentType Environment
+FIELD Public, Static GameData/ClimateType Climate
+FIELD Public, Static System.Collections.Generic.List`1<BlueprintGroup> Blueprints
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,CustomActor> SavedStyles
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,BehaviorNode>> AITrees
+FIELD Public, Static System.Random RND
+FIELD Public, Static SoftwareType DigitalDistributionPlatform
+FIELD Public, Static System.String RandomString
+FIELD Public, Static Tyd.TydDocument TeamSetups
+FIELD Public, Static Tyd.TydDocument ProjectManagementSetups
+FIELD Public, Static System.Collections.Generic.List`1<System.String> LocalLogos
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Material> UserImages
+FIELD Public, Static System.Single DefaultBillboardEffect
+FIELD Private, Static RandomWordGenerator2 _wordGenerator
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,DLCObject> InstalledDLC
+FIELD Private, Static System.EventHandler OnNewImages
+FIELD Private, Static System.IO.FileSystemWatcher _newImageWatcher
+FIELD Public, Static System.Boolean UserImagesDirty
+FIELD Private, Static System.Boolean _isInit
+FIELD Public, Static, Literal, HasDefault System.Single DefaultMaxSpec
+CONSTANT DefaultMaxSpec = 0.5
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> TaskTime
+FIELD Private, Static System.Single[0...,0...] CachedEffectiveness
+FIELD Private, Static System.Int32[] OptimalEmployees
+PROPERTY System.Boolean GameData::LoadAnyOnLoad()
+PROPERTY System.String GameData::UserImagePath()
+PROPERTY System.Single GameData::RNDValue()
+TYPE Employee/<>c__DisplayClass79_0 BASE System.Object
+FIELD Public System.Int32 y
+FIELD Public System.Func`2<SoftwareCategory,System.Boolean> <>9__1
+METHOD Assembly, HideBySig System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__0(SoftwareType)
+LOCAL 0 System.Func`2<SoftwareCategory,System.Boolean>
+IL_0000: ldarg.1
+IL_0001: ldfld System.Boolean SoftwareType::OneClient
+IL_0006: brtrue.s IL_0046
+IL_0008: ldarg.1
+IL_0009: ldarg.0
+IL_000a: ldfld System.Int32 Employee/<>c__DisplayClass79_0::y
+IL_000f: callvirt System.Boolean SoftwareType::IsUnlocked(System.Int32)
+IL_0014: brfalse.s IL_0046
+IL_0016: ldarg.1
+IL_0017: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory> SoftwareType::Categories
+IL_001c: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareCategory>::get_Values()
+IL_0021: ldarg.0
+IL_0022: ldfld System.Func`2<SoftwareCategory,System.Boolean> Employee/<>c__DisplayClass79_0::<>9__1
+IL_0027: dup
+IL_0028: brtrue.s IL_0040
+IL_002a: pop
+IL_002b: ldarg.0
+IL_002c: ldarg.0
+IL_002d: ldftn System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__1(SoftwareCategory)
+IL_0033: newobj System.Void System.Func`2<SoftwareCategory,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0038: dup
+IL_0039: stloc.0
+IL_003a: stfld System.Func`2<SoftwareCategory,System.Boolean> Employee/<>c__DisplayClass79_0::<>9__1
+IL_003f: ldloc.0
+IL_0040: call System.Boolean System.Linq.Enumerable::Any<SoftwareCategory>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0045: ret
+IL_0046: ldc.i4.0
+IL_0047: ret
+METHOD Assembly, HideBySig System.Boolean Employee/<>c__DisplayClass79_0::<RandomizeLeadSpec>b__1(SoftwareCategory)
+IL_0000: ldarg.1
+IL_0001: ldarg.0
+IL_0002: ldfld System.Int32 Employee/<>c__DisplayClass79_0::y
+IL_0007: callvirt System.Boolean SoftwareCategory::IsUnlocked(System.Int32)
+IL_000c: ret

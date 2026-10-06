@@ -1,0 +1,141 @@
+TYPE GameData BASE System.Object
+FIELD Public, Static System.String[] ObsoleteDifficultySettings
+FIELD Private, Static System.String[] FemaleNames
+FIELD Private, Static System.String[] MaleNames
+FIELD Private, Static System.String[] LastNames
+FIELD Private, Static System.String[] FemaleLastNames
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,SoftwareType> SoftwareTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,CompanyType> CompanyTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> NameGens
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,Currency> CurrencyRates
+FIELD Public, Static System.Collections.Generic.List`1<ModPackage> ModPackages
+FIELD Public, Static System.Collections.Generic.List`1<RewardTask> Tasks
+FIELD Private, Static Currency cachedCurrency
+FIELD Private, Static System.Boolean hasCachedCurrency
+FIELD Private, Static System.String cachedCurrencyName
+FIELD Public, Static SaveGame LoadFile
+FIELD Public, Static SDateTime CompanyDate
+FIELD Public, Static System.Byte[] CompanyData
+FIELD Public, Static System.Boolean LoadBackup
+FIELD Public, Static System.String CompanyName
+FIELD Public, Static System.Boolean LoadBuildingOnLoad
+FIELD Public, Static System.Boolean LoadCompanyOnLoad
+FIELD Public, Static System.Boolean EditMode
+FIELD Public, Static System.Boolean CampaignMode
+FIELD Public, Static System.String BobName
+FIELD Public, Static System.Boolean MultiplayerMode
+FIELD Public, Static System.Boolean DoCampaignInit
+FIELD Public, Static System.Boolean RestartCompany
+FIELD Public, Static System.Collections.Generic.List`1<MarketEvent> RestartEvents
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartCompletedMissions
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartActiveMissions
+FIELD Public, Static System.UInt32 RestartCompanyID
+FIELD Public, Static PersonalityGraph RestartCompanyPersonalities
+FIELD Public, Static System.String[][] RestartCompanySpecs
+FIELD Public, Static System.Double RestartCompanyFunds
+FIELD Public, Static System.Byte[] RestartCompanyFounder
+FIELD Public, Static System.String LobbyName
+FIELD Public, Static System.String LobbyPassword
+FIELD Public, Static System.Boolean NetworkAllowCodeMods
+FIELD Public, Static System.Boolean NetworkAllowFurnitureMods
+FIELD Public, Static System.Nullable`1<System.Single> ForcedIPO
+FIELD Public, Static System.Single RoundLimit
+FIELD Public, Static SINetworking.NetworkLobby/RoundLimitType RoundType
+FIELD Public, Static System.Boolean PlotAdjacency
+FIELD Public, Static System.Double StartingMoney
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,SentenceGenerator> SentenceGen
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,MoodEffect> MoodEffects
+FIELD Private, Static PersonalityGraph Personalities
+FIELD Public, Static System.Int32 ActiveYear
+FIELD Public, Static Actor[] Founders
+FIELD Public, Static System.Boolean IntroDone
+FIELD Public, Static System.Boolean RuralBigPlots
+FIELD Public, Static DifficultyValues/DifficultySetting SelectedDifficulty
+FIELD Public, Static System.Int32 DaysPerMonth
+FIELD Public, Static System.Int32 LoanAmount
+FIELD Public, Static System.Int32 LoadYear
+FIELD Public, Static System.Byte[] CompanyLogo
+FIELD Public, Static System.Byte[] NetworkSaveData
+FIELD Public, Static NetworkMeta NetworkData
+FIELD Public, Static InitialNetworkSettings NetworkSettings
+FIELD Public, Static System.Nullable`1<SDateTime> HostDate
+FIELD Public, Static GameData/EnvironmentType Environment
+FIELD Public, Static GameData/ClimateType Climate
+FIELD Public, Static System.Collections.Generic.List`1<BlueprintGroup> Blueprints
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,CustomActor> SavedStyles
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,BehaviorNode>> AITrees
+FIELD Public, Static System.Random RND
+FIELD Public, Static SoftwareType DigitalDistributionPlatform
+FIELD Public, Static System.String RandomString
+FIELD Public, Static Tyd.TydDocument TeamSetups
+FIELD Public, Static Tyd.TydDocument ProjectManagementSetups
+FIELD Public, Static System.Collections.Generic.List`1<System.String> LocalLogos
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Material> UserImages
+FIELD Public, Static System.Single DefaultBillboardEffect
+FIELD Private, Static RandomWordGenerator2 _wordGenerator
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,DLCObject> InstalledDLC
+FIELD Private, Static System.EventHandler OnNewImages
+FIELD Private, Static System.IO.FileSystemWatcher _newImageWatcher
+FIELD Public, Static System.Boolean UserImagesDirty
+FIELD Private, Static System.Boolean _isInit
+FIELD Public, Static, Literal, HasDefault System.Single DefaultMaxSpec
+CONSTANT DefaultMaxSpec = 0.5
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> TaskTime
+FIELD Private, Static System.Single[0...,0...] CachedEffectiveness
+FIELD Private, Static System.Int32[] OptimalEmployees
+PROPERTY System.Boolean GameData::LoadAnyOnLoad()
+PROPERTY System.String GameData::UserImagePath()
+PROPERTY System.Single GameData::RNDValue()
+METHOD Public, Static, HideBySig SoftwareType GameData::GetSoftwareType(System.String)
+LOCAL 0 SoftwareType
+LOCAL 1 System.Collections.Generic.IEnumerator`1<ModPackage>
+LOCAL 2 SoftwareType
+IL_0000: ldnull
+IL_0001: stloc.0
+IL_0002: ldsfld System.Collections.Generic.List`1<ModPackage> GameData::ModPackages
+IL_0007: ldsfld System.Func`2<ModPackage,System.Boolean> GameData/<>c::<>9__139_0
+IL_000c: dup
+IL_000d: brtrue.s IL_0026
+IL_000f: pop
+IL_0010: ldsfld GameData/<>c GameData/<>c::<>9
+IL_0015: ldftn System.Boolean GameData/<>c::<GetSoftwareType>b__139_0(ModPackage)
+IL_001b: newobj System.Void System.Func`2<ModPackage,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0020: dup
+IL_0021: stsfld System.Func`2<ModPackage,System.Boolean> GameData/<>c::<>9__139_0
+IL_0026: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<ModPackage>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_002b: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<ModPackage>::GetEnumerator()
+IL_0030: stloc.1
+IL_0031: br.s IL_004c
+IL_0033: ldloc.1
+IL_0034: callvirt !0 System.Collections.Generic.IEnumerator`1<ModPackage>::get_Current()
+IL_0039: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> ModPackage::SoftwareTypes
+IL_003e: ldarg.0
+IL_003f: ldloca.s V_0
+IL_0041: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::TryGetValue(!0,!1&)
+IL_0046: brfalse.s IL_004c
+IL_0048: ldloc.0
+IL_0049: stloc.2
+IL_004a: leave.s IL_0082
+IL_004c: ldloc.1
+IL_004d: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_0052: brtrue.s IL_0033
+IL_0054: leave.s IL_0060
+IL_0056: ldloc.1
+IL_0057: brfalse.s IL_005f
+IL_0059: ldloc.1
+IL_005a: callvirt System.Void System.IDisposable::Dispose()
+IL_005f: endfinally
+IL_0060: ldsfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> GameData::SoftwareTypes
+IL_0065: ldarg.0
+IL_0066: ldloca.s V_0
+IL_0068: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::TryGetValue(!0,!1&)
+IL_006d: brfalse.s IL_0071
+IL_006f: ldloc.0
+IL_0070: ret
+IL_0071: ldstr "Failed locating software type: "
+IL_0076: ldarg.0
+IL_0077: call System.String System.String::Concat(System.String,System.String)
+IL_007c: newobj System.Void UnityEngine.UnityException::.ctor(System.String)
+IL_0081: throw
+IL_0082: ldloc.2
+IL_0083: ret

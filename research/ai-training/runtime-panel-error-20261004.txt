@@ -1,0 +1,19 @@
+Observed in output_log.txt before installing AI Compute 0.2.4. Native UI was not run by the verification harness.
+
+ 
+(Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)
+
+Can't add 'HorizontalLayoutGroup' to Content because a 'VerticalLayoutGroup' is already added to the game object!
+A GameObject can only contain one 'LayoutGroup' component.
+ 
+(Filename:  Line: 97)
+
+AI Compute panel initialization failed: System.NullReferenceException: Object reference not set to an instance of an object
+  at WindowManager.CreateUI (XMLParser+XMLNode node, UnityEngine.GameObject parent, ModBehaviour callback, System.Collections.Generic.Dictionary`2[TKey,TValue] components) [0x0012b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at WindowManager.CreateUI (XMLParser+XMLNode node, UnityEngine.GameObject parent, ModBehaviour callback, System.Collections.Generic.Dictionary`2[TKey,TValue] components) [0x0022b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at WindowManager.CreateUI (XMLParser+XMLNode node, UnityEngine.GameObject parent, ModBehaviour callback, System.Collections.Generic.Dictionary`2[TKey,TValue] components) [0x0022b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at WindowManager.CreateUI (XMLParser+XMLNode node, UnityEngine.GameObject parent, ModBehaviour callback, System.Collections.Generic.Dictionary`2[TKey,TValue] components) [0x0022b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at WindowManager.CreateUI (XMLParser+XMLNode node, UnityEngine.GameObject parent, ModBehaviour callback, System.Collections.Generic.Dictionary`2[TKey,TValue] components) [0x0022b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+  at WindowManager.GenerateUI (System.Collections.Generic.List`1[T] nodes, UnityEngine.GameObject parent, ModBehaviour callback) [0x0002b] in <07b4923c0ada443f8df87bcf49af9bd0>:0 
+
+The same layout rejection and panel initialization exception repeat at log lines 179 and 184.

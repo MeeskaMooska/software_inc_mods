@@ -1,0 +1,316 @@
+TYPE WorkItem BASE System.Object
+INTERFACE IFormatColorObject
+INTERFACE ILossable
+INTERFACE IReferenceFix
+INTERFACE IByteData
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.Type,System.String> _workNames
+FIELD Public System.String _name
+FIELD Public, InitOnly System.UInt32 ID
+FIELD Public System.Int32 Priority
+FIELD Private System.Single[] WorkerSkill
+FIELD Public System.Double Loss
+FIELD Public System.Double[] LossBreakdown
+FIELD Family System.UInt32 deal
+FIELD Public System.Single TotalNetworkUnits
+FIELD Public System.Single LastNetworkUnits
+FIELD Public System.String NetworkStage
+FIELD Public System.String NetworkCategory
+FIELD Public System.String NetworkProgressLabel
+FIELD Public System.Single NetworkProgress
+FIELD Public System.Int32 SiblingIndex
+FIELD Public SHashSet`1<System.String> DevTeams
+FIELD Private SimulatedCompany _companyWorker
+FIELD Public System.Boolean Done
+FIELD Public System.Boolean AutoDev
+FIELD Public ContractWork contract
+FIELD Public System.Boolean Collapsed
+FIELD Public System.Boolean Enabled
+FIELD Private System.Boolean _hidden
+FIELD Private System.Boolean _wasCancelled
+FIELD Public System.Boolean _paused
+FIELD Public, NotSerialized UnityEngine.Vector2 MouseRel
+FIELD Public, NotSerialized GUIWorkItem guiItem
+FIELD Public System.Int32 MiniGameLives
+FIELD Public NetworkDeal NetworkDeal
+FIELD Public NetworkDeal/NetworkWorkItemID WorkItemID
+PROPERTY System.String WorkItem::Name()
+PROPERTY WorkDeal WorkItem::ActiveDeal()
+PROPERTY SimulatedCompany WorkItem::CompanyWorker()
+PROPERTY System.Boolean WorkItem::Hidden()
+PROPERTY System.Boolean WorkItem::Paused()
+PROPERTY System.String WorkItem::QueryString()
+PROPERTY System.Boolean WorkItem::CanOutsourceNetwork()
+PROPERTY System.String WorkItem::UnitName()
+PROPERTY System.UInt32 WorkItem::MaxUnits()
+PROPERTY UnityEngine.Color WorkItem::BackColor()
+PROPERTY System.Boolean WorkItem::AlwaysUseLocalProgressLabel()
+PROPERTY System.Boolean WorkItem::AlwaysUseLocalCategory()
+PROPERTY System.Boolean WorkItem::AlwaysUseLocalStageLabel()
+PROPERTY System.Byte WorkItem::ByteTypeID()
+PROPERTY System.Boolean WorkItem::HasNaturalNetworkEnd()
+METHOD Public, Static, HideBySig System.String WorkItem::GetWorkTypeName(WorkItem)
+METHOD Public, Static, HideBySig System.String WorkItem::GetWorkTypeName(System.Type)
+METHOD Public, HideBySig, SpecialName System.String WorkItem::get_Name()
+METHOD Public, HideBySig, SpecialName System.Void WorkItem::set_Name(System.String)
+METHOD Public, HideBySig, SpecialName WorkDeal WorkItem::get_ActiveDeal()
+METHOD Public, HideBySig, SpecialName System.Void WorkItem::set_ActiveDeal(WorkDeal)
+METHOD Public, HideBySig, SpecialName SimulatedCompany WorkItem::get_CompanyWorker()
+METHOD Public, HideBySig, SpecialName System.Void WorkItem::set_CompanyWorker(SimulatedCompany)
+METHOD Public, HideBySig, SpecialName System.Boolean WorkItem::get_Hidden()
+METHOD Public, HideBySig, SpecialName System.Void WorkItem::set_Hidden(System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_Paused()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void WorkItem::set_Paused(System.Boolean)
+METHOD Public, HideBySig, SpecialName System.String WorkItem::get_QueryString()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_CanOutsourceNetwork()
+METHOD Public, HideBySig System.Boolean WorkItem::GetCanOutsourceNetwork()
+METHOD Public, HideBySig WorkItem/NetworkDealState WorkItem::GetNetworkDealState()
+METHOD Public, HideBySig System.Boolean WorkItem::IsWorkOwner()
+METHOD Public, HideBySig Company WorkItem::GetWorkOwner()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask Company WorkItem::GetLocalCompanyOwner()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask IRoyaltyItem WorkItem::GetRoyaltyItem()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::OnNetworkComplete(System.IO.Stream)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::InitNetworkDealAccepted()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Byte[] WorkItem::GetNetworkCompletionData(System.Boolean)
+METHOD Public, HideBySig System.Void WorkItem::SendDeal(SINetworking.NetworkPlayer)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.String WorkItem::get_UnitName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.UInt32 WorkItem::get_MaxUnits()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> WorkItem::GetInfo()
+METHOD Private, HideBySig System.Void WorkItem::SubSendDeal(SINetworking.NetworkPlayer)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String WorkItem::GetSubjectName()
+METHOD Family, HideBySig System.Void WorkItem::RecordSkill(Employee/EmployeeRole,System.Single,System.Single)
+METHOD Family, HideBySig System.Void WorkItem::RecordSkill(Employee/EmployeeRole,Actor,System.Single)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::DevTeamChange()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::PauseChange()
+METHOD Public, HideBySig System.Void WorkItem::HandleUnitPayout()
+METHOD Public, HideBySig System.Boolean WorkItem::HandleNetworkEnding(System.Boolean)
+METHOD Public, HideBySig System.Void WorkItem::InitNetwork()
+METHOD Public, HideBySig System.Void WorkItem::NetworkCancel(System.Boolean)
+METHOD Public, HideBySig System.Void WorkItem::UpdateDealSender()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Byte[] WorkItem::SerializeProgressData()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::DeserializeProgressData(System.Byte[])
+METHOD Public, HideBySig System.Void WorkItem::SendNetworkDealSync()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Byte[] WorkItem::SubSendNetworkDealSync()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::ReceiveNetworkDealSync(System.IO.Stream)
+METHOD Public, HideBySig System.Void WorkItem::AddDevTeam(Team)
+METHOD Public, HideBySig System.Void WorkItem::AddDevTeams(System.Collections.Generic.IEnumerable`1<System.String>)
+METHOD Public, HideBySig System.Void WorkItem::AddDevTeams(System.Collections.Generic.IList`1<System.String>)
+METHOD Public, HideBySig System.Void WorkItem::SetDevTeams(System.Collections.Generic.IList`1<System.String>)
+METHOD Public, HideBySig System.Void WorkItem::RemoveDevTeam(Team)
+METHOD Public, HideBySig System.Void WorkItem::SwitchDevTeam(Team,Team)
+METHOD Public, HideBySig System.Collections.Generic.List`1<Team> WorkItem::GetDevTeams()
+METHOD Public, HideBySig System.Void WorkItem::ClearTeams()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::Kill(System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::GetMax()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName UnityEngine.Color WorkItem::get_BackColor()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::GetWorkScore()
+METHOD Public, HideBySig System.Void WorkItem::MakeWorkItem()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Int32 WorkItem::GUIWorkItemType()
+METHOD Family, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::Cancelled()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask WorkItem/HasWorkReturn WorkItem::HasWork(Actor,System.Boolean,System.Boolean)
+METHOD Public, Static, HideBySig WorkItem/HasWorkReturn WorkItem::CombineWorkResult(WorkItem/HasWorkReturn,WorkItem/HasWorkReturn)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetIcon()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String WorkItem::GetWorkTypeName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetIdentifyingTypeName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetDetailedTypeName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetWorkTypeFilter()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void WorkItem::.ctor(System.String,ContractWork,System.UInt32,NetworkDeal,System.Int32)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void WorkItem::.ctor()
+METHOD Public, HideBySig System.Single WorkItem::GetActualProgress()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::GetProgress()
+METHOD Public, HideBySig System.String WorkItem::GetActualProgressLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_AlwaysUseLocalProgressLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetProgressLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_AlwaysUseLocalCategory()
+METHOD Public, HideBySig System.String WorkItem::GetCategory()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::Category()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_AlwaysUseLocalStageLabel()
+METHOD Public, HideBySig System.String WorkItem::GetCurrentStage()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::CurrentStage()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetTeam(UnityEngine.UI.Text)
+METHOD Public, Static, HideBySig UnityEngine.Color WorkItem::GetDefaultProgressColor()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask UnityEngine.Color WorkItem::GetProgressColor()
+METHOD Public, Virtual, HideBySig System.String WorkItem::ToString()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::WriteData(System.IO.Stream)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::WriteSubData(System.IO.Stream)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Byte WorkItem::get_ByteTypeID()
+METHOD Public, Static, HideBySig WorkItem WorkItem::ReadData(System.IO.Stream)
+METHOD Public, Static, HideBySig SoftwareWorkItem/FeatureProgress WorkItem::GetFeatFromData(SoftwareType,SoftwareCategory,SoftwareAddOn,Company,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SoftwareProduct,System.Boolean,SoftwareFramework,System.UInt32,System.UInt32,System.Int32,System.Double,System.Double)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean WorkItem::get_HasNaturalNetworkEnd()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean WorkItem::IsDoneForNetworkDeal()
+METHOD Public, HideBySig System.Void WorkItem::NetworkComplete()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask IReferenceFix WorkItem::FixReferences()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::AddLoss(System.Single,SoftwareProduct/LossType,System.Boolean,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::AddLoss(System.Single,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::AddLicenseCost(SoftwareProduct,System.Single,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::GetLicenseAmount()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetActualString()
+METHOD Public, HideBySig System.Int32 WorkItem::GetEmployeeCount()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.Single WorkItem::StressMultiplier()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Void WorkItem::InitWorkItem(GUIWorkItem)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::CollapseLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.Void WorkItem::DoWork(Actor,System.Single,System.Single,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::GetWorkBoost(Employee/EmployeeRole,System.Single)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.Nullable`1<Employee/EmployeeRole> WorkItem::GetBoostRole(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::HightlightButton()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract Actor/WorkParticle WorkItem::EmitType(Actor,System.Boolean)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean WorkItem::CanUseCompany()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean WorkItem::HasCompanyWork()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Single WorkItem::CompanyWork(System.Single)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Nullable`1<UnityEngine.Color> WorkItem::GetLastPhaseProgress()
+METHOD Public, HideBySig System.Void WorkItem::Assign(System.String,System.Action)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::ProgressTip()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetTutorial()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean WorkItem::IsLeaderTask()
+METHOD Family, HideBySig System.Void WorkItem::RunScripts(System.Collections.Generic.IList`1<T>,System.Boolean,System.Boolean,System.Func`2<T,FeatureBase>)
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<System.String,System.Action>> WorkItem::GetButtons()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.Void WorkItem::GetNeeds(System.Collections.Generic.Dictionary`2<HRManagement/EdNeed,System.Int32>[])
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String WorkItem::GetTypeName()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String WorkItem::GetGroupType()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String WorkItem::GetGroupProject()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetGroupTypeLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.String WorkItem::GetGroupProjectLabel()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean WorkItem::HasProjectGrouping()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void WorkItem::.cctor()
+TYPE SoftwareWorkItem BASE WorkItem
+INTERFACE ICalenderItem
+INTERFACE IRoyaltyItem
+FIELD Public, Static, Literal, HasDefault System.Single LevelThreeSpeedBoost
+CONSTANT LevelThreeSpeedBoost = 0.15
+FIELD Public System.String SoftwareName
+FIELD Public System.String CreateFramework
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory SWCategory
+FIELD Public SoftwareFramework Framework
+FIELD Public System.Single FrameworkRoyalty
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> Needs
+FIELD Public SoftwareProduct[] OSs
+FIELD Public SDateTime DevStart
+FIELD Public PublisherDeal Publishing
+FIELD Public System.Int32 MaxBugs
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public Company MyCompany
+FIELD Public SoftwareProduct SequelTo
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Public System.Collections.Generic.HashSet`1<System.UInt32> LastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> LeadWork
+FIELD Family System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> _workRoyalties
+FIELD Private System.Nullable`1<System.Int32> _networkLastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> TechLevels
+FIELD Public SoftwareWorkItem/FeatureProgress[] Features
+FIELD Public System.Double[] Submarkets
+FIELD Public System.Byte[] HardwareDesign
+FIELD Public, InitOnly System.String Server
+FIELD Public System.String Server2
+FIELD Public System.Single Price
+FIELD Public System.Single PressReleaseEffect
+FIELD Public System.Single PressBuildEffect
+FIELD Private System.Single _followers
+FIELD Public System.UInt32 MaxFollowers
+FIELD Public System.Single FollowerChange
+FIELD Public System.Nullable`1<SDateTime> ReleaseDate
+FIELD Public System.Single CodeArtRatio
+FIELD Public System.Single WorkDevTime
+FIELD Public System.Double CreativityScore
+FIELD Family System.Boolean _anyMarketing
+FIELD Public System.UInt32 AddonIDOffset
+FIELD Private System.Boolean _hypeWarned
+FIELD Public SoftwareAddOn AddonType
+FIELD Public SoftwareProduct AddonParent
+FIELD Public SoftwareWorkItem AddonWorkParent
+FIELD Public System.Collections.Generic.List`1<SoftwareWorkItem> AddonWorkChildren
+FIELD Public System.Nullable`1<System.UInt32> SWID
+FIELD Public TwoWayDictionary`2<Employee,SoftwareWorkItem/FeatureProgress> NewWorking
+PROPERTY System.Boolean SoftwareWorkItem::AddOn()
+PROPERTY System.Boolean SoftwareWorkItem::WorkAddOn()
+PROPERTY System.Boolean SoftwareWorkItem::DistributionPlatform()
+PROPERTY System.Nullable`1<System.UInt32> SoftwareWorkItem::AddonParentSWID()
+PROPERTY System.Single SoftwareWorkItem::Followers()
+PROPERTY System.Single SoftwareWorkItem::PremarketingBoost()
+PROPERTY System.Boolean SoftwareWorkItem::AlwaysUseLocalCategory()
+PROPERTY System.Boolean SoftwareWorkItem::HasWorkRoyalties()
+METHOD Public, Static, HideBySig System.Int32 SoftwareWorkItem::GetOptimalIterations(System.Single)
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareWorkItem::get_AddOn()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareWorkItem::get_WorkAddOn()
+METHOD Public, HideBySig, SpecialName System.Boolean SoftwareWorkItem::get_DistributionPlatform()
+METHOD Public, HideBySig System.UInt32 SoftwareWorkItem::GetNextAddonID()
+METHOD Public, Virtual, HideBySig IReferenceFix SoftwareWorkItem::FixReferences()
+METHOD Public, HideBySig, SpecialName System.Nullable`1<System.UInt32> SoftwareWorkItem::get_AddonParentSWID()
+METHOD Public, HideBySig System.UInt32 SoftwareWorkItem::ForceID()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::NetworkSchedule(System.Boolean)
+METHOD Public, HideBySig System.Void SoftwareWorkItem::MarketingDone()
+METHOD Public, HideBySig, SpecialName System.Single SoftwareWorkItem::get_Followers()
+METHOD Public, HideBySig, SpecialName System.Void SoftwareWorkItem::set_Followers(System.Single)
+METHOD Public, HideBySig, SpecialName System.Single SoftwareWorkItem::get_PremarketingBoost()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(System.String)
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Object SoftwareWorkItem::PromoteAction()
+METHOD Public, Virtual, HideBySig, SpecialName System.Boolean SoftwareWorkItem::get_AlwaysUseLocalCategory()
+METHOD Public, Virtual, HideBySig System.String SoftwareWorkItem::Category()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::RegisterLeadWork(Employee,System.Single)
+METHOD Public, HideBySig System.Void SoftwareWorkItem::ReEvaluateMaxFollowers()
+METHOD Public, Static, HideBySig System.UInt32 SoftwareWorkItem::GetMaxFollowers(SoftwareType,SoftwareCategory,Company,SoftwareAddOn,SoftwareProduct,SoftwareWorkItem,System.Collections.Generic.IEnumerable`1<SoftwareProduct>,PublisherDeal)
+METHOD Public, HideBySig PublisherDeal SoftwareWorkItem::GetRelevantPublisherDeal()
+METHOD Public, HideBySig System.Single SoftwareWorkItem::GetRep()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::RefreshWorkDevTime(System.Boolean)
+METHOD Public, Static, HideBySig System.Single SoftwareWorkItem::Lateness(SDateTime)
+METHOD Public, HideBySig System.Boolean SoftwareWorkItem::AllZero(System.Boolean)
+METHOD Public, HideBySig System.Boolean SoftwareWorkItem::AllDone(System.Boolean,System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Boolean SoftwareWorkItem::AnyCode()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::SimulateFollowers(System.Single)
+METHOD Public, HideBySig System.Void SoftwareWorkItem::PublisherInstaMarket()
+METHOD Public, Static, HideBySig SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::GenerateProgress(SoftwareCategory,Company,System.Collections.Generic.IList`1<SoftwareWorkItem/FeatureProgress>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,SoftwareProduct,ReviewWindow/ReviewData)
+METHOD Public, Static, HideBySig SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::GenerateProgress(SoftwareType,SoftwareCategory,Company,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Collections.Generic.IList`1<SoftwareProduct>,SoftwareProduct,System.Boolean,SoftwareFramework,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.UInt32[],System.Int32)
+METHOD Public, HideBySig FeatureBase[] SoftwareWorkItem::GetFeatures()
+METHOD Public, HideBySig AddOnFeature[] SoftwareWorkItem::GetAddonFeatures()
+METHOD Public, HideBySig System.UInt32[] SoftwareWorkItem::GetFactors()
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(System.String,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,System.Boolean,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,ContractWork,System.String,System.String,System.String,SoftwareFramework,System.UInt32,NetworkDeal)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(System.String,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.Single,SDateTime,Company,SoftwareProduct,SoftwareWorkItem,System.Double,System.Collections.Generic.IList`1<FeatureBase>,System.UInt32[],System.String,System.UInt32,NetworkDeal)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(SoftwareAlpha,ReviewWindow/ReviewData)
+METHOD Public, Static, HideBySig System.Int32 SoftwareWorkItem::GetMaximumBugs(System.Single)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareType,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,SoftwareProduct[],System.Single,System.Boolean,System.Double[],SDateTime,Company,SoftwareProduct,SoftwareWorkItem/FeatureProgress[],System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Boolean,System.Double,ContractWork,System.String,System.String,System.Int32,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.String,SoftwareFramework,System.Single,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(System.String,System.Nullable`1<System.UInt32>,SoftwareAddOn,SoftwareCategory,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.Single,SDateTime,Company,SoftwareProduct,SoftwareWorkItem,SoftwareWorkItem/FeatureProgress[],System.Double,System.String,System.Int32,System.Single,System.UInt32,System.Single,System.Nullable`1<SDateTime>,System.Int32,System.Double,System.Boolean,System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>>,System.UInt32,NetworkDeal)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(SoftwareProduct,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct>,System.String,System.Int32,System.UInt32,NetworkDeal)
+METHOD Family, HideBySig, SpecialName, RTSpecialName System.Void SoftwareWorkItem::.ctor(SoftwareFramework,System.Collections.Generic.Dictionary`2<System.String,TechLevel>,System.String,System.Int32,System.UInt32,NetworkDeal)
+METHOD Public, Virtual, HideBySig System.Void SoftwareWorkItem::DevTeamChange()
+METHOD Public, Virtual, HideBySig System.Void SoftwareWorkItem::PauseChange()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::UpdateWorking()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::RemoveWorking(Employee)
+METHOD Family, HideBySig SoftwareWorkItem/FeatureProgress SoftwareWorkItem::FindOptimalTask(Actor,System.Boolean,System.Boolean)
+METHOD Family, HideBySig System.Void SoftwareWorkItem::AssignTaskIfNone(Actor,System.Boolean,System.Boolean,System.Boolean)
+METHOD Family, HideBySig System.Void SoftwareWorkItem::AssignTask(Actor,SoftwareWorkItem/FeatureProgress)
+METHOD Family, HideBySig SoftwareWorkItem/FeatureProgress SoftwareWorkItem::FindJob(Actor,System.Boolean,System.Boolean,System.Boolean)
+METHOD Family, HideBySig WorkItem/HasWorkReturn SoftwareWorkItem::CheckAdequateSpecLevel(Actor,System.Boolean,System.Boolean,System.Boolean)
+METHOD Family, HideBySig System.Boolean SoftwareWorkItem::WorkAllFeatures(Actor,System.Double,System.Single,Employee/EmployeeRole,System.Double&,System.Boolean,System.Single)
+METHOD Public, Virtual, HideBySig System.Int32 SoftwareWorkItem::GUIWorkItemType()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::FixAutoDev()
+METHOD Public, Virtual, HideBySig System.String SoftwareWorkItem::GetActualString()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::KillLicenses()
+METHOD Public, Virtual, HideBySig System.Void SoftwareWorkItem::Kill(System.Boolean)
+METHOD Family, Virtual, HideBySig, VtableLayoutMask, Abstract System.Collections.Generic.IEnumerable`1<Employee/EmployeeRole> SoftwareWorkItem::CompCheck()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask System.Boolean SoftwareWorkItem::DisableCompCheck()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::CheckCompetency()
+METHOD Public, HideBySig System.Double SoftwareWorkItem::GetPerceivedMarketValue()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::UpdateContract()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareWorkItem::GetTitle()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String SoftwareWorkItem::GetDescription()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Nullable`1<SDateTime> SoftwareWorkItem::GetTime()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask ComingReleaseWindow/EventType SoftwareWorkItem::GetEventType()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Boolean SoftwareWorkItem::MatchSWFilter(SoftwareType,SoftwareCategory)
+METHOD Public, HideBySig System.Single SoftwareWorkItem::HWSkillFactor(System.Single,Actor)
+METHOD Public, HideBySig System.Double SoftwareWorkItem::GetSpProgress(System.Boolean,System.Boolean)
+METHOD Family, HideBySig System.Void SoftwareWorkItem::GetNeeds(System.Collections.Generic.Dictionary`2<HRManagement/EdNeed,System.Int32>[],System.Boolean)
+METHOD Public, HideBySig Employee SoftwareWorkItem::GetLeadDesigner()
+METHOD Public, Virtual, HideBySig Company SoftwareWorkItem::GetLocalCompanyOwner()
+METHOD Public, Virtual, HideBySig System.Single SoftwareWorkItem::GetLicenseAmount()
+METHOD Public, Virtual, HideBySig System.Void SoftwareWorkItem::ReceiveNetworkDealSync(System.IO.Stream)
+METHOD Public, Virtual, HideBySig System.Byte[] SoftwareWorkItem::SubSendNetworkDealSync()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean SoftwareWorkItem::get_HasWorkRoyalties()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.IEnumerable`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> SoftwareWorkItem::GetWorkRoyalties()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void SoftwareWorkItem::AddWorkRoyalty(Company,System.Single)
+METHOD Public, Virtual, HideBySig IRoyaltyItem SoftwareWorkItem::GetRoyaltyItem()
+METHOD Public, Virtual, HideBySig System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,System.String>> SoftwareWorkItem::GetInfo()
+METHOD Public, Virtual, HideBySig System.String SoftwareWorkItem::GetGroupProject()
+METHOD Public, Virtual, HideBySig, VtableLayoutMask, Abstract System.String SoftwareWorkItem::GetSoftwareWorkType()
+METHOD Public, HideBySig System.Void SoftwareWorkItem::FixReviewRep(System.String&,System.Single&)
+METHOD Private, HideBySig System.Void SoftwareWorkItem::<FixReferences>b__53_1(SoftwareWorkItem/FeatureProgress)

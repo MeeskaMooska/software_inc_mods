@@ -1,0 +1,233 @@
+TYPE SoftwareWorkItem BASE WorkItem
+INTERFACE ICalenderItem
+INTERFACE IRoyaltyItem
+FIELD Public, Static, Literal, HasDefault System.Single LevelThreeSpeedBoost
+CONSTANT LevelThreeSpeedBoost = 0.15
+FIELD Public System.String SoftwareName
+FIELD Public System.String CreateFramework
+FIELD Public SoftwareType Type
+FIELD Public SoftwareCategory SWCategory
+FIELD Public SoftwareFramework Framework
+FIELD Public System.Single FrameworkRoyalty
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,SoftwareProduct> Needs
+FIELD Public SoftwareProduct[] OSs
+FIELD Public SDateTime DevStart
+FIELD Public PublisherDeal Publishing
+FIELD Public System.Int32 MaxBugs
+FIELD Public, InitOnly System.Single DevTime
+FIELD Public Company MyCompany
+FIELD Public SoftwareProduct SequelTo
+FIELD Public, InitOnly System.Boolean InHouse
+FIELD Public, InitOnly System.Boolean SubscriptionBased
+FIELD Public System.Collections.Generic.HashSet`1<System.UInt32> LastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> LeadWork
+FIELD Family System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Company,System.Single>> _workRoyalties
+FIELD Private System.Nullable`1<System.Int32> _networkLastWorked
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,TechLevel> TechLevels
+FIELD Public SoftwareWorkItem/FeatureProgress[] Features
+FIELD Public System.Double[] Submarkets
+FIELD Public System.Byte[] HardwareDesign
+FIELD Public, InitOnly System.String Server
+FIELD Public System.String Server2
+FIELD Public System.Single Price
+FIELD Public System.Single PressReleaseEffect
+FIELD Public System.Single PressBuildEffect
+FIELD Private System.Single _followers
+FIELD Public System.UInt32 MaxFollowers
+FIELD Public System.Single FollowerChange
+FIELD Public System.Nullable`1<SDateTime> ReleaseDate
+FIELD Public System.Single CodeArtRatio
+FIELD Public System.Single WorkDevTime
+FIELD Public System.Double CreativityScore
+FIELD Family System.Boolean _anyMarketing
+FIELD Public System.UInt32 AddonIDOffset
+FIELD Private System.Boolean _hypeWarned
+FIELD Public SoftwareAddOn AddonType
+FIELD Public SoftwareProduct AddonParent
+FIELD Public SoftwareWorkItem AddonWorkParent
+FIELD Public System.Collections.Generic.List`1<SoftwareWorkItem> AddonWorkChildren
+FIELD Public System.Nullable`1<System.UInt32> SWID
+FIELD Public TwoWayDictionary`2<Employee,SoftwareWorkItem/FeatureProgress> NewWorking
+PROPERTY System.Boolean SoftwareWorkItem::AddOn()
+PROPERTY System.Boolean SoftwareWorkItem::WorkAddOn()
+PROPERTY System.Boolean SoftwareWorkItem::DistributionPlatform()
+PROPERTY System.Nullable`1<System.UInt32> SoftwareWorkItem::AddonParentSWID()
+PROPERTY System.Single SoftwareWorkItem::Followers()
+PROPERTY System.Single SoftwareWorkItem::PremarketingBoost()
+PROPERTY System.Boolean SoftwareWorkItem::AlwaysUseLocalCategory()
+PROPERTY System.Boolean SoftwareWorkItem::HasWorkRoyalties()
+METHOD Family, HideBySig System.Boolean SoftwareWorkItem::WorkAllFeatures(Actor,System.Double,System.Single,Employee/EmployeeRole,System.Double&,System.Boolean,System.Single)
+LOCAL 0 System.Single
+LOCAL 1 System.Boolean
+LOCAL 2 System.Boolean
+LOCAL 3 System.Int32
+LOCAL 4 SoftwareWorkItem/FeatureProgress
+LOCAL 5 System.Double
+LOCAL 6 System.Boolean
+LOCAL 7 System.Double
+IL_0000: ldarg.0
+IL_0001: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0006: ldlen
+IL_0007: conv.i4
+IL_0008: conv.r4
+IL_0009: ldc.r4 2
+IL_000e: div
+IL_000f: ldc.r4 0.5
+IL_0014: add
+IL_0015: stloc.0
+IL_0016: ldarg.s added
+IL_0018: ldc.r8 0
+IL_0021: stind.r8
+IL_0022: ldarg.s role
+IL_0024: ldc.i4.3
+IL_0025: ceq
+IL_0027: stloc.1
+IL_0028: ldc.i4.0
+IL_0029: stloc.2
+IL_002a: ldc.i4.0
+IL_002b: stloc.3
+IL_002c: br IL_00d2
+IL_0031: ldarg.0
+IL_0032: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_0037: ldloc.3
+IL_0038: ldelem.ref
+IL_0039: stloc.s V_4
+IL_003b: ldarg.1
+IL_003c: callvirt Employee Actor::get_employee()
+IL_0041: ldarg.s role
+IL_0043: ldloc.s V_4
+IL_0045: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_004a: ldfld System.String FeatureBase::Spec
+IL_004f: ldnull
+IL_0050: callvirt System.Int32 Employee::GetSpecialization(Employee/EmployeeRole,System.String,Actor)
+IL_0055: ldloc.s V_4
+IL_0057: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_005c: callvirt System.Int32 FeatureBase::get_Level()
+IL_0061: blt.s IL_00c6
+IL_0063: ldloc.s V_4
+IL_0065: ldarg.2
+IL_0066: ldloc.0
+IL_0067: conv.r8
+IL_0068: div
+IL_0069: ldarg.s role
+IL_006b: ldarg.1
+IL_006c: callvirt Employee Actor::get_employee()
+IL_0071: ldarg.s role
+IL_0073: ldloc.s V_4
+IL_0075: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_007a: ldfld System.String FeatureBase::Spec
+IL_007f: ldnull
+IL_0080: callvirt System.Int32 Employee::GetSpecialization(Employee/EmployeeRole,System.String,Actor)
+IL_0085: ldc.i4.3
+IL_0086: ceq
+IL_0088: ldloca.s V_6
+IL_008a: ldloca.s V_7
+IL_008c: ldarg.3
+IL_008d: conv.r8
+IL_008e: ldc.i4.1
+IL_008f: callvirt System.Double SoftwareWorkItem/FeatureProgress::AddProgress(System.Double,Employee/EmployeeRole,System.Boolean,System.Boolean&,System.Double&,System.Double,System.Boolean)
+IL_0094: stloc.s V_5
+IL_0096: ldloc.2
+IL_0097: ldloc.s V_6
+IL_0099: or
+IL_009a: stloc.2
+IL_009b: ldarg.2
+IL_009c: ldloc.s V_5
+IL_009e: sub
+IL_009f: starg.s left
+IL_00a1: ldarg.s added
+IL_00a3: ldarg.s added
+IL_00a5: ldind.r8
+IL_00a6: ldloc.s V_5
+IL_00a8: add
+IL_00a9: stind.r8
+IL_00aa: ldloc.s V_4
+IL_00ac: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::OS
+IL_00b1: ldc.i4.0
+IL_00b2: ceq
+IL_00b4: ldarg.s addQuality
+IL_00b6: and
+IL_00b7: brfalse.s IL_00c6
+IL_00b9: ldloc.s V_4
+IL_00bb: ldarg.s skill
+IL_00bd: conv.r8
+IL_00be: ldloc.s V_7
+IL_00c0: ldloc.1
+IL_00c1: callvirt System.Void SoftwareWorkItem/FeatureProgress::AddQuality(System.Double,System.Double,System.Boolean)
+IL_00c6: ldloc.0
+IL_00c7: ldc.r4 0.5
+IL_00cc: sub
+IL_00cd: stloc.0
+IL_00ce: ldloc.3
+IL_00cf: ldc.i4.1
+IL_00d0: add
+IL_00d1: stloc.3
+IL_00d2: ldloc.3
+IL_00d3: ldarg.0
+IL_00d4: ldfld SoftwareWorkItem/FeatureProgress[] SoftwareWorkItem::Features
+IL_00d9: ldlen
+IL_00da: conv.i4
+IL_00db: blt IL_0031
+IL_00e0: ldloc.2
+IL_00e1: ret
+TYPE SoftwareWorkItem/FeatureProgress BASE System.Object
+FIELD Public FeatureBase Feature
+FIELD Public System.Double DevTime
+FIELD Public System.Double CDevTime
+FIELD Public System.Double ADevTime
+FIELD Public System.Double Progress
+FIELD Public System.Double ArtProgress
+FIELD Public System.Double Qual
+FIELD Public System.Double Qual2
+FIELD Public System.Double CodeTargetQual
+FIELD Public System.Double ArtTargetQual
+FIELD Public System.Boolean OS
+FIELD Public System.Boolean CodeDone
+FIELD Public System.Boolean ArtDone
+FIELD Public System.Single LastIterationProg
+FIELD Public System.Int32 Assigned
+FIELD Public System.UInt32 Factor
+FIELD Private, Static FloatInterpolator _speedDamper
+FIELD Public, Static System.Single[] Means
+FIELD Public, Static System.Single[] Deviations
+METHOD Public, HideBySig System.Void SoftwareWorkItem/FeatureProgress::UpdateStatus(System.Boolean,System.Single)
+LOCAL 0 System.Double
+LOCAL 1 System.Double
+IL_0000: ldarg.0
+IL_0001: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_0006: brtrue.s IL_002d
+IL_0008: ldarg.2
+IL_0009: conv.r8
+IL_000a: ldarg.1
+IL_000b: brtrue.s IL_0015
+IL_000d: ldarg.0
+IL_000e: ldfld System.Double SoftwareWorkItem/FeatureProgress::CDevTime
+IL_0013: br.s IL_001b
+IL_0015: ldarg.0
+IL_0016: ldfld System.Double SoftwareWorkItem/FeatureProgress::DevTime
+IL_001b: mul
+IL_001c: stloc.0
+IL_001d: ldarg.0
+IL_001e: ldfld System.Double SoftwareWorkItem/FeatureProgress::Progress
+IL_0023: ldloc.0
+IL_0024: blt.un.s IL_002d
+IL_0026: ldarg.0
+IL_0027: ldc.i4.1
+IL_0028: stfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_002d: ldarg.0
+IL_002e: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_0033: brtrue.s IL_004f
+IL_0035: ldarg.2
+IL_0036: conv.r8
+IL_0037: ldarg.0
+IL_0038: ldfld System.Double SoftwareWorkItem/FeatureProgress::ADevTime
+IL_003d: mul
+IL_003e: stloc.1
+IL_003f: ldarg.0
+IL_0040: ldfld System.Double SoftwareWorkItem/FeatureProgress::ArtProgress
+IL_0045: ldloc.1
+IL_0046: blt.un.s IL_004f
+IL_0048: ldarg.0
+IL_0049: ldc.i4.1
+IL_004a: stfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_004f: ret

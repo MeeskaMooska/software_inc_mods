@@ -1,0 +1,33 @@
+TYPE AutoDevWorkItem/AutoDevItem BASE System.Object
+FIELD Public SoftwareAlpha Alpha
+FIELD Public DesignDocument Document
+FIELD Public MarketingPlan Hype
+FIELD Public System.Collections.Generic.List`1<SoftwareWorkItem> Addons
+FIELD Public System.Boolean PressRelease
+FIELD Public System.Boolean PressBuild
+FIELD Public System.Boolean Queued
+FIELD Public System.Boolean Secondary
+FIELD Public System.Boolean hasPrinted
+FIELD Public SDateTime ActualStartDate
+FIELD Public System.Single AlreadyDev
+FIELD Public System.Single MonthsToSpend
+PROPERTY SoftwareWorkItem AutoDevWorkItem/AutoDevItem::SWWorkItem()
+PROPERTY System.Nullable`1<SDateTime> AutoDevWorkItem/AutoDevItem::ReleaseDate()
+PROPERTY System.String AutoDevWorkItem/AutoDevItem::ReleaseDateText()
+PROPERTY System.Int32 AutoDevWorkItem/AutoDevItem::ReleaseDateInt()
+PROPERTY System.Boolean AutoDevWorkItem/AutoDevItem::InHouse()
+PROPERTY SDateTime AutoDevWorkItem/AutoDevItem::StartDate()
+PROPERTY System.String AutoDevWorkItem/AutoDevItem::Name()
+PROPERTY System.Boolean AutoDevWorkItem/AutoDevItem::Design()
+METHOD Public, HideBySig SDateTime AutoDevWorkItem/AutoDevItem::GetCutDate(System.Single)
+IL_0000: ldarg.0
+IL_0001: ldfld SDateTime AutoDevWorkItem/AutoDevItem::ActualStartDate
+IL_0006: ldarg.0
+IL_0007: ldfld System.Single AutoDevWorkItem/AutoDevItem::MonthsToSpend
+IL_000c: ldarg.1
+IL_000d: mul
+IL_000e: ldarg.0
+IL_000f: ldfld System.Single AutoDevWorkItem/AutoDevItem::AlreadyDev
+IL_0014: sub
+IL_0015: call SDateTime SDateTime::op_Addition(SDateTime,System.Single)
+IL_001a: ret

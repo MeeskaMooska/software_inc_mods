@@ -1,0 +1,411 @@
+TYPE GameData BASE System.Object
+FIELD Public, Static System.String[] ObsoleteDifficultySettings
+FIELD Private, Static System.String[] FemaleNames
+FIELD Private, Static System.String[] MaleNames
+FIELD Private, Static System.String[] LastNames
+FIELD Private, Static System.String[] FemaleLastNames
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,SoftwareType> SoftwareTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,CompanyType> CompanyTypes
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,RandomNameGenerator> NameGens
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,Currency> CurrencyRates
+FIELD Public, Static System.Collections.Generic.List`1<ModPackage> ModPackages
+FIELD Public, Static System.Collections.Generic.List`1<RewardTask> Tasks
+FIELD Private, Static Currency cachedCurrency
+FIELD Private, Static System.Boolean hasCachedCurrency
+FIELD Private, Static System.String cachedCurrencyName
+FIELD Public, Static SaveGame LoadFile
+FIELD Public, Static SDateTime CompanyDate
+FIELD Public, Static System.Byte[] CompanyData
+FIELD Public, Static System.Boolean LoadBackup
+FIELD Public, Static System.String CompanyName
+FIELD Public, Static System.Boolean LoadBuildingOnLoad
+FIELD Public, Static System.Boolean LoadCompanyOnLoad
+FIELD Public, Static System.Boolean EditMode
+FIELD Public, Static System.Boolean CampaignMode
+FIELD Public, Static System.String BobName
+FIELD Public, Static System.Boolean MultiplayerMode
+FIELD Public, Static System.Boolean DoCampaignInit
+FIELD Public, Static System.Boolean RestartCompany
+FIELD Public, Static System.Collections.Generic.List`1<MarketEvent> RestartEvents
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartCompletedMissions
+FIELD Public, Static System.Collections.Generic.HashSet`1<System.String> RestartActiveMissions
+FIELD Public, Static System.UInt32 RestartCompanyID
+FIELD Public, Static PersonalityGraph RestartCompanyPersonalities
+FIELD Public, Static System.String[][] RestartCompanySpecs
+FIELD Public, Static System.Double RestartCompanyFunds
+FIELD Public, Static System.Byte[] RestartCompanyFounder
+FIELD Public, Static System.String LobbyName
+FIELD Public, Static System.String LobbyPassword
+FIELD Public, Static System.Boolean NetworkAllowCodeMods
+FIELD Public, Static System.Boolean NetworkAllowFurnitureMods
+FIELD Public, Static System.Nullable`1<System.Single> ForcedIPO
+FIELD Public, Static System.Single RoundLimit
+FIELD Public, Static SINetworking.NetworkLobby/RoundLimitType RoundType
+FIELD Public, Static System.Boolean PlotAdjacency
+FIELD Public, Static System.Double StartingMoney
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,SentenceGenerator> SentenceGen
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,MoodEffect> MoodEffects
+FIELD Private, Static PersonalityGraph Personalities
+FIELD Public, Static System.Int32 ActiveYear
+FIELD Public, Static Actor[] Founders
+FIELD Public, Static System.Boolean IntroDone
+FIELD Public, Static System.Boolean RuralBigPlots
+FIELD Public, Static DifficultyValues/DifficultySetting SelectedDifficulty
+FIELD Public, Static System.Int32 DaysPerMonth
+FIELD Public, Static System.Int32 LoanAmount
+FIELD Public, Static System.Int32 LoadYear
+FIELD Public, Static System.Byte[] CompanyLogo
+FIELD Public, Static System.Byte[] NetworkSaveData
+FIELD Public, Static NetworkMeta NetworkData
+FIELD Public, Static InitialNetworkSettings NetworkSettings
+FIELD Public, Static System.Nullable`1<SDateTime> HostDate
+FIELD Public, Static GameData/EnvironmentType Environment
+FIELD Public, Static GameData/ClimateType Climate
+FIELD Public, Static System.Collections.Generic.List`1<BlueprintGroup> Blueprints
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,CustomActor> SavedStyles
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Collections.Generic.Dictionary`2<System.String,BehaviorNode>> AITrees
+FIELD Public, Static System.Random RND
+FIELD Public, Static SoftwareType DigitalDistributionPlatform
+FIELD Public, Static System.String RandomString
+FIELD Public, Static Tyd.TydDocument TeamSetups
+FIELD Public, Static Tyd.TydDocument ProjectManagementSetups
+FIELD Public, Static System.Collections.Generic.List`1<System.String> LocalLogos
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Material> UserImages
+FIELD Public, Static System.Single DefaultBillboardEffect
+FIELD Private, Static RandomWordGenerator2 _wordGenerator
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,DLCObject> InstalledDLC
+FIELD Private, Static System.EventHandler OnNewImages
+FIELD Private, Static System.IO.FileSystemWatcher _newImageWatcher
+FIELD Public, Static System.Boolean UserImagesDirty
+FIELD Private, Static System.Boolean _isInit
+FIELD Public, Static, Literal, HasDefault System.Single DefaultMaxSpec
+CONSTANT DefaultMaxSpec = 0.5
+FIELD Public, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> TaskTime
+FIELD Private, Static System.Single[0...,0...] CachedEffectiveness
+FIELD Private, Static System.Int32[] OptimalEmployees
+PROPERTY System.Boolean GameData::LoadAnyOnLoad()
+PROPERTY System.String GameData::UserImagePath()
+PROPERTY System.Single GameData::RNDValue()
+METHOD Public, Static, HideBySig System.Collections.Generic.IEnumerable`1<SoftwareType> GameData::AllSoftwareTypes(ModPackage[])
+LOCAL 0 System.Collections.Generic.Dictionary`2<System.String,SoftwareType>
+LOCAL 1 System.Collections.Generic.List`1<System.String>
+LOCAL 2 System.Collections.Generic.Dictionary`2<System.String,SoftwareTypeOverride[]>
+LOCAL 3 System.Collections.Generic.List`1/Enumerator<System.String>
+LOCAL 4 System.String
+LOCAL 5 ModPackage[]
+LOCAL 6 System.Int32
+LOCAL 7 System.Collections.Generic.Dictionary`2/Enumerator<System.String,SoftwareType>
+LOCAL 8 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>
+LOCAL 9 System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>
+LOCAL 10 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>
+IL_0000: call System.Void GameData::InitializeNow()
+IL_0005: ldarg.0
+IL_0006: dup
+IL_0007: brtrue.s IL_0038
+IL_0009: pop
+IL_000a: ldsfld System.Collections.Generic.List`1<ModPackage> GameData::ModPackages
+IL_000f: ldsfld System.Func`2<ModPackage,System.Boolean> GameData/<>c::<>9__121_0
+IL_0014: dup
+IL_0015: brtrue.s IL_002e
+IL_0017: pop
+IL_0018: ldsfld GameData/<>c GameData/<>c::<>9
+IL_001d: ldftn System.Boolean GameData/<>c::<AllSoftwareTypes>b__121_0(ModPackage)
+IL_0023: newobj System.Void System.Func`2<ModPackage,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_0028: dup
+IL_0029: stsfld System.Func`2<ModPackage,System.Boolean> GameData/<>c::<>9__121_0
+IL_002e: call System.Collections.Generic.IEnumerable`1<T> Utilities::Where<ModPackage>(System.Collections.Generic.IList`1<T>,System.Func`2<T,System.Boolean>)
+IL_0033: call !!0[] System.Linq.Enumerable::ToArray<ModPackage>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_0038: starg.s mods
+IL_003a: ldsfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> GameData::SoftwareTypes
+IL_003f: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,System.String> GameData/<>c::<>9__121_1
+IL_0044: dup
+IL_0045: brtrue.s IL_005e
+IL_0047: pop
+IL_0048: ldsfld GameData/<>c GameData/<>c::<>9
+IL_004d: ldftn System.String GameData/<>c::<AllSoftwareTypes>b__121_1(System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>)
+IL_0053: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,System.String>::.ctor(System.Object,System.IntPtr)
+IL_0058: dup
+IL_0059: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,System.String> GameData/<>c::<>9__121_1
+IL_005e: ldsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,SoftwareType> GameData/<>c::<>9__121_2
+IL_0063: dup
+IL_0064: brtrue.s IL_007d
+IL_0066: pop
+IL_0067: ldsfld GameData/<>c GameData/<>c::<>9
+IL_006c: ldftn SoftwareType GameData/<>c::<AllSoftwareTypes>b__121_2(System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>)
+IL_0072: newobj System.Void System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,SoftwareType>::.ctor(System.Object,System.IntPtr)
+IL_0077: dup
+IL_0078: stsfld System.Func`2<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,SoftwareType> GameData/<>c::<>9__121_2
+IL_007d: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>,System.String,SoftwareType>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_0082: stloc.0
+IL_0083: ldarg.0
+IL_0084: ldsfld System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<System.String>> GameData/<>c::<>9__121_3
+IL_0089: dup
+IL_008a: brtrue.s IL_00a3
+IL_008c: pop
+IL_008d: ldsfld GameData/<>c GameData/<>c::<>9
+IL_0092: ldftn System.Collections.Generic.IEnumerable`1<System.String> GameData/<>c::<AllSoftwareTypes>b__121_3(ModPackage)
+IL_0098: newobj System.Void System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<System.String>>::.ctor(System.Object,System.IntPtr)
+IL_009d: dup
+IL_009e: stsfld System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<System.String>> GameData/<>c::<>9__121_3
+IL_00a3: call System.Collections.Generic.IEnumerable`1<T2> Utilities::SelectMany<ModPackage,System.String>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,System.Collections.Generic.IEnumerable`1<T2>>)
+IL_00a8: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Distinct<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00ad: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<System.String>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_00b2: stloc.1
+IL_00b3: ldloc.1
+IL_00b4: ldsfld System.Predicate`1<System.String> GameData/<>c::<>9__121_4
+IL_00b9: dup
+IL_00ba: brtrue.s IL_00d3
+IL_00bc: pop
+IL_00bd: ldsfld GameData/<>c GameData/<>c::<>9
+IL_00c2: ldftn System.Boolean GameData/<>c::<AllSoftwareTypes>b__121_4(System.String)
+IL_00c8: newobj System.Void System.Predicate`1<System.String>::.ctor(System.Object,System.IntPtr)
+IL_00cd: dup
+IL_00ce: stsfld System.Predicate`1<System.String> GameData/<>c::<>9__121_4
+IL_00d3: callvirt System.Int32 System.Collections.Generic.List`1<System.String>::RemoveAll(System.Predicate`1<!0>)
+IL_00d8: pop
+IL_00d9: ldloc.1
+IL_00da: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<System.String>::GetEnumerator()
+IL_00df: stloc.3
+IL_00e0: br.s IL_00f4
+IL_00e2: ldloca.s V_3
+IL_00e4: call !0 System.Collections.Generic.List`1/Enumerator<System.String>::get_Current()
+IL_00e9: stloc.s V_4
+IL_00eb: ldloc.0
+IL_00ec: ldloc.s V_4
+IL_00ee: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::Remove(!0)
+IL_00f3: pop
+IL_00f4: ldloca.s V_3
+IL_00f6: call System.Boolean System.Collections.Generic.List`1/Enumerator<System.String>::MoveNext()
+IL_00fb: brtrue.s IL_00e2
+IL_00fd: leave.s IL_010d
+IL_00ff: ldloca.s V_3
+IL_0101: constrained. System.Collections.Generic.List`1/Enumerator<System.String>
+IL_0107: callvirt System.Void System.IDisposable::Dispose()
+IL_010c: endfinally
+IL_010d: ldarg.0
+IL_010e: stloc.s V_5
+IL_0110: ldc.i4.0
+IL_0111: stloc.s V_6
+IL_0113: br.s IL_0173
+IL_0115: ldloc.s V_5
+IL_0117: ldloc.s V_6
+IL_0119: ldelem.ref
+IL_011a: ldfld System.Collections.Generic.Dictionary`2<System.String,SoftwareType> ModPackage::SoftwareTypes
+IL_011f: callvirt System.Collections.Generic.Dictionary`2/Enumerator<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::GetEnumerator()
+IL_0124: stloc.s V_7
+IL_0126: br.s IL_0154
+IL_0128: ldloca.s V_7
+IL_012a: call System.Collections.Generic.KeyValuePair`2<!0,!1> System.Collections.Generic.Dictionary`2/Enumerator<System.String,SoftwareType>::get_Current()
+IL_012f: stloc.s V_8
+IL_0131: ldloc.1
+IL_0132: ldloca.s V_8
+IL_0134: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_0139: callvirt System.Boolean System.Collections.Generic.List`1<System.String>::Contains(!0)
+IL_013e: brtrue.s IL_0154
+IL_0140: ldloc.0
+IL_0141: ldloca.s V_8
+IL_0143: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_0148: ldloca.s V_8
+IL_014a: call !1 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Value()
+IL_014f: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::set_Item(!0,!1)
+IL_0154: ldloca.s V_7
+IL_0156: call System.Boolean System.Collections.Generic.Dictionary`2/Enumerator<System.String,SoftwareType>::MoveNext()
+IL_015b: brtrue.s IL_0128
+IL_015d: leave.s IL_016d
+IL_015f: ldloca.s V_7
+IL_0161: constrained. System.Collections.Generic.Dictionary`2/Enumerator<System.String,SoftwareType>
+IL_0167: callvirt System.Void System.IDisposable::Dispose()
+IL_016c: endfinally
+IL_016d: ldloc.s V_6
+IL_016f: ldc.i4.1
+IL_0170: add
+IL_0171: stloc.s V_6
+IL_0173: ldloc.s V_6
+IL_0175: ldloc.s V_5
+IL_0177: ldlen
+IL_0178: conv.i4
+IL_0179: blt.s IL_0115
+IL_017b: ldarg.0
+IL_017c: ldsfld System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<SoftwareTypeOverride>> GameData/<>c::<>9__121_5
+IL_0181: dup
+IL_0182: brtrue.s IL_019b
+IL_0184: pop
+IL_0185: ldsfld GameData/<>c GameData/<>c::<>9
+IL_018a: ldftn System.Collections.Generic.IEnumerable`1<SoftwareTypeOverride> GameData/<>c::<AllSoftwareTypes>b__121_5(ModPackage)
+IL_0190: newobj System.Void System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<SoftwareTypeOverride>>::.ctor(System.Object,System.IntPtr)
+IL_0195: dup
+IL_0196: stsfld System.Func`2<ModPackage,System.Collections.Generic.IEnumerable`1<SoftwareTypeOverride>> GameData/<>c::<>9__121_5
+IL_019b: call System.Collections.Generic.IEnumerable`1<T2> Utilities::SelectMany<ModPackage,SoftwareTypeOverride>(System.Collections.Generic.IList`1<T1>,System.Func`2<T1,System.Collections.Generic.IEnumerable`1<T2>>)
+IL_01a0: ldsfld System.Func`2<SoftwareTypeOverride,System.String> GameData/<>c::<>9__121_6
+IL_01a5: dup
+IL_01a6: brtrue.s IL_01bf
+IL_01a8: pop
+IL_01a9: ldsfld GameData/<>c GameData/<>c::<>9
+IL_01ae: ldftn System.String GameData/<>c::<AllSoftwareTypes>b__121_6(SoftwareTypeOverride)
+IL_01b4: newobj System.Void System.Func`2<SoftwareTypeOverride,System.String>::.ctor(System.Object,System.IntPtr)
+IL_01b9: dup
+IL_01ba: stsfld System.Func`2<SoftwareTypeOverride,System.String> GameData/<>c::<>9__121_6
+IL_01bf: call System.Collections.Generic.IEnumerable`1<System.Linq.IGrouping`2<!!1,!!0>> System.Linq.Enumerable::GroupBy<SoftwareTypeOverride,System.String>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>)
+IL_01c4: ldsfld System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,System.String> GameData/<>c::<>9__121_7
+IL_01c9: dup
+IL_01ca: brtrue.s IL_01e3
+IL_01cc: pop
+IL_01cd: ldsfld GameData/<>c GameData/<>c::<>9
+IL_01d2: ldftn System.String GameData/<>c::<AllSoftwareTypes>b__121_7(System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>)
+IL_01d8: newobj System.Void System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,System.String>::.ctor(System.Object,System.IntPtr)
+IL_01dd: dup
+IL_01de: stsfld System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,System.String> GameData/<>c::<>9__121_7
+IL_01e3: ldsfld System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,SoftwareTypeOverride[]> GameData/<>c::<>9__121_8
+IL_01e8: dup
+IL_01e9: brtrue.s IL_0202
+IL_01eb: pop
+IL_01ec: ldsfld GameData/<>c GameData/<>c::<>9
+IL_01f1: ldftn SoftwareTypeOverride[] GameData/<>c::<AllSoftwareTypes>b__121_8(System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>)
+IL_01f7: newobj System.Void System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,SoftwareTypeOverride[]>::.ctor(System.Object,System.IntPtr)
+IL_01fc: dup
+IL_01fd: stsfld System.Func`2<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,SoftwareTypeOverride[]> GameData/<>c::<>9__121_8
+IL_0202: call System.Collections.Generic.Dictionary`2<!!1,!!2> System.Linq.Enumerable::ToDictionary<System.Linq.IGrouping`2<System.String,SoftwareTypeOverride>,System.String,SoftwareTypeOverride[]>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,!!1>,System.Func`2<!!0,!!2>)
+IL_0207: stloc.2
+IL_0208: ldloc.0
+IL_0209: call System.Collections.Generic.List`1<!!0> System.Linq.Enumerable::ToList<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>(System.Collections.Generic.IEnumerable`1<!!0>)
+IL_020e: callvirt System.Collections.Generic.List`1/Enumerator<!0> System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>::GetEnumerator()
+IL_0213: stloc.s V_9
+IL_0215: br.s IL_0275
+IL_0217: ldloca.s V_9
+IL_0219: call !0 System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>::get_Current()
+IL_021e: stloc.s V_10
+IL_0220: ldloc.2
+IL_0221: ldloca.s V_10
+IL_0223: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_0228: callvirt System.Boolean System.Collections.Generic.Dictionary`2<System.String,SoftwareTypeOverride[]>::ContainsKey(!0)
+IL_022d: brfalse.s IL_0257
+IL_022f: ldloc.0
+IL_0230: ldloca.s V_10
+IL_0232: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_0237: ldloca.s V_10
+IL_0239: call !1 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Value()
+IL_023e: ldloc.2
+IL_023f: ldloca.s V_10
+IL_0241: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_0246: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,SoftwareTypeOverride[]>::get_Item(!0)
+IL_024b: callvirt SoftwareType SoftwareType::Clone(SoftwareTypeOverride[])
+IL_0250: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::set_Item(!0,!1)
+IL_0255: br.s IL_0275
+IL_0257: ldloc.0
+IL_0258: ldloca.s V_10
+IL_025a: call !0 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Key()
+IL_025f: ldloca.s V_10
+IL_0261: call !1 System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>::get_Value()
+IL_0266: call !!0[] System.Array::Empty<SoftwareTypeOverride>()
+IL_026b: callvirt SoftwareType SoftwareType::Clone(SoftwareTypeOverride[])
+IL_0270: callvirt System.Void System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::set_Item(!0,!1)
+IL_0275: ldloca.s V_9
+IL_0277: call System.Boolean System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>::MoveNext()
+IL_027c: brtrue.s IL_0217
+IL_027e: leave.s IL_028e
+IL_0280: ldloca.s V_9
+IL_0282: constrained. System.Collections.Generic.List`1/Enumerator<System.Collections.Generic.KeyValuePair`2<System.String,SoftwareType>>
+IL_0288: callvirt System.Void System.IDisposable::Dispose()
+IL_028d: endfinally
+IL_028e: ldloc.0
+IL_028f: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,SoftwareType>::get_Values()
+IL_0294: ret
+METHOD Public, Static, HideBySig IWorkshopItem GameData::LoadSteamMod(System.String,System.String)
+LOCAL 0 ModPackage
+LOCAL 1 IWorkshopItem
+LOCAL 2 System.Exception
+LOCAL 3 System.Nullable`1<Steamworks.PublishedFileId_t>
+IL_0000: ldarg.0
+IL_0001: call ModPackage ModPackage::Load(System.String)
+IL_0006: stloc.0
+IL_0007: ldsfld System.Collections.Generic.List`1<ModPackage> GameData::ModPackages
+IL_000c: ldloc.0
+IL_000d: callvirt System.Void System.Collections.Generic.List`1<ModPackage>::Add(!0)
+IL_0012: ldloc.0
+IL_0013: stloc.1
+IL_0014: leave.s IL_0056
+IL_0016: stloc.2
+IL_0017: ldstr "Error loading mod "
+IL_001c: ldarg.1
+IL_001d: ldstr ":
+"
+IL_0022: ldloc.2
+IL_0023: callvirt System.String System.Object::ToString()
+IL_0028: call System.String System.String::Concat(System.String,System.String,System.String,System.String)
+IL_002d: dup
+IL_002e: call System.Void UnityEngine.Debug::Log(System.Object)
+IL_0033: call System.Void DevConsole.Console::LogError(System.String)
+IL_0038: ldstr "Data mod"
+IL_003d: ldarg.0
+IL_003e: ldarg.1
+IL_003f: ldloc.2
+IL_0040: callvirt System.String System.Object::ToString()
+IL_0045: ldloca.s V_3
+IL_0047: initobj System.Nullable`1<Steamworks.PublishedFileId_t>
+IL_004d: ldloc.3
+IL_004e: newobj System.Void FailMod::.ctor(System.String,System.String,System.String,System.String,System.Nullable`1<Steamworks.PublishedFileId_t>)
+IL_0053: stloc.1
+IL_0054: leave.s IL_0056
+IL_0056: ldloc.1
+IL_0057: ret
+METHOD Private, Static, HideBySig System.Void GameData::LoadMods(System.String)
+LOCAL 0 System.String[]
+LOCAL 1 System.Int32
+LOCAL 2 System.String
+LOCAL 3 System.Exception
+LOCAL 4 System.Nullable`1<Steamworks.PublishedFileId_t>
+IL_0000: ldarg.0
+IL_0001: call System.String[] System.IO.Directory::GetDirectories(System.String)
+IL_0006: stloc.0
+IL_0007: ldc.i4.0
+IL_0008: stloc.1
+IL_0009: br.s IL_0087
+IL_000b: ldloc.0
+IL_000c: ldloc.1
+IL_000d: ldelem.ref
+IL_000e: stloc.2
+IL_000f: ldsfld System.Collections.Generic.List`1<ModPackage> GameData::ModPackages
+IL_0014: ldloc.2
+IL_0015: call ModPackage ModPackage::Load(System.String)
+IL_001a: callvirt System.Void System.Collections.Generic.List`1<ModPackage>::Add(!0)
+IL_001f: leave.s IL_0083
+IL_0021: stloc.3
+IL_0022: ldstr "Data mod"
+IL_0027: ldloc.2
+IL_0028: ldloc.3
+IL_0029: callvirt System.String System.Object::ToString()
+IL_002e: ldloca.s V_4
+IL_0030: initobj System.Nullable`1<Steamworks.PublishedFileId_t>
+IL_0036: ldloc.s V_4
+IL_0038: newobj System.Void FailMod::.ctor(System.String,System.String,System.String,System.Nullable`1<Steamworks.PublishedFileId_t>)
+IL_003d: pop
+IL_003e: ldstr "Failed loading mod: "
+IL_0043: ldloc.2
+IL_0044: call System.String System.IO.Path::GetFileName(System.String)
+IL_0049: call System.String System.String::Concat(System.String,System.String)
+IL_004e: call System.Int32 LoadDebugger::AddError(System.String)
+IL_0053: pop
+IL_0054: ldsfld DevConsole.Console DevConsole.Console::Singleton
+IL_0059: ldnull
+IL_005a: call System.Boolean UnityEngine.Object::op_Inequality(UnityEngine.Object,UnityEngine.Object)
+IL_005f: brfalse.s IL_0081
+IL_0061: ldstr "Error loading mod "
+IL_0066: ldloc.2
+IL_0067: call System.String System.IO.Path::GetFileName(System.String)
+IL_006c: ldstr ":
+"
+IL_0071: ldloc.3
+IL_0072: callvirt System.String System.Exception::get_Message()
+IL_0077: call System.String System.String::Concat(System.String,System.String,System.String,System.String)
+IL_007c: call System.Void DevConsole.Console::LogError(System.String)
+IL_0081: leave.s IL_0083
+IL_0083: ldloc.1
+IL_0084: ldc.i4.1
+IL_0085: add
+IL_0086: stloc.1
+IL_0087: ldloc.1
+IL_0088: ldloc.0
+IL_0089: ldlen
+IL_008a: conv.i4
+IL_008b: blt IL_000b
+IL_0090: ret

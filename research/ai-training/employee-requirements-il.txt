@@ -1,0 +1,947 @@
+TYPE Employee BASE System.Object
+INTERFACE IFormatColorObject
+INTERFACE SINetworking.INetworkID
+FIELD Public, Static System.Int32 RetirementAge
+FIELD Public, Static System.Int32 Youngest
+FIELD Public, Static, Literal, HasDefault System.Int32 RoleCount
+CONSTANT RoleCount = 5
+FIELD Public, Static System.Byte[] RoleToBit
+FIELD Public, Static System.Int32 MaxLeadSpec
+FIELD Public, Static System.Int32 MaxServiceSpec
+FIELD Public, Static System.String[] LeadSpecs
+FIELD Public, Static System.String[] ServiceSpecs
+FIELD Public, Static Employee/RoleBit[] RoleToMask
+FIELD Public, Static, Literal, HasDefault Employee/Trait DeprecatedTraits
+CONSTANT DeprecatedTraits = 67108864
+FIELD Public, Static, Literal, HasDefault Employee/Trait GoodTraits
+CONSTANT GoodTraits = 3087007871
+FIELD Public, Static, Literal, HasDefault Employee/Trait NeutralTraits
+CONSTANT NeutralTraits = 1082146688
+FIELD Public, Static, Literal, HasDefault Employee/Trait BadTraits
+CONSTANT BadTraits = 4353671168
+FIELD Public, Static, Literal, HasDefault Employee/Trait FounderTraits
+CONSTANT FounderTraits = 8522590037
+FIELD Private, Static System.Int32[] RoleOrder
+FIELD Private, Static System.Single[] RoleSalaryFactor
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> ServiceSalaryFactor
+FIELD Private, Static System.Collections.Generic.KeyValuePair`2<System.String,System.Single>[] ServiceSalaryFactorArr
+FIELD Private, NotSerialized System.String _maxServiceSpec
+FIELD Public, Static System.Single[] LowSkillCap
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] SpecializationLevels
+FIELD Private System.Single[] SpecializationExp
+FIELD Private System.Int32[] SpecUsed
+FIELD Public, Static System.Single AverageWage
+FIELD Public, InitOnly System.String Name
+FIELD Public, InitOnly System.Boolean Female
+FIELD Public, InitOnly System.Single Creativity
+FIELD Public, InitOnly System.Single InspirationTime
+FIELD Public System.Single CreativityKnown
+FIELD Public System.Single Inspiration
+FIELD Public System.Single LastDemandScore
+FIELD Public SDateTime LastInpirationUse
+FIELD Public SDateTime LastBid
+FIELD Public System.String NickName
+FIELD Public System.Boolean ActiveComplaint
+FIELD Public System.Boolean Filter
+FIELD Public System.Boolean PreviousEmployment
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> CustomBenefits
+FIELD Public ActorBodyItem/BodyItemObject[] StyleGen
+FIELD Public System.Collections.Generic.Dictionary`2<SoftwareType,System.Single> LeadSpecialization
+FIELD Public System.Collections.Generic.Dictionary`2<System.String,System.Single> LeadSpecializationFix
+FIELD Public, NotSerialized System.String LeadSpecPick
+FIELD Public System.Collections.Generic.List`1<SoftwareProduct> LeadProjects
+FIELD Public System.Collections.Generic.List`1<System.UInt32> LeadProjectsFix
+FIELD Public System.UInt32 DemandsMet
+FIELD Public System.UInt32 DemandsRequested
+FIELD Public, InitOnly System.Single InitialLeadExperience
+FIELD Public LeadDesignDemands/Demand DemandResults
+FIELD Public Company Employer
+FIELD Public NetworkedID`1<System.UInt32> EmployerID
+FIELD Public System.Single[] LastCreatity
+FIELD Public System.Int32 AgeMonth
+FIELD Public System.Single SkillCeiling
+FIELD Public System.Single LowestSatisfaction
+FIELD Public, NotSerialized System.UInt32 _leadUpdateCount
+FIELD Private Employee/RoleBit _currentRole
+FIELD Private Employee/RoleBit _secondaryRole
+FIELD Public, Static System.String[] ShortFormRole
+FIELD Public, Static System.Int32[] RoleOrderIndex
+FIELD Public Employee/EmployeeRole HiredFor
+FIELD Public, Static System.Single HungerDrain
+FIELD Public, Static System.Single BladderDrain
+FIELD Public, Static System.Single EnergyDrain
+FIELD Public, Static System.Single StressDrain
+FIELD Public, Static System.Single SocialDrain
+FIELD Public System.Single Hunger
+FIELD Public System.Single Energy
+FIELD Public System.Single Bladder
+FIELD Public System.Single Social
+FIELD Public System.Single Stress
+FIELD Public System.Single Posture
+FIELD Public System.Single CoffeeQual
+FIELD Public System.Boolean SatisfactionHitZero
+FIELD Public System.Boolean InteractedWithBestFriend
+FIELD Private, Static System.Collections.Generic.Dictionary`2<Employee/FriendKey,System.Single> _friendships
+FIELD Public System.Collections.Generic.Dictionary`2<Employee,System.Single> Friendships
+FIELD Public Employee/Trait Traits
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<Employee> _localFriendCache
+FIELD Private, Static System.Collections.Generic.List`1<System.ValueTuple`2<Employee,System.Single>> _friendCache2
+FIELD Public DictionaryList`2<System.String,Employee/ThoughtEffect> Thoughts
+FIELD Public System.Boolean HadProperFood
+FIELD Public System.Single JobSatisfaction
+FIELD Private System.Single[] Skill
+FIELD Public System.String[] PersonalityTraits
+FIELD Public System.Single Salary
+FIELD Public System.Single AskedFor
+FIELD Public System.Single Demanded
+FIELD Public System.Single UpfrontDemand
+FIELD Public SDateTime Hired
+FIELD Public SDateTime LastWage
+FIELD Public System.Nullable`1<SDateTime> PlayerQuarantine
+FIELD Public System.Boolean Founder
+FIELD Public System.Boolean MadeCEO
+FIELD Public System.Boolean Dismissed
+FIELD Public System.Boolean Retired
+FIELD Public SDateTime BirthDate
+FIELD Public, NotSerialized Actor MyActor
+FIELD Private, Static, InitOnly System.Int32[] _pointDist
+FIELD Private, Static System.Int32 PersonalityNum
+FIELD Public System.Single SkillFact
+FIELD Public, Static System.Single SkillBase
+FIELD Public, Static System.Single SkillFactor
+FIELD Public, Static System.Single SeniorityWeight
+FIELD Public, Static System.Int32[][] AgeBrackets
+FIELD Private, Static FloatInterpolator _coffeeDrain
+FIELD Private System.UInt32 <NetworkID>k__BackingField
+PROPERTY Company Employee::MyEmployer()
+PROPERTY System.String Employee::FullName()
+PROPERTY System.String Employee::ExtraName()
+PROPERTY Employee/RoleBit Employee::CurrentRoleBit()
+PROPERTY Employee/RoleBit Employee::SecondaryRole()
+PROPERTY System.String Employee::RoleString()
+PROPERTY System.Collections.Generic.HashSet`1<Employee> Employee::LocalFriendCache()
+PROPERTY System.UInt32 Employee::NetworkID()
+PROPERTY UnityEngine.GameObject Employee::GO()
+METHOD Public, Static, HideBySig System.Int32 Employee::TraitOrder(Employee/Trait)
+IL_0000: ldc.i4 -1207959425
+IL_0005: conv.u8
+IL_0006: ldarg.0
+IL_0007: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_000c: brfalse.s IL_0010
+IL_000e: ldc.i4.0
+IL_000f: ret
+IL_0010: ldc.i4 1082146688
+IL_0015: conv.i8
+IL_0016: ldarg.0
+IL_0017: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_001c: brfalse.s IL_0020
+IL_001e: ldc.i4.1
+IL_001f: ret
+IL_0020: ldc.i4.2
+IL_0021: ret
+METHOD Public, Static, HideBySig System.Collections.Generic.IEnumerable`1<Employee/Trait> Employee::EnumTraits(Employee/Trait)
+IL_0000: ldc.i4.s -2
+IL_0002: newobj System.Void Employee/<EnumTraits>d__21::.ctor(System.Int32)
+IL_0007: dup
+IL_0008: ldarg.0
+IL_0009: stfld Employee/Trait Employee/<EnumTraits>d__21::<>3__t
+IL_000e: ret
+METHOD Public, HideBySig System.Boolean Employee::HasTrait(Employee/Trait)
+IL_0000: ldarg.0
+IL_0001: ldfld Employee/Trait Employee::Traits
+IL_0006: ldarg.1
+IL_0007: and
+IL_0008: ldc.i4.0
+IL_0009: conv.i8
+IL_000a: cgt.un
+IL_000c: ret
+METHOD Public, HideBySig System.Single Employee::ModTrait(Employee/Trait,System.Single,System.Single)
+IL_0000: ldarg.0
+IL_0001: ldfld Employee/Trait Employee::Traits
+IL_0006: ldarg.1
+IL_0007: and
+IL_0008: brtrue.s IL_000c
+IL_000a: ldarg.3
+IL_000b: ret
+IL_000c: ldarg.2
+IL_000d: ret
+METHOD Public, HideBySig System.Single Employee::AddTrait(Employee/Trait,System.Single,System.Single)
+IL_0000: ldarg.0
+IL_0001: ldfld Employee/Trait Employee::Traits
+IL_0006: ldarg.1
+IL_0007: and
+IL_0008: brtrue.s IL_000c
+IL_000a: ldarg.3
+IL_000b: ret
+IL_000c: ldarg.2
+IL_000d: ret
+METHOD Public, Static, HideBySig System.Single Employee::GetCreativityFor(System.Single,Employee/EmployeeRole)
+LOCAL 0 System.Single
+LOCAL 1 System.Single
+IL_0000: ldarg.1
+IL_0001: ldc.i4.2
+IL_0002: bne.un.s IL_0079
+IL_0004: ldarg.0
+IL_0005: ldsfld System.Int32 Employee::Youngest
+IL_000a: conv.r4
+IL_000b: ldsfld System.Int32 Employee::RetirementAge
+IL_0010: ldc.i4.s 10
+IL_0012: sub
+IL_0013: conv.r4
+IL_0014: ldc.r4 0.4
+IL_0019: ldc.r4 0.5
+IL_001e: ldc.i4.1
+IL_001f: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0024: ldarg.0
+IL_0025: ldsfld System.Int32 Employee::Youngest
+IL_002a: conv.r4
+IL_002b: ldsfld System.Int32 Employee::RetirementAge
+IL_0030: ldc.i4.s 10
+IL_0032: sub
+IL_0033: conv.r4
+IL_0034: ldc.r4 1
+IL_0039: ldc.r4 0.7
+IL_003e: ldc.i4.1
+IL_003f: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0044: stloc.0
+IL_0045: ldarg.0
+IL_0046: ldsfld System.Int32 Employee::Youngest
+IL_004b: conv.r4
+IL_004c: ldsfld System.Int32 Employee::RetirementAge
+IL_0051: ldc.i4.s 10
+IL_0053: sub
+IL_0054: conv.r4
+IL_0055: ldc.r4 0.6
+IL_005a: ldc.r4 0.8
+IL_005f: ldc.i4.1
+IL_0060: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0065: stloc.1
+IL_0066: ldloc.0
+IL_0067: ldloc.1
+IL_0068: ldc.r4 0.2
+IL_006d: ldnull
+IL_006e: call System.Single Utilities::RandomGaussClamped(System.Single,System.Single,System.Random)
+IL_0073: call System.Single UnityEngine.Mathf::Lerp(System.Single,System.Single,System.Single)
+IL_0078: ret
+IL_0079: ldc.r4 0.5
+IL_007e: ldc.r4 0.1
+IL_0083: ldnull
+IL_0084: call System.Single Utilities::RandomGaussClamped(System.Single,System.Single,System.Random)
+IL_0089: ret
+METHOD Public, HideBySig System.Single Employee::GetEducationFactor(Employee/EmployeeRole,SDateTime)
+IL_0000: ldarg.0
+IL_0001: ldarg.2
+IL_0002: call System.Single Employee::GetAge(SDateTime)
+IL_0007: ldsfld System.Int32 Employee::Youngest
+IL_000c: conv.r4
+IL_000d: ldsfld System.Int32 Employee::RetirementAge
+IL_0012: conv.r4
+IL_0013: ldc.r4 1
+IL_0018: ldc.r4 0.9
+IL_001d: ldc.i4.1
+IL_001e: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0023: ldarg.0
+IL_0024: ldfld System.Single[] Employee::Skill
+IL_0029: ldarg.1
+IL_002a: ldelem.r4
+IL_002b: ldc.r4 0
+IL_0030: ldc.r4 0.5
+IL_0035: ldc.r4 0.75
+IL_003a: ldc.r4 1
+IL_003f: ldc.i4.1
+IL_0040: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_0045: mul
+IL_0046: ldarg.0
+IL_0047: ldc.i4.1
+IL_0048: conv.i8
+IL_0049: ldc.r4 1.5
+IL_004e: ldc.r4 1
+IL_0053: call System.Single Employee::ModTrait(Employee/Trait,System.Single,System.Single)
+IL_0058: mul
+IL_0059: ret
+METHOD Public, HideBySig System.Int32 Employee::GetBestSpecialization(System.Boolean,SoftwareWorkItem/FeatureProgress)
+LOCAL 0 System.Int32
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldarg.1
+IL_0003: brfalse.s IL_001f
+IL_0005: ldarg.0
+IL_0006: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] Employee::SpecializationLevels
+IL_000b: ldc.i4.2
+IL_000c: ldelem.ref
+IL_000d: ldarg.2
+IL_000e: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_0013: ldfld System.String FeatureBase::Spec
+IL_0018: ldc.i4.0
+IL_0019: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_001e: stloc.0
+IL_001f: ldarg.1
+IL_0020: brtrue.s IL_005c
+IL_0022: ldarg.2
+IL_0023: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::ArtDone
+IL_0028: brtrue.s IL_005c
+IL_002a: ldarg.2
+IL_002b: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_0030: ldfld System.Single FeatureBase::CodeArtRatio
+IL_0035: ldc.r4 1
+IL_003a: bge.un.s IL_005c
+IL_003c: ldloc.0
+IL_003d: ldarg.0
+IL_003e: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] Employee::SpecializationLevels
+IL_0043: ldc.i4.3
+IL_0044: ldelem.ref
+IL_0045: ldarg.2
+IL_0046: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_004b: ldfld System.String FeatureBase::Spec
+IL_0050: ldc.i4.0
+IL_0051: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0056: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_005b: stloc.0
+IL_005c: ldarg.1
+IL_005d: brtrue.s IL_0099
+IL_005f: ldarg.2
+IL_0060: ldfld System.Boolean SoftwareWorkItem/FeatureProgress::CodeDone
+IL_0065: brtrue.s IL_0099
+IL_0067: ldarg.2
+IL_0068: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_006d: ldfld System.Single FeatureBase::CodeArtRatio
+IL_0072: ldc.r4 0
+IL_0077: ble.un.s IL_0099
+IL_0079: ldloc.0
+IL_007a: ldarg.0
+IL_007b: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] Employee::SpecializationLevels
+IL_0080: ldc.i4.1
+IL_0081: ldelem.ref
+IL_0082: ldarg.2
+IL_0083: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_0088: ldfld System.String FeatureBase::Spec
+IL_008d: ldc.i4.0
+IL_008e: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_0093: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_0098: stloc.0
+IL_0099: ldloc.0
+IL_009a: ret
+METHOD Public, HideBySig System.Int32 Employee::GetSpecialization(Employee/EmployeeRole,System.String,Actor)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+LOCAL 2 System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.Dictionary`2<System.String,System.Int32>[] Employee::SpecializationLevels
+IL_0006: ldarg.1
+IL_0007: ldelem.ref
+IL_0008: ldarg.2
+IL_0009: ldc.i4.0
+IL_000a: call TValue Utilities::GetOrDefault<System.String,System.Int32>(System.Collections.Generic.IDictionary`2<TKey,TValue>,TKey,TValue)
+IL_000f: stloc.0
+IL_0010: ldarg.3
+IL_0011: call System.Boolean Utilities::IsReferenceNull(UnityEngine.Object)
+IL_0016: brtrue.s IL_0058
+IL_0018: ldc.i4.0
+IL_0019: stloc.1
+IL_001a: br.s IL_004a
+IL_001c: ldarg.3
+IL_001d: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Actor::Courses
+IL_0022: ldloc.1
+IL_0023: callvirt !0 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>>::get_Item(System.Int32)
+IL_0028: stloc.2
+IL_0029: ldloca.s V_2
+IL_002b: call !0 System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>::get_Key()
+IL_0030: ldarg.1
+IL_0031: bne.un.s IL_0046
+IL_0033: ldloca.s V_2
+IL_0035: call !1 System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>::get_Value()
+IL_003a: ldarg.2
+IL_003b: callvirt System.Boolean System.String::Equals(System.String)
+IL_0040: brfalse.s IL_0046
+IL_0042: ldloc.0
+IL_0043: ldc.i4.1
+IL_0044: add
+IL_0045: stloc.0
+IL_0046: ldloc.1
+IL_0047: ldc.i4.1
+IL_0048: add
+IL_0049: stloc.1
+IL_004a: ldloc.1
+IL_004b: ldarg.3
+IL_004c: ldfld System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Actor::Courses
+IL_0051: callvirt System.Int32 System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>>::get_Count()
+IL_0056: blt.s IL_001c
+IL_0058: ldloc.0
+IL_0059: ret
+METHOD Public, Static, HideBySig System.Void Employee::IncTraitType(System.Int32,System.Int32&,System.Int32&,System.Int32&)
+IL_0000: ldarg.0
+IL_0001: switch IL_0013,IL_001a,IL_0021
+IL_0012: ret
+IL_0013: ldarg.1
+IL_0014: ldarg.1
+IL_0015: ldind.i4
+IL_0016: ldc.i4.1
+IL_0017: add
+IL_0018: stind.i4
+IL_0019: ret
+IL_001a: ldarg.2
+IL_001b: ldarg.2
+IL_001c: ldind.i4
+IL_001d: ldc.i4.1
+IL_001e: add
+IL_001f: stind.i4
+IL_0020: ret
+IL_0021: ldarg.3
+IL_0022: ldarg.3
+IL_0023: ldind.i4
+IL_0024: ldc.i4.1
+IL_0025: add
+IL_0026: stind.i4
+IL_0027: ret
+METHOD Public, Static, HideBySig Employee/Trait Employee::PickTraits(System.String[],PersonalityGraph,Employee/Trait,Employee/Trait)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+LOCAL 2 System.Int32
+LOCAL 3 Employee/Trait
+LOCAL 4 Employee/Trait
+LOCAL 5 System.Int32
+LOCAL 6 System.Int32
+LOCAL 7 System.Int32
+IL_0000: ldc.i4.0
+IL_0001: stloc.0
+IL_0002: ldc.i4.0
+IL_0003: stloc.1
+IL_0004: ldc.i4.0
+IL_0005: stloc.2
+IL_0006: ldc.i4.0
+IL_0007: conv.i8
+IL_0008: stloc.3
+IL_0009: ldarg.2
+IL_000a: brfalse.s IL_001f
+IL_000c: ldarg.2
+IL_000d: stloc.3
+IL_000e: ldloc.3
+IL_000f: call System.Int32 Employee::GoodBadNeutral(Employee/Trait)
+IL_0014: ldloca.s V_0
+IL_0016: ldloca.s V_2
+IL_0018: ldloca.s V_1
+IL_001a: call System.Void Employee::IncTraitType(System.Int32,System.Int32&,System.Int32&,System.Int32&)
+IL_001f: ldarg.1
+IL_0020: ldfld System.Collections.Generic.Dictionary`2<System.String,Employee/Trait[]> PersonalityGraph::Traits
+IL_0025: ldarg.0
+IL_0026: ldc.i4.0
+IL_0027: ldelem.ref
+IL_0028: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,Employee/Trait[]>::get_Item(!0)
+IL_002d: ldloc.3
+IL_002e: ldarg.3
+IL_002f: ldloc.0
+IL_0030: ldloc.2
+IL_0031: ldloc.1
+IL_0032: call Employee/Trait Employee::GetTraitFromPerson(Employee/Trait[],Employee/Trait,Employee/Trait,System.Int32,System.Int32,System.Int32)
+IL_0037: stloc.s V_4
+IL_0039: ldloc.s V_4
+IL_003b: brfalse.s IL_0054
+IL_003d: ldloc.3
+IL_003e: ldloc.s V_4
+IL_0040: or
+IL_0041: stloc.3
+IL_0042: ldloc.s V_4
+IL_0044: call System.Int32 Employee::GoodBadNeutral(Employee/Trait)
+IL_0049: ldloca.s V_0
+IL_004b: ldloca.s V_2
+IL_004d: ldloca.s V_1
+IL_004f: call System.Void Employee::IncTraitType(System.Int32,System.Int32&,System.Int32&,System.Int32&)
+IL_0054: ldarg.1
+IL_0055: ldfld System.Collections.Generic.Dictionary`2<System.String,Employee/Trait[]> PersonalityGraph::Traits
+IL_005a: ldarg.0
+IL_005b: ldc.i4.1
+IL_005c: ldelem.ref
+IL_005d: callvirt !1 System.Collections.Generic.Dictionary`2<System.String,Employee/Trait[]>::get_Item(!0)
+IL_0062: ldloc.3
+IL_0063: ldarg.3
+IL_0064: ldloc.0
+IL_0065: ldloc.2
+IL_0066: ldloc.1
+IL_0067: call Employee/Trait Employee::GetTraitFromPerson(Employee/Trait[],Employee/Trait,Employee/Trait,System.Int32,System.Int32,System.Int32)
+IL_006c: stloc.s V_4
+IL_006e: ldloc.s V_4
+IL_0070: brfalse.s IL_0089
+IL_0072: ldloc.3
+IL_0073: ldloc.s V_4
+IL_0075: or
+IL_0076: stloc.3
+IL_0077: ldloc.s V_4
+IL_0079: call System.Int32 Employee::GoodBadNeutral(Employee/Trait)
+IL_007e: ldloca.s V_0
+IL_0080: ldloca.s V_2
+IL_0082: ldloca.s V_1
+IL_0084: call System.Void Employee::IncTraitType(System.Int32,System.Int32&,System.Int32&,System.Int32&)
+IL_0089: ldloc.2
+IL_008a: ldc.i4.0
+IL_008b: ble.s IL_00c0
+IL_008d: ldloc.0
+IL_008e: brtrue.s IL_00a4
+IL_0090: ldloc.3
+IL_0091: ldc.i4 -1207959425
+IL_0096: conv.u8
+IL_0097: ldloc.3
+IL_0098: not
+IL_0099: and
+IL_009a: ldarg.3
+IL_009b: not
+IL_009c: and
+IL_009d: call Employee/Trait Employee::PickRandomTrait(Employee/Trait)
+IL_00a2: or
+IL_00a3: stloc.3
+IL_00a4: ldloc.1
+IL_00a5: brtrue.s IL_0117
+IL_00a7: ldloc.3
+IL_00a8: ldc.i8 4353671168
+IL_00b1: ldloc.3
+IL_00b2: not
+IL_00b3: and
+IL_00b4: ldarg.3
+IL_00b5: not
+IL_00b6: and
+IL_00b7: call Employee/Trait Employee::PickRandomTrait(Employee/Trait)
+IL_00bc: or
+IL_00bd: stloc.3
+IL_00be: br.s IL_0117
+IL_00c0: ldc.i4.2
+IL_00c1: ldloc.0
+IL_00c2: sub
+IL_00c3: stloc.s V_5
+IL_00c5: ldc.i4.0
+IL_00c6: stloc.s V_6
+IL_00c8: br.s IL_00e4
+IL_00ca: ldloc.3
+IL_00cb: ldc.i4 -1207959425
+IL_00d0: conv.u8
+IL_00d1: ldloc.3
+IL_00d2: not
+IL_00d3: and
+IL_00d4: ldarg.3
+IL_00d5: not
+IL_00d6: and
+IL_00d7: call Employee/Trait Employee::PickRandomTrait(Employee/Trait)
+IL_00dc: or
+IL_00dd: stloc.3
+IL_00de: ldloc.s V_6
+IL_00e0: ldc.i4.1
+IL_00e1: add
+IL_00e2: stloc.s V_6
+IL_00e4: ldloc.s V_6
+IL_00e6: ldloc.s V_5
+IL_00e8: blt.s IL_00ca
+IL_00ea: ldc.i4.2
+IL_00eb: ldloc.1
+IL_00ec: sub
+IL_00ed: stloc.s V_5
+IL_00ef: ldc.i4.0
+IL_00f0: stloc.s V_7
+IL_00f2: br.s IL_0111
+IL_00f4: ldloc.3
+IL_00f5: ldc.i8 4353671168
+IL_00fe: ldloc.3
+IL_00ff: not
+IL_0100: and
+IL_0101: ldarg.3
+IL_0102: not
+IL_0103: and
+IL_0104: call Employee/Trait Employee::PickRandomTrait(Employee/Trait)
+IL_0109: or
+IL_010a: stloc.3
+IL_010b: ldloc.s V_7
+IL_010d: ldc.i4.1
+IL_010e: add
+IL_010f: stloc.s V_7
+IL_0111: ldloc.s V_7
+IL_0113: ldloc.s V_5
+IL_0115: blt.s IL_00f4
+IL_0117: ldloc.3
+IL_0118: ret
+METHOD Public, Static, HideBySig Employee/Trait Employee::PickRandomTrait(Employee/Trait)
+IL_0000: ldarg.0
+IL_0001: call System.UInt64 Utilities::GetRandomBit(System.UInt64)
+IL_0006: ret
+METHOD Private, Static, HideBySig Employee/Trait Employee::GetTraitFromPerson(Employee/Trait[],Employee/Trait,Employee/Trait,System.Int32,System.Int32,System.Int32)
+LOCAL 0 System.Int32
+LOCAL 1 System.Int32
+IL_0000: ldarg.0
+IL_0001: ldlen
+IL_0002: conv.i4
+IL_0003: ldc.i4.1
+IL_0004: bne.un.s IL_0028
+IL_0006: ldarg.s neutral
+IL_0008: brtrue IL_009d
+IL_000d: ldarg.2
+IL_000e: ldarg.0
+IL_000f: ldc.i4.0
+IL_0010: ldelem.i8
+IL_0011: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_0016: brtrue IL_009d
+IL_001b: ldarg.3
+IL_001c: ldc.i4.2
+IL_001d: bge.s IL_009d
+IL_001f: ldarg.s bad
+IL_0021: ldc.i4.2
+IL_0022: bge.s IL_009d
+IL_0024: ldarg.0
+IL_0025: ldc.i4.0
+IL_0026: ldelem.i8
+IL_0027: ret
+IL_0028: ldarg.3
+IL_0029: ldc.i4.0
+IL_002a: bgt.s IL_003d
+IL_002c: ldarg.s bad
+IL_002e: ldc.i4.0
+IL_002f: bgt.s IL_003a
+IL_0031: ldc.i4.0
+IL_0032: ldc.i4.2
+IL_0033: call System.Int32 Utilities::RandomRange(System.Int32,System.Int32)
+IL_0038: br.s IL_003e
+IL_003a: ldc.i4.0
+IL_003b: br.s IL_003e
+IL_003d: ldc.i4.1
+IL_003e: stloc.0
+IL_003f: ldarg.1
+IL_0040: ldarg.0
+IL_0041: ldloc.0
+IL_0042: ldelem.i8
+IL_0043: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_0048: brtrue.s IL_006a
+IL_004a: ldarg.2
+IL_004b: ldarg.0
+IL_004c: ldloc.0
+IL_004d: ldelem.i8
+IL_004e: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_0053: brtrue.s IL_006a
+IL_0055: ldarg.s neutral
+IL_0057: ldc.i4.0
+IL_0058: ble.s IL_006e
+IL_005a: ldloc.0
+IL_005b: brtrue.s IL_0061
+IL_005d: ldarg.3
+IL_005e: ldc.i4.0
+IL_005f: bgt.s IL_006a
+IL_0061: ldloc.0
+IL_0062: ldc.i4.1
+IL_0063: bne.un.s IL_006e
+IL_0065: ldarg.s bad
+IL_0067: ldc.i4.0
+IL_0068: ble.s IL_006e
+IL_006a: ldc.i4.1
+IL_006b: ldloc.0
+IL_006c: sub
+IL_006d: stloc.0
+IL_006e: ldc.i4.2
+IL_006f: ldarg.s neutral
+IL_0071: sub
+IL_0072: stloc.1
+IL_0073: ldarg.1
+IL_0074: ldarg.0
+IL_0075: ldloc.0
+IL_0076: ldelem.i8
+IL_0077: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_007c: brtrue.s IL_009d
+IL_007e: ldarg.2
+IL_007f: ldarg.0
+IL_0080: ldloc.0
+IL_0081: ldelem.i8
+IL_0082: call System.Boolean Utilities::HasBits(Employee/Trait,Employee/Trait)
+IL_0087: brtrue.s IL_009d
+IL_0089: ldloc.0
+IL_008a: brtrue.s IL_0090
+IL_008c: ldarg.3
+IL_008d: ldloc.1
+IL_008e: blt.s IL_0099
+IL_0090: ldloc.0
+IL_0091: ldc.i4.1
+IL_0092: bne.un.s IL_009d
+IL_0094: ldarg.s bad
+IL_0096: ldloc.1
+IL_0097: bge.s IL_009d
+IL_0099: ldarg.0
+IL_009a: ldloc.0
+IL_009b: ldelem.i8
+IL_009c: ret
+IL_009d: ldc.i4.0
+IL_009e: conv.i8
+IL_009f: ret
+TYPE Actor BASE Selectable
+INTERFACE IDistributee
+INTERFACE IHasSpeed
+INTERFACE IStylable
+INTERFACE IFormatColorObject
+INTERFACE IHasVector
+INTERFACE IBenefitReceiver
+INTERFACE IDoorTriggerer
+FIELD Public, Static System.UInt32[][] ParticleSeed
+FIELD Public, Static System.Int32 AffectorCount
+FIELD Public, Static System.Single HumanHeight
+FIELD Public, Static System.Single StressRelief
+FIELD Public, Static ObjectPool`1<System.Collections.Generic.List`1<PathVector>> PathPool
+FIELD Public Actor/WorkParticle EmitType
+FIELD Public System.Boolean BladderFailCheck
+FIELD Public System.Boolean HungerFailCheck
+FIELD Public System.Single TestVarStand
+FIELD Public System.Single TestVarVehicle
+FIELD Public System.Single CrunchHangover
+FIELD Public System.Single ComplaintLevel
+FIELD Public System.Single QuitLevel
+FIELD Private, NotSerialized System.String[] _complaintReasons
+FIELD Private, Static System.Single TeamRelationTimerMax
+FIELD Private System.Int32 TeamRelationNum
+FIELD Private System.Single TeamRelationTimer
+FIELD Public, NotSerialized System.Single ChristmasBonus
+FIELD Public, NotSerialized ScissorLift ActiveScissor
+FIELD Public System.Boolean IsOnLift
+FIELD Public UnityEngine.Vector3 LiftStart
+FIELD Public System.Single LiftHeight
+FIELD Public System.Single LiftRot
+FIELD Public System.Boolean UsedSubway
+FIELD Public System.Int32 DummyCount
+FIELD Public System.Boolean BadBack
+FIELD Public System.Boolean QuitAmicably
+FIELD Public System.Boolean LeaveWhenDone
+FIELD Public System.Boolean Biking
+FIELD Public System.Single AirQuality
+FIELD Public, NotSerialized System.Boolean DogBlessing
+FIELD Public, NotSerialized LeadDesignDemands/Demand BreachedDemands
+FIELD Private InteractionPoint _usingPoint
+FIELD Public ActorStateBehaviour/ActorEvent LastTrigger
+FIELD Private, NotSerialized System.Single _trashTimer
+FIELD Public System.Collections.Generic.HashSet`1<Furniture> Owns
+FIELD Private System.Collections.Generic.List`1<PathVector> _currentPath
+FIELD Public UnityEngine.AudioSource AudioComp
+FIELD Public UnityEngine.AudioClip[] KeyboardSFX
+FIELD Public UnityEngine.AudioClip[] TalkSFX
+FIELD Public UnityEngine.AudioClip[] FemaleTalkSFX
+FIELD Public UnityEngine.BoxCollider[] Colliders
+FIELD Public UnityEngine.AudioClip HammerHitSFX
+FIELD Public UnityEngine.AudioClip[] FeetSFX
+FIELD Public SDateTime LastMeeting
+FIELD Public SDateTime MeetingTime
+FIELD Public SDateTime DriveTime
+FIELD Public SDateTime DespawnTime
+FIELD Public CarScript MyCar
+FIELD Public UnityEngine.MeshRenderer VisibilityRenderer
+FIELD Public UnityEngine.LODGroup LOD
+FIELD Public UnityEngine.GameObject DataBall
+FIELD Public UnityEngine.MeshRenderer DataBallRend
+FIELD Public UnityEngine.Vector3 ActualPosition
+FIELD Public, NotSerialized System.Collections.Generic.List`1<AutoDevWorkItem> AutoDevs
+FIELD Private, NotSerialized System.UInt32 _targetActorID
+FIELD Private, NotSerialized System.UInt32 _guardingID
+FIELD Public, NotSerialized Actor TargetActor
+FIELD Public System.Int32 CarSpawnID
+FIELD Public, NotSerialized System.Single RetirementFund
+FIELD Public, NotSerialized System.Single LastCheckWait
+FIELD Public UnityEngine.GameObject CensorRend
+FIELD Public UnityEngine.Renderer[] LOD2UpperBody
+FIELD Public UnityEngine.Renderer[] LOD2LowerBody
+FIELD Public UnityEngine.Renderer[] LOD2Head
+FIELD Public UnityEngine.Renderer[] LOD2Feet
+FIELD Public UnityEngine.Renderer[] LOD2Hair
+FIELD Public, NotSerialized SHashSet`1<System.String> AssignedRoomGroups
+FIELD Public, NotSerialized ProductPrintOrder Order
+FIELD Private, NotSerialized ActorBodyItem _shadow
+FIELD Public System.Int32 Boxes
+FIELD Public System.Int32 BoxesShipped
+FIELD Public System.Int32 LastBoxesShipped
+FIELD Public System.Int32 CarIdx
+FIELD Public System.Int32 SickDays
+FIELD Public UnityEngine.Color CarColor3
+FIELD Public System.Int32 CarWheelHubs
+FIELD Public System.Int32 CurrentPathNode
+FIELD Public SDateTime LeaveTime
+FIELD Public System.Single PathProg
+FIELD Public System.Single WalkSpeed
+FIELD Public System.Single Timer
+FIELD Public System.Single SocialFactor
+FIELD Public System.Single StressFactor
+FIELD Public System.Boolean BO
+FIELD Public System.Single GermAdd
+FIELD Public System.Single GermCount
+FIELD Public System.Single Burnt
+FIELD Public System.Boolean NegotiateSalary
+FIELD Public System.Boolean IgnoreOffSalary
+FIELD Public SDateTime LastSocial
+FIELD Public Holdable coffee
+FIELD Public Holdable Food
+FIELD Public UnityEngine.Vector3 LastWorldPos
+FIELD Public System.Int32 TargetFloor
+FIELD Public System.Boolean HasMet
+FIELD Public System.Boolean HasMetSub
+FIELD Public System.Single MeetingDiff
+FIELD Private, NotSerialized Employee _employee
+FIELD Private, NotSerialized System.Boolean _isWalking
+FIELD Public Actor/ElevatorState EState
+FIELD Public, NotSerialized ElevatorGroup QueuedForElevator
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Room> InspectRooms
+FIELD Private UnityEngine.GameObject HolidayItem
+FIELD Public, NotSerialized System.Collections.Generic.List`1<InventoryItem> Stolen
+FIELD Public, NotSerialized SDateTime MentorCooldown
+FIELD Public, NotSerialized System.Boolean IsMentor
+FIELD Public, NotSerialized System.Boolean BeingMentored
+FIELD Private System.Boolean _allowHoliday
+FIELD Public, NotSerialized System.Single NightOwlDebuff
+FIELD Public, NotSerialized System.Boolean WasSick
+FIELD Public, NotSerialized SDateTime ForgetfulETA
+FIELD Private, NotSerialized Employee/Trait _traitView
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Color> _traitColor
+FIELD Private, NotSerialized SDateTime _traitViewExp
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Employee> HasInteractedWith
+FIELD Public, NotSerialized System.Single LastWorkTime
+FIELD Private Furniture _reserved
+FIELD Private Furniture _onHead
+FIELD Public UnityEngine.Transform NeckBone
+FIELD Public UnityEngine.Transform LookBone
+FIELD Public UnityEngine.Transform HeadBone
+FIELD Public UnityEngine.Transform LeftHand
+FIELD Public UnityEngine.Transform RightHand
+FIELD Public UnityEngine.Transform EyePos
+FIELD Public SDateTime _vacationMonth
+FIELD Public SDateTime AlternateVacation
+FIELD Public System.Boolean AtFurniture
+FIELD Public System.Boolean WaitSpawn
+FIELD Public System.Boolean WasOnScreen
+FIELD Public System.Boolean Despawned
+FIELD Public System.Boolean IsIdle
+FIELD Public System.Boolean WagePaid
+FIELD Public Actor/WorkStatus IdleStatus
+FIELD Public Room CleaningRoom
+FIELD Public, NotSerialized Deal deal
+FIELD Public System.Collections.Generic.Stack`1<UnityEngine.Vector3> CleaningPoints
+FIELD Public, NotSerialized UnityEngine.Vector2 CurrentCleaningSpot
+FIELD Public System.Single AvailableDirt
+FIELD Private System.String[] actions
+FIELD Private System.String[] actionsFounder
+FIELD Private System.String[] staffActions
+FIELD Public UnityEngine.Animator anim
+FIELD Public UnityEngine.Color SkinColor
+FIELD Public UnityEngine.Color HairColor
+FIELD Public, NotSerialized System.UInt32[] LastWorkItems
+FIELD Public System.Int32 LastWorkCounter
+FIELD Public System.Boolean IsTalking
+FIELD Public System.Boolean GoHomeNow
+FIELD Public System.Int32 StayHome
+FIELD Public System.Boolean OnCall
+FIELD Public System.Boolean HasFridged
+FIELD Public System.Single NextParticle
+FIELD Public System.Single NextSmell
+FIELD Public System.Boolean IsWorking
+FIELD Public System.Single Effectiveness
+FIELD Public TableScript LoiterTable
+FIELD Public System.Int32 StaffOn
+FIELD Public System.Int32 StaffOff
+FIELD Public AI/AIType AItype
+FIELD Public AI AIScript
+FIELD Public, NotSerialized Furniture ReservedFridge
+FIELD Public, NotSerialized Furniture ReservedPort
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Furniture> ReservedFurniture
+FIELD Public Actor/HomeState SpecialState
+FIELD Public System.Int32 CurrentWorkItem
+FIELD Public System.Int32 SubWorkItem
+FIELD Public System.Int32 WorkCyclesLeft
+FIELD Public System.Boolean SecondaryWork
+FIELD Public System.Boolean SecondaryTask
+FIELD Public System.Boolean Female
+FIELD Public, NotSerialized System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Courses
+FIELD Public SDateTime LastCourse
+FIELD Public System.Boolean Turn
+FIELD Public System.Single TargetRot
+FIELD Public Holdable[] Holding
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<System.UInt32> _neighbours
+FIELD Public, NotSerialized System.Single NeighbourSocialBoost
+FIELD Public, NotSerialized System.Single[] Affactors
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,InteractionPoint> InQueue
+FIELD Public, NotSerialized System.Single GuestPatience
+FIELD Private Room _currentRoom
+FIELD Public EyeScript Eyes
+FIELD Public System.Collections.Generic.List`1<UnityEngine.Renderer> Children
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItem> _bodyItems
+FIELD Private UnityEngine.Transform _rootBone
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> <Rig>k__BackingField
+FIELD Private, NotSerialized RoomSegment _guarding
+FIELD Private System.Single _noisiness
+FIELD Private, Static, InitOnly System.Collections.Generic.HashSet`1<System.UInt32> IteratedAssignedRooms
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<System.String> DeletedAssignedRooms
+FIELD Private System.Single teamComp
+FIELD Public System.Int32 LastAnim
+FIELD Private, NotSerialized Team team
+FIELD Public, NotSerialized System.Boolean OnDestroyWasCalled
+FIELD Private, NotSerialized UnityEngine.Vector3 LastPos
+FIELD Private, NotSerialized System.Boolean _initialized
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Quaternion> _lastLookAt
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Quaternion> _rndLookAt
+FIELD Private, NotSerialized System.Int32 _lookAtIndex
+FIELD Private, NotSerialized System.Single _lookAtCountdown
+FIELD Private System.Single _animRandomness
+FIELD Private System.Int32 _currentBlend
+FIELD Public, NotSerialized System.Boolean LastVisible
+FIELD Public, NotSerialized System.Single UnusedMeters
+FIELD Public, Static System.Boolean UseSimOffset
+FIELD Public, Static System.Single SimOffsetEffect
+FIELD Public, Static System.Single SimOffsetSize
+FIELD Public, NotSerialized UnityEngine.Vector2 PosOffset
+FIELD Public, Static System.Int32 FilterCheck
+FIELD Private, Static System.Collections.Generic.SortedList`2<System.Single,InteractionPoint> _furnResultCache
+FIELD Private, Static System.Collections.Generic.List`1<InteractionPoint> _furnfinalResultCache
+FIELD Private, Static InteractionPoint[] _furnPathCache
+FIELD Private, Static System.Collections.Generic.HashSet`1<Room> _failPathIgnore
+FIELD Public System.Single WaitingForQueue
+FIELD Public, Static System.Collections.Generic.Dictionary`2<Room/RoomLimits,System.Collections.Generic.HashSet`1<System.Int32>> ValidLimits
+FIELD Public System.Boolean ShouldWork
+FIELD Private System.Int32 _lastJobDiff
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> _problemCache
+FIELD Private, NotSerialized System.Boolean UpdateStateInfluence
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Single> _cachedBenefits
+FIELD Private, NotSerialized System.Single _cachedBenefitValue
+PROPERTY InteractionPoint Actor::UsingPoint()
+PROPERTY System.Collections.Generic.List`1<PathVector> Actor::CurrentPath()
+PROPERTY System.Boolean Actor::HasAssignedRooms()
+PROPERTY System.Boolean Actor::TrappedInToilet()
+PROPERTY Employee Actor::employee()
+PROPERTY Furniture Actor::Reserved()
+PROPERTY Furniture Actor::OnHead()
+PROPERTY SDateTime Actor::VacationMonth()
+PROPERTY Actor/AnimationStates Actor::CurrentAnimState()
+PROPERTY System.Collections.Generic.List`1<ActorBodyItem> Actor::BodyItems()
+PROPERTY UnityEngine.Transform Actor::RootBone()
+PROPERTY System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> Actor::Rig()
+PROPERTY System.Boolean Actor::UsesLOD1()
+PROPERTY System.Boolean Actor::NeedsDestruction()
+PROPERTY RoomSegment Actor::Guarding()
+PROPERTY System.Single Actor::Noisiness()
+PROPERTY System.Int32 Actor::SpawnTime()
+PROPERTY System.Boolean Actor::TakingCourses()
+PROPERTY System.Int32 Actor::Floor()
+PROPERTY Room Actor::currentActualRoom()
+PROPERTY Room Actor::currentRoom()
+PROPERTY System.Single Actor::TeamCompatibility()
+PROPERTY System.String Actor::Team()
+PROPERTY System.Boolean Actor::IsValid()
+PROPERTY System.Boolean Actor::IsInitialized()
+METHOD Public, HideBySig System.Void Actor::SetTraitView(Employee/Trait,System.Int32,System.Int32,System.Boolean,System.Nullable`1<UnityEngine.Color>)
+IL_0000: ldarg.s overwrite
+IL_0002: brtrue.s IL_0015
+IL_0004: ldarg.0
+IL_0005: ldfld Employee/Trait Actor::_traitView
+IL_000a: brfalse.s IL_0015
+IL_000c: ldarg.0
+IL_000d: ldfld Employee/Trait Actor::_traitView
+IL_0012: ldarg.1
+IL_0013: bne.un.s IL_003e
+IL_0015: ldarg.0
+IL_0016: ldarg.1
+IL_0017: stfld Employee/Trait Actor::_traitView
+IL_001c: ldarg.0
+IL_001d: ldarg.s color
+IL_001f: stfld System.Nullable`1<UnityEngine.Color> Actor::_traitColor
+IL_0024: ldarg.0
+IL_0025: call SDateTime SDateTime::Now()
+IL_002a: ldarg.3
+IL_002b: ldarg.2
+IL_002c: ldc.i4.0
+IL_002d: ldc.i4.0
+IL_002e: ldc.i4.0
+IL_002f: newobj System.Void SDateTime::.ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)
+IL_0034: call SDateTime SDateTime::op_Addition(SDateTime,SDateTime)
+IL_0039: stfld SDateTime Actor::_traitViewExp
+IL_003e: ret

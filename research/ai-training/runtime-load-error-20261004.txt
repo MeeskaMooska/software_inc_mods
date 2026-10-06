@@ -1,0 +1,4 @@
+> Error loading dll mod AI Compute with load errors:
+  System.Exception: [CS1519]: Unexpected symbol `try' in class, struct, or interface member declaration in AICompute.cs at [157, 7]
+   
+  (Filename: C:\buildslave\unity\build\Runtime/Export/Debug.bindings.h Line: 45)

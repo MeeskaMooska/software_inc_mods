@@ -1,0 +1,16 @@
+-start(base)
+-base(end)
+Aperture
+Beacon
+Clarity
+Horizon
+Lattice
+Meridian
+Nexus
+Prism
+Reason
+Solstice
+-end(stop)
+ AI
+ Intelligence
+ Model

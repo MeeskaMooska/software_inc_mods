@@ -1,0 +1,110 @@
+TYPE GUIWindow BASE UnityEngine.MonoBehaviour
+FIELD Public System.Boolean OnlyHide
+FIELD Public System.Boolean StartHidden
+FIELD Public System.Boolean Modal
+FIELD Public System.Boolean AlwaysOnTop
+FIELD Public System.Boolean ShowCentered
+FIELD Public System.Boolean ForcePosition
+FIELD Public System.Boolean HasBeenShown
+FIELD Public System.Boolean HideBlockPanel
+FIELD Public System.Boolean IgnoreBuildMode
+FIELD Public System.Boolean IgnoreWindowBorder
+FIELD Public System.Boolean ContinuallyUpdateSize
+FIELD Public UnityEngine.Vector2 MinSize
+FIELD Public UnityEngine.UI.Text TitleText
+FIELD Public System.String InitialTitle
+FIELD Public System.Action OnClose
+FIELD Public System.Boolean OnCloseAfter
+FIELD Public UnityEngine.GameObject MainPanel
+FIELD Public UnityEngine.GameObject CloseButton
+FIELD Public UnityEngine.GameObject SizeButton
+FIELD Public UnityEngine.UI.Button HelpButton
+FIELD Public UnityEngine.RectTransform SpawnFrom
+FIELD Public UnityEngine.Events.UnityEvent OnSizeChanged
+FIELD Public System.String WindowSizeID
+FIELD Public System.String ClosePrompt
+FIELD Public System.Boolean SavePosition
+FIELD Public System.String AssociatedTutorial
+FIELD Private System.String _title
+FIELD Private UnityEngine.Vector2 InitMouseOffset
+FIELD Private UnityEngine.Vector2 InitWindowOffset
+FIELD Private UnityEngine.Vector2 InitWindowSize
+FIELD Private System.Boolean Dragging
+FIELD Private System.Boolean Sizing
+FIELD Private System.Boolean SizeHor
+FIELD Private System.Boolean SizeVert
+FIELD Private System.Boolean SizeMove
+FIELD Private System.Boolean Collapsed
+FIELD Private System.Boolean reactiveSizeButton
+FIELD Public UnityEngine.UI.Image TopPanel
+FIELD Private, Static UnityEngine.Color _activeColor
+FIELD Private, Static UnityEngine.Color _inactiveColor
+FIELD Public UnityEngine.Events.UnityEvent OnGainedFocus
+FIELD Public UnityEngine.Events.UnityEvent OnLostFocus
+FIELD Public UnityEngine.Events.UnityEvent OnAccept
+FIELD Public GUIWindow/CollapseEvent OnCollapse
+FIELD Public, NotSerialized UnityEngine.GameObject BlockPanel
+FIELD Public, NotSerialized GUIWindow Child
+FIELD Public, NotSerialized GUIWindow Parent
+FIELD Private System.Single LastHeight
+FIELD Private System.Single LastWidth
+FIELD Public UnityEngine.RectTransform rectTransform
+PROPERTY System.Boolean GUIWindow::IsActiveWindow()
+PROPERTY System.Boolean GUIWindow::CanSize()
+PROPERTY System.Boolean GUIWindow::IsCollapsed()
+PROPERTY System.Boolean GUIWindow::Shown()
+PROPERTY System.String GUIWindow::Title()
+PROPERTY System.String GUIWindow::NonLocTitle()
+METHOD Public, HideBySig System.Void GUIWindow::Show()
+IL_0000: ldarg.0
+IL_0001: ldc.i4.0
+IL_0002: ldc.i4.1
+IL_0003: call System.Void GUIWindow::Show(System.Boolean,System.Boolean)
+IL_0008: ret
+METHOD Public, HideBySig System.Void GUIWindow::Show(System.Boolean,System.Boolean)
+IL_0000: ldarg.0
+IL_0001: call UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_0006: callvirt System.Boolean UnityEngine.GameObject::get_activeSelf()
+IL_000b: brfalse.s IL_0018
+IL_000d: ldarg.1
+IL_000e: brtrue.s IL_0018
+IL_0010: ldarg.0
+IL_0011: call System.Void WindowManager::Focus(GUIWindow)
+IL_0016: br.s IL_0066
+IL_0018: ldarg.0
+IL_0019: ldfld UnityEngine.RectTransform GUIWindow::rectTransform
+IL_001e: ldnull
+IL_001f: call System.Boolean UnityEngine.Object::op_Equality(UnityEngine.Object,UnityEngine.Object)
+IL_0024: brfalse.s IL_0032
+IL_0026: ldarg.0
+IL_0027: ldarg.0
+IL_0028: call !!0 UnityEngine.Component::GetComponent<UnityEngine.RectTransform>()
+IL_002d: stfld UnityEngine.RectTransform GUIWindow::rectTransform
+IL_0032: ldarg.0
+IL_0033: call System.Void WindowManager::RegisterWindow(GUIWindow)
+IL_0038: ldarg.0
+IL_0039: call UnityEngine.GameObject UnityEngine.Component::get_gameObject()
+IL_003e: ldc.i4.1
+IL_003f: callvirt System.Void UnityEngine.GameObject::SetActive(System.Boolean)
+IL_0044: ldarg.0
+IL_0045: ldfld System.Boolean GUIWindow::Collapsed
+IL_004a: brtrue.s IL_0066
+IL_004c: ldarg.0
+IL_004d: call System.Boolean GUIWindow::get_CanSize()
+IL_0052: brfalse.s IL_0066
+IL_0054: ldc.i4.s 30
+IL_0056: ldarg.0
+IL_0057: ldfld UnityEngine.GameObject GUIWindow::SizeButton
+IL_005c: callvirt !!0 UnityEngine.GameObject::GetComponent<UnityEngine.RectTransform>()
+IL_0061: call System.Void HelpTipPanel::Show(HintController/Hints,UnityEngine.RectTransform)
+IL_0066: ldarg.2
+IL_0067: brfalse.s IL_0077
+IL_0069: ldarg.0
+IL_006a: ldfld System.Boolean GUIWindow::Collapsed
+IL_006f: brfalse.s IL_0077
+IL_0071: ldarg.0
+IL_0072: call System.Void GUIWindow::ToggleCollapse()
+IL_0077: ldarg.0
+IL_0078: ldc.i4.1
+IL_0079: stfld System.Boolean GUIWindow::HasBeenShown
+IL_007e: ret

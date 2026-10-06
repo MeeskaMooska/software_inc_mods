@@ -1,0 +1,194 @@
+TYPE DesignDocumentWindow BASE UnityEngine.MonoBehaviour
+FIELD Public System.Int32 CurrentPage
+FIELD Public System.Collections.Generic.List`1<DesignDocumentWindow/RectSetups> Pages
+FIELD Public System.Int32 MaxDefaultPages
+FIELD Public System.String[] PageNames
+FIELD Public System.Boolean PageChanged
+FIELD Public UnityEngine.RectTransform PageContent
+FIELD Public FeatureCard FeatureCardPrefab
+FIELD Public GUIWindow Window
+FIELD Public UnityEngine.UI.InputField ProductName
+FIELD Public UnityEngine.UI.InputField PriceText
+FIELD Public UnityEngine.UI.InputField NewFramework
+FIELD Public GUICombobox TypeCombo
+FIELD Public GUICombobox ServerCombo
+FIELD Public GUICombobox SCMCombo
+FIELD Public GUICombobox CategoryCombo
+FIELD Public GUICombobox SubsidiaryCombo
+FIELD Public GUIPieChart[] Pies
+FIELD Public UnityEngine.UI.Text[] Submarkets
+FIELD Public GUIProgressBar[] SubmarketSats
+FIELD Public TriangleSlider SubmarketSlider
+FIELD Public UnityEngine.Color[] SubMarketColors
+FIELD Public UnityEngine.UI.Button NameButton
+FIELD Public UnityEngine.UI.Button IPButton
+FIELD Public UnityEngine.UI.Button PrevPage
+FIELD Public UnityEngine.UI.Button NextPage
+FIELD Public UnityEngine.GameObject ProjManButton
+FIELD Public UnityEngine.GameObject NewFrameworkNameLabel
+FIELD Public UnityEngine.UI.Toggle HouseToggle
+FIELD Public UnityEngine.UI.Toggle NewFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle UseFrameworkToggle
+FIELD Public UnityEngine.UI.Toggle SkipGeneration
+FIELD Public UnityEngine.UI.Toggle SubscriptionToggle
+FIELD Public UnityEngine.UI.Toggle SequelMarketToggle
+FIELD Public UnityEngine.UI.Toggle CompetitionMarketToggle
+FIELD Public UnityEngine.UI.Text IPButtonText
+FIELD Public UnityEngine.UI.Text DesignTeamText
+FIELD Public UnityEngine.UI.Text DevelopTeamText
+FIELD Public UnityEngine.UI.Text TeamIssueText
+FIELD Public UnityEngine.UI.Text PageTitle
+FIELD Public UnityEngine.UI.Text ExistingFramework
+FIELD Public UnityEngine.UI.Text PageNumLabel
+FIELD Public VarValueSheet DescriptionSh
+FIELD Public VarValueSheet LimitSheet
+FIELD Public GUIListView OSList
+FIELD Public UnityEngine.RectTransform NeedsRect
+FIELD Public UnityEngine.RectTransform ForcedAddRect
+FIELD Public UnityEngine.UI.ScrollRect FeatureScroll
+FIELD Public UnityEngine.GameObject ButtonPrefab
+FIELD Public UnityEngine.GameObject LabelPrefab
+FIELD Public UnityEngine.GameObject FeaturePrefab
+FIELD Public FrameworkWindow FrameworkDialog
+FIELD Public UnityEngine.GameObject AdvancedButton
+FIELD Public UnityEngine.GameObject PagePanel
+FIELD Public LeadDesignControl LeadDesigner
+FIELD Public UnityEngine.UI.Text PrevPageLabel
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<System.String,SoftwareProduct>> NeedsList
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,System.Collections.Generic.KeyValuePair`2<SoftwareAddOn,AddonDesignWindow/AddonDesign>> ForcedAddList
+FIELD Public, NotSerialized System.Collections.Generic.List`1<FeatureCard> FeatureCards
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> NeedLabels
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<UnityEngine.UI.Button,UnityEngine.GameObject> ForcedAddLabels
+FIELD Private, NotSerialized SoftwareFramework _framework
+FIELD Public UnityEngine.GameObject NeedsSubPanel
+FIELD Public UnityEngine.GameObject OSPanel
+FIELD Public UnityEngine.GameObject OSLabel
+FIELD Public UnityEngine.GameObject NeedsLabel
+FIELD Public UnityEngine.GameObject ForcedAddLabel
+FIELD Public UnityEngine.GameObject ExistingFrameworkButton
+FIELD Public UnityEngine.GameObject ManufactureButton
+FIELD Public UnityEngine.GameObject ManufactureView
+FIELD Public UnityEngine.GameObject HardwareDesignButton
+FIELD Public ManufacturingPanel Manufacturing
+FIELD Public UnityEngine.Gradient InterestGradient
+FIELD Public UnityEngine.RectTransform FeaturePanel
+FIELD Public UnityEngine.GameObject[] DistributionDisable
+FIELD Public System.String DefaultName
+FIELD Public, Static System.String[] BalanceNames
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DesignTeams
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<System.String> DevelopmentTeams
+FIELD Private, NotSerialized PublisherDeal _publisher
+FIELD Private, NotSerialized System.Byte[] _hardwareDesign
+FIELD Private, NotSerialized SoftwareProduct _sequelTo
+FIELD Private, NotSerialized SoftwareType _swOverride
+FIELD Private, NotSerialized SoftwareCategory _swCatOverride
+FIELD Private, NotSerialized System.Boolean priceHasBeenEdited
+FIELD Public, NotSerialized System.Boolean DisableFeatureUpdate
+FIELD Private System.Boolean _noSubUpdate
+FIELD Private System.String _lastSWType
+FIELD Private System.String _lastSWCat
+FIELD Private System.Boolean _changeSWType
+FIELD Private System.Boolean _checkingWithPublisher
+FIELD Private System.Collections.Generic.List`1<System.String> _varList
+FIELD Private System.Collections.Generic.List`1<System.String> _valueList
+FIELD Private System.Collections.Generic.List`1<System.String> _tipList
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> _teamSpecs
+FIELD Public System.Boolean AutoDev
+FIELD Public PublisherDealWindow PubDealWindow
+FIELD Public UnityEngine.UI.Text PublisherText
+PROPERTY SimulatedCompany DesignDocumentWindow::Subsidiairy()
+PROPERTY SoftwareProduct DesignDocumentWindow::SequelTo()
+PROPERTY SoftwareType DesignDocumentWindow::SelectedType()
+PROPERTY System.Single DesignDocumentWindow::Price()
+PROPERTY SoftwareFramework DesignDocumentWindow::Framework()
+PROPERTY System.Collections.Generic.Dictionary`2<Employee/EmployeeRole,System.Collections.Generic.Dictionary`2<System.String,System.Int32>> DesignDocumentWindow::TeamSpecs()
+METHOD Private, HideBySig System.Void DesignDocumentWindow::GenerateFeatures()
+LOCAL 0 DesignDocumentWindow/<>c__DisplayClass145_0
+LOCAL 1 SoftwareType
+LOCAL 2 System.Collections.Generic.IEnumerator`1<SpecFeature>
+LOCAL 3 SpecFeature
+LOCAL 4 DesignDocumentWindow/<>c__DisplayClass145_1
+LOCAL 5 FeatureCard
+IL_0000: newobj System.Void DesignDocumentWindow/<>c__DisplayClass145_0::.ctor()
+IL_0005: stloc.0
+IL_0006: ldarg.0
+IL_0007: call System.Void DesignDocumentWindow::ClearFeatures()
+IL_000c: ldarg.0
+IL_000d: call SoftwareType DesignDocumentWindow::get_SelectedType()
+IL_0012: stloc.1
+IL_0013: ldloc.0
+IL_0014: ldarg.0
+IL_0015: ldloc.1
+IL_0016: call SoftwareCategory DesignDocumentWindow::GetCategory(SoftwareType)
+IL_001b: stfld SoftwareCategory DesignDocumentWindow/<>c__DisplayClass145_0::cat
+IL_0020: ldloc.1
+IL_0021: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_0026: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::get_Values()
+IL_002b: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SpecFeature>(System.Collections.IEnumerable)
+IL_0030: ldloc.0
+IL_0031: ldftn System.Boolean DesignDocumentWindow/<>c__DisplayClass145_0::<GenerateFeatures>b__0(SpecFeature)
+IL_0037: newobj System.Void System.Func`2<SpecFeature,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_003c: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SpecFeature>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_0041: callvirt System.Collections.Generic.IEnumerator`1<!0> System.Collections.Generic.IEnumerable`1<SpecFeature>::GetEnumerator()
+IL_0046: stloc.2
+IL_0047: br IL_00ce
+IL_004c: ldloc.2
+IL_004d: callvirt !0 System.Collections.Generic.IEnumerator`1<SpecFeature>::get_Current()
+IL_0052: stloc.3
+IL_0053: newobj System.Void DesignDocumentWindow/<>c__DisplayClass145_1::.ctor()
+IL_0058: stloc.s V_4
+IL_005a: ldloc.s V_4
+IL_005c: ldloc.0
+IL_005d: stfld DesignDocumentWindow/<>c__DisplayClass145_0 DesignDocumentWindow/<>c__DisplayClass145_1::CS$<>8__locals1
+IL_0062: ldloc.s V_4
+IL_0064: ldloc.3
+IL_0065: stfld SpecFeature DesignDocumentWindow/<>c__DisplayClass145_1::spec1
+IL_006a: ldarg.0
+IL_006b: ldfld FeatureCard DesignDocumentWindow::FeatureCardPrefab
+IL_0070: call !!0 UnityEngine.Object::Instantiate<FeatureCard>(!!0)
+IL_0075: stloc.s V_5
+IL_0077: ldloc.s V_5
+IL_0079: callvirt UnityEngine.Transform UnityEngine.Component::get_transform()
+IL_007e: ldarg.0
+IL_007f: ldfld UnityEngine.RectTransform DesignDocumentWindow::FeaturePanel
+IL_0084: ldc.i4.0
+IL_0085: callvirt System.Void UnityEngine.Transform::SetParent(UnityEngine.Transform,System.Boolean)
+IL_008a: ldarg.0
+IL_008b: ldfld System.Collections.Generic.List`1<FeatureCard> DesignDocumentWindow::FeatureCards
+IL_0090: ldloc.s V_5
+IL_0092: callvirt System.Void System.Collections.Generic.List`1<FeatureCard>::Add(!0)
+IL_0097: ldloc.s V_5
+IL_0099: ldloc.3
+IL_009a: ldloc.1
+IL_009b: ldfld System.Collections.Generic.Dictionary`2<System.String,FeatureBase> SoftwareType::Features
+IL_00a0: callvirt System.Collections.Generic.Dictionary`2/ValueCollection<!0,!1> System.Collections.Generic.Dictionary`2<System.String,FeatureBase>::get_Values()
+IL_00a5: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::OfType<SubFeature>(System.Collections.IEnumerable)
+IL_00aa: ldloc.s V_4
+IL_00ac: ldftn System.Boolean DesignDocumentWindow/<>c__DisplayClass145_1::<GenerateFeatures>b__1(SubFeature)
+IL_00b2: newobj System.Void System.Func`2<SubFeature,System.Boolean>::.ctor(System.Object,System.IntPtr)
+IL_00b7: call System.Collections.Generic.IEnumerable`1<!!0> System.Linq.Enumerable::Where<SubFeature>(System.Collections.Generic.IEnumerable`1<!!0>,System.Func`2<!!0,System.Boolean>)
+IL_00bc: ldloc.s V_4
+IL_00be: ldfld DesignDocumentWindow/<>c__DisplayClass145_0 DesignDocumentWindow/<>c__DisplayClass145_1::CS$<>8__locals1
+IL_00c3: ldfld SoftwareCategory DesignDocumentWindow/<>c__DisplayClass145_0::cat
+IL_00c8: ldarg.0
+IL_00c9: callvirt System.Void FeatureCard::Init(SpecFeature,System.Collections.Generic.IEnumerable`1<SubFeature>,SoftwareCategory,DesignDocumentWindow)
+IL_00ce: ldloc.2
+IL_00cf: callvirt System.Boolean System.Collections.IEnumerator::MoveNext()
+IL_00d4: brtrue IL_004c
+IL_00d9: leave.s IL_00e5
+IL_00db: ldloc.2
+IL_00dc: brfalse.s IL_00e4
+IL_00de: ldloc.2
+IL_00df: callvirt System.Void System.IDisposable::Dispose()
+IL_00e4: endfinally
+IL_00e5: ldarg.0
+IL_00e6: ldfld UnityEngine.UI.ScrollRect DesignDocumentWindow::FeatureScroll
+IL_00eb: call UnityEngine.Vector2 UnityEngine.Vector2::get_up()
+IL_00f0: callvirt System.Void UnityEngine.UI.ScrollRect::set_normalizedPosition(UnityEngine.Vector2)
+IL_00f5: ldarg.0
+IL_00f6: ldfld UnityEngine.UI.ScrollRect DesignDocumentWindow::FeatureScroll
+IL_00fb: callvirt !!0 UnityEngine.Component::GetComponent<UnityEngine.RectTransform>()
+IL_0100: call System.Void UnityEngine.UI.LayoutRebuilder::ForceRebuildLayoutImmediate(UnityEngine.RectTransform)
+IL_0105: ldarg.0
+IL_0106: call System.Void DesignDocumentWindow::FixFeatures()
+IL_010b: ret

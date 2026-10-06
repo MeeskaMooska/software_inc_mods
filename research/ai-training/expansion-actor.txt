@@ -1,0 +1,518 @@
+TYPE Actor BASE Selectable
+INTERFACE IDistributee
+INTERFACE IHasSpeed
+INTERFACE IStylable
+INTERFACE IFormatColorObject
+INTERFACE IHasVector
+INTERFACE IBenefitReceiver
+INTERFACE IDoorTriggerer
+FIELD Public, Static System.UInt32[][] ParticleSeed
+FIELD Public, Static System.Int32 AffectorCount
+FIELD Public, Static System.Single HumanHeight
+FIELD Public, Static System.Single StressRelief
+FIELD Public, Static ObjectPool`1<System.Collections.Generic.List`1<PathVector>> PathPool
+FIELD Public Actor/WorkParticle EmitType
+FIELD Public System.Boolean BladderFailCheck
+FIELD Public System.Boolean HungerFailCheck
+FIELD Public System.Single TestVarStand
+FIELD Public System.Single TestVarVehicle
+FIELD Public System.Single CrunchHangover
+FIELD Public System.Single ComplaintLevel
+FIELD Public System.Single QuitLevel
+FIELD Private, NotSerialized System.String[] _complaintReasons
+FIELD Private, Static System.Single TeamRelationTimerMax
+FIELD Private System.Int32 TeamRelationNum
+FIELD Private System.Single TeamRelationTimer
+FIELD Public, NotSerialized System.Single ChristmasBonus
+FIELD Public, NotSerialized ScissorLift ActiveScissor
+FIELD Public System.Boolean IsOnLift
+FIELD Public UnityEngine.Vector3 LiftStart
+FIELD Public System.Single LiftHeight
+FIELD Public System.Single LiftRot
+FIELD Public System.Boolean UsedSubway
+FIELD Public System.Int32 DummyCount
+FIELD Public System.Boolean BadBack
+FIELD Public System.Boolean QuitAmicably
+FIELD Public System.Boolean LeaveWhenDone
+FIELD Public System.Boolean Biking
+FIELD Public System.Single AirQuality
+FIELD Public, NotSerialized System.Boolean DogBlessing
+FIELD Public, NotSerialized LeadDesignDemands/Demand BreachedDemands
+FIELD Private InteractionPoint _usingPoint
+FIELD Public ActorStateBehaviour/ActorEvent LastTrigger
+FIELD Private, NotSerialized System.Single _trashTimer
+FIELD Public System.Collections.Generic.HashSet`1<Furniture> Owns
+FIELD Private System.Collections.Generic.List`1<PathVector> _currentPath
+FIELD Public UnityEngine.AudioSource AudioComp
+FIELD Public UnityEngine.AudioClip[] KeyboardSFX
+FIELD Public UnityEngine.AudioClip[] TalkSFX
+FIELD Public UnityEngine.AudioClip[] FemaleTalkSFX
+FIELD Public UnityEngine.BoxCollider[] Colliders
+FIELD Public UnityEngine.AudioClip HammerHitSFX
+FIELD Public UnityEngine.AudioClip[] FeetSFX
+FIELD Public SDateTime LastMeeting
+FIELD Public SDateTime MeetingTime
+FIELD Public SDateTime DriveTime
+FIELD Public SDateTime DespawnTime
+FIELD Public CarScript MyCar
+FIELD Public UnityEngine.MeshRenderer VisibilityRenderer
+FIELD Public UnityEngine.LODGroup LOD
+FIELD Public UnityEngine.GameObject DataBall
+FIELD Public UnityEngine.MeshRenderer DataBallRend
+FIELD Public UnityEngine.Vector3 ActualPosition
+FIELD Public, NotSerialized System.Collections.Generic.List`1<AutoDevWorkItem> AutoDevs
+FIELD Private, NotSerialized System.UInt32 _targetActorID
+FIELD Private, NotSerialized System.UInt32 _guardingID
+FIELD Public, NotSerialized Actor TargetActor
+FIELD Public System.Int32 CarSpawnID
+FIELD Public, NotSerialized System.Single RetirementFund
+FIELD Public, NotSerialized System.Single LastCheckWait
+FIELD Public UnityEngine.GameObject CensorRend
+FIELD Public UnityEngine.Renderer[] LOD2UpperBody
+FIELD Public UnityEngine.Renderer[] LOD2LowerBody
+FIELD Public UnityEngine.Renderer[] LOD2Head
+FIELD Public UnityEngine.Renderer[] LOD2Feet
+FIELD Public UnityEngine.Renderer[] LOD2Hair
+FIELD Public, NotSerialized SHashSet`1<System.String> AssignedRoomGroups
+FIELD Public, NotSerialized ProductPrintOrder Order
+FIELD Private, NotSerialized ActorBodyItem _shadow
+FIELD Public System.Int32 Boxes
+FIELD Public System.Int32 BoxesShipped
+FIELD Public System.Int32 LastBoxesShipped
+FIELD Public System.Int32 CarIdx
+FIELD Public System.Int32 SickDays
+FIELD Public UnityEngine.Color CarColor3
+FIELD Public System.Int32 CarWheelHubs
+FIELD Public System.Int32 CurrentPathNode
+FIELD Public SDateTime LeaveTime
+FIELD Public System.Single PathProg
+FIELD Public System.Single WalkSpeed
+FIELD Public System.Single Timer
+FIELD Public System.Single SocialFactor
+FIELD Public System.Single StressFactor
+FIELD Public System.Boolean BO
+FIELD Public System.Single GermAdd
+FIELD Public System.Single GermCount
+FIELD Public System.Single Burnt
+FIELD Public System.Boolean NegotiateSalary
+FIELD Public System.Boolean IgnoreOffSalary
+FIELD Public SDateTime LastSocial
+FIELD Public Holdable coffee
+FIELD Public Holdable Food
+FIELD Public UnityEngine.Vector3 LastWorldPos
+FIELD Public System.Int32 TargetFloor
+FIELD Public System.Boolean HasMet
+FIELD Public System.Boolean HasMetSub
+FIELD Public System.Single MeetingDiff
+FIELD Private, NotSerialized Employee _employee
+FIELD Private, NotSerialized System.Boolean _isWalking
+FIELD Public Actor/ElevatorState EState
+FIELD Public, NotSerialized ElevatorGroup QueuedForElevator
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Room> InspectRooms
+FIELD Private UnityEngine.GameObject HolidayItem
+FIELD Public, NotSerialized System.Collections.Generic.List`1<InventoryItem> Stolen
+FIELD Public, NotSerialized SDateTime MentorCooldown
+FIELD Public, NotSerialized System.Boolean IsMentor
+FIELD Public, NotSerialized System.Boolean BeingMentored
+FIELD Private System.Boolean _allowHoliday
+FIELD Public, NotSerialized System.Single NightOwlDebuff
+FIELD Public, NotSerialized System.Boolean WasSick
+FIELD Public, NotSerialized SDateTime ForgetfulETA
+FIELD Private, NotSerialized Employee/Trait _traitView
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Color> _traitColor
+FIELD Private, NotSerialized SDateTime _traitViewExp
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Employee> HasInteractedWith
+FIELD Public, NotSerialized System.Single LastWorkTime
+FIELD Private Furniture _reserved
+FIELD Private Furniture _onHead
+FIELD Public UnityEngine.Transform NeckBone
+FIELD Public UnityEngine.Transform LookBone
+FIELD Public UnityEngine.Transform HeadBone
+FIELD Public UnityEngine.Transform LeftHand
+FIELD Public UnityEngine.Transform RightHand
+FIELD Public UnityEngine.Transform EyePos
+FIELD Public SDateTime _vacationMonth
+FIELD Public SDateTime AlternateVacation
+FIELD Public System.Boolean AtFurniture
+FIELD Public System.Boolean WaitSpawn
+FIELD Public System.Boolean WasOnScreen
+FIELD Public System.Boolean Despawned
+FIELD Public System.Boolean IsIdle
+FIELD Public System.Boolean WagePaid
+FIELD Public Actor/WorkStatus IdleStatus
+FIELD Public Room CleaningRoom
+FIELD Public, NotSerialized Deal deal
+FIELD Public System.Collections.Generic.Stack`1<UnityEngine.Vector3> CleaningPoints
+FIELD Public, NotSerialized UnityEngine.Vector2 CurrentCleaningSpot
+FIELD Public System.Single AvailableDirt
+FIELD Private System.String[] actions
+FIELD Private System.String[] actionsFounder
+FIELD Private System.String[] staffActions
+FIELD Public UnityEngine.Animator anim
+FIELD Public UnityEngine.Color SkinColor
+FIELD Public UnityEngine.Color HairColor
+FIELD Public, NotSerialized System.UInt32[] LastWorkItems
+FIELD Public System.Int32 LastWorkCounter
+FIELD Public System.Boolean IsTalking
+FIELD Public System.Boolean GoHomeNow
+FIELD Public System.Int32 StayHome
+FIELD Public System.Boolean OnCall
+FIELD Public System.Boolean HasFridged
+FIELD Public System.Single NextParticle
+FIELD Public System.Single NextSmell
+FIELD Public System.Boolean IsWorking
+FIELD Public System.Single Effectiveness
+FIELD Public TableScript LoiterTable
+FIELD Public System.Int32 StaffOn
+FIELD Public System.Int32 StaffOff
+FIELD Public AI/AIType AItype
+FIELD Public AI AIScript
+FIELD Public, NotSerialized Furniture ReservedFridge
+FIELD Public, NotSerialized Furniture ReservedPort
+FIELD Public, NotSerialized System.Collections.Generic.HashSet`1<Furniture> ReservedFurniture
+FIELD Public Actor/HomeState SpecialState
+FIELD Public System.Int32 CurrentWorkItem
+FIELD Public System.Int32 SubWorkItem
+FIELD Public System.Int32 WorkCyclesLeft
+FIELD Public System.Boolean SecondaryWork
+FIELD Public System.Boolean SecondaryTask
+FIELD Public System.Boolean Female
+FIELD Public, NotSerialized System.Collections.Generic.List`1<System.Collections.Generic.KeyValuePair`2<Employee/EmployeeRole,System.String>> Courses
+FIELD Public SDateTime LastCourse
+FIELD Public System.Boolean Turn
+FIELD Public System.Single TargetRot
+FIELD Public Holdable[] Holding
+FIELD Private, NotSerialized System.Collections.Generic.HashSet`1<System.UInt32> _neighbours
+FIELD Public, NotSerialized System.Single NeighbourSocialBoost
+FIELD Public, NotSerialized System.Single[] Affactors
+FIELD Public, NotSerialized System.Collections.Generic.Dictionary`2<System.String,InteractionPoint> InQueue
+FIELD Public, NotSerialized System.Single GuestPatience
+FIELD Private Room _currentRoom
+FIELD Public EyeScript Eyes
+FIELD Public System.Collections.Generic.List`1<UnityEngine.Renderer> Children
+FIELD Private, NotSerialized System.Collections.Generic.List`1<ActorBodyItem> _bodyItems
+FIELD Private UnityEngine.Transform _rootBone
+FIELD Private System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> <Rig>k__BackingField
+FIELD Private, NotSerialized RoomSegment _guarding
+FIELD Private System.Single _noisiness
+FIELD Private, Static, InitOnly System.Collections.Generic.HashSet`1<System.UInt32> IteratedAssignedRooms
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<System.String> DeletedAssignedRooms
+FIELD Private System.Single teamComp
+FIELD Public System.Int32 LastAnim
+FIELD Private, NotSerialized Team team
+FIELD Public, NotSerialized System.Boolean OnDestroyWasCalled
+FIELD Private, NotSerialized UnityEngine.Vector3 LastPos
+FIELD Private, NotSerialized System.Boolean _initialized
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Quaternion> _lastLookAt
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Quaternion> _rndLookAt
+FIELD Private, NotSerialized System.Int32 _lookAtIndex
+FIELD Private, NotSerialized System.Single _lookAtCountdown
+FIELD Private System.Single _animRandomness
+FIELD Private System.Int32 _currentBlend
+FIELD Public, NotSerialized System.Boolean LastVisible
+FIELD Public, NotSerialized System.Single UnusedMeters
+FIELD Public, Static System.Boolean UseSimOffset
+FIELD Public, Static System.Single SimOffsetEffect
+FIELD Public, Static System.Single SimOffsetSize
+FIELD Public, NotSerialized UnityEngine.Vector2 PosOffset
+FIELD Public, Static System.Int32 FilterCheck
+FIELD Private, Static System.Collections.Generic.SortedList`2<System.Single,InteractionPoint> _furnResultCache
+FIELD Private, Static System.Collections.Generic.List`1<InteractionPoint> _furnfinalResultCache
+FIELD Private, Static InteractionPoint[] _furnPathCache
+FIELD Private, Static System.Collections.Generic.HashSet`1<Room> _failPathIgnore
+FIELD Public System.Single WaitingForQueue
+FIELD Public, Static System.Collections.Generic.Dictionary`2<Room/RoomLimits,System.Collections.Generic.HashSet`1<System.Int32>> ValidLimits
+FIELD Public System.Boolean ShouldWork
+FIELD Private System.Int32 _lastJobDiff
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,System.Single> _problemCache
+FIELD Private, NotSerialized System.Boolean UpdateStateInfluence
+FIELD Private, NotSerialized System.Collections.Generic.Dictionary`2<System.String,System.Single> _cachedBenefits
+FIELD Private, NotSerialized System.Single _cachedBenefitValue
+PROPERTY InteractionPoint Actor::UsingPoint()
+PROPERTY System.Collections.Generic.List`1<PathVector> Actor::CurrentPath()
+PROPERTY System.Boolean Actor::HasAssignedRooms()
+PROPERTY System.Boolean Actor::TrappedInToilet()
+PROPERTY Employee Actor::employee()
+PROPERTY Furniture Actor::Reserved()
+PROPERTY Furniture Actor::OnHead()
+PROPERTY SDateTime Actor::VacationMonth()
+PROPERTY Actor/AnimationStates Actor::CurrentAnimState()
+PROPERTY System.Collections.Generic.List`1<ActorBodyItem> Actor::BodyItems()
+PROPERTY UnityEngine.Transform Actor::RootBone()
+PROPERTY System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> Actor::Rig()
+PROPERTY System.Boolean Actor::UsesLOD1()
+PROPERTY System.Boolean Actor::NeedsDestruction()
+PROPERTY RoomSegment Actor::Guarding()
+PROPERTY System.Single Actor::Noisiness()
+PROPERTY System.Int32 Actor::SpawnTime()
+PROPERTY System.Boolean Actor::TakingCourses()
+PROPERTY System.Int32 Actor::Floor()
+PROPERTY Room Actor::currentActualRoom()
+PROPERTY Room Actor::currentRoom()
+PROPERTY System.Single Actor::TeamCompatibility()
+PROPERTY System.String Actor::Team()
+PROPERTY System.Boolean Actor::IsValid()
+PROPERTY System.Boolean Actor::IsInitialized()
+METHOD Public, HideBySig, SpecialName InteractionPoint Actor::get_UsingPoint()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_UsingPoint(InteractionPoint)
+METHOD Public, HideBySig, SpecialName System.Collections.Generic.List`1<PathVector> Actor::get_CurrentPath()
+METHOD Public, HideBySig, SpecialName System.Boolean Actor::get_HasAssignedRooms()
+METHOD Public, HideBySig, SpecialName System.Boolean Actor::get_TrappedInToilet()
+METHOD Public, HideBySig System.Void Actor::InteractWith(Actor)
+METHOD Public, HideBySig System.Void Actor::SetTraitView(Employee/Trait,System.Int32,System.Int32,System.Boolean,System.Nullable`1<UnityEngine.Color>)
+METHOD Public, HideBySig, SpecialName Employee Actor::get_employee()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_employee(Employee)
+METHOD Public, HideBySig, SpecialName Furniture Actor::get_Reserved()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_Reserved(Furniture)
+METHOD Public, HideBySig, SpecialName Furniture Actor::get_OnHead()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_OnHead(Furniture)
+METHOD Private, HideBySig System.Void Actor::SetHeadDeserialize(Furniture)
+METHOD Private, HideBySig System.Boolean Actor::CheckOnHead(Furniture)
+METHOD Public, HideBySig System.Void Actor::CheckMeeting(System.Boolean)
+METHOD Public, HideBySig, SpecialName SDateTime Actor::get_VacationMonth()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_VacationMonth(SDateTime)
+METHOD Public, HideBySig, SpecialName Actor/AnimationStates Actor::get_CurrentAnimState()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.List`1<ActorBodyItem> Actor::get_BodyItems()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void Actor::set_BodyItems(System.Collections.Generic.List`1<ActorBodyItem>)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName UnityEngine.Transform Actor::get_RootBone()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void Actor::set_RootBone(UnityEngine.Transform)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform> Actor::get_Rig()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Void Actor::set_Rig(System.Collections.Generic.Dictionary`2<System.String,UnityEngine.Transform>)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean Actor::get_UsesLOD1()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean Actor::get_NeedsDestruction()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.Transform Actor::GetTransform()
+METHOD Public, HideBySig, SpecialName RoomSegment Actor::get_Guarding()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_Guarding(RoomSegment)
+METHOD Public, HideBySig, SpecialName System.Single Actor::get_Noisiness()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_Noisiness(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::UpdateEyes()
+METHOD Public, Static, HideBySig System.Int32 Actor::GetStaffHours(AI/AIType)
+METHOD Public, HideBySig System.Int32 Actor::GetStaffHours()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::UpdateHairColor(UnityEngine.Color)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::UpdateSkinColor(UnityEngine.Color)
+METHOD Public, HideBySig System.Void Actor::ClearPath(System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::IsAssignedRoom(Room)
+METHOD Public, HideBySig System.Void Actor::SetNeighbours(System.Collections.Generic.IList`1<Actor>)
+METHOD Public, HideBySig System.Void Actor::AddNeighbour(Actor)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<Actor> Actor::GetNeighbours()
+METHOD Public, HideBySig System.Void Actor::AddNeighbour(Actor,System.Single)
+METHOD Public, HideBySig System.Void Actor::RemoveNeighbour(System.UInt32)
+METHOD Public, HideBySig System.Void Actor::ClearNeighbours()
+METHOD Public, HideBySig System.Void Actor::UpdateNeighbourBoost()
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<Room> Actor::GetAssignedRooms()
+METHOD Public, HideBySig System.Boolean Actor::AreRoomsAssignedEmpty()
+METHOD Public, HideBySig, SpecialName System.Int32 Actor::get_SpawnTime()
+METHOD Public, HideBySig, SpecialName System.Boolean Actor::get_TakingCourses()
+METHOD Public, HideBySig, SpecialName System.Int32 Actor::get_Floor()
+METHOD Public, HideBySig, SpecialName Room Actor::get_currentActualRoom()
+METHOD Public, HideBySig, SpecialName Room Actor::get_currentRoom()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_currentRoom(Room)
+METHOD Private, HideBySig System.Void Actor::BurglarSecurityCheck()
+METHOD Public, HideBySig, SpecialName System.Single Actor::get_TeamCompatibility()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_TeamCompatibility(System.Single)
+METHOD Public, HideBySig System.Void Actor::SetTeamDeserialize(Team)
+METHOD Public, HideBySig, SpecialName System.String Actor::get_Team()
+METHOD Public, HideBySig, SpecialName System.Void Actor::set_Team(System.String)
+METHOD Public, HideBySig System.Void Actor::TeamRename(Team)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask, SpecialName System.Boolean Actor::get_IsValid()
+METHOD Public, HideBySig Team Actor::GetTeam()
+METHOD Public, Virtual, HideBySig System.String[] Actor::GetActions()
+METHOD Public, HideBySig System.Void Actor::SetCar(System.Int32)
+METHOD Public, HideBySig System.String Actor::LimitText(System.Single,System.Single)
+METHOD Public, Virtual, HideBySig System.String Actor::GetInfo()
+METHOD Public, HideBySig System.Boolean Actor::QueuedFor(System.String)
+METHOD Public, HideBySig System.Boolean Actor::IsUp(System.String)
+METHOD Public, Virtual, HideBySig System.String[] Actor::GetExtendedInfo()
+METHOD Public, Virtual, HideBySig UnityEngine.Color[] Actor::GetExtendedColorInfo()
+METHOD Public, Virtual, HideBySig System.String[] Actor::GetExtendedIconInfo()
+METHOD Public, Virtual, HideBySig System.String[] Actor::GetExtendedTooltipInfo()
+METHOD Public, Virtual, HideBySig System.Collections.Generic.IEnumerable`1<Selectable> Actor::GetRelated()
+METHOD Public, HideBySig System.Void Actor::MeetNow()
+METHOD Public, HideBySig System.Void Actor::AdjustLeaveTime()
+METHOD Public, HideBySig System.String Actor::CurrentState(System.Boolean)
+METHOD Public, HideBySig System.Void Actor::OnDestroy()
+METHOD Family, Virtual, HideBySig System.Void Actor::UpdateOnHighlight()
+METHOD Private, HideBySig System.Void Actor::UpdateShadowVisibility()
+METHOD Public, HideBySig System.Void Actor::UpdateCurrentRoom(System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::IsOnSkyRoad()
+METHOD Public, HideBySig System.Boolean Actor::IsOnSubway()
+METHOD Public, HideBySig System.Boolean Actor::IsOnRoad()
+METHOD Public, HideBySig System.Void Actor::ResetState()
+METHOD Public, HideBySig System.Void Actor::FleeNow(System.Boolean)
+METHOD Public, HideBySig System.Void Actor::PanicBurglar()
+METHOD Public, HideBySig System.Void Actor::RunToBurglar(Actor)
+METHOD Public, HideBySig System.Void Actor::Arrest(System.Boolean,CarScript)
+METHOD Public, HideBySig System.String Actor::GetActorGroup()
+METHOD Public, HideBySig, SpecialName System.Boolean Actor::get_IsInitialized()
+METHOD Public, HideBySig System.Void Actor::Init()
+METHOD Private, HideBySig System.Void Actor::Awake()
+METHOD Private, HideBySig System.Void Actor::Start()
+METHOD Public, HideBySig System.Void Actor::SetAnim(Actor/AnimationStates,System.Int32)
+METHOD Public, HideBySig System.Void Actor::ResetBlend()
+METHOD Public, HideBySig SVector3 Actor::GetBlend()
+METHOD Public, HideBySig System.Void Actor::SetBlend(System.Int32)
+METHOD Public, HideBySig System.Void Actor::SetBlend(System.Single,System.Single,System.Single,System.Single)
+METHOD Public, HideBySig System.Void Actor::BlendFromTo(System.Int32,System.Int32,System.Single)
+METHOD Public, HideBySig System.Int32 Actor::CurrentBlend()
+METHOD Public, HideBySig System.Void Actor::TowardsBlend(System.Int32,System.Single)
+METHOD Public, HideBySig System.Boolean Actor::MayPlaySound()
+METHOD Private, HideBySig System.Boolean Actor::IsInValidLookState()
+METHOD Private, HideBySig System.Single Actor::IsInRandomLookState()
+METHOD Private, HideBySig System.Void Actor::RandomSubAnim(System.Int32)
+METHOD Private, HideBySig System.Void Actor::LateUpdate()
+METHOD Private, Static, HideBySig System.Single Actor::ClampNeckAngle(System.Single)
+METHOD Private, HideBySig System.Boolean Actor::IsStandingUp()
+METHOD Private, HideBySig System.Boolean Actor::IsStandingStill()
+METHOD Private, HideBySig System.Void Actor::FixedUpdate()
+METHOD Public, Static, HideBySig System.Void Actor::EmitParticle(System.UInt32[],System.Int32,UnityEngine.Color,UnityEngine.Vector3)
+METHOD Private, HideBySig System.Single Actor::ClaustrophobiaFactor()
+METHOD Public, HideBySig System.Void Actor::UpdateDataBall()
+METHOD Public, HideBySig System.Void Actor::UpdateData()
+METHOD Private, HideBySig System.Void Actor::OnDisable()
+METHOD Private, HideBySig System.Void Actor::OnEnable()
+METHOD Public, HideBySig System.Void Actor::SetVisible(System.Boolean)
+METHOD Public, HideBySig System.Void Actor::UpdateAgeLook()
+METHOD Private, HideBySig System.Void Actor::TurnAround()
+METHOD Public, HideBySig Holdable Actor::GetItemAnyHand(System.String)
+METHOD Public, HideBySig Holdable Actor::GetItem(System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::LeaveItem(System.String,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::LeaveItem(Holdable,System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::ReTakeItemAnyHand(Holdable)
+METHOD Public, HideBySig System.Boolean Actor::ReTakeItem(Holdable,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::InitiateTurn(System.Single)
+METHOD Public, Static, HideBySig System.Void Actor::ConvertPath(System.Collections.Generic.List`1<PathVector>)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.Vector3 Actor::GetFuturePoint(System.Single)
+METHOD Public, HideBySig UnityEngine.Vector3 Actor::GetPathPoint(System.Single)
+METHOD Public, HideBySig System.Single Actor::GetWalkSpeedFactor(UnityEngine.Vector3,System.Int32)
+METHOD Private, HideBySig System.Boolean Actor::CheckElevator()
+METHOD Private, HideBySig System.Void Actor::MarkRoomEscapeViolation(Room,ElevatorGroup)
+METHOD Public, HideBySig System.Boolean Actor::WalkPath()
+METHOD Public, HideBySig UnityEngine.Vector2 Actor::GetPosWithOffset()
+METHOD Private, HideBySig System.Void Actor::SimulateOffset()
+METHOD Public, HideBySig System.Void Actor::InitLift(UnityEngine.Vector3,System.Single,System.Single)
+METHOD Private, HideBySig System.Boolean Actor::GotoNextNode()
+METHOD Private, HideBySig System.Void Actor::UpdateScissor()
+METHOD Private, HideBySig System.Void Actor::CheckSideWalk()
+METHOD Public, HideBySig System.Void Actor::SetPath(System.Collections.Generic.List`1<PathVector>,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::TurnToFurniture()
+METHOD Public, Virtual, HideBySig System.String Actor::Description()
+METHOD Private, HideBySig System.Void Actor::Fatigue()
+METHOD Public, HideBySig System.Void Actor::InitPath()
+METHOD Public, HideBySig System.Boolean Actor::CanToilet(System.Boolean,Room)
+METHOD Private, HideBySig System.Boolean Actor::CheckFilter(System.Func`2<Furniture,System.Boolean>,Furniture)
+METHOD Private, Static, HideBySig System.Boolean Actor::RoomReady(Room,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::RemoveFromQueue(System.String)
+METHOD Public, HideBySig System.Collections.Generic.List`1<InteractionPoint> Actor::FindFurniture(System.String,InteractionPoint/ActionType,System.Int32,Room,System.Boolean,System.Func`2<Furniture,System.Boolean>,System.Boolean,System.Single,System.Boolean,System.Boolean,System.Boolean)
+METHOD Private, HideBySig System.Void Actor::SearchRoom(System.String,InteractionPoint/ActionType,Room,Room,System.Int32,System.Boolean,System.Boolean,System.Func`2<Furniture,System.Boolean>,System.Single,System.Collections.Generic.SortedList`2<System.Single,InteractionPoint>,System.Single&,InteractionPoint&,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::CreateParentCar()
+METHOD Public, HideBySig System.Void Actor::UpdateParentState()
+METHOD Public, HideBySig System.Void Actor::SkipAnimTime()
+METHOD Private, HideBySig System.Single Actor::RoomDist(System.Single,Furniture,System.Boolean)
+METHOD Private, HideBySig System.Single Actor::RoomDistance(System.Int32)
+METHOD Public, HideBySig Employee/RoleBit Actor::GetRole()
+METHOD Public, Static, HideBySig System.Func`2<PathNode`1<UnityEngine.Vector3>,System.Single> Actor::GetWeightingFunc(AI/AIType)
+METHOD Public, HideBySig System.Boolean Actor::PathToPoint(UnityEngine.Vector3,System.Boolean,System.Boolean,AI/AIType)
+METHOD Public, HideBySig System.Boolean Actor::PathToFurniture(InteractionPoint,System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::IsEmployee()
+METHOD Public, HideBySig System.Boolean Actor::CanUseBrokenFurniture()
+METHOD Public, HideBySig System.Boolean Actor::PathToFurniture(System.Collections.Generic.IList`1<InteractionPoint>,System.Boolean)
+METHOD Private, Static, HideBySig System.Boolean Actor::IsOnBathroom(Actor,InteractionPoint)
+METHOD Public, HideBySig System.Int32 Actor::GoToFurniture(System.String,InteractionPoint/ActionType,System.Int32,System.Boolean,Room,System.Boolean,System.Boolean,System.Func`2<Furniture,System.Boolean>,System.Single,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::CutBathroomPath(InteractionPoint)
+METHOD Public, HideBySig System.Int32 Actor::WaitForTimer(System.Single)
+METHOD Public, HideBySig System.Void Actor::MeetingBoost()
+METHOD Public, HideBySig WorkItem Actor::MyWorkItem()
+METHOD Public, HideBySig WorkItem Actor::MyWorkItem(System.Int32)
+METHOD Public, HideBySig System.Int32 Actor::GetWorkCount()
+METHOD Public, HideBySig System.Void Actor::WorkBoost()
+METHOD Public, HideBySig TableScript Actor::FindFreeTable(Room/RoomLimits,System.Boolean,System.Boolean,System.Boolean,System.Int32)
+METHOD Public, HideBySig System.Collections.Generic.List`1<Actor> Actor::CallForMeeting()
+METHOD Public, HideBySig System.Void Actor::ChangeRole(Employee/EmployeeRole,System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::ChangeRole(Employee/RoleBit,Employee/RoleBit)
+METHOD Public, HideBySig System.Void Actor::ShutdownPC()
+METHOD Public, HideBySig System.Single Actor::GetPCAddonBonus(Employee/EmployeeRole)
+METHOD Public, HideBySig System.Boolean Actor::IsCrunching()
+METHOD Private, HideBySig System.Single Actor::GetCrunchBuff(System.Single)
+METHOD Private, HideBySig WorkItem/HasWorkReturn Actor::ActuallyHasWork(WorkItem)
+METHOD Public, HideBySig System.Void Actor::ThrowTrash(System.Int32)
+METHOD Public, HideBySig System.Void Actor::TrashUpdate(System.Single,System.Int32,System.Single)
+METHOD Public, HideBySig System.Void Actor::DoWork(System.Single)
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<WorkItem> Actor::GetCurrentWorkItems()
+METHOD Public, HideBySig System.Collections.Generic.IEnumerable`1<System.String> Actor::GetCurrentTasks()
+METHOD Private, HideBySig System.Int32 Actor::JobDiffCount()
+METHOD Public, HideBySig System.Single Actor::Affect(Actor/Affector,System.Single,System.Single,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::FakeAffect(Actor/Affector,System.Single)
+METHOD Public, HideBySig System.Void Actor::NoAffect(Actor/Affector,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::AddMoodNotification(ActorMoodNotification/Issue)
+METHOD Public, HideBySig System.Single Actor::GetStateInfluence(System.Single)
+METHOD Private, HideBySig System.Boolean Actor::AnyNonTeamWorking()
+METHOD Family, Virtual, HideBySig System.Object Actor::DeserializeMe(WriteDictionary,System.Boolean,Writeable/LoadType)
+METHOD Family, Virtual, HideBySig System.Void Actor::SerializeMe(WriteDictionary,GameReader/NewLoadMode,Writeable/LoadType,System.Boolean)
+METHOD Public, Virtual, HideBySig System.Void Actor::PostDeserialize()
+METHOD Public, Virtual, HideBySig System.String Actor::WriteName()
+METHOD Public, HideBySig System.Void Actor::Fire(System.Boolean,System.Boolean)
+METHOD Public, HideBySig System.Void Actor::Dismiss(System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::WorksForFree()
+METHOD Public, HideBySig System.Int32 Actor::GetWorkHours(System.Boolean)
+METHOD Public, HideBySig System.Single Actor::GetMonthlySalary()
+METHOD Public, HideBySig System.Single Actor::GetRealSalary()
+METHOD Private, HideBySig System.Void Actor::UpdateProblems()
+METHOD Public, HideBySig System.Boolean Actor::HandleComplaint(System.Single,System.Boolean,System.Single,System.Single)
+METHOD Private, HideBySig System.Void Actor::EscalateProblem()
+METHOD Public, Virtual, HideBySig System.String Actor::ToString()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.Vector2 Actor::GetPos()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.Vector3 Actor::GetPosition()
+METHOD Public, HideBySig System.Collections.Generic.KeyValuePair`2<UnityEngine.Texture2D,UnityEngine.Rect> Actor::Snapshot()
+METHOD Public, HideBySig System.Void Actor::PrepareHighlight(System.Boolean&,System.Boolean&)
+METHOD Public, HideBySig System.Void Actor::OnDespawn()
+METHOD Private, HideBySig System.Void Actor::OnDrawGizmosSelected()
+METHOD Public, Virtual, HideBySig System.Int32 Actor::GetFloor()
+METHOD Public, Virtual, HideBySig System.Boolean Actor::IsSelectableInView()
+METHOD Public, Virtual, HideBySig System.Boolean Actor::IsSelectionRestricted()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::UpdateNow(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::UpdateNow2(System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Boolean Actor::NeedUpdate(System.Boolean)
+METHOD Public, HideBySig System.Boolean Actor::WageNegotiationNecessary()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask UnityEngine.GameObject Actor::GetGameObject()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single Actor::GetSpeed(System.Single)
+METHOD Public, HideBySig System.Boolean Actor::ShouldTrySocial()
+METHOD Public, HideBySig System.Void Actor::MakeIdle(Actor/WorkStatus)
+METHOD Public, HideBySig System.Void Actor::MakeUnIdle()
+METHOD Public, HideBySig System.Void Actor::KillAutoDev()
+METHOD Public, HideBySig System.Void Actor::ScheduleVacation(System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Collections.Generic.Dictionary`2<System.String,System.Single> Actor::GetBenefits()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Single Actor::GetBenefitValue(System.String,System.Boolean)
+METHOD Private, HideBySig System.Void Actor::InitBenefits()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::CacheBenefits()
+METHOD Public, HideBySig System.Single Actor::GetBenefitScore()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::ApplyNewBenefits()
+METHOD Public, HideBySig System.Single Actor::LeaderEffectivenessFactor(System.Int32)
+METHOD Public, HideBySig System.Void Actor::QuitAffectTeam(System.Boolean,System.Single)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::PostUpdate(System.Boolean)
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.Void Actor::SetLOD2Color(System.String,UnityEngine.Color)
+METHOD Public, Virtual, HideBySig UnityEngine.Vector2 Actor::GetFlatPos()
+METHOD Public, Final, Virtual, HideBySig, VtableLayoutMask System.String Actor::GetActualString()
+METHOD Public, Virtual, HideBySig System.Boolean Actor::CanRectSelect()
+METHOD Public, Virtual, HideBySig UnityEngine.Vector3 Actor::GetSelectPosition()
+METHOD Public, HideBySig System.Boolean Actor::StaffBlockTimeSkip()
+METHOD Public, HideBySig System.Void Actor::ClearLoiterTable()
+METHOD Public, Virtual, HideBySig UnityEngine.Vector3 Actor::GetTransformPosition()
+METHOD Public, HideBySig System.Void Actor::CleanUpEating()
+METHOD Public, Virtual, HideBySig System.String Actor::GetPanelActionName()
+METHOD Public, Virtual, HideBySig System.Void Actor::InvokePanelAction(System.Collections.Generic.List`1<UndoObject/UndoAction>)
+METHOD Public, Virtual, HideBySig System.Boolean Actor::PanelActionOnlyOnce()
+METHOD Public, HideBySig System.Boolean Actor::AllowAlternativeTraffic()
+METHOD Public, HideBySig System.Int32 Actor::GetCourseBit()
+METHOD Public, HideBySig, SpecialName, RTSpecialName System.Void Actor::.ctor()
+METHOD Private, Static, HideBySig, SpecialName, RTSpecialName System.Void Actor::.cctor()
+METHOD Private, HideBySig System.Boolean Actor::<set_Team>b__282_0(DesignDocument)
+METHOD Private, HideBySig System.Void Actor::<MeetNow>b__298_0()
+METHOD Private, HideBySig System.Void Actor::<OnDestroy>b__302_0(Furniture)
+METHOD Private, HideBySig System.Void Actor::<OnDestroy>b__302_1(System.Collections.Generic.HashSet`1<Actor>)
+METHOD Private, HideBySig System.Void Actor::<Init>b__319_0()
+METHOD Private, HideBySig System.Void Actor::<Init>b__319_1()
+METHOD Private, HideBySig System.Boolean Actor::<GetStateInfluence>b__440_0(Actor)
+METHOD Private, HideBySig System.Void Actor::<DeserializeMe>b__442_0(Furniture)
+METHOD Private, HideBySig Room Actor::<DeserializeMe>b__442_2(System.UInt32)
+METHOD Private, HideBySig System.Boolean Actor::<SerializeMe>b__443_1(Furniture)
+METHOD Private, HideBySig System.Boolean Actor::<SerializeMe>b__443_3(Furniture)

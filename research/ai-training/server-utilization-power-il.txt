@@ -1,0 +1,356 @@
+TYPE Upgradable BASE UnityEngine.MonoBehaviour
+FIELD Public UnityEngine.Transform SmokePosition
+FIELD Public System.Single Quality
+FIELD Public System.Single RepairTime
+FIELD Public System.Single AtrophyModifier
+FIELD Public System.Single FireStarter
+FIELD Public SDateTime LastRepair
+FIELD Public System.Single TimeToAtrophy
+FIELD Public System.Single MinutesToRepair
+FIELD Public System.Boolean DegradeAlways
+FIELD Public System.Boolean ModifiableAtrophy
+FIELD Public System.Boolean ManualDegrade
+FIELD Public System.Boolean AffectedByTemp
+FIELD Public System.Boolean AffectedByAirQuality
+FIELD Public System.Boolean Broken
+FIELD Public System.Boolean CanBreak
+FIELD Public Furniture furn
+FIELD Private Server server
+FIELD Public UnityEngine.Animation Anim
+FIELD Public, NotSerialized System.Boolean HasAnim
+FIELD Public, NotSerialized SDateTime LastUpdate
+FIELD Private System.Random _fireStart
+FIELD Public, NotSerialized System.Boolean FromInventory
+TYPE Furniture BASE WallSnap
+INTERFACE IRoomConnector
+INTERFACE IDistributee
+INTERFACE IFormatColorObject
+FIELD Public, Static, Literal, HasDefault System.Single WaterPrice
+CONSTANT WaterPrice = 0.05
+FIELD Public, Static, Literal, HasDefault System.Single ElectricityPrice
+CONSTANT ElectricityPrice = 0.6
+FIELD Public, Static, Literal, HasDefault System.Single GasPrice
+CONSTANT GasPrice = 1
+FIELD Public, Static, Literal, HasDefault System.Int32 UseEffectCount
+CONSTANT UseEffectCount = 7
+FIELD Private, Static System.Single[] _useEffectCache
+FIELD Private, Static System.Boolean _useEffectCleared
+FIELD Public System.Boolean PunchHoleThroughWall
+FIELD Public UnityEngine.Vector2[] BuildBoundary
+FIELD Public UnityEngine.Vector2[] NavBoundary
+FIELD Public, NotSerialized UnityEngine.Vector2[] FinalNav
+FIELD Public UnityEngine.Vector2[] FinalBoundary
+FIELD Public System.Boolean OnXEdge
+FIELD Public System.Boolean OnYEdge
+FIELD Public System.Boolean GenerateBoundaryOnStart
+FIELD Public System.Boolean CanRotate
+FIELD Public System.Boolean Only180Rotation
+FIELD Public System.Boolean IsDraggable
+FIELD Public System.Single DragDistance
+FIELD Public System.Single Height1
+FIELD Public System.Single Height2
+FIELD Public System.Boolean IgnoreBoundary
+FIELD Public System.Boolean BasementValid
+FIELD Public System.Boolean OnlyExteriorWalls
+FIELD Public System.Boolean OnlyInteriorWalls
+FIELD Public System.Boolean WallFurn
+FIELD Public System.Boolean InFloor
+FIELD Public System.Boolean BlocksFloor
+FIELD Public System.Boolean ValidIndoors
+FIELD Public System.Boolean ValidOutdoors
+FIELD Public System.Boolean ValidOutside
+FIELD Public System.Boolean ValidOnFence
+FIELD Public System.Boolean ValidAgainstOutdoorArea
+FIELD Public System.Boolean OnlyOnGrass
+FIELD Public System.Boolean PokesThroughWall
+FIELD Public System.Boolean PokesThroughRoof
+FIELD Public System.Boolean NeedsRoadConnection
+FIELD Public System.Boolean ShowBuildBoundaryOutline
+FIELD Public System.Boolean AtriumValid
+FIELD Public System.Boolean AtriumFixture
+FIELD Public System.Boolean PrefabRotationImportant
+FIELD Public System.Boolean ValidInBlueprints
+FIELD Public System.Boolean ValidInInventory
+FIELD Public System.Single MirrorRotationOffset
+FIELD Public System.String IgnoreType
+FIELD Public System.String[] AutoPlaceGroup
+FIELD Public System.Boolean DefaultInteractionDistance
+FIELD Public SnapPoint[] SnapPoints
+FIELD Public SnapPoint SnappedTo
+FIELD Public System.Boolean IsSnapping
+FIELD Public System.Single SurfaceSnapRadius
+FIELD Public System.Boolean CanNotSnap
+FIELD Public System.String[] SnapsTo
+FIELD Private System.Collections.Generic.HashSet`1<System.String> _actualSnap
+FIELD Public System.Boolean CanAssign
+FIELD Public System.Boolean ReverseLowPass
+FIELD Public System.Boolean NeedsChair
+FIELD Public System.Boolean ManualUsageCalculation
+FIELD Public System.Boolean CanSteal
+FIELD Public System.Boolean InteractAnimation
+FIELD Public System.Boolean InteractOnAnimation
+FIELD Public System.String RunningAnimation
+FIELD Public System.Int32 MaxQueue
+FIELD Public UnityEngine.AudioClip InteractStartClip
+FIELD Public UnityEngine.AudioClip InteractEndClip
+FIELD Public System.String UpgradeTo
+FIELD Public System.Boolean InDemo
+FIELD Public System.Boolean ITFix
+FIELD Public System.Int32 UnlockYear
+FIELD Public System.String UnlockMission
+FIELD Public System.Boolean TemperatureController
+FIELD Public System.Boolean TemperatureOutput
+FIELD Public System.Boolean TemperatureModifyUsage
+FIELD Public Furniture/TemperatureType TempControlType
+FIELD Public UnityEngine.Transform TempAccessPoint
+FIELD Public System.Boolean AlwaysOn
+FIELD Public System.Boolean DefaultOn
+FIELD Public System.Boolean OnWithParent
+FIELD Public System.Boolean OnWhenUsed
+FIELD Public UnityEngine.Renderer TheScreen
+FIELD Public UnityEngine.MeshFilter InteractChangeMesh
+FIELD Public UnityEngine.Material OnMat
+FIELD Public UnityEngine.Material OffMat
+FIELD Public FurnitureInteractScript[] InteractionScripts
+FIELD Public UnityEngine.GameObject[] DisableObjs
+FIELD Public UnityEngine.Transform ComputerTransform
+FIELD Public UnityEngine.Vector3 OriginalOffset
+FIELD Public UnityEngine.Vector3 PCAddonOffset
+FIELD Public UnityEngine.Vector3 OriginalRotation
+FIELD Public UnityEngine.Vector3 PCAddonRotation
+FIELD Public System.Boolean CanLean
+FIELD Public System.Boolean TwoFloors
+FIELD Public System.Boolean MakeHole
+FIELD Public UnityEngine.Transform CustomHoleTransform
+FIELD Public UnityEngine.Mesh CustomHoleMesh
+FIELD Public UnityEngine.Mesh DefaultMesh
+FIELD Public UnityEngine.Mesh InteractMesh
+FIELD Public UnityEngine.Transform[] OffsetPoints
+FIELD Private, NotSerialized UnityEngine.Vector3[] _offsetPointCached
+FIELD Private, NotSerialized UnityEngine.Matrix4x4 _elevatorMatrix
+FIELD Public UnityEngine.Transform[] InterPoints
+FIELD Public UnityEngine.Transform[] InterPointsReversed
+FIELD Public UnityEngine.GameObject UpperFloorFrame
+FIELD Public UnityEngine.GameObject OnRoofObject
+FIELD Public UnityEngine.Transform[] HoldablePoints
+FIELD Private, NotSerialized System.Collections.Generic.List`1<Holdable> Holdables
+FIELD Public System.Boolean DespawnHoldables
+FIELD Public System.Single DespawnHour
+FIELD Public System.Boolean RandomSFX
+FIELD Public System.String KeepAudioSynced
+FIELD Public UnityEngine.AudioClip[] SFXFiles
+FIELD Public System.Single RandomSFXMin
+FIELD Public System.Single RandomSFXMax
+FIELD Private System.Single _randomSFXTimer
+FIELD Public System.Boolean DisableTableGrouping
+FIELD Public System.Boolean InRentMode
+FIELD Public UnityEngine.Transform[] LookAtPoints
+FIELD Public UnityEngine.GameObject ActiveWithOn
+FIELD Public UnityEngine.Vector4 HighlightAlphaUV
+FIELD Public System.Boolean OnHead
+FIELD Public System.Boolean Deprecated
+FIELD Public UnityEngine.MeshRenderer[] ElevatorDisplay
+FIELD Public DoorScript[] ElevatorDoors
+FIELD Public UnityEngine.Rect ElevatorEntrance
+FIELD Public UnityEngine.Rect ElevatorArea
+FIELD Public System.Boolean WallFurnHide
+FIELD Public System.Int32 AvailableMonth
+FIELD Public System.Boolean ForcePCPricing
+FIELD Public System.Boolean CanBoost
+FIELD Public System.Single MinBoostValue
+FIELD Public System.Single MaxBoostValue
+FIELD Public System.Single BoostIncrement
+FIELD Public System.Single BoostUseModifier
+FIELD Public UnityEngine.Transform AtriumObject
+FIELD Public System.Boolean ReverseAtriumScale
+FIELD Public System.Boolean VisibleAtAnyAngles
+FIELD Public Furniture/IsOnEvent IsOnStateChanged
+FIELD Public System.String MetalMarket
+FIELD Public System.Int32 MetalLevel
+FIELD Public System.Boolean Offshore
+FIELD Public System.Boolean AllowNoExtraParent
+FIELD Public System.Boolean CanCopy
+FIELD Public System.Boolean ShouldNetwork
+FIELD Public System.Boolean PreferInventory
+FIELD Public System.Boolean BlueprintUpgradeTo
+FIELD Public System.Boolean BlueprintUpgradeFrom
+FIELD Public System.Boolean BlueprintReplaceable
+FIELD Public System.Boolean LightAlwaysOn
+FIELD Public System.Int32 SelectionSubType
+FIELD Public System.String LocalizeOverride
+FIELD Public, NotSerialized System.String NameOverride
+FIELD Public System.String[] Category
+FIELD Public System.String FunctionCategory
+FIELD Public System.Single Cost
+FIELD Public System.String Unlockable
+FIELD Public System.Single ComputerPowerModifier
+FIELD Public System.Boolean IgnorePCRelease
+FIELD Public System.Single HeatCoolArea
+FIELD Public System.Boolean EqualizeTemperature
+FIELD Public System.Single[] UseEffects
+FIELD Public System.Single Lighting
+FIELD Public System.Single Wait
+FIELD Public System.Single MiscPotential
+FIELD Public System.Int32 Capacity
+FIELD Public System.Boolean RefillCapacity
+FIELD Public System.Int32 Expiration
+FIELD Public System.Single UnitCost
+FIELD Public System.Single[] AuraValues
+FIELD Public System.Single AuraCoverage
+FIELD Public System.Boolean CapAura
+FIELD Public System.Single Wattage
+FIELD Public System.Single Water
+FIELD Public System.Single Gas
+FIELD Public System.Single Noisiness
+FIELD Public System.Single ExpectedOn
+FIELD Public System.Single Comfort
+FIELD Public System.Single Environment
+FIELD Public System.Single AcousticDampening
+FIELD Public System.Single AirCleaning
+FIELD Public CompanySignage Signage
+FIELD Private, NotSerialized System.Boolean _hasAtriumObject
+FIELD Public System.Boolean TurnOnOccupants
+FIELD Public System.Boolean PlacedInEditMode
+FIELD Public System.Boolean PartOfGen
+FIELD Public, NotSerialized PlayerMap Map
+FIELD Public, NotSerialized System.Boolean StartInteraction
+FIELD Public, NotSerialized System.Single OnFire
+FIELD Public System.Single _boostValue
+FIELD Public, NotSerialized System.Double SpecialPrice
+FIELD Public System.Boolean FireProtection
+FIELD Public System.Boolean CanInsure
+FIELD Private UnityEngine.Animation _anim
+FIELD Public, NotSerialized System.Int32 HasHoldables
+FIELD Private, NotSerialized System.Collections.Generic.List`1<FurnitureStock> _unitStock
+FIELD Public UnityEngine.Vector2[] MeshBoundary
+FIELD Public System.Single WallCullingDistance
+FIELD Public System.Single RotationOffset
+FIELD Public UnityEngine.Vector3 OriginalPosition
+FIELD Private, NotSerialized System.UInt32[][] SerializedQueue
+FIELD Private System.Boolean _isOn
+FIELD Private System.Boolean _hasClip
+FIELD Public UnityEngine.AudioSource AudioSrc
+FIELD Private, NotSerialized System.Boolean HasAudioSource
+FIELD Public System.Boolean isTemporary
+FIELD Public Upgradable upg
+FIELD Public, NotSerialized System.Boolean HasUpg
+FIELD Private System.Single AtEdge
+FIELD Public System.Int32 PathFailCount
+FIELD Public InteractionPoint[] InteractionPoints
+FIELD Private Room _parent
+FIELD Public Room InteractionParent
+FIELD Public, NotSerialized UnityEngine.Vector3 SnapPointOffset
+FIELD Public, NotSerialized NetworkRoom NetworkParent
+FIELD Public System.Int32 Floor
+FIELD Private Actor _reserved
+FIELD Public System.Single EnvironmentNoise
+FIELD Public System.Single ActorNoise
+FIELD Public System.Single FinalNoise
+FIELD Public System.Boolean CanTraverse
+FIELD Public System.Boolean CanExitElevator
+FIELD Public System.Boolean CanEnterElevator
+FIELD Public Furniture ComputerChair
+FIELD Public System.Boolean Undo
+FIELD Private System.Boolean _playingOneShot
+FIELD Public, NotSerialized System.Boolean NonPlayerDestruction
+FIELD Public, NotSerialized TemperatureGroup TempGroup
+FIELD Public, NotSerialized Furniture TempPointTo
+FIELD Public, NotSerialized System.Boolean ForceTempUpdate
+FIELD Public, NotSerialized System.Boolean Insured
+FIELD Public, NotSerialized CCTVGroup CCGroup
+FIELD Public ProductPallet Pallet
+FIELD Public ProductPrinter Printer
+FIELD Public Conveyor Conveyor
+FIELD Public System.Boolean HasConveyor
+FIELD Private, NotSerialized System.Single[] _useEffects
+FIELD Public, NotSerialized Actor OnHeadOf
+FIELD Public, NotSerialized ElevatorGroup EGroup
+FIELD Public, NotSerialized LampScript Lamp
+FIELD Public, NotSerialized System.Boolean HasLamp
+FIELD Public System.Boolean CanFallback
+FIELD Public, NotSerialized System.Single Waste
+FIELD Public, NotSerialized System.Nullable`1<SDateTime> TurnOffTimer
+FIELD Private System.Single MaxAudioDistance
+FIELD Public, NotSerialized Room ExtraParent
+FIELD Public System.Int32 StartDowngrade
+FIELD Public TableScript Table
+FIELD Private System.Boolean _forceEmission
+FIELD Private System.Single _useModifier
+FIELD Private System.Double _currentWattage
+FIELD Private System.Double _currentWater
+FIELD Private System.Double _currentGas
+FIELD Public, Static, Literal, HasDefault System.Int32 AuraCount
+CONSTANT AuraCount = 3
+FIELD Private Actor _ownedBy
+FIELD Private UnityEngine.Renderer[] Children
+FIELD Public, NotSerialized System.String[] actions
+FIELD Private PathNode`1<UnityEngine.Vector3> _pathNode
+FIELD Private System.Int32 _atriumOffset
+FIELD Private, NotSerialized System.Boolean _initialized
+FIELD Private, NotSerialized System.Int32 _lastLOD
+FIELD Public, Static, Literal, HasDefault System.Single LOD2Dist
+CONSTANT LOD2Dist = 1600
+FIELD Public, Static, Literal, HasDefault System.Single LOD1Dist
+CONSTANT LOD1Dist = 625
+FIELD Private, Static System.Collections.Generic.Dictionary`2<System.String,Furniture> _timeMasters
+FIELD Private System.Boolean _syncAudio
+FIELD Public, NotSerialized System.Boolean LoadError
+FIELD Private, Static System.Collections.Generic.List`1<IFurnitureSerialization> _subSerializeList
+FIELD Private, NotSerialized System.Nullable`1<UnityEngine.Rect> _boundCache
+FIELD Private, Static, InitOnly FloatInterpolator ComfortDegration
+FIELD Private, NotSerialized UnityEngine.Vector2 _boundsOffset
+FIELD Public System.Boolean EmissionOnWithFurniture
+FIELD Public System.Boolean EmissionWarmUp
+FIELD Public System.Boolean ChangeColorOffSecondary
+FIELD Public System.Boolean ChangeColorOffTertiary
+FIELD Public System.Collections.Generic.List`1<LODFurn> LODGroups
+FIELD Public UnityEngine.Renderer TreeLeaves
+FIELD Private System.Boolean <IsBlocked>k__BackingField
+FIELD Private, Static, InitOnly System.Collections.Generic.List`1<UnityEngine.Vector2> cSegments
+FIELD Private, Static System.Collections.Generic.HashSet`1<Room> NoiseVisit
+FIELD Private, Static System.Collections.Generic.List`1<System.Single> NoiseValues
+FIELD Private, Static System.Int32 NoiseValueCount
+FIELD Public, Static System.Single NoiseValueMax
+FIELD Private, Static System.Single WallIsolation
+FIELD Private, Static System.Collections.Generic.HashSet`1<Actor> _noiseIgnoreCache
+FIELD Public, Static, Literal, HasDefault System.Single NeighbourDistance
+CONSTANT NeighbourDistance = 3.5
+FIELD Public, Static, Literal, HasDefault System.Single NeighbourDistanceSquared
+CONSTANT NeighbourDistanceSquared = 12.25
+FIELD Private, NotSerialized TrashCan _connectedCan
+FIELD Public, Static, Literal, HasDefault System.Single TrashCanDistanceSqr
+CONSTANT TrashCanDistanceSqr = 12.25
+PROPERTY System.Boolean Furniture::CanSnapSurface()
+PROPERTY System.Single Furniture::BoostValue()
+PROPERTY Room Furniture::Parent()
+PROPERTY System.Boolean Furniture::Insurable()
+PROPERTY Actor Furniture::Reserved()
+PROPERTY System.Single Furniture::ComputerPower()
+PROPERTY System.Single Furniture::ActualHeight()
+PROPERTY System.Boolean Furniture::ForceEmission()
+PROPERTY System.Single Furniture::UseModifier()
+PROPERTY System.Single Furniture::CurrentWattage()
+PROPERTY System.Boolean Furniture::IsOn()
+PROPERTY Actor Furniture::OwnedBy()
+PROPERTY System.Boolean Furniture::IsConnecter()
+PROPERTY PathNode`1<UnityEngine.Vector3> Furniture::pathNode()
+PROPERTY System.Boolean Furniture::IsActivelySnapping()
+PROPERTY System.Boolean Furniture::IsCCTVFurn()
+PROPERTY UnityEngine.Transform Furniture::ObjectTransform()
+PROPERTY System.Boolean Furniture::IsValid()
+PROPERTY System.Boolean Furniture::IsBlocked()
+PROPERTY System.Boolean Furniture::MovesBetweenFloors()
+PROPERTY System.Boolean Furniture::IsNull()
+PROPERTY System.Boolean Furniture::IsRefreshing()
+METHOD Public, HideBySig, SpecialName System.Single Furniture::get_UseModifier()
+IL_0000: ldarg.0
+IL_0001: ldfld System.Single Furniture::_useModifier
+IL_0006: ret
+METHOD Public, HideBySig, SpecialName System.Void Furniture::set_UseModifier(System.Single)
+IL_0000: ldarg.0
+IL_0001: ldarg.1
+IL_0002: stfld System.Single Furniture::_useModifier
+IL_0007: ldarg.0
+IL_0008: ldc.i4.0
+IL_0009: call System.Void Furniture::RefreshUsage(System.Boolean)
+IL_000e: ret

@@ -1,0 +1,541 @@
+TYPE SoftwareUpdate BASE SoftwareWorkItem
+INTERFACE IServerItem
+INTERFACE IReferenceFix
+FIELD Public SoftwareProduct Target
+FIELD Public SoftwareFramework TargetFramework
+FIELD Public System.Boolean HasFinished
+FIELD Public System.Boolean HasFinishedArt
+FIELD Public System.Boolean HasFinishedCode
+FIELD Public System.Boolean FixBugs
+FIELD Public System.Single AddedBugs
+FIELD Public System.Single FixedBugs
+FIELD Private System.Single _sourceControlBoost
+FIELD Private ActiveWorkerManager _workerManager
+PROPERTY System.Boolean SoftwareUpdate::IsFramework()
+PROPERTY System.Boolean SoftwareUpdate::UsesISP()
+PROPERTY UnityEngine.Color SoftwareUpdate::BackColor()
+PROPERTY System.Boolean SoftwareUpdate::CanOutsourceNetwork()
+PROPERTY System.String SoftwareUpdate::UnitName()
+PROPERTY System.Boolean SoftwareUpdate::HasNaturalNetworkEnd()
+PROPERTY System.Byte SoftwareUpdate::ByteTypeID()
+METHOD Public, Virtual, HideBySig System.Void SoftwareUpdate::DoWork(Actor,System.Single,System.Single,System.Boolean)
+LOCAL 0 System.Boolean
+LOCAL 1 System.Int32
+LOCAL 2 System.Single
+LOCAL 3 System.Single
+LOCAL 4 System.Single
+LOCAL 5 System.Single
+LOCAL 6 System.Single
+LOCAL 7 System.Single
+LOCAL 8 SoftwareWorkItem/FeatureProgress
+LOCAL 9 System.Single
+LOCAL 10 System.Int32
+LOCAL 11 System.Boolean
+LOCAL 12 Employee/EmployeeRole
+LOCAL 13 System.Single
+LOCAL 14 System.Single
+LOCAL 15 System.Single
+LOCAL 16 System.Single
+LOCAL 17 System.Double
+LOCAL 18 System.Boolean
+LOCAL 19 System.Double
+LOCAL 20 System.Int32
+LOCAL 21 System.Single
+IL_0000: ldarg.0
+IL_0001: ldfld System.Collections.Generic.HashSet`1<System.UInt32> SoftwareWorkItem::LastWorked
+IL_0006: ldarg.1
+IL_0007: ldfld System.UInt32 Writeable::DID
+IL_000c: callvirt System.Boolean System.Collections.Generic.HashSet`1<System.UInt32>::Add(!0)
+IL_0011: pop
+IL_0012: ldarg.1
+IL_0013: callvirt Team Actor::GetTeam()
+IL_0018: brfalse.s IL_0032
+IL_001a: ldarg.2
+IL_001b: call System.Boolean System.Single::IsNaN(System.Single)
+IL_0020: brtrue.s IL_0032
+IL_0022: ldarg.2
+IL_0023: call System.Boolean System.Single::IsInfinity(System.Single)
+IL_0028: brtrue.s IL_0032
+IL_002a: ldarg.2
+IL_002b: ldc.r4 0
+IL_0030: bge.un.s IL_0033
+IL_0032: ret
+IL_0033: ldarg.0
+IL_0034: ldfld System.Single SoftwareWorkItem::WorkDevTime
+IL_0039: ldc.r4 0
+IL_003e: bge.un.s IL_0047
+IL_0040: ldarg.0
+IL_0041: ldc.i4.0
+IL_0042: call System.Void SoftwareWorkItem::RefreshWorkDevTime(System.Boolean)
+IL_0047: ldarg.2
+IL_0048: call DifficultyValues/DifficultySetting DifficultyValues::get_Difficulty()
+IL_004d: ldfld System.Single DifficultyValues/DifficultySetting::AlphaSpeedBonus
+IL_0052: ldarg.1
+IL_0053: ldc.i4.2
+IL_0054: callvirt System.Single Actor::LeaderEffectivenessFactor(System.Int32)
+IL_0059: mul
+IL_005a: mul
+IL_005b: starg.s effectiveness
+IL_005d: ldarg.2
+IL_005e: ldc.r4 1
+IL_0063: ldarg.0
+IL_0064: ldfld System.Single SoftwareUpdate::_sourceControlBoost
+IL_0069: ldc.r4 0.1
+IL_006e: mul
+IL_006f: add
+IL_0070: mul
+IL_0071: starg.s effectiveness
+IL_0073: ldarg.0
+IL_0074: call System.Boolean SoftwareUpdate::DoBugs()
+IL_0079: brfalse.s IL_008b
+IL_007b: ldarg.1
+IL_007c: callvirt Employee Actor::get_employee()
+IL_0081: ldc.i4.2
+IL_0082: ldarg.s secondary
+IL_0084: callvirt System.Boolean Employee::IsRole(Employee/RoleBit,System.Boolean)
+IL_0089: br.s IL_008c
+IL_008b: ldc.i4.0
+IL_008c: stloc.0
+IL_008d: ldc.i4.0
+IL_008e: stloc.1
+IL_008f: ldarg.0
+IL_0090: ldfld System.Boolean SoftwareUpdate::HasFinished
+IL_0095: brtrue IL_0425
+IL_009a: ldarg.2
+IL_009b: ldc.i4.1
+IL_009c: ldarg.0
+IL_009d: ldfld TwoWayDictionary`2<Employee,SoftwareWorkItem/FeatureProgress> SoftwareWorkItem::NewWorking
+IL_00a2: callvirt System.Int32 TwoWayDictionary`2<Employee,SoftwareWorkItem/FeatureProgress>::get_Count()
+IL_00a7: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_00ac: ldarg.0
+IL_00ad: ldfld System.Single SoftwareWorkItem::WorkDevTime
+IL_00b2: ldc.i4.0
+IL_00b3: call System.Single SoftwareType::GetEmployeeCountEffect(System.Int32,System.Single,System.Boolean)
+IL_00b8: mul
+IL_00b9: stloc.2
+IL_00ba: ldc.r4 1
+IL_00bf: stloc.3
+IL_00c0: ldc.r4 1
+IL_00c5: stloc.s V_4
+IL_00c7: ldloc.0
+IL_00c8: brfalse.s IL_00dc
+IL_00ca: ldloc.3
+IL_00cb: ldc.r4 0.6666667
+IL_00d0: mul
+IL_00d1: stloc.3
+IL_00d2: ldloc.s V_4
+IL_00d4: ldc.r4 0.6666667
+IL_00d9: mul
+IL_00da: stloc.s V_4
+IL_00dc: ldarg.1
+IL_00dd: callvirt Employee Actor::get_employee()
+IL_00e2: ldc.i4.1
+IL_00e3: callvirt System.Single Employee::GetSkill(Employee/EmployeeRole)
+IL_00e8: stloc.s V_5
+IL_00ea: ldarg.1
+IL_00eb: callvirt Employee Actor::get_employee()
+IL_00f0: ldc.i4.3
+IL_00f1: callvirt System.Single Employee::GetSkill(Employee/EmployeeRole)
+IL_00f6: stloc.s V_6
+IL_00f8: ldarg.1
+IL_00f9: callvirt Employee Actor::get_employee()
+IL_00fe: ldc.i4 512
+IL_0103: conv.i8
+IL_0104: callvirt System.Boolean Employee::HasTrait(Employee/Trait)
+IL_0109: brfalse.s IL_0121
+IL_010b: ldarg.0
+IL_010c: ldloc.s V_5
+IL_010e: ldarg.1
+IL_010f: call System.Single SoftwareWorkItem::HWSkillFactor(System.Single,Actor)
+IL_0114: stloc.s V_5
+IL_0116: ldarg.0
+IL_0117: ldloc.s V_6
+IL_0119: ldarg.1
+IL_011a: call System.Single SoftwareWorkItem::HWSkillFactor(System.Single,Actor)
+IL_011f: stloc.s V_6
+IL_0121: ldarg.1
+IL_0122: callvirt Employee Actor::get_employee()
+IL_0127: ldc.i4.8
+IL_0128: ldarg.s secondary
+IL_012a: callvirt System.Boolean Employee::IsRole(Employee/RoleBit,System.Boolean)
+IL_012f: brfalse.s IL_0188
+IL_0131: ldarg.1
+IL_0132: callvirt Employee Actor::get_employee()
+IL_0137: ldc.i4.2
+IL_0138: ldarg.s secondary
+IL_013a: callvirt System.Boolean Employee::IsRole(Employee/RoleBit,System.Boolean)
+IL_013f: brfalse.s IL_0188
+IL_0141: ldarg.0
+IL_0142: ldfld System.Single SoftwareWorkItem::CodeArtRatio
+IL_0147: ldc.r4 0
+IL_014c: ble.un.s IL_0188
+IL_014e: ldarg.0
+IL_014f: ldfld System.Single SoftwareWorkItem::CodeArtRatio
+IL_0154: ldc.r4 1
+IL_0159: bge.un.s IL_0188
+IL_015b: ldarg.0
+IL_015c: ldfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_0161: brtrue.s IL_0188
+IL_0163: ldarg.0
+IL_0164: ldfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_0169: brtrue.s IL_0188
+IL_016b: ldloc.s V_5
+IL_016d: ldloc.s V_6
+IL_016f: add
+IL_0170: stloc.s V_9
+IL_0172: ldloc.s V_9
+IL_0174: ldc.r4 0
+IL_0179: ble.un.s IL_0188
+IL_017b: ldloc.s V_5
+IL_017d: ldloc.s V_9
+IL_017f: div
+IL_0180: stloc.3
+IL_0181: ldloc.s V_6
+IL_0183: ldloc.s V_9
+IL_0185: div
+IL_0186: stloc.s V_4
+IL_0188: ldc.r4 1
+IL_018d: ldsfld System.Single SoftwareType::DesignRatio
+IL_0192: sub
+IL_0193: ldarg.3
+IL_0194: ldc.i4.1
+IL_0195: call System.Single Utilities::PerHour(System.Single,System.Single,System.Boolean)
+IL_019a: stloc.s V_7
+IL_019c: ldloc.s V_7
+IL_019e: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_01a3: conv.r4
+IL_01a4: div
+IL_01a5: stloc.s V_7
+IL_01a7: ldarg.0
+IL_01a8: ldarg.1
+IL_01a9: ldarg.s secondary
+IL_01ab: ldc.i4.0
+IL_01ac: ldc.i4.1
+IL_01ad: call SoftwareWorkItem/FeatureProgress SoftwareWorkItem::FindJob(Actor,System.Boolean,System.Boolean,System.Boolean)
+IL_01b2: stloc.s V_8
+IL_01b4: ldc.i4.0
+IL_01b5: stloc.s V_10
+IL_01b7: br IL_03fe
+IL_01bc: ldloc.s V_10
+IL_01be: ldc.i4.0
+IL_01bf: ceq
+IL_01c1: stloc.s V_11
+IL_01c3: ldloc.s V_11
+IL_01c5: brfalse.s IL_01e8
+IL_01c7: ldarg.0
+IL_01c8: ldfld System.Single SoftwareWorkItem::CodeArtRatio
+IL_01cd: ldc.r4 0
+IL_01d2: beq.s IL_01dc
+IL_01d4: ldarg.0
+IL_01d5: ldfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_01da: brfalse.s IL_01e8
+IL_01dc: ldarg.0
+IL_01dd: ldc.i4.1
+IL_01de: stfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_01e3: br IL_03f8
+IL_01e8: ldloc.s V_11
+IL_01ea: brtrue.s IL_020d
+IL_01ec: ldarg.0
+IL_01ed: ldfld System.Single SoftwareWorkItem::CodeArtRatio
+IL_01f2: ldc.r4 1
+IL_01f7: beq.s IL_0201
+IL_01f9: ldarg.0
+IL_01fa: ldfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_01ff: brfalse.s IL_020d
+IL_0201: ldarg.0
+IL_0202: ldc.i4.1
+IL_0203: stfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_0208: br IL_03f8
+IL_020d: ldloc.1
+IL_020e: ldc.i4.1
+IL_020f: add
+IL_0210: stloc.1
+IL_0211: ldloc.s V_11
+IL_0213: brtrue.s IL_0218
+IL_0215: ldc.i4.3
+IL_0216: br.s IL_0219
+IL_0218: ldc.i4.1
+IL_0219: stloc.s V_12
+IL_021b: ldarg.1
+IL_021c: callvirt Employee Actor::get_employee()
+IL_0221: ldloc.s V_12
+IL_0223: ldarg.s secondary
+IL_0225: callvirt System.Boolean Employee::IsRole(Employee/EmployeeRole,System.Boolean)
+IL_022a: brfalse IL_03bc
+IL_022f: ldloc.s V_11
+IL_0231: brtrue.s IL_0237
+IL_0233: ldloc.s V_6
+IL_0235: br.s IL_0239
+IL_0237: ldloc.s V_5
+IL_0239: stloc.s V_13
+IL_023b: ldarg.0
+IL_023c: ldloc.s V_12
+IL_023e: ldloc.s V_13
+IL_0240: ldarg.3
+IL_0241: call System.Void WorkItem::RecordSkill(Employee/EmployeeRole,System.Single,System.Single)
+IL_0246: ldloc.s V_11
+IL_0248: brtrue.s IL_024e
+IL_024a: ldloc.s V_4
+IL_024c: br.s IL_024f
+IL_024e: ldloc.3
+IL_024f: stloc.s V_14
+IL_0251: ldloc.s V_14
+IL_0253: ldarg.1
+IL_0254: ldloc.s V_12
+IL_0256: callvirt System.Single Actor::GetPCAddonBonus(Employee/EmployeeRole)
+IL_025b: mul
+IL_025c: stloc.s V_14
+IL_025e: ldloc.s V_13
+IL_0260: ldc.r4 0
+IL_0265: ldc.r4 0.1
+IL_026a: ldc.r4 0.5
+IL_026f: ldc.r4 1
+IL_0274: ldc.i4.1
+IL_0275: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_027a: stloc.s V_15
+IL_027c: ldloc.2
+IL_027d: ldloc.s V_7
+IL_027f: mul
+IL_0280: ldloc.s V_15
+IL_0282: mul
+IL_0283: ldloc.s V_14
+IL_0285: mul
+IL_0286: stloc.s V_16
+IL_0288: ldc.r8 0
+IL_0291: stloc.s V_17
+IL_0293: ldloc.s V_8
+IL_0295: brtrue.s IL_02c2
+IL_0297: ldarg.0
+IL_0298: ldarg.1
+IL_0299: ldloc.s V_16
+IL_029b: conv.r8
+IL_029c: ldc.r4 1
+IL_02a1: ldloc.s V_12
+IL_02a3: ldloca.s V_17
+IL_02a5: ldc.i4.1
+IL_02a6: ldloc.s V_13
+IL_02a8: ldc.r4 0.25
+IL_02ad: call System.Single Utilities::WeightOne(System.Single,System.Single)
+IL_02b2: call System.Boolean SoftwareWorkItem::WorkAllFeatures(Actor,System.Double,System.Single,Employee/EmployeeRole,System.Double&,System.Boolean,System.Single)
+IL_02b7: brfalse.s IL_0311
+IL_02b9: ldarg.0
+IL_02ba: ldc.i4.0
+IL_02bb: call System.Void SoftwareWorkItem::RefreshWorkDevTime(System.Boolean)
+IL_02c0: br.s IL_0311
+IL_02c2: ldloc.s V_8
+IL_02c4: ldloc.s V_11
+IL_02c6: callvirt System.Boolean SoftwareWorkItem/FeatureProgress::Valid(System.Boolean)
+IL_02cb: brfalse.s IL_0311
+IL_02cd: ldloc.s V_8
+IL_02cf: ldloc.s V_16
+IL_02d1: conv.r8
+IL_02d2: ldloc.s V_12
+IL_02d4: ldarg.1
+IL_02d5: callvirt Employee Actor::get_employee()
+IL_02da: ldloc.s V_12
+IL_02dc: ldloc.s V_8
+IL_02de: ldfld FeatureBase SoftwareWorkItem/FeatureProgress::Feature
+IL_02e3: ldfld System.String FeatureBase::Spec
+IL_02e8: ldnull
+IL_02e9: callvirt System.Int32 Employee::GetSpecialization(Employee/EmployeeRole,System.String,Actor)
+IL_02ee: ldc.i4.3
+IL_02ef: ceq
+IL_02f1: ldloca.s V_18
+IL_02f3: ldloca.s V_19
+IL_02f5: ldc.r8 1
+IL_02fe: ldc.i4.0
+IL_02ff: callvirt System.Double SoftwareWorkItem/FeatureProgress::AddProgress(System.Double,Employee/EmployeeRole,System.Boolean,System.Boolean&,System.Double&,System.Double,System.Boolean)
+IL_0304: stloc.s V_17
+IL_0306: ldloc.s V_18
+IL_0308: brfalse.s IL_0311
+IL_030a: ldarg.0
+IL_030b: ldc.i4.0
+IL_030c: call System.Void SoftwareWorkItem::RefreshWorkDevTime(System.Boolean)
+IL_0311: ldarg.0
+IL_0312: call System.Boolean SoftwareUpdate::get_IsFramework()
+IL_0317: ldc.i4.0
+IL_0318: ceq
+IL_031a: ldloc.s V_11
+IL_031c: and
+IL_031d: brfalse IL_03bc
+IL_0322: ldloc.s V_17
+IL_0324: ldc.r8 0
+IL_032d: ble.un IL_03bc
+IL_0332: ldarg.0
+IL_0333: ldarg.0
+IL_0334: ldfld System.Single SoftwareUpdate::AddedBugs
+IL_0339: ldloc.s V_17
+IL_033b: ldarg.0
+IL_033c: ldfld System.Int32 SoftwareWorkItem::MaxBugs
+IL_0341: conv.r8
+IL_0342: mul
+IL_0343: ldloc.s V_13
+IL_0345: ldc.r4 0
+IL_034a: ldc.r4 1
+IL_034f: ldc.r4 1
+IL_0354: ldc.r4 0.25
+IL_0359: ldc.i4.0
+IL_035a: call System.Single Utilities::MapRange(System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)
+IL_035f: conv.r8
+IL_0360: mul
+IL_0361: ldc.r4 1
+IL_0366: ldarg.0
+IL_0367: ldfld System.Single SoftwareUpdate::_sourceControlBoost
+IL_036c: ldc.r4 0.5
+IL_0371: mul
+IL_0372: sub
+IL_0373: conv.r8
+IL_0374: mul
+IL_0375: ldarg.0
+IL_0376: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_037b: ldfld System.Double SoftwareProduct::CodeQuality
+IL_0380: ldc.r8 0
+IL_0389: ldc.r8 1
+IL_0392: ldc.r8 0.5
+IL_039b: ldc.r8 0.10000000149011612
+IL_03a4: ldc.i4.1
+IL_03a5: call System.Double Utilities::MapRange(System.Double,System.Double,System.Double,System.Double,System.Double,System.Boolean)
+IL_03aa: mul
+IL_03ab: ldc.r8 0.05000000074505806
+IL_03b4: mul
+IL_03b5: conv.r4
+IL_03b6: add
+IL_03b7: stfld System.Single SoftwareUpdate::AddedBugs
+IL_03bc: ldloc.s V_11
+IL_03be: brtrue.s IL_03da
+IL_03c0: ldarg.0
+IL_03c1: ldfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_03c6: brtrue.s IL_03da
+IL_03c8: ldarg.0
+IL_03c9: ldc.i4.0
+IL_03ca: ldc.i4.1
+IL_03cb: ldc.i4.0
+IL_03cc: call System.Boolean SoftwareWorkItem::AllDone(System.Boolean,System.Boolean,System.Boolean)
+IL_03d1: brfalse.s IL_03da
+IL_03d3: ldarg.0
+IL_03d4: ldc.i4.1
+IL_03d5: stfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_03da: ldloc.s V_11
+IL_03dc: brfalse.s IL_03f8
+IL_03de: ldarg.0
+IL_03df: ldfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_03e4: brtrue.s IL_03f8
+IL_03e6: ldarg.0
+IL_03e7: ldc.i4.0
+IL_03e8: ldc.i4.0
+IL_03e9: ldc.i4.1
+IL_03ea: call System.Boolean SoftwareWorkItem::AllDone(System.Boolean,System.Boolean,System.Boolean)
+IL_03ef: brfalse.s IL_03f8
+IL_03f1: ldarg.0
+IL_03f2: ldc.i4.1
+IL_03f3: stfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_03f8: ldloc.s V_10
+IL_03fa: ldc.i4.1
+IL_03fb: add
+IL_03fc: stloc.s V_10
+IL_03fe: ldloc.s V_10
+IL_0400: ldc.i4.2
+IL_0401: blt IL_01bc
+IL_0406: ldarg.0
+IL_0407: ldfld System.Boolean SoftwareUpdate::HasFinished
+IL_040c: brtrue.s IL_0425
+IL_040e: ldarg.0
+IL_040f: ldfld System.Boolean SoftwareUpdate::HasFinishedArt
+IL_0414: brfalse.s IL_0425
+IL_0416: ldarg.0
+IL_0417: ldfld System.Boolean SoftwareUpdate::HasFinishedCode
+IL_041c: brfalse.s IL_0425
+IL_041e: ldarg.0
+IL_041f: ldc.i4.1
+IL_0420: stfld System.Boolean SoftwareUpdate::HasFinished
+IL_0425: ldloc.0
+IL_0426: brfalse IL_0519
+IL_042b: ldarg.0
+IL_042c: ldfld ActiveWorkerManager SoftwareUpdate::_workerManager
+IL_0431: ldarg.1
+IL_0432: ldfld System.UInt32 Writeable::DID
+IL_0437: call SDateTime SDateTime::Now()
+IL_043c: callvirt System.Void ActiveWorkerManager::UpdateWorker(System.UInt32,SDateTime)
+IL_0441: ldarg.2
+IL_0442: ldc.r4 1
+IL_0447: ldloc.1
+IL_0448: ldc.i4.1
+IL_0449: add
+IL_044a: conv.r4
+IL_044b: div
+IL_044c: ldc.i4.1
+IL_044d: ldarg.0
+IL_044e: ldfld ActiveWorkerManager SoftwareUpdate::_workerManager
+IL_0453: callvirt System.Int32 ActiveWorkerManager::get_Count()
+IL_0458: call System.Int32 UnityEngine.Mathf::Max(System.Int32,System.Int32)
+IL_045d: ldarg.0
+IL_045e: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_0463: ldfld System.Single SoftwareProduct::DevTime
+IL_0468: ldc.i4.0
+IL_0469: call System.Single SoftwareType::GetEmployeeCountEffect(System.Int32,System.Single,System.Boolean)
+IL_046e: mul
+IL_046f: ldc.r4 8
+IL_0474: mul
+IL_0475: mul
+IL_0476: starg.s effectiveness
+IL_0478: ldarg.0
+IL_0479: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_047e: callvirt System.Int32 SoftwareProduct::get_FixableBugs()
+IL_0483: stloc.s V_20
+IL_0485: ldloc.s V_20
+IL_0487: ldc.i4.0
+IL_0488: ble IL_0519
+IL_048d: ldarg.0
+IL_048e: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_0493: stloc.s V_21
+IL_0495: ldarg.0
+IL_0496: ldarg.0
+IL_0497: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_049c: ldarg.2
+IL_049d: ldarg.1
+IL_049e: ldc.i4.1
+IL_049f: callvirt System.Single Actor::GetPCAddonBonus(Employee/EmployeeRole)
+IL_04a4: mul
+IL_04a5: ldarg.3
+IL_04a6: ldc.i4.1
+IL_04a7: call System.Single Utilities::PerHour(System.Single,System.Single,System.Boolean)
+IL_04ac: ldc.r4 4
+IL_04b1: ldsfld System.Int32 GameSettings::DaysPerMonth
+IL_04b6: conv.r4
+IL_04b7: div
+IL_04b8: mul
+IL_04b9: ldarg.0
+IL_04ba: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_04bf: callvirt System.Int32 SoftwareProduct::get_StartBugss()
+IL_04c4: ldarg.0
+IL_04c5: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_04ca: callvirt System.Int32 SoftwareProduct::get_Bugss()
+IL_04cf: sub
+IL_04d0: conv.r4
+IL_04d1: ldarg.0
+IL_04d2: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_04d7: add
+IL_04d8: ldarg.0
+IL_04d9: ldfld SoftwareProduct SoftwareUpdate::Target
+IL_04de: callvirt System.Int32 SoftwareProduct::get_StartBugss()
+IL_04e3: conv.r4
+IL_04e4: div
+IL_04e5: call System.Single UnityEngine.Mathf::Clamp01(System.Single)
+IL_04ea: call System.Single SoftwareAlpha::GetBugSpeedDamp(System.Single)
+IL_04ef: mul
+IL_04f0: add
+IL_04f1: ldc.r4 0
+IL_04f6: ldloc.s V_20
+IL_04f8: conv.r4
+IL_04f9: call System.Single UnityEngine.Mathf::Clamp(System.Single,System.Single,System.Single)
+IL_04fe: stfld System.Single SoftwareUpdate::FixedBugs
+IL_0503: ldarg.0
+IL_0504: ldarg.0
+IL_0505: ldfld System.Single WorkItem::TotalNetworkUnits
+IL_050a: ldarg.0
+IL_050b: ldfld System.Single SoftwareUpdate::FixedBugs
+IL_0510: ldloc.s V_21
+IL_0512: sub
+IL_0513: add
+IL_0514: stfld System.Single WorkItem::TotalNetworkUnits
+IL_0519: ret
